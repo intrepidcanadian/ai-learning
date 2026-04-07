@@ -152,6 +152,70 @@ As of 2026, automated quality assessment of knowledge resources is a rapidly evo
 
 - **Application to AI-powered learning platforms**: Quality benchmarking of educational content is increasingly important as AI generates study materials at scale. Systems like Khan Academy's Khanmigo use quality rubrics similar to this benchmark's dimensions to evaluate AI-generated explanations before presenting them to students[^11]. The principle that *measurability drives improvement* applies equally to wiki articles and AI tutoring responses.
 
+- **Holistic AI evaluation for education (2026)**: Sánchez-Ruiz et al. (2026) propose the first comprehensive evaluation methodology for AI systems in language education, addressing the "evaluation crisis" where no generally accepted evaluations for AI in education exist.[^12] Their framework evaluates across pedagogical effectiveness, response quality, adaptivity, and safety — dimensions that parallel this wiki's structural, sourcing, and currency metrics. This validates the multi-dimensional approach used here.
+
+- **Meta-benchmarking: benchmarking the benchmarks (2026)**: BenchBench (Wang et al., 2026) introduces a three-stage pipeline for evaluating automated benchmark generation itself: extracting structured domain cards, prompting designer LLMs to generate test suites, and validating with a multi-model answerer panel.[^13] This meta-evaluation approach is directly relevant — as this wiki's benchmark matures, we need ways to evaluate whether the benchmark itself measures what matters.
+
+- **Knowledge graph navigation as quality signal (2026)**: LLM-WikiRace (Wu et al., 2026) benchmarks LLM reasoning by requiring models to navigate Wikipedia hyperlinks from source to target pages.[^14] This reframes wiki quality from a static property (how good is this article?) to a dynamic one (how effectively can an AI navigate the knowledge structure?). Internal linking quality — one of this benchmark's dimensions — directly affects navigability.
+
+- **Automated domain benchmark generation (2026)**: Peskoff et al. (2025, updated 2026) present a deterministic pipeline that transforms raw domain corpora into completion-style benchmarks without relying on other LLMs or costly human annotation.[^15] This approach could extend this wiki's benchmark by automatically generating comprehension questions from article content — testing whether articles convey knowledge effectively, not just whether they're well-structured.
+
+- **Comprehensive educational benchmarking (2026)**: EduBench (Li et al., 2025, updated 2026) introduces a benchmark tailored for educational scenarios incorporating synthetic data across 9 major scenarios and over 4,000 distinct educational contexts.[^16] The scale and diversity of EduBench demonstrates that quality measurement in educational AI requires domain-specific evaluation — generic benchmarks miss domain-critical quality dimensions.
+
+```svg
+<svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="12">
+  <text x="360" y="25" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Evolution of Knowledge Quality Assessment (2015-2026)</text>
+
+  <!-- Timeline -->
+  <line x1="60" y1="70" x2="660" y2="70" stroke="#333" stroke-width="2"/>
+
+  <!-- Era 1 -->
+  <circle cx="120" cy="70" r="6" fill="#1565C0"/>
+  <text x="120" y="55" text-anchor="middle" font-size="9" fill="#1565C0">2015</text>
+  <rect x="40" y="85" width="160" height="70" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="120" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565C0">Structural Features</text>
+  <text x="120" y="118" text-anchor="middle" font-size="8">Section count, citations</text>
+  <text x="120" y="132" text-anchor="middle" font-size="8">link density [4]</text>
+  <text x="120" y="146" text-anchor="middle" font-size="8" fill="#1565C0">~80% accuracy</text>
+
+  <!-- Era 2 -->
+  <circle cx="330" cy="70" r="6" fill="#F57F17"/>
+  <text x="330" y="55" text-anchor="middle" font-size="9" fill="#F57F17">2024-25</text>
+  <rect x="250" y="85" width="160" height="70" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="330" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#F57F17">LLM-as-Judge</text>
+  <text x="330" y="118" text-anchor="middle" font-size="8">Semantic evaluation</text>
+  <text x="330" y="132" text-anchor="middle" font-size="8">multi-dimensional [7]</text>
+  <text x="330" y="146" text-anchor="middle" font-size="8" fill="#F57F17">>85% human agreement</text>
+
+  <!-- Era 3 -->
+  <circle cx="540" cy="70" r="6" fill="#2E7D32"/>
+  <text x="540" y="55" text-anchor="middle" font-size="9" fill="#2E7D32">2026</text>
+  <rect x="460" y="85" width="160" height="70" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="540" y="102" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E7D32">Meta-Benchmarking</text>
+  <text x="540" y="118" text-anchor="middle" font-size="8">Benchmarking benchmarks</text>
+  <text x="540" y="132" text-anchor="middle" font-size="8">navigability testing [13,14]</text>
+  <text x="540" y="146" text-anchor="middle" font-size="8" fill="#2E7D32">Dynamic quality metrics</text>
+
+  <!-- Arrows -->
+  <line x1="205" y1="120" x2="245" y2="120" stroke="#333" stroke-width="1"/>
+  <polygon points="243,116 250,120 243,124" fill="#333"/>
+  <line x1="415" y1="120" x2="455" y2="120" stroke="#333" stroke-width="1"/>
+  <polygon points="453,116 460,120 453,124" fill="#333"/>
+
+  <!-- This wiki's approach -->
+  <rect x="40" y="180" width="640" height="65" rx="8" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <text x="360" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#4527A0">This Wiki's Benchmark: Structural + Experiment-Driven Learning</text>
+  <text x="360" y="218" text-anchor="middle" font-size="10">7 dimensions × weighted scoring + hypothesis logging + trend tracking</text>
+  <text x="360" y="233" text-anchor="middle" font-size="9" fill="#4527A0">Future: add semantic evaluation [12], navigability testing [14], auto-generated comprehension checks [15]</text>
+
+  <!-- Learning application -->
+  <rect x="100" y="260" width="520" height="65" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+  <text x="360" y="282" text-anchor="middle" font-size="12" font-weight="bold" fill="#00838F">Learning Application: Build Your Own Quality Loop</text>
+  <text x="360" y="300" text-anchor="middle" font-size="10">Define dimensions → automate measurement → log experiments → learn what works</text>
+  <text x="360" y="315" text-anchor="middle" font-size="9">Works for wikis, study guides, course materials, documentation — any knowledge resource</text>
+</svg>
+```
+
 ## Limitations
 
 - **No semantic evaluation.** The benchmark measures structure, sourcing, and formatting — not whether the content is accurate or insightful. An article could score 100 with well-formatted nonsense. Future work could incorporate LLM-as-judge evaluation[^7].
@@ -172,6 +236,8 @@ As of 2026, automated quality assessment of knowledge resources is a rapidly evo
 - [AIDE](../tools-platforms/aide.md) — another autonomous experiment framework with similar iterative improvement patterns
 - [Automated Experiment Design](automated-experiment-design.md) — the methodology of hypothesis-driven iteration that this benchmark implements
 - [Agentic Tree Search](agentic-tree-search.md) — structured exploration that parallels the benchmark's systematic improvement strategy
+- [Curriculum Learning](curriculum-learning.md) — progressive difficulty in knowledge assessment mirrors curriculum design
+- [Active Learning](active-learning.md) — the benchmark loop selects which articles to improve next, analogous to active learning sample selection
 - [Template-Free Research](template-free-research.md) — open-ended AI research where quality metrics guide exploration
 - [VLM Integration](vlm-integration.md) — vision-language models that could enable visual quality checks of diagrams and formatting
 - [Automated Scientific Discovery](../core-concepts/automated-scientific-discovery.md) — the broader goal that quality benchmarking supports
@@ -208,3 +274,13 @@ As of 2026, automated quality assessment of knowledge resources is a rapidly evo
 [^10]: White, C. et al. (2025). "Neural Architecture Search: Insights from 1000 Papers." [arXiv:2301.08727](https://arxiv.org/abs/2301.08727)
 
 [^11]: Khan Academy (2025). "Khanmigo: AI-Powered Tutoring with Quality Guardrails." Khan Academy Engineering Blog.
+
+[^12]: Sánchez-Ruiz, A. et al. (2026). "Beyond Accuracy: Towards a Robust Evaluation Methodology for AI Systems for Language Education." arXiv:2603.20088. https://arxiv.org/abs/2603.20088
+
+[^13]: Wang, Y. et al. (2026). "BenchBench: Benchmarking Automated Benchmark Generation." arXiv:2603.20807. https://arxiv.org/abs/2603.20807
+
+[^14]: Wu, Z. et al. (2026). "LLM-WikiRace: Benchmarking Long-term Planning and Reasoning over Real-World Knowledge Graphs." arXiv:2602.16902. https://arxiv.org/abs/2602.16902
+
+[^15]: Peskoff, D. et al. (2025). "From Raw Corpora to Domain Benchmarks: Automated Evaluation of LLM Domain Expertise." arXiv:2506.07658. https://arxiv.org/abs/2506.07658
+
+[^16]: Li, X. et al. (2025). "EduBench: A Comprehensive Benchmarking Dataset for Evaluating Large Language Models in Diverse Educational Scenarios." arXiv:2505.16160. https://arxiv.org/abs/2505.16160

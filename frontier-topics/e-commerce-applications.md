@@ -60,6 +60,47 @@ Hazenberg et al. (2025) benchmark three multi-agent reinforcement learning (MARL
 
 Key finding: MADDPG achieves near-optimal pricing while maintaining market stability, suggesting that **cooperative-competitive hybrid strategies** outperform pure competition. This has direct implications for [multi-agent systems](multi-agent-systems.md) research — the pricing agents learn not just to optimize their own reward but to model competitors' strategies.
 
+### Conversational Shopping Agents with Memory (2026)
+
+Shopping Companion (Liu et al., 2026) introduces a **memory-augmented LLM agent** architecture for real-world e-commerce tasks.[^6] The system combines:
+
+- **Persistent user memory**: Stores long-term preferences, past purchases, and stated constraints across sessions
+- **Working memory**: Tracks the current shopping context (budget, occasion, style preferences) within a conversation
+- **Tool use**: Integrates with product APIs, price comparison services, and review aggregators
+
+Unlike stateless recommendation systems, Shopping Companion remembers that a user prefers organic products, has a nut allergy, and typically shops for a family of four — making each interaction more efficient than the last. This connects to [world models](../methodologies/world-models.md) — the agent builds an internal model of the user's preferences and constraints.
+
+### LLM Persuasion in Commerce (2026)
+
+A large-scale study (N=2,012) by researchers at Stanford and MIT reveals that **LLM-driven persuasion nearly triples sponsored product selection rates** compared to traditional search placement (61.2% vs. 22.4%).[^7] Key findings:
+
+- LLM agents that conversationally recommend products are significantly more persuasive than banner ads or sponsored listings
+- Users often cannot distinguish between genuine recommendations and sponsored content in conversational interfaces
+- **Ethical implications**: The persuasion gap raises questions about disclosure requirements and consumer protection in AI-mediated commerce
+
+This connects to [AI safety in research](ai-safety-in-research.md) — the same persuasion capabilities that make AI shopping assistants effective can be misused to manipulate purchasing decisions.
+
+### Trust and Bias in LLM Recommendations (2026)
+
+Wang et al. (2026) expose critical vulnerabilities in LLM-based recommendation agents: **models frequently succumb to injected biases despite having sufficient reasoning capabilities**.[^8] Testing across Gemini-2.5/3-pro, GPT-4o, and DeepSeek-R1:
+
+- Position bias: Items listed first receive disproportionate recommendation regardless of quality
+- Popularity bias: Well-known brands are favored even when lesser-known alternatives objectively fit better
+- Injection attacks: Maliciously crafted product descriptions can manipulate recommendations
+- **Mitigation**: Chain-of-thought reasoning reduces but does not eliminate these biases
+
+This has implications for [prompt engineering](../methodologies/prompt-engineering.md) — designing prompts that make recommendation agents more robust to manipulation.
+
+### ProductResearch: Deep Research Agents for Commerce (2026)
+
+ProductResearch (2026) proposes a multi-agent framework for training e-commerce deep research agents via **synthetic trajectory distillation**.[^9] The system:
+
+- Uses teacher agents to generate high-fidelity, long-horizon tool-use trajectories (search → compare → analyze → recommend)
+- Distills these trajectories into smaller student agents that can independently research products
+- Achieves comparable research quality to GPT-4-class models at 10× lower inference cost
+
+This connects to [knowledge distillation](../core-concepts/knowledge-distillation.md) and [agentic tree search](../methodologies/agentic-tree-search.md) — the research agent explores a tree of product comparisons, and the distillation process compresses expert exploration into efficient policies.
+
 ### On-Device Recommendation (2026)
 
 OD-LLM introduces the first compression framework for deploying LLM-based sequential recommendation on edge devices.[^4] The system:
@@ -169,22 +210,75 @@ LLM-powered Product Knowledge Graphs (PKG) provide transparent reasoning chains 
 
 1. **LLM agents replace pipelines**: Traditional e-commerce ML pipelines (feature engineering → model training → A/B testing) are being replaced by end-to-end LLM agents that understand, reason, and converse[^1]
 2. **History length doesn't matter**: The surprising finding that 5-item histories match 50-item histories for LLM recommendations challenges the "more data is better" assumption[^1]
-3. **On-device deployment is viable**: Compressed recommendation models run on edge devices, enabling privacy-preserving real-time personalization[^4]
-4. **Multi-agent pricing reaches equilibrium**: MARL algorithms find competitive yet fair pricing strategies, moving beyond simple demand-response curves[^3]
-5. **Explainability is a competitive advantage**: PKG-based recommendation reasoning helps users make better decisions and builds trust[^5]
-6. **Search understands intent**: LLM-powered relevance models handle nuanced, long-tail queries that keyword systems miss[^2]
+3. **Memory-augmented shopping**: Agents with persistent memory across sessions deliver increasingly personalized assistance, remembering user constraints and preferences[^6]
+4. **Persuasion power raises ethics concerns**: LLM conversational recommendations are 2.7× more effective than traditional ad placement, prompting calls for disclosure regulation[^7]
+5. **Trust vulnerabilities exposed**: LLM recommendation agents are susceptible to position bias, popularity bias, and injection attacks — an active area of safety research[^8]
+6. **Deep research agents**: Multi-agent distillation produces specialized product research agents that match GPT-4-class quality at 10× lower cost[^9]
+7. **On-device deployment is viable**: Compressed recommendation models run on edge devices, enabling privacy-preserving real-time personalization[^4]
+8. **Multi-agent pricing reaches equilibrium**: MARL algorithms find competitive yet fair pricing strategies, moving beyond simple demand-response curves[^3]
+9. **Explainability is a competitive advantage**: PKG-based recommendation reasoning helps users make better decisions and builds trust[^5]
+10. **Search understands intent**: LLM-powered relevance models handle nuanced, long-tail queries that keyword systems miss[^2]
 
 ### Key Metrics
 
 | System | Year | Key Result |
 |--------|------|-----------|
 | LLM Recommendation Agents | 2026 | 88% cost reduction with consistent quality[^1] |
+| Shopping Companion | 2026 | Memory-augmented agent for persistent personalization[^6] |
+| LLM Persuasion Study | 2026 | 61.2% vs 22.4% sponsored product selection[^7] |
+| LLM Bias Analysis | 2026 | Position/popularity/injection vulnerabilities[^8] |
+| ProductResearch | 2026 | 10× cheaper deep research agents via distillation[^9] |
 | LREF Search | 2025 | Industrial-scale LLM relevance scoring[^2] |
 | MARL Dynamic Pricing | 2025 | MADDPG achieves competitive fairness[^3] |
 | OD-LLM | 2026 | 94% quality at 15x lower cost on-device[^4] |
 | Product Knowledge Graph | 2024 | Explainable recommendation chains[^5] |
 
 ## Limitations / Challenges
+
+```svg
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="12">
+  <text x="360" y="25" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Trust &amp; Safety in AI Commerce (2026)</text>
+
+  <!-- Bias types -->
+  <rect x="20" y="50" width="160" height="100" rx="8" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+  <text x="100" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#C62828">Position Bias</text>
+  <text x="100" y="90" text-anchor="middle" font-size="9">First-listed items get</text>
+  <text x="100" y="104" text-anchor="middle" font-size="9">disproportionate</text>
+  <text x="100" y="118" text-anchor="middle" font-size="9">recommendation [8]</text>
+  <text x="100" y="140" text-anchor="middle" font-size="8" fill="#C62828">All tested LLMs affected</text>
+
+  <rect x="200" y="50" width="160" height="100" rx="8" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <text x="280" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">Popularity Bias</text>
+  <text x="280" y="90" text-anchor="middle" font-size="9">Known brands favored</text>
+  <text x="280" y="104" text-anchor="middle" font-size="9">over better-fitting</text>
+  <text x="280" y="118" text-anchor="middle" font-size="9">alternatives [8]</text>
+  <text x="280" y="140" text-anchor="middle" font-size="8" fill="#E65100">Reinforces monopolies</text>
+
+  <rect x="380" y="50" width="160" height="100" rx="8" fill="#FCE4EC" stroke="#AD1457" stroke-width="2"/>
+  <text x="460" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#AD1457">Injection Attacks</text>
+  <text x="460" y="90" text-anchor="middle" font-size="9">Malicious product</text>
+  <text x="460" y="104" text-anchor="middle" font-size="9">descriptions manipulate</text>
+  <text x="460" y="118" text-anchor="middle" font-size="9">recommendations [8]</text>
+  <text x="460" y="140" text-anchor="middle" font-size="8" fill="#AD1457">Security vulnerability</text>
+
+  <rect x="560" y="50" width="140" height="100" rx="8" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+  <text x="630" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#283593">Persuasion Gap</text>
+  <text x="630" y="90" text-anchor="middle" font-size="9">LLM recommendations</text>
+  <text x="630" y="104" text-anchor="middle" font-size="9">2.7x more effective</text>
+  <text x="630" y="118" text-anchor="middle" font-size="9">than ads [7]</text>
+  <text x="630" y="140" text-anchor="middle" font-size="8" fill="#283593">Ethics concern</text>
+
+  <!-- Mitigation -->
+  <rect x="20" y="175" width="680" height="55" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="360" y="195" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E7D32">Mitigations: Chain-of-Thought Reasoning + Memory-Augmented Agents [6] + Disclosure Requirements</text>
+  <text x="360" y="215" text-anchor="middle" font-size="10">CoT reduces but does not eliminate bias | Persistent memory enables preference verification | Regulation needed</text>
+
+  <!-- Learning takeaway -->
+  <rect x="100" y="250" width="520" height="55" rx="8" fill="#EDE7F6" stroke="#4527A0" stroke-width="1.5"/>
+  <text x="360" y="272" text-anchor="middle" font-size="12" font-weight="bold" fill="#4527A0">Learning Application: Critical AI Literacy</text>
+  <text x="360" y="292" text-anchor="middle" font-size="10">Understanding these biases helps consumers evaluate AI recommendations critically</text>
+</svg>
+```
 
 1. **Optimization misalignment**: AI systems optimize for conversion (purchases) rather than user satisfaction — a product that converts well may not serve the user well
 2. **Cold-start for new products**: While user cold-start is improving, new product cold-start (no reviews, no purchase history) remains difficult
@@ -210,6 +304,9 @@ LLM-powered Product Knowledge Graphs (PKG) provide transparent reasoning chains 
 - [Inference Optimization](../methodologies/inference-optimization.md) — real-time recommendation serving
 - [Domain Specificity](../methodologies/domain-specificity.md) — e-commerce as a specialized domain
 - [Evaluation Methodology](../methodologies/evaluation-methodology.md) — offline vs. online metrics
+- [Prompt Engineering](../methodologies/prompt-engineering.md) — designing bias-resistant recommendation prompts
+- [World Models](../methodologies/world-models.md) — user preference modeling in shopping agents
+- [Agentic Tree Search](../methodologies/agentic-tree-search.md) — product research as tree exploration
 - [Synthetic Data Generation](../methodologies/synthetic-data-generation.md) — generating training data for commerce models
 
 **Frontier Topics:**
@@ -234,3 +331,11 @@ LLM-powered Product Knowledge Graphs (PKG) provide transparent reasoning chains 
 [^4]: Anonymous. (2026). "On-Device Large Language Models for Sequential Recommendation." arXiv:2601.09306. https://arxiv.org/abs/2601.09306
 
 [^5]: Anonymous. (2024). "Enabling Explainable Recommendation in E-commerce with LLM-powered Product Knowledge Graph." arXiv:2412.01837. https://arxiv.org/abs/2412.01837
+
+[^6]: Liu, Y. et al. (2026). "Shopping Companion: A Memory-Augmented LLM Agent for Real-World E-Commerce Tasks." arXiv:2603.14864. https://arxiv.org/abs/2603.14864
+
+[^7]: Anonymous. (2026). "Commercial Persuasion in AI-Mediated Conversations." arXiv:2604.04263. https://arxiv.org/abs/2604.04263
+
+[^8]: Wang, Z. et al. (2026). "Is Your LLM-as-a-Recommender Agent Trustable? LLMs' Recommendation is Easily Hacked by Biases." arXiv:2603.17417. https://arxiv.org/abs/2603.17417
+
+[^9]: Anonymous. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716

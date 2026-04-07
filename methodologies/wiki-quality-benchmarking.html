@@ -637,7 +637,74 @@ python3 benchmark_wiki.py --history  # Show composite score over all runs
 <li>
 <p><strong>Application to AI-powered learning platforms</strong>: Quality benchmarking of educational content is increasingly important as AI generates study materials at scale. Systems like Khan Academy's Khanmigo use quality rubrics similar to this benchmark's dimensions to evaluate AI-generated explanations before presenting them to students[^11]. The principle that <em>measurability drives improvement</em> applies equally to wiki articles and AI tutoring responses.</p>
 </li>
+<li>
+<p><strong>Holistic AI evaluation for education (2026)</strong>: Sánchez-Ruiz et al. (2026) propose the first comprehensive evaluation methodology for AI systems in language education, addressing the "evaluation crisis" where no generally accepted evaluations for AI in education exist.[^12] Their framework evaluates across pedagogical effectiveness, response quality, adaptivity, and safety — dimensions that parallel this wiki's structural, sourcing, and currency metrics. This validates the multi-dimensional approach used here.</p>
+</li>
+<li>
+<p><strong>Meta-benchmarking: benchmarking the benchmarks (2026)</strong>: BenchBench (Wang et al., 2026) introduces a three-stage pipeline for evaluating automated benchmark generation itself: extracting structured domain cards, prompting designer LLMs to generate test suites, and validating with a multi-model answerer panel.[^13] This meta-evaluation approach is directly relevant — as this wiki's benchmark matures, we need ways to evaluate whether the benchmark itself measures what matters.</p>
+</li>
+<li>
+<p><strong>Knowledge graph navigation as quality signal (2026)</strong>: LLM-WikiRace (Wu et al., 2026) benchmarks LLM reasoning by requiring models to navigate Wikipedia hyperlinks from source to target pages.[^14] This reframes wiki quality from a static property (how good is this article?) to a dynamic one (how effectively can an AI navigate the knowledge structure?). Internal linking quality — one of this benchmark's dimensions — directly affects navigability.</p>
+</li>
+<li>
+<p><strong>Automated domain benchmark generation (2026)</strong>: Peskoff et al. (2025, updated 2026) present a deterministic pipeline that transforms raw domain corpora into completion-style benchmarks without relying on other LLMs or costly human annotation.[^15] This approach could extend this wiki's benchmark by automatically generating comprehension questions from article content — testing whether articles convey knowledge effectively, not just whether they're well-structured.</p>
+</li>
+<li>
+<p><strong>Comprehensive educational benchmarking (2026)</strong>: EduBench (Li et al., 2025, updated 2026) introduces a benchmark tailored for educational scenarios incorporating synthetic data across 9 major scenarios and over 4,000 distinct educational contexts.[^16] The scale and diversity of EduBench demonstrates that quality measurement in educational AI requires domain-specific evaluation — generic benchmarks miss domain-critical quality dimensions.</p>
+</li>
 </ul>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 340&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Evolution of Knowledge Quality Assessment (2015-2026)&lt;/text&gt;
+
+  &lt;!-- Timeline --&gt;
+  &lt;line x1=&quot;60&quot; y1=&quot;70&quot; x2=&quot;660&quot; y2=&quot;70&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot;/&gt;
+
+  &lt;!-- Era 1 --&gt;
+  &lt;circle cx=&quot;120&quot; cy=&quot;70&quot; r=&quot;6&quot; fill=&quot;#1565C0&quot;/&gt;
+  &lt;text x=&quot;120&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#1565C0&quot;&gt;2015&lt;/text&gt;
+  &lt;rect x=&quot;40&quot; y=&quot;85&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;6&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;120&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Structural Features&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;118&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Section count, citations&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;132&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;link density [4]&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;146&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#1565C0&quot;&gt;~80% accuracy&lt;/text&gt;
+
+  &lt;!-- Era 2 --&gt;
+  &lt;circle cx=&quot;330&quot; cy=&quot;70&quot; r=&quot;6&quot; fill=&quot;#F57F17&quot;/&gt;
+  &lt;text x=&quot;330&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#F57F17&quot;&gt;2024-25&lt;/text&gt;
+  &lt;rect x=&quot;250&quot; y=&quot;85&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;6&quot; fill=&quot;#FFF8E1&quot; stroke=&quot;#F57F17&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;330&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#F57F17&quot;&gt;LLM-as-Judge&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;118&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Semantic evaluation&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;132&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;multi-dimensional [7]&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;146&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#F57F17&quot;&gt;&gt;85% human agreement&lt;/text&gt;
+
+  &lt;!-- Era 3 --&gt;
+  &lt;circle cx=&quot;540&quot; cy=&quot;70&quot; r=&quot;6&quot; fill=&quot;#2E7D32&quot;/&gt;
+  &lt;text x=&quot;540&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;2026&lt;/text&gt;
+  &lt;rect x=&quot;460&quot; y=&quot;85&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;540&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Meta-Benchmarking&lt;/text&gt;
+  &lt;text x=&quot;540&quot; y=&quot;118&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Benchmarking benchmarks&lt;/text&gt;
+  &lt;text x=&quot;540&quot; y=&quot;132&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;navigability testing [13,14]&lt;/text&gt;
+  &lt;text x=&quot;540&quot; y=&quot;146&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;Dynamic quality metrics&lt;/text&gt;
+
+  &lt;!-- Arrows --&gt;
+  &lt;line x1=&quot;205&quot; y1=&quot;120&quot; x2=&quot;245&quot; y2=&quot;120&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;polygon points=&quot;243,116 250,120 243,124&quot; fill=&quot;#333&quot;/&gt;
+  &lt;line x1=&quot;415&quot; y1=&quot;120&quot; x2=&quot;455&quot; y2=&quot;120&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;polygon points=&quot;453,116 460,120 453,124&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- This wiki's approach --&gt;
+  &lt;rect x=&quot;40&quot; y=&quot;180&quot; width=&quot;640&quot; height=&quot;65&quot; rx=&quot;8&quot; fill=&quot;#EDE7F6&quot; stroke=&quot;#4527A0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#4527A0&quot;&gt;This Wiki's Benchmark: Structural + Experiment-Driven Learning&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;218&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;7 dimensions × weighted scoring + hypothesis logging + trend tracking&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;233&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#4527A0&quot;&gt;Future: add semantic evaluation [12], navigability testing [14], auto-generated comprehension checks [15]&lt;/text&gt;
+
+  &lt;!-- Learning application --&gt;
+  &lt;rect x=&quot;100&quot; y=&quot;260&quot; width=&quot;520&quot; height=&quot;65&quot; rx=&quot;8&quot; fill=&quot;#E0F7FA&quot; stroke=&quot;#00838F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;282&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#00838F&quot;&gt;Learning Application: Build Your Own Quality Loop&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;300&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Define dimensions → automate measurement → log experiments → learn what works&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;315&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Works for wikis, study guides, course materials, documentation — any knowledge resource&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li><strong>No semantic evaluation.</strong> The benchmark measures structure, sourcing, and formatting — not whether the content is accurate or insightful. An article could score 100 with well-formatted nonsense. Future work could incorporate LLM-as-judge evaluation[^7].</li>
@@ -658,6 +725,8 @@ python3 benchmark_wiki.py --history  # Show composite score over all runs
 <li><a href="../tools-platforms/aide.html">AIDE</a> — another autonomous experiment framework with similar iterative improvement patterns</li>
 <li><a href="automated-experiment-design.html">Automated Experiment Design</a> — the methodology of hypothesis-driven iteration that this benchmark implements</li>
 <li><a href="agentic-tree-search.html">Agentic Tree Search</a> — structured exploration that parallels the benchmark's systematic improvement strategy</li>
+<li><a href="curriculum-learning.html">Curriculum Learning</a> — progressive difficulty in knowledge assessment mirrors curriculum design</li>
+<li><a href="active-learning.html">Active Learning</a> — the benchmark loop selects which articles to improve next, analogous to active learning sample selection</li>
 <li><a href="template-free-research.html">Template-Free Research</a> — open-ended AI research where quality metrics guide exploration</li>
 <li><a href="vlm-integration.html">VLM Integration</a> — vision-language models that could enable visual quality checks of diagrams and formatting</li>
 <li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a> — the broader goal that quality benchmarking supports</li>
@@ -683,6 +752,11 @@ python3 benchmark_wiki.py --history  # Show composite score over all runs
 <p>[^9]: Google Technical Writing Team (2025). "Continuous Documentation Quality in Large-Scale Software Projects." Google Engineering Blog.</p>
 <p>[^10]: White, C. et al. (2025). "Neural Architecture Search: Insights from 1000 Papers." <a href="https://arxiv.org/abs/2301.08727">arXiv:2301.08727</a></p>
 <p>[^11]: Khan Academy (2025). "Khanmigo: AI-Powered Tutoring with Quality Guardrails." Khan Academy Engineering Blog.</p>
+<p>[^12]: Sánchez-Ruiz, A. et al. (2026). "Beyond Accuracy: Towards a Robust Evaluation Methodology for AI Systems for Language Education." arXiv:2603.20088. https://arxiv.org/abs/2603.20088</p>
+<p>[^13]: Wang, Y. et al. (2026). "BenchBench: Benchmarking Automated Benchmark Generation." arXiv:2603.20807. https://arxiv.org/abs/2603.20807</p>
+<p>[^14]: Wu, Z. et al. (2026). "LLM-WikiRace: Benchmarking Long-term Planning and Reasoning over Real-World Knowledge Graphs." arXiv:2602.16902. https://arxiv.org/abs/2602.16902</p>
+<p>[^15]: Peskoff, D. et al. (2025). "From Raw Corpora to Domain Benchmarks: Automated Evaluation of LLM Domain Expertise." arXiv:2506.07658. https://arxiv.org/abs/2506.07658</p>
+<p>[^16]: Li, X. et al. (2025). "EduBench: A Comprehensive Benchmarking Dataset for Evaluating Large Language Models in Diverse Educational Scenarios." arXiv:2505.16160. https://arxiv.org/abs/2505.16160</p>
 </main>
 </body>
 </html>

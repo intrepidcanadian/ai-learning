@@ -536,6 +536,30 @@ loadWishlist();
 <li><strong>Efficiency gains</strong>: Latent reasoning avoids the token generation bottleneck, enabling 3-5× more reasoning paths for the same compute budget</li>
 </ul>
 <p>This represents a fundamental shift: test-time compute scaling need not produce visible "thinking" — the model can think deeply in its internal representations.</p>
+<h3 id="adaptive-compute-allocation-via-verifier-guidance-2026">Adaptive Compute Allocation via Verifier Guidance (2026)</h3>
+<p>Li et al. (2026) propose treating test-time compute allocation as an <strong>adaptive per-prompt decision</strong> guided by a Process Reward Model (PRM).[^7] The framework:</p>
+<ul>
+<li>Uses a PRM as a unified control signal for both pruning (stopping unpromising paths early) and expansion (allocating more compute to promising ones)</li>
+<li>Dynamically adjusts the number of reasoning steps based on problem difficulty — easy problems get minimal compute, hard problems get extensive search</li>
+<li>Achieves the same accuracy as uniform Best-of-64 sampling with only <strong>8-12 average samples per problem</strong></li>
+</ul>
+<p>This is directly relevant for AI-assisted learning: an adaptive tutoring system could spend 10× more compute generating explanations for concepts a student is struggling with, while providing quick answers to straightforward questions — connecting to <a href="curriculum-learning.html">curriculum learning</a>.</p>
+<h3 id="recurrent-depth-for-vision-language-action-models-2026">Recurrent-Depth for Vision-Language-Action Models (2026)</h3>
+<p>RD-VLA (Chen et al., 2026) extends test-time scaling to <strong>embodied AI</strong> through latent iterative refinement with a recurrent, weight-tied action head.[^8] Key results:</p>
+<ul>
+<li>Tasks that failed with single-iteration inference exceeded <strong>90% success rate with four iterations</strong> of latent reasoning</li>
+<li>The recurrent depth approach enables computational adaptivity without modifying the base model architecture</li>
+<li>Demonstrates that test-time compute scaling generalizes beyond text — applicable to robotics, autonomous navigation, and physical simulation</li>
+</ul>
+<p>This bridges <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> and test-time scaling: the model simulates outcomes through iterative latent refinement before committing to an action.</p>
+<h3 id="budget-aware-inference-plan-and-budget-2025-2026">Budget-Aware Inference: Plan and Budget (2025-2026)</h3>
+<p>The Budget Allocation Model (BAM) by Zhang et al. (2025) introduces <strong>budget-aware test-time scaling</strong> that decomposes complex queries into sub-questions and allocates token budgets based on estimated complexity.[^9] The approach:</p>
+<ul>
+<li>Estimates the difficulty of each sub-problem before allocating compute</li>
+<li>Produces a "reasoning plan" that allocates token budgets proportionally to sub-problem complexity</li>
+<li>Achieves comparable accuracy to unconstrained reasoning while using <strong>40-60% fewer tokens</strong></li>
+</ul>
+<p>For educational applications, this means AI tutors can provide detailed step-by-step explanations within a fixed compute budget — making high-quality AI tutoring economically viable at scale. This connects to <a href="computational-cost.html">computational cost</a> — budget-aware inference makes test-time scaling practical for cost-sensitive deployments.</p>
 <h3 id="deep-thinking-tokens-2026">Deep-Thinking Tokens (2026)</h3>
 <p>Lu et al. (2026) identify <strong>deep-thinking tokens</strong> — positions in the generation where internal predictions undergo significant revisions in deeper layers.[^6] These tokens mark moments of genuine cognitive effort rather than routine generation. The Think@n strategy:</p>
 <ul>
@@ -624,6 +648,53 @@ loadWishlist();
   &lt;text x=&quot;360&quot; y=&quot;401&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;= democratized access to high-quality AI tutoring without large model costs&lt;/text&gt;
 &lt;/svg&gt;
 </code></pre>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 300&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Budget-Aware Inference: Adaptive Compute Allocation&lt;/text&gt;
+
+  &lt;!-- Problem decomposition --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;50&quot; width=&quot;150&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;95&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Complex Query&lt;/text&gt;
+  &lt;text x=&quot;95&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;&quot;Explain why&lt;/text&gt;
+  &lt;text x=&quot;95&quot; y=&quot;106&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;transformers use&lt;/text&gt;
+  &lt;text x=&quot;95&quot; y=&quot;120&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;multi-head attention&quot;&lt;/text&gt;
+
+  &lt;line x1=&quot;175&quot; y1=&quot;90&quot; x2=&quot;210&quot; y2=&quot;90&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;208,85 218,90 208,95&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- Sub-problems with budgets --&gt;
+  &lt;rect x=&quot;220&quot; y=&quot;40&quot; width=&quot;200&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;#C8E6C9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;320&quot; y=&quot;60&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;Sub-Q1: What is attention? [easy, 50 tokens]&lt;/text&gt;
+
+  &lt;rect x=&quot;220&quot; y=&quot;78&quot; width=&quot;200&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;#FFF9C4&quot; stroke=&quot;#F57F17&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;320&quot; y=&quot;98&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#F57F17&quot;&gt;Sub-Q2: Why multi-head? [medium, 150 tokens]&lt;/text&gt;
+
+  &lt;rect x=&quot;220&quot; y=&quot;116&quot; width=&quot;200&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;#FFCDD2&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;320&quot; y=&quot;136&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;Sub-Q3: Math proof? [hard, 400 tokens]&lt;/text&gt;
+
+  &lt;line x1=&quot;425&quot; y1=&quot;90&quot; x2=&quot;460&quot; y2=&quot;90&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;458,85 468,90 458,95&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- Budget allocation --&gt;
+  &lt;rect x=&quot;470&quot; y=&quot;45&quot; width=&quot;230&quot; height=&quot;105&quot; rx=&quot;8&quot; fill=&quot;#EDE7F6&quot; stroke=&quot;#4527A0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;585&quot; y=&quot;65&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#4527A0&quot;&gt;Budget Allocation [9]&lt;/text&gt;
+  &lt;rect x=&quot;485&quot; y=&quot;78&quot; width=&quot;30&quot; height=&quot;12&quot; rx=&quot;3&quot; fill=&quot;#C8E6C9&quot;/&gt;
+  &lt;text x=&quot;525&quot; y=&quot;88&quot; font-size=&quot;8&quot;&gt;8% budget → quick answer&lt;/text&gt;
+  &lt;rect x=&quot;485&quot; y=&quot;98&quot; width=&quot;80&quot; height=&quot;12&quot; rx=&quot;3&quot; fill=&quot;#FFF9C4&quot;/&gt;
+  &lt;text x=&quot;575&quot; y=&quot;108&quot; font-size=&quot;8&quot;&gt;25% budget → moderate detail&lt;/text&gt;
+  &lt;rect x=&quot;485&quot; y=&quot;118&quot; width=&quot;190&quot; height=&quot;12&quot; rx=&quot;3&quot; fill=&quot;#FFCDD2&quot;/&gt;
+  &lt;text x=&quot;575&quot; y=&quot;138&quot; font-size=&quot;8&quot;&gt;67% budget → deep reasoning&lt;/text&gt;
+
+  &lt;!-- Comparison bar --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;175&quot; width=&quot;680&quot; height=&quot;50&quot; rx=&quot;8&quot; fill=&quot;#F5F5F5&quot; stroke=&quot;#999&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;195&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot;&gt;Efficiency: Same accuracy, 40-60% fewer tokens than uniform allocation&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;212&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;PRM-guided [7] + BAM [9] + Deep-thinking tokens [6] = compute-optimal inference&lt;/text&gt;
+
+  &lt;!-- Learning application --&gt;
+  &lt;rect x=&quot;100&quot; y=&quot;240&quot; width=&quot;520&quot; height=&quot;50&quot; rx=&quot;8&quot; fill=&quot;#E0F7FA&quot; stroke=&quot;#00838F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;260&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#00838F&quot;&gt;For AI Tutoring: Spend More on Hard Concepts, Less on Easy Ones&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;278&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Democratizes high-quality tutoring — same quality at lower per-student cost&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2026-landscape">2026 Landscape</h3>
 <ol>
@@ -632,6 +703,9 @@ loadWishlist();
 <li><strong>Multi-model fusion</strong>: AdaFuse demonstrates that ensembling diverse models at inference time provides natural test-time scaling with uncertainty estimation[^4]</li>
 <li><strong>Latent reasoning</strong>: Parallel test-time scaling in continuous vector spaces achieves 3-5× more reasoning paths per compute dollar than explicit chain-of-thought[^5]</li>
 <li><strong>Adaptive compute allocation</strong>: Deep-thinking tokens enable targeted compute investment, matching uniform scaling performance at lower cost[^6]</li>
+<li><strong>Verifier-guided pruning</strong>: PRM-based adaptive frameworks achieve Best-of-64 quality with only 8-12 samples on average[^7]</li>
+<li><strong>Embodied test-time scaling</strong>: RD-VLA shows that latent iterative refinement enables 90%+ success rates in robotic tasks that fail with single-iteration inference[^8]</li>
+<li><strong>Budget-aware inference</strong>: BAM-style systems decompose problems and allocate compute proportionally, saving 40-60% of tokens while maintaining accuracy[^9]</li>
 <li><strong>Test-time learning convergence</strong>: Multiple independent groups discover that continuing to learn during deployment produces dramatically better outcomes — connecting to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a>[^1]</li>
 </ol>
 <h3 id="key-metrics">Key Metrics</h3>
@@ -669,6 +743,21 @@ loadWishlist();
 <td>2026</td>
 <td>Matches self-consistency at significantly reduced cost[^6]</td>
 </tr>
+<tr>
+<td>PRM-Guided Allocation</td>
+<td>2026</td>
+<td>Best-of-64 quality with 8-12 average samples[^7]</td>
+</tr>
+<tr>
+<td>RD-VLA</td>
+<td>2026</td>
+<td>90%+ success via iterative latent refinement in robotics[^8]</td>
+</tr>
+<tr>
+<td>BAM</td>
+<td>2025</td>
+<td>40-60% token savings via budget-aware decomposition[^9]</td>
+</tr>
 </tbody>
 </table>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
@@ -691,8 +780,10 @@ loadWishlist();
 <p><strong>Methodologies:</strong>
 - <a href="test-time-compute.html">Test-Time Compute</a> — foundational techniques (chain-of-thought, self-consistency)
 - <a href="inference-optimization.html">Inference Optimization</a> — making test-time compute efficient
-- <a href="computational-cost.html">Computational Cost</a> — economics of compute allocation
+- <a href="computational-cost.html">Computational Cost</a> — economics of compute allocation and budget-aware inference
+- <a href="curriculum-learning.html">Curriculum Learning</a> — adaptive difficulty connects to adaptive compute allocation
 - <a href="evaluation-methodology.html">Evaluation Methodology</a> — measuring scaling law effectiveness
+- <a href="prompt-engineering.html">Prompt Engineering</a> — prompt design for compute-efficient reasoning
 - <a href="world-models.html">World Models</a> — internal representations for latent reasoning</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — test-time learning as self-improvement during deployment
@@ -709,6 +800,9 @@ loadWishlist();
 <p>[^4]: Cui, C., Wei, T., Chen, Z., Qiu, R., Zeng, Z., et al. (2026). "AdaFuse: Adaptive Ensemble Decoding with Test-Time Scaling for LLMs." arXiv:2601.06022. https://arxiv.org/abs/2601.06022</p>
 <p>[^5]: You, R. et al. (2026). "Parallel Test-Time Scaling for Latent Reasoning Models." arXiv:2510.07745. https://arxiv.org/abs/2510.07745</p>
 <p>[^6]: Lu, H. A. et al. (2026). "Think Deep, Not Just Long: Measuring LLM Reasoning Effort via Deep-Thinking Tokens." arXiv preprint.</p>
+<p>[^7]: Li, Z. et al. (2026). "What If We Allocate Test-Time Compute Adaptively?" arXiv:2602.01070. https://arxiv.org/abs/2602.01070</p>
+<p>[^8]: Chen, H. et al. (2026). "Recurrent-Depth VLA: Implicit Test-Time Compute Scaling of Vision-Language-Action Models via Latent Iterative Reasoning." arXiv:2602.07845. https://arxiv.org/abs/2602.07845</p>
+<p>[^9]: Zhang, Y. et al. (2025). "Plan and Budget: Effective and Efficient Test-Time Scaling on Reasoning Large Language Models." arXiv:2505.16122. https://arxiv.org/abs/2505.16122</p>
 </main>
 </body>
 </html>

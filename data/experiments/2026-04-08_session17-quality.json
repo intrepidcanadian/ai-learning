@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-04-08_070000",
+  "iteration": 17,
+  "mode": "quality",
+  "articles_targeted": ["e-commerce-applications", "test-time-compute-scaling", "wiki-quality-benchmarking"],
+  "hypothesis": {
+    "strategy": "Add 4-5 new 2026 papers to each of the 3 lowest-scoring articles, targeting sourcing and currency dimensions",
+    "predicted_delta": 3.0,
+    "dimensions_targeted": ["sourcing", "currency", "depth"],
+    "reasoning": "Past experiments show adding 2026 papers with footnotes is the most reliable strategy (+3-14 points). e-commerce-applications (sourcing=52) and test-time-compute-scaling (sourcing=56) have the most room for improvement in sourcing. wiki-quality-benchmarking (currency=57) needs more recent papers."
+  },
+  "result": {
+    "composite_before": 85.8,
+    "composite_after": 86.3,
+    "composite_delta": 0.5,
+    "articles": [
+      {
+        "article": "e-commerce-applications",
+        "score_before": 78.8,
+        "score_after": 87.0,
+        "actual_delta": 8.2,
+        "papers_added": 4,
+        "diagrams_added": 1
+      },
+      {
+        "article": "test-time-compute-scaling",
+        "score_before": 79.2,
+        "score_after": 85.2,
+        "actual_delta": 6.0,
+        "papers_added": 3,
+        "diagrams_added": 1
+      },
+      {
+        "article": "wiki-quality-benchmarking",
+        "score_before": 79.3,
+        "score_after": 88.6,
+        "actual_delta": 9.3,
+        "papers_added": 5,
+        "diagrams_added": 1
+      }
+    ],
+    "improved": true,
+    "lesson": "All 3 articles gained 6-9 points. wiki-quality-benchmarking gained most (+9.3) due to currency jumping from 57 to 87. Adding 2026 papers with diagrams consistently delivers strong improvements across sourcing, currency, and depth."
+  }
+}
