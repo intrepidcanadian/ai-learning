@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications for Real-World Learning - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/applications-for-real-world-learning.html" aria-current="page">Applications for Real-World Learning</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/computational-cost.html">Computational Cost</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/domain-specificity.html">Domain Specificity</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Applications for Real-World Learning</div>
+<h1 id="applications-for-real-world-learning">Applications for Real-World Learning</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Applications for real-world learning</strong> encompasses the design and deployment of AI systems that help humans learn skills, concepts, and competencies applicable to real-life contexts — from professional training and scientific literacy to practical decision-making. Unlike traditional educational technology that delivers static content, modern AI learning systems adapt in real time to learner state, provide personalized scaffolding, and bridge the gap between theoretical knowledge and practical application. The convergence of large language models, biosensors, simulation environments, and adaptive curricula is creating a new generation of learning tools that function more like expert mentors than textbooks.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-transfer-problem">The Transfer Problem</h3>
+<p>The central challenge in real-world learning is <strong>transfer</strong> — ensuring that knowledge acquired in one context (classroom, tutorial, online course) can be applied in different, often unpredictable real-world situations.[^1] Traditional education struggles with transfer because:</p>
+<ul>
+<li><strong>Context dependence</strong>: Knowledge learned in one setting may not activate in another</li>
+<li><strong>Inert knowledge</strong>: Students can recall facts on tests but fail to apply them in practice</li>
+<li><strong>Skill-knowledge gap</strong>: Understanding a concept theoretically differs from applying it under pressure</li>
+</ul>
+<p>AI-powered learning systems address transfer through <strong>situated learning</strong> — embedding instruction in realistic contexts, simulated environments, and practical tasks. This connects to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a>, where AI models create environments for experiential learning.</p>
+<h3 id="adaptive-learning-theory">Adaptive Learning Theory</h3>
+<p>Effective real-world learning requires adaptation across multiple dimensions:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>What Adapts</th>
+<th>AI Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cognitive</strong></td>
+<td>Difficulty, complexity</td>
+<td><a href="curriculum-learning.html">Curriculum learning</a> algorithms</td>
+</tr>
+<tr>
+<td><strong>Temporal</strong></td>
+<td>Pace, spacing</td>
+<td>Spaced repetition with memory models</td>
+</tr>
+<tr>
+<td><strong>Affective</strong></td>
+<td>Engagement, motivation</td>
+<td>Biosensor feedback, sentiment analysis</td>
+</tr>
+<tr>
+<td><strong>Social</strong></td>
+<td>Collaboration, competition</td>
+<td><a href="../frontier-topics/multi-agent-systems.html">Multi-agent systems</a> for peer learning</td>
+</tr>
+<tr>
+<td><strong>Contextual</strong></td>
+<td>Examples, analogies</td>
+<td>Domain-specific <a href="prompt-engineering.html">prompt engineering</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="guideai-biosensor-augmented-adaptive-learning-2026">GuideAI: Biosensor-Augmented Adaptive Learning (2026)</h3>
+<p>GuideAI represents a paradigm shift in AI tutoring — a context-aware, biosensor-augmented LLM framework that performs continuous learner-state inference and adaptive intervention at multiple temporal and cognitive scales.[^2]</p>
+<p>Key innovations:
+- <strong>Physiological sensing</strong>: Monitors heart rate variability, galvanic skin response, and eye tracking to infer cognitive load, frustration, and engagement in real time
+- <strong>Multi-scale adaptation</strong>: Adjusts at three levels — micro (next sentence), meso (current topic), and macro (learning path)
+- <strong>Intervention timing</strong>: Uses predictive models to intervene <em>before</em> the learner disengages, not after
+- <strong>Grounded explanations</strong>: Integrates <a href="../core-concepts/retrieval-augmented-generation.html">retrieval-augmented generation</a> to provide source-backed explanations</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;GuideAI: Adaptive Real-World Learning Pipeline&lt;/text&gt;
+
+  &lt;!-- Learner --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;55&quot; width=&quot;130&quot; height=&quot;100&quot; rx=&quot;10&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;85&quot; y=&quot;78&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Learner&lt;/text&gt;
+  &lt;text x=&quot;85&quot; y=&quot;98&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Interactions&lt;/text&gt;
+  &lt;text x=&quot;85&quot; y=&quot;112&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Biosensor data&lt;/text&gt;
+  &lt;text x=&quot;85&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Eye tracking&lt;/text&gt;
+  &lt;text x=&quot;85&quot; y=&quot;140&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Response patterns&lt;/text&gt;
+
+  &lt;!-- Arrow --&gt;
+  &lt;line x1=&quot;155&quot; y1=&quot;105&quot; x2=&quot;195&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;193,100 203,105 193,110&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- State Inference --&gt;
+  &lt;rect x=&quot;205&quot; y=&quot;45&quot; width=&quot;150&quot; height=&quot;120&quot; rx=&quot;10&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#FF9800&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;280&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;State Inference&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Cognitive load: 0.7&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Engagement: 0.4 ↓&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;116&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Frustration: 0.6 ↑&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Comprehension: 0.5&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;150&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#E65100&quot;&gt;⚠ Intervention needed&lt;/text&gt;
+
+  &lt;!-- Arrow --&gt;
+  &lt;line x1=&quot;360&quot; y1=&quot;105&quot; x2=&quot;400&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;398,100 408,105 398,110&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- Adaptive LLM --&gt;
+  &lt;rect x=&quot;410&quot; y=&quot;45&quot; width=&quot;150&quot; height=&quot;120&quot; rx=&quot;10&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;485&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Adaptive LLM&lt;/text&gt;
+  &lt;text x=&quot;485&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Simplify explanation&lt;/text&gt;
+  &lt;text x=&quot;485&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Add concrete example&lt;/text&gt;
+  &lt;text x=&quot;485&quot; y=&quot;116&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Switch to analogy&lt;/text&gt;
+  &lt;text x=&quot;485&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Offer encouragement&lt;/text&gt;
+  &lt;text x=&quot;485&quot; y=&quot;150&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;Grounded in RAG sources&lt;/text&gt;
+
+  &lt;!-- Arrow --&gt;
+  &lt;line x1=&quot;565&quot; y1=&quot;105&quot; x2=&quot;605&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;603,100 613,105 603,110&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- Output --&gt;
+  &lt;rect x=&quot;615&quot; y=&quot;55&quot; width=&quot;90&quot; height=&quot;100&quot; rx=&quot;10&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;660&quot; y=&quot;78&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;Response&lt;/text&gt;
+  &lt;text x=&quot;660&quot; y=&quot;98&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Adapted&lt;/text&gt;
+  &lt;text x=&quot;660&quot; y=&quot;112&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;content +&lt;/text&gt;
+  &lt;text x=&quot;660&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;scaffolding&lt;/text&gt;
+  &lt;text x=&quot;660&quot; y=&quot;140&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;+ sources&lt;/text&gt;
+
+  &lt;!-- Feedback loop --&gt;
+  &lt;path d=&quot;M 660 160 L 660 185 L 85 185 L 85 160&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot; stroke-dasharray=&quot;5,5&quot;/&gt;
+  &lt;polygon points=&quot;80,162 85,152 90,162&quot; fill=&quot;#7B1FA2&quot;/&gt;
+  &lt;text x=&quot;370&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#7B1FA2&quot;&gt;Continuous feedback loop — learner state updates every interaction&lt;/text&gt;
+
+  &lt;!-- Three scale boxes --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;220&quot; width=&quot;220&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#E0F7FA&quot; stroke=&quot;#00838F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;130&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#00838F&quot;&gt;Micro Scale&lt;/text&gt;
+  &lt;text x=&quot;130&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Next sentence/response&lt;/text&gt;
+  &lt;text x=&quot;130&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Adjust wording, add hints&lt;/text&gt;
+  &lt;text x=&quot;130&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;~seconds&lt;/text&gt;
+
+  &lt;rect x=&quot;250&quot; y=&quot;220&quot; width=&quot;220&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#FFF8E1&quot; stroke=&quot;#F57F17&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#F57F17&quot;&gt;Meso Scale&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Current topic/concept&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Switch approach, add examples&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;~minutes&lt;/text&gt;
+
+  &lt;rect x=&quot;480&quot; y=&quot;220&quot; width=&quot;220&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#FCE4EC&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;590&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;Macro Scale&lt;/text&gt;
+  &lt;text x=&quot;590&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Learning path/curriculum&lt;/text&gt;
+  &lt;text x=&quot;590&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Reorder topics, add remediation&lt;/text&gt;
+  &lt;text x=&quot;590&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;~hours/days&lt;/text&gt;
+
+  &lt;!-- Application domains --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;305&quot; width=&quot;680&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#F1F8E9&quot; stroke=&quot;#558B2F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#558B2F&quot;&gt;Real-World Application Domains&lt;/text&gt;
+  &lt;text x=&quot;150&quot; y=&quot;350&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;🏥 Medical training&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;350&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;🔬 Scientific literacy&lt;/text&gt;
+  &lt;text x=&quot;470&quot; y=&quot;350&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;💼 Professional skills&lt;/text&gt;
+  &lt;text x=&quot;630&quot; y=&quot;350&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;🛒 E-commerce&lt;/text&gt;
+  &lt;text x=&quot;150&quot; y=&quot;370&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;📊 Data analysis&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;370&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;⚖️ Legal reasoning&lt;/text&gt;
+  &lt;text x=&quot;470&quot; y=&quot;370&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;🔧 Engineering&lt;/text&gt;
+  &lt;text x=&quot;630&quot; y=&quot;370&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;💻 Programming&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<h3 id="open-tutorai-open-source-personalized-learning-2026">Open TutorAI: Open-Source Personalized Learning (2026)</h3>
+<p>Open TutorAI is an open-source platform that captures learner goals and preferences to configure a learner-specific AI assistant with both text-based and avatar-driven interfaces.[^3] Key features:</p>
+<ul>
+<li><strong>Goal elicitation</strong>: Structured onboarding that identifies what the learner wants to achieve (pass an exam, build a project, understand a concept for work)</li>
+<li><strong>Multi-modal interaction</strong>: Text chat, voice, and animated avatar interfaces — the avatar uses <a href="vlm-integration.html">VLM integration</a> for visual explanations</li>
+<li><strong>Open-source architecture</strong>: Enables educators and institutions to customize and extend the platform, connecting to <a href="../tools-platforms/code-generation.html">code generation</a> for technical learning paths</li>
+</ul>
+<h3 id="pedagogically-controlled-ai-tutoring">Pedagogically Controlled AI Tutoring</h3>
+<p>Curriculum-constrained AI tutoring combines a modular, semantically tagged knowledge base with engineered prompts for safe, personalized, curriculum-aligned tutoring — without custom model training.[^4] This approach:</p>
+<ul>
+<li>Prevents the AI from teaching content outside the approved curriculum</li>
+<li>Uses <a href="prompt-engineering.html">prompt engineering</a> to enforce Socratic questioning rather than direct answers</li>
+<li>Maintains learner profiles that track mastery across curriculum standards</li>
+<li>Connects to <a href="evaluation-methodology.html">evaluation methodology</a> for assessing learning outcomes</li>
+</ul>
+<h3 id="simulation-based-experiential-learning">Simulation-Based Experiential Learning</h3>
+<p>AI-powered simulations create environments where learners practice skills in realistic but safe contexts. This connects to several wiki topics:</p>
+<ul>
+<li><strong><a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation learning</a></strong>: World models that simulate domain environments for practice</li>
+<li><strong>Digital twins for training</strong> (2026): AI-integrated digital twins enable learners to experiment with complex systems (factories, cities, ecosystems) without real-world consequences[^5]</li>
+<li><strong><a href="world-models.html">World models</a></strong>: Internal representations that enable AI to predict outcomes, giving learners a "what-if" sandbox</li>
+</ul>
+<h3 id="e-commerce-learning-applications">E-Commerce Learning Applications</h3>
+<p>Real-world learning for e-commerce professionals involves AI systems that teach:</p>
+<ul>
+<li><strong>Product analysis</strong>: Understanding market positioning through AI-powered competitive analysis — connecting to <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a></li>
+<li><strong>Customer behavior modeling</strong>: Simulation environments where learners practice segmentation and targeting using <a href="synthetic-data-generation.html">synthetic data generation</a></li>
+<li><strong>Conversational commerce skills</strong>: Training with AI customers that simulate different shopping intents, powered by <a href="../frontier-topics/multi-agent-systems.html">multi-agent systems</a></li>
+</ul>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2026-landscape">2026 Landscape</h3>
+<p>The field is converging around several key trends:</p>
+<ol>
+<li><strong>Biosensor integration</strong>: Systems like GuideAI demonstrate that physiological data significantly improves adaptation quality — cognitive load detection enables preemptive intervention[^2]</li>
+<li><strong>Open-source platforms</strong>: Open TutorAI and similar projects democratize access to AI tutoring, enabling customization for specific curricula and domains[^3]</li>
+<li><strong>Simulation-first pedagogy</strong>: Digital twin environments (January 2026) enable four-stage learning: modeling → mirroring → intervening → autonomous management[^5]</li>
+<li><strong>Hallucination safeguards</strong>: All serious educational AI systems now integrate <a href="../core-concepts/hallucination-detection.html">hallucination detection</a> to prevent teaching incorrect information</li>
+<li><strong>Transfer measurement</strong>: New evaluation frameworks specifically measure whether AI-assisted learning transfers to real-world performance, not just test scores</li>
+</ol>
+<h3 id="key-metrics">Key Metrics</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Year</th>
+<th>Key Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GuideAI</td>
+<td>2026</td>
+<td>Real-time cognitive load inference enables preemptive scaffolding</td>
+</tr>
+<tr>
+<td>Open TutorAI</td>
+<td>2026</td>
+<td>Open-source platform with text + avatar interfaces</td>
+</tr>
+<tr>
+<td>Curriculum-Constrained Tutor</td>
+<td>2025</td>
+<td>Safe, aligned tutoring without custom training</td>
+</tr>
+<tr>
+<td>Digital Twin Learning</td>
+<td>2026</td>
+<td>Four-stage framework from modeling to autonomous management</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Privacy concerns</strong>: Biosensor data collection raises significant ethical questions about student surveillance and data ownership</li>
+<li><strong>Digital divide</strong>: Advanced AI tutoring systems require hardware and connectivity that many learners lack</li>
+<li><strong>Assessment validity</strong>: It remains difficult to measure whether AI-assisted learning truly transfers to real-world competence or just optimizes for measurable proxies</li>
+<li><strong>Over-reliance</strong>: Learners may become dependent on AI scaffolding and struggle without it — the "training wheels" problem</li>
+<li><strong>Domain coverage</strong>: Current systems work best for well-structured domains (STEM, programming) and struggle with ambiguous, creative, or deeply contextual fields</li>
+<li><strong>Cultural adaptation</strong>: Most AI tutoring systems are trained on English-language, Western educational norms and may not transfer well to other cultural contexts</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> — ensuring AI tutors don't teach errors
+- <a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a> — grounding explanations in sources
+- <a href="../core-concepts/transfer-learning.html">Transfer Learning</a> — knowledge transfer between domains
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — base models powering learning systems</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — AI-assisted programming education
+- <a href="../tools-platforms/aider.html">Aider</a> — practical AI coding assistant for learning
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking educational AI research</p>
+<p><strong>Methodologies:</strong>
+- <a href="curriculum-learning.html">Curriculum Learning</a> — progressive skill building
+- <a href="prompt-engineering.html">Prompt Engineering</a> — designing effective tutoring prompts
+- <a href="evaluation-methodology.html">Evaluation Methodology</a> — measuring learning outcomes
+- <a href="vlm-integration.html">VLM Integration</a> — visual explanations and avatar interfaces
+- <a href="active-learning.html">Active Learning</a> — query strategies for efficient learning</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulation environments for practice
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — commercial applications
+- <a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems</a> — peer learning simulations
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-improving tutoring systems
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — integrating learning across domains</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational educational AI papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring learning research</p>
+<h2 id="references">References</h2>
+<p>[^1]: Bransford, J. D., Brown, A. L., &amp; Cocking, R. R. (2000). <em>How People Learn: Brain, Mind, Experience, and School</em>. National Academy Press.</p>
+<p>[^2]: Anonymous. (2026). "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions." arXiv:2601.20402. https://arxiv.org/abs/2601.20402</p>
+<p>[^3]: Anonymous. (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." arXiv:2602.07176. https://arxiv.org/abs/2602.07176</p>
+<p>[^4]: Anonymous. (2025). "Pedagogically Controlled, Curriculum-Constrained AI Tutor for SE Education." arXiv:2512.11882. https://arxiv.org/abs/2512.11882</p>
+<p>[^5]: Anonymous. (2026). "Digital Twin AI: Opportunities and Challenges from Large Language Models to World Models." arXiv:2601.01321. https://arxiv.org/abs/2601.01321</p>
+</main>
+</body>
+</html>

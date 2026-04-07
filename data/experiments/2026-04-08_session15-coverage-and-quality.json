@@ -1,0 +1,40 @@
+{
+  "session": 15,
+  "date": "2026-04-08",
+  "mode": "mixed (coverage + quality)",
+  "hypothesis": {
+    "strategy": "Write 3 new wishlist articles (applications-for-real-world-learning, computational-cost, domain-specificity) and improve 3 lowest-scoring articles (prompt-engineering, hallucination-detection, interpretability) with 2026 papers and SVG diagrams",
+    "predicted_delta": "+0.1 composite (new articles dilute, but improved articles compensate)",
+    "dimensions_targeted": ["currency", "sourcing", "depth", "linking"],
+    "reasoning": "Based on sessions 13-14, mixed mode maintains composite while expanding coverage. The 3 lowest-scoring articles all have currency and sourcing as weak dimensions — adding 2026 papers should yield +7-10 points per article. New articles with SVGs and rich cross-linking should score 78-82."
+  },
+  "result": {
+    "before": {
+      "composite": 85.8,
+      "articles": 40,
+      "wishlist_pct": 48.4,
+      "combined_coverage_pct": 74
+    },
+    "after": {
+      "composite": 85.9,
+      "articles": 43,
+      "wishlist_pct": 58.1,
+      "combined_coverage_pct": 79
+    },
+    "actual_delta": 0.1,
+    "articles_improved": {
+      "hallucination-detection": {"before": 79.3, "after": 89.9, "delta": 10.6},
+      "prompt-engineering": {"before": 77.9, "after": 86.4, "delta": 8.5},
+      "interpretability": {"before": 79.3, "after": 87.3, "delta": 8.0}
+    },
+    "new_articles": {
+      "applications-for-real-world-learning": {"score": 79.5},
+      "computational-cost": {"score": 80.9},
+      "domain-specificity": {"score": 79.0}
+    },
+    "papers_added": 21,
+    "diagrams_added": 5,
+    "connections_added": 3
+  },
+  "lesson": "Mixed mode continues to be effective. Improving low-scoring articles with 2026 papers yields consistent +8-10 points. New articles score 79-81 with SVGs and cross-linking. Coverage jumped +9.7pp (48.4%→58.1%). Combined coverage at 79% — very close to the 80% threshold for switching to quality mode."
+}

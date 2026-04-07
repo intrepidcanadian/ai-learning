@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computational Cost - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/applications-for-real-world-learning.html">Applications for Real-World Learning</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/computational-cost.html" aria-current="page">Computational Cost</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/domain-specificity.html">Domain Specificity</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Computational Cost</div>
+<h1 id="computational-cost">Computational Cost</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Computational cost</strong> refers to the resources — compute, energy, memory, and time — required to train, deploy, and run AI systems. As models scale to hundreds of billions of parameters, computational cost has become a first-class research concern, driving innovations in efficient training, quantization, knowledge distillation, and mixture-of-experts architectures. For AI-assisted learning, computational cost determines which institutions and learners can access advanced AI tools, making efficiency research a matter of educational equity as well as engineering optimization.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-scaling-problem">The Scaling Problem</h3>
+<p>The computational requirements of AI have grown exponentially: training costs for frontier models have increased roughly 10x per year since 2020.[^1] This creates several tensions:</p>
+<ul>
+<li><strong>Capability vs. accessibility</strong>: The most capable models are the most expensive to run, limiting access to well-funded organizations</li>
+<li><strong>Training vs. inference</strong>: Training a model is a one-time cost, but inference (running it) is an ongoing cost that scales with users</li>
+<li><strong>Performance vs. efficiency</strong>: Larger models generally perform better, but the marginal gains decrease while costs increase linearly or super-linearly</li>
+</ul>
+<h3 id="scaling-laws-and-compute-optimal-training">Scaling Laws and Compute-Optimal Training</h3>
+<p>Hoffman et al. (2022) established <strong>Chinchilla scaling laws</strong>: for a given compute budget, there is an optimal balance between model size and training data.[^2] Training a smaller model on more data can match a larger model trained on less data — but at lower inference cost. This connects to <a href="../frontier-topics/scaling-laws-research.html">scaling laws research</a> and informs <a href="inference-optimization.html">inference optimization</a> strategies.</p>
+<h3 id="the-green-ai-movement">The Green AI Movement</h3>
+<p>Schwartz et al. proposed the concept of <strong>Green AI</strong> — prioritizing computational efficiency alongside accuracy as a first-class metric in AI research.[^3] The argument: reporting only accuracy without computational cost creates perverse incentives to use ever-larger models, with diminishing returns and growing environmental impact.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="quantization">Quantization</h3>
+<p>Quantization reduces model precision from 32-bit or 16-bit floating point to lower bit widths (8-bit, 4-bit, or even 2-bit), dramatically reducing memory and compute requirements:</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 380&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Computational Cost Reduction Strategies&lt;/text&gt;
+
+  &lt;!-- Cost pyramid --&gt;
+  &lt;polygon points=&quot;360,50 580,200 140,200&quot; fill=&quot;#FFEBEE&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;90&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;Full Precision (FP32)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;106&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;100% memory, 100% compute&lt;/text&gt;
+
+  &lt;polygon points=&quot;360,110 530,200 190,200&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#FF9800&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;140&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Half Precision (FP16/BF16)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;156&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;50% memory, ~2x speedup&lt;/text&gt;
+
+  &lt;polygon points=&quot;360,160 480,200 240,200&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;185&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;INT8/INT4 Quantized&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;198&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;25-12.5% memory&lt;/text&gt;
+
+  &lt;!-- Strategy boxes --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;220&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;100&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Quantization&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;GPTQ, AWQ, GGUF&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;2-4 bit with QAT&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#1565C0&quot;&gt;Up to 4x compression&lt;/text&gt;
+
+  &lt;rect x=&quot;200&quot; y=&quot;220&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;280&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;Distillation&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Teacher → Student&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;LoRA + Muon optimizer&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#7B1FA2&quot;&gt;10-100x smaller models&lt;/text&gt;
+
+  &lt;rect x=&quot;380&quot; y=&quot;220&quot; width=&quot;160&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#FFF8E1&quot; stroke=&quot;#F57F17&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;460&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#F57F17&quot;&gt;Mixture of Experts&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Activate subset of params&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Optimal sparsity scaling&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#F57F17&quot;&gt;Same perf, less compute&lt;/text&gt;
+
+  &lt;rect x=&quot;560&quot; y=&quot;220&quot; width=&quot;140&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#E0F7FA&quot; stroke=&quot;#00838F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;630&quot; y=&quot;240&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#00838F&quot;&gt;Pruning&lt;/text&gt;
+  &lt;text x=&quot;630&quot; y=&quot;256&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Remove redundant&lt;/text&gt;
+  &lt;text x=&quot;630&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;weights/heads/layers&lt;/text&gt;
+  &lt;text x=&quot;630&quot; y=&quot;284&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#00838F&quot;&gt;20-50% reduction&lt;/text&gt;
+
+  &lt;!-- Learning impact --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;305&quot; width=&quot;680&quot; height=&quot;60&quot; rx=&quot;8&quot; fill=&quot;#F1F8E9&quot; stroke=&quot;#558B2F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#558B2F&quot;&gt;Impact on Learning Accessibility&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;347&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;4-bit quantized models run on consumer GPUs → AI tutoring on personal devices&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;361&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Distilled models run on phones → offline learning in low-connectivity regions&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p><strong>Quantization-Aware Training for Reasoning</strong> (January 2026): A systematic empirical study showed that <a href="../core-concepts/knowledge-distillation.html">knowledge distillation</a> is the most robust training objective for quantized reasoning models, and that post-training quantization (PTQ) provides strong initialization for quantization-aware training (QAT).[^4] This is critical for deploying reasoning models in educational contexts where compute is limited.</p>
+<h3 id="knowledge-distillation-for-cost-reduction">Knowledge Distillation for Cost Reduction</h3>
+<p><a href="../core-concepts/knowledge-distillation.html">Knowledge distillation</a> trains smaller "student" models to mimic larger "teacher" models, achieving dramatic cost reductions:</p>
+<ul>
+<li><strong>Muon-Optimized Distillation</strong> (January 2026): An integrated framework combining GPTQ-based quantization, LoRA fine-tuning, and specialized data distillation achieving up to 2x memory compression while maintaining reasoning capability.[^5]</li>
+<li><strong>Domain-specific distillation</strong>: Training small, specialized models that outperform general-purpose models in narrow domains — relevant for <a href="domain-specificity.html">domain-specificity</a> in educational applications</li>
+</ul>
+<h3 id="mixture-of-experts-moe-scaling">Mixture-of-Experts (MoE) Scaling</h3>
+<p>MoE architectures activate only a subset of parameters for each input, enabling models with total parameter counts in the trillions while using compute equivalent to much smaller dense models:</p>
+<ul>
+<li><strong>Optimal sparsity</strong> (March 2026): Research shows that MoE sparsity influences the trade-off between memorization and reasoning capabilities. Optimal sparsity must be determined jointly by active FLOPs and total tokens per parameter, revising classical compute-optimal scaling laws.[^6]</li>
+<li><strong>Joint MoE scaling laws</strong> (2025): Principled methods for scaling learning rate with number of experts and model size, analyzing training FLOPs, inference cost, and memory usage jointly.[^7]</li>
+</ul>
+<h3 id="energy-cost-of-ai-assisted-development">Energy Cost of AI-Assisted Development</h3>
+<p><strong>Green AI for Software Development</strong> (February 2026): The first comprehensive quantification of computational and energy costs of AI-assisted software development workflows, proposing strategies to reduce the energy footprint of LLM inference in development contexts.[^8] Key findings:</p>
+<ul>
+<li>AI code completion adds 15-40% energy overhead to development workflows</li>
+<li>Caching and batching strategies can reduce this by 60%+</li>
+<li>Smaller specialized models can match large general models for routine coding tasks at 10x lower energy cost</li>
+</ul>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2026-cost-landscape">2026 Cost Landscape</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost Reduction</th>
+<th>Quality Impact</th>
+<th>Maturity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INT4 Quantization</td>
+<td>4x memory</td>
+<td>&lt;2% accuracy loss</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Knowledge Distillation</td>
+<td>10-100x smaller</td>
+<td>5-15% accuracy loss</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>MoE Routing</td>
+<td>3-8x compute</td>
+<td>Comparable accuracy</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Pruning</td>
+<td>2-5x speedup</td>
+<td>1-5% accuracy loss</td>
+<td>Research</td>
+</tr>
+<tr>
+<td>Speculative Decoding</td>
+<td>2-3x faster inference</td>
+<td>Lossless</td>
+<td>Production</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implications-for-learning">Implications for Learning</h3>
+<p>Computational cost directly affects who can access AI-powered learning:</p>
+<ol>
+<li><strong>Institutional access</strong>: Universities with GPU clusters can run frontier models; community colleges cannot</li>
+<li><strong>Personal devices</strong>: Quantized models running locally enable private, offline AI tutoring</li>
+<li><strong>Developing regions</strong>: Energy-efficient models make AI learning feasible where electricity is expensive or unreliable</li>
+<li><strong>Real-time interaction</strong>: Low-latency inference is essential for interactive tutoring — connecting to <a href="test-time-compute.html">test-time compute</a> trade-offs</li>
+<li><strong>Scaling to millions</strong>: <a href="inference-optimization.html">Inference optimization</a> determines whether AI tutoring can serve all students, not just those who can afford premium APIs</li>
+</ol>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Accuracy-efficiency trade-off</strong>: Every cost reduction technique introduces some quality degradation — the question is whether it matters for the specific application</li>
+<li><strong>Hardware dependency</strong>: Many optimization techniques are specific to particular GPU architectures, limiting portability</li>
+<li><strong>Evaluation gaps</strong>: Cost is rarely reported in AI education papers, making it difficult to compare approaches</li>
+<li><strong>Hidden costs</strong>: API pricing obscures true computational costs; fine-tuning costs are rarely included in total cost of ownership</li>
+<li><strong>Rebound effects</strong>: Making AI cheaper may increase usage enough to offset efficiency gains (Jevons paradox)</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a> — training smaller models from larger ones
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — the models being optimized
+- <a href="../core-concepts/transfer-learning.html">Transfer Learning</a> — reusing pretrained models to reduce training cost</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking efficiency research
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — energy cost of AI-assisted coding</p>
+<p><strong>Methodologies:</strong>
+- <a href="inference-optimization.html">Inference Optimization</a> — reducing deployment costs
+- <a href="test-time-compute.html">Test-Time Compute</a> — compute allocation at inference
+- <a href="evaluation-methodology.html">Evaluation Methodology</a> — measuring cost-performance trade-offs
+- <a href="synthetic-data-generation.html">Synthetic Data Generation</a> — reducing data collection costs</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws Research</a> — theoretical foundations of compute scaling
+- <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Research</a> — safety implications of cost cutting
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — commercial deployment costs
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — cost as a cross-cutting concern</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational efficiency papers
+- <a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — labs focused on efficient AI</p>
+<h2 id="references">References</h2>
+<p>[^1]: Epoch AI. (2025). "Trends in Machine Learning Compute." https://epochai.org/trends</p>
+<p>[^2]: Hoffmann, J., Borgeaud, S., Mensch, A., Buchatskaya, E., Cai, T., Rutherford, E., ... &amp; Sifre, L. (2022). "Training Compute-Optimal Large Language Models." arXiv:2203.15556. https://arxiv.org/abs/2203.15556</p>
+<p>[^3]: Schwartz, R., Dodge, J., Smith, N. A., &amp; Etzioni, O. (2020). "Green AI." <em>Communications of the ACM</em>, 63(12), 54-63. https://doi.org/10.1145/3381831</p>
+<p>[^4]: Anonymous. (2026). "What Makes Low-Bit Quantization-Aware Training Work for Reasoning LLMs?" arXiv:2601.14888. https://arxiv.org/abs/2601.14888</p>
+<p>[^5]: Anonymous. (2026). "Advancing Model Refinement: Muon-Optimized Distillation and Quantization for LLM Deployment." arXiv:2601.09865. https://arxiv.org/abs/2601.09865</p>
+<p>[^6]: Anonymous. (2026). "Optimal Sparsity of Mixture-of-Experts Language Models for Reasoning Tasks." arXiv:2508.18672. https://arxiv.org/abs/2508.18672</p>
+<p>[^7]: Anonymous. (2025). "Joint MoE Scaling Laws: Mixture of Experts Can Be Memory Efficient." arXiv:2502.05172. https://arxiv.org/abs/2502.05172</p>
+<p>[^8]: Anonymous. (2026). "Towards Green AI: Decoding the Energy of LLM Inference in Software Development." arXiv:2602.05712. https://arxiv.org/abs/2602.05712</p>
+</main>
+</body>
+</html>

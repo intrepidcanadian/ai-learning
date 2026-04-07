@@ -338,8 +338,11 @@ body {
 <details open><summary>Methodologies</summary>
 <a href="../methodologies/active-learning.html">Active Learning</a>
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/applications-for-real-world-learning.html">Applications for Real-World Learning</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/computational-cost.html">Computational Cost</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/domain-specificity.html">Domain Specificity</a>
 <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/inference-optimization.html">Inference Optimization</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
@@ -520,6 +523,88 @@ loadWishlist();
 <li><strong>Retrieval-augmented generation (RAG)</strong>: Grounding model outputs in retrieved documents reduces hallucination rates by 30-50%, though RAG introduces its own failure modes (retrieving irrelevant documents, faithfully reproducing errors in sources)[^8]</li>
 <li><strong>Real-time detection pipelines</strong>: Production systems at Google, Anthropic, and OpenAI now run hallucination detection as a post-processing step, flagging or blocking outputs that fail verification checks</li>
 </ul>
+<h3 id="2026-breakthroughs">2026 Breakthroughs</h3>
+<p>Several 2026 papers have advanced the state of the art significantly:</p>
+<ul>
+<li>
+<p><strong>VeriFY — Factual Self-Verification</strong> (February 2026): Trains models to verify their own factual claims, achieving large hallucination reductions with minimal degradation to correct response rates. Unlike knowledge probing and self-consistency (which reduce hallucinations primarily by abstaining), VeriFY actively corrects while maintaining helpfulness.[^9]</p>
+</li>
+<li>
+<p><strong>Tool Receipts for Agent Hallucination</strong> (March 2026): The NabaOS system generates HMAC-signed tool execution receipts that the LLM cannot forge, then cross-references model claims against these receipts for real-time hallucination detection. Achieves 91% detection rate with the lowest false positive rates among tested approaches — critical for <a href="../frontier-topics/multi-agent-systems.html">multi-agent systems</a> where agents make claims about tool usage.[^10]</p>
+</li>
+<li>
+<p><strong>RT4CHART — Hierarchical Verification for RAG</strong> (March 2026): Decomposes model outputs into independently verifiable claims with hierarchical local-to-global verification against retrieved context. Each claim is labeled as entailed, contradicted, or baseless — providing granular hallucination attribution rather than binary detection. Directly improves <a href="retrieval-augmented-generation.html">retrieval-augmented generation</a> reliability.[^11]</p>
+</li>
+<li>
+<p><strong>Unified Hallucination Detection and Fact Verification</strong> (2026): First large-scale empirical study directly comparing hallucination detection and fact verification under a single unified framework, revealing that techniques from one domain can transfer to the other with minimal adaptation.[^12]</p>
+</li>
+</ul>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 380&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;2026 Hallucination Detection Pipeline&lt;/text&gt;
+
+  &lt;!-- Input --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;50&quot; width=&quot;140&quot; height=&quot;50&quot; rx=&quot;8&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;90&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;LLM Output&lt;/text&gt;
+  &lt;text x=&quot;90&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;&quot;The paper shows...&quot;&lt;/text&gt;
+
+  &lt;!-- Arrow --&gt;
+  &lt;line x1=&quot;165&quot; y1=&quot;75&quot; x2=&quot;190&quot; y2=&quot;75&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;188,70 198,75 188,80&quot; fill=&quot;#333&quot;/&gt;
+
+  &lt;!-- Claim decomposition --&gt;
+  &lt;rect x=&quot;200&quot; y=&quot;45&quot; width=&quot;130&quot; height=&quot;60&quot; rx=&quot;8&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#FF9800&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;265&quot; y=&quot;65&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Claim Decomposition&lt;/text&gt;
+  &lt;text x=&quot;265&quot; y=&quot;80&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;(RT4CHART)&lt;/text&gt;
+  &lt;text x=&quot;265&quot; y=&quot;93&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Split → atomic claims&lt;/text&gt;
+
+  &lt;!-- Three verification paths --&gt;
+  &lt;line x1=&quot;335&quot; y1=&quot;60&quot; x2=&quot;390&quot; y2=&quot;45&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;line x1=&quot;335&quot; y1=&quot;75&quot; x2=&quot;390&quot; y2=&quot;75&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;line x1=&quot;335&quot; y1=&quot;90&quot; x2=&quot;390&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+
+  &lt;!-- Self-verification --&gt;
+  &lt;rect x=&quot;390&quot; y=&quot;20&quot; width=&quot;140&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;460&quot; y=&quot;38&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Self-Verification&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;52&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;(VeriFY) — internal check&lt;/text&gt;
+
+  &lt;!-- Tool receipt verification --&gt;
+  &lt;rect x=&quot;390&quot; y=&quot;72&quot; width=&quot;140&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;460&quot; y=&quot;90&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;Tool Receipts&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;104&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;(NabaOS) — HMAC signed&lt;/text&gt;
+
+  &lt;!-- RAG grounding --&gt;
+  &lt;rect x=&quot;390&quot; y=&quot;124&quot; width=&quot;140&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#E0F7FA&quot; stroke=&quot;#00838F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;460&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#00838F&quot;&gt;RAG Grounding&lt;/text&gt;
+  &lt;text x=&quot;460&quot; y=&quot;156&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Hierarchical verification&lt;/text&gt;
+
+  &lt;!-- Convergence --&gt;
+  &lt;line x1=&quot;535&quot; y1=&quot;42&quot; x2=&quot;575&quot; y2=&quot;75&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;line x1=&quot;535&quot; y1=&quot;94&quot; x2=&quot;575&quot; y2=&quot;75&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;line x1=&quot;535&quot; y1=&quot;146&quot; x2=&quot;575&quot; y2=&quot;100&quot; stroke=&quot;#333&quot; stroke-width=&quot;1&quot;/&gt;
+
+  &lt;!-- Aggregation --&gt;
+  &lt;rect x=&quot;575&quot; y=&quot;50&quot; width=&quot;130&quot; height=&quot;70&quot; rx=&quot;8&quot; fill=&quot;#FCE4EC&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;640&quot; y=&quot;70&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;Confidence&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;84&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;Aggregation&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;100&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Entailed / Contradicted&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;112&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;/ Baseless per claim&lt;/text&gt;
+
+  &lt;!-- Learning application box --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;190&quot; width=&quot;680&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#F1F8E9&quot; stroke=&quot;#558B2F&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;212&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#558B2F&quot;&gt;Application to Learning: Trustworthy AI Tutoring&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;232&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Claim-level verification enables AI tutors that flag uncertain explanations&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;248&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Tool receipts ensure agent actions (searches, calculations) are verifiable&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;264&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Students learn to evaluate AI claims by seeing verification confidence scores&lt;/text&gt;
+
+  &lt;!-- Detection rates box --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;285&quot; width=&quot;680&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#EDE7F6&quot; stroke=&quot;#4527A0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;307&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#4527A0&quot;&gt;2026 Detection Performance&lt;/text&gt;
+  &lt;text x=&quot;180&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;NabaOS Tool Receipts: &lt;tspan font-weight=&quot;bold&quot;&gt;91%&lt;/tspan&gt; detection&lt;/text&gt;
+  &lt;text x=&quot;540&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;VeriFY: &lt;tspan font-weight=&quot;bold&quot;&gt;Low degradation&lt;/tspan&gt; to correct answers&lt;/text&gt;
+  &lt;text x=&quot;180&quot; y=&quot;347&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Adaptive Bayesian: &lt;tspan font-weight=&quot;bold&quot;&gt;40-60%&lt;/tspan&gt; cost reduction&lt;/text&gt;
+  &lt;text x=&quot;540&quot; y=&quot;347&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;RT4CHART: &lt;tspan font-weight=&quot;bold&quot;&gt;Claim-level&lt;/tspan&gt; granularity&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h3 id="benchmarks-and-evaluation">Benchmarks and Evaluation</h3>
 <table>
 <thead>
@@ -594,6 +679,10 @@ loadWishlist();
 <p>[^6]: Pesaranghader, A. &amp; Li, E. (2026). "Hallucination Detection and Mitigation in Large Language Models." arXiv:2601.09929. https://arxiv.org/abs/2601.09929</p>
 <p>[^7]: Sun, H., Li, Z., Xu, S., &amp; Zhang, M. (2025). "Aligning to Reduce Hallucination: A Survey of Techniques." arXiv preprint.</p>
 <p>[^8]: Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... &amp; Kiela, D. (2020). "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." <em>NeurIPS 2020</em>. https://arxiv.org/abs/2005.11401</p>
+<p>[^9]: Anonymous. (2026). "VeriFY — Do I Really Know? Learning Factual Self-Verification." arXiv:2602.02018. https://arxiv.org/abs/2602.02018</p>
+<p>[^10]: Anonymous. (2026). "Tool Receipts, Not Zero-Knowledge Proofs: Practical Hallucination Detection for AI Agents." arXiv:2603.10060. https://arxiv.org/abs/2603.10060</p>
+<p>[^11]: Anonymous. (2026). "Retromorphic Testing with Hierarchical Verification for Hallucination Detection in RAG (RT4CHART)." arXiv:2603.27752. https://arxiv.org/abs/2603.27752</p>
+<p>[^12]: Anonymous. (2026). "Towards Unification of Hallucination Detection and Fact Verification." arXiv:2512.02772. https://arxiv.org/abs/2512.02772</p>
 </main>
 </body>
 </html>

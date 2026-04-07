@@ -1215,6 +1215,18 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 
 [Code generation](../tools-platforms/code-generation.md) closes the gap between research papers and working implementations across all three domains. PaperCoder (Seo et al., 2025)[^104] transforms ML papers into executable repositories, directly enabling the [automated scientific discovery](../core-concepts/automated-scientific-discovery.md) pipeline. For simulation, code generation automates the creation of environment dynamics; for recursion, it enables self-modifying agents that can write and test their own improvements; for commerce, it allows non-technical domain experts to rapidly prototype recommendation and personalization systems.
 
+## Connection 78: Computational Cost as the Equity Bottleneck
+
+[Computational cost](../methodologies/computational-cost.md) is the hidden variable that determines whether AI learning systems reach all learners or only those with access to expensive infrastructure. The convergence of quantization (INT4 models on consumer GPUs), knowledge distillation (7B models matching GPT-4 on domain tasks), and MoE routing (activating only needed experts) creates a pathway from frontier capability to universal accessibility. This connects simulation (world models that must run in real-time for interactive learning), recursion (self-improvement loops that compound compute costs), and commerce (inference costs that scale linearly with users). The 2026 Green AI findings show that strategic caching and batching can reduce energy costs by 60%+, making the sustainability concern addressable.
+
+## Connection 79: Domain Specificity as the Transfer Mechanism
+
+[Domain specificity](../methodologies/domain-specificity.md) is the bridge between general AI capability and real-world learning outcomes. The MoE-LoRA framework (2026) demonstrates that domain adaptation can be both efficient and effective — shared backbones with domain-specific expert modules. For the triad: simulation requires domain-specific world models (a physics simulation needs different internals than an economics simulation), recursion benefits from domain-specific verification (mathematical proofs vs. code tests vs. business metrics), and commerce demands domain expertise (fashion recommendations require different knowledge than electronics). The autonomous lab agent achieving 99.3% accuracy with a 7B model proves that small, specialized models outperform large general ones in narrow domains — the key insight for educational AI.
+
+## Connection 80: Real-World Learning Applications Complete the Theory-Practice Pipeline
+
+[Applications for real-world learning](../methodologies/applications-for-real-world-learning.md) represents the ultimate validation of the simulation-recursion-commerce triad: AI systems that measurably improve human capability in practical contexts. GuideAI's biosensor-augmented adaptation (2026) adds the missing feedback dimension — physiological signals that reveal cognitive load before the learner disengages. Open TutorAI's open-source platform democratizes the educational architecture that commerce has already perfected (preference capture → personalized delivery → outcome measurement). The three-scale adaptation model (micro/meso/macro) directly parallels the three-level recursion in self-improving systems (next action/current strategy/overall architecture).
+
 ## See Also
 
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) -- End-to-end research automation
@@ -1246,6 +1258,9 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 - [Interpretability](../methodologies/interpretability.md) -- Understanding model internals
 - [Active Learning](../methodologies/active-learning.md) -- Strategic data selection
 - [Code Generation](../tools-platforms/code-generation.md) -- Research-to-implementation pipeline
+- [Applications for Real-World Learning](../methodologies/applications-for-real-world-learning.md) -- Practical learning systems
+- [Computational Cost](../methodologies/computational-cost.md) -- Efficiency as equity enabler
+- [Domain Specificity](../methodologies/domain-specificity.md) -- Domain adaptation for learning
 
 ## References
 

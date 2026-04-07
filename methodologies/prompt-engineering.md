@@ -181,6 +181,75 @@ Common patterns that recur across educational and research applications:
 5. **Evaluation of prompt strategies**: Systematic comparison of prompt patterns across tasks and models, connecting to [evaluation methodology](evaluation-methodology.md)
 6. **Prompt security**: Defending against prompt injection and jailbreaking — relevant to [AI safety in research](../frontier-topics/ai-safety-in-research.md)
 
+### 2026 Advances in Automated Prompt Optimization
+
+Recent work has pushed prompt optimization significantly further:
+
+- **Zero-shot autoprompting** (January 2026): Generates task-specific prompts from output demonstrations alone, requiring no task descriptions or fine-tuning — a fully automated approach that removes the human bottleneck entirely.[^8]
+
+- **MemAPO — Self-Evolving Memory for Prompt Optimization** (March 2026): Reconceptualizes prompt optimization as self-evolving experience accumulation with a dual-memory mechanism (episodic + semantic) that distills successful reasoning trajectories into reusable strategy templates. Achieves best average performance across benchmarks while reducing cost by ~57.2% compared to TextGrad.[^9] This connects to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md) — the optimizer itself learns from experience.
+
+- **REprompt — Requirements Engineering for Prompts** (January 2026): Multi-agent framework that applies requirements engineering principles to prompt optimization, effectively co-optimizing both system and user prompts through structured decomposition of task requirements.[^10]
+
+- **Prompt Duel Optimizer (PDO)** (January 2026): Sample-efficient, label-free prompt optimization using pairwise preference feedback. Casts prompt selection as a dueling-bandit problem solved with Double Thompson Sampling — enabling prompt optimization without labeled evaluation data.[^11]
+
+```svg
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="12">
+  <text x="360" y="25" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">2026 Prompt Optimization: From Manual to Self-Evolving</text>
+
+  <!-- Timeline -->
+  <line x1="60" y1="60" x2="660" y2="60" stroke="#999" stroke-width="2"/>
+
+  <!-- 2024 -->
+  <circle cx="120" cy="60" r="8" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <text x="120" y="50" text-anchor="middle" font-size="9" fill="#1565C0">2024</text>
+  <rect x="60" y="75" width="120" height="55" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1"/>
+  <text x="120" y="92" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">DSPy/OPRO</text>
+  <text x="120" y="106" text-anchor="middle" font-size="8">Fixed optimization</text>
+  <text x="120" y="118" text-anchor="middle" font-size="8">loops, human-defined</text>
+  <text x="120" y="128" text-anchor="middle" font-size="8" fill="#888">metrics required</text>
+
+  <!-- 2025 -->
+  <circle cx="300" cy="60" r="8" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+  <text x="300" y="50" text-anchor="middle" font-size="9" fill="#2E7D32">2025</text>
+  <rect x="235" y="75" width="130" height="55" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+  <text x="300" y="92" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Prompt Inversion</text>
+  <text x="300" y="106" text-anchor="middle" font-size="8">Reverse-engineer from</text>
+  <text x="300" y="118" text-anchor="middle" font-size="8">outputs, soft prompts,</text>
+  <text x="300" y="128" text-anchor="middle" font-size="8" fill="#888">non-obvious formulations</text>
+
+  <!-- 2026 -->
+  <circle cx="510" cy="60" r="8" fill="#FFE082" stroke="#F57F17" stroke-width="2"/>
+  <text x="510" y="50" text-anchor="middle" font-size="9" fill="#F57F17">2026</text>
+  <rect x="420" y="75" width="180" height="55" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1"/>
+  <text x="510" y="92" text-anchor="middle" font-size="9" font-weight="bold" fill="#F57F17">Self-Evolving (MemAPO)</text>
+  <text x="510" y="106" text-anchor="middle" font-size="8">Dual-memory accumulation,</text>
+  <text x="510" y="118" text-anchor="middle" font-size="8">zero-shot autoprompting,</text>
+  <text x="510" y="128" text-anchor="middle" font-size="8" fill="#888">label-free optimization</text>
+
+  <!-- Key insight box -->
+  <rect x="60" y="150" width="600" height="80" rx="8" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+  <text x="360" y="172" text-anchor="middle" font-size="11" font-weight="bold" fill="#7B1FA2">Key Insight: The Prompt Optimization Stack</text>
+  <text x="360" y="192" text-anchor="middle" font-size="10">Zero-shot autoprompting removes task descriptions → MemAPO adds learning from experience</text>
+  <text x="360" y="208" text-anchor="middle" font-size="10">→ PDO removes labels → REprompt co-optimizes system + user prompts</text>
+  <text x="360" y="224" text-anchor="middle" font-size="9" fill="#7B1FA2">Result: 57% cost reduction with better performance than manual engineering</text>
+
+  <!-- Learning application -->
+  <rect x="60" y="245" width="600" height="60" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+  <text x="360" y="267" text-anchor="middle" font-size="11" font-weight="bold" fill="#00838F">Application to Learning</text>
+  <text x="360" y="285" text-anchor="middle" font-size="10">Self-evolving prompts adapt tutoring style to learner patterns over time</text>
+  <text x="360" y="299" text-anchor="middle" font-size="10">MemAPO's strategy templates can encode effective pedagogical approaches</text>
+</svg>
+```
+
+### Implications for AI-Assisted Learning
+
+The 2026 advances have direct implications for educational AI:
+
+- **Self-adapting tutors**: MemAPO's dual-memory mechanism enables tutoring prompts that evolve based on accumulated experience with learners — the system remembers what pedagogical strategies worked and applies them to new students
+- **No-label optimization**: PDO's preference-based approach means educational prompts can be optimized using student engagement signals (time on task, follow-up questions) rather than requiring expert-labeled evaluation data
+- **Requirements-driven prompt design**: REprompt's structured approach to co-optimizing system and user prompts enables more rigorous design of educational AI interfaces, connecting to [evaluation methodology](evaluation-methodology.md)
+
 ### E-Commerce Applications
 
 Prompt engineering is critical for [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md):
@@ -254,3 +323,11 @@ Prompt engineering has direct applications in education:
 [^6]: Neural at ArchEHR-QA Authors. (2025). "Agentic Prompt Optimization for Evidence-Grounded Clinical QA." arXiv:2506.10751. https://arxiv.org/abs/2506.10751
 
 [^7]: Wang, J., et al. (2025). "You Don't Need Prompt Engineering Anymore: The Prompting Inversion." arXiv:2510.22251. https://arxiv.org/abs/2510.22251
+
+[^8]: Anonymous. (2026). "Automatic Prompt Engineering with No Task Cues and No Tuning." arXiv:2601.03130. https://arxiv.org/abs/2601.03130
+
+[^9]: Anonymous. (2026). "Generalizable Self-Evolving Memory for Automatic Prompt Optimization (MemAPO)." arXiv:2603.21520. https://arxiv.org/abs/2603.21520
+
+[^10]: Anonymous. (2026). "REprompt: Prompt Generation for Intelligent Software Development Guided by Requirements Engineering." arXiv:2601.16507. https://arxiv.org/abs/2601.16507
+
+[^11]: Anonymous. (2026). "LLM Prompt Duel Optimizer." arXiv:2510.13907. https://arxiv.org/abs/2510.13907

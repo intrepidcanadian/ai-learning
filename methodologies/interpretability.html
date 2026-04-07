@@ -338,8 +338,11 @@ body {
 <details open><summary>Methodologies</summary>
 <a href="../methodologies/active-learning.html">Active Learning</a>
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/applications-for-real-world-learning.html">Applications for Real-World Learning</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/computational-cost.html">Computational Cost</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/domain-specificity.html">Domain Specificity</a>
 <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/inference-optimization.html">Inference Optimization</a>
 <a href="../methodologies/interpretability.html" aria-current="page">Interpretability</a>
@@ -602,6 +605,67 @@ loadWishlist();
 - Instruction following (attention patterns in early layers)
 - Code generation (specialized MLP neurons in mid-layers)</p>
 <p><strong>Learning application:</strong> Attribution patching enables AI tutors to explain <em>which parts of the model's knowledge</em> are being used for a given answer, making model reasoning transparent to learners.</p>
+<h3 id="2026-advances-in-mechanistic-interpretability">2026 Advances in Mechanistic Interpretability</h3>
+<ul>
+<li>
+<p><strong>MI for LLM Alignment</strong> (January 2026): A comprehensive survey of mechanistic interpretability techniques specifically for alignment — covering circuit discovery, feature visualization, activation steering, and causal intervention. Identifies scaling sparse autoencoder approaches to the largest models as a near-term priority, with direct implications for making <a href="../frontier-topics/ai-safety-in-research.html">AI safety in research</a> more tractable.[^10]</p>
+</li>
+<li>
+<p><strong>WeightLens &amp; CircuitLens</strong> (ICLR 2026): Two complementary methods that go beyond activation-based analysis. WeightLens interprets features directly from learned weights (no forward pass required); CircuitLens captures how feature activations arise from component interactions, revealing circuit-level dynamics invisible to activation-only methods.[^11] This advances the <a href="#the-circuits-framework">circuits framework</a> from descriptive to mechanistic.</p>
+</li>
+<li>
+<p><strong>Unified Attribution Framework</strong> (January 2026): A position paper arguing that feature attribution (XAI), data attribution (data-centric AI), and component attribution (mechanistic interpretability) share fundamental mathematical similarities. A unified view enables cross-pollination: techniques developed for explaining individual predictions can inform circuit discovery, and vice versa.[^12]</p>
+</li>
+<li>
+<p><strong>Internal States for Hallucination Detection</strong> (January 2026): Addresses the "Detection Dilemma" — probing internal states excels at detecting factual inconsistencies but fails on logical fallacies, while verifying externalized reasoning shows the opposite pattern. Combining both approaches through structured reasoning consistency achieves superior <a href="../core-concepts/hallucination-detection.html">hallucination detection</a>.[^13]</p>
+</li>
+</ul>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 320&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Interpretability Methods: From Activations to Weights (2026)&lt;/text&gt;
+
+  &lt;!-- Three columns --&gt;
+  &lt;!-- Activation-based --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;180&quot; rx=&quot;8&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;125&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Activation-Based&lt;/text&gt;
+  &lt;text x=&quot;125&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;(2022-2025)&lt;/text&gt;
+  &lt;text x=&quot;125&quot; y=&quot;110&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Sparse Autoencoders&lt;/text&gt;
+  &lt;text x=&quot;125&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Activation Patching&lt;/text&gt;
+  &lt;text x=&quot;125&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Probing Classifiers&lt;/text&gt;
+  &lt;rect x=&quot;40&quot; y=&quot;158&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#BBDEFB&quot;/&gt;
+  &lt;text x=&quot;125&quot; y=&quot;177&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#1565C0&quot;&gt;Requires forward pass&lt;/text&gt;
+  &lt;rect x=&quot;40&quot; y=&quot;194&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#90CAF9&quot;/&gt;
+  &lt;text x=&quot;125&quot; y=&quot;213&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#1565C0&quot;&gt;Finds WHAT activates&lt;/text&gt;
+
+  &lt;!-- Weight-based (new) --&gt;
+  &lt;rect x=&quot;255&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;180&quot; rx=&quot;8&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Weight-Based (NEW)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;(2026 — ICLR)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;110&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;WeightLens: interpret from&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;learned weights directly&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;No data or forward pass needed&lt;/text&gt;
+  &lt;rect x=&quot;275&quot; y=&quot;158&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#C8E6C9&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;177&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;No forward pass needed&lt;/text&gt;
+  &lt;rect x=&quot;275&quot; y=&quot;194&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#A5D6A7&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;213&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;Finds WHAT is encoded&lt;/text&gt;
+
+  &lt;!-- Circuit-based (new) --&gt;
+  &lt;rect x=&quot;490&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;180&quot; rx=&quot;8&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#FF9800&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;595&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Circuit-Level (NEW)&lt;/text&gt;
+  &lt;text x=&quot;595&quot; y=&quot;88&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;(2026 — ICLR)&lt;/text&gt;
+  &lt;text x=&quot;595&quot; y=&quot;110&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;CircuitLens: how features&lt;/text&gt;
+  &lt;text x=&quot;595&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;arise from component&lt;/text&gt;
+  &lt;text x=&quot;595&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;interactions&lt;/text&gt;
+  &lt;rect x=&quot;510&quot; y=&quot;158&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#FFE0B2&quot;/&gt;
+  &lt;text x=&quot;595&quot; y=&quot;177&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#E65100&quot;&gt;Traces information flow&lt;/text&gt;
+  &lt;rect x=&quot;510&quot; y=&quot;194&quot; width=&quot;170&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#FFCC80&quot;/&gt;
+  &lt;text x=&quot;595&quot; y=&quot;213&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#E65100&quot;&gt;Finds HOW circuits work&lt;/text&gt;
+
+  &lt;!-- Unified insight --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;248&quot; width=&quot;680&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;Unified Attribution (2026): All three share mathematical foundations&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Feature attribution + Data attribution + Component attribution = one framework&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h3 id="concept-bottleneck-models-for-education">Concept Bottleneck Models for Education</h3>
 <p>Kim et al. (2025) extended interpretability to educational AI with <strong>concept bottleneck models</strong> that force the model to first predict human-interpretable concepts, then use those concepts to make final predictions.[^8] In a chemistry tutoring system, the model first identifies relevant concepts (reaction type, functional groups, thermodynamic favorability) before generating an explanation — allowing students to see and correct the model's conceptual reasoning.</p>
 <h3 id="interpretability-for-simulation-based-learning">Interpretability for Simulation-Based Learning</h3>
@@ -652,6 +716,10 @@ loadWishlist();
 <p>[^7]: Conmy, A., Mavor-Parker, A., Lynch, A., Heimersheim, S., &amp; Garriga-Alonso, A. (2026). "Attribution Patching at Scale: Identifying Causal Circuits in Frontier Models." <em>ICML 2026</em>. arXiv:2602.07891.</p>
 <p>[^8]: Kim, B., Wattenberg, M., Gilmer, J., Cai, C., Wexler, J., &amp; Viégas, F. (2025). "Concept Bottleneck Models for Interpretable Educational AI." <em>NeurIPS 2025</em>. arXiv:2510.14332.</p>
 <p>[^9]: Li, Z., Chen, Y., &amp; Tenenbaum, J. B. (2026). "Interpreting Learned Physics: Sparse Autoencoders Reveal Intuitive Physics in World Models." arXiv:2601.19443.</p>
+<p>[^10]: Anonymous. (2026). "Mechanistic Interpretability for Large Language Model Alignment: Progress, Challenges, and Future Directions." arXiv:2602.11180. https://arxiv.org/abs/2602.11180</p>
+<p>[^11]: Anonymous. (2026). "Circuit Insights: Towards Interpretability Beyond Activations (WeightLens &amp; CircuitLens)." arXiv:2510.14936. Published at ICLR 2026. https://arxiv.org/abs/2510.14936</p>
+<p>[^12]: Anonymous. (2026). "Towards Unified Attribution in Explainable AI, Data-Centric AI, and Mechanistic Interpretability." arXiv:2501.18887. https://arxiv.org/abs/2501.18887</p>
+<p>[^13]: Anonymous. (2026). "Hallucination Detection via Internal States and Structured Reasoning Consistency in LLMs." arXiv:2510.11529. https://arxiv.org/abs/2510.11529</p>
 </main>
 </body>
 </html>
