@@ -82,9 +82,58 @@ This enables a practical workflow:
 2. Compose adapters at inference time for novel task combinations
 3. No retraining needed when new tasks are added
 
+### Continual Learning in the Foundation Model Era
+
+Bell et al. (2025) identified three key directions for continual learning that extend transfer learning to evolving environments:[^9]
+
+1. **Continual pre-training**: Updating foundation models with new data without catastrophic forgetting of prior knowledge
+2. **Continual fine-tuning**: Adapting models to sequences of tasks while preserving cross-task transfer
+3. **Dynamic composition**: Combining specialized adapters at inference time for novel task combinations
+
+This framework is critical for AI learning systems that must continuously adapt — an educational AI tutor needs to incorporate new curriculum content without forgetting how to teach older material. The connection to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md) is direct: continual learning enables systems that improve over their deployment lifetime.
+
+### Domain Adaptation for Medical Imaging
+
+Wu & Chaddad (2026) conducted a comprehensive study of domain adaptation across 10 deep learning architectures for medical image classification, demonstrating that transfer learning combined with domain adaptation achieves:[^10]
+
+- **12-25% accuracy improvement** over training from scratch across multi-modality imaging (CT, MRI, X-ray)
+- Robust performance under **noise injection** — domain-adapted models degrade 40% less than non-adapted models
+- Effective transfer in **federated learning** settings, where data cannot leave hospital premises
+
+This work connects to [applications for real-world learning](../methodologies/applications-for-real-world-learning.md) — medical education benefits from models that transfer diagnostic patterns across imaging modalities, enabling students to learn from diverse case studies without requiring access to each institution's data.
+
+### Simulation-to-Real Transfer with Cross-Domain Bridging
+
+Kim et al. (2025) developed **SevenNet-Omni**, a universal machine learning interatomic potential trained across 15 scientific databases spanning molecules, crystals, and surfaces.[^11] Their approach to cross-domain transfer introduced two innovations:
+
+- **Selective regularization**: Preventing catastrophic forgetting when training across diverse domains by weighting loss terms based on domain similarity
+- **Domain-bridging datasets**: Creating synthetic intermediate data that connects molecular and solid-state domains, facilitating knowledge transfer across the gap
+
+Published in *Nature Communications* (2026), this work achieved state-of-the-art cross-domain accuracy for scientific simulations, demonstrating that transfer learning can unify previously separate computational methods. The domain-bridging concept has implications for [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) — similar bridging strategies could enable simulation models to transfer from simplified to realistic environments.
+
+### Certifiable Few-Shot Transfer
+
+Rezk et al. (2025) introduced **model diffusion** for few-shot transfer learning with formal generalization guarantees.[^12] The approach:
+
+1. Trains a diffusion model over the space of parameter-efficient fine-tunings
+2. Generates diverse model parameters for a target task from very few examples
+3. Provides **non-vacuous generalization bounds** — mathematical guarantees on how well the transferred model will perform on unseen data
+
+This is significant because most transfer learning methods lack formal guarantees about when transfer will succeed or fail. For AI-assisted education, certifiable transfer means tutoring systems can provide confidence estimates when applying pedagogical strategies from one subject to another.
+
 ### Transfer Learning for E-Commerce Product Understanding
 
 Zhang et al. (2025) showed that LLMs fine-tuned on general product descriptions transfer to specialized e-commerce tasks (attribute extraction, category prediction, review summarization) with 3-5x less labeled data than domain-specific models.[^8] The key insight is that product language shares a common structure across categories — brand, features, specifications, use cases — enabling effective cross-category transfer relevant to [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md).
+
+### Bridging Simulated and Real Data
+
+Guemes-Palau et al. (2025) demonstrated that transfer learning combining simulated and real network data achieves up to **88% error reduction** in prediction tasks with minimal real-world training samples.[^13] Their sim-to-real transfer pipeline:
+
+1. Pre-train on large volumes of simulated data (cheap to generate)
+2. Fine-tune on small amounts of real data (expensive to collect)
+3. Apply domain adaptation to align feature distributions
+
+This approach directly parallels [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) workflows: train in simulation, transfer to reality. For educational applications, this means AI tutors can be pre-trained on simulated student interactions before being fine-tuned on real classroom data — reducing the need for expensive real-world educational data collection.
 
 ## Current State / Latest Developments
 
@@ -211,11 +260,16 @@ Transfer learning principles directly inform how AI can help humans learn:
 - [Curriculum Learning](../methodologies/curriculum-learning.md) — structured learning that facilitates transfer
 - [World Models](../methodologies/world-models.md) — sim-to-real transfer of learned physics
 - [Test-Time Compute](../methodologies/test-time-compute.md) — in-context transfer at inference time
+- [Active Learning](../methodologies/active-learning.md) — transfer learning reduces data needs for active query selection
+- [Computational Cost](../methodologies/computational-cost.md) — transfer reduces training costs via knowledge reuse
+- [Applications for Real-World Learning](../methodologies/applications-for-real-world-learning.md) — domain adaptation for real-world deployment
 
 **Frontier Topics:**
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) — simulation-to-reality transfer
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — transfer of self-improvement capabilities across domains
 - [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md) — cross-domain knowledge transfer
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — product understanding via cross-category transfer
+- [E-Commerce Applications](../frontier-topics/e-commerce-applications.md) — practical transfer for product categorization
 
 **Research Sources:**
 - [Key Papers](../research-sources/key-papers.md) — foundational transfer learning papers
@@ -238,3 +292,13 @@ Transfer learning principles directly inform how AI can help humans learn:
 [^7]: Huang, S., Zhang, T., & Li, W. (2026). "LoRA Composition: Dynamic Multi-Adapter Routing for Multi-Task Transfer." arXiv:2602.14521.
 
 [^8]: Zhang, Y., Wang, L., & Chen, H. (2025). "Product Language Models: Cross-Category Transfer Learning for E-Commerce." *KDD 2025*. arXiv:2505.09831.
+
+[^9]: Bell, J., Quarantiello, L., Coleman, E. N., Li, L., Li, M., Madeddu, M., Piccoli, E., & Lomonaco, V. (2025). "The Future of Continual Learning in the Era of Foundation Models: Three Key Directions." arXiv:2506.03320. https://arxiv.org/abs/2506.03320
+
+[^10]: Wu, Y. & Chaddad, A. (2026). "Impact of Domain Adaptation in Deep Learning for Medical Image Classifications." arXiv:2602.09355. https://arxiv.org/abs/2602.09355
+
+[^11]: Kim, J., You, J., Park, Y., Lim, Y., Kang, Y., Kim, J., Jeon, H., Ju, S., Hong, D., Lee, S. Y., Choi, S., Kim, Y., Lee, J. W., & Han, S. (2025). "Optimizing Cross-Domain Transfer for Universal Machine Learning Interatomic Potentials." *Nature Communications* (2026). arXiv:2510.11241. https://arxiv.org/abs/2510.11241
+
+[^12]: Rezk, F., Lee, R., Gouk, H., Hospedales, T., & Kim, M. (2025). "Model Diffusion for Certifiable Few-shot Transfer Learning." arXiv:2502.06970. https://arxiv.org/abs/2502.06970
+
+[^13]: Guemes-Palau, C., Ferriol-Galmes, M., Paillisse-Vilanova, J., Lopez-Bresco, A., Barlet-Ros, P., & Cabellos-Aparicio, A. (2025). "Bridging the Gap Between Simulated and Real Network Data Using Transfer Learning." arXiv:2510.00956. https://arxiv.org/abs/2510.00956

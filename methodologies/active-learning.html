@@ -537,6 +537,16 @@ loadWishlist();
 - <strong>Assesses</strong> the student's understanding (reducing its own uncertainty)
 - <strong>Teaches</strong> by challenging the student at the optimal difficulty level (the zone of proximal development)</p>
 <p>This dual function connects active learning to <a href="curriculum-learning.html">curriculum learning</a> and <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> — the tutor builds an internal model of the student and simulates their likely responses to plan optimal question sequences.</p>
+<h3 id="training-free-active-learning-with-llms">Training-Free Active Learning with LLMs</h3>
+<p>Wang et al. (2025) demonstrated a <strong>training-free active learning framework</strong> for materials science that leverages LLMs' pretrained knowledge to bypass the cold-start problem entirely.[^9] Unlike traditional active learning that requires initial labeled data to train a surrogate model, this approach uses LLMs to directly predict experimental outcomes and select the most informative next experiments. The system reduced experimental iterations by over 70% compared to traditional ML-based active learning in materials discovery tasks, suggesting that LLM-based active learning could accelerate <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a> across domains.</p>
+<h3 id="generative-active-learning-with-gflownets">Generative Active Learning with GFlowNets</h3>
+<p>Zhang et al. (2025) introduced <strong>BALD-GFlowNet</strong>, a generative active learning framework using Generative Flow Networks for drug discovery.[^10] Rather than evaluating every candidate in a massive unlabeled pool (which is computationally prohibitive for molecular search spaces of 10³⁰+), the system directly <em>generates</em> informative molecules proportional to a Bayesian Active Learning by Disagreement (BALD) reward:</p>
+<ol>
+<li>A GFlowNet learns to construct molecules atom-by-atom</li>
+<li>The generation probability is proportional to the expected information gain</li>
+<li>Novel, maximally informative candidates are created rather than selected from a fixed pool</li>
+</ol>
+<p>This represents the shift from <strong>selection-based</strong> to <strong>generation-based</strong> active learning documented in recent surveys,[^2] with direct implications for <a href="automated-experiment-design.html">automated experiment design</a> in scientific research.</p>
 <h3 id="simulation-guided-active-learning">Simulation-Guided Active Learning</h3>
 <p>Park et al. (2026) introduced <strong>simulation-guided active learning</strong> where an AI agent uses <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> to simulate the outcome of querying different data points before actually querying them.[^6] The system:</p>
 <ol>
@@ -558,6 +568,109 @@ loadWishlist();
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="from-selection-to-generation">From Selection to Generation</h3>
 <p>Xia et al. (2025) published a comprehensive survey documenting the paradigm shift from <strong>selective</strong> active learning (choosing from existing unlabeled data) to <strong>generative</strong> active learning (synthesizing new training examples tailored to the model's learning needs).[^2] LLMs enable this shift because they can generate realistic, diverse examples on demand.</p>
+<h3 id="information-theoretic-foundations-of-pool-based-active-learning">Information-Theoretic Foundations of Pool-Based Active Learning</h3>
+<p>Sugiyama &amp; Uchida (2026) established a rigorous <strong>information-theoretic framework</strong> for pool-based active learning by reformulating it as a noisy lossy compression problem.[^11] Their key contributions:</p>
+<ul>
+<li>Derived novel <strong>finite blocklength bounds</strong> on label complexity — providing theoretical guarantees on how many labels are needed for a given accuracy</li>
+<li>Showed that active learning's advantage over passive learning can be quantified as the gap between the entropy of the full pool and the entropy of the actively-selected subset</li>
+<li>Connected active learning to rate-distortion theory, providing a principled stopping criterion (addressing a key limitation of current systems)</li>
+</ul>
+<p>This theoretical advance informs practical batch selection strategies and connects to <a href="evaluation-methodology.html">evaluation methodology</a> for rigorously comparing active learning algorithms.</p>
+<h3 id="budget-constrained-batch-active-learning">Budget-Constrained Batch Active Learning</h3>
+<p>Morato et al. (2025) addressed real-world batch active learning where acquisition costs vary across samples — a common scenario in <a href="../frontier-topics/e-commerce-applications.html">e-commerce applications</a> and scientific experiments.[^12] Their <strong>ConBatch-BAL</strong> framework:</p>
+<ul>
+<li>Uses Bayesian neural networks to quantify epistemic uncertainty</li>
+<li>Formulates batch selection as a constrained optimization problem with heterogeneous costs</li>
+<li>Achieves 15-25% better cost-efficiency than uniform-cost batch methods on industrial datasets</li>
+</ul>
+<p><strong>Learning application:</strong> In educational assessment, different test questions have different "costs" (time, cognitive load, student frustration). Budget-constrained active learning enables AI tutors to maximize diagnostic information within a fixed testing window.</p>
+<h3 id="active-learning-adoption-community-assessment">Active Learning Adoption: Community Assessment</h3>
+<p>Romberg et al. (2025) conducted a <strong>community survey</strong> on active learning adoption in NLP practice, revealing a gap between theoretical promise and real-world deployment.[^13] Key findings:</p>
+<ul>
+<li>Only 23% of practitioners who considered active learning actually deployed it in production</li>
+<li><strong>Setup complexity</strong> was the top barrier — selecting query strategies, defining annotation interfaces, and managing the iterative loop</li>
+<li>LLM-based annotation has <em>reduced</em> traditional active learning adoption by providing a simpler alternative (zero-shot labeling), but <em>increased</em> interest in generative active learning</li>
+<li>The survey identified <strong>tooling</strong> as the critical bottleneck: existing active learning libraries assume static datasets and synchronous annotation, which don't match modern LLM workflows</li>
+</ul>
+<p>This connects to <a href="applications-for-real-world-learning.html">applications for real-world learning</a> — the gap between research and practice is a recurring challenge across AI-assisted learning systems.</p>
+<h3 id="active-learning-decision-framework">Active Learning Decision Framework</h3>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 420&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;11&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;22&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Active Learning Strategy Selection Decision Tree&lt;/text&gt;
+
+  &lt;!-- Root --&gt;
+  &lt;rect x=&quot;250&quot; y=&quot;35&quot; width=&quot;220&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;60&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;How large is your pool?&lt;/text&gt;
+
+  &lt;!-- Left branch: Small pool --&gt;
+  &lt;line x1=&quot;310&quot; y1=&quot;75&quot; x2=&quot;160&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;rect x=&quot;60&quot; y=&quot;105&quot; width=&quot;200&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;120&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Small pool (&amp;lt;10K)&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;134&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;→ Pool-based selection&lt;/text&gt;
+
+  &lt;!-- Right branch: Large/infinite pool --&gt;
+  &lt;line x1=&quot;410&quot; y1=&quot;75&quot; x2=&quot;560&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;rect x=&quot;460&quot; y=&quot;105&quot; width=&quot;200&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;560&quot; y=&quot;120&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Large/infinite pool&lt;/text&gt;
+  &lt;text x=&quot;560&quot; y=&quot;134&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;→ Generative (GFlowNet)&lt;/text&gt;
+
+  &lt;!-- Small pool: labeled data? --&gt;
+  &lt;line x1=&quot;160&quot; y1=&quot;141&quot; x2=&quot;160&quot; y2=&quot;165&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;rect x=&quot;50&quot; y=&quot;165&quot; width=&quot;220&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;180&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Have initial labeled data?&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;194&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;Cold start vs warm start&lt;/text&gt;
+
+  &lt;!-- No labeled data --&gt;
+  &lt;line x1=&quot;100&quot; y1=&quot;201&quot; x2=&quot;70&quot; y2=&quot;230&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;55&quot; y=&quot;225&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;No&lt;/text&gt;
+  &lt;rect x=&quot;10&quot; y=&quot;232&quot; width=&quot;160&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#FCE4EC&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;90&quot; y=&quot;250&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;LLM Bootstrap&lt;/text&gt;
+  &lt;text x=&quot;90&quot; y=&quot;264&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;LAUD zero-shot or&lt;/text&gt;
+  &lt;text x=&quot;90&quot; y=&quot;276&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Training-free LLM AL&lt;/text&gt;
+
+  &lt;!-- Yes labeled data --&gt;
+  &lt;line x1=&quot;220&quot; y1=&quot;201&quot; x2=&quot;260&quot; y2=&quot;230&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;248&quot; y=&quot;225&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;Yes&lt;/text&gt;
+  &lt;rect x=&quot;190&quot; y=&quot;232&quot; width=&quot;160&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;270&quot; y=&quot;250&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Budget uniform?&lt;/text&gt;
+  &lt;text x=&quot;270&quot; y=&quot;264&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Same cost per query?&lt;/text&gt;
+
+  &lt;!-- Uniform budget --&gt;
+  &lt;line x1=&quot;230&quot; y1=&quot;282&quot; x2=&quot;180&quot; y2=&quot;310&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;185&quot; y=&quot;305&quot; font-size=&quot;9&quot; fill=&quot;#1565C0&quot;&gt;Yes&lt;/text&gt;
+  &lt;rect x=&quot;100&quot; y=&quot;312&quot; width=&quot;160&quot; height=&quot;46&quot; rx=&quot;6&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;180&quot; y=&quot;330&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Standard AL&lt;/text&gt;
+  &lt;text x=&quot;180&quot; y=&quot;346&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Uncertainty / QBC&lt;/text&gt;
+
+  &lt;!-- Non-uniform budget --&gt;
+  &lt;line x1=&quot;310&quot; y1=&quot;282&quot; x2=&quot;360&quot; y2=&quot;310&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;340&quot; y=&quot;305&quot; font-size=&quot;9&quot; fill=&quot;#7B1FA2&quot;&gt;No&lt;/text&gt;
+  &lt;rect x=&quot;280&quot; y=&quot;312&quot; width=&quot;170&quot; height=&quot;46&quot; rx=&quot;6&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;365&quot; y=&quot;330&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;ConBatch-BAL&lt;/text&gt;
+  &lt;text x=&quot;365&quot; y=&quot;346&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Budget-constrained batch&lt;/text&gt;
+
+  &lt;!-- Large pool branches --&gt;
+  &lt;line x1=&quot;560&quot; y1=&quot;141&quot; x2=&quot;560&quot; y2=&quot;165&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;rect x=&quot;460&quot; y=&quot;165&quot; width=&quot;200&quot; height=&quot;36&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;560&quot; y=&quot;180&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Need simulation?&lt;/text&gt;
+  &lt;text x=&quot;560&quot; y=&quot;194&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;Can simulate outcomes?&lt;/text&gt;
+
+  &lt;line x1=&quot;510&quot; y1=&quot;201&quot; x2=&quot;490&quot; y2=&quot;230&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;478&quot; y=&quot;225&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;Yes&lt;/text&gt;
+  &lt;rect x=&quot;400&quot; y=&quot;232&quot; width=&quot;180&quot; height=&quot;46&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;490&quot; y=&quot;250&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Sim-Guided AL&lt;/text&gt;
+  &lt;text x=&quot;490&quot; y=&quot;266&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;World model queries&lt;/text&gt;
+
+  &lt;line x1=&quot;610&quot; y1=&quot;201&quot; x2=&quot;640&quot; y2=&quot;230&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;632&quot; y=&quot;225&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;No&lt;/text&gt;
+  &lt;rect x=&quot;580&quot; y=&quot;232&quot; width=&quot;130&quot; height=&quot;46&quot; rx=&quot;6&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;645&quot; y=&quot;250&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Recursive AL&lt;/text&gt;
+  &lt;text x=&quot;645&quot; y=&quot;266&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Multi-tier cascade&lt;/text&gt;
+
+  &lt;!-- Bottom legend --&gt;
+  &lt;rect x=&quot;100&quot; y=&quot;380&quot; width=&quot;520&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;#F5F5F5&quot; stroke=&quot;#999&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;400&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#333&quot;&gt;Key: Each leaf strategy optimizes query selection for its scenario's constraints&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h3 id="recursive-active-learning-2026">Recursive Active Learning (2026)</h3>
 <p>Wang et al. (2026) demonstrated <strong>recursive active learning</strong>, where the active learning agent uses its own uncertainty about its uncertainty estimates to decide when to query a more capable model versus a cheaper one.[^8] This creates a hierarchy:
 - Tier 1: Small local model handles confident predictions
@@ -588,15 +701,22 @@ loadWishlist();
 - <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — active learning for experiment selection</p>
 <p><strong>Tools &amp; Platforms:</strong>
 - <a href="../tools-platforms/aider.html">Aider</a> — AI coding assistants that could use active learning for user preference modeling
-- <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — active selection of papers to read</p>
+- <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — active selection of papers to read
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking active learning research advances
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — active learning for code completion and suggestion</p>
 <p><strong>Methodologies:</strong>
 - <a href="curriculum-learning.html">Curriculum Learning</a> — complementary approach: curriculum = ordering, active learning = selection
 - <a href="automated-experiment-design.html">Automated Experiment Design</a> — active learning applied to scientific experimentation
-- <a href="agentic-tree-search.html">Agentic Tree Search</a> — explore-exploit tradeoffs in both paradigms</p>
+- <a href="agentic-tree-search.html">Agentic Tree Search</a> — explore-exploit tradeoffs in both paradigms
+- <a href="evaluation-methodology.html">Evaluation Methodology</a> — information-theoretic frameworks for comparing AL algorithms
+- <a href="applications-for-real-world-learning.html">Applications for Real-World Learning</a> — bridging the gap between AL research and deployment
+- <a href="synthetic-data-generation.html">Synthetic Data Generation</a> — generative active learning creates synthetic training data</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulating outcomes to guide active queries
 - <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — active learning for product understanding
-- <a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a> — exploration strategies beyond exploitation</p>
+- <a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a> — exploration strategies beyond exploitation
+- <a href="../frontier-topics/e-commerce-applications.html">E-Commerce Applications</a> — budget-constrained AL for product categorization
+- <a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems</a> — committee-based query strategies as multi-agent coordination</p>
 <p><strong>Research Sources:</strong>
 - <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring active learning advances
 - <a href="../research-sources/key-papers.html">Key Papers</a> — foundational active learning references</p>
@@ -609,6 +729,11 @@ loadWishlist();
 <p>[^6]: Park, J., Kim, S., &amp; Lee, H. (2026). "Simulation-Guided Active Learning: World Models for Query Optimization." <em>ICLR 2026</em>. arXiv:2601.22187.</p>
 <p>[^7]: Chen, W., Liu, Y., &amp; Zhang, R. (2026). "Active Learning for Cold-Start Product Recommendation in E-Commerce." <em>WWW 2026</em>. arXiv:2602.08891.</p>
 <p>[^8]: Wang, X., Li, Z., &amp; Chen, T. (2026). "Recursive Active Learning: Hierarchical Uncertainty for Multi-Tier Annotation." arXiv:2603.04521.</p>
+<p>[^9]: Wang, H., Espinosa Castaneda, R., Werber, J. R., Fehlis, Y., Kim, E., &amp; Hattrick-Simpers, J. (2025). "Training-Free Active Learning Framework in Materials Science with Large Language Models." arXiv:2511.19730. https://arxiv.org/abs/2511.19730</p>
+<p>[^10]: Zhang, R., Pandey, M., Cherkasov, A., &amp; Ester, M. (2025). "Why Pool When You Can Flow? Active Learning with GFlowNets." arXiv:2509.00704. https://arxiv.org/abs/2509.00704</p>
+<p>[^11]: Sugiyama, K. &amp; Uchida, M. (2026). "Pool-based Active Learning as Noisy Lossy Compression: Characterizing Label Complexity via Finite Blocklength Analysis." arXiv:2602.05333. https://arxiv.org/abs/2602.05333</p>
+<p>[^12]: Morato, P. G., Andriotis, C. P., &amp; Khademi, S. (2025). "ConBatch-BAL: Batch Bayesian Active Learning under Budget Constraints." arXiv:2507.04929. https://arxiv.org/abs/2507.04929</p>
+<p>[^13]: Romberg, J., Schroeder, C., Gonsior, J., Tomanek, K., &amp; Olsson, F. (2025). "Reassessing Active Learning Adoption in Contemporary NLP: A Community Survey." arXiv:2503.09701. https://arxiv.org/abs/2503.09701</p>
 </main>
 </body>
 </html>

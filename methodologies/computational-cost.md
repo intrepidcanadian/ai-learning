@@ -94,6 +94,96 @@ MoE architectures activate only a subset of parameters for each input, enabling 
 - **Optimal sparsity** (March 2026): Research shows that MoE sparsity influences the trade-off between memorization and reasoning capabilities. Optimal sparsity must be determined jointly by active FLOPs and total tokens per parameter, revising classical compute-optimal scaling laws.[^6]
 - **Joint MoE scaling laws** (2025): Principled methods for scaling learning rate with number of experts and model size, analyzing training FLOPs, inference cost, and memory usage jointly.[^7]
 
+### Adaptive Inference: EcoThink Framework
+
+Li & Lu (2026) introduced **EcoThink**, a green adaptive inference framework that dynamically routes queries based on complexity to reduce computational overhead.[^9] The key insight is that most inference requests don't require the full model's capacity:
+
+```svg
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="11">
+  <text x="360" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a2e">EcoThink: Adaptive Inference Cost Routing</text>
+
+  <!-- Input queries -->
+  <rect x="20" y="50" width="140" height="80" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="90" y="72" text-anchor="middle" font-weight="bold" fill="#1565C0">Incoming</text>
+  <text x="90" y="88" text-anchor="middle" font-weight="bold" fill="#1565C0">Queries</text>
+  <text x="90" y="108" text-anchor="middle" font-size="9" fill="#666">Mixed complexity</text>
+  <text x="90" y="120" text-anchor="middle" font-size="9" fill="#666">distribution</text>
+
+  <!-- Complexity router -->
+  <line x1="160" y1="90" x2="200" y2="90" stroke="#333" stroke-width="2"/>
+  <polygon points="195,85 205,90 195,95" fill="#333"/>
+  <rect x="205" y="55" width="130" height="70" rx="8" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <text x="270" y="78" text-anchor="middle" font-weight="bold" font-size="10" fill="#E65100">Complexity</text>
+  <text x="270" y="93" text-anchor="middle" font-weight="bold" font-size="10" fill="#E65100">Router</text>
+  <text x="270" y="113" text-anchor="middle" font-size="8" fill="#999">Learned classifier</text>
+
+  <!-- Tier 1: Simple -->
+  <line x1="335" y1="70" x2="400" y2="55" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="400" y="35" width="180" height="50" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="490" y="55" text-anchor="middle" font-weight="bold" font-size="10" fill="#2E7D32">Tier 1: Cached / Small</text>
+  <text x="490" y="72" text-anchor="middle" font-size="9">~60% of queries | 0.1x cost</text>
+
+  <!-- Tier 2: Medium -->
+  <line x1="335" y1="90" x2="400" y2="110" stroke="#F57F17" stroke-width="1.5"/>
+  <rect x="400" y="90" width="180" height="50" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="490" y="110" text-anchor="middle" font-weight="bold" font-size="10" fill="#F57F17">Tier 2: Distilled Model</text>
+  <text x="490" y="127" text-anchor="middle" font-size="9">~30% of queries | 0.3x cost</text>
+
+  <!-- Tier 3: Complex -->
+  <line x1="335" y1="110" x2="400" y2="165" stroke="#C62828" stroke-width="1.5"/>
+  <rect x="400" y="145" width="180" height="50" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+  <text x="490" y="165" text-anchor="middle" font-weight="bold" font-size="10" fill="#C62828">Tier 3: Full Model</text>
+  <text x="490" y="182" text-anchor="middle" font-size="9">~10% of queries | 1.0x cost</text>
+
+  <!-- Results merge -->
+  <line x1="580" y1="60" x2="620" y2="120" stroke="#333" stroke-width="1.5"/>
+  <line x1="580" y1="115" x2="620" y2="120" stroke="#333" stroke-width="1.5"/>
+  <line x1="580" y1="170" x2="620" y2="120" stroke="#333" stroke-width="1.5"/>
+  <rect x="620" y="95" width="80" height="50" rx="8" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="660" y="118" text-anchor="middle" font-weight="bold" font-size="10" fill="#7B1FA2">Output</text>
+  <text x="660" y="135" text-anchor="middle" font-size="9" fill="#666">~0.2x avg</text>
+
+  <!-- Cost comparison -->
+  <rect x="20" y="220" width="680" height="60" rx="8" fill="#F5F5F5" stroke="#999" stroke-width="1"/>
+  <text x="360" y="242" text-anchor="middle" font-weight="bold" font-size="12" fill="#333">Cost Comparison</text>
+  <rect x="40" y="252" width="300" height="16" rx="3" fill="#FFCDD2"/>
+  <text x="190" y="264" text-anchor="middle" font-size="9" fill="#C62828">Uniform routing: 100% cost</text>
+  <rect x="40" y="258" width="60" height="16" rx="3" fill="#C8E6C9"/>
+  <text x="190" y="278" text-anchor="middle" font-size="9" fill="#2E7D32">EcoThink adaptive: ~20% cost, 97% quality</text>
+
+  <!-- Learning connection -->
+  <rect x="20" y="300" width="680" height="65" rx="8" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+  <text x="360" y="320" text-anchor="middle" font-weight="bold" font-size="11" fill="#283593">Learning Application</text>
+  <text x="360" y="338" text-anchor="middle" font-size="10">Simple review questions → cached responses (instant feedback)</text>
+  <text x="360" y="354" text-anchor="middle" font-size="10">Complex reasoning → full model (personalized explanation)</text>
+</svg>
+```
+
+EcoThink achieves 80% compute reduction while maintaining 97% of full-model quality across diverse benchmarks.[^9] For AI-assisted education, this means an adaptive tutor can provide instant feedback on routine questions (using cached or small models) while reserving expensive frontier model inference for complex, personalized explanations.
+
+### The Price of Progress: AI Cost Trajectories
+
+Gundlach et al. (2025) conducted the first systematic analysis of **AI cost trajectories**, revealing a paradox in AI economics:[^10]
+
+| Metric | Annual Change | Implication |
+|--------|--------------|------------|
+| Inference cost per token | Decreasing 5-10x/year | AI deployment becoming cheaper |
+| Frontier training cost | Increasing 3-18x/year | Capability development concentrating |
+| Energy per inference | Decreasing 2-3x/year | Efficiency improvements real but insufficient |
+| Total AI compute demand | Increasing 4x/year | Jevons paradox in action |
+
+This analysis shows that while per-query costs are falling, total AI compute expenditure is accelerating — efficiency improvements increase usage faster than they reduce per-unit cost. For AI learning systems, the falling inference cost is the relevant metric: it means AI tutoring will become increasingly affordable even as frontier model training remains concentrated at well-funded labs.
+
+### Energy-Efficient Inference Optimization
+
+Fernandez et al. (2025) systematically evaluated how inference optimizations affect energy consumption across LLM workloads.[^11] Key findings with direct relevance to [inference optimization](inference-optimization.md):
+
+- **Quantization** (INT8) reduces energy by 35-50% with <1% accuracy loss on most tasks
+- **Speculative decoding** reduces energy by 40-60% for long-form generation
+- **KV-cache optimization** reduces energy by 20-30% for multi-turn conversations (critical for tutoring)
+- **Batch scheduling** reduces energy by up to 73% from unoptimized baselines
+- Combined optimizations can reduce total energy by **up to 73%** — equivalent to running 4x more student sessions on the same hardware
+
 ### Energy Cost of AI-Assisted Development
 
 **Green AI for Software Development** (February 2026): The first comprehensive quantification of computational and energy costs of AI-assisted software development workflows, proposing strategies to reduce the energy footprint of LLM inference in development contexts.[^8] Key findings:
@@ -101,8 +191,18 @@ MoE architectures activate only a subset of parameters for each input, enabling 
 - AI code completion adds 15-40% energy overhead to development workflows
 - Caching and batching strategies can reduce this by 60%+
 - Smaller specialized models can match large general models for routine coding tasks at 10x lower energy cost
+- Suppressing unnecessary output generation can reduce energy use by up to 89%[^8]
 
 ## Current State / Latest Developments
+
+### Adaptive Compute Budgets for Reasoning
+
+Alomrani et al. (2025) surveyed **adaptive and controllable test-time compute** strategies in LLMs, distinguishing two paradigms:[^12]
+
+- **L1 (Fixed-budget)**: Pre-allocate a fixed compute budget per query. Simple but wasteful — easy questions use the same resources as hard ones
+- **L2 (Dynamic-scaling)**: Adjust inference compute based on input difficulty. More efficient but requires reliable difficulty estimation
+
+The survey benchmarks these approaches across 15+ datasets, finding that L2 methods achieve **equivalent accuracy at 30-50% lower compute** on mixed-difficulty workloads. This directly connects to [test-time compute](test-time-compute.md) research and has major implications for AI tutoring: adaptive compute means the system can allocate more reasoning power to challenging student questions while processing routine queries cheaply.
 
 ### 2026 Cost Landscape
 
@@ -146,8 +246,10 @@ Computational cost directly affects who can access AI-powered learning:
 **Methodologies:**
 - [Inference Optimization](inference-optimization.md) — reducing deployment costs
 - [Test-Time Compute](test-time-compute.md) — compute allocation at inference
+- [Test-Time Compute Scaling](test-time-compute-scaling.md) — adaptive compute budget strategies
 - [Evaluation Methodology](evaluation-methodology.md) — measuring cost-performance trade-offs
 - [Synthetic Data Generation](synthetic-data-generation.md) — reducing data collection costs
+- [Active Learning](active-learning.md) — reducing labeling costs through intelligent query selection
 
 **Frontier Topics:**
 - [Scaling Laws Research](../frontier-topics/scaling-laws-research.md) — theoretical foundations of compute scaling
@@ -175,4 +277,12 @@ Computational cost directly affects who can access AI-powered learning:
 
 [^7]: Anonymous. (2025). "Joint MoE Scaling Laws: Mixture of Experts Can Be Memory Efficient." arXiv:2502.05172. https://arxiv.org/abs/2502.05172
 
-[^8]: Anonymous. (2026). "Towards Green AI: Decoding the Energy of LLM Inference in Software Development." arXiv:2602.05712. https://arxiv.org/abs/2602.05712
+[^8]: Solovyeva, L. & Castor, F. (2026). "Towards Green AI: Decoding the Energy of LLM Inference in Software Development." arXiv:2602.05712. https://arxiv.org/abs/2602.05712
+
+[^9]: Li, L. & Lu, Z. (2026). "EcoThink: A Green Adaptive Inference Framework for Sustainable and Accessible Agents." arXiv:2603.25498. https://arxiv.org/abs/2603.25498
+
+[^10]: Gundlach, H., Lynch, J., Mertens, M., & Thompson, N. (2025). "The Price of Progress: Price Performance and the Future of AI." arXiv:2511.23455. https://arxiv.org/abs/2511.23455
+
+[^11]: Fernandez, J., Na, C., Tiwari, V., Bisk, Y., Luccioni, S., & Strubell, E. (2025). "Energy Considerations of Large Language Model Inference and Efficiency Optimizations." arXiv:2504.17674. https://arxiv.org/abs/2504.17674
+
+[^12]: Alomrani, M. A., Zhang, Y., Li, D., Sun, Q., Pal, S., et al. (2025). "Reasoning on a Budget: A Survey of Adaptive and Controllable Test-Time Compute in LLMs." arXiv:2507.02076. https://arxiv.org/abs/2507.02076

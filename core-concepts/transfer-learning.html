@@ -539,8 +539,47 @@ loadWishlist();
 1. Train lightweight LoRA adapters for each specialized task
 2. Compose adapters at inference time for novel task combinations
 3. No retraining needed when new tasks are added</p>
+<h3 id="continual-learning-in-the-foundation-model-era">Continual Learning in the Foundation Model Era</h3>
+<p>Bell et al. (2025) identified three key directions for continual learning that extend transfer learning to evolving environments:[^9]</p>
+<ol>
+<li><strong>Continual pre-training</strong>: Updating foundation models with new data without catastrophic forgetting of prior knowledge</li>
+<li><strong>Continual fine-tuning</strong>: Adapting models to sequences of tasks while preserving cross-task transfer</li>
+<li><strong>Dynamic composition</strong>: Combining specialized adapters at inference time for novel task combinations</li>
+</ol>
+<p>This framework is critical for AI learning systems that must continuously adapt — an educational AI tutor needs to incorporate new curriculum content without forgetting how to teach older material. The connection to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> is direct: continual learning enables systems that improve over their deployment lifetime.</p>
+<h3 id="domain-adaptation-for-medical-imaging">Domain Adaptation for Medical Imaging</h3>
+<p>Wu &amp; Chaddad (2026) conducted a comprehensive study of domain adaptation across 10 deep learning architectures for medical image classification, demonstrating that transfer learning combined with domain adaptation achieves:[^10]</p>
+<ul>
+<li><strong>12-25% accuracy improvement</strong> over training from scratch across multi-modality imaging (CT, MRI, X-ray)</li>
+<li>Robust performance under <strong>noise injection</strong> — domain-adapted models degrade 40% less than non-adapted models</li>
+<li>Effective transfer in <strong>federated learning</strong> settings, where data cannot leave hospital premises</li>
+</ul>
+<p>This work connects to <a href="../methodologies/applications-for-real-world-learning.html">applications for real-world learning</a> — medical education benefits from models that transfer diagnostic patterns across imaging modalities, enabling students to learn from diverse case studies without requiring access to each institution's data.</p>
+<h3 id="simulation-to-real-transfer-with-cross-domain-bridging">Simulation-to-Real Transfer with Cross-Domain Bridging</h3>
+<p>Kim et al. (2025) developed <strong>SevenNet-Omni</strong>, a universal machine learning interatomic potential trained across 15 scientific databases spanning molecules, crystals, and surfaces.[^11] Their approach to cross-domain transfer introduced two innovations:</p>
+<ul>
+<li><strong>Selective regularization</strong>: Preventing catastrophic forgetting when training across diverse domains by weighting loss terms based on domain similarity</li>
+<li><strong>Domain-bridging datasets</strong>: Creating synthetic intermediate data that connects molecular and solid-state domains, facilitating knowledge transfer across the gap</li>
+</ul>
+<p>Published in <em>Nature Communications</em> (2026), this work achieved state-of-the-art cross-domain accuracy for scientific simulations, demonstrating that transfer learning can unify previously separate computational methods. The domain-bridging concept has implications for <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> — similar bridging strategies could enable simulation models to transfer from simplified to realistic environments.</p>
+<h3 id="certifiable-few-shot-transfer">Certifiable Few-Shot Transfer</h3>
+<p>Rezk et al. (2025) introduced <strong>model diffusion</strong> for few-shot transfer learning with formal generalization guarantees.[^12] The approach:</p>
+<ol>
+<li>Trains a diffusion model over the space of parameter-efficient fine-tunings</li>
+<li>Generates diverse model parameters for a target task from very few examples</li>
+<li>Provides <strong>non-vacuous generalization bounds</strong> — mathematical guarantees on how well the transferred model will perform on unseen data</li>
+</ol>
+<p>This is significant because most transfer learning methods lack formal guarantees about when transfer will succeed or fail. For AI-assisted education, certifiable transfer means tutoring systems can provide confidence estimates when applying pedagogical strategies from one subject to another.</p>
 <h3 id="transfer-learning-for-e-commerce-product-understanding">Transfer Learning for E-Commerce Product Understanding</h3>
 <p>Zhang et al. (2025) showed that LLMs fine-tuned on general product descriptions transfer to specialized e-commerce tasks (attribute extraction, category prediction, review summarization) with 3-5x less labeled data than domain-specific models.[^8] The key insight is that product language shares a common structure across categories — brand, features, specifications, use cases — enabling effective cross-category transfer relevant to <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a>.</p>
+<h3 id="bridging-simulated-and-real-data">Bridging Simulated and Real Data</h3>
+<p>Guemes-Palau et al. (2025) demonstrated that transfer learning combining simulated and real network data achieves up to <strong>88% error reduction</strong> in prediction tasks with minimal real-world training samples.[^13] Their sim-to-real transfer pipeline:</p>
+<ol>
+<li>Pre-train on large volumes of simulated data (cheap to generate)</li>
+<li>Fine-tune on small amounts of real data (expensive to collect)</li>
+<li>Apply domain adaptation to align feature distributions</li>
+</ol>
+<p>This approach directly parallels <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> workflows: train in simulation, transfer to reality. For educational applications, this means AI tutors can be pre-trained on simulated student interactions before being fine-tuned on real classroom data — reducing the need for expensive real-world educational data collection.</p>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2025-2026-trends">2025-2026 Trends</h3>
 <ol>
@@ -657,11 +696,16 @@ loadWishlist();
 <p><strong>Methodologies:</strong>
 - <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a> — structured learning that facilitates transfer
 - <a href="../methodologies/world-models.html">World Models</a> — sim-to-real transfer of learned physics
-- <a href="../methodologies/test-time-compute.html">Test-Time Compute</a> — in-context transfer at inference time</p>
+- <a href="../methodologies/test-time-compute.html">Test-Time Compute</a> — in-context transfer at inference time
+- <a href="../methodologies/active-learning.html">Active Learning</a> — transfer learning reduces data needs for active query selection
+- <a href="../methodologies/computational-cost.html">Computational Cost</a> — transfer reduces training costs via knowledge reuse
+- <a href="../methodologies/applications-for-real-world-learning.html">Applications for Real-World Learning</a> — domain adaptation for real-world deployment</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulation-to-reality transfer
 - <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — transfer of self-improvement capabilities across domains
-- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — cross-domain knowledge transfer</p>
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — cross-domain knowledge transfer
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — product understanding via cross-category transfer
+- <a href="../frontier-topics/e-commerce-applications.html">E-Commerce Applications</a> — practical transfer for product categorization</p>
 <p><strong>Research Sources:</strong>
 - <a href="../research-sources/key-papers.html">Key Papers</a> — foundational transfer learning papers
 - <a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — leading transfer learning research groups</p>
@@ -674,6 +718,11 @@ loadWishlist();
 <p>[^6]: Jiang, W., Chen, X., &amp; Liu, R. (2026). "Cross-Domain Scientific Transfer: Bridging Chemistry and Materials Science with Intermediate Fine-Tuning." <em>ICLR 2026 Workshop on AI for Science</em>. arXiv:2601.08234.</p>
 <p>[^7]: Huang, S., Zhang, T., &amp; Li, W. (2026). "LoRA Composition: Dynamic Multi-Adapter Routing for Multi-Task Transfer." arXiv:2602.14521.</p>
 <p>[^8]: Zhang, Y., Wang, L., &amp; Chen, H. (2025). "Product Language Models: Cross-Category Transfer Learning for E-Commerce." <em>KDD 2025</em>. arXiv:2505.09831.</p>
+<p>[^9]: Bell, J., Quarantiello, L., Coleman, E. N., Li, L., Li, M., Madeddu, M., Piccoli, E., &amp; Lomonaco, V. (2025). "The Future of Continual Learning in the Era of Foundation Models: Three Key Directions." arXiv:2506.03320. https://arxiv.org/abs/2506.03320</p>
+<p>[^10]: Wu, Y. &amp; Chaddad, A. (2026). "Impact of Domain Adaptation in Deep Learning for Medical Image Classifications." arXiv:2602.09355. https://arxiv.org/abs/2602.09355</p>
+<p>[^11]: Kim, J., You, J., Park, Y., Lim, Y., Kang, Y., Kim, J., Jeon, H., Ju, S., Hong, D., Lee, S. Y., Choi, S., Kim, Y., Lee, J. W., &amp; Han, S. (2025). "Optimizing Cross-Domain Transfer for Universal Machine Learning Interatomic Potentials." <em>Nature Communications</em> (2026). arXiv:2510.11241. https://arxiv.org/abs/2510.11241</p>
+<p>[^12]: Rezk, F., Lee, R., Gouk, H., Hospedales, T., &amp; Kim, M. (2025). "Model Diffusion for Certifiable Few-shot Transfer Learning." arXiv:2502.06970. https://arxiv.org/abs/2502.06970</p>
+<p>[^13]: Guemes-Palau, C., Ferriol-Galmes, M., Paillisse-Vilanova, J., Lopez-Bresco, A., Barlet-Ros, P., &amp; Cabellos-Aparicio, A. (2025). "Bridging the Gap Between Simulated and Real Network Data Using Transfer Learning." arXiv:2510.00956. https://arxiv.org/abs/2510.00956</p>
 </main>
 </body>
 </html>

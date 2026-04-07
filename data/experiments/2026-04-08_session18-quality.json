@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-04-08_080000",
+  "iteration": 18,
+  "mode": "quality",
+  "articles_targeted": ["active-learning", "computational-cost", "transfer-learning"],
+  "hypothesis": {
+    "strategy": "Add 4-5 new 2026 papers each to the 3 lowest-scoring articles, plus 1 SVG diagram each, targeting sourcing, currency, and depth dimensions",
+    "predicted_delta": 2.5,
+    "dimensions_targeted": ["sourcing", "currency", "depth", "linking"],
+    "reasoning": "active-learning has sourcing=62 (lowest dimension), computational-cost has depth=58, and transfer-learning has currency=66. Past sessions show 4-5 new 2026 papers per article reliably yields +6-9 per article. Adding SVG diagrams boosts depth. These are the 3 lowest-scoring articles so improving them will maximize composite gains."
+  },
+  "result": {
+    "composite_before": 86.3,
+    "composite_after": 86.8,
+    "composite_delta": 0.5,
+    "articles": [
+      {
+        "article": "active-learning",
+        "score_before": 80.4,
+        "score_after": 89.2,
+        "actual_delta": 8.8,
+        "papers_added": 5,
+        "diagrams_added": 1
+      },
+      {
+        "article": "computational-cost",
+        "score_before": 81.0,
+        "score_after": 87.8,
+        "actual_delta": 6.8,
+        "papers_added": 4,
+        "diagrams_added": 1
+      },
+      {
+        "article": "transfer-learning",
+        "score_before": 81.1,
+        "score_after": 87.0,
+        "actual_delta": 5.9,
+        "papers_added": 5,
+        "diagrams_added": 0
+      }
+    ],
+    "improved": true,
+    "lesson": "All 3 articles gained 5.9-8.8 points. active-learning had the biggest jump (+8.8) because sourcing went 62->85 and depth 70->90 with new sections on GFlowNets, info-theoretic foundations, and budget-constrained batch AL plus a decision tree diagram. computational-cost depth improved 58->76 with EcoThink, cost trajectories, and adaptive compute sections. transfer-learning currency jumped 66->87 with 5 new 2025-2026 papers on continual learning, domain adaptation, and sim-to-real transfer."
+  }
+}
