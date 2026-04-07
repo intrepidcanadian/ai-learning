@@ -1441,14 +1441,41 @@ def generate_trend_md():
         lines.append("")
 
     topic_cov = latest.get("topic_coverage", {})
+    wishlist_cov = latest.get("wishlist_coverage", {})
+
+    if topic_cov or wishlist_cov:
+        lines.append("### Coverage Metrics")
+        lines.append("")
+        lines.append("| Metric | Score | Detail |")
+        lines.append("|--------|-------|--------|")
+
     if topic_cov:
         cov_score = topic_cov.get("coverage_score", "?")
         resolved = topic_cov.get("resolved", "?")
         total = topic_cov.get("total_topic_refs", "?")
         unresolved = topic_cov.get("unresolved", 0)
-        lines.append(f"**Topic Coverage: {cov_score}/100** ({resolved}/{total} references resolved, "
-                     f"{unresolved} gaps)")
-        lines.append("")
+        lines.append(f"| **Topic Coverage** | {cov_score}/100 | "
+                     f"{resolved}/{total} cross-link references resolved, {unresolved} gaps |")
+
+    if wishlist_cov and wishlist_cov.get("total", 0) > 0:
+        wl_score = wishlist_cov.get("coverage_score", "?")
+        wl_written = wishlist_cov.get("written", "?")
+        wl_total = wishlist_cov.get("total", "?")
+        wl_remaining_count = wl_total - wl_written if isinstance(wl_total, int) and isinstance(wl_written, int) else "?"
+        lines.append(f"| **Wishlist Coverage** | {wl_score}% | "
+                     f"{wl_written}/{wl_total} planned topics written, {wl_remaining_count} remaining |")
+
+        # Combined coverage
+        topic_score = topic_cov.get("coverage_score", 100) if topic_cov else 100
+        if isinstance(topic_score, (int, float)) and isinstance(wl_score, (int, float)):
+            combined = (topic_score + wl_score) / 2
+            mode = "Quality" if combined >= 80 else "Coverage"
+            lines.append(f"| **Combined Coverage** | {combined:.0f}% | "
+                         f"Average of topic + wishlist — mode: **{mode}** |")
+
+    lines.append("")
+
+    if topic_cov:
         gaps = topic_cov.get("gaps", [])
         if gaps:
             lines.append("**Red-link gaps** (topics referenced but no article exists):")
@@ -1460,6 +1487,15 @@ def generate_trend_md():
                 if len(gap["referenced_by"]) > 3:
                     refs += f" +{len(gap['referenced_by']) - 3}"
                 lines.append(f"| {gap['topic']} | {refs} | {gap['suggested_category']} |")
+            lines.append("")
+
+    if wishlist_cov and wishlist_cov.get("total", 0) > 0:
+        remaining_items = [i["topic"] for i in wishlist_cov.get("items", []) if not i.get("written")]
+        if remaining_items:
+            lines.append("**Remaining wishlist topics:**")
+            lines.append("")
+            for item in remaining_items:
+                lines.append(f"- {item}")
             lines.append("")
 
     lines.append(f"*Last benchmarked: {latest['timestamp'][:16]}*")
@@ -1526,8 +1562,8 @@ def generate_trend_md():
         # History table
         lines.append("### Run History")
         lines.append("")
-        lines.append("| Timestamp | Ver | Quality | Coverage | Articles | Notes |")
-        lines.append("|-----------|-----|---------|----------|----------|-------|")
+        lines.append("| Timestamp | Ver | Quality | Topic Cov | Wishlist Cov | Combined | Articles | Notes |")
+        lines.append("|-----------|-----|---------|-----------|-------------|----------|----------|-------|")
         prev_overall = None
         for r in runs:
             ts = r["timestamp"][:16].replace("T", " ")
@@ -1536,13 +1572,28 @@ def generate_trend_md():
             topic_cov = r.get("topic_coverage", {})
             cov_score = topic_cov.get("coverage_score", "—") if topic_cov else "—"
             cov_str = f"{cov_score}" if isinstance(cov_score, (int, float)) else cov_score
+            # Wishlist coverage
+            wl_cov = r.get("wishlist_coverage", {})
+            if wl_cov and wl_cov.get("total", 0) > 0:
+                wl_score = wl_cov.get("coverage_score", "—")
+                wl_str = f"{wl_score}%" if isinstance(wl_score, (int, float)) else str(wl_score)
+            else:
+                wl_str = "—"
+                wl_score = None
+            # Combined coverage
+            tc_val = topic_cov.get("coverage_score") if topic_cov else None
+            if isinstance(tc_val, (int, float)) and isinstance(wl_score, (int, float)):
+                combined_val = (tc_val + wl_score) / 2
+                combined_str = f"{combined_val:.0f}%"
+            else:
+                combined_str = "—"
             count = r["summary"]["article_count"]
             # Find matching experiment note (score changed = post-edit run)
             note = ""
             if prev_overall is not None and overall != prev_overall:
                 note = experiment_notes.get(overall, "")
             prev_overall = overall
-            lines.append(f"| {ts} | v{ver} | **{overall}** | {cov_str} | {count} | {note} |")
+            lines.append(f"| {ts} | v{ver} | **{overall}** | {cov_str} | {wl_str} | {combined_str} | {count} | {note} |")
         lines.append("")
 
     # ── Open Issues ──
