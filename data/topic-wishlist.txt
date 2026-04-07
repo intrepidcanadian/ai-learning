@@ -24,3 +24,11 @@ tools-platforms
 research-sources
 test-time-compute-scaling
 computational-cost
+same-category-methodologies
+frontier-topics
+applications-for-real-world-learning
+domain-specificity
+evaluation-difficulty
+e-commerce-applications
+catastrophic-forgetting
+application-to-real-world-learning

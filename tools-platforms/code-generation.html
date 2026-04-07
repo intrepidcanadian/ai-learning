@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Generation - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html" aria-current="page">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Tools & Platforms &rsaquo; Code Generation</div>
+<h1 id="code-generation">Code Generation</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Code generation</strong> refers to AI systems that automatically produce executable source code from natural language descriptions, specifications, or other high-level inputs. Modern code generation has evolved from template-based transpilers to LLM-powered agents that can plan, write, debug, and test entire software projects. For AI-assisted learning, code generation is both a practical tool (enabling rapid prototyping of experiments) and a learning accelerator (helping researchers who are domain experts but not software engineers translate their ideas into working implementations).</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="from-templates-to-neural-code">From Templates to Neural Code</h3>
+<p>The evolution of automated code generation spans several paradigms:</p>
+<ol>
+<li><strong>Template-based</strong> (1960s-2000s): Code generators that fill in boilerplate from structured specifications</li>
+<li><strong>Program synthesis</strong> (2000s-2010s): Search-based methods that find programs satisfying input-output specifications</li>
+<li><strong>Neural code generation</strong> (2020s): Transformer models trained on massive code corpora that generate code from natural language[^1]</li>
+<li><strong>Agentic code generation</strong> (2024-2026): LLM-powered agents that iteratively plan, code, test, and debug — tools like <a href="aider.html">Aider</a> and <a href="aide.html">AIDE</a> exemplify this shift</li>
+</ol>
+<h3 id="the-code-language-connection">The Code-Language Connection</h3>
+<p>A key insight is that code and natural language share structural properties — both are sequential, hierarchical, and compositional. LLMs pretrained on both code and text can leverage this shared structure for code generation. The pretraining data for modern code models typically includes:</p>
+<ul>
+<li>Open-source repositories (GitHub, GitLab)</li>
+<li>Documentation, tutorials, and Stack Overflow</li>
+<li>Academic papers with code snippets</li>
+<li>Package documentation and API references</li>
+</ul>
+<p>This connects to <a href="../core-concepts/transfer-learning.html">transfer learning</a>: knowledge from natural language understanding transfers to code generation, and vice versa.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="llm-based-code-generation-agents">LLM-Based Code Generation Agents</h3>
+<p>Dong et al. (2025) surveyed the rapidly growing landscape of LLM-based code generation agents, identifying a common architecture:[^1]</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│              AGENTIC CODE GENERATION PIPELINE                │
+│                                                             │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌───────┐ │
+│  │ PLANNING  │───▶│ CODING   │───▶│ TESTING  │───▶│DEPLOY │ │
+│  │           │    │          │    │          │    │       │ │
+│  │ • Parse   │    │ • Write  │    │ • Run    │    │• Ship │ │
+│  │   spec    │    │   code   │    │   tests  │    │• Docs │ │
+│  │ • Design  │    │ • Fill   │    │ • Debug  │    │       │ │
+│  │   arch    │    │   impl   │    │ • Fix    │    │       │ │
+│  └──────────┘    └──────────┘    └──────────┘    └───────┘ │
+│       │               ▲               │                     │
+│       │               │    feedback    │                     │
+│       │               └───────────────┘                     │
+│       │                                                     │
+│       ▼          ┌──────────────────┐                       │
+│  ┌──────────┐    │   TOOL USE       │                       │
+│  │ MEMORY   │    │  • File system   │                       │
+│  │ • Context│    │  • Web search    │                       │
+│  │ • Past   │    │  • API calls     │                       │
+│  │   errors │    │  • Shell exec    │                       │
+│  └──────────┘    └──────────────────┘                       │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="paper2code-from-papers-to-repositories">Paper2Code: From Papers to Repositories</h3>
+<p>Seo et al. (2025) introduced <strong>PaperCoder</strong>, a multi-agent LLM framework that transforms machine learning papers into operational code repositories.[^2] The system operates in three stages:</p>
+<ol>
+<li><strong>Planning</strong>: Analyzes the paper to extract the algorithm, architecture, and experimental setup</li>
+<li><strong>Analysis</strong>: Identifies dependencies, data requirements, and potential implementation challenges</li>
+<li><strong>Generation</strong>: Produces a complete repository with code, tests, configuration, and documentation</li>
+</ol>
+<p>PaperCoder demonstrates a key application for AI-assisted research: lowering the barrier between reading a paper and reproducing its results — directly supporting the <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a> pipeline.</p>
+<h3 id="the-reproducibility-gap">The Reproducibility Gap</h3>
+<p>Vangala et al. (2025) exposed a critical limitation: only <strong>68.3%</strong> of LLM-generated projects execute out-of-the-box.[^3] The breakdown by language reveals stark differences:</p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Execution Success Rate</th>
+<th>Primary Failure Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python</td>
+<td>89.2%</td>
+<td>Dependency version conflicts</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>44.0%</td>
+<td>Build system configuration</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>71.5%</td>
+<td>Module resolution</td>
+</tr>
+<tr>
+<td>C++</td>
+<td>52.3%</td>
+<td>Compiler/platform differences</td>
+</tr>
+</tbody>
+</table>
+<p>The primary failure modes are <strong>dependency gaps</strong> — the model generates code that imports packages at versions that don't exist, are deprecated, or have incompatible APIs. This connects to <a href="../core-concepts/hallucination-detection.html">hallucination detection</a>: the model "hallucinates" API signatures and package versions.</p>
+<h3 id="code-generation-for-learning">Code Generation for Learning</h3>
+<p>AI code generation serves educational purposes in several ways:</p>
+<ul>
+<li><strong>Worked examples</strong>: Generating step-by-step implementations of algorithms for learning</li>
+<li><strong>Scaffolding</strong>: Providing partial implementations that students complete — the <a href="../methodologies/active-learning.html">active learning</a> approach to coding education</li>
+<li><strong>Translation</strong>: Converting between programming languages to help learners familiar with one language understand another</li>
+<li><strong>Experimentation</strong>: Enabling researchers to rapidly prototype ideas without deep software engineering expertise, as supported by tools like <a href="autoresearch.html">AutoResearch</a></li>
+</ul>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-landscape">2025-2026 Landscape</h3>
+<p>The code generation field has matured rapidly:</p>
+<ul>
+<li><strong>Frontier model capabilities</strong>: Claude, GPT-4, and Gemini score 60-85% on HumanEval and increasingly complex benchmarks (SWE-bench, LiveCodeBench)</li>
+<li><strong>Specialized coding models</strong>: DeepSeek-Coder-V2, Codestral, and StarCoder2 compete with general-purpose models on code tasks</li>
+<li><strong>Agent frameworks</strong>: <a href="aider.html">Aider</a>, <a href="aide.html">AIDE</a>, Cursor, Windsurf, and Claude Code enable iterative code generation with tool use</li>
+<li><strong>Benchmark saturation</strong>: HumanEval is nearly saturated; harder benchmarks (SWE-bench full, real-world issue resolution) are now the standard</li>
+</ul>
+<h3 id="e-commerce-applications">E-Commerce Applications</h3>
+<p>Code generation accelerates <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> by:
+- Automating the creation of product recommendation pipelines
+- Generating A/B testing infrastructure from natural language specifications
+- Enabling non-technical merchants to build custom analytics dashboards
+- Translating business logic into code for dynamic pricing and inventory management</p>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Correctness without verification</strong>: Generated code may look correct but contain subtle bugs — static analysis and testing are essential</li>
+<li><strong>Security vulnerabilities</strong>: LLMs reproduce insecure coding patterns from training data (SQL injection, XSS, hardcoded secrets)[^3]</li>
+<li><strong>Dependency hallucination</strong>: Models generate imports for packages or API versions that don't exist</li>
+<li><strong>Context limitations</strong>: Complex codebases exceed model context windows, leading to inconsistent generated code</li>
+<li><strong>License compliance</strong>: Generated code may inadvertently reproduce copyrighted training data, creating legal risk</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — code generation for automated research implementation
+- <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> — detecting hallucinated APIs and dependencies
+- <a href="../core-concepts/transfer-learning.html">Transfer Learning</a> — code models leveraging language transfer</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="aider.html">Aider</a> — open-source AI coding assistant built on code generation
+- <a href="aide.html">AIDE</a> — AI-powered IDE integrations for code generation
+- <a href="autoresearch.html">AutoResearch</a> — automated research tools that generate experimental code</p>
+<p><strong>Methodologies:</strong>
+- <a href="../methodologies/active-learning.html">Active Learning</a> — interactive code generation with human feedback
+- <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — search-based code generation strategies
+- <a href="../methodologies/test-time-compute.html">Test-Time Compute</a> — extended reasoning for complex code tasks</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — AI systems that improve their own code
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — code generation for e-commerce applications
+- <a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems</a> — collaborative code generation agents</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational code generation papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring code generation benchmarks</p>
+<h2 id="references">References</h2>
+<p>[^1]: Dong, Y., Jiang, X., Qian, J., Wang, T., Zhang, K., Jin, Z., &amp; Li, G. (2025). "A Survey on Code Generation with LLM-based Agents." arXiv:2508.00083. https://arxiv.org/abs/2508.00083</p>
+<p>[^2]: Seo, M., Baek, J., Lee, S., &amp; Hwang, S. J. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." arXiv:2504.17192. https://arxiv.org/abs/2504.17192</p>
+<p>[^3]: Vangala, B. P., Adibifar, A., Gehani, A., &amp; Malik, T. (2025). "AI-Generated Code Is Not Reproducible (Yet): An Empirical Study of Dependency Gaps in LLM-Based Coding Agents." arXiv:2512.22387. https://arxiv.org/abs/2512.22387</p>
+</main>
+</body>
+</html>

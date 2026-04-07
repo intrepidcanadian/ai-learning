@@ -321,19 +321,24 @@ body {
 <a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
 </details>
 <details open><summary>Tools & Platforms</summary>
 <a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
 <a href="../tools-platforms/aider.html">Aider</a>
 <a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
 <a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
 <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
 </details>
 <details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
@@ -2106,6 +2111,14 @@ loadWishlist();
 <p>The 2025-2026 research confirms this pattern: The AI Scientist[^3] uses multi-agent pipelines for end-to-end research, AutoGen[^100] provides the framework for agent coordination, and SocioVerse[^36] demonstrates population-scale multi-agent simulation for social dynamics. The AAAI 2026 Bridge Program specifically targets the challenge of LLM-based multi-agent collaboration, addressing error cascades and coordination failures that limit current systems.</p>
 <h3 id="learning-application-multi-agent-tutoring-systems">Learning Application: Multi-Agent Tutoring Systems</h3>
 <p>The most practical cross-domain application is a multi-agent tutoring system where: a Literature Agent retrieves relevant learning materials (<a href="../research-sources/tracking-ai-research.html">tracking-ai-research</a>), a Simulation Agent provides practice environments (<a href="../methodologies/world-models.html">world models</a>), a Critic Agent checks understanding via Socratic questioning (<a href="../core-concepts/automated-peer-review.html">automated peer review</a>), and a Curriculum Agent sequences the experience optimally (<a href="../methodologies/curriculum-learning.html">curriculum learning</a>). Each agent is specialized, but together they provide a learning experience richer than any single agent could deliver.</p>
+<h2 id="connection-75-hallucination-detection-as-the-trust-layer-for-ai-assisted-learning">Connection 75: Hallucination Detection as the Trust Layer for AI-Assisted Learning</h2>
+<p><a href="../core-concepts/hallucination-detection.html">Hallucination detection</a> serves as the critical trust infrastructure connecting all three domains. In simulation, undetected hallucinations in world models propagate through rollouts, creating compounding prediction errors. In recursion, self-improving systems that cannot detect their own hallucinations risk amplifying errors with each iteration — a failure mode that Pesaranghader &amp; Li (2026) call "confident confabulation."[^101] In commerce, product hallucinations (fabricated specifications, non-existent features) erode consumer trust. The detection-correction loop (detect → diagnose → retrain) is itself a form of recursive self-improvement, and the methods used — semantic entropy,[^102] attention spectral analysis — require the same <a href="../methodologies/interpretability.html">interpretability</a> tools that enable mechanistic understanding of model behavior.</p>
+<h3 id="learning-application-calibrated-ai-tutoring">Learning Application: Calibrated AI Tutoring</h3>
+<p>An AI tutor that cannot detect its own hallucinations is dangerous: it teaches falsehoods with confidence. The integration of hallucination detection into tutoring pipelines enables <strong>calibrated confidence</strong> — the system can say "I'm uncertain about this, let me verify" rather than confidently stating incorrect information. This connects to <a href="../methodologies/active-learning.html">active learning</a> principles: the most informative teaching moments often occur at the boundary of the model's reliable knowledge.</p>
+<h2 id="connection-76-transfer-learning-as-the-efficiency-engine-across-domains">Connection 76: Transfer Learning as the Efficiency Engine Across Domains</h2>
+<p><a href="../core-concepts/transfer-learning.html">Transfer learning</a> is the mechanism that makes cross-domain connections <em>computationally feasible</em>. Without transfer, every new simulation environment, recursive improvement cycle, or commerce vertical would require training from scratch. Lin et al. (2025) showed that fine-tuning adaptations transfer between model versions,[^103] meaning that expensive alignment work done for one domain (e.g., safe recursion) can be transferred to another (e.g., commerce recommendation) without repeating the full process. The pretrain-finetune paradigm mirrors how human learners build broad foundations before specializing — a principle that <a href="../methodologies/curriculum-learning.html">curriculum learning</a> operationalizes.</p>
+<h2 id="connection-77-code-generation-accelerates-the-research-to-application-pipeline">Connection 77: Code Generation Accelerates the Research-to-Application Pipeline</h2>
+<p><a href="../tools-platforms/code-generation.html">Code generation</a> closes the gap between research papers and working implementations across all three domains. PaperCoder (Seo et al., 2025)[^104] transforms ML papers into executable repositories, directly enabling the <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a> pipeline. For simulation, code generation automates the creation of environment dynamics; for recursion, it enables self-modifying agents that can write and test their own improvements; for commerce, it allows non-technical domain experts to rapidly prototype recommendation and personalization systems.</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> -- End-to-end research automation</li>
@@ -2129,6 +2142,11 @@ loadWishlist();
 <li><a href="../methodologies/test-time-compute.html">Test-Time Compute</a> -- Adaptive inference scaling</li>
 <li><a href="../methodologies/curriculum-learning.html">Curriculum Learning</a> -- Progressive difficulty orchestration</li>
 <li><a href="multi-agent-systems.html">Multi-Agent Systems</a> -- Collaborative agent architectures</li>
+<li><a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> -- Trust layer for AI learning</li>
+<li><a href="../core-concepts/transfer-learning.html">Transfer Learning</a> -- Cross-domain knowledge transfer</li>
+<li><a href="../methodologies/interpretability.html">Interpretability</a> -- Understanding model internals</li>
+<li><a href="../methodologies/active-learning.html">Active Learning</a> -- Strategic data selection</li>
+<li><a href="../tools-platforms/code-generation.html">Code Generation</a> -- Research-to-implementation pipeline</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Zhang, J. et al. (2025). "Darwin Godel Machine." <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a>
@@ -2229,7 +2247,11 @@ loadWishlist();
 [^97]: Wang, Z. et al. (2026). "Efficient Reinforcement Finetuning via Adaptive Curriculum Learning." <a href="https://arxiv.org/abs/2504.05520">arXiv:2504.05520</a>
 [^98]: Liu, J. et al. (2025). "Continual Learning, Not Training: Online Adaptation For Agents (ATLAS)." <a href="https://arxiv.org/abs/2511.01093">arXiv:2511.01093</a>
 [^99]: Sardana, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal (T² Scaling Laws)." <a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a>
-[^100]: Wu, Q. et al. (2025). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." <a href="https://arxiv.org/abs/2308.08155">arXiv:2308.08155</a></p>
+[^100]: Wu, Q. et al. (2025). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." <a href="https://arxiv.org/abs/2308.08155">arXiv:2308.08155</a>
+[^101]: Pesaranghader, A. &amp; Li, E. (2026). "Hallucination Detection and Mitigation in Large Language Models." <a href="https://arxiv.org/abs/2601.09929">arXiv:2601.09929</a>
+[^102]: Sun, Q. et al. (2026). "Efficient Hallucination Detection: Adaptive Bayesian Estimation of Semantic Entropy." <a href="https://arxiv.org/abs/2603.22812">arXiv:2603.22812</a>
+[^103]: Lin, P. et al. (2025). "Efficient Model Development through Fine-tuning Transfer." <a href="https://arxiv.org/abs/2503.20110">arXiv:2503.20110</a>
+[^104]: Seo, M. et al. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." <a href="https://arxiv.org/abs/2504.17192">arXiv:2504.17192</a></p>
 </main>
 </body>
 </html>

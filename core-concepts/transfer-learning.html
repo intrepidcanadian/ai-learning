@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer Learning - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html" aria-current="page">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Core Concepts &rsaquo; Transfer Learning</div>
+<h1 id="transfer-learning">Transfer Learning</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Transfer learning</strong> is the practice of applying knowledge gained from one task, domain, or dataset to improve performance on a different but related task. Rather than training every model from scratch, transfer learning enables AI systems to reuse learned representations — dramatically reducing data requirements, training time, and compute costs. Transfer learning is arguably the single most impactful idea in modern AI: the entire paradigm of pretraining <a href="foundation-models-for-research.html">foundation models</a> on broad data and then fine-tuning on specific tasks is a form of transfer learning at scale.</p>
+<p>For AI-assisted education, transfer learning explains both <em>how</em> modern AI systems achieve their capabilities and <em>why</em> learning builds on prior knowledge — a principle that applies equally to machines and humans.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-transfer-learning-spectrum">The Transfer Learning Spectrum</h3>
+<p>Transfer learning exists on a spectrum from near to far:[^1]</p>
+<table>
+<thead>
+<tr>
+<th>Transfer Type</th>
+<th>Source → Target</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain adaptation</strong></td>
+<td>Same task, different data distribution</td>
+<td>Sentiment analysis: movie reviews → product reviews</td>
+</tr>
+<tr>
+<td><strong>Task transfer</strong></td>
+<td>Same domain, different task</td>
+<td>NLP: next-token prediction → question answering</td>
+</tr>
+<tr>
+<td><strong>Cross-modal</strong></td>
+<td>Different modalities</td>
+<td>Vision-language: images → text descriptions</td>
+</tr>
+<tr>
+<td><strong>Cross-domain</strong></td>
+<td>Fundamentally different domains</td>
+<td>Games → robotics control</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-transfer-works">Why Transfer Works</h3>
+<p>Transfer learning succeeds because many tasks share underlying structure:</p>
+<ul>
+<li><strong>Low-level features are universal</strong>: Edge detectors, frequency patterns, and syntactic structures transfer across vision and language tasks respectively</li>
+<li><strong>Hierarchical representation</strong>: Deep networks learn progressively abstract features, with lower layers capturing general patterns and higher layers capturing task-specific ones</li>
+<li><strong>Manifold hypothesis</strong>: Real-world data lies on low-dimensional manifolds in high-dimensional space, and related tasks share manifold structure</li>
+</ul>
+<h3 id="negative-transfer">Negative Transfer</h3>
+<p>Not all transfer is beneficial. <strong>Negative transfer</strong> occurs when knowledge from the source domain actually hurts performance on the target domain.[^1] This happens when:
+- Source and target distributions are too dissimilar
+- The model overfits to source-specific patterns
+- Learned representations encode biases that do not generalize</p>
+<p>Detecting and avoiding negative transfer remains an open challenge, connecting to <a href="hallucination-detection.html">hallucination detection</a> — both involve identifying when a model's learned knowledge is being misapplied.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="the-foundation-model-paradigm">The Foundation Model Paradigm</h3>
+<p>The dominant transfer learning approach in 2025-2026 is the <strong>pretrain-finetune</strong> paradigm:[^2]</p>
+<ol>
+<li><strong>Pretraining</strong>: Train a large model on massive, diverse data (web text, code, images) using self-supervised objectives</li>
+<li><strong>Adaptation</strong>: Specialize the pretrained model for a target task using one or more techniques:</li>
+<li><strong>Full fine-tuning</strong>: Update all parameters on task-specific data</li>
+<li><strong>Parameter-efficient fine-tuning (PEFT)</strong>: Update only a small number of parameters (LoRA, adapters, prefix tuning)</li>
+<li><strong>In-context learning</strong>: Provide task demonstrations in the prompt without updating parameters</li>
+<li><strong>Instruction tuning</strong>: Fine-tune on diverse tasks formatted as instructions</li>
+</ol>
+<h3 id="fine-tuning-transfer-across-model-versions">Fine-Tuning Transfer Across Model Versions</h3>
+<p>Lin et al. (2025) discovered that fine-tuning adaptations can be <strong>transferred between model versions</strong> — the parameter diff from fine-tuning model v1 can be applied to model v2 without repeating the expensive fine-tuning process.[^3] This finding has major practical implications: as foundation models are updated (e.g., GPT-4 → GPT-4o → GPT-5), expensive alignment and specialization work does not need to be repeated from scratch.</p>
+<p>The key insight is that successive model versions share a similar representation space, and the fine-tuning diff vector captures task-specific knowledge in a version-agnostic form.</p>
+<h3 id="transfer-learning-for-tabular-data">Transfer Learning for Tabular Data</h3>
+<p>Rabbani et al. (2025) demonstrated that LLMs can serve as effective transfer learning backbones even for <strong>tabular data</strong> — a domain where deep learning has traditionally struggled against gradient-boosted trees.[^4] By serializing tabular rows as text and fine-tuning LLMs, their approach outperforms traditional ML/DL methods on datasets with fewer than ten features, suggesting that language model pretraining captures general reasoning patterns transferable beyond text.</p>
+<h3 id="systematic-fine-tuning-transfer">Systematic Fine-Tuning Transfer</h3>
+<p>Strangmann et al. (2024) conducted a systematic study of transfer learning techniques applied to LLM fine-tuning across tasks.[^5] Key findings:</p>
+<ul>
+<li><strong>Task similarity predicts transfer</strong>: Fine-tuning on a related task before the target task provides 5-15% accuracy gains</li>
+<li><strong>Multi-task pretraining</strong>: Sequential fine-tuning on multiple related tasks outperforms direct fine-tuning</li>
+<li><strong>Optimal transfer is task-dependent</strong>: No single transfer strategy dominates across all task pairs</li>
+</ul>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-trends">2025-2026 Trends</h3>
+<ol>
+<li><strong>Cross-modal transfer</strong>: Models pretrained on text are being transferred to robotics, chemistry, and biology by encoding domain-specific data as text</li>
+<li><strong>Transfer from simulation</strong>: <a href="../methodologies/world-models.html">World models</a> trained in simulation transfer learned physics to real-world tasks, connecting to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a></li>
+<li><strong>Efficient adaptation</strong>: LoRA and QLoRA have made fine-tuning accessible on consumer hardware, democratizing transfer learning</li>
+<li><strong>Negative transfer detection</strong>: New methods use gradient alignment between source and target tasks to predict and prevent negative transfer before it occurs</li>
+</ol>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>Transfer learning principles directly inform how AI can help humans learn:</p>
+<ul>
+<li><strong>Prior knowledge activation</strong>: Just as models transfer learned representations, effective teaching activates a learner's prior knowledge and connects new material to it</li>
+<li><strong>Progressive specialization</strong>: The pretrain → fine-tune paradigm mirrors the educational progression from broad foundations to specialized expertise</li>
+<li><strong>Cross-domain analogies</strong>: Transfer learning shows that skills learned in one domain (e.g., mathematics) can accelerate learning in another (e.g., physics) — AI tutors can leverage this by identifying cross-domain connections, as documented in <a href="../frontier-topics/cross-cutting-connections.html">cross-cutting connections</a></li>
+<li><strong>E-commerce applications</strong>: Transfer from general product understanding to specific categories enables rapid adaptation in <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a></li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Catastrophic forgetting</strong>: Fine-tuning on a new task can erase knowledge from pretraining, especially with small target datasets</li>
+<li><strong>Distribution gap</strong>: When source and target distributions differ substantially, transferred features may be misleading</li>
+<li><strong>Computational asymmetry</strong>: While transfer reduces target-task training costs, pretraining itself is extremely expensive (millions of dollars for frontier models)</li>
+<li><strong>Evaluation difficulty</strong>: It is hard to isolate the contribution of transferred knowledge from the contribution of target-task data</li>
+<li><strong>Licensing and access</strong>: Many foundation models have restrictive licenses that limit how their learned representations can be reused</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="foundation-models-for-research.html">Foundation Models for Research</a> — the pretrained models that enable transfer
+- <a href="hallucination-detection.html">Hallucination Detection</a> — negative transfer as a source of hallucinations
+- <a href="the-ai-scientist.html">The AI Scientist</a> — transfer learning across scientific domains</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — model hub enabling transfer learning at scale
+- <a href="../tools-platforms/aider.html">Aider</a> — code generation tools leveraging code transfer</p>
+<p><strong>Methodologies:</strong>
+- <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a> — structured learning that facilitates transfer
+- <a href="../methodologies/world-models.html">World Models</a> — sim-to-real transfer of learned physics
+- <a href="../methodologies/test-time-compute.html">Test-Time Compute</a> — in-context transfer at inference time</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulation-to-reality transfer
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — transfer of self-improvement capabilities across domains
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — cross-domain knowledge transfer</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational transfer learning papers
+- <a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — leading transfer learning research groups</p>
+<h2 id="references">References</h2>
+<p>[^1]: Zhuang, F., Qi, Z., Duan, K., Xi, D., Zhu, Y., Zhu, H., Xiong, H., &amp; He, Q. (2021). "A Comprehensive Survey on Transfer Learning." <em>Proceedings of the IEEE</em>, 109(1), 43-76. https://doi.org/10.1109/JPROC.2020.3004555</p>
+<p>[^2]: Bommasani, R., Hudson, D. A., Adeli, E., et al. (2021). "On the Opportunities and Risks of Foundation Models." arXiv:2108.07258. https://arxiv.org/abs/2108.07258</p>
+<p>[^3]: Lin, P., Balasubramanian, R., Liu, F., Kandpal, N., &amp; Vu, T. (2025). "Efficient Model Development through Fine-tuning Transfer." arXiv:2503.20110. https://arxiv.org/abs/2503.20110</p>
+<p>[^4]: Rabbani, S. B., Kowsar, I., &amp; Samad, M. D. (2025). "Transfer Learning of Tabular Data by Finetuning Large Language Models." arXiv:2501.06863. https://arxiv.org/abs/2501.06863</p>
+<p>[^5]: Strangmann, T., Purucker, L., Franke, J. K. H., Rapant, I., Ferreira, F., &amp; Hutter, F. (2024). "Transfer Learning for Finetuning Large Language Models." <em>NeurIPS 2024 Workshop on Adaptive Foundation Models</em>. arXiv:2411.01195. https://arxiv.org/abs/2411.01195</p>
+</main>
+</body>
+</html>

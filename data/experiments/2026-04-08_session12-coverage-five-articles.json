@@ -1,0 +1,33 @@
+{
+  "session": 12,
+  "date": "2026-04-08",
+  "mode": "coverage",
+  "strategy": "Write 5 new wishlist articles (hallucination-detection, interpretability, active-learning, transfer-learning, code-generation) with SVG diagrams and cross-links. Add 3 new connections (75-77) to cross-cutting-connections.",
+  "predicted_delta": -2.5,
+  "actual_delta": -2.8,
+  "before": {
+    "composite": 88.4,
+    "articles": 29,
+    "coverage_combined": 59,
+    "wishlist_pct": 17.4
+  },
+  "after": {
+    "composite": 85.6,
+    "articles": 34,
+    "coverage_combined": 66,
+    "wishlist_pct": 32.1
+  },
+  "dimensions_targeted": ["coverage", "linking"],
+  "reasoning": "Coverage mode required writing new articles. Expected composite drop as new articles start below average. Focused on most-referenced wishlist topics to maximize coverage gains.",
+  "lesson": "5 new articles moved wishlist from 17.4% to 32.1% (+14.7pp) and combined coverage from 59% to 66% (+7pp). Composite drop of -2.8 is within expected range. New articles scored 71.4-80.7, with transfer-learning and code-generation lowest due to fewer 2026 papers and lower sourcing scores. Next session should either continue coverage or improve the lowest-scoring new articles.",
+  "articles_changed": [
+    "core-concepts/hallucination-detection.md",
+    "core-concepts/transfer-learning.md",
+    "methodologies/interpretability.md",
+    "methodologies/active-learning.md",
+    "tools-platforms/code-generation.md",
+    "frontier-topics/cross-cutting-connections.md"
+  ],
+  "papers_added": 19,
+  "svgs_added": 1
+}

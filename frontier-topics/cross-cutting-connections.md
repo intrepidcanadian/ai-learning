@@ -1199,6 +1199,22 @@ The 2025-2026 research confirms this pattern: The AI Scientist[^3] uses multi-ag
 
 The most practical cross-domain application is a multi-agent tutoring system where: a Literature Agent retrieves relevant learning materials ([tracking-ai-research](../research-sources/tracking-ai-research.md)), a Simulation Agent provides practice environments ([world models](../methodologies/world-models.md)), a Critic Agent checks understanding via Socratic questioning ([automated peer review](../core-concepts/automated-peer-review.md)), and a Curriculum Agent sequences the experience optimally ([curriculum learning](../methodologies/curriculum-learning.md)). Each agent is specialized, but together they provide a learning experience richer than any single agent could deliver.
 
+## Connection 75: Hallucination Detection as the Trust Layer for AI-Assisted Learning
+
+[Hallucination detection](../core-concepts/hallucination-detection.md) serves as the critical trust infrastructure connecting all three domains. In simulation, undetected hallucinations in world models propagate through rollouts, creating compounding prediction errors. In recursion, self-improving systems that cannot detect their own hallucinations risk amplifying errors with each iteration — a failure mode that Pesaranghader & Li (2026) call "confident confabulation."[^101] In commerce, product hallucinations (fabricated specifications, non-existent features) erode consumer trust. The detection-correction loop (detect → diagnose → retrain) is itself a form of recursive self-improvement, and the methods used — semantic entropy,[^102] attention spectral analysis — require the same [interpretability](../methodologies/interpretability.md) tools that enable mechanistic understanding of model behavior.
+
+### Learning Application: Calibrated AI Tutoring
+
+An AI tutor that cannot detect its own hallucinations is dangerous: it teaches falsehoods with confidence. The integration of hallucination detection into tutoring pipelines enables **calibrated confidence** — the system can say "I'm uncertain about this, let me verify" rather than confidently stating incorrect information. This connects to [active learning](../methodologies/active-learning.md) principles: the most informative teaching moments often occur at the boundary of the model's reliable knowledge.
+
+## Connection 76: Transfer Learning as the Efficiency Engine Across Domains
+
+[Transfer learning](../core-concepts/transfer-learning.md) is the mechanism that makes cross-domain connections *computationally feasible*. Without transfer, every new simulation environment, recursive improvement cycle, or commerce vertical would require training from scratch. Lin et al. (2025) showed that fine-tuning adaptations transfer between model versions,[^103] meaning that expensive alignment work done for one domain (e.g., safe recursion) can be transferred to another (e.g., commerce recommendation) without repeating the full process. The pretrain-finetune paradigm mirrors how human learners build broad foundations before specializing — a principle that [curriculum learning](../methodologies/curriculum-learning.md) operationalizes.
+
+## Connection 77: Code Generation Accelerates the Research-to-Application Pipeline
+
+[Code generation](../tools-platforms/code-generation.md) closes the gap between research papers and working implementations across all three domains. PaperCoder (Seo et al., 2025)[^104] transforms ML papers into executable repositories, directly enabling the [automated scientific discovery](../core-concepts/automated-scientific-discovery.md) pipeline. For simulation, code generation automates the creation of environment dynamics; for recursion, it enables self-modifying agents that can write and test their own improvements; for commerce, it allows non-technical domain experts to rapidly prototype recommendation and personalization systems.
+
 ## See Also
 
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) -- End-to-end research automation
@@ -1222,6 +1238,11 @@ The most practical cross-domain application is a multi-agent tutoring system whe
 - [Test-Time Compute](../methodologies/test-time-compute.md) -- Adaptive inference scaling
 - [Curriculum Learning](../methodologies/curriculum-learning.md) -- Progressive difficulty orchestration
 - [Multi-Agent Systems](multi-agent-systems.md) -- Collaborative agent architectures
+- [Hallucination Detection](../core-concepts/hallucination-detection.md) -- Trust layer for AI learning
+- [Transfer Learning](../core-concepts/transfer-learning.md) -- Cross-domain knowledge transfer
+- [Interpretability](../methodologies/interpretability.md) -- Understanding model internals
+- [Active Learning](../methodologies/active-learning.md) -- Strategic data selection
+- [Code Generation](../tools-platforms/code-generation.md) -- Research-to-implementation pipeline
 
 ## References
 
@@ -1325,3 +1346,7 @@ The most practical cross-domain application is a multi-agent tutoring system whe
 [^98]: Liu, J. et al. (2025). "Continual Learning, Not Training: Online Adaptation For Agents (ATLAS)." [arXiv:2511.01093](https://arxiv.org/abs/2511.01093)
 [^99]: Sardana, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal (T² Scaling Laws)." [arXiv:2604.01411](https://arxiv.org/abs/2604.01411)
 [^100]: Wu, Q. et al. (2025). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." [arXiv:2308.08155](https://arxiv.org/abs/2308.08155)
+[^101]: Pesaranghader, A. & Li, E. (2026). "Hallucination Detection and Mitigation in Large Language Models." [arXiv:2601.09929](https://arxiv.org/abs/2601.09929)
+[^102]: Sun, Q. et al. (2026). "Efficient Hallucination Detection: Adaptive Bayesian Estimation of Semantic Entropy." [arXiv:2603.22812](https://arxiv.org/abs/2603.22812)
+[^103]: Lin, P. et al. (2025). "Efficient Model Development through Fine-tuning Transfer." [arXiv:2503.20110](https://arxiv.org/abs/2503.20110)
+[^104]: Seo, M. et al. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." [arXiv:2504.17192](https://arxiv.org/abs/2504.17192)
