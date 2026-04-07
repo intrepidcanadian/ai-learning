@@ -338,6 +338,7 @@ body {{
 <div class="sidebar-header">
     <h1><a href="{index_path}">AI Learning Wiki</a></h1>
     <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="{glossary_path}" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
 </div>
 {sidebar}
 <div class="wishlist-panel" id="wishlistPanel">
@@ -511,6 +512,7 @@ def build():
                 body=body,
                 breadcrumb=breadcrumb,
                 index_path="../index.html",
+                glossary_path="../glossary.html",
             )
 
             out_path = os.path.join(cat_path, art["filename"].replace(".md", ".html"))
@@ -534,11 +536,224 @@ def build():
         body=body,
         breadcrumb="Home",
         index_path="index.html",
+        glossary_path="glossary.html",
     )
 
     with open(os.path.join(ROOT, "index.html"), "w") as f:
         f.write(html)
     print("  Built: index.html")
+
+    # Build glossary
+    build_glossary(articles)
+    print("  Built: glossary.html")
+
+
+def extract_glossary_terms(articles):
+    """Extract key terms from all articles for the glossary.
+    Returns sorted list of {term, definition, article_title, article_href, category}."""
+    entries = []
+    seen = set()
+
+    for cat_dir, cat_name in CATEGORIES.items():
+        if cat_dir not in articles:
+            continue
+        for art in articles[cat_dir]:
+            text = art["text"]
+            href = art["html_rel"]
+            title = art["title"]
+
+            # 1. Article title itself
+            key = title.lower()
+            if key not in seen:
+                seen.add(key)
+                # Extract first sentence after the h1 as a short definition
+                lines = text.splitlines()
+                defn = ""
+                for line in lines:
+                    stripped = line.strip()
+                    if stripped and not stripped.startswith("#") and not stripped.startswith("**Paper") and not stripped.startswith("**Repository") and not stripped.startswith("!["):
+                        # Clean markdown formatting
+                        defn = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', stripped)
+                        defn = re.sub(r'\*\*([^*]+)\*\*', r'\1', defn)
+                        defn = re.sub(r'\*([^*]+)\*', r'\1', defn)
+                        defn = re.sub(r'`([^`]+)`', r'\1', defn)
+                        # Truncate to first sentence
+                        if '. ' in defn:
+                            defn = defn[:defn.index('. ') + 1]
+                        if len(defn) > 200:
+                            defn = defn[:197] + "..."
+                        break
+                entries.append({
+                    "term": title,
+                    "definition": defn,
+                    "article_title": title,
+                    "article_href": href,
+                    "category": cat_name,
+                })
+
+            # 2. H2 headings as sub-terms
+            for line in text.splitlines():
+                if line.startswith("## "):
+                    heading = line[3:].strip()
+                    # Skip generic section names
+                    if heading.lower() in ("overview", "background", "background / theoretical foundations",
+                                           "technical details", "technical details / key systems",
+                                           "technical architecture",
+                                           "current state", "current state / latest developments",
+                                           "limitations", "limitations / challenges",
+                                           "see also", "see also / connections", "references",
+                                           "significance", "how it works", "key design principles",
+                                           "comparison with related systems", "contributing"):
+                        continue
+                    hkey = heading.lower()
+                    if hkey not in seen:
+                        seen.add(hkey)
+                        entries.append({
+                            "term": heading,
+                            "definition": "",
+                            "article_title": title,
+                            "article_href": href,
+                            "category": cat_name,
+                        })
+
+            # 3. Bold terms from first paragraph (key definitions)
+            bold_terms = re.findall(r'\*\*([A-Z][^*]{2,60})\*\*', text[:1500])
+            for bt in bold_terms:
+                btkey = bt.lower()
+                if btkey not in seen and not bt.startswith("Paper") and not bt.startswith("Repository"):
+                    seen.add(btkey)
+                    entries.append({
+                        "term": bt,
+                        "definition": "",
+                        "article_title": title,
+                        "article_href": href,
+                        "category": cat_name,
+                    })
+
+    entries.sort(key=lambda e: e["term"].lower())
+    return entries
+
+
+def build_glossary(articles):
+    """Generate glossary.html with searchable term index."""
+    entries = extract_glossary_terms(articles)
+
+    # Group by first letter
+    letter_groups = {}
+    for e in entries:
+        letter = e["term"][0].upper()
+        if not letter.isalpha():
+            letter = "#"
+        letter_groups.setdefault(letter, []).append(e)
+
+    # Build letter nav
+    all_letters = sorted(letter_groups.keys())
+    letter_nav = " ".join(
+        f'<a href="#letter-{l}" class="gl-letter-link">{l}</a>' for l in all_letters
+    )
+
+    # Build entries HTML
+    entries_html = ""
+    for letter in all_letters:
+        entries_html += f'<div class="gl-group" id="letter-{letter}">\n'
+        entries_html += f'<h2 class="gl-letter">{letter}</h2>\n'
+        for e in letter_groups[letter]:
+            defn_html = f'<span class="gl-defn"> — {e["definition"]}</span>' if e["definition"] else ""
+            entries_html += (
+                f'<div class="gl-entry" data-term="{e["term"].lower()}">'
+                f'<a href="{e["article_href"]}" class="gl-term">{e["term"]}</a>'
+                f'{defn_html}'
+                f'<span class="gl-source">{e["category"]}</span>'
+                f'</div>\n'
+            )
+        entries_html += '</div>\n'
+
+    body = f"""
+<div class="gl-header">
+<h1>Glossary & Index</h1>
+<p class="gl-subtitle">{len(entries)} terms across {sum(len(v) for v in articles.values())} articles</p>
+<input type="text" id="glSearch" class="gl-search" placeholder="Search terms..." autofocus />
+</div>
+
+<div class="gl-letters">{letter_nav}</div>
+
+<div id="glEntries">
+{entries_html}
+</div>
+
+<script>
+document.getElementById('glSearch').addEventListener('input', function() {{
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.gl-entry').forEach(el => {{
+        el.style.display = el.dataset.term.includes(q) ? '' : 'none';
+    }});
+    document.querySelectorAll('.gl-group').forEach(g => {{
+        const visible = g.querySelectorAll('.gl-entry[style=""], .gl-entry:not([style])');
+        g.style.display = visible.length > 0 ? '' : 'none';
+    }});
+}});
+</script>
+"""
+
+    sidebar = build_sidebar(articles, "")
+    breadcrumb = '<a href="index.html">Home</a> &rsaquo; Glossary'
+
+    html = TEMPLATE.format(
+        title="Glossary & Index",
+        sidebar=sidebar,
+        body=body,
+        breadcrumb=breadcrumb,
+        index_path="index.html",
+        glossary_path="glossary.html",
+    )
+
+    # Inject glossary-specific styles before </style>
+    glossary_css = """
+.gl-header { margin-bottom: 24px; }
+.gl-subtitle { color: #7b8794; font-size: 14px; margin-top: 4px; }
+.gl-search {
+    width: 100%; padding: 10px 16px; font-size: 15px;
+    border: 2px solid #e2e6ed; border-radius: 8px;
+    margin-top: 16px; outline: none;
+    font-family: inherit;
+}
+.gl-search:focus { border-color: #4a6fa5; }
+.gl-letters {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 16px 0 24px; padding: 12px 0;
+    border-bottom: 1px solid #e2e6ed;
+}
+.gl-letter-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 6px;
+    background: #edf2f7; color: #2d3748; font-weight: 600;
+    font-size: 13px; text-decoration: none; border: none;
+}
+.gl-letter-link:hover { background: #4a6fa5; color: #fff; }
+.gl-letter {
+    font-size: 18px; color: #4a6fa5; margin: 24px 0 8px;
+    padding-bottom: 4px; border-bottom: 2px solid #4a6fa5;
+    display: inline-block;
+}
+.gl-entry {
+    padding: 6px 0; font-size: 14px;
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.gl-term {
+    font-weight: 600; color: #2b6cb0; text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+.gl-term:hover { border-bottom-color: #2b6cb0; }
+.gl-defn { color: #4a5568; flex: 1; min-width: 200px; }
+.gl-source {
+    font-size: 11px; color: #7b8794; background: #f1f5f9;
+    padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+}
+"""
+    html = html.replace("</style>", glossary_css + "</style>")
+
+    with open(os.path.join(ROOT, "glossary.html"), "w") as f:
+        f.write(html)
 
 
 def clean():
@@ -555,6 +770,10 @@ def clean():
     if os.path.exists(index):
         os.remove(index)
         print("  Removed: index.html")
+    glossary = os.path.join(ROOT, "glossary.html")
+    if os.path.exists(glossary):
+        os.remove(glossary)
+        print("  Removed: glossary.html")
 
 
 WISHLIST_PATH = os.path.join(ROOT, "data", "topic-wishlist.txt")
