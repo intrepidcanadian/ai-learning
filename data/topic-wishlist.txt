@@ -2,14 +2,20 @@
 # One topic per line. Lines starting with # are comments.
 # The benchmark checks which of these have articles written.
 # Add topics via the wiki UI or by editing this file directly.
+# Topics below the AUTO-SUGGESTED line were added by the benchmark.
 
-prompt-engineering
+world-models
+test-time-compute
+curriculum-learning
+hallucination-detection
+interpretability
 multi-agent-systems
-knowledge-distillation
+active-learning
+transfer-learning
+code-generation
+evaluation-methodology
 retrieval-augmented-generation
 synthetic-data-generation
-reward-modeling
-constitutional-ai
-chain-of-thought-reasoning
-model-merging
-tool-use-and-function-calling
+inference-optimization
+knowledge-distillation
+prompt-engineering

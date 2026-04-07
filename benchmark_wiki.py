@@ -540,6 +540,128 @@ def compute_wishlist_coverage(articles_dict):
     }
 
 
+def save_wishlist(topics):
+    """Write topics back to wishlist file, preserving header."""
+    header = (
+        "# Topic Wishlist\n"
+        "# One topic per line. Lines starting with # are comments.\n"
+        "# The benchmark checks which of these have articles written.\n"
+        "# Add topics via the wiki UI or by editing this file directly.\n"
+        "# Topics below the AUTO-SUGGESTED line were added by the benchmark.\n\n"
+    )
+    WISHLIST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(WISHLIST_PATH, "w") as f:
+        f.write(header)
+        for t in topics:
+            f.write(t + "\n")
+
+
+def auto_suggest_wishlist(articles_dict, max_suggestions=5):
+    """Scan articles for frequently referenced concepts that have no article
+    and are not already on the wishlist. Appends new suggestions automatically.
+
+    Strategy: extract bold-defined terms (**Term**) and internal link labels
+    that appear across 3+ different articles, normalize to slug form,
+    and filter against existing articles + current wishlist.
+
+    Returns list of newly added topic slugs.
+    """
+    all_stems = set(articles_dict.keys())
+    current_wishlist = set(load_wishlist())
+    excluded_stems = {Path(f).stem for f in EXCLUDED_FILES}
+
+    # Count how many different articles reference each concept
+    # concept_slug -> set of article keys that mention it
+    concept_refs = defaultdict(set)
+
+    for key, path in articles_dict.items():
+        text = path.read_text()
+
+        # 1. Bold terms: **Some Concept** -> some-concept
+        bold_terms = re.findall(r'\*\*([A-Z][^*]{2,50})\*\*', text)
+        for bt in bold_terms:
+            slug = re.sub(r'[^a-z0-9]+', '-', bt.lower()).strip('-')
+            if slug and len(slug) > 3:
+                concept_refs[slug].add(key)
+
+        # 2. Internal link labels that point to non-existent files
+        links = extract_internal_links(text)
+        for label, target in links:
+            if target.startswith('http'):
+                continue
+            target_file = target.split('#')[0]
+            if not target_file or not target_file.endswith('.md'):
+                continue
+            stem = Path(target_file).stem
+            if stem not in all_stems and stem not in excluded_stems:
+                concept_refs[stem].add(key)
+
+        # 3. H3 headings with specific names -> often key concepts
+        for line in text.splitlines():
+            if line.startswith("### "):
+                heading = line[4:].strip()
+                # Skip generic headings
+                if any(heading.lower().startswith(g) for g in
+                       ("example", "step ", "phase ", "option ", "table ")):
+                    continue
+                slug = re.sub(r'[^a-z0-9]+', '-', heading.lower()).strip('-')
+                if slug and len(slug) > 5:
+                    concept_refs[slug].add(key)
+
+    # Words too generic to be article topics
+    STOP_SLUGS = {
+        "overview", "background", "example", "examples", "evaluation",
+        "results", "summary", "discussion", "method", "methods",
+        "learning", "learning-application", "model", "models", "data",
+        "system", "systems", "approach", "tool", "tools", "framework",
+        "memory", "training", "testing", "analysis", "design",
+        "performance", "application", "applications", "implementation",
+        "architecture", "comparison", "introduction", "conclusion",
+        "paper", "papers", "research", "study", "review",
+        "tool-use", "compute-cost", "compute-costs",
+    }
+    # Patterns in slugs that indicate section headings, not concepts
+    STOP_PREFIXES = ("key-", "step-", "phase-", "how-", "why-", "what-",
+                     "current-", "latest-", "recent-", "new-", "our-",
+                     "to-", "the-", "a-", "an-", "for-", "in-", "on-",
+                     "from-", "with-", "by-", "of-", "and-", "or-")
+
+    # Filter: must appear in 3+ different articles, not already covered
+    candidates = []
+    for slug, refs in concept_refs.items():
+        if len(refs) < 3:
+            continue
+        if slug in all_stems or slug in current_wishlist or slug in excluded_stems:
+            continue
+        if slug in STOP_SLUGS:
+            continue
+        if any(slug.startswith(p) for p in STOP_PREFIXES):
+            continue
+        # Must be at least 2 words (hyphen-separated) to avoid single generic words
+        if '-' not in slug:
+            continue
+        # Check no article file exists
+        exists = False
+        for cat in CATEGORIES:
+            if (ROOT / cat / f"{slug}.md").exists():
+                exists = True
+                break
+        if exists:
+            continue
+        candidates.append((slug, len(refs)))
+
+    # Sort by reference count, take top N
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    new_topics = [slug for slug, _count in candidates[:max_suggestions]]
+
+    if new_topics:
+        # Append to wishlist
+        all_topics = load_wishlist() + new_topics
+        save_wishlist(all_topics)
+
+    return new_topics
+
+
 # ── Coverage & Freshness Summary ────────────────────────────────────────────
 
 def compute_coverage(article_results):
@@ -694,6 +816,10 @@ def run_benchmark():
     coverage = compute_coverage(results)
     freshness = compute_freshness_summary(results)
     topic_coverage = compute_topic_coverage(discovered)
+
+    # Auto-suggest new wishlist topics based on article content
+    auto_suggested = auto_suggest_wishlist(discovered)
+
     wishlist_coverage = compute_wishlist_coverage(discovered)
 
     # Per-tier composites
@@ -727,6 +853,7 @@ def run_benchmark():
         "coverage": coverage,
         "topic_coverage": topic_coverage,
         "wishlist_coverage": wishlist_coverage,
+        "auto_suggested": auto_suggested,
         "freshness": freshness,
         "articles": results,
     }
@@ -879,6 +1006,9 @@ def print_scorecard(results):
             print(f"  Remaining: {', '.join(remaining_items[:10])}")
             if len(remaining_items) > 10:
                 print(f"    ... and {len(remaining_items) - 10} more")
+        auto_suggested = results.get("auto_suggested", [])
+        if auto_suggested:
+            print(f"  Auto-suggested (new): {', '.join(auto_suggested)}")
         print()
 
     # Mode recommendation
