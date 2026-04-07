@@ -122,6 +122,20 @@ As of early 2026, scaling laws for research automation are gaining both empirica
 
 - **Agent and world model scaling**: Huang et al. (2024) established scaling laws for pre-training agents and world models, finding that agent performance scales predictably with both model size and environment interaction data[^14]. This connects scaling theory directly to [predictive simulation learning](predictive-simulation-learning.md) and embodied AI research.
 
+### Test-Time Compute Scaling (2025–2026)
+
+A major emerging theme is the recognition that **test-time compute** is a distinct and independently scalable dimension:
+
+- **No universal strategy**: A comprehensive study spanning 30B+ generated tokens across 8 open-source LLMs found that no single test-time strategy universally dominates — the optimal approach depends on model capability, task type, and compute budget[^15].
+- **Coupled scaling laws**: Chen et al. (2026) demonstrated that pretraining and test-time scaling laws are fundamentally coupled — jointly optimizing both changes the compute-optimal frontier, making overtraining compute-optimal when test-time scaling is available[^16].
+- **Agent-specific strategies**: Scaling test-time compute for LLM agents involves four distinct strategies: parallel sampling, sequential revision, verifier/merging, and rollout diversification — each with different scaling characteristics[^17].
+
+These results have direct implications for research automation: the optimal way to allocate compute between training, inference, and search depends on the specific research task, and the [Agentic Tree Search](../methodologies/agentic-tree-search.md) approach is validated as an effective test-time scaling strategy.
+
+### Sparse Architecture Scaling
+
+Generalizing scaling laws to sparse architectures (Mixture of Experts) alongside dense models reveals that MoE architectures achieve better performance per FLOP than dense models, but the scaling exponents differ — requiring separate compute-optimal analysis for each architecture family[^18].
+
 ### Learning Application: Understanding Scaling for Practitioners
 
 Scaling laws provide a powerful mental model for learners deciding where to invest effort. The key insight for practitioners: **model upgrades compound across all tasks**, while prompt engineering improvements are task-specific. A student learning ML should invest in understanding which model capabilities their task requires, then match the most compute-efficient model to those requirements — the same optimization that drives research automation scaling.
@@ -183,3 +197,11 @@ For [e-commerce applications](ai-ecommerce-learning.md), scaling laws suggest th
 [^13]: Li, C. et al. (2025). "Densing Law of LLMs." *Nature Machine Intelligence*. [doi:10.1038/s42256-025-01137-0](https://doi.org/10.1038/s42256-025-01137-0)
 
 [^14]: Huang, J. et al. (2024). "Scaling Laws for Pre-training Agents and World Models." [arXiv:2411.04434](https://arxiv.org/abs/2411.04434)
+
+[^15]: Various (2025). "The Art of Scaling Test-Time Compute for Large Language Models." [arXiv:2512.02008](https://arxiv.org/abs/2512.02008)
+
+[^16]: Chen, Y. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal." [arXiv:2604.01411](https://arxiv.org/abs/2604.01411)
+
+[^17]: Various (2025). "Scaling Test-time Compute for LLM Agents." [arXiv:2506.12928](https://arxiv.org/abs/2506.12928)
+
+[^18]: Various (2025). "Generalizing Scaling Laws for Dense and Sparse Large Language Models." [arXiv:2508.06617](https://arxiv.org/abs/2508.06617)

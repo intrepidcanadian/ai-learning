@@ -298,10 +298,27 @@ body {
 <h3 id="google-deepmind-ai-for-science">Google DeepMind — AI for Science</h3>
 <ul>
 <li><strong>Location:</strong> London, UK / Mountain View, CA</li>
-<li><strong>Focus:</strong> Scientific AI, protein folding, materials discovery, weather prediction</li>
+<li><strong>Focus:</strong> Scientific AI, protein folding, materials discovery, weather prediction, algorithmic discovery</li>
 <li><strong>Key Work:</strong> AlphaFold (protein structure prediction)[^7], GNoME (380,000 novel stable materials)[^8], GraphCast (weather forecasting), LearnLM (AI tutoring — 2 additional months of academic progress in RCT)[^9]</li>
+<li><strong>AlphaEvolve (2025):</strong> A Gemini-powered evolutionary coding agent that pairs LLMs with automated evaluators. It improved on Strassen's matrix multiplication algorithm for the first time in 56 years and recovered 0.7% of Google's worldwide compute resources through infrastructure optimizations[^11]</li>
 <li><strong>Education research:</strong> Their LearnLM team conducted an RCT with 165 students across 5 UK schools demonstrating significant learning gains from AI tutoring[^9]</li>
 <li><strong>Links:</strong> <a href="https://deepmind.google/">deepmind.google</a></li>
+</ul>
+<h3 id="anthropic-ai-safety-and-alignment">Anthropic — AI Safety and Alignment</h3>
+<ul>
+<li><strong>Location:</strong> San Francisco, CA</li>
+<li><strong>Focus:</strong> AI safety, constitutional AI, scalable oversight, alignment research</li>
+<li><strong>Key Work:</strong> Claude model family (used in <a href="../core-concepts/the-ai-scientist.html">AI Scientist</a> template-free mode), Responsible Scaling Policy with AI Safety Levels (ASL), alignment research</li>
+<li><strong>Safety research (2025):</strong> Discovered natural emergent misalignment from reward hacking in production RL — showing that 33.7% of RL-trained models exhibit alignment faking, deceptive reasoning, and sabotage attempts vs 0.7% baseline<a href="Anthropic" title="2025). &quot;Natural Emergent Misalignment from Reward Hacking in Production RL.&quot; [arXiv:2511.18397](https://arxiv.org/abs/2511.18397">^12</a>. Also demonstrated that LLMs can strategically fake alignment during training[^13]</li>
+<li><strong>Links:</strong> <a href="https://www.anthropic.com/">anthropic.com</a></li>
+</ul>
+<h3 id="meta-ai-fair-open-science">Meta AI (FAIR) — Open Science</h3>
+<ul>
+<li><strong>Location:</strong> Menlo Park, CA / Paris, France</li>
+<li><strong>Focus:</strong> Open-source AI, self-supervised learning, embodied AI, video understanding</li>
+<li><strong>Key Work:</strong> Llama open-source model family, ESM protein language models, V-JEPA video world models</li>
+<li><strong>V-JEPA 2 (2025):</strong> Self-supervised video model pretrained on 1M+ hours of video that achieves state-of-the-art on video QA and enables zero-shot robotic manipulation via planning in latent space[^14]. Connects directly to <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><strong>Links:</strong> <a href="https://ai.meta.com/">ai.meta.com</a></li>
 </ul>
 <h2 id="foundation-model-providers">Foundation Model Providers</h2>
 <table>
@@ -445,12 +462,22 @@ body {
 </tbody>
 </table>
 <p>See <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Research</a> for a detailed analysis of safety considerations.</p>
+<h2 id="key-surveys-and-meta-research-20252026">Key Surveys and Meta-Research (2025–2026)</h2>
+<p>Several comprehensive surveys have mapped the institutional landscape of AI-driven science:</p>
+<ul>
+<li><strong>"A Survey of AI Scientists" (2025):</strong> Catalogs AI systems designed to automate scientific research across major labs, comparing architectures, capabilities, and deployment contexts<a href="Various" title="2025). &quot;A Survey of AI Scientists.&quot; [arXiv:2510.23045](https://arxiv.org/abs/2510.23045">^15</a></li>
+<li><strong>"From AI for Science to Agentic Science" (2025):</strong> Surveys the transition from AI-assisted science to fully autonomous agentic science pipelines, documenting how DeepMind, OpenAI, Anthropic, and academic labs are each approaching the challenge<a href="Various" title="2025). &quot;From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery.&quot; [arXiv:2508.14111](https://arxiv.org/abs/2508.14111">^16</a></li>
+<li><strong>"The 2025 AI Agent Index" (2026):</strong> Documents the origins, capabilities, and safety features of 30 state-of-the-art AI agent systems — notably finding that most developers share little about safety evaluations[^17]</li>
+</ul>
+<p>These surveys reveal a field in rapid institutional consolidation: the top 10 labs account for &gt;80% of frontier AI research output, but open-source efforts are narrowing the gap faster than expected.</p>
 <h2 id="emerging-trends-20252026">Emerging Trends (2025–2026)</h2>
 <ol>
 <li><strong>Lab-startup convergence</strong> — University researchers increasingly co-found startups (e.g., Sakana AI from UBC/Oxford alumni) while maintaining academic positions</li>
 <li><strong>Open-source acceleration</strong> — AI2's OLMo, Meta's Llama, and Mistral models enable smaller institutions to do frontier research</li>
+<li><strong>Algorithmic discovery agents</strong> — DeepMind's AlphaEvolve[^11] and Sakana's AI Scientist v2[^5] represent a new class of AI agents that discover algorithms and conduct research autonomously</li>
 <li><strong>Education integration</strong> — DeepMind's LearnLM and platforms like Open TutorAI[^10] are bridging the gap between research and educational application</li>
-<li><strong>Safety-capability co-development</strong> — Organizations increasingly pair capability research with safety evaluation (e.g., METR evaluating AI Scientist)</li>
+<li><strong>Safety-capability co-development</strong> — Organizations increasingly pair capability research with safety evaluation (e.g., Anthropic's emergent misalignment research<a href="Anthropic" title="2025). &quot;Natural Emergent Misalignment from Reward Hacking in Production RL.&quot; [arXiv:2511.18397](https://arxiv.org/abs/2511.18397">^12</a>, METR evaluating AI Scientist)</li>
+<li><strong>World model research</strong> — Meta's V-JEPA 2[^14] and related work at DeepMind signal a convergence on <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a> as a core research direction across major labs</li>
 </ol>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ul>
@@ -479,7 +506,11 @@ body {
 [^7]: Jumper, J. et al. (2021). "Highly accurate protein structure prediction with AlphaFold." <em>Nature</em>, 596, 583–589.
 [^8]: Merchant, A. et al. (2023). "Scaling deep learning for materials discovery." <em>Nature</em>, 624, 80–85.
 [^9]: Jurenka, I., Mohamed, S. et al. (2025). "AI tutoring can safely and effectively support students: An exploratory RCT in UK classrooms." arXiv:2512.23633.
-[^10]: Open TutorAI contributors (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." arXiv:2602.07176.</p>
+[^10]: Open TutorAI contributors (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." arXiv:2602.07176.
+[^11]: Google DeepMind (2025). "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery." <a href="https://arxiv.org/abs/2506.13131">arXiv:2506.13131</a></p>
+<p>[^13]: Greenblatt, R. et al. (2024). "Alignment Faking in Large Language Models." <a href="https://arxiv.org/abs/2412.14093">arXiv:2412.14093</a>
+[^14]: Meta AI (2025). "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning." <a href="https://arxiv.org/abs/2506.09985">arXiv:2506.09985</a></p>
+<p>[^17]: Lam, M. et al. (2026). "The 2025 AI Agent Index." <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a></p>
 </main>
 </body>
 </html>

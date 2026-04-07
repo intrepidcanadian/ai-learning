@@ -810,6 +810,214 @@ def _ascii_bar(value, max_val=100, width=30):
     return "█" * filled + "░" * (width - filled)
 
 
+def _generate_trend_svg(runs, experiment_notes=None):
+    """Generate an inline SVG line chart of composite scores over time."""
+    if len(runs) < 2:
+        return ""
+    if experiment_notes is None:
+        experiment_notes = {}
+
+    scores = [r["summary"]["overall_composite"] for r in runs]
+    timestamps = [r["timestamp"][:16].replace("T", " ") for r in runs]
+
+    # Build per-run notes by matching score changes to experiment notes
+    run_notes = [""] * len(runs)
+    prev_score = None
+    for i, s in enumerate(scores):
+        if prev_score is not None and s != prev_score and s in experiment_notes:
+            run_notes[i] = experiment_notes[s]
+        prev_score = s
+
+    # Chart dimensions
+    w, h = 720, 320
+    pad_left, pad_right, pad_top, pad_bottom = 55, 20, 30, 60
+
+    plot_w = w - pad_left - pad_right
+    plot_h = h - pad_top - pad_bottom
+
+    # Score range with padding
+    min_score = max(0, min(scores) - 5)
+    max_score = min(100, max(scores) + 5)
+    score_range = max_score - min_score if max_score != min_score else 1
+
+    def x_pos(i):
+        return pad_left + (i / (len(scores) - 1)) * plot_w if len(scores) > 1 else pad_left + plot_w / 2
+
+    def y_pos(v):
+        return pad_top + plot_h - ((v - min_score) / score_range) * plot_h
+
+    # Build SVG
+    svg_lines = []
+    svg_lines.append(f'<div style="position:relative;display:inline-block;width:100%;max-width:{w}px">')
+    svg_lines.append(f'<div id="chart-tooltip" style="display:none;position:absolute;background:#1a1a2e;color:#fff;'
+                     f'padding:8px 12px;border-radius:6px;font-size:12px;pointer-events:none;'
+                     f'z-index:10;max-width:320px;line-height:1.4;white-space:pre-wrap;'
+                     f'box-shadow:0 2px 8px rgba(0,0,0,0.2)"></div>')
+    svg_lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" '
+                     f'font-family="system-ui, -apple-system, sans-serif">')
+
+    # Background
+    svg_lines.append(f'<rect width="{w}" height="{h}" fill="#fafafa" rx="8"/>')
+
+    # Title
+    svg_lines.append(f'<text x="{w // 2}" y="20" text-anchor="middle" font-size="14" '
+                     f'font-weight="bold" fill="#1a1a2e">Wiki Quality Score Over Time</text>')
+
+    # Grid lines and Y-axis labels
+    for tick in range(int(min_score), int(max_score) + 1, 5):
+        y = y_pos(tick)
+        if pad_top <= y <= pad_top + plot_h:
+            svg_lines.append(f'<line x1="{pad_left}" y1="{y:.1f}" x2="{w - pad_right}" '
+                             f'y2="{y:.1f}" stroke="#e0e0e0" stroke-width="1"/>')
+            svg_lines.append(f'<text x="{pad_left - 8}" y="{y + 4:.1f}" text-anchor="end" '
+                             f'font-size="11" fill="#666">{tick}</text>')
+
+    # Build polyline points
+    points = []
+    for i, s in enumerate(scores):
+        points.append(f"{x_pos(i):.1f},{y_pos(s):.1f}")
+
+    # Area fill under the line
+    area_points = points.copy()
+    area_points.append(f"{x_pos(len(scores) - 1):.1f},{pad_top + plot_h:.1f}")
+    area_points.append(f"{x_pos(0):.1f},{pad_top + plot_h:.1f}")
+    svg_lines.append(f'<polygon points="{" ".join(area_points)}" fill="#4A90D9" opacity="0.1"/>')
+
+    # Line
+    svg_lines.append(f'<polyline points="{" ".join(points)}" fill="none" '
+                     f'stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>')
+
+    # Data points (dots) with hover tooltips
+    step = max(1, len(scores) // 20)
+    for i, s in enumerate(scores):
+        if i % step == 0 or i == len(scores) - 1 or run_notes[i]:
+            cx, cy = x_pos(i), y_pos(s)
+            radius = "5" if run_notes[i] else "3.5"
+            fill = "#e67e22" if run_notes[i] else "#4A90D9"
+            tip_line1 = f"{timestamps[i]}  —  Score: {s}"
+            tip_line2 = run_notes[i] if run_notes[i] else ""
+            # Escape quotes for data attributes
+            tip_line1_safe = tip_line1.replace('"', '&quot;')
+            tip_line2_safe = tip_line2.replace('"', '&quot;')
+            svg_lines.append(
+                f'<circle class="chart-dot" cx="{cx:.1f}" cy="{cy:.1f}" r="{radius}" '
+                f'fill="{fill}" stroke="#fff" stroke-width="1.5" '
+                f'style="cursor:pointer" '
+                f'data-tip="{tip_line1_safe}" data-note="{tip_line2_safe}"/>'
+            )
+
+    # Score labels for first, last, and key milestones
+    label_indices = {0, len(scores) - 1}
+    # Also label points where version changed
+    for i in range(1, len(runs)):
+        if runs[i].get("version", 1) != runs[i - 1].get("version", 1):
+            label_indices.add(i)
+    for i in sorted(label_indices):
+        cx, cy = x_pos(i), y_pos(scores[i])
+        anchor = "start" if i == 0 else ("end" if i == len(scores) - 1 else "middle")
+        svg_lines.append(f'<text x="{cx:.1f}" y="{cy - 8:.1f}" text-anchor="{anchor}" '
+                         f'font-size="11" font-weight="bold" fill="#2c3e50">{scores[i]:.1f}</text>')
+
+    # X-axis labels (show a few timestamps)
+    n_labels = min(6, len(timestamps))
+    label_step = max(1, (len(timestamps) - 1) // (n_labels - 1)) if n_labels > 1 else 1
+    for i in range(0, len(timestamps), label_step):
+        cx = x_pos(i)
+        ts = timestamps[i]
+        # Show just time portion if all same date
+        label = ts[11:16] if ts[:10] == timestamps[0][:10] else ts[:10]
+        svg_lines.append(f'<text x="{cx:.1f}" y="{pad_top + plot_h + 18}" text-anchor="middle" '
+                         f'font-size="10" fill="#888">{label}</text>')
+    # Always show last label
+    if (len(timestamps) - 1) % label_step != 0:
+        cx = x_pos(len(timestamps) - 1)
+        ts = timestamps[-1]
+        label = ts[11:16] if ts[:10] == timestamps[0][:10] else ts[:10]
+        svg_lines.append(f'<text x="{cx:.1f}" y="{pad_top + plot_h + 18}" text-anchor="end" '
+                         f'font-size="10" fill="#888">{label}</text>')
+
+    # Version transition marker
+    for i in range(1, len(runs)):
+        if runs[i].get("version", 1) != runs[i - 1].get("version", 1):
+            cx = x_pos(i)
+            svg_lines.append(f'<line x1="{cx:.1f}" y1="{pad_top}" x2="{cx:.1f}" '
+                             f'y2="{pad_top + plot_h}" stroke="#e67e22" '
+                             f'stroke-width="1.5" stroke-dasharray="5,3"/>')
+            svg_lines.append(f'<text x="{cx + 4:.1f}" y="{pad_top + 14}" font-size="10" '
+                             f'fill="#e67e22">v{runs[i].get("version", 1)}</text>')
+
+    svg_lines.append('</svg>')
+
+    # JavaScript for tooltip
+    svg_lines.append("""<script>
+(function() {
+  var tip = document.getElementById('chart-tooltip');
+  if (!tip) return;
+  var dots = document.querySelectorAll('.chart-dot');
+  dots.forEach(function(dot) {
+    dot.addEventListener('mouseenter', function(e) {
+      var text = dot.getAttribute('data-tip');
+      var note = dot.getAttribute('data-note');
+      if (note) text += '\\n' + note;
+      tip.textContent = text;
+      tip.style.display = 'block';
+    });
+    dot.addEventListener('mousemove', function(e) {
+      var wrapper = tip.parentElement;
+      var rect = wrapper.getBoundingClientRect();
+      var x = e.clientX - rect.left + 12;
+      var y = e.clientY - rect.top - 10;
+      if (x + tip.offsetWidth > rect.width) x = x - tip.offsetWidth - 24;
+      if (y < 0) y = y + 30;
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    });
+    dot.addEventListener('mouseleave', function() {
+      tip.style.display = 'none';
+    });
+  });
+})();
+</script>""")
+    svg_lines.append('</div>')  # close wrapper div
+    return "\n".join(svg_lines)
+
+
+EXPERIMENT_DIR = ROOT / "data" / "experiments"
+
+
+def _load_experiment_notes():
+    """Load experiment logs and build a mapping from after_score -> short note."""
+    notes = {}
+    exp_files = sorted(EXPERIMENT_DIR.glob("*.json"))
+    for f in exp_files:
+        try:
+            with open(f) as fp:
+                exp = json.load(fp)
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        # Extract after_score from various experiment formats
+        after = None
+        strategy = ""
+        result = exp.get("result", {})
+        if isinstance(result, dict):
+            after = (result.get("score_after") or result.get("after_composite")
+                     or result.get("after"))
+            strategy = exp.get("hypothesis", {}).get("strategy", "")
+        if after is None:
+            after = exp.get("after_score") or exp.get("after")
+        # Handle nested dict format (e.g. {"composite": 80.6, ...})
+        if isinstance(after, dict):
+            after = after.get("composite")
+        if not strategy:
+            strategy = exp.get("strategy", "")
+
+        if after is not None and isinstance(after, (int, float)) and strategy:
+            short = strategy[:80] + ("..." if len(strategy) > 80 else "")
+            notes[after] = short
+    return notes
+
+
 def generate_trend_md():
     """Generate research-sources/benchmark-trend.md from all benchmark history."""
     BENCHMARK_DIR.mkdir(parents=True, exist_ok=True)
@@ -920,17 +1128,32 @@ def generate_trend_md():
         lines.append(f"**Overall composite:** {overall_scores[0]:.1f} -> {overall_scores[-1]:.1f}  `{sparkline}`")
         lines.append("")
 
+        # Load experiment logs for session notes
+        experiment_notes = _load_experiment_notes()
+
+        # SVG line chart
+        lines.append("### Score Over Time")
+        lines.append("")
+        lines.append(_generate_trend_svg(runs, experiment_notes))
+        lines.append("")
+
         # History table
         lines.append("### Run History")
         lines.append("")
-        lines.append("| Date | Ver | Overall | Articles |")
-        lines.append("|------|-----|---------|----------|")
+        lines.append("| Timestamp | Ver | Overall | Articles | Notes |")
+        lines.append("|-----------|-----|---------|----------|-------|")
+        prev_overall = None
         for r in runs:
-            date = r["timestamp"][:10]
+            ts = r["timestamp"][:16].replace("T", " ")
             ver = r.get("version", 1)
             overall = r["summary"]["overall_composite"]
             count = r["summary"]["article_count"]
-            lines.append(f"| {date} | v{ver} | **{overall}** | {count} |")
+            # Find matching experiment note (score changed = post-edit run)
+            note = ""
+            if prev_overall is not None and overall != prev_overall:
+                note = experiment_notes.get(overall, "")
+            prev_overall = overall
+            lines.append(f"| {ts} | v{ver} | **{overall}** | {count} | {note} |")
         lines.append("")
 
     # ── Open Issues ──

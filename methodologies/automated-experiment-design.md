@@ -100,11 +100,39 @@ As of 2026, automated experiment design has matured across several dimensions:
 - **Foundation model improvements**: The progression from GPT-4 to o3/o4-mini and Claude Sonnet 4 has qualitatively improved experiment design — reasoning models generate more creative hypotheses while coding models implement them more reliably[^9]. See [Foundation Models for Research](../core-concepts/foundation-models-for-research.md).
 - **Application to real-world learning**: Automated experiment design principles are being applied to educational contexts, where AI tutors design personalized learning experiments — test a teaching approach, measure comprehension, adjust strategy[^11]. This connects experiment design to the broader goal of AI-accelerated learning.
 
+## Self-Driving Laboratories (2025–2026)
+
+A major frontier for automated experiment design is the **self-driving laboratory (SDL)** — physical lab systems that automate the entire scientific method from hypothesis generation through data analysis. This represents the extension of automated experiment design from computational experiments (ML training runs) to physical-world experiments (chemistry, materials science, biology).
+
+### SDL Architecture
+
+![Self-Driving Laboratory: Automated Experiment Cycle](self-driving-lab-cycle.svg)
+
+Self-driving laboratories integrate three components:[^12]
+1. **AI decision engine** — LLM or Bayesian optimization system that plans experiments
+2. **Robotic execution** — Automated synthesis, measurement, and characterization hardware
+3. **Orchestration software** — Scheduling, data management, and safety protocols that connect AI to robots
+
+### Key Systems
+
+- **Atlas (2025):** An orchestration framework serving as a "brain" for self-driving laboratories, integrating scheduling, data management, and safety protocols for autonomous lab systems[^13]
+- **SDL 2.0 (2026):** Describes the next generation of self-driving labs — flexible, scalable, collaborative discovery engines with modular hardware, AI-driven decision-making, and cross-lab orchestration[^14]
+- **INS2ANE (2025):** A novelty-driven framework for autonomous experimentation that goes beyond optimization to discover entirely new phenomena using novelty scoring and strategic sampling[^15]
+
+### Bayesian Optimization for Experiment Planning
+
+Bayesian optimization remains the mathematical backbone of sequential experiment design. Recent advances include optimization over **problem formulation space** itself — rather than just optimizing within a fixed experimental setup, the AI identifies optimal design formulations, choosing what to measure and how[^16]. This meta-level optimization connects to [open-ended discovery](../frontier-topics/open-ended-discovery.md) principles: the system explores the space of possible experiments, not just the space within an experiment.
+
+### Learning Application: From SDL to Everyday Experimentation
+
+Self-driving lab principles transfer to any domain with structured experimentation. For [e-commerce](../frontier-topics/ai-ecommerce-learning.md), the SDL pattern maps to automated A/B testing platforms: an AI decision engine proposes test variants, the platform executes them with real users, and orchestration software manages traffic allocation and statistical analysis. The key lesson: **let the AI decide what to test next**, not just how to run the test.
+
 ## Limitations / Challenges
 
 - **Novelty vs. exploitation**: Automated systems tend toward incremental experiments that optimize known approaches, rather than creative leaps that test fundamentally new ideas.
-- **Safety in physical experiments**: For chemistry, biology, or robotics experiments, automated design must incorporate safety constraints that are difficult to formalize.
+- **Safety in physical experiments**: For chemistry, biology, or robotics experiments, automated design must incorporate safety constraints that are difficult to formalize. SDL systems require robust emergency stops and containment protocols[^12].
 - **Evaluation complexity**: When the metric is easy to game (e.g., overfitting to a validation set), automated experiment design can exploit rather than genuinely improve.
+- **Hardware integration**: Self-driving labs face unique challenges in robotic reliability, instrument calibration drift, and cross-lab reproducibility that are absent in purely computational experiment design[^14].
 
 ## See Also
 
@@ -149,3 +177,13 @@ As of 2026, automated experiment design has matured across several dimensions:
 [^10]: Chan, J. et al. (2025). "MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering." [arXiv:2410.07095](https://arxiv.org/abs/2410.07095)
 
 [^11]: VanLehn, K. (2025). "The Relative Effectiveness of Human Tutoring, Intelligent Tutoring Systems, and Other Tutoring Systems." *Educational Psychologist*, 46(4), 197-221. [doi:10.1080/00461520.2011.611369](https://doi.org/10.1080/00461520.2011.611369)
+
+[^12]: Various (2025). "Autonomous 'Self-Driving' Laboratories: A Review of Technology and Policy Implications." *Royal Society Open Science*, 12(7). [doi:10.1098/rsos.250646](https://royalsocietypublishing.org/rsos/article/12/7/250646)
+
+[^13]: Various (2025). "Atlas: A Brain for Self-Driving Laboratories." *Digital Discovery*. [doi:10.1039/D4DD00115J](https://doi.org/10.1039/D4DD00115J)
+
+[^14]: Various (2026). "Toward Self-Driving Laboratory 2.0 for Chemistry and Materials Discovery." *Materials Horizons*. [doi:10.1039/D5MH01984B](https://doi.org/10.1039/D5MH01984B)
+
+[^15]: Various (2025). "Beyond Optimization: Exploring Novelty Discovery in Autonomous Experiments (INS2ANE)." *ACS Nanoscience Au*. [doi:10.1021/acsnanoscienceau.5c00106](https://doi.org/10.1021/acsnanoscienceau.5c00106)
+
+[^16]: Various (2025). "Towards Autonomous Experimentation: Bayesian Optimization over Problem Formulation Space." [arXiv:2502.05735](https://arxiv.org/abs/2502.05735)

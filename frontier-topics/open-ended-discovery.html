@@ -303,6 +303,12 @@ body {
 <p><a href="../tools-platforms/autoresearch.html">Autoresearch</a> exhibits a simpler form: the agent continuously proposes and tests modifications, accumulating improvements that compound over time.</p>
 <h3 id="open-ended-learning-in-foundation-models">Open-Ended Learning in Foundation Models</h3>
 <p>Recent work (2025-2026) has shown that foundation models themselves exhibit open-ended learning behaviors when given appropriate environments. Gao et al. (2025) demonstrated that LLM agents placed in open-ended sandbox environments spontaneously develop novel problem-solving strategies not present in their training data[^9]. This suggests that the capacity for open-ended discovery may be an emergent property of sufficient model scale combined with rich interaction environments.</p>
+<h3 id="self-evolving-agents">Self-Evolving Agents</h3>
+<p>A comprehensive survey by Wang et al. (2025) documents the emergence of <strong>self-evolving agents</strong> — systems that adaptively reason, act, and evolve in real time within open-ended interactive environments[^11]. The survey identifies three evolution dimensions: what evolves (knowledge, skills, architecture), when evolution occurs (online vs. offline), and how evolution is driven (intrinsic curiosity vs. external feedback). This taxonomy provides a framework for understanding how open-ended discovery can be systematically engineered rather than merely hoped for.</p>
+<h3 id="curiosity-driven-open-ended-exploration">Curiosity-Driven Open-Ended Exploration</h3>
+<p>Curiosity as a driver of open-endedness has received renewed attention. Niu et al. (2025) introduced <strong>Curiosity-Driven RLHF (CD-RLHF)</strong>, incorporating intrinsic curiosity rewards into reinforcement learning from human feedback to optimize both diversity and alignment quality in text generation[^12]. Meanwhile, a scalable curiosity-driven game-theoretic framework (2026) demonstrated that moderate curiosity achieves maximum performance in data mining tasks, establishing scaling principles for curiosity-guided exploration<a href="Various" title="2026). &quot;A Scalable Curiosity-Driven Game-Theoretic Framework.&quot; [arXiv:2602.15330](https://arxiv.org/abs/2602.15330">^13</a>. These results suggest that curiosity is not just a metaphor but a quantifiable algorithmic ingredient for open-endedness.</p>
+<h3 id="quality-diversity-self-play-qdsp">Quality-Diversity Self-Play (QDSP)</h3>
+<p>The <strong>QDSP</strong> algorithm (2025) combines quality-diversity optimization with foundation model self-play, introducing a dimensionless MAP-Elites variant that discovers diverse sophisticated strategies without manually specifying behavioral dimensions[^14]. This is significant because traditional QD algorithms require human-designed feature spaces — QDSP eliminates this bottleneck by having the foundation model propose and evaluate its own diversity dimensions, enabling truly open-ended strategy discovery.</p>
 <h2 id="the-archive-mechanism">The Archive Mechanism</h2>
 <p>A key architectural pattern in open-ended systems is the <strong>archive</strong> -- a growing collection of discovered artifacts that serves as the substrate for future exploration:</p>
 <pre><code>Idea Archive
@@ -339,6 +345,8 @@ enabling the system to build on past work and avoid repetition.
 <li><strong>Degenerate solutions</strong> -- Systems that exploit their evaluation metric without genuine innovation</li>
 <li><strong>Knowledge accumulation</strong> -- How to ensure each generation builds meaningfully on the last</li>
 </ol>
+<h3 id="improvisation-and-open-endedness">Improvisation and Open-Endedness</h3>
+<p>Drawing parallels between human creativity and artificial open-endedness, Bown et al. (2025) explored how insights from musical improvisation — real-time generation of novel, contextually appropriate responses — can inform the design of open-ended AI systems[^15]. Their key insight: human improvisation succeeds not by random exploration but by maintaining a repertoire of patterns that can be recombined in context-sensitive ways. This suggests that open-ended AI systems should maintain structured archives of reusable components rather than searching from scratch.</p>
 <h2 id="the-scaling-hypothesis">The Scaling Hypothesis</h2>
 <p>A central bet in open-ended discovery: as <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> improve, the quality and creativity of AI-generated research will improve correspondingly. The AI Scientist paper notes: "once a new capability starts to work, it becomes superhuman surprisingly soon."</p>
 <h2 id="connections-to-emerging-topics">Connections to Emerging Topics</h2>
@@ -374,7 +382,11 @@ enabling the system to build on past work and avoid repetition.
 [^7]: Zhang, J. et al. (2026). "Hyperagents." <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a>
 [^8]: Clune, J. (2019). "AI-Generating Algorithms, an Alternate Paradigm for Producing General Artificial Intelligence." <a href="https://arxiv.org/abs/1905.10985">arXiv:1905.10985</a>
 [^9]: Gao, L. et al. (2025). "Emergent Open-Ended Behavior in LLM Agent Sandboxes." <a href="https://arxiv.org/abs/2503.14847">arXiv:2503.14847</a>
-[^10]: Mouret, J.-B. &amp; Clune, J. (2015). "Illuminating search spaces by mapping elites." <a href="https://arxiv.org/abs/1504.04909">arXiv:1504.04909</a></p>
+[^10]: Mouret, J.-B. &amp; Clune, J. (2015). "Illuminating search spaces by mapping elites." <a href="https://arxiv.org/abs/1504.04909">arXiv:1504.04909</a>
+[^11]: Wang, Z. et al. (2025). "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve." <a href="https://arxiv.org/abs/2507.21046">arXiv:2507.21046</a>
+[^12]: Niu, Y. et al. (2025). "Curiosity-Driven Reinforcement Learning from Human Feedback." <a href="https://arxiv.org/abs/2501.11463">arXiv:2501.11463</a></p>
+<p>[^14]: Various (2025). "Open-Ended Strategy Innovation via Foundation Models (QDSP)." RLC 2025.
+[^15]: Bown, O. et al. (2025). "On Improvisation and Open-Endedness: Insights for Experiential AI." <a href="https://arxiv.org/abs/2511.00529">arXiv:2511.00529</a></p>
 </main>
 </body>
 </html>

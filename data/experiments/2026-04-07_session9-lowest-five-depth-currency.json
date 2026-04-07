@@ -1,0 +1,43 @@
+{
+  "session": 9,
+  "date": "2026-04-07",
+  "strategy": "Add new subsections and 2025-2026 papers to the 5 lowest-scoring articles (institutions-and-labs, open-ended-discovery, scaling-laws-research, automated-experiment-design, ai-safety-in-research), focusing on depth and currency dimensions.",
+  "predicted_delta": 1.5,
+  "dimensions_targeted": ["depth", "currency", "sourcing"],
+  "reasoning": "Session 8 achieved +1.1 targeting 5 lowest articles. Continuing same strategy with fresh papers. Depth remains hardest dimension — adding entirely new subsections (self-driving labs for experiment-design, emergent misalignment for safety, test-time scaling for scaling-laws). Currency is lowest for institutions-and-labs (49) and experiment-design (37). Diminishing returns expected at 87.5 composite.",
+  "articles_targeted": [
+    "institutions-and-labs",
+    "open-ended-discovery",
+    "scaling-laws-research",
+    "automated-experiment-design",
+    "ai-safety-in-research"
+  ],
+  "papers_added": [
+    "AlphaEvolve (arXiv:2506.13131)",
+    "Natural Emergent Misalignment (arXiv:2511.18397)",
+    "Alignment Faking (arXiv:2412.14093)",
+    "V-JEPA 2 (arXiv:2506.09985)",
+    "A Survey of AI Scientists (arXiv:2510.23045)",
+    "From AI for Science to Agentic Science (arXiv:2508.14111)",
+    "The 2025 AI Agent Index (arXiv:2602.17753)",
+    "Self-Evolving Agents Survey (arXiv:2507.21046)",
+    "Curiosity-Driven RLHF (arXiv:2501.11463)",
+    "Scalable Curiosity-Driven Framework (arXiv:2602.15330)",
+    "QDSP (RLC 2025)",
+    "On Improvisation and Open-Endedness (arXiv:2511.00529)",
+    "Art of Scaling Test-Time Compute (arXiv:2512.02008)",
+    "Test-Time Scaling Makes Overtraining Compute-Optimal (arXiv:2604.01411)",
+    "Scaling Test-time Compute for Agents (arXiv:2506.12928)",
+    "Generalizing Scaling Laws Dense/Sparse (arXiv:2508.06617)",
+    "Autonomous Self-Driving Laboratories Review (doi:10.1098/rsos.250646)",
+    "Atlas: A Brain for SDLs (doi:10.1039/D4DD00115J)",
+    "Self-Driving Laboratory 2.0 (doi:10.1039/D5MH01984B)",
+    "INS2ANE (doi:10.1021/acsnanoscienceau.5c00106)",
+    "Bayesian Optimization over Problem Formulation Space (arXiv:2502.05735)",
+    "Emergent Misalignment Narrow Finetuning (arXiv:2502.17424)",
+    "Fault-Tolerant Sandboxing (arXiv:2512.12806)",
+    "Agentic AI Security (arXiv:2510.23883)"
+  ],
+  "actual_delta": 0.8,
+  "lesson": "Achieved +0.8 composite (predicted +1.5). institutions-and-labs had the biggest gain (+9.0) from adding Anthropic, Meta subsections + surveys — low-scoring articles with many weak dimensions benefit most from broad additions. automated-experiment-design gained +5.1 from adding self-driving lab section. Diminishing returns continue at 88+ composite."
+}

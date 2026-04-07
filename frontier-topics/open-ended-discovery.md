@@ -55,6 +55,15 @@ Hu, Lu & Clune (2025) achieved meta-level open-endedness: an AI system that desi
 ### Open-Ended Learning in Foundation Models
 Recent work (2025-2026) has shown that foundation models themselves exhibit open-ended learning behaviors when given appropriate environments. Gao et al. (2025) demonstrated that LLM agents placed in open-ended sandbox environments spontaneously develop novel problem-solving strategies not present in their training data[^9]. This suggests that the capacity for open-ended discovery may be an emergent property of sufficient model scale combined with rich interaction environments.
 
+### Self-Evolving Agents
+A comprehensive survey by Wang et al. (2025) documents the emergence of **self-evolving agents** — systems that adaptively reason, act, and evolve in real time within open-ended interactive environments[^11]. The survey identifies three evolution dimensions: what evolves (knowledge, skills, architecture), when evolution occurs (online vs. offline), and how evolution is driven (intrinsic curiosity vs. external feedback). This taxonomy provides a framework for understanding how open-ended discovery can be systematically engineered rather than merely hoped for.
+
+### Curiosity-Driven Open-Ended Exploration
+Curiosity as a driver of open-endedness has received renewed attention. Niu et al. (2025) introduced **Curiosity-Driven RLHF (CD-RLHF)**, incorporating intrinsic curiosity rewards into reinforcement learning from human feedback to optimize both diversity and alignment quality in text generation[^12]. Meanwhile, a scalable curiosity-driven game-theoretic framework (2026) demonstrated that moderate curiosity achieves maximum performance in data mining tasks, establishing scaling principles for curiosity-guided exploration[^13]. These results suggest that curiosity is not just a metaphor but a quantifiable algorithmic ingredient for open-endedness.
+
+### Quality-Diversity Self-Play (QDSP)
+The **QDSP** algorithm (2025) combines quality-diversity optimization with foundation model self-play, introducing a dimensionless MAP-Elites variant that discovers diverse sophisticated strategies without manually specifying behavioral dimensions[^14]. This is significant because traditional QD algorithms require human-designed feature spaces — QDSP eliminates this bottleneck by having the foundation model propose and evaluate its own diversity dimensions, enabling truly open-ended strategy discovery.
+
 ## The Archive Mechanism
 
 A key architectural pattern in open-ended systems is the **archive** -- a growing collection of discovered artifacts that serves as the substrate for future exploration:
@@ -99,6 +108,9 @@ Quality-diversity principles have direct implications for AI-powered education a
 5. **Degenerate solutions** -- Systems that exploit their evaluation metric without genuine innovation
 6. **Knowledge accumulation** -- How to ensure each generation builds meaningfully on the last
 
+### Improvisation and Open-Endedness
+Drawing parallels between human creativity and artificial open-endedness, Bown et al. (2025) explored how insights from musical improvisation — real-time generation of novel, contextually appropriate responses — can inform the design of open-ended AI systems[^15]. Their key insight: human improvisation succeeds not by random exploration but by maintaining a repertoire of patterns that can be recombined in context-sensitive ways. This suggests that open-ended AI systems should maintain structured archives of reusable components rather than searching from scratch.
+
 ## The Scaling Hypothesis
 
 A central bet in open-ended discovery: as [foundation models](../core-concepts/foundation-models-for-research.md) improve, the quality and creativity of AI-generated research will improve correspondingly. The AI Scientist paper notes: "once a new capability starts to work, it becomes superhuman surprisingly soon."
@@ -139,3 +151,8 @@ Open-ended discovery intersects with several rapidly developing areas:
 [^8]: Clune, J. (2019). "AI-Generating Algorithms, an Alternate Paradigm for Producing General Artificial Intelligence." [arXiv:1905.10985](https://arxiv.org/abs/1905.10985)
 [^9]: Gao, L. et al. (2025). "Emergent Open-Ended Behavior in LLM Agent Sandboxes." [arXiv:2503.14847](https://arxiv.org/abs/2503.14847)
 [^10]: Mouret, J.-B. & Clune, J. (2015). "Illuminating search spaces by mapping elites." [arXiv:1504.04909](https://arxiv.org/abs/1504.04909)
+[^11]: Wang, Z. et al. (2025). "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve." [arXiv:2507.21046](https://arxiv.org/abs/2507.21046)
+[^12]: Niu, Y. et al. (2025). "Curiosity-Driven Reinforcement Learning from Human Feedback." [arXiv:2501.11463](https://arxiv.org/abs/2501.11463)
+[^13]: Various (2026). "A Scalable Curiosity-Driven Game-Theoretic Framework." [arXiv:2602.15330](https://arxiv.org/abs/2602.15330)
+[^14]: Various (2025). "Open-Ended Strategy Innovation via Foundation Models (QDSP)." RLC 2025.
+[^15]: Bown, O. et al. (2025). "On Improvisation and Open-Endedness: Insights for Experiential AI." [arXiv:2511.00529](https://arxiv.org/abs/2511.00529)

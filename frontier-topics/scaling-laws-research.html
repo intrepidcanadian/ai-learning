@@ -367,6 +367,16 @@ body {
 <p><strong>Agent and world model scaling</strong>: Huang et al. (2024) established scaling laws for pre-training agents and world models, finding that agent performance scales predictably with both model size and environment interaction data[^14]. This connects scaling theory directly to <a href="predictive-simulation-learning.html">predictive simulation learning</a> and embodied AI research.</p>
 </li>
 </ul>
+<h3 id="test-time-compute-scaling-20252026">Test-Time Compute Scaling (2025–2026)</h3>
+<p>A major emerging theme is the recognition that <strong>test-time compute</strong> is a distinct and independently scalable dimension:</p>
+<ul>
+<li><strong>No universal strategy</strong>: A comprehensive study spanning 30B+ generated tokens across 8 open-source LLMs found that no single test-time strategy universally dominates — the optimal approach depends on model capability, task type, and compute budget<a href="Various" title="2025). &quot;The Art of Scaling Test-Time Compute for Large Language Models.&quot; [arXiv:2512.02008](https://arxiv.org/abs/2512.02008">^15</a>.</li>
+<li><strong>Coupled scaling laws</strong>: Chen et al. (2026) demonstrated that pretraining and test-time scaling laws are fundamentally coupled — jointly optimizing both changes the compute-optimal frontier, making overtraining compute-optimal when test-time scaling is available[^16].</li>
+<li><strong>Agent-specific strategies</strong>: Scaling test-time compute for LLM agents involves four distinct strategies: parallel sampling, sequential revision, verifier/merging, and rollout diversification — each with different scaling characteristics<a href="Various" title="2025). &quot;Scaling Test-time Compute for LLM Agents.&quot; [arXiv:2506.12928](https://arxiv.org/abs/2506.12928">^17</a>.</li>
+</ul>
+<p>These results have direct implications for research automation: the optimal way to allocate compute between training, inference, and search depends on the specific research task, and the <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> approach is validated as an effective test-time scaling strategy.</p>
+<h3 id="sparse-architecture-scaling">Sparse Architecture Scaling</h3>
+<p>Generalizing scaling laws to sparse architectures (Mixture of Experts) alongside dense models reveals that MoE architectures achieve better performance per FLOP than dense models, but the scaling exponents differ — requiring separate compute-optimal analysis for each architecture family<a href="Various" title="2025). &quot;Generalizing Scaling Laws for Dense and Sparse Large Language Models.&quot; [arXiv:2508.06617](https://arxiv.org/abs/2508.06617">^18</a>.</p>
 <h3 id="learning-application-understanding-scaling-for-practitioners">Learning Application: Understanding Scaling for Practitioners</h3>
 <p>Scaling laws provide a powerful mental model for learners deciding where to invest effort. The key insight for practitioners: <strong>model upgrades compound across all tasks</strong>, while prompt engineering improvements are task-specific. A student learning ML should invest in understanding which model capabilities their task requires, then match the most compute-efficient model to those requirements — the same optimization that drives research automation scaling.</p>
 <p>For <a href="ai-ecommerce-learning.html">e-commerce applications</a>, scaling laws suggest that recommendation systems should invest in larger retrieval models (which see the most queries) while using smaller, specialized models for re-ranking — mirroring the compute-optimal allocation principle from Chinchilla[^2].</p>
@@ -411,6 +421,7 @@ body {
 <p>[^12]: Sardana, N. et al. (2025). "Inference Scaling Laws: An Empirical Analysis of Compute-Optimal Inference for Problem-Solving with Language Models." <a href="https://arxiv.org/abs/2408.00724">arXiv:2408.00724</a></p>
 <p>[^13]: Li, C. et al. (2025). "Densing Law of LLMs." <em>Nature Machine Intelligence</em>. <a href="https://doi.org/10.1038/s42256-025-01137-0">doi:10.1038/s42256-025-01137-0</a></p>
 <p>[^14]: Huang, J. et al. (2024). "Scaling Laws for Pre-training Agents and World Models." <a href="https://arxiv.org/abs/2411.04434">arXiv:2411.04434</a></p>
+<p>[^16]: Chen, Y. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal." <a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a></p>
 </main>
 </body>
 </html>
