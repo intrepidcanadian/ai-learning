@@ -119,12 +119,39 @@ As of 2026, AIDE has evolved significantly since its initial release:
 
 - **Application to learning**: AIDE's approach has implications for AI-powered education. By treating solution-finding as a search problem with execution feedback, it demonstrates how AI tutors could explore multiple explanation strategies for a student, evaluating each approach's effectiveness before settling on the best one. This mirrors how effective human tutors adapt their teaching style based on student responses.
 
+## Scaling Behavior and Compute Trade-offs
+
+AIDE's performance exhibits scaling relationships across several dimensions, connecting to broader [scaling laws for research automation](../frontier-topics/scaling-laws-research.md):
+
+### Iteration Scaling
+Performance improves log-linearly with the number of solution tree iterations. Initial drafts typically achieve baseline performance; improvements compound through the tree structure, with diminishing returns after ~50 iterations on most tasks[^1]. This mirrors inference-time scaling laws described by Snell et al. (2024), where allocating more compute at generation time yields better results up to a point[^11].
+
+### Model Capability Scaling
+AIDE's performance is bottlenecked by the underlying LLM's coding ability. Benchmarks show that switching from GPT-4 to Claude Opus 4 or o3 can improve solve rates by 20-40% on complex ML tasks, consistent with the observation that model upgrades are the biggest lever for research automation quality[^1][^5].
+
+### Architecture-Aware Scaling
+Xu et al. (2025) demonstrated that scaling laws must account for architectural factors — not just parameter count and training data — showing that inference cost and accuracy depend on key architectural choices like attention pattern, layer structure, and vocabulary size[^12]. This has direct implications for AIDE: choosing the right model architecture for code generation tasks may matter as much as choosing the right model size.
+
+### Predictive Execution
+A promising direction integrates AIDE with [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md). Rather than executing every candidate script (expensive), a lightweight predictor estimates performance from code features, pruning unpromising branches before execution. This connects to work on predicting ML agent outcomes before execution (Gong et al., 2026), which found that execution priors can compress hours of runtime into seconds of predictive reasoning[^13].
+
+## E-Commerce Applications
+
+AIDE's code-search paradigm has direct applications in [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md):
+
+- **Recommendation algorithm optimization**: AIDE can explore the space of recommendation models, automatically testing different architectures (collaborative filtering, graph attention networks, transformer-based rankers) against click-through and conversion metrics[^14]
+- **A/B test automation**: By treating A/B test variants as nodes in the solution tree, AIDE can generate and evaluate multiple pricing, layout, or personalization strategies simultaneously
+- **Feature engineering**: AIDE generates and evaluates feature extraction pipelines for product catalogs, discovering non-obvious features that improve recommendation quality
+
+A 2026 study on switching-based deep learning frameworks for e-commerce demonstrates the kind of multi-strategy optimization that AIDE can automate — testing different model architectures for different user segments and automatically selecting the best performer[^15].
+
 ## Limitations / Challenges
 
 - **High variance**: Because the search space is all programs, results can vary significantly across runs — a lucky initial generation may find a great solution, while an unlucky one may explore unproductive regions.
 - **Compute cost**: Each iteration requires executing a full training script. For expensive training tasks, this limits the number of search steps feasible in a given time budget.
 - **Interpretability**: When AIDE finds a good solution, understanding *why* it works can be difficult if the generated code is complex or unconventional.
 - **Task specification sensitivity**: Performance depends heavily on how clearly the task and metric are described — vague specifications lead to poor solutions[^1].
+- **Long-horizon limitations**: SWE-EVO benchmarks reveal that even strong coding agents achieve only 21% accuracy on multi-file tasks spanning 21+ files, suggesting AIDE's single-script approach may struggle with complex, multi-module ML pipelines[^8].
 
 ## See Also
 
@@ -135,6 +162,11 @@ As of 2026, AIDE has evolved significantly since its initial release:
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — AIDE's iterative refinement as a form of self-improvement
 - [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — how AIDE performance scales with iterations
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) — monitoring AIDE-style tools in the research landscape
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — applying AIDE's optimization approach to e-commerce
+- [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md) — how AIDE connects research automation to practical applications
+- [Wiki Quality Benchmarking](../methodologies/wiki-quality-benchmarking.md) — evaluating output quality of automated systems
+- [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — discovering new ML papers for AIDE to work on
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — labs developing AIDE-style research tools
 
 ## References
 
@@ -157,3 +189,13 @@ As of 2026, AIDE has evolved significantly since its initial release:
 [^9]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" [arXiv:2511.13646](https://arxiv.org/abs/2511.13646)
 
 [^10]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." [arXiv:2602.20478](https://arxiv.org/abs/2602.20478)
+
+[^11]: Snell, C. et al. (2024). "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters." [arXiv:2408.03314](https://arxiv.org/abs/2408.03314)
+
+[^12]: Xu, H. et al. (2025). "Scaling Laws Meet Model Architecture: Toward Inference-Efficient LLMs." [arXiv:2510.18245](https://arxiv.org/abs/2510.18245)
+
+[^13]: Gong, Y. et al. (2026). "Can We Predict Before Executing Machine Learning Agents?" [arXiv:2601.05930](https://arxiv.org/abs/2601.05930)
+
+[^14]: Zhang, J. et al. (2025). "Recommendation systems in e-commerce applications with machine learning methods." *EASE 2025*. [arXiv:2506.17287](https://arxiv.org/abs/2506.17287)
+
+[^15]: Khan, A. et al. (2026). "A switching-based deep learning framework for personalized and adaptive e-commerce recommendations." *Scientific Reports*. [doi:10.1038/s41598-026-40024-5](https://doi.org/10.1038/s41598-026-40024-5)

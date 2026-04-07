@@ -1,0 +1,13 @@
+{
+  "session": 8,
+  "date": "2026-04-07",
+  "strategy": "Deepen 5 lowest-scoring articles (aide, scaling-laws, automated-peer-review, aider, foundation-models) with 2025-2026 papers, cross-links, and an SVG diagram",
+  "predicted_delta": 2.0,
+  "dimensions_targeted": ["depth", "currency", "sourcing", "linking"],
+  "reasoning": "Sessions 6-7 showed +2.0 composite gains by targeting 4-5 lowest-scoring articles with recent papers and cross-links. Same strategy applied to the next 5 lowest should yield similar gains. Depth scores (37-52) are the weakest dimension.",
+  "articles_targeted": ["aide", "scaling-laws-research", "automated-peer-review", "aider", "foundation-models-for-research"],
+  "pre_score": 86.4,
+  "actual_delta": 1.1,
+  "post_score": 87.5,
+  "lesson": "All 5 articles improved (+3.2 to +6.8 each). aide had the biggest gain (+6.8) from adding scaling/e-commerce sections and 5 new refs. Predicted +2.0 but achieved +1.1 — the diminishing returns at higher baselines are real. Depth remains the hardest dimension to move (37→50 for aider, 52→61 for aide)."
+}

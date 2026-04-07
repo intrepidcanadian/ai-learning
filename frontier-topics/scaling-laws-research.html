@@ -351,8 +351,25 @@ body {
 <li><strong>Cost scaling</strong>: The cost per AI-generated paper dropped from ~$15 (2024) to ~$6 (2025) while quality improved, indicating favorable cost-quality scaling [^6].</li>
 <li><strong>AI-discovered scaling laws</strong>: Lin et al. (2025) introduced SLDAgent, an evolution-based agent that autonomously discovers scaling laws with more accurate extrapolation than human-derived counterparts across 8 tasks [^8].</li>
 <li><strong>Agentic system scaling</strong>: Kim et al. (2025) formalized scaling laws for multi-agent systems, characterizing how performance scales with agent quantity, coordination structure, and model capability [^9].</li>
-<li><strong>Generative evaluation scaling</strong>: Schaeffer et al. (2025, ICLR 2026) derived scaling laws specifically for generative evaluations, moving beyond discriminative benchmarks to predict open-ended task performance [^10].</li>
+<li>
+<p><strong>Generative evaluation scaling</strong>: Schaeffer et al. (2025, ICLR 2026) derived scaling laws specifically for generative evaluations, moving beyond discriminative benchmarks to predict open-ended task performance [^10].</p>
+</li>
+<li>
+<p><strong>Architecture-aware scaling</strong>: Xu et al. (2025) introduced conditional scaling laws that augment the Chinchilla framework with architectural information — showing that inference cost and accuracy depend on choices like attention pattern, layer structure, and vocabulary size, not just parameter count[^11]. This has practical implications: choosing the right architecture may matter as much as scaling to a larger model.</p>
+</li>
+<li>
+<p><strong>Inference scaling laws</strong>: Sardana et al. (2025) established empirical scaling laws specifically for compute-optimal inference, analyzing trade-offs between model sizes and generating additional tokens with strategies like greedy search, majority voting, and tree search algorithms[^12]. Their work validates the intuition behind <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>: spending more inference compute on search yields better results up to a budget-dependent optimum.</p>
+</li>
+<li>
+<p><strong>Capability density doubling</strong>: The "Densing Law of LLMs" (Nature Machine Intelligence, 2025) found that capability density — performance per parameter — doubles approximately every 3.5 months, meaning equivalent model performance can be achieved with exponentially fewer parameters over time[^13]. This has profound implications for research automation accessibility: today's expensive frontier capability becomes affordable within months.</p>
+</li>
+<li>
+<p><strong>Agent and world model scaling</strong>: Huang et al. (2024) established scaling laws for pre-training agents and world models, finding that agent performance scales predictably with both model size and environment interaction data[^14]. This connects scaling theory directly to <a href="predictive-simulation-learning.html">predictive simulation learning</a> and embodied AI research.</p>
+</li>
 </ul>
+<h3 id="learning-application-understanding-scaling-for-practitioners">Learning Application: Understanding Scaling for Practitioners</h3>
+<p>Scaling laws provide a powerful mental model for learners deciding where to invest effort. The key insight for practitioners: <strong>model upgrades compound across all tasks</strong>, while prompt engineering improvements are task-specific. A student learning ML should invest in understanding which model capabilities their task requires, then match the most compute-efficient model to those requirements — the same optimization that drives research automation scaling.</p>
+<p>For <a href="ai-ecommerce-learning.html">e-commerce applications</a>, scaling laws suggest that recommendation systems should invest in larger retrieval models (which see the most queries) while using smaller, specialized models for re-ranking — mirroring the compute-optimal allocation principle from Chinchilla[^2].</p>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ul>
 <li><strong>No formal theory</strong>: Unlike training scaling laws (which have mathematical derivations from statistical learning theory), research automation scaling laws are purely empirical observations with small sample sizes.</li>
@@ -371,6 +388,13 @@ body {
 <li><a href="predictive-simulation-learning.html">Predictive Simulation Learning</a> -- World model quality as a scaling dimension</li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> -- Methods for monitoring research output at scale</li>
 <li><a href="../research-sources/key-papers.html">Key Papers</a> -- Foundational papers including the original scaling laws work</li>
+<li><a href="ai-ecommerce-learning.html">AI E-Commerce Learning</a> -- Applying scaling insights to e-commerce optimization</li>
+<li><a href="../tools-platforms/aide.html">AIDE</a> -- How AIDE performance scales with iterations and model capability</li>
+<li><a href="../tools-platforms/aider.html">Aider</a> -- Coding agent whose performance scales with model quality</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> -- Review quality as a function of model scale</li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a> -- Multi-modal scaling for research automation</li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> -- Tracking the latest scaling research</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> -- Labs driving scaling laws research</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Kaplan, J. et al. (2020). "Scaling Laws for Neural Language Models." <a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a></p>
@@ -383,6 +407,10 @@ body {
 <p>[^8]: Lin, H. et al. (2025). "Can Language Models Discover Scaling Laws?" <a href="https://arxiv.org/abs/2507.21184">arXiv:2507.21184</a></p>
 <p>[^9]: Kim, Y. et al. (2025). "Towards a Science of Scaling Agent Systems." <a href="https://arxiv.org/abs/2512.08296">arXiv:2512.08296</a></p>
 <p>[^10]: Schaeffer, R. et al. (2025). "Pretraining Scaling Laws for Generative Evaluations of Language Models." ICLR 2026. <a href="https://arxiv.org/abs/2509.24012">arXiv:2509.24012</a></p>
+<p>[^11]: Xu, H. et al. (2025). "Scaling Laws Meet Model Architecture: Toward Inference-Efficient LLMs." <a href="https://arxiv.org/abs/2510.18245">arXiv:2510.18245</a></p>
+<p>[^12]: Sardana, N. et al. (2025). "Inference Scaling Laws: An Empirical Analysis of Compute-Optimal Inference for Problem-Solving with Language Models." <a href="https://arxiv.org/abs/2408.00724">arXiv:2408.00724</a></p>
+<p>[^13]: Li, C. et al. (2025). "Densing Law of LLMs." <em>Nature Machine Intelligence</em>. <a href="https://doi.org/10.1038/s42256-025-01137-0">doi:10.1038/s42256-025-01137-0</a></p>
+<p>[^14]: Huang, J. et al. (2024). "Scaling Laws for Pre-training Agents and World Models." <a href="https://arxiv.org/abs/2411.04434">arXiv:2411.04434</a></p>
 </main>
 </body>
 </html>

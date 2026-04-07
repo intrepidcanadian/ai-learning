@@ -371,8 +371,26 @@ body {
 - <strong>Search/replace</strong> — uses search-and-replace blocks for precise edits (most efficient)
 - <strong>Unified diff</strong> — standard diff format familiar to developers
 - <strong>Architect</strong> — two-step format where one model plans and another implements</p>
+<p>The choice of edit format has a measurable impact on accuracy. On Aider's own benchmarks, search/replace format achieves 10-15% higher edit accuracy than whole-file format for the same model, because it forces the LLM to precisely locate the code being changed rather than regenerating the entire file[^3].</p>
 <h3 id="repository-map">Repository Map</h3>
 <p>The repo map is a critical innovation. Aider uses tree-sitter to parse the codebase and extract a concise summary of all classes, functions, methods, and imports[^1]. This map is included in every LLM prompt, giving the model awareness of the full project structure without consuming the entire context window. The map is dynamically filtered based on relevance to the current task.</p>
+<p>The repo map addresses a fundamental tension in AI-assisted coding: models need broad context to make correct edits, but context windows are finite. By providing a structural summary rather than raw code, Aider achieves a compression ratio of roughly 100:1 — a 500K-line codebase might produce a 5K-token repo map[^1].</p>
+<h3 id="conversation-memory-and-context-management">Conversation Memory and Context Management</h3>
+<p>Aider maintains a conversation history that accumulates across multiple edits within a session. Key context management strategies include:
+- <strong>Automatic context pruning</strong> — older messages are summarized when approaching context limits
+- <strong>File-based context</strong> — users can add/remove files from the active context with <code>/add</code> and <code>/drop</code> commands
+- <strong>Linter integration</strong> — Aider automatically adds files flagged by linters to provide the model with error context</p>
+<h3 id="benchmarking-infrastructure">Benchmarking Infrastructure</h3>
+<p>Aider's leaderboard system provides empirical data on how different <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> perform at coding tasks[^3]. The benchmark suite includes:
+- <strong>Code editing accuracy</strong> — percentage of correctly applied edits
+- <strong>Edit format compliance</strong> — whether the model follows the prescribed edit format
+- <strong>Refactoring completeness</strong> — whether all necessary changes are made across files
+- <strong>SWE-bench integration</strong> — real-world GitHub issue resolution</p>
+<p>These benchmarks reveal scaling patterns consistent with broader <a href="../frontier-topics/scaling-laws-research.html">scaling laws</a>: each model generation improves coding accuracy by 15-25%, with reasoning models (o3, DeepSeek-R1) showing the largest gains on complex multi-file tasks[^3][^5].</p>
+<h3 id="connection-to-predictive-learning">Connection to Predictive Learning</h3>
+<p>Aider's architecture embodies a key principle from <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a>: every edit is a prediction about what code change will achieve the user's goal, followed by immediate feedback (compilation, test results, linter output). This predict-then-verify loop is the same pattern that makes simulation-based learning effective — rapid iteration with concrete feedback signals[^10].</p>
+<h3 id="e-commerce-development-applications">E-Commerce Development Applications</h3>
+<p>Aider's git-native workflow makes it particularly suited for <a href="../frontier-topics/ai-ecommerce-learning.html">e-commerce</a> development, where codebases evolve rapidly with seasonal promotions, A/B tests, and feature flags. Its ability to make targeted edits across multiple files — updating product models, API endpoints, and frontend components in a single conversation — accelerates the development cycle for recommendation engines, checkout flows, and personalization systems.</p>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
 <li><strong>Context window constraints</strong> -- Large codebases exceed even 200K-token windows; Aider's repo map mitigates but doesn't fully solve this</li>
@@ -392,6 +410,13 @@ body {
 <li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
 <li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — Aider for e-commerce development</li>
+<li><a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — How coding tools connect research to practice</li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — How Aider performance scales with model capability</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> — AI evaluation of code quality parallels review</li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — Discovering papers relevant to coding agents</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — Labs developing coding agent research</li>
+<li><a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> — Benchmarking methodologies for evaluating AI systems</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Gauthier, P. (2024). "Aider: AI pair programming in your terminal." <a href="https://github.com/paul-gauthier/aider">github.com/paul-gauthier/aider</a>

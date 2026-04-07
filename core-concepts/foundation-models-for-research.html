@@ -347,12 +347,23 @@ body {
 2. Read and summarize retrieved papers
 3. Generate citation justifications
 4. Weave references into the manuscript</p>
+<h2 id="taxonomy-of-fm-roles-in-scientific-discovery">Taxonomy of FM Roles in Scientific Discovery</h2>
+<p>A comprehensive framework by Liu et al. (2025) identifies three levels of foundation model involvement in scientific discovery, each with different autonomy and risk profiles[^11]:</p>
+<h3 id="level-1-fm-as-tool">Level 1: FM as Tool</h3>
+<p>The model augments human researchers by performing specific, well-defined tasks under direct supervision. Examples include literature summarization via <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar</a>, code generation via <a href="../tools-platforms/aider.html">Aider</a>, and statistical analysis assistance. This level is widely deployed and relatively low-risk.</p>
+<h3 id="level-2-fm-as-analyst">Level 2: FM as Analyst</h3>
+<p>The model exhibits greater autonomy in processing complex information — synthesizing multi-paper literature reviews, identifying research gaps, and proposing experimental modifications. <a href="../tools-platforms/aide.html">AIDE</a> operates at this level, exploring the space of ML solutions with minimal human oversight[^12].</p>
+<h3 id="level-3-fm-as-scientist">Level 3: FM as Scientist</h3>
+<p>The model autonomously conducts major research stages: hypothesis generation, experimental design, execution, and manuscript preparation. <a href="the-ai-scientist.html">The AI Scientist</a> and its successors represent this frontier. Liang et al. (2025) survey the transition from automation to autonomy, finding that current systems still require human oversight for novelty assessment and ethical review[^13].</p>
+<h3 id="embodied-fm-research-agents">Embodied FM Research Agents</h3>
+<p>The newest development extends FMs into physical laboratories. Liu et al. (2026) demonstrated FMs generating Python control scripts for scientific instruments — translating user-specified objectives into directly executable lab protocols[^14]. This connects foundation models to real-world <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a>, where the model's predictions are tested against physical outcomes.</p>
 <h2 id="scaling-properties">Scaling Properties</h2>
 <p>Research quality correlates with model capability. Key observations from The AI Scientist:</p>
 <ul>
 <li><strong>Stronger models = better papers</strong> -- Paper quality improves with each generation of foundation model</li>
 <li><strong>Reasoning models excel at idea generation</strong> -- o3 outperforms non-reasoning models at hypothesis formation</li>
 <li><strong>Specialized models for specialized tasks</strong> -- Using different models for different phases (reasoning for ideas, coding models for implementation, vision models for figures) outperforms using a single model</li>
+<li><strong>Capability density doubling</strong> -- The "Densing Law" shows FM capability per parameter doubles every ~3.5 months, meaning research automation becomes more accessible over time[^15]</li>
 </ul>
 <p>This suggests that as foundation models continue to improve, research automation quality will improve correspondingly. See <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>.</p>
 <h2 id="agentic-patterns">Agentic Patterns</h2>
@@ -382,6 +393,15 @@ body {
 <li>
 <p><strong>AI for learning applications</strong>: Foundation models are increasingly used as personalized tutoring engines. Systems like Khanmigo (Khan Academy + GPT-4) and Duolingo Max demonstrate that the same models powering research automation can accelerate human learning across subjects[^10]. The key insight is that models capable of generating research can also explain it — making complex topics accessible to learners at any level.</p>
 </li>
+<li>
+<p><strong>Rapid growth in scientific use</strong>: A large-scale analysis by Chen et al. (2025) tracking FM usage across scientific publications found that foundation model adoption in science grew 340% between 2023-2025, with biology and materials science showing the fastest uptake after computer science[^16]. This validates the foundation model thesis: general-purpose models transfer effectively to specialized scientific domains.</p>
+</li>
+<li>
+<p><strong>FM for e-commerce research</strong>: Foundation models are transforming <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> through multi-modal product understanding, personalized recommendation generation, and automated market analysis. A 2025 comprehensive review of recommender systems shows that FM-based approaches now dominate both retrieval and ranking stages of modern recommendation pipelines[^17].</p>
+</li>
+<li>
+<p><strong>Foundation models for temporal processes</strong>: Bae et al. (2025) introduced foundation models specifically for temporal point processes — a key tool for modeling event sequences in scientific experiments, user behavior analysis, and clinical trial monitoring[^18].</p>
+</li>
 </ul>
 <h2 id="current-limitations">Current Limitations</h2>
 <ol>
@@ -404,6 +424,12 @@ body {
 <li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
 <li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — FM applications in e-commerce</li>
+<li><a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — How FMs connect research domains</li>
+<li><a href="../tools-platforms/aide.html">AIDE</a> — FM as analyst in ML experimentation</li>
+<li><a href="../tools-platforms/aider.html">Aider</a> — FM as coding tool for research</li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — Tracking FM research papers</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — Labs developing foundation models</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Bommasani, R. et al. (2021). "On the Opportunities and Risks of Foundation Models." <a href="https://arxiv.org/abs/2108.07258">arXiv:2108.07258</a>
@@ -416,6 +442,14 @@ body {
 [^8]: Anthropic. (2025). "Claude Sonnet 4 Model Card." Anthropic.
 [^9]: DeepSeek AI. (2025). "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." <a href="https://arxiv.org/abs/2501.12948">arXiv:2501.12948</a>
 [^10]: Khan Academy. (2025). "Khanmigo: Scaling Personalized Tutoring with Foundation Models." Khan Academy Research.</p>
+<p>[^11]: Liu, Z. et al. (2025). "Foundation Models for Scientific Discovery: From Paradigm Enhancement to Paradigm Transition." <a href="https://arxiv.org/abs/2510.15280">arXiv:2510.15280</a></p>
+<p>[^12]: Jiang, Z. et al. (2025). "AIDE: AI-driven exploration in the space of code." <a href="https://arxiv.org/abs/2502.13138">arXiv:2502.13138</a></p>
+<p>[^13]: Liang, X. et al. (2025). "From Automation to Autonomy: A Survey on Large Language Models in Scientific Discovery." <a href="https://arxiv.org/abs/2505.13259">arXiv:2505.13259</a></p>
+<p>[^14]: Liu, Y. et al. (2026). "Grounding LLMs in Scientific Discovery via Embodied Actions." <a href="https://arxiv.org/abs/2602.20639">arXiv:2602.20639</a></p>
+<p>[^15]: Li, C. et al. (2025). "Densing Law of LLMs." <em>Nature Machine Intelligence</em>. <a href="https://doi.org/10.1038/s42256-025-01137-0">doi:10.1038/s42256-025-01137-0</a></p>
+<p>[^16]: Chen, X. et al. (2025). "The Rapid Growth of AI Foundation Model Usage in Science." <a href="https://arxiv.org/abs/2511.21739">arXiv:2511.21739</a></p>
+<p>[^17]: He, Z. et al. (2024). "A Comprehensive Review of Recommender Systems: Transitioning from Theory to Practice." <a href="https://arxiv.org/abs/2407.13699">arXiv:2407.13699</a></p>
+<p>[^18]: Bae, J. et al. (2025). "On Foundation Models for Temporal Point Processes to Accelerate Scientific Discovery." <a href="https://arxiv.org/abs/2510.12640">arXiv:2510.12640</a></p>
 </main>
 </body>
 </html>

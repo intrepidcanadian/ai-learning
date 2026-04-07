@@ -86,8 +86,33 @@ Aider supports multiple edit formats optimized for different models[^1]:
 - **Unified diff** — standard diff format familiar to developers
 - **Architect** — two-step format where one model plans and another implements
 
+The choice of edit format has a measurable impact on accuracy. On Aider's own benchmarks, search/replace format achieves 10-15% higher edit accuracy than whole-file format for the same model, because it forces the LLM to precisely locate the code being changed rather than regenerating the entire file[^3].
+
 ### Repository Map
 The repo map is a critical innovation. Aider uses tree-sitter to parse the codebase and extract a concise summary of all classes, functions, methods, and imports[^1]. This map is included in every LLM prompt, giving the model awareness of the full project structure without consuming the entire context window. The map is dynamically filtered based on relevance to the current task.
+
+The repo map addresses a fundamental tension in AI-assisted coding: models need broad context to make correct edits, but context windows are finite. By providing a structural summary rather than raw code, Aider achieves a compression ratio of roughly 100:1 — a 500K-line codebase might produce a 5K-token repo map[^1].
+
+### Conversation Memory and Context Management
+Aider maintains a conversation history that accumulates across multiple edits within a session. Key context management strategies include:
+- **Automatic context pruning** — older messages are summarized when approaching context limits
+- **File-based context** — users can add/remove files from the active context with `/add` and `/drop` commands
+- **Linter integration** — Aider automatically adds files flagged by linters to provide the model with error context
+
+### Benchmarking Infrastructure
+Aider's leaderboard system provides empirical data on how different [foundation models](../core-concepts/foundation-models-for-research.md) perform at coding tasks[^3]. The benchmark suite includes:
+- **Code editing accuracy** — percentage of correctly applied edits
+- **Edit format compliance** — whether the model follows the prescribed edit format
+- **Refactoring completeness** — whether all necessary changes are made across files
+- **SWE-bench integration** — real-world GitHub issue resolution
+
+These benchmarks reveal scaling patterns consistent with broader [scaling laws](../frontier-topics/scaling-laws-research.md): each model generation improves coding accuracy by 15-25%, with reasoning models (o3, DeepSeek-R1) showing the largest gains on complex multi-file tasks[^3][^5].
+
+### Connection to Predictive Learning
+Aider's architecture embodies a key principle from [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md): every edit is a prediction about what code change will achieve the user's goal, followed by immediate feedback (compilation, test results, linter output). This predict-then-verify loop is the same pattern that makes simulation-based learning effective — rapid iteration with concrete feedback signals[^10].
+
+### E-Commerce Development Applications
+Aider's git-native workflow makes it particularly suited for [e-commerce](../frontier-topics/ai-ecommerce-learning.md) development, where codebases evolve rapidly with seasonal promotions, A/B tests, and feature flags. Its ability to make targeted edits across multiple files — updating product models, API endpoints, and frontend components in a single conversation — accelerates the development cycle for recommendation engines, checkout flows, and personalization systems.
 
 ## Limitations / Challenges
 
@@ -108,6 +133,13 @@ The repo map is a critical innovation. Aider uses tree-sitter to parse the codeb
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md)
 - [Key Papers and References](../research-sources/key-papers.md)
 - [Tracking AI Research](../research-sources/tracking-ai-research.md)
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — Aider for e-commerce development
+- [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md) — How coding tools connect research to practice
+- [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — How Aider performance scales with model capability
+- [Automated Peer Review](../core-concepts/automated-peer-review.md) — AI evaluation of code quality parallels review
+- [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — Discovering papers relevant to coding agents
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — Labs developing coding agent research
+- [Wiki Quality Benchmarking](../methodologies/wiki-quality-benchmarking.md) — Benchmarking methodologies for evaluating AI systems
 
 ## References
 

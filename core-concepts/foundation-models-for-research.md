@@ -63,6 +63,22 @@ Models act as agents that:
 3. Generate citation justifications
 4. Weave references into the manuscript
 
+## Taxonomy of FM Roles in Scientific Discovery
+
+A comprehensive framework by Liu et al. (2025) identifies three levels of foundation model involvement in scientific discovery, each with different autonomy and risk profiles[^11]:
+
+### Level 1: FM as Tool
+The model augments human researchers by performing specific, well-defined tasks under direct supervision. Examples include literature summarization via [Semantic Scholar](../tools-platforms/semantic-scholar-api.md), code generation via [Aider](../tools-platforms/aider.md), and statistical analysis assistance. This level is widely deployed and relatively low-risk.
+
+### Level 2: FM as Analyst
+The model exhibits greater autonomy in processing complex information — synthesizing multi-paper literature reviews, identifying research gaps, and proposing experimental modifications. [AIDE](../tools-platforms/aide.md) operates at this level, exploring the space of ML solutions with minimal human oversight[^12].
+
+### Level 3: FM as Scientist
+The model autonomously conducts major research stages: hypothesis generation, experimental design, execution, and manuscript preparation. [The AI Scientist](the-ai-scientist.md) and its successors represent this frontier. Liang et al. (2025) survey the transition from automation to autonomy, finding that current systems still require human oversight for novelty assessment and ethical review[^13].
+
+### Embodied FM Research Agents
+The newest development extends FMs into physical laboratories. Liu et al. (2026) demonstrated FMs generating Python control scripts for scientific instruments — translating user-specified objectives into directly executable lab protocols[^14]. This connects foundation models to real-world [predictive simulation](../frontier-topics/predictive-simulation-learning.md), where the model's predictions are tested against physical outcomes.
+
 ## Scaling Properties
 
 Research quality correlates with model capability. Key observations from The AI Scientist:
@@ -70,6 +86,7 @@ Research quality correlates with model capability. Key observations from The AI 
 - **Stronger models = better papers** -- Paper quality improves with each generation of foundation model
 - **Reasoning models excel at idea generation** -- o3 outperforms non-reasoning models at hypothesis formation
 - **Specialized models for specialized tasks** -- Using different models for different phases (reasoning for ideas, coding models for implementation, vision models for figures) outperforms using a single model
+- **Capability density doubling** -- The "Densing Law" shows FM capability per parameter doubles every ~3.5 months, meaning research automation becomes more accessible over time[^15]
 
 This suggests that as foundation models continue to improve, research automation quality will improve correspondingly. See [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md).
 
@@ -97,6 +114,12 @@ As of early 2026, foundation models for research have seen several significant a
 
 - **AI for learning applications**: Foundation models are increasingly used as personalized tutoring engines. Systems like Khanmigo (Khan Academy + GPT-4) and Duolingo Max demonstrate that the same models powering research automation can accelerate human learning across subjects[^10]. The key insight is that models capable of generating research can also explain it — making complex topics accessible to learners at any level.
 
+- **Rapid growth in scientific use**: A large-scale analysis by Chen et al. (2025) tracking FM usage across scientific publications found that foundation model adoption in science grew 340% between 2023-2025, with biology and materials science showing the fastest uptake after computer science[^16]. This validates the foundation model thesis: general-purpose models transfer effectively to specialized scientific domains.
+
+- **FM for e-commerce research**: Foundation models are transforming [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md) through multi-modal product understanding, personalized recommendation generation, and automated market analysis. A 2025 comprehensive review of recommender systems shows that FM-based approaches now dominate both retrieval and ranking stages of modern recommendation pipelines[^17].
+
+- **Foundation models for temporal processes**: Bae et al. (2025) introduced foundation models specifically for temporal point processes — a key tool for modeling event sequences in scientific experiments, user behavior analysis, and clinical trial monitoring[^18].
+
 ## Current Limitations
 
 1. **Hallucination** -- Models confidently generate incorrect results, fake citations, and flawed reasoning
@@ -118,6 +141,12 @@ As of early 2026, foundation models for research have seen several significant a
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md)
 - [Key Papers and References](../research-sources/key-papers.md)
 - [Tracking AI Research](../research-sources/tracking-ai-research.md)
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — FM applications in e-commerce
+- [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md) — How FMs connect research domains
+- [AIDE](../tools-platforms/aide.md) — FM as analyst in ML experimentation
+- [Aider](../tools-platforms/aider.md) — FM as coding tool for research
+- [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — Tracking FM research papers
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — Labs developing foundation models
 
 ## References
 
@@ -131,3 +160,19 @@ As of early 2026, foundation models for research have seen several significant a
 [^8]: Anthropic. (2025). "Claude Sonnet 4 Model Card." Anthropic.
 [^9]: DeepSeek AI. (2025). "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." [arXiv:2501.12948](https://arxiv.org/abs/2501.12948)
 [^10]: Khan Academy. (2025). "Khanmigo: Scaling Personalized Tutoring with Foundation Models." Khan Academy Research.
+
+[^11]: Liu, Z. et al. (2025). "Foundation Models for Scientific Discovery: From Paradigm Enhancement to Paradigm Transition." [arXiv:2510.15280](https://arxiv.org/abs/2510.15280)
+
+[^12]: Jiang, Z. et al. (2025). "AIDE: AI-driven exploration in the space of code." [arXiv:2502.13138](https://arxiv.org/abs/2502.13138)
+
+[^13]: Liang, X. et al. (2025). "From Automation to Autonomy: A Survey on Large Language Models in Scientific Discovery." [arXiv:2505.13259](https://arxiv.org/abs/2505.13259)
+
+[^14]: Liu, Y. et al. (2026). "Grounding LLMs in Scientific Discovery via Embodied Actions." [arXiv:2602.20639](https://arxiv.org/abs/2602.20639)
+
+[^15]: Li, C. et al. (2025). "Densing Law of LLMs." *Nature Machine Intelligence*. [doi:10.1038/s42256-025-01137-0](https://doi.org/10.1038/s42256-025-01137-0)
+
+[^16]: Chen, X. et al. (2025). "The Rapid Growth of AI Foundation Model Usage in Science." [arXiv:2511.21739](https://arxiv.org/abs/2511.21739)
+
+[^17]: He, Z. et al. (2024). "A Comprehensive Review of Recommender Systems: Transitioning from Theory to Practice." [arXiv:2407.13699](https://arxiv.org/abs/2407.13699)
+
+[^18]: Bae, J. et al. (2025). "On Foundation Models for Temporal Point Processes to Accelerate Scientific Discovery." [arXiv:2510.12640](https://arxiv.org/abs/2510.12640)

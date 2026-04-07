@@ -64,15 +64,43 @@ Key finding: The Automated Reviewer's agreement with human decisions **matches o
 - **Surface-level evaluation** — May miss deep methodological flaws
 - **Gameable** — Papers can be optimized to pass automated review without genuine scientific merit
 
+![Automated Peer Review Pipeline](automated-peer-review-pipeline.svg)
+
+## Technical Deep Dive: Review Generation Pipeline
+
+Modern automated peer review systems follow a multi-stage pipeline that mirrors how expert human reviewers approach papers:
+
+### Stage 1: Paper Parsing and Comprehension
+The system first parses the paper into structured sections (abstract, introduction, methods, results, discussion). For PDF inputs, this involves layout analysis and figure extraction. Recent systems use [VLM integration](../methodologies/vlm-integration.md) to process figures and tables alongside text, producing a multi-modal understanding of the paper[^4].
+
+### Stage 2: Claim Extraction and Verification
+The reviewer identifies the paper's core claims and evaluates supporting evidence. This involves:
+- **Novelty assessment**: Comparing claims against known literature via [Semantic Scholar](../tools-platforms/semantic-scholar-api.md) retrieval
+- **Methodology validation**: Checking whether experimental design supports conclusions
+- **Statistical rigor**: Flagging p-hacking indicators, missing confidence intervals, or inappropriate statistical tests
+
+### Stage 3: Multi-Perspective Review Generation
+State-of-the-art systems generate reviews from multiple "reviewer personas" with different expertise levels and focus areas. MARG (D'Arcy et al., 2024) demonstrated that multi-agent review produces more diverse and comprehensive feedback than single-model review[^8]. Each agent may focus on different dimensions:
+- **Soundness reviewer**: Checks logical consistency and experimental validity
+- **Novelty reviewer**: Assesses originality against prior work
+- **Clarity reviewer**: Evaluates presentation quality and reproducibility
+
+### Stage 4: Meta-Review and Calibration
+Individual reviews are synthesized by a meta-reviewer (analogous to an area chair) that resolves disagreements, weights perspectives, and produces a final recommendation. Robertson et al. (2025) showed that calibrating against historical human review distributions reduces systematic bias in final scores[^7].
+
+### Scaling Properties
+Review quality scales with both model capability and inference compute. Using [agentic tree search](../methodologies/agentic-tree-search.md) — where the reviewer explores multiple interpretations of ambiguous claims — improves review thoroughness at the cost of additional compute. This connects to broader [scaling laws for research automation](../frontier-topics/scaling-laws-research.md): the optimal review compute budget depends on paper complexity[^6].
+
 ## Beyond The AI Scientist
 
 Other automated review systems and approaches:
 
-- **ReviewerGPT** — LLM-based review generation for conferences
-- **MARG** (Meta Automated Review Generation) — Multi-agent review framework
+- **ReviewerGPT** — Liu & Shah (2024) evaluated GPT-4's reviewing ability, finding strengths in surface-level assessment but weaknesses in deep technical critique[^9]
+- **MARG** (Meta Automated Review Generation) — Multi-agent review framework using diverse reviewer personas[^8]
 - **OpenReview integration** — Automated screening for desk rejection
 - **ACL Rolling Review** — Exploring AI-assisted review workload management
 - **VLM-as-judge** — Extending review to include visual evaluation of figures using [vision-language models](../methodologies/vlm-integration.md), achieving 0.7–0.8 pass rates in domain-specific scientific figure assessment[^4]
+- **LLM review surveys**: A comprehensive survey by Li et al. (2025) categorizes approaches into end-to-end generation, aspect-specific evaluation, and hybrid human-AI systems, identifying that current LLMs consistently underperform in identifying weaknesses and raising substantive methodological questions[^10]
 
 ## Current State / Latest Developments (2025–2026)
 
@@ -84,6 +112,14 @@ Other automated review systems and approaches:
 - **AI Scientist v2 review component:** The updated AI Scientist v2 (Yamada et al., 2025) uses o4-mini as a cost-efficient reviewer, generating reviews at ~$0.02 per paper while maintaining quality comparable to more expensive models[^6]. This makes large-scale automated review economically feasible.
 - **Review calibration:** Robertson et al. (2025) introduced methods for calibrating automated reviewers against human score distributions, reducing systematic biases in automated scores[^7]. Their approach uses historical review data from OpenReview to align LLM-generated scores with conference norms.
 - **Predictive review for learning:** A key application for real-world learning is using automated review as a *pre-submission diagnostic*. Students and early-career researchers can run their drafts through automated reviewers to identify weaknesses before formal submission, effectively using [predictive simulation](../frontier-topics/predictive-simulation-learning.md) of the review process[^1].
+
+- **LLM detection in reviews**: Ye et al. (2025) developed benchmarks to detect whether peer reviews were written by LLMs, finding that current detection tools achieve 85-92% accuracy — raising important questions about transparency in the review process[^11].
+
+- **ICLR 2025 AI feedback experiment**: At ICLR 2025, an official AI feedback tool was deployed to provide reviewers with post-review suggestions, representing the first major conference to officially integrate LLM assistance into the review workflow[^12]. Initial results showed improved review thoroughness without degrading review quality.
+
+- **Conference policy divergence**: The field is split on AI-assisted review policy. While ICLR embraced AI tools, CVPR 2025 prohibited LLM use in review writing entirely, reflecting ongoing debate about the appropriate role of AI in scientific evaluation[^12].
+
+- **Scaling peer review with AI**: Goldberg et al. (2025) proposed scaling frameworks for using AI to handle the exponential growth of ML conference submissions, arguing that hybrid human-AI systems can maintain quality while reducing per-reviewer burden by 30-40%[^13].
 
 ## Implications for Science
 
@@ -137,3 +173,9 @@ The ultimate test of automated review quality: can an AI-generated paper pass hu
 [^5]: Zheng, L. et al. (2025). "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." *NeurIPS 2024*. [arXiv:2306.05685](https://arxiv.org/abs/2306.05685)
 [^6]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." [arXiv:2504.08066](https://arxiv.org/abs/2504.08066)
 [^7]: Robertson, T. et al. (2025). "Calibrating AI Reviewers: Aligning Automated Paper Scores with Conference Norms." [arXiv:2503.08291](https://arxiv.org/abs/2503.08291)
+[^8]: D'Arcy, M. et al. (2024). "MARG: Multi-Agent Review Generation for Scientific Papers." [arXiv:2401.04259](https://arxiv.org/abs/2401.04259)
+[^9]: Liu, R. & Shah, N. (2024). "ReviewerGPT? An Exploratory Study on Using Large Language Models for Paper Reviewing." [arXiv:2306.00622](https://arxiv.org/abs/2306.00622)
+[^10]: Li, J. et al. (2025). "Large language models for automated scholarly paper review: A survey." [arXiv:2501.10326](https://arxiv.org/abs/2501.10326)
+[^11]: Ye, S. et al. (2025). "Is Your Paper Being Reviewed by an LLM? Benchmarking AI Text Detection in Peer Review." [arXiv:2502.19614](https://arxiv.org/abs/2502.19614)
+[^12]: Wei, Z. et al. (2025). "What Happens When Reviewers Receive AI Feedback in Their Reviews?" [arXiv:2602.13817](https://arxiv.org/abs/2602.13817)
+[^13]: Goldberg, A. et al. (2025). "The AI Imperative: Scaling High-Quality Peer Review in Machine Learning." [arXiv:2506.08134](https://arxiv.org/abs/2506.08134)
