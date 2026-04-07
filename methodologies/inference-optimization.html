@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inference Optimization - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html" aria-current="page">Inference Optimization</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Inference Optimization</div>
+<h1 id="inference-optimization">Inference Optimization</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Inference optimization</strong> is the set of techniques that make AI model inference faster, cheaper, and more memory-efficient without significantly degrading output quality. As LLMs grow to hundreds of billions of parameters, the cost and latency of serving them at scale becomes a primary bottleneck for real-world deployment. Inference optimization bridges the gap between research-grade models and production systems — enabling real-time <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> recommendations, interactive tutoring, and accessible AI-powered education on commodity hardware.</p>
+<p>For AI-assisted learning, inference optimization is what makes personalized, on-demand AI tutoring financially and technically viable. A student asking questions during homework needs sub-second responses, not 30-second batch completions — and school districts cannot afford GPU clusters. Techniques like quantization, speculative decoding, and KV cache compression make frontier-quality AI accessible at scale.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-inference-cost-problem">The Inference Cost Problem</h3>
+<p>Transformer inference is bottlenecked by two resources:[^1]</p>
+<ol>
+<li><strong>Memory bandwidth</strong>: Loading model weights from GPU memory dominates latency for small batch sizes (the "memory-bound" regime)</li>
+<li><strong>Compute</strong>: Matrix multiplications dominate for large batch sizes (the "compute-bound" regime)</li>
+<li><strong>KV cache memory</strong>: Autoregressive generation stores key-value pairs for all previous tokens, consuming memory that grows linearly with sequence length</li>
+</ol>
+<p>The cost breakdown for serving a 70B-parameter model:
+- <strong>Model weights</strong>: ~140 GB at FP16, requiring multiple GPUs
+- <strong>KV cache</strong>: ~2 GB per 4K-context request at FP16, limiting concurrent users
+- <strong>Compute</strong>: ~140 TFLOPs per token, setting throughput ceiling</p>
+<h3 id="the-optimization-landscape">The Optimization Landscape</h3>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Targets</th>
+<th>Speedup</th>
+<th>Quality Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quantization</strong></td>
+<td>Memory, bandwidth</td>
+<td>2-4x</td>
+<td>Minimal at INT8, moderate at INT4</td>
+</tr>
+<tr>
+<td><strong>Speculative decoding</strong></td>
+<td>Latency</td>
+<td>2-3x</td>
+<td>Lossless</td>
+</tr>
+<tr>
+<td><strong>KV cache compression</strong></td>
+<td>Memory</td>
+<td>4-8x</td>
+<td>Minimal with attention-aware methods</td>
+</tr>
+<tr>
+<td><strong>Pruning</strong></td>
+<td>Compute, memory</td>
+<td>1.5-3x</td>
+<td>Moderate, task-dependent</td>
+</tr>
+<tr>
+<td><strong>Distillation</strong></td>
+<td>All</td>
+<td>5-50x</td>
+<td>Depends on teacher-student gap</td>
+</tr>
+<tr>
+<td><strong>Mixture of Experts</strong></td>
+<td>Compute</td>
+<td>2-4x per token</td>
+<td>Minimal (architectural)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="connection-to-scaling-laws">Connection to Scaling Laws</h3>
+<p>Inference optimization interacts with <a href="../frontier-topics/scaling-laws-research.html">scaling laws</a> in a nuanced way: a smaller, optimized model can outperform a larger, unoptimized one at the same inference budget. This creates an alternative scaling axis — <em>scaling efficiency</em> rather than scaling parameters. <a href="test-time-compute.html">Test-time compute</a> adds another dimension: spending more compute at inference time (via search or self-refinement) can substitute for model scale.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="quantization">Quantization</h3>
+<p>Quantization reduces the precision of model weights and activations from 16-bit floating point to lower bit widths:[^2]</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 380&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowIO&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#333&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Inference Optimization: Quantization &amp;amp; Speculative Decoding&lt;/text&gt;
+
+  &lt;!-- Quantization section --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;155&quot; rx=&quot;10&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;185&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Quantization Precision Ladder&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;80&quot; width=&quot;290&quot; height=&quot;25&quot; rx=&quot;4&quot; fill=&quot;#1565C0&quot;/&gt;
+  &lt;text x=&quot;185&quot; y=&quot;97&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;white&quot;&gt;FP16: 140 GB | Baseline quality | 1x speed&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;110&quot; width=&quot;220&quot; height=&quot;25&quot; rx=&quot;4&quot; fill=&quot;#1976D2&quot;/&gt;
+  &lt;text x=&quot;150&quot; y=&quot;127&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;white&quot;&gt;INT8: 70 GB | ~99% quality | 2x speed&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;140&quot; width=&quot;145&quot; height=&quot;25&quot; rx=&quot;4&quot; fill=&quot;#2196F3&quot;/&gt;
+  &lt;text x=&quot;112&quot; y=&quot;157&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;white&quot;&gt;INT4: 35 GB | ~96% | 3-4x&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;170&quot; width=&quot;72&quot; height=&quot;25&quot; rx=&quot;4&quot; fill=&quot;#64B5F6&quot;/&gt;
+  &lt;text x=&quot;76&quot; y=&quot;187&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#333&quot;&gt;1-bit | 50-85%&lt;/text&gt;
+
+  &lt;!-- Speculative decoding section --&gt;
+  &lt;rect x=&quot;370&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;155&quot; rx=&quot;10&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;535&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Speculative Decoding&lt;/text&gt;
+
+  &lt;rect x=&quot;390&quot; y=&quot;80&quot; width=&quot;100&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#C8E6C9&quot; stroke=&quot;#388E3C&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;440&quot; y=&quot;100&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Draft Model&lt;/text&gt;
+  &lt;text x=&quot;440&quot; y=&quot;115&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Fast, small&lt;/text&gt;
+
+  &lt;line x1=&quot;495&quot; y1=&quot;105&quot; x2=&quot;525&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowIO)&quot;/&gt;
+  &lt;text x=&quot;510&quot; y=&quot;98&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#555&quot;&gt;k tokens&lt;/text&gt;
+
+  &lt;rect x=&quot;530&quot; y=&quot;80&quot; width=&quot;100&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#A5D6A7&quot; stroke=&quot;#388E3C&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;580&quot; y=&quot;100&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Verify Model&lt;/text&gt;
+  &lt;text x=&quot;580&quot; y=&quot;115&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Full, accurate&lt;/text&gt;
+
+  &lt;line x1=&quot;635&quot; y1=&quot;105&quot; x2=&quot;665&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowIO)&quot;/&gt;
+
+  &lt;rect x=&quot;670&quot; y=&quot;85&quot; width=&quot;20&quot; height=&quot;40&quot; rx=&quot;4&quot; fill=&quot;#66BB6A&quot;/&gt;
+  &lt;text x=&quot;680&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;white&quot;&gt;✓&lt;/text&gt;
+
+  &lt;text x=&quot;535&quot; y=&quot;155&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;Draft generates k tokens cheaply;&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;168&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;target verifies in one forward pass&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;181&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;Result: lossless 2-3x speedup&lt;/text&gt;
+
+  &lt;!-- KV Cache section --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;220&quot; width=&quot;680&quot; height=&quot;140&quot; rx=&quot;10&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;245&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;KV Cache Optimization Strategies (2025-2026)&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;260&quot; width=&quot;150&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;115&quot; y=&quot;278&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Eviction&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Drop low-attention tokens&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;310&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;H₂O, ScissorHands&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;325&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;4-8x memory savings&lt;/text&gt;
+
+  &lt;rect x=&quot;210&quot; y=&quot;260&quot; width=&quot;150&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;285&quot; y=&quot;278&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Compression&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Quantize KV to INT4/INT2&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;310&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;RocketKV, ZipServ&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;325&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;2-4x with minimal loss&lt;/text&gt;
+
+  &lt;rect x=&quot;380&quot; y=&quot;260&quot; width=&quot;150&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;455&quot; y=&quot;278&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Hybrid Memory&lt;/text&gt;
+  &lt;text x=&quot;455&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;CPU offload, paging&lt;/text&gt;
+  &lt;text x=&quot;455&quot; y=&quot;310&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;vLLM PagedAttention&lt;/text&gt;
+  &lt;text x=&quot;455&quot; y=&quot;325&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;Near-zero waste&lt;/text&gt;
+
+  &lt;rect x=&quot;550&quot; y=&quot;260&quot; width=&quot;140&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;620&quot; y=&quot;278&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Novel Attention&lt;/text&gt;
+  &lt;text x=&quot;620&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Multi-Query, Grouped-&lt;/text&gt;
+  &lt;text x=&quot;620&quot; y=&quot;310&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Query Attention (GQA)&lt;/text&gt;
+  &lt;text x=&quot;620&quot; y=&quot;325&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;Architectural change&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p><strong>Post-training quantization (PTQ)</strong> is the most practical approach: take a trained FP16 model, calibrate quantization parameters on a small dataset, and convert weights to INT8 or INT4. GPTQ, AWQ, and SqueezeLLM represent the state of the art, with INT4 models retaining 94-97% of FP16 performance while using 4x less memory.[^2]</p>
+<p>UniComp (2026) provides the first unified evaluation across pruning, quantization, and distillation, finding that quantization offers the best overall tradeoff between performance, reliability, and efficiency.[^3] Key finding: task-specific calibration can improve pruned model reasoning by up to 50%.</p>
+<h3 id="speculative-decoding">Speculative Decoding</h3>
+<p>Speculative decoding uses a small, fast <strong>draft model</strong> to generate candidate tokens, then verifies them in parallel with the full <strong>target model</strong>:[^4]</p>
+<ol>
+<li>The draft model generates <em>k</em> tokens autoregressively (cheap)</li>
+<li>The target model scores all <em>k</em> tokens in a single forward pass (parallel)</li>
+<li>Accepted tokens are kept; the first rejected token triggers re-generation from that point</li>
+<li>The result is <em>mathematically identical</em> to sampling from the target model — zero quality loss</li>
+</ol>
+<p><strong>DART</strong> (2026) pushed this further with diffusion-inspired parallel generation, achieving 2-3.4x wall-clock speedup by eliminating autoregressive rollouts in the draft model entirely.[^5] <strong>Nightjar</strong> (2025) addresses the throughput-latency tradeoff under varying load, achieving 27% higher throughput via dynamic adaptation of speculation depth.[^6]</p>
+<p><strong>Speculative Speculative Decoding (SSD)</strong> (2026) introduced meta-speculation: predicting likely verification outcomes and pre-preparing the next speculation batch, achieving ~30% faster inference than already-optimized speculative decoding baselines.[^7]</p>
+<h3 id="kv-cache-optimization">KV Cache Optimization</h3>
+<p>As context windows grow to 1M+ tokens, KV cache memory becomes the dominant bottleneck. A comprehensive survey by Chen et al. (2026) organizes solutions into five categories:[^8]</p>
+<ol>
+<li><strong>Cache eviction</strong>: Drop KV entries for tokens the model attends to least (H₂O, StreamingLLM)</li>
+<li><strong>Cache compression</strong>: Quantize KV values to INT4 or lower — <strong>RocketKV</strong> (2025) achieves 2-stage compression with minimal quality loss, including multi-turn support[^9]</li>
+<li><strong>Hybrid memory</strong>: Offload cold KV entries to CPU memory, keeping hot entries on GPU (vLLM PagedAttention)</li>
+<li><strong>Novel attention</strong>: Architectural changes like Grouped-Query Attention (GQA) that reduce KV heads</li>
+<li><strong>Lossless compression</strong>: <strong>ZipServ</strong> (2026) provides bit-exact lossless KV compression with hardware-aware encoding, preserving full output quality while reducing memory 2-3x[^10]</li>
+</ol>
+<h3 id="pruning-and-structured-sparsity">Pruning and Structured Sparsity</h3>
+<p>Pruning removes unnecessary weights or attention heads:</p>
+<ul>
+<li><strong>Unstructured pruning</strong>: Set individual weights to zero (high compression, needs sparse hardware)</li>
+<li><strong>Structured pruning</strong>: Remove entire attention heads or FFN neurons (compatible with standard hardware)</li>
+<li><strong>SparseGPT</strong> and <strong>Wanda</strong> enable one-shot pruning of LLMs to 50% sparsity with minimal quality loss</li>
+</ul>
+<h3 id="connection-to-knowledge-distillation">Connection to Knowledge Distillation</h3>
+<p>The most aggressive optimization uses <a href="../core-concepts/knowledge-distillation.html">knowledge distillation</a> to train a small student model that mimics a large teacher. Distillation achieves 5-50x compression but requires significant training compute upfront. The tradeoff: quantization and speculative decoding preserve the original model's full capability; distillation trades some capability for dramatic efficiency gains.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-trends">2025-2026 Trends</h3>
+<ol>
+<li><strong>Composable optimizations</strong>: Combining quantization + speculative decoding + KV cache compression multiplicatively — achieving 8-16x total speedup[^8]</li>
+<li><strong>Hardware-software co-design</strong>: Custom kernels (FlashAttention, FlashDecoding) that match optimization techniques to GPU architecture</li>
+<li><strong>Serving frameworks</strong>: vLLM, TensorRT-LLM, and SGLang integrate multiple optimizations into production-ready systems</li>
+<li><strong>On-device inference</strong>: INT4 quantized models running on phones and laptops (Llama 3.2, Phi-3, Gemma) — enabling offline AI tutoring</li>
+<li><strong>Mixture of Experts (MoE)</strong>: Models like Mixtral activate only 2 of 8 expert blocks per token, reducing compute 4x while maintaining capacity</li>
+<li><strong>Diffusion-based decoding</strong>: DART and similar approaches that parallelize token generation are emerging as alternatives to autoregressive decoding[^5]</li>
+</ol>
+<h3 id="e-commerce-applications">E-Commerce Applications</h3>
+<p>Inference optimization is critical for <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a>:</p>
+<ul>
+<li><strong>Real-time recommendations</strong>: Product suggestions must appear in &lt;100ms to avoid cart abandonment — quantized models serve at 10x the throughput</li>
+<li><strong>Conversational shopping</strong>: Interactive product advisors require sub-second response times</li>
+<li><strong>Cost efficiency</strong>: Serving millions of product queries per day demands aggressive optimization to control compute costs</li>
+<li><strong>Edge deployment</strong>: Running recommendation models on users' devices for privacy-preserving personalization</li>
+</ul>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>Inference optimization directly enables accessible AI education:</p>
+<ul>
+<li><strong>Low-resource schools</strong>: Quantized models on consumer GPUs make AI tutoring affordable for underfunded schools</li>
+<li><strong>Offline learning</strong>: On-device models enable AI-assisted study without internet access — critical for rural and developing regions</li>
+<li><strong>Interactive tutoring</strong>: Sub-second response times enable natural conversation flow between student and AI tutor</li>
+<li><strong>Personalized assessment</strong>: Real-time <a href="evaluation-methodology.html">evaluation methodology</a> requires fast inference to provide immediate feedback on student work</li>
+<li><strong>Scaling access</strong>: Efficient serving means more students can use AI tutors simultaneously within fixed compute budgets</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Quality degradation at extreme compression</strong>: INT2 and 1-bit quantization significantly degrade reasoning capabilities, especially for math and coding tasks</li>
+<li><strong>Task-specific sensitivity</strong>: Some tasks (creative writing) tolerate aggressive optimization; others (mathematical reasoning) are highly sensitive to precision loss</li>
+<li><strong>Hardware dependency</strong>: Many optimizations require specific GPU architectures (e.g., INT4 kernels on A100/H100), limiting portability</li>
+<li><strong>Evaluation gap</strong>: Models that appear equivalent on benchmarks after optimization may differ in edge cases and long-tail queries</li>
+<li><strong>Speculative decoding overhead</strong>: Draft model selection and management adds engineering complexity; draft quality varies across domains</li>
+<li><strong>Optimization-robustness tradeoff</strong>: Heavily optimized models may be more brittle to distribution shift in deployment</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — models that need optimization for deployment
+- <a href="../core-concepts/transfer-learning.html">Transfer Learning</a> — efficient adaptation vs. full fine-tuning
+- <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> — optimization may increase hallucination rates</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — optimized inference for coding assistants
+- <a href="../tools-platforms/aider.html">Aider</a> — local model support via quantized models
+- <a href="../tools-platforms/aide.html">AIDE</a> — inference budget management in solution search</p>
+<p><strong>Methodologies:</strong>
+- <a href="test-time-compute.html">Test-Time Compute</a> — spending more compute at inference for better results
+- <a href="evaluation-methodology.html">Evaluation Methodology</a> — measuring optimization impact on quality
+- <a href="world-models.html">World Models</a> — efficient world model inference for real-time simulation
+- <a href="synthetic-data-generation.html">Synthetic Data Generation</a> — generating training data for distilled models</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws Research</a> — efficiency scaling as an alternative to parameter scaling
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — real-time inference requirements
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — fast inference for interactive simulations
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-optimization of inference pipelines</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational inference optimization papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring optimization advances</p>
+<h2 id="references">References</h2>
+<p>[^1]: Pope, R., Douglas, S., Chowdhery, A., Devlin, J., Bradbury, J., Heek, J., ... &amp; Dean, J. (2023). "Efficiently Scaling Transformer Inference." <em>MLSys 2023</em>. arXiv:2211.05102. https://arxiv.org/abs/2211.05102</p>
+<p>[^2]: Frantar, E., Ashkboos, S., Hoefler, T., &amp; Alistarh, D. (2023). "GPTQ: Accurate Post-Training Quantization for Generative Pre-Trained Transformers." <em>ICLR 2023</em>. arXiv:2210.17323. https://arxiv.org/abs/2210.17323</p>
+<p>[^3]: UniComp Authors. (2026). "UniComp: A Unified Evaluation of LLM Compression via Pruning, Quantization, and Distillation." arXiv:2602.09130. https://arxiv.org/abs/2602.09130</p>
+<p>[^4]: Leviathan, Y., Kalman, M., &amp; Matias, Y. (2023). "Fast Inference from Transformers via Speculative Decoding." <em>ICML 2023</em>. arXiv:2211.17192. https://arxiv.org/abs/2211.17192</p>
+<p>[^5]: Liu, F., et al. (2026). "DART: Diffusion-Inspired Speculative Decoding for Fast LLM Inference." arXiv:2601.19278. https://arxiv.org/abs/2601.19278</p>
+<p>[^6]: Nightjar Authors. (2025). "Nightjar: Dynamic Adaptive Speculative Decoding for Large Language Models Serving." arXiv:2512.22420. https://arxiv.org/abs/2512.22420</p>
+<p>[^7]: Kumar, T., Dao, T., &amp; May, A. (2026). "Speculative Speculative Decoding." arXiv:2603.03251. https://arxiv.org/abs/2603.03251</p>
+<p>[^8]: Chen, et al. (2026). "KV Cache Optimization Strategies for Scalable and Efficient LLM Inference." arXiv:2603.20397. https://arxiv.org/abs/2603.20397</p>
+<p>[^9]: RocketKV Authors. (2025). "RocketKV: Accelerating Long-Context LLM Inference via Two-Stage KV Cache Compression." arXiv:2502.14051. https://arxiv.org/abs/2502.14051</p>
+<p>[^10]: ZipServ Authors. (2026). "ZipServ: Fast and Memory-Efficient LLM Inference with Hardware-Aware Lossless Compression." arXiv:2603.17435. https://arxiv.org/abs/2603.17435</p>
+</main>
+</body>
+</html>

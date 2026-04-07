@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
 <a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
@@ -340,7 +341,9 @@ body {
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
 <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
 <a href="../methodologies/synthetic-data-generation.html" aria-current="page">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
@@ -609,6 +612,9 @@ loadWishlist();
 <li><strong>Domain-specific generation</strong>: Specialized generators for scientific, legal, medical, and educational data are outperforming general-purpose generators</li>
 <li><strong>Model collapse mitigation</strong>: New techniques mix synthetic and real data in carefully calibrated ratios to prevent distribution narrowing[^3]</li>
 <li><strong>Verifiable synthetic data</strong>: Methods that generate data with provably correct labels (e.g., synthetic math problems with known solutions)</li>
+<li><strong>Pedagogically-structured synthetic data</strong>: The IOA Framework (2026) generates synthetic training data structured according to Bloom's Taxonomy and Vygotsky's Zone of Proximal Development — using educational theory to produce better <a href="../core-concepts/knowledge-distillation.html">knowledge distillation</a> curricula[^8]</li>
+<li><strong>Multi-agent trajectory synthesis</strong>: ProductResearch (2026) uses multi-agent systems to construct synthetic research trajectories for training e-commerce deep research agents, combining tool-use traces with citation-grounded outputs[^9]</li>
+<li><strong>On-policy synthetic generation</strong>: Rather than generating synthetic data once from a teacher, on-policy distillation (2026) has the student generate its own data and receive teacher feedback — producing training signal tailored to the student's actual distribution[^10]</li>
 </ol>
 <h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
 <p>Synthetic data generation directly enables personalized learning:</p>
@@ -636,12 +642,15 @@ loadWishlist();
 <p><strong>Tools &amp; Platforms:</strong>
 - <a href="../tools-platforms/code-generation.html">Code Generation</a> — synthetic code data for training coding models
 - <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking synthetic data research
-- <a href="../tools-platforms/autoresearch.html">AutoResearch</a> — automated generation of research data</p>
+- <a href="../tools-platforms/autoresearch.html">AutoResearch</a> — automated generation of research data
+- <a href="../tools-platforms/aider.html">Aider</a> — uses synthetic code traces for training</p>
 <p><strong>Methodologies:</strong>
 - <a href="curriculum-learning.html">Curriculum Learning</a> — synthetic data with controlled difficulty progression
 - <a href="active-learning.html">Active Learning</a> — generating data targeted at model weaknesses
 - <a href="evaluation-methodology.html">Evaluation Methodology</a> — evaluating synthetic data quality
-- <a href="world-models.html">World Models</a> — simulation-based synthetic data generation</p>
+- <a href="world-models.html">World Models</a> — simulation-based synthetic data generation
+- <a href="prompt-engineering.html">Prompt Engineering</a> — prompts that control synthetic data quality and diversity
+- <a href="inference-optimization.html">Inference Optimization</a> — efficient generation of large synthetic datasets</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-training loops using synthetic data
 - <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — synthetic product and customer data
@@ -658,6 +667,9 @@ loadWishlist();
 <p>[^5]: Xu, C., Sun, Q., Zheng, K., Geng, X., Zhao, P., Feng, J., ... &amp; Jiang, D. (2024). "WizardLM: Empowering Large Language Models to Follow Complex Instructions." <em>ICLR 2024</em>. arXiv:2304.12244. https://arxiv.org/abs/2304.12244</p>
 <p>[^6]: Luo, Z., Xu, C., Zhao, P., et al. (2025). "SciSynth: Synthetic Scientific Reasoning Data via Template Evolution." <em>ICML 2025</em>. arXiv:2503.08901.</p>
 <p>[^7]: Zhang, Y., Li, H., &amp; Wang, K. (2025). "ProductGen: Synthetic E-Commerce Data Generation for Multilingual Product Understanding." <em>KDD 2025</em>. arXiv:2505.11234.</p>
+<p>[^8]: IOA Framework Authors. (2026). "Pedagogically-Inspired Data Synthesis for Language Model Knowledge Distillation." arXiv:2602.12172. https://arxiv.org/abs/2602.12172</p>
+<p>[^9]: ProductResearch Authors. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716</p>
+<p>[^10]: On-Policy Distillation Survey Authors. (2026). "A Survey of On-Policy Distillation for Large Language Models." arXiv:2604.00626. https://arxiv.org/abs/2604.00626</p>
 </main>
 </body>
 </html>

@@ -184,6 +184,9 @@ For [predictive simulation learning](../frontier-topics/predictive-simulation-le
 4. **Domain-specific generation**: Specialized generators for scientific, legal, medical, and educational data are outperforming general-purpose generators
 5. **Model collapse mitigation**: New techniques mix synthetic and real data in carefully calibrated ratios to prevent distribution narrowing[^3]
 6. **Verifiable synthetic data**: Methods that generate data with provably correct labels (e.g., synthetic math problems with known solutions)
+7. **Pedagogically-structured synthetic data**: The IOA Framework (2026) generates synthetic training data structured according to Bloom's Taxonomy and Vygotsky's Zone of Proximal Development — using educational theory to produce better [knowledge distillation](../core-concepts/knowledge-distillation.md) curricula[^8]
+8. **Multi-agent trajectory synthesis**: ProductResearch (2026) uses multi-agent systems to construct synthetic research trajectories for training e-commerce deep research agents, combining tool-use traces with citation-grounded outputs[^9]
+9. **On-policy synthetic generation**: Rather than generating synthetic data once from a teacher, on-policy distillation (2026) has the student generate its own data and receive teacher feedback — producing training signal tailored to the student's actual distribution[^10]
 
 ### Application to Real-World Learning
 
@@ -215,12 +218,15 @@ Synthetic data generation directly enables personalized learning:
 - [Code Generation](../tools-platforms/code-generation.md) — synthetic code data for training coding models
 - [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — tracking synthetic data research
 - [AutoResearch](../tools-platforms/autoresearch.md) — automated generation of research data
+- [Aider](../tools-platforms/aider.md) — uses synthetic code traces for training
 
 **Methodologies:**
 - [Curriculum Learning](curriculum-learning.md) — synthetic data with controlled difficulty progression
 - [Active Learning](active-learning.md) — generating data targeted at model weaknesses
 - [Evaluation Methodology](evaluation-methodology.md) — evaluating synthetic data quality
 - [World Models](world-models.md) — simulation-based synthetic data generation
+- [Prompt Engineering](prompt-engineering.md) — prompts that control synthetic data quality and diversity
+- [Inference Optimization](inference-optimization.md) — efficient generation of large synthetic datasets
 
 **Frontier Topics:**
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — self-training loops using synthetic data
@@ -247,3 +253,9 @@ Synthetic data generation directly enables personalized learning:
 [^6]: Luo, Z., Xu, C., Zhao, P., et al. (2025). "SciSynth: Synthetic Scientific Reasoning Data via Template Evolution." *ICML 2025*. arXiv:2503.08901.
 
 [^7]: Zhang, Y., Li, H., & Wang, K. (2025). "ProductGen: Synthetic E-Commerce Data Generation for Multilingual Product Understanding." *KDD 2025*. arXiv:2505.11234.
+
+[^8]: IOA Framework Authors. (2026). "Pedagogically-Inspired Data Synthesis for Language Model Knowledge Distillation." arXiv:2602.12172. https://arxiv.org/abs/2602.12172
+
+[^9]: ProductResearch Authors. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716
+
+[^10]: On-Policy Distillation Survey Authors. (2026). "A Survey of On-Policy Distillation for Large Language Models." arXiv:2604.00626. https://arxiv.org/abs/2604.00626

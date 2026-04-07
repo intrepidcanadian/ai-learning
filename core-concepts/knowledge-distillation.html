@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Distillation - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html" aria-current="page">Knowledge Distillation</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Core Concepts &rsaquo; Knowledge Distillation</div>
+<h1 id="knowledge-distillation">Knowledge Distillation</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Knowledge distillation</strong> is the process of transferring learned capabilities from a large, expensive "teacher" model to a smaller, efficient "student" model. Introduced by Hinton et al. (2015), the core insight is that a teacher's soft probability distribution over outputs contains far more information than hard labels alone — the teacher's uncertainty, its ranking of alternatives, and its implicit understanding of inter-class similarities all transfer to the student through soft targets.</p>
+<p>In the era of frontier LLMs costing millions to train and thousands per hour to serve, knowledge distillation is how cutting-edge capabilities become accessible. For AI-assisted learning, distillation is what makes it possible to run a capable AI tutor on a school laptop rather than a cloud GPU cluster — it is the bridge between research breakthroughs and real-world educational equity.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-teacher-student-framework">The Teacher-Student Framework</h3>
+<p>The classical distillation framework trains a student model <em>S</em> to match the teacher model <em>T</em>'s output distribution:[^1]</p>
+<p><strong>Distillation loss</strong> = α · CrossEntropy(S(x), y_hard) + (1-α) · KL(S(x)/τ, T(x)/τ) · τ²</p>
+<p>Where:
+- <em>y_hard</em> = ground-truth labels (standard training signal)
+- <em>T(x)/τ</em> = teacher's softened predictions (temperature τ &gt; 1 spreads probability mass)
+- <em>α</em> = balancing weight between hard and soft targets
+- <em>τ</em> = temperature parameter controlling softness</p>
+<p><strong>Why soft targets work:</strong> When a teacher assigns 90% probability to "cat" and 5% to "lynx" vs. 0.1% to "truck," the student learns that cats and lynxes are visually similar — information absent from hard labels.</p>
+<h3 id="from-output-distillation-to-process-distillation">From Output Distillation to Process Distillation</h3>
+<p>Modern LLM distillation has evolved beyond output matching:[^2]</p>
+<table>
+<thead>
+<tr>
+<th>Generation</th>
+<th>What Transfers</th>
+<th>Method</th>
+<th>Era</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1st: Logit matching</strong></td>
+<td>Output distribution</td>
+<td>KL divergence on logits</td>
+<td>2015-2020</td>
+</tr>
+<tr>
+<td><strong>2nd: Feature matching</strong></td>
+<td>Internal representations</td>
+<td>Layer-wise alignment</td>
+<td>2019-2022</td>
+</tr>
+<tr>
+<td><strong>3rd: Behavior cloning</strong></td>
+<td>Input-output traces</td>
+<td>Fine-tune on teacher's responses</td>
+<td>2023-2024</td>
+</tr>
+<tr>
+<td><strong>4th: On-policy distillation</strong></td>
+<td>Interactive feedback</td>
+<td>Student generates, teacher critiques</td>
+<td>2025-2026</td>
+</tr>
+</tbody>
+</table>
+<h3 id="connection-to-transfer-learning">Connection to Transfer Learning</h3>
+<p>Knowledge distillation is a form of <a href="transfer-learning.html">transfer learning</a> — knowledge moves from one model to another. But while standard transfer learning preserves the model architecture (e.g., fine-tuning a pretrained model), distillation allows <em>architectural compression</em>: the student can be radically smaller and differently structured than the teacher.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="on-policy-distillation">On-Policy Distillation</h3>
+<p>The latest paradigm shift is <strong>on-policy distillation</strong>, where the student generates its own outputs and receives teacher feedback, rather than passively imitating teacher traces:[^3]</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowKD&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#333&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Knowledge Distillation: Off-Policy vs On-Policy&lt;/text&gt;
+
+  &lt;!-- Off-policy side --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;160&quot; rx=&quot;10&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;185&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Off-Policy (Traditional)&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;82&quot; width=&quot;100&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#BBDEFB&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;90&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Teacher&lt;/text&gt;
+  &lt;text x=&quot;90&quot; y=&quot;117&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Generates traces&lt;/text&gt;
+
+  &lt;line x1=&quot;145&quot; y1=&quot;105&quot; x2=&quot;175&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowKD)&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;97&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#555&quot;&gt;fixed&lt;/text&gt;
+
+  &lt;rect x=&quot;180&quot; y=&quot;82&quot; width=&quot;80&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;220&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Dataset&lt;/text&gt;
+  &lt;text x=&quot;220&quot; y=&quot;117&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Teacher outputs&lt;/text&gt;
+
+  &lt;line x1=&quot;265&quot; y1=&quot;105&quot; x2=&quot;285&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowKD)&quot;/&gt;
+
+  &lt;rect x=&quot;290&quot; y=&quot;82&quot; width=&quot;50&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#90CAF9&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;315&quot; y=&quot;107&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Student&lt;/text&gt;
+
+  &lt;text x=&quot;185&quot; y=&quot;155&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;Student imitates teacher's outputs&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;170&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;⚠ Distribution mismatch:&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;183&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#C62828&quot;&gt;student never learns from its own mistakes&lt;/text&gt;
+
+  &lt;!-- On-policy side --&gt;
+  &lt;rect x=&quot;370&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;160&quot; rx=&quot;10&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;535&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;On-Policy (2025-2026)&lt;/text&gt;
+
+  &lt;rect x=&quot;510&quot; y=&quot;82&quot; width=&quot;100&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#C8E6C9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;560&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Teacher&lt;/text&gt;
+  &lt;text x=&quot;560&quot; y=&quot;117&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Gives feedback&lt;/text&gt;
+
+  &lt;line x1=&quot;560&quot; y1=&quot;132&quot; x2=&quot;560&quot; y2=&quot;148&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowKD)&quot;/&gt;
+  &lt;text x=&quot;585&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#555&quot;&gt;critique&lt;/text&gt;
+
+  &lt;rect x=&quot;390&quot; y=&quot;82&quot; width=&quot;100&quot; height=&quot;45&quot; rx=&quot;6&quot; fill=&quot;#A5D6A7&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;440&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Student&lt;/text&gt;
+  &lt;text x=&quot;440&quot; y=&quot;117&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#666&quot;&gt;Generates outputs&lt;/text&gt;
+
+  &lt;line x1=&quot;495&quot; y1=&quot;105&quot; x2=&quot;505&quot; y2=&quot;105&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowKD)&quot;/&gt;
+
+  &lt;path d=&quot;M 440 132 L 440 160 L 560 160&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; fill=&quot;none&quot; marker-end=&quot;url(#arrowKD)&quot;/&gt;
+  &lt;text x=&quot;500&quot; y=&quot;175&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#555&quot;&gt;own outputs&lt;/text&gt;
+
+  &lt;text x=&quot;535&quot; y=&quot;195&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;✓ Student learns from its own distribution&lt;/text&gt;
+
+  &lt;!-- Pedagogical connection --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;225&quot; width=&quot;680&quot; height=&quot;155&quot; rx=&quot;10&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;248&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Pedagogical Parallel: How Humans Learn from Experts&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;265&quot; width=&quot;200&quot; height=&quot;100&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;140&quot; y=&quot;285&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Lecture (Off-Policy)&lt;/text&gt;
+  &lt;text x=&quot;140&quot; y=&quot;305&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Student passively receives&lt;/text&gt;
+  &lt;text x=&quot;140&quot; y=&quot;320&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;expert's pre-made solutions&lt;/text&gt;
+  &lt;text x=&quot;140&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;Limited engagement, forgets quickly&lt;/text&gt;
+  &lt;text x=&quot;140&quot; y=&quot;355&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#C62828&quot;&gt;≈ Off-policy distillation&lt;/text&gt;
+
+  &lt;rect x=&quot;260&quot; y=&quot;265&quot; width=&quot;200&quot; height=&quot;100&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;285&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Tutoring (On-Policy)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;305&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Student attempts problems,&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;320&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;tutor provides targeted feedback&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;Active learning, deep understanding&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;355&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;≈ On-policy distillation&lt;/text&gt;
+
+  &lt;rect x=&quot;480&quot; y=&quot;265&quot; width=&quot;200&quot; height=&quot;100&quot; rx=&quot;6&quot; fill=&quot;#FFE0B2&quot; stroke=&quot;#F57C00&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;580&quot; y=&quot;285&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;Socratic (Curriculum)&lt;/text&gt;
+  &lt;text x=&quot;580&quot; y=&quot;305&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Progressively harder problems&lt;/text&gt;
+  &lt;text x=&quot;580&quot; y=&quot;320&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;matched to student's level&lt;/text&gt;
+  &lt;text x=&quot;580&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;Zone of proximal development&lt;/text&gt;
+  &lt;text x=&quot;580&quot; y=&quot;355&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#9C27B0&quot;&gt;≈ Curriculum distillation (IOA)&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>A comprehensive survey by the on-policy distillation community (2026) introduces a unified f-divergence framework where different divergence measures (KL, reverse KL, Jensen-Shannon) produce different distillation behaviors.[^3] Key findings:
+- <strong>Forward KL</strong> (standard): student spreads mass to cover teacher's full distribution — conservative but safe
+- <strong>Reverse KL</strong>: student concentrates on teacher's modes — sharper but may miss alternatives
+- <strong>Distillation scaling laws</strong>: larger teachers and more on-policy iterations improve student quality predictably</p>
+<h3 id="reinforcement-aware-distillation">Reinforcement-Aware Distillation</h3>
+<p>As RL post-training (RLHF, RLAIF) drives reasoning gains in frontier models, standard distillation methods that copy teacher traces miss the <em>process</em> that produced those traces. Reinforcement-aware knowledge distillation (2026) addresses this by:[^4]</p>
+<ol>
+<li>Having the student generate its own chain-of-thought reasoning</li>
+<li>Using the teacher to provide step-level reward signals (not just final-answer feedback)</li>
+<li>Training the student via RL on those step-level rewards</li>
+</ol>
+<p>This produces students that <em>reason like the teacher</em> rather than just <em>imitating the teacher's answers</em> — a crucial distinction for mathematical and scientific reasoning tasks.</p>
+<h3 id="pedagogically-inspired-distillation-ioa-framework">Pedagogically-Inspired Distillation (IOA Framework)</h3>
+<p>The IOA Framework (2026) integrates educational theory directly into distillation:[^5]</p>
+<ol>
+<li><strong>Knowledge Identifier</strong>: Maps the teacher's knowledge space into Bloom's Taxonomy levels</li>
+<li><strong>Organizer</strong>: Structures curriculum from simple to complex, following Vygotsky's Zone of Proximal Development</li>
+<li><strong>Adapter</strong>: Generates progressively harder training examples calibrated to the student's current capability</li>
+</ol>
+<p>This connects to <a href="../methodologies/curriculum-learning.html">curriculum learning</a> — the distillation process itself follows a pedagogical progression, mirroring how human education scaffolds from fundamentals to advanced topics.</p>
+<h3 id="progressive-distillation-pocl">Progressive Distillation (POCL)</h3>
+<p>POCL (2025) implements a "progressive overload" principle inspired by strength training:[^6]</p>
+<ul>
+<li>Start with easy examples where teacher-student agreement is high</li>
+<li>Gradually introduce harder examples as the student's capability grows</li>
+<li>Monitor difficulty calibration to avoid overwhelming the student</li>
+</ul>
+<p>This plug-in framework adds minimal computational overhead and works with any base distillation method.</p>
+<h3 id="moe-enhanced-distillation">MoE-Enhanced Distillation</h3>
+<p>Leveraging Mixture of Experts architectures (2026) for code model distillation shows that specialized expert routing can improve the teacher's ability to provide diverse, domain-specific training signals for the student.[^7] Different experts specialize in different code patterns, producing richer distillation data than a monolithic teacher.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-trends">2025-2026 Trends</h3>
+<ol>
+<li><strong>On-policy dominance</strong>: The field has shifted decisively from static trace imitation to interactive, on-policy distillation[^3]</li>
+<li><strong>RL-aware distillation</strong>: Distilling reasoning processes, not just reasoning outputs — critical for math, code, and science</li>
+<li><strong>Agent-level distillation</strong>: Distilling tool-use, planning, and multi-step agent behaviors, not just text generation</li>
+<li><strong>Distillation scaling laws</strong>: Predictable relationships between teacher size, student size, data quantity, and student quality</li>
+<li><strong>Cross-modal distillation</strong>: Transferring knowledge from multimodal teachers (vision+language) to text-only students</li>
+<li><strong>Self-distillation</strong>: Models distilling knowledge from their own chain-of-thought reasoning into direct answers, connecting to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></li>
+</ol>
+<h3 id="e-commerce-applications">E-Commerce Applications</h3>
+<p>Distillation is essential for <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> deployment:</p>
+<ul>
+<li><strong>Recommendation latency</strong>: Distilled models serve product recommendations in &lt;10ms vs. 200ms for full models</li>
+<li><strong>Edge deployment</strong>: Distilled models run on edge servers close to users, reducing latency for real-time pricing</li>
+<li><strong>Cost control</strong>: A distilled 7B model costs 50x less to serve than the 405B teacher, enabling margin-positive AI features</li>
+<li><strong>Specialized distillation</strong>: Domain-specific student models for product search, review summarization, and customer intent classification</li>
+</ul>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>Knowledge distillation has a deep parallel to human education — it <em>is</em> the process of making expert knowledge accessible to learners:</p>
+<ul>
+<li><strong>Accessible AI tutors</strong>: Distilled models enable AI tutoring on commodity hardware, making quality education accessible regardless of school budgets</li>
+<li><strong>Curriculum design</strong>: The IOA framework's pedagogical approach to distillation provides a model for how educational AI should scaffold learning</li>
+<li><strong>Teacher-student dynamics</strong>: On-policy distillation mirrors effective tutoring: the student attempts, the teacher provides targeted feedback, and the student improves through practice rather than passive absorption</li>
+<li><strong>Personalized pacing</strong>: Progressive distillation's difficulty calibration maps directly to personalized learning paths for human students</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Capability ceiling</strong>: The student can never fully match the teacher — there is an inherent information loss in compression</li>
+<li><strong>Training cost</strong>: On-policy distillation requires running both teacher and student, making training expensive</li>
+<li><strong>Reasoning fidelity</strong>: Distilled models may produce correct answers via shortcuts rather than genuine reasoning — harder to verify for educational applications</li>
+<li><strong>Distribution sensitivity</strong>: Students perform well on the teacher's distribution but may fail on out-of-distribution inputs</li>
+<li><strong>Legal and ethical questions</strong>: Using proprietary model outputs (e.g., GPT-4) to train competitors raises unresolved legal issues</li>
+<li><strong>Evaluation difficulty</strong>: Standard benchmarks may not capture the subtle capability losses from distillation (see <a href="../methodologies/evaluation-methodology.html">evaluation methodology</a>)</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="transfer-learning.html">Transfer Learning</a> — distillation as a form of knowledge transfer
+- <a href="foundation-models-for-research.html">Foundation Models for Research</a> — making foundation models accessible via distillation
+- <a href="hallucination-detection.html">Hallucination Detection</a> — distilled models may hallucinate differently than teachers</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — distilled coding models (CodeLlama, DeepSeek-Coder)
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking distillation research
+- <a href="../tools-platforms/aider.html">Aider</a> — uses distilled models for local coding assistance</p>
+<p><strong>Methodologies:</strong>
+- <a href="../methodologies/inference-optimization.html">Inference Optimization</a> — distillation as the most aggressive optimization
+- <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a> — progressive distillation follows curriculum design
+- <a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a> — teacher-generated data for student training
+- <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a> — measuring distillation quality</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-distillation for iterative improvement
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — distilled models for real-time commerce
+- <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws Research</a> — distillation scaling laws
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — distilling simulation knowledge</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational distillation papers
+- <a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — distillation research groups</p>
+<h2 id="references">References</h2>
+<p>[^1]: Hinton, G., Vinyals, O., &amp; Dean, J. (2015). "Distilling the Knowledge in a Neural Network." <em>NIPS 2014 Deep Learning Workshop</em>. arXiv:1503.02531. https://arxiv.org/abs/1503.02531</p>
+<p>[^2]: Gou, J., Yu, B., Maybank, S. J., &amp; Tao, D. (2021). "Knowledge Distillation: A Survey." <em>International Journal of Computer Vision</em>, 129, 1789-1819. https://doi.org/10.1007/s11263-021-01453-z</p>
+<p>[^3]: On-Policy Distillation Survey Authors. (2026). "A Survey of On-Policy Distillation for Large Language Models." arXiv:2604.00626. https://arxiv.org/abs/2604.00626</p>
+<p>[^4]: Reinforcement-Aware KD Authors. (2026). "Reinforcement-aware Knowledge Distillation for LLM Reasoning." arXiv:2602.22495. https://arxiv.org/abs/2602.22495</p>
+<p>[^5]: IOA Framework Authors. (2026). "Pedagogically-Inspired Data Synthesis for Language Model Knowledge Distillation." arXiv:2602.12172. https://arxiv.org/abs/2602.12172</p>
+<p>[^6]: POCL Authors. (2025). "Being Strong Progressively! Enhancing Knowledge Distillation via Curriculum Learning." arXiv:2506.05695. https://arxiv.org/abs/2506.05695</p>
+<p>[^7]: MoE KD Authors. (2026). "Leveraging Mixture of Experts to Improve Knowledge Distillation for Language Models of Code." arXiv:2603.13213. https://arxiv.org/abs/2603.13213</p>
+</main>
+</body>
+</html>

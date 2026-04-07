@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Engineering - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html" aria-current="page">Prompt Engineering</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Prompt Engineering</div>
+<h1 id="prompt-engineering">Prompt Engineering</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Prompt engineering</strong> is the practice of designing, optimizing, and automating the natural language instructions given to AI models to elicit desired behaviors. What began as informal "prompt crafting" has evolved into a rigorous discipline with automated optimization frameworks, theoretical foundations, and measurable impact on model performance. A well-designed prompt can transform a general-purpose LLM into a domain expert, while a poor prompt can make the same model produce hallucinated, irrelevant, or harmful outputs.</p>
+<p>For AI-assisted learning, prompt engineering is both a <em>tool</em> and a <em>subject</em>. As a tool, it determines how effectively AI tutors explain concepts, generate practice problems, and assess student work. As a subject, prompt engineering is itself a valuable skill for students to learn — the ability to clearly specify what you want from an AI system is becoming as fundamental as information literacy.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="from-manual-craft-to-automated-science">From Manual Craft to Automated Science</h3>
+<p>The evolution of prompt engineering reflects the maturation of the field:[^1]</p>
+<table>
+<thead>
+<tr>
+<th>Era</th>
+<th>Approach</th>
+<th>Example</th>
+<th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2020-2022</strong></td>
+<td>Manual prompt writing</td>
+<td>"Answer the following question:"</td>
+<td>Wording matters enormously</td>
+</tr>
+<tr>
+<td><strong>2022-2023</strong></td>
+<td>Chain-of-thought (CoT)</td>
+<td>"Let's think step by step"</td>
+<td>Reasoning elicitation</td>
+</tr>
+<tr>
+<td><strong>2023-2024</strong></td>
+<td>Few-shot exemplar selection</td>
+<td>Optimized example ordering</td>
+<td>Examples as programming</td>
+</tr>
+<tr>
+<td><strong>2024-2025</strong></td>
+<td>Automated prompt optimization</td>
+<td>DSPy, OPRO, APE</td>
+<td>Prompts as learnable parameters</td>
+</tr>
+<tr>
+<td><strong>2025-2026</strong></td>
+<td>Prompt sculpting &amp; inversion</td>
+<td>Automated prompt discovery</td>
+<td>Beyond human intuition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-prompts-matter-so-much">Why Prompts Matter So Much</h3>
+<p>The sensitivity of LLM outputs to prompt wording reveals something fundamental about how these models work:[^2]</p>
+<ol>
+<li><strong>Activation steering</strong>: Different prompts activate different knowledge and reasoning circuits within the model</li>
+<li><strong>Distribution shift</strong>: The prompt determines which region of the model's output distribution is sampled</li>
+<li><strong>Role simulation</strong>: Prompts like "You are an expert physicist" cause the model to condition on that role, producing more specialized and accurate outputs</li>
+<li><strong>Reasoning scaffolding</strong>: Chain-of-thought prompts provide intermediate computation space that improves multi-step reasoning</li>
+</ol>
+<h3 id="connection-to-test-time-compute">Connection to Test-Time Compute</h3>
+<p>Prompt engineering is the most accessible form of <a href="test-time-compute.html">test-time compute</a> scaling — by adding reasoning instructions to the prompt, users spend more tokens (compute) at inference time in exchange for better outputs. The relationship is:</p>
+<p><strong>Simple prompt</strong> → single forward pass → fast but shallow
+<strong>CoT prompt</strong> → extended generation → slower but deeper reasoning
+<strong>Multi-step prompt</strong> → multiple LLM calls → most compute, best results</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="chain-of-thought-prompting">Chain-of-Thought Prompting</h3>
+<p>Wei et al. (2022) showed that adding "Let's think step by step" to prompts dramatically improves reasoning performance:[^3]</p>
+<ul>
+<li><strong>Zero-shot CoT</strong>: Just adding the reasoning instruction</li>
+<li><strong>Few-shot CoT</strong>: Providing worked examples with step-by-step solutions</li>
+<li><strong>Auto-CoT</strong>: Automatically selecting and ordering chain-of-thought demonstrations</li>
+</ul>
+<p>CoT is now standard practice for mathematical reasoning, scientific analysis, and complex decision-making. It connects to how human learners benefit from showing their work — the intermediate steps make errors detectable and reasoning auditable.</p>
+<h3 id="structured-prompting">Structured Prompting</h3>
+<p>Chen et al. (2025) demonstrated that structured prompts — using XML tags, markdown headers, and explicit formatting — improve LLM evaluation performance by 6% on average:[^4]</p>
+<pre><code>&lt;context&gt;
+  You are evaluating student essays on climate change.
+&lt;/context&gt;
+&lt;rubric&gt;
+  - Scientific accuracy (0-25 points)
+  - Argument structure (0-25 points)
+  - Evidence quality (0-25 points)
+  - Writing clarity (0-25 points)
+&lt;/rubric&gt;
+&lt;instructions&gt;
+  Score each dimension separately with justification,
+  then provide an overall assessment.
+&lt;/instructions&gt;
+</code></pre>
+<p>Key finding: most of the performance gain comes from introducing chain-of-thought; diminishing returns from more advanced optimizers suggest a ceiling on structural gains.</p>
+<h3 id="automated-prompt-optimization">Automated Prompt Optimization</h3>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 420&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowPE&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#333&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Automated Prompt Optimization Loop&lt;/text&gt;
+
+  &lt;!-- Manual vs Automated comparison --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#fce4ec&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;185&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#C62828&quot;&gt;Manual Prompt Engineering&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;90&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Human writes prompt → tests → reads outputs&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;→ rewrites prompt → tests again → ...&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;Slow, inconsistent, bounded by human intuition&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;148&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#C62828&quot;&gt;Rarely explores non-obvious formulations&lt;/text&gt;
+  &lt;text x=&quot;185&quot; y=&quot;165&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#888&quot;&gt;10-50 iterations typical&lt;/text&gt;
+
+  &lt;rect x=&quot;370&quot; y=&quot;45&quot; width=&quot;330&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;535&quot; y=&quot;68&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Automated Prompt Optimization&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;90&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Optimizer generates prompt candidates&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;→ evaluates on validation set → scores&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;→ evolves/refines best prompts → ...&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;148&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2E7D32&quot;&gt;Fast, systematic, discovers non-obvious prompts&lt;/text&gt;
+  &lt;text x=&quot;535&quot; y=&quot;165&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#888&quot;&gt;1000+ iterations feasible&lt;/text&gt;
+
+  &lt;!-- Optimization loop diagram --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;195&quot; width=&quot;680&quot; height=&quot;205&quot; rx=&quot;10&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;218&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;DSPy / MIPROv2 Optimization Pipeline&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;235&quot; width=&quot;130&quot; height=&quot;65&quot; rx=&quot;6&quot; fill=&quot;#BBDEFB&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;105&quot; y=&quot;257&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Task Spec&lt;/text&gt;
+  &lt;text x=&quot;105&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Input/output examples&lt;/text&gt;
+  &lt;text x=&quot;105&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Evaluation metric&lt;/text&gt;
+
+  &lt;line x1=&quot;175&quot; y1=&quot;267&quot; x2=&quot;200&quot; y2=&quot;267&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowPE)&quot;/&gt;
+
+  &lt;rect x=&quot;205&quot; y=&quot;235&quot; width=&quot;130&quot; height=&quot;65&quot; rx=&quot;6&quot; fill=&quot;#90CAF9&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;270&quot; y=&quot;257&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Candidate Gen&lt;/text&gt;
+  &lt;text x=&quot;270&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;LLM proposes prompts&lt;/text&gt;
+  &lt;text x=&quot;270&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Mutation + crossover&lt;/text&gt;
+
+  &lt;line x1=&quot;340&quot; y1=&quot;267&quot; x2=&quot;365&quot; y2=&quot;267&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowPE)&quot;/&gt;
+
+  &lt;rect x=&quot;370&quot; y=&quot;235&quot; width=&quot;130&quot; height=&quot;65&quot; rx=&quot;6&quot; fill=&quot;#64B5F6&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;435&quot; y=&quot;257&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;white&quot;&gt;Evaluation&lt;/text&gt;
+  &lt;text x=&quot;435&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;white&quot;&gt;Run on validation set&lt;/text&gt;
+  &lt;text x=&quot;435&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;white&quot;&gt;Score each candidate&lt;/text&gt;
+
+  &lt;line x1=&quot;505&quot; y1=&quot;267&quot; x2=&quot;530&quot; y2=&quot;267&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowPE)&quot;/&gt;
+
+  &lt;rect x=&quot;535&quot; y=&quot;235&quot; width=&quot;130&quot; height=&quot;65&quot; rx=&quot;6&quot; fill=&quot;#42A5F5&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;600&quot; y=&quot;257&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;white&quot;&gt;Selection&lt;/text&gt;
+  &lt;text x=&quot;600&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;white&quot;&gt;Keep top-k prompts&lt;/text&gt;
+  &lt;text x=&quot;600&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;white&quot;&gt;Feed back to gen&lt;/text&gt;
+
+  &lt;!-- Feedback arrow --&gt;
+  &lt;path d=&quot;M 600 305 L 600 340 L 270 340 L 270 305&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot; marker-end=&quot;url(#arrowPE)&quot; stroke-dasharray=&quot;5,5&quot;/&gt;
+  &lt;text x=&quot;435&quot; y=&quot;355&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#1565C0&quot;&gt;Iterate until convergence or budget exhausted&lt;/text&gt;
+
+  &lt;!-- Output --&gt;
+  &lt;rect x=&quot;200&quot; y=&quot;370&quot; width=&quot;300&quot; height=&quot;25&quot; rx=&quot;6&quot; fill=&quot;#1565C0&quot;/&gt;
+  &lt;text x=&quot;350&quot; y=&quot;387&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;white&quot;&gt;Optimized prompt (often non-obvious to humans)&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>The survey by Zhou et al. (2025) frames prompt engineering as a bi-level optimization problem:[^1]</p>
+<ul>
+<li><strong>Outer loop</strong>: optimize the prompt template</li>
+<li><strong>Inner loop</strong>: the LLM's generation conditioned on that prompt</li>
+</ul>
+<p>Key frameworks:
+- <strong>DSPy</strong>: Treats prompts as differentiable programs with learnable modules[^5]
+- <strong>OPRO</strong>: Uses an LLM to optimize prompts for another LLM
+- <strong>MIPROv2</strong>: Multi-stage instruction proposal and refinement, demonstrated for clinical QA with autonomous prompt tuning[^6]</p>
+<h3 id="prompt-sculpting-and-inversion">Prompt Sculpting and Inversion</h3>
+<p>Wang et al. (2025) argue that manual prompt engineering is being superseded by <strong>prompt sculpting</strong> — automated methods that discover effective prompts humans would never write:[^7]</p>
+<ul>
+<li><strong>Prompt inversion</strong>: Given desired outputs, reverse-engineer the prompt that produces them</li>
+<li><strong>Gradient-free optimization</strong>: Evolutionary strategies that mutate and recombine prompt fragments</li>
+<li><strong>Soft prompts</strong>: Continuous embeddings prepended to input (not human-readable, but highly effective)</li>
+</ul>
+<p>For thought-driven models (o1, DeepSeek-R1), small prompt changes can drastically alter reasoning trajectories — making automated optimization essential since humans cannot predict these effects.</p>
+<h3 id="domain-specific-prompt-patterns">Domain-Specific Prompt Patterns</h3>
+<p>Common patterns that recur across educational and research applications:</p>
+<ol>
+<li><strong>Role prompting</strong>: "You are a patient physics tutor for 10th graders" — sets expertise level and communication style</li>
+<li><strong>Scaffolded questioning</strong>: "Ask the student a guiding question rather than giving the answer directly" — implements Socratic method</li>
+<li><strong>Rubric-driven evaluation</strong>: Embed grading rubrics in prompts for consistent <a href="evaluation-methodology.html">evaluation methodology</a></li>
+<li><strong>Source-grounded generation</strong>: "Base your response only on the following documents" — implements <a href="../core-concepts/retrieval-augmented-generation.html">RAG</a> constraints</li>
+<li><strong>Difficulty calibration</strong>: "Adjust explanation complexity based on the student's prior responses" — connects to <a href="curriculum-learning.html">curriculum learning</a></li>
+</ol>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-trends">2025-2026 Trends</h3>
+<ol>
+<li><strong>Automated optimization is mainstream</strong>: DSPy and similar frameworks are standard in production pipelines — manual prompt engineering is for prototyping only[^1]</li>
+<li><strong>Thought-driven models change the game</strong>: Models like o1 and DeepSeek-R1 use internal chain-of-thought, making prompt design about <em>what to think about</em> rather than <em>how to think</em>[^1]</li>
+<li><strong>Prompt-as-code</strong>: DSPy treats prompt engineering as software engineering, with modular, testable, version-controlled prompt programs[^5]</li>
+<li><strong>Multi-agent prompting</strong>: Prompt templates for <a href="../frontier-topics/multi-agent-systems.html">multi-agent systems</a> where agents have different roles and communication protocols</li>
+<li><strong>Evaluation of prompt strategies</strong>: Systematic comparison of prompt patterns across tasks and models, connecting to <a href="evaluation-methodology.html">evaluation methodology</a></li>
+<li><strong>Prompt security</strong>: Defending against prompt injection and jailbreaking — relevant to <a href="../frontier-topics/ai-safety-in-research.html">AI safety in research</a></li>
+</ol>
+<h3 id="e-commerce-applications">E-Commerce Applications</h3>
+<p>Prompt engineering is critical for <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a>:</p>
+<ul>
+<li><strong>Product description generation</strong>: Prompts that specify tone, target audience, SEO keywords, and brand voice</li>
+<li><strong>Customer intent classification</strong>: Structured prompts that categorize queries (browsing, comparing, ready-to-buy)</li>
+<li><strong>Review summarization</strong>: Prompts that extract specific attribute sentiments from customer reviews</li>
+<li><strong>Conversational commerce</strong>: Multi-turn prompts that maintain shopping context across conversation turns</li>
+</ul>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>Prompt engineering has direct applications in education:</p>
+<ul>
+<li><strong>Teaching AI literacy</strong>: Students learning to write effective prompts develop skills in clear communication, problem decomposition, and specification writing</li>
+<li><strong>Adaptive tutoring</strong>: Well-designed system prompts create AI tutors that adjust to student level, provide appropriate scaffolding, and encourage active thinking</li>
+<li><strong>Assessment design</strong>: Prompts can generate diverse, high-quality practice problems calibrated to curriculum standards — connecting to <a href="synthetic-data-generation.html">synthetic data generation</a></li>
+<li><strong>Research skills</strong>: Prompt engineering for <a href="../core-concepts/retrieval-augmented-generation.html">retrieval-augmented generation</a> teaches students to formulate precise research questions</li>
+<li><strong>Critical thinking</strong>: Understanding that AI outputs depend on prompts builds healthy skepticism about AI-generated content</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Fragility</strong>: Small prompt changes can cause large output differences — making prompts difficult to debug and maintain</li>
+<li><strong>Model specificity</strong>: Prompts optimized for one model may not transfer to others — optimization must be repeated per model</li>
+<li><strong>Evaluation difficulty</strong>: No standardized way to compare prompt strategies across diverse tasks</li>
+<li><strong>Security risks</strong>: Prompt injection attacks can override system prompts, causing models to ignore safety guidelines</li>
+<li><strong>Opacity of automated prompts</strong>: Machine-optimized prompts may be unintelligible to humans, making auditing difficult</li>
+<li><strong>Diminishing returns with stronger models</strong>: As models improve at instruction following, the marginal value of prompt optimization decreases[^4]</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a> — prompts that integrate retrieved context
+- <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> — prompts that reduce hallucination
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — prompting as the primary interface
+- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — prompt design for automated research</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/code-generation.html">Code Generation</a> — prompts for code assistants
+- <a href="../tools-platforms/autoresearch.html">AutoResearch</a> — automated prompt chains for research
+- <a href="../tools-platforms/aider.html">Aider</a> — prompt engineering for coding workflows</p>
+<p><strong>Methodologies:</strong>
+- <a href="test-time-compute.html">Test-Time Compute</a> — prompts as compute allocation decisions
+- <a href="curriculum-learning.html">Curriculum Learning</a> — progressive prompting for scaffolded learning
+- <a href="evaluation-methodology.html">Evaluation Methodology</a> — evaluating prompt effectiveness
+- <a href="active-learning.html">Active Learning</a> — prompts that elicit informative model uncertainty</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems</a> — role prompts for agent teams
+- <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Research</a> — prompt safety and injection defense
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-optimizing prompts
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — commercial prompt design
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — prompting across domains</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational prompt engineering papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring prompt research</p>
+<h2 id="references">References</h2>
+<p>[^1]: Zhou, Y., Muresanu, A. I., Han, Z., Paster, K., Pitis, S., Chan, H., &amp; Ba, J. (2025). "A Survey of Automatic Prompt Engineering: An Optimization Perspective." arXiv:2502.11560. https://arxiv.org/abs/2502.11560</p>
+<p>[^2]: Reynolds, L. &amp; McDonell, K. (2021). "Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm." <em>CHI EA 2021</em>. https://doi.org/10.1145/3411763.3451760</p>
+<p>[^3]: Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., ... &amp; Zhou, D. (2022). "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." <em>NeurIPS 2022</em>. arXiv:2201.11903. https://arxiv.org/abs/2201.11903</p>
+<p>[^4]: Chen, J., et al. (2025). "Structured Prompts Improve Evaluation of Language Models." arXiv:2511.20836. https://arxiv.org/abs/2511.20836</p>
+<p>[^5]: Khattab, O., Singhvi, A., Maheshwari, P., Zhang, Z., Santhanam, K., Vardhamanan, S., ... &amp; Potts, C. (2024). "DSPy: Compiling Declarative Language Model Calls into State-of-the-Art Pipelines." <em>ICLR 2024</em>. arXiv:2310.03714. https://arxiv.org/abs/2310.03714</p>
+<p>[^6]: Neural at ArchEHR-QA Authors. (2025). "Agentic Prompt Optimization for Evidence-Grounded Clinical QA." arXiv:2506.10751. https://arxiv.org/abs/2506.10751</p>
+<p>[^7]: Wang, J., et al. (2025). "You Don't Need Prompt Engineering Anymore: The Prompting Inversion." arXiv:2510.22251. https://arxiv.org/abs/2510.22251</p>
+</main>
+</body>
+</html>

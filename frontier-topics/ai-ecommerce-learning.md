@@ -790,6 +790,9 @@ This loop is visible across the systems described here: [ShopSimulator](#shopsim
 - [Agentic Tree Search](../methodologies/agentic-tree-search.md) -- Search strategies for product discovery
 - [Semantic Scholar API](../tools-platforms/semantic-scholar-api.md) -- Finding e-commerce AI research
 - [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) -- Discovering new papers
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) -- Compressing models for real-time commerce
+- [Inference Optimization](../methodologies/inference-optimization.md) -- Fast inference for real-time recommendations
+- [Prompt Engineering](../methodologies/prompt-engineering.md) -- Designing prompts for shopping agents
 - [Key Papers and References](../research-sources/key-papers.md) -- E-commerce AI paper collection
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) -- Monitoring new research
 

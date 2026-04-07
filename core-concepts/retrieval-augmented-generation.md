@@ -164,6 +164,9 @@ Fan et al. (2025) demonstrated **ScholarRAG**, a system that retrieves from 200M
 3. **Real-time RAG**: Systems that retrieve from live data streams (news, social media, market data) for current-events grounding
 4. **RAG for code**: Retrieving documentation, examples, and similar code snippets to improve [code generation](../tools-platforms/code-generation.md) accuracy
 5. **Evaluation of RAG**: New benchmarks specifically for retrieval quality, attribution accuracy, and grounding faithfulness (see [evaluation methodology](../methodologies/evaluation-methodology.md))
+6. **Deep research agents**: ProductResearch (2026) trains e-commerce deep research agents through multi-agent synthetic trajectory distillation with tailored tool-use and citation-grounded report generation — representing RAG evolved into autonomous research[^6]
+7. **Memory-augmented RAG**: Shopping Companion (2026) introduces memory-augmented LLM agents that manage long-term user preferences across extended conversations, combining retrieval with persistent user modeling[^7]
+8. **RAG + knowledge distillation**: Distilled retrieval-aware models (see [knowledge distillation](knowledge-distillation.md)) can internalize common retrieval patterns, reducing latency while preserving grounding quality through [inference optimization](../methodologies/inference-optimization.md)
 
 ### E-Commerce Applications
 
@@ -199,6 +202,7 @@ RAG transforms AI-assisted education by:
 - [The AI Scientist](the-ai-scientist.md) — RAG provides the literature awareness layer
 - [Foundation Models for Research](foundation-models-for-research.md) — base models enhanced by retrieval
 - [Transfer Learning](transfer-learning.md) — RAG as an alternative to fine-tuning for domain adaptation
+- [Knowledge Distillation](knowledge-distillation.md) — distilling retrieval-aware models for efficient RAG
 
 **Tools & Platforms:**
 - [Semantic Scholar API](../tools-platforms/semantic-scholar-api.md) — academic paper retrieval backend
@@ -208,6 +212,8 @@ RAG transforms AI-assisted education by:
 **Methodologies:**
 - [Agentic Tree Search](../methodologies/agentic-tree-search.md) — search strategies for multi-step retrieval
 - [Evaluation Methodology](../methodologies/evaluation-methodology.md) — evaluating RAG systems
+- [Prompt Engineering](../methodologies/prompt-engineering.md) — designing prompts that integrate retrieved context
+- [Inference Optimization](../methodologies/inference-optimization.md) — making RAG pipelines faster
 - [Active Learning](../methodologies/active-learning.md) — active selection of documents to index
 
 **Frontier Topics:**
@@ -231,3 +237,7 @@ RAG transforms AI-assisted education by:
 [^4]: Asai, A., Wu, Z., Wang, Y., Sil, A., & Hajishirzi, H. (2024). "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." *ICLR 2024*. arXiv:2310.11511. https://arxiv.org/abs/2310.11511
 
 [^5]: Fan, Y., Wang, X., & Ni, J. (2025). "ScholarRAG: Retrieval-Augmented Generation for Scientific Question Answering at Scale." *ACL 2025*. arXiv:2503.12345.
+
+[^6]: ProductResearch Authors. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716
+
+[^7]: Shopping Companion Authors. (2026). "Shopping Companion: A Memory-Augmented LLM Agent for Real-World E-Commerce Tasks." arXiv:2603.14864. https://arxiv.org/abs/2603.14864

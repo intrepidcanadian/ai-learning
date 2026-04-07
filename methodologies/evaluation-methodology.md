@@ -151,6 +151,20 @@ Evaluating AI for education requires domain-specific metrics beyond standard NLP
 
 ## Current State / Latest Developments
 
+### AI Tutor Evaluation: From Benchmarks to Learning Outcomes
+
+A critical development in 2025-2026 is the emergence of rigorous evaluation frameworks for AI tutoring systems that measure *actual student learning*, not just model capability:
+
+**EduAlign** (2025) introduces a multi-dimensional reward model trained on 8,000 educational interactions annotated along three dimensions: Helpfulness, Personalization, and Creativity.[^8] The framework uses RL to align LLMs with educational traits — evaluating whether the tutor adapts explanations, provides appropriate scaffolding, and engages students creatively. This moves beyond "is the answer correct?" to "does the student learn?"
+
+**LearnLM RCT** (2025) conducted a randomized controlled trial with 165 students across five UK secondary schools, comparing Google's pedagogically-tuned LearnLM against expert human tutors.[^9] Key findings:
+- AI tutors achieved comparable learning gains to human tutors on factual recall
+- Human tutors remained superior for conceptual understanding and transfer tasks
+- Student engagement was higher with AI tutors (novelty effect) but declined over multi-week studies
+- The study demonstrates that AI tutor evaluation *requires* controlled experiments with real students, not just benchmark scores
+
+**Training LLM Tutors for Learning Outcomes** (2025) focuses on training LLM tutors specifically to optimize student learning outcomes through dialogue, rather than just generating helpful-sounding responses.[^10] The key insight: a tutor that gives direct answers scores high on helpfulness benchmarks but produces worse learning outcomes than one that asks guiding questions — standard evaluation metrics actively penalize good pedagogy.
+
 ### 2025-2026 Trends
 
 1. **Dynamic benchmarks**: LiveBench, Chatbot Arena, and similar systems that resist contamination are becoming the standard[^6]
@@ -159,6 +173,8 @@ Evaluating AI for education requires domain-specific metrics beyond standard NLP
 4. **Domain-specific benchmarks**: Specialized evaluation for scientific reasoning, medical diagnosis, legal analysis, and education
 5. **Process evaluation**: Evaluating not just final outputs but intermediate reasoning steps, connecting to [test-time compute](test-time-compute.md) and [agentic tree search](agentic-tree-search.md)
 6. **E-commerce evaluation**: Benchmarks for product recommendation quality, review summarization accuracy, and personalization effectiveness in [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md) contexts
+7. **Distillation evaluation**: UniComp (2026) provides the first unified evaluation of LLM compression across pruning, quantization, and [knowledge distillation](../core-concepts/knowledge-distillation.md), measuring performance, reliability, and efficiency simultaneously[^11]
+8. **Prompt optimization evaluation**: Systematic comparison of [prompt engineering](prompt-engineering.md) strategies reveals that structured prompts improve evaluation scores by 6% on average, with most gains from chain-of-thought reasoning[^12]
 
 ### Application to Real-World Learning
 
@@ -182,6 +198,8 @@ Evaluation methodology is itself a learning topic with direct practical applicat
 - [Hallucination Detection](../core-concepts/hallucination-detection.md) — evaluating factual accuracy of model outputs
 - [Automated Peer Review](../core-concepts/automated-peer-review.md) — evaluation methodology for research quality
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) — evaluating automated research outputs
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) — evaluating compressed model quality
+- [Transfer Learning](../core-concepts/transfer-learning.md) — evaluating knowledge transfer effectiveness
 
 **Tools & Platforms:**
 - [Aider](../tools-platforms/aider.md) — evaluated on SWE-bench and code benchmarks
@@ -193,6 +211,9 @@ Evaluation methodology is itself a learning topic with direct practical applicat
 - [Test-Time Compute](test-time-compute.md) — evaluating models that use variable compute
 - [Curriculum Learning](curriculum-learning.md) — evaluation of learning progressions
 - [Active Learning](active-learning.md) — evaluation of query strategies
+- [Prompt Engineering](prompt-engineering.md) — structured prompts improve evaluation quality
+- [Inference Optimization](inference-optimization.md) — evaluating optimized model quality
+- [Synthetic Data Generation](synthetic-data-generation.md) — evaluating synthetic data quality
 
 **Frontier Topics:**
 - [AI Safety in Research](../frontier-topics/ai-safety-in-research.md) — safety evaluation and red teaming
@@ -218,3 +239,13 @@ Evaluation methodology is itself a learning topic with direct practical applicat
 [^6]: White, C., Dooley, S., Roberts, M., Pal, A., Feber, B., & Neiswanger, W. (2025). "LiveBench: A Challenging, Contamination-Free LLM Benchmark." arXiv:2406.19314. https://arxiv.org/abs/2406.19314
 
 [^7]: Kasneci, E., Seßler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., ... & Kasneci, G. (2023). "ChatGPT for Good? On Opportunities and Challenges of Large Language Models for Education." *Learning and Individual Differences*, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274
+
+[^8]: EduAlign Authors. (2025). "Cultivating Helpful, Personalized, and Creative AI Tutors." arXiv:2507.20335. https://arxiv.org/abs/2507.20335
+
+[^9]: LearnLM RCT Authors. (2025). "AI Tutoring Can Safely and Effectively Support Students." arXiv:2512.23633. https://arxiv.org/abs/2512.23633
+
+[^10]: LLM Tutor Authors. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." arXiv:2503.06424. https://arxiv.org/abs/2503.06424
+
+[^11]: UniComp Authors. (2026). "UniComp: A Unified Evaluation of LLM Compression via Pruning, Quantization, and Distillation." arXiv:2602.09130. https://arxiv.org/abs/2602.09130
+
+[^12]: Chen, J., et al. (2025). "Structured Prompts Improve Evaluation of Language Models." arXiv:2511.20836. https://arxiv.org/abs/2511.20836

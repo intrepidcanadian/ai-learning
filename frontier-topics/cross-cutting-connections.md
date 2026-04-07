@@ -1237,6 +1237,9 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 - [World Models](../methodologies/world-models.md) -- The imagination engine behind simulation
 - [Test-Time Compute](../methodologies/test-time-compute.md) -- Adaptive inference scaling
 - [Curriculum Learning](../methodologies/curriculum-learning.md) -- Progressive difficulty orchestration
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) -- Making AI accessible through compression
+- [Inference Optimization](../methodologies/inference-optimization.md) -- Enabling real-time cross-domain applications
+- [Prompt Engineering](../methodologies/prompt-engineering.md) -- Cross-domain prompt design patterns
 - [Multi-Agent Systems](multi-agent-systems.md) -- Collaborative agent architectures
 - [Hallucination Detection](../core-concepts/hallucination-detection.md) -- Trust layer for AI learning
 - [Transfer Learning](../core-concepts/transfer-learning.md) -- Cross-domain knowledge transfer

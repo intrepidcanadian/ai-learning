@@ -787,6 +787,9 @@ The field is converging on a shared understanding that effective world models re
 - [Scaling Laws for Research Automation](scaling-laws-research.md) -- How prediction quality scales
 - [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) -- Discovering world model papers
 - [Autoresearch](../tools-platforms/autoresearch.md) -- Automated experimentation
+- [Inference Optimization](../methodologies/inference-optimization.md) -- Making real-time simulation affordable
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) -- Compressing world models for deployment
+- [Prompt Engineering](../methodologies/prompt-engineering.md) -- Designing prompts for simulation agents
 - [Key Papers and References](../research-sources/key-papers.md) -- World model paper collection
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) -- Finding new simulation research
 

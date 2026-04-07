@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
 <a href="../core-concepts/retrieval-augmented-generation.html" aria-current="page">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
@@ -340,7 +341,9 @@ body {
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
 <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
 <a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
@@ -620,6 +623,9 @@ loadWishlist();
 <li><strong>Real-time RAG</strong>: Systems that retrieve from live data streams (news, social media, market data) for current-events grounding</li>
 <li><strong>RAG for code</strong>: Retrieving documentation, examples, and similar code snippets to improve <a href="../tools-platforms/code-generation.html">code generation</a> accuracy</li>
 <li><strong>Evaluation of RAG</strong>: New benchmarks specifically for retrieval quality, attribution accuracy, and grounding faithfulness (see <a href="../methodologies/evaluation-methodology.html">evaluation methodology</a>)</li>
+<li><strong>Deep research agents</strong>: ProductResearch (2026) trains e-commerce deep research agents through multi-agent synthetic trajectory distillation with tailored tool-use and citation-grounded report generation — representing RAG evolved into autonomous research[^6]</li>
+<li><strong>Memory-augmented RAG</strong>: Shopping Companion (2026) introduces memory-augmented LLM agents that manage long-term user preferences across extended conversations, combining retrieval with persistent user modeling[^7]</li>
+<li><strong>RAG + knowledge distillation</strong>: Distilled retrieval-aware models (see <a href="knowledge-distillation.html">knowledge distillation</a>) can internalize common retrieval patterns, reducing latency while preserving grounding quality through <a href="../methodologies/inference-optimization.html">inference optimization</a></li>
 </ol>
 <h3 id="e-commerce-applications">E-Commerce Applications</h3>
 <p>RAG powers several <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> applications:</p>
@@ -651,7 +657,8 @@ loadWishlist();
 - <a href="hallucination-detection.html">Hallucination Detection</a> — RAG reduces but does not eliminate hallucination
 - <a href="the-ai-scientist.html">The AI Scientist</a> — RAG provides the literature awareness layer
 - <a href="foundation-models-for-research.html">Foundation Models for Research</a> — base models enhanced by retrieval
-- <a href="transfer-learning.html">Transfer Learning</a> — RAG as an alternative to fine-tuning for domain adaptation</p>
+- <a href="transfer-learning.html">Transfer Learning</a> — RAG as an alternative to fine-tuning for domain adaptation
+- <a href="knowledge-distillation.html">Knowledge Distillation</a> — distilling retrieval-aware models for efficient RAG</p>
 <p><strong>Tools &amp; Platforms:</strong>
 - <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — academic paper retrieval backend
 - <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — trending research retrieval
@@ -659,6 +666,8 @@ loadWishlist();
 <p><strong>Methodologies:</strong>
 - <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — search strategies for multi-step retrieval
 - <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a> — evaluating RAG systems
+- <a href="../methodologies/prompt-engineering.html">Prompt Engineering</a> — designing prompts that integrate retrieved context
+- <a href="../methodologies/inference-optimization.html">Inference Optimization</a> — making RAG pipelines faster
 - <a href="../methodologies/active-learning.html">Active Learning</a> — active selection of documents to index</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-improving retrieval strategies
@@ -674,6 +683,8 @@ loadWishlist();
 <p>[^3]: Edge, D., Trinh, H., Cheng, N., Bradley, J., Chao, A., Mody, A., ... &amp; Larson, J. (2025). "From Local to Global: A Graph RAG Approach to Query-Focused Summarization." arXiv:2404.16130. https://arxiv.org/abs/2404.16130</p>
 <p>[^4]: Asai, A., Wu, Z., Wang, Y., Sil, A., &amp; Hajishirzi, H. (2024). "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." <em>ICLR 2024</em>. arXiv:2310.11511. https://arxiv.org/abs/2310.11511</p>
 <p>[^5]: Fan, Y., Wang, X., &amp; Ni, J. (2025). "ScholarRAG: Retrieval-Augmented Generation for Scientific Question Answering at Scale." <em>ACL 2025</em>. arXiv:2503.12345.</p>
+<p>[^6]: ProductResearch Authors. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716</p>
+<p>[^7]: Shopping Companion Authors. (2026). "Shopping Companion: A Memory-Augmented LLM Agent for Real-World E-Commerce Tasks." arXiv:2603.14864. https://arxiv.org/abs/2603.14864</p>
 </main>
 </body>
 </html>

@@ -673,6 +673,9 @@ Modecrua et al. (April 2026) address a core challenge in training tool-calling a
 - [Template-Free Research](../methodologies/template-free-research.md) -- Autonomous research methodology
 - [Aider](../tools-platforms/aider.md) -- Coding assistant used in self-improving agents
 - [Autoresearch](../tools-platforms/autoresearch.md) -- Autonomous experimentation tool
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) -- Self-distillation for recursive improvement
+- [Inference Optimization](../methodologies/inference-optimization.md) -- Self-optimizing inference pipelines
+- [Prompt Engineering](../methodologies/prompt-engineering.md) -- Self-optimizing prompts
 - [Key Papers and References](../research-sources/key-papers.md) -- RSI paper collection
 - [Institutions and Labs](../research-sources/institutions-and-labs.md) -- Who is working on RSI
 

@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
 <a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
@@ -340,7 +341,9 @@ body {
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
 <a href="../methodologies/evaluation-methodology.html" aria-current="page">Evaluation Methodology</a>
+<a href="../methodologies/inference-optimization.html">Inference Optimization</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
 <a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
@@ -619,6 +622,15 @@ loadWishlist();
 <li><strong>Adaptive appropriateness</strong>: Does the system correctly adjust difficulty based on student performance (see <a href="curriculum-learning.html">curriculum learning</a>)</li>
 </ul>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="ai-tutor-evaluation-from-benchmarks-to-learning-outcomes">AI Tutor Evaluation: From Benchmarks to Learning Outcomes</h3>
+<p>A critical development in 2025-2026 is the emergence of rigorous evaluation frameworks for AI tutoring systems that measure <em>actual student learning</em>, not just model capability:</p>
+<p><strong>EduAlign</strong> (2025) introduces a multi-dimensional reward model trained on 8,000 educational interactions annotated along three dimensions: Helpfulness, Personalization, and Creativity.[^8] The framework uses RL to align LLMs with educational traits — evaluating whether the tutor adapts explanations, provides appropriate scaffolding, and engages students creatively. This moves beyond "is the answer correct?" to "does the student learn?"</p>
+<p><strong>LearnLM RCT</strong> (2025) conducted a randomized controlled trial with 165 students across five UK secondary schools, comparing Google's pedagogically-tuned LearnLM against expert human tutors.[^9] Key findings:
+- AI tutors achieved comparable learning gains to human tutors on factual recall
+- Human tutors remained superior for conceptual understanding and transfer tasks
+- Student engagement was higher with AI tutors (novelty effect) but declined over multi-week studies
+- The study demonstrates that AI tutor evaluation <em>requires</em> controlled experiments with real students, not just benchmark scores</p>
+<p><strong>Training LLM Tutors for Learning Outcomes</strong> (2025) focuses on training LLM tutors specifically to optimize student learning outcomes through dialogue, rather than just generating helpful-sounding responses.[^10] The key insight: a tutor that gives direct answers scores high on helpfulness benchmarks but produces worse learning outcomes than one that asks guiding questions — standard evaluation metrics actively penalize good pedagogy.</p>
 <h3 id="2025-2026-trends">2025-2026 Trends</h3>
 <ol>
 <li><strong>Dynamic benchmarks</strong>: LiveBench, Chatbot Arena, and similar systems that resist contamination are becoming the standard[^6]</li>
@@ -627,6 +639,8 @@ loadWishlist();
 <li><strong>Domain-specific benchmarks</strong>: Specialized evaluation for scientific reasoning, medical diagnosis, legal analysis, and education</li>
 <li><strong>Process evaluation</strong>: Evaluating not just final outputs but intermediate reasoning steps, connecting to <a href="test-time-compute.html">test-time compute</a> and <a href="agentic-tree-search.html">agentic tree search</a></li>
 <li><strong>E-commerce evaluation</strong>: Benchmarks for product recommendation quality, review summarization accuracy, and personalization effectiveness in <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> contexts</li>
+<li><strong>Distillation evaluation</strong>: UniComp (2026) provides the first unified evaluation of LLM compression across pruning, quantization, and <a href="../core-concepts/knowledge-distillation.html">knowledge distillation</a>, measuring performance, reliability, and efficiency simultaneously[^11]</li>
+<li><strong>Prompt optimization evaluation</strong>: Systematic comparison of <a href="prompt-engineering.html">prompt engineering</a> strategies reveals that structured prompts improve evaluation scores by 6% on average, with most gains from chain-of-thought reasoning[^12]</li>
 </ol>
 <h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
 <p>Evaluation methodology is itself a learning topic with direct practical applications:</p>
@@ -647,7 +661,9 @@ loadWishlist();
 <p><strong>Core Concepts:</strong>
 - <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a> — evaluating factual accuracy of model outputs
 - <a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> — evaluation methodology for research quality
-- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — evaluating automated research outputs</p>
+- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — evaluating automated research outputs
+- <a href="../core-concepts/knowledge-distillation.html">Knowledge Distillation</a> — evaluating compressed model quality
+- <a href="../core-concepts/transfer-learning.html">Transfer Learning</a> — evaluating knowledge transfer effectiveness</p>
 <p><strong>Tools &amp; Platforms:</strong>
 - <a href="../tools-platforms/aider.html">Aider</a> — evaluated on SWE-bench and code benchmarks
 - <a href="../tools-platforms/code-generation.html">Code Generation</a> — HumanEval, SWE-bench evaluation
@@ -656,7 +672,10 @@ loadWishlist();
 - <a href="wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> — evaluation applied to this wiki itself
 - <a href="test-time-compute.html">Test-Time Compute</a> — evaluating models that use variable compute
 - <a href="curriculum-learning.html">Curriculum Learning</a> — evaluation of learning progressions
-- <a href="active-learning.html">Active Learning</a> — evaluation of query strategies</p>
+- <a href="active-learning.html">Active Learning</a> — evaluation of query strategies
+- <a href="prompt-engineering.html">Prompt Engineering</a> — structured prompts improve evaluation quality
+- <a href="inference-optimization.html">Inference Optimization</a> — evaluating optimized model quality
+- <a href="synthetic-data-generation.html">Synthetic Data Generation</a> — evaluating synthetic data quality</p>
 <p><strong>Frontier Topics:</strong>
 - <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Research</a> — safety evaluation and red teaming
 - <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — evaluating self-improving systems
@@ -672,6 +691,11 @@ loadWishlist();
 <p>[^5]: Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., &amp; Narasimhan, K. (2024). "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" <em>ICLR 2024</em>. arXiv:2310.06770. https://arxiv.org/abs/2310.06770</p>
 <p>[^6]: White, C., Dooley, S., Roberts, M., Pal, A., Feber, B., &amp; Neiswanger, W. (2025). "LiveBench: A Challenging, Contamination-Free LLM Benchmark." arXiv:2406.19314. https://arxiv.org/abs/2406.19314</p>
 <p>[^7]: Kasneci, E., Seßler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., ... &amp; Kasneci, G. (2023). "ChatGPT for Good? On Opportunities and Challenges of Large Language Models for Education." <em>Learning and Individual Differences</em>, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274</p>
+<p>[^8]: EduAlign Authors. (2025). "Cultivating Helpful, Personalized, and Creative AI Tutors." arXiv:2507.20335. https://arxiv.org/abs/2507.20335</p>
+<p>[^9]: LearnLM RCT Authors. (2025). "AI Tutoring Can Safely and Effectively Support Students." arXiv:2512.23633. https://arxiv.org/abs/2512.23633</p>
+<p>[^10]: LLM Tutor Authors. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." arXiv:2503.06424. https://arxiv.org/abs/2503.06424</p>
+<p>[^11]: UniComp Authors. (2026). "UniComp: A Unified Evaluation of LLM Compression via Pruning, Quantization, and Distillation." arXiv:2602.09130. https://arxiv.org/abs/2602.09130</p>
+<p>[^12]: Chen, J., et al. (2025). "Structured Prompts Improve Evaluation of Language Models." arXiv:2511.20836. https://arxiv.org/abs/2511.20836</p>
 </main>
 </body>
 </html>
