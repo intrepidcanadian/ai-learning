@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for E-Commerce Learning - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html" aria-current="page">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Frontier Topics &rsaquo; AI for E-Commerce Learning</div>
+<h1 id="ai-for-e-commerce-learning">AI for E-Commerce Learning</h1>
+<p><strong>AI for E-Commerce Learning</strong> covers how artificial intelligence -- particularly LLM-powered agents -- is transforming online commerce through personalization, autonomous shopping assistance, demand prediction, and supply chain optimization. This article focuses on how these systems learn and how they can help humans learn better purchasing, business, and market skills.</p>
+<h2 id="overview">Overview</h2>
+<p>E-commerce is one of the highest-impact domains for applied AI learning: the feedback loops are fast (users click, buy, or abandon), the data is abundant, and the economic incentives are strong. Recent work has moved beyond traditional recommendation engines toward <strong>agentic commerce</strong> -- AI agents that can autonomously navigate, evaluate, negotiate, and transact on behalf of users.</p>
+<p>This shift raises new questions: How do AI agents learn to shop? What biases do they bring? How can AI help consumers and businesses learn to make better decisions?</p>
+<h2 id="llm-powered-shopping-agents">LLM-Powered Shopping Agents</h2>
+<h3 id="shopping-companion-memory-augmented-assistance">Shopping Companion: Memory-Augmented Assistance</h3>
+<p>Yu et al. (2026) introduced Shopping Companion, a unified framework that integrates long-term user preference memory with shopping task execution.[^1] The system uses a two-stage agentic architecture with dual-reward reinforcement learning and tool-wise supervision.</p>
+<p>Key innovation: <strong>joint optimization of memory retrieval and task performance</strong> -- the agent learns not just what to recommend but what to remember about each user. This creates a persistent learning relationship where the AI's understanding of the user deepens over time.</p>
+<p><strong>Learning application:</strong> Models how an ideal personal shopper would learn a client's preferences, constraints, and aspirations -- then apply that accumulated knowledge to increasingly effective recommendations.</p>
+<h3 id="aces-auditing-ai-shopping-agent-behavior">ACES: Auditing AI Shopping Agent Behavior</h3>
+<p>Allouah et al. (2025) built ACES (Agentic e-CommercE Simulator), a controlled sandbox for auditing AI shopping agents across six frontier models (Claude, GPT, Gemini families).[^2]</p>
+<p><strong>Critical findings:</strong>
+- AI agents exhibit <strong>strong position biases</strong> -- preferring products listed first regardless of quality
+- Market concentration is <strong>model-dependent</strong> -- different LLMs systematically favor different brands
+- Agents demonstrate near-perfect rationality on basic price/rating comparisons
+- Sellers can <strong>strategically exploit agent biases</strong> through description optimization</p>
+<p><strong>Learning application:</strong> Essential reading for anyone building or using AI shopping tools. Understanding these biases helps consumers critically evaluate AI recommendations and helps businesses design fairer AI-mediated marketplaces.</p>
+<h3 id="digital-twin-customers">Digital Twin Customers</h3>
+<p>Sun et al. (2025) investigated whether LLM-based "digital twin" agents can replicate human customer behavior when interacting with conversational shopping systems like Amazon Rufus.[^3] A study with 40 human participants was compared against simulated agents on identical tasks.</p>
+<p><strong>Finding:</strong> Agents achieved comparable task completion and aligned UX feedback on objective dimensions, but diverged in exploration patterns and preference selections.</p>
+<p><strong>Learning application:</strong> Enables scalable evaluation of conversational commerce systems, reducing the need for expensive human studies while providing insights into how AI agents differ from human shoppers.</p>
+<h3 id="productresearch-deep-research-agents-for-shopping">ProductResearch: Deep Research Agents for Shopping</h3>
+<p>Wang et al. (2026) propose ProductResearch, a multi-agent framework that synthesizes high-fidelity, long-horizon tool-use trajectories for training robust e-commerce shopping agents.[^11] The framework employs three specialized agents:
+- <strong>User Agent:</strong> Infers nuanced shopping intents from behavioral histories
+- <strong>Supervisor Agent:</strong> Orchestrates iterative collaboration between agents
+- <strong>Research Agent:</strong> Generates comprehensive product research reports</p>
+<p>A reflective internalization process refines the synthetic trajectories, and a compact mixture-of-experts model fine-tuned on this data achieves substantial improvements in response comprehensiveness, research depth, and user-perceived utility -- approaching proprietary deep research systems.</p>
+<p><strong>Learning application:</strong> ProductResearch demonstrates how multi-agent collaboration can teach AI systems complex research skills that transfer to real shopping assistance. The scaffolded approach (user intent → supervised research → reflective refinement) mirrors how human researchers learn: starting with a question, conducting structured investigation, and reflecting on findings. This framework could power educational tools that teach students research methodology through the lens of product evaluation -- a practical, engaging context for learning critical thinking and information synthesis.</p>
+<h3 id="solicit-then-suggest-the-economics-of-agentic-purchasing">Solicit-Then-Suggest: The Economics of Agentic Purchasing</h3>
+<p>Cao &amp; Hu (March 2026) formalize how AI shopping agents shift e-commerce from search-based to conversational purchasing.[^16] Their model analyzes agents that conduct multiple dialogue rounds to elicit customer preferences before presenting curated options. A key finding is a fundamental economic tradeoff: <strong>inquiry depth and product variety are substitutes</strong> in reducing uncertainty -- asking more questions compensates for less variety, and vice versa. The optimal recommendation strategy uses Voronoi partitioning and a water-filling principle to equalize posterior uncertainty across preference dimensions. In higher preference dimensions, recommendations face a "curse of dimensionality" that limits agent effectiveness.</p>
+<p><strong>Learning application:</strong> This paper provides the theoretical foundation for understanding when conversational AI tutoring is most effective. The inquiry-variety tradeoff maps directly to education: a tutor can either ask more diagnostic questions (inquiry depth) or present more diverse exercises (variety) to identify student needs. The curse of dimensionality explains why tutoring in high-dimensional subjects (e.g., creative writing with many quality dimensions) is harder to automate than narrow skills (e.g., arithmetic with few dimensions).</p>
+<h3 id="memrerank-compact-preference-memory-for-personalization">MemRerank: Compact Preference Memory for Personalization</h3>
+<p>Peng et al. (March 2026) propose MemRerank, a preference memory framework for LLM-based shopping agents that distills user purchase history into concise, query-independent signals for personalized product reranking.[^17] The system trains a memory extractor using RL, achieving improvements of up to 10.61 percentage points in accuracy compared to approaches using raw history. The key insight: compact preference representations outperform feeding full purchase histories to LLMs.</p>
+<p><strong>Learning application:</strong> MemRerank demonstrates that effective personalization requires distilling experience into compact representations rather than raw replay -- the AI equivalent of forming mental models from experience rather than memorizing every interaction. An adaptive tutoring system could use this approach to build concise learner profiles that capture essential patterns rather than storing complete interaction logs.</p>
+<h3 id="shopsimulator-rl-training-ground-for-shopping-agents">ShopSimulator: RL Training Ground for Shopping Agents</h3>
+<p>Wang et al. (January 2026) introduce ShopSimulator, a large-scale Chinese e-commerce simulation environment for evaluating LLM-based shopping agents.[^18] Even the best-performing models achieve less than 40% full-success rate on realistic tasks. Combining supervised fine-tuning with RL substantially enhances agent performance, while key failure modes include underutilization of personalization information and poor product search during longer interactions.</p>
+<p><strong>Learning application:</strong> ShopSimulator connects directly to <a href="predictive-simulation-learning.html">predictive simulation learning</a> -- agents improve their shopping skills by practicing in simulated environments. The identified failure modes (ignoring personalization signals, degrading over long sessions) parallel common learning challenges: students often fail to apply known concepts in extended problem-solving contexts.</p>
+<h3 id="agenticrs-architecture-self-improving-recommender-lifecycle">AgenticRS-Architecture: Self-Improving Recommender Lifecycle</h3>
+<p>Zhang et al. (March 2026) introduce AgenticRS-Architecture, a system design that replaces traditional recommendation pipelines with interacting evolution agents possessing long-term memory and self-improvement capability.[^22] The architecture organizes around three specialized agents:</p>
+<ul>
+<li><strong>AutoTrain:</strong> Automates model design and training, including paper-driven model reproduction -- parsing research papers, generating code, running large-scale training, and offline comparison</li>
+<li><strong>AutoFeature:</strong> Manages data analysis and feature evolution</li>
+<li><strong>AutoPerf:</strong> Oversees performance, deployment, and online experimentation</li>
+</ul>
+<p>A shared coordination and knowledge layer records decisions, configurations, and outcomes, enabling locally automated yet globally aligned evolution. The system extends beyond recommendations to search and advertising.</p>
+<p><strong>Learning application:</strong> AgenticRS-Architecture demonstrates how <a href="recursive-self-improvement.html">recursive self-improvement</a> can be operationalized in production commerce systems. The AutoTrain agent's ability to read research papers, implement methods, and evaluate them autonomously mirrors an ideal self-directed learner. For educational AI, this architecture suggests a model where specialized agents handle different aspects of the learning experience (content creation, assessment, personalization) while a coordination layer maintains coherent improvement across all dimensions.</p>
+<h3 id="multi-agent-video-recommenders-toward-self-improving-content-discovery">Multi-Agent Video Recommenders: Toward Self-Improving Content Discovery</h3>
+<p>Ranganathan et al. (April 2026) survey how multi-agent architectures are redefining video recommendation systems through coordinated specialized agents for understanding, reasoning, and feedback.[^23] The survey synthesizes work from early multi-agent reinforcement learning (MARL) systems through emerging LLM-powered architectures like MACRec and Agent4Rec.</p>
+<p><strong>Key open challenges identified:</strong>
+- <strong>Lifelong personalization</strong> -- systems that continuously evolve with user interactions
+- <strong>Self-improving architectures</strong> -- recommenders that autonomously enhance their own performance
+- <strong>Hybrid RL-LLM systems</strong> -- combining adaptive RL with LLM reasoning capabilities</p>
+<p><strong>Learning application:</strong> The shift from static engagement metrics to dynamic, agent-based learning in video recommendation directly parallels the shift from static curricula to adaptive learning in education. The identified challenge of "lifelong personalization" is precisely the goal of adaptive tutoring -- a system that grows with the learner over months and years. The hybrid RL-LLM approach (combining experiential learning with reasoning) maps to the dual-process model of education: building procedural fluency through practice (RL) while developing conceptual understanding through explanation (LLM).</p>
+<h3 id="agenticshop-benchmarking-agentic-product-curation">AgenticShop: Benchmarking Agentic Product Curation</h3>
+<p>Kim et al. (WWW 2026) introduce AgenticShop, the first benchmark for evaluating agentic systems on personalized product curation in open-web environments.[^24] Unlike existing e-commerce benchmarks that focus on single-platform lookups, AgenticShop tests realistic exploratory search across the open web with diverse user profiles and a checklist-driven personalization evaluation framework.</p>
+<p><strong>Key finding:</strong> Current agentic systems remain largely insufficient for personalized product curation across modern web environments. The benchmark exposes gaps between impressive demo performance and real-world shopping complexity.</p>
+<p><strong>Learning application:</strong> AgenticShop reveals that the gap between AI agent capability and real-world shopping competence mirrors the gap between classroom knowledge and practical skill. Just as ShoppingBench showed GPT-4.1 achieves under 50% on realistic tasks, AgenticShop demonstrates that agents struggle with the open-ended, multi-platform nature of real shopping. For education, this validates the importance of authentic assessment -- testing in realistic, open environments rather than simplified sandboxes. A learning system trained only on single-platform interactions (like a student who only studies textbook problems) fails when confronted with the full complexity of real-world tasks.</p>
+<h3 id="hierarchical-memory-orchestration-for-persistent-agents">Hierarchical Memory Orchestration for Persistent Agents</h3>
+<p>Liu et al. (April 2026) propose HMO (Hierarchical Memory Orchestration), a three-tier memory management system for personalized persistent agents.[^25] The architecture maintains: (1) a compact primary cache combining recent and important memories with an evolving user profile, (2) a high-priority secondary layer, and (3) a global archive of full interaction history. The user persona drives memory redistribution, surfacing relevant knowledge precisely when needed.</p>
+<p><strong>Learning application:</strong> HMO addresses a fundamental challenge in both commerce and education: how to maintain useful long-term memory without drowning in accumulated data. A tutoring agent that remembers a student's strengths, weaknesses, and learning trajectory over months needs the same hierarchical memory management -- keeping core understanding readily accessible while archiving detailed interaction history. The persona-driven redistribution is particularly relevant: as a learner progresses, what's "important" changes, and the memory system must adapt accordingly. This connects to <a href="#shopping-companion-memory-augmented-assistance">Shopping Companion's</a> preference memory and <a href="#memrerank-compact-preference-memory-for-personalization">MemRerank's</a> compact representations, forming a spectrum of memory strategies from compact (MemRerank) to hierarchical (HMO).</p>
+<h2 id="ai-for-recommendation-and-personalization">AI for Recommendation and Personalization</h2>
+<h3 id="sustainable-recommendations-llmgreenrec">Sustainable Recommendations: LLMGreenRec</h3>
+<p>Nguyen et al. (2026) present a multi-agent framework that integrates environmental responsibility into recommendations.[^4] Specialized agents analyze user behavior patterns to identify "green-oriented user intents" and prioritize eco-friendly product recommendations while reducing computational energy.</p>
+<p><strong>Learning application:</strong> Goes beyond pure optimization to integrate values into AI recommendations. Represents a shift toward AI that helps consumers learn to make more environmentally conscious choices -- a direct intersection of AI learning and behavioral change.</p>
+<h3 id="adaptive-switching-for-cold-start-users">Adaptive Switching for Cold-Start Users</h3>
+<p>Saini et al. (Scientific Reports, 2026) address the cold-start problem by classifying users into three categories (newcomers, lightweight users, heavy users) and dynamically switching between recommendation models.[^5]</p>
+<p><strong>Learning application:</strong> Mirrors how human learning itself progresses through stages -- from broad exploration (new users) to refined optimization (experienced users). The switching mechanism adapts the AI's teaching strategy to the learner's current level.</p>
+<h3 id="social-graph-enhanced-recommendations">Social Graph-Enhanced Recommendations</h3>
+<p>A 2025 study published in <em>Applied Artificial Intelligence</em> introduces a model that enhances e-commerce personalization by leveraging graph attention networks (GATs) to mine and integrate information from both user-item (U-I) score graphs and user-user (U-U) social graphs.[^12] By incorporating social connections into recommendation, the system captures influence patterns that pure behavioral data misses.</p>
+<p><strong>Learning application:</strong> Social learning -- where peers influence what and how we learn -- is one of the most powerful educational mechanisms. This research shows how AI can formalize and scale social influence in recommendations, suggesting pathways for educational platforms that recommend learning resources based not just on individual behavior but on what peers with similar goals found valuable.</p>
+<h2 id="benchmarks-and-evaluation">Benchmarks and Evaluation</h2>
+<h3 id="shoppingbench-grounded-shopping-tasks">ShoppingBench: Grounded Shopping Tasks</h3>
+<p>Wang et al. (2025) created ShoppingBench, a comprehensive benchmark with 2.5+ million real products that evaluates LLM agents on complex shopping intents -- voucher application, budget management, multi-seller matching.[^6]</p>
+<p><strong>Key finding:</strong> Even GPT-4.1 achieves under 50% success on realistic shopping tasks, highlighting the gap between current AI capabilities and practical e-commerce assistance.</p>
+<p>The benchmark also proposes a <strong>trajectory distillation strategy</strong> -- using supervised fine-tuning and RL to transfer agent capabilities from large to small models -- making capable shopping AI more accessible.</p>
+<h3 id="shoppingcomp-expert-curated-shopping-competency">ShoppingComp: Expert-Curated Shopping Competency</h3>
+<p>The ShoppingComp benchmark (November 2025) raises the bar further with 145 instances and 558 scenarios curated by 35 domain experts, evaluating AI shopping agents on product retrieval, comparative report generation, and safety-critical purchase decisions.[^67] The benchmark reveals a stark capability gap: even GPT-5.2 achieves only 17.76% overall accuracy, with particular failures in safety-sensitive categories (medication, electronics compatibility). This suggests that deploying AI shopping agents in high-stakes domains requires significant advances in grounded reasoning and domain knowledge.</p>
+<p><strong>Learning application:</strong> ShoppingComp's expert-curated scenarios provide a template for how educational assessments could be designed — complex, multi-step tasks that test integrated understanding rather than isolated facts. The 17.76% ceiling demonstrates that current AI excels at information retrieval but struggles with the kind of integrated judgment that effective learning applications require.</p>
+<h3 id="llm-powered-recommendation-agents-a-taxonomy">LLM-Powered Recommendation Agents: A Taxonomy</h3>
+<p>Peng et al. (2025) provide a systematic survey identifying three paradigms for LLM-based recommendation agents [^68]:
+1. <strong>Recommender-oriented</strong>: LLMs enhance core recommendation algorithms (embeddings, feature extraction)
+2. <strong>Interaction-oriented</strong>: Dynamic dialogue-based suggestions where the agent actively elicits preferences
+3. <strong>Simulation-oriented</strong>: Multi-agent frameworks modeling user-item dynamics for testing and optimization</p>
+<p>The survey covers the full agent lifecycle — profile construction, memory management, planning, and action execution — providing a roadmap for building AI-powered commerce learning systems.</p>
+<h2 id="predictive-models-for-commerce">Predictive Models for Commerce</h2>
+<h3 id="purchase-behavior-prediction-via-reinforcement-learning">Purchase Behavior Prediction via Reinforcement Learning</h3>
+<p>Jain (2025) introduced a hybrid DQN-LSTM architecture for forecasting purchase intent, achieving 88% accuracy on 885,000+ user sessions.[^7] The reinforcement learning approach allows the model to adapt as customer behavior evolves.</p>
+<p><strong>Learning application:</strong> Enables businesses to learn which browsing patterns signal purchase intent, directly improving inventory management and personalized marketing. The RL component means the system continuously learns from changing behavior rather than relying on static historical patterns.</p>
+<h3 id="supply-chain-planning-at-scale">Supply Chain Planning at Scale</h3>
+<p>Qi et al. (2025) deployed a Supply Chain Planning Agent (SCPA) at JD.com that uses LLMs for intent classification, task orchestration, execution, and iterative plan correction.[^8]</p>
+<p><strong>Production results:</strong>
+- ~40% reduction in weekly planning time
+- 22% increase in plan accuracy
+- 2-3% improvement in stock fulfillment rates</p>
+<p><strong>Learning application:</strong> One of the few papers demonstrating production deployment of LLM agents in e-commerce operations. The results show AI can help supply chain professionals learn to make better planning decisions by providing intelligent defaults and catching errors.</p>
+<h3 id="aigq-generative-query-recommendation-at-taobao-scale">AIGQ: Generative Query Recommendation at Taobao Scale</h3>
+<p>Xu et al. (March 2026) introduce AIGQ, the first end-to-end generative framework for pre-search query recommendation in e-commerce, deployed on Taobao.[^19] The architecture comprises two LLM variants: AIGQ-Direct for personalized user-to-query generation and AIGQ-Think for trigger-to-query mappings, trained on massive user behavior logs. Large-scale online A/B experiments demonstrate substantial improvements in business metrics across platform effectiveness and user engagement.</p>
+<p><strong>Learning application:</strong> AIGQ shows how generative AI can anticipate what users want to search for before they type. For educational platforms, this suggests proactive learning recommendation -- an AI that generates study topics or questions based on a learner's trajectory, guiding exploration before the learner knows what to look for next.</p>
+<h2 id="predictive-models-for-supply-chain-resilience">Predictive Models for Supply Chain Resilience</h2>
+<h3 id="foresight-learning-calibrated-disruption-forecasting">Foresight Learning: Calibrated Disruption Forecasting</h3>
+<p>Wilczewski &amp; Skotheim (April 2026) introduce an end-to-end framework that trains LLMs to produce calibrated probabilistic forecasts of supply chain disruptions using news as input and realized disruption outcomes as supervision.[^20] The fine-tuned model substantially outperforms strong baselines -- including GPT-5 -- on accuracy, calibration, and precision. Training induces structured probabilistic reasoning behaviors (base-rate anchoring, iterative refinement) without explicit prompting.</p>
+<p><strong>Learning application:</strong> Foresight Learning demonstrates that LLMs can develop genuine probabilistic reasoning through supervised training on forecasting tasks -- they learn to reason about uncertainty rather than just pattern-match. This connects to <a href="predictive-simulation-learning.html">predictive simulation learning</a>: the model builds an internal world model of supply chain dynamics from news signals. For education, this suggests that training students on forecasting tasks (with calibration feedback) could develop transferable probabilistic reasoning skills applicable across domains.</p>
+<h2 id="ai-powered-dynamic-pricing-the-lm-tree-agent">AI-Powered Dynamic Pricing: The LM-Tree Agent</h2>
+<p>Archer, Ghili &amp; Haghpanah (April 2026) introduce the LM-Tree, an intelligent pricing mechanism that uses language models to categorize content and set differentiated prices for AI system access to publisher content.[^26] Rather than relying on manual editorial taxonomy, the system learns value distinctions from binary purchase feedback alone, automatically discovering what makes some content more valuable than others.</p>
+<p><strong>Key results:</strong>
+- 65% revenue improvement over uniform pricing
+- 47% gain over simple two-tier pricing
+- 40% outperformance of the publisher's existing 8-segment editorial taxonomy
+- Validated on 8,939 articles with 80,451 buyer queries from a major German tech publisher</p>
+<p><strong>Learning application:</strong> The LM-Tree demonstrates a powerful principle: AI can discover pricing-relevant categories that human-designed taxonomies miss. For educational content marketplaces -- where courses, tutorials, and learning materials are sold -- this suggests that AI-discovered categorizations (based on what learners actually value) may outperform hand-crafted subject taxonomies. The system's ability to learn from purchase signals alone (no explicit feedback) mirrors how <a href="ai-ecommerce-learning.md#ai-for-recommendation-and-personalization">recommendation systems</a> learn from implicit behavioral signals. This connects to the broader theme of <a href="recursive-self-improvement.html">recursive self-improvement</a>: the pricing model improves its own categorization through each transaction, creating a self-improving pricing agent.</p>
+<h2 id="generative-ai-impact-on-e-commerce-productivity">Generative AI Impact on E-Commerce Productivity</h2>
+<h3 id="field-experiments-in-online-retail">Field Experiments in Online Retail</h3>
+<p>Fang et al. (2025) conducted rigorous field experiments across seven e-commerce business workflows -- pre-sale chatbots, search refinement, product descriptions, marketing messages -- to measure how generative AI affects firm productivity.[^9]</p>
+<p><strong>Key finding:</strong> Effectiveness varies substantially by workflow, seller characteristics, and consumer segments. <strong>Friction reduction</strong> was identified as the primary mechanism for AI-powered performance gains -- not creative superiority.</p>
+<p><strong>Learning application:</strong> Provides evidence-based guidance on where AI tools add most value in e-commerce, helping businesses learn where to invest in AI integration and where human expertise remains superior.</p>
+<h2 id="industry-trends-and-scale-2026">Industry Trends and Scale (2026)</h2>
+<p>The convergence of research and deployment is accelerating rapidly:</p>
+<ul>
+<li>The global AI-enabled e-commerce market reached $8.65 billion in 2025, projected to hit $22.6 billion by 2032 (14.6% CAGR)[^13]</li>
+<li>97% of commerce organizations now have AI implementation plans in place</li>
+<li>Companies using AI personalization generate ~40% more revenue, with leaders growing ~10 percentage points faster than laggards</li>
+<li>Gartner predicts (January 2026) that 60% of brands will use agentic AI for one-to-one customer interactions by 2028<a href="Gartner" title="2026). Agentic AI prediction cited in [growth-engines.com](https://growth-engines.com/insights/ecommerce/ecommerce-personalization-strategies-how-ai-is-driving-40-revenue-lifts">^14</a></li>
+</ul>
+<p>A notable shift is occurring from optimization-centric AI to a more integrated discourse where <strong>fairness, transparency, and trust</strong> are structurally central to system design.[^15] This mirrors a broader trend in AI-assisted learning: effectiveness without trustworthiness is insufficient.</p>
+<p><strong>Learning application:</strong> These statistics provide concrete evidence that AI-commerce skills are becoming essential professional competencies. Educational programs should prepare students not just for technical AI implementation but for the governance, ethics, and strategic dimensions of AI-mediated commerce.</p>
+<h2 id="from-commerce-agents-to-education-agents-the-agentic-workflow-bridge">From Commerce Agents to Education Agents: The Agentic Workflow Bridge</h2>
+<p>Kamalov et al. (2025, revised January 2026) systematically analyze AI agents in education through four design paradigms -- reflection, planning, tool use, and multi-agent collaboration -- that are structurally identical to the paradigms driving agentic commerce.[^21] Their multi-agent framework for automated essay scoring demonstrates that agentic architectures developed for commerce (multi-agent coordination, memory-augmented personalization, adaptive difficulty) transfer directly to educational applications.</p>
+<p>The parallel is precise:</p>
+<table>
+<thead>
+<tr>
+<th>Commerce Paradigm</th>
+<th>Education Paradigm</th>
+<th>Shared Architecture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shopping agent reflects on user satisfaction</td>
+<td>Tutoring agent reflects on student understanding</td>
+<td>Self-evaluation loop</td>
+</tr>
+<tr>
+<td>Supply chain agent plans multi-step procurement</td>
+<td>Course agent plans learning path</td>
+<td>Goal decomposition + sequencing</td>
+</tr>
+<tr>
+<td>Product research agent uses web search tools</td>
+<td>Research tutoring agent uses citation tools</td>
+<td>Tool-augmented generation</td>
+</tr>
+<tr>
+<td>Multi-agent shopping (user/supervisor/research)</td>
+<td>Multi-agent tutoring (profiler/scheduler/content creator)</td>
+<td>Specialized role coordination</td>
+</tr>
+</tbody>
+</table>
+<p>This convergence means that advances in agentic e-commerce -- Shopping Companion's preference memory, ProductResearch's reflective internalization, MemRerank's compact user profiles -- are directly applicable as educational technologies. The feedback loop that makes a shopping agent better at predicting purchases is the same loop that makes a tutoring agent better at predicting learning outcomes.</p>
+<p><strong>Practical implication:</strong> Organizations investing in agentic commerce infrastructure are simultaneously building the foundation for adaptive education systems. The same LLM agent that learns a customer's product preferences can learn a student's knowledge gaps; the same simulation that predicts purchase behavior can predict learning trajectories.</p>
+<h2 id="cross-cutting-themes">Cross-Cutting Themes</h2>
+<h3 id="1-from-recommendation-to-agency">1. From Recommendation to Agency</h3>
+<p>The field is shifting from passive recommendation ("you might like this") to active agency ("I'll find the best deal for you, apply the coupon, and purchase it"). This requires AI systems that can:
+- Navigate complex multi-step workflows
+- Maintain state across long interactions
+- Learn user preferences from sparse feedback
+- Handle real-world constraints (budgets, delivery windows, return policies)</p>
+<h3 id="2-bias-and-marketplace-fairness">2. Bias and Marketplace Fairness</h3>
+<p>When AI agents mediate between buyers and sellers, new fairness questions arise. The ACES findings on position bias and model-dependent market concentration suggest that AI-mediated commerce could inadvertently create winner-take-all dynamics unless carefully designed.</p>
+<h3 id="3-the-learning-feedback-loop">3. The Learning Feedback Loop</h3>
+<p>E-commerce AI systems create tight feedback loops: recommendation → user action → updated model → better recommendation. This is a natural form of <a href="recursive-self-improvement.html">recursive self-improvement</a> applied to a commercial domain, where each interaction teaches the system something new. MemRerank's compact preference memory[^17] and GASP's guided difficulty progression (see <a href="recursive-self-improvement.html">recursive self-improvement</a>) both address the same challenge: how to extract maximum learning signal from each interaction cycle.</p>
+<h3 id="5-the-information-theoretic-view">5. The Information-Theoretic View</h3>
+<p>The Solicit-Then-Suggest model[^16] and the self-play evolution theory of Liu et al. (see <a href="recursive-self-improvement.html">recursive self-improvement</a>) share a deep connection: both frame effective AI learning as <strong>information gain optimization</strong>. In commerce, the agent optimizes information about user preferences; in self-play, the system optimizes learnable information gain per iteration. The mathematical structure is identical -- what differs is the domain of uncertainty being reduced.</p>
+<h3 id="4-simulation-for-commerce">4. Simulation for Commerce</h3>
+<p><a href="predictive-simulation-learning.html">Predictive simulation</a> underpins multiple e-commerce applications:
+- <strong>Demand forecasting:</strong> Simulating future purchase patterns to optimize inventory
+- <strong>Price optimization:</strong> Simulating market responses to price changes
+- <strong>Customer journey modeling:</strong> Simulating user paths to identify conversion barriers
+- <strong>A/B test simulation:</strong> Predicting experiment outcomes before running them</p>
+<h2 id="connections-to-other-topics">Connections to Other Topics</h2>
+<h3 id="to-predictive-simulation-learning">To Predictive Simulation Learning</h3>
+<p><a href="predictive-simulation-learning.html">Predictive simulation</a> provides the technical foundation for demand forecasting and customer behavior modeling. World models applied to commerce could predict the effects of pricing changes, marketing campaigns, or product launches before committing resources.</p>
+<h3 id="to-recursive-self-improvement">To Recursive Self-Improvement</h3>
+<p>E-commerce recommendation systems are natural examples of <a href="recursive-self-improvement.html">recursive self-improvement</a>: each user interaction provides feedback that refines the model. The Shopping Companion's memory-augmented architecture makes this recursive learning explicit.</p>
+<h3 id="to-open-ended-discovery">To Open-Ended Discovery</h3>
+<p>The product space is effectively unbounded -- new products, categories, and shopping patterns emerge continuously. AI systems that can <a href="open-ended-discovery.html">discover</a> emerging trends and novel product combinations without predefined categories mirror open-ended search.</p>
+<h3 id="to-foundation-models">To Foundation Models</h3>
+<p><a href="../core-concepts/foundation-models-for-research.html">Foundation models</a> enable the shift from narrow recommendation engines to general-purpose shopping agents. LLMs' ability to understand natural language intents, reason about trade-offs, and execute multi-step plans is what makes agentic commerce possible.</p>
+<h3 id="interruptbench-handling-mid-task-user-changes-in-shopping">InterruptBench: Handling Mid-Task User Changes in Shopping</h3>
+<p>Zou et al. (April 2026) introduce InterruptBench, a benchmark evaluating how LLM agents handle mid-task user interruptions -- additions, revisions, and retractions -- during web navigation including shopping tasks.[^27] Testing 6 LLM backbones reveals that handling interruptions remains challenging even for frontier models, with performance degrading sharply when users change their minds mid-flow.</p>
+<p><strong>Learning application:</strong> InterruptBench captures a critical real-world shopping skill that previous benchmarks missed: adapting to changing intent. Human shoppers routinely revise their goals ("actually, I need the blue one, not the red") and expect seamless adaptation. The finding that frontier models struggle with this exposes a gap between current AI shopping agents and real human shopping behavior. For educational simulations, this suggests that training environments must include realistic interruption patterns -- a business student learning customer service or retail management needs practice with intent changes, not just straightforward transactions. This connects to <a href="#shopsimulator-rl-training-ground-for-shopping-agents">ShopSimulator's</a> finding that agents degrade during longer interactions -- interruptions compound the difficulty of extended shopping sessions.</p>
+<h3 id="omni-simplemem-lifelong-memory-for-persistent-commerce-agents">Omni-SimpleMem: Lifelong Memory for Persistent Commerce Agents</h3>
+<p>Liu et al. (April 2026) developed Omni-SimpleMem, an autonomous research pipeline that discovers a unified memory framework for long-running agents, improving F1 by +411% on LoCoMo and +214% on Mem-Gallery.[^28] The key finding: architectural modifications to memory systems produce far larger gains than hyperparameter tuning, and the optimal architecture was discovered through automated research rather than human design.</p>
+<p><strong>Learning application:</strong> Lifelong memory is the foundation of persistent personalization in commerce -- a shopping agent that remembers a customer's preferences, past purchases, and evolving tastes across months of interaction. Omni-SimpleMem's dramatic improvements suggest that current memory architectures for commerce agents are severely suboptimal. The automated discovery approach (the system found better memory architectures than human researchers) connects to <a href="recursive-self-improvement.html">recursive self-improvement</a>: the research process itself was automated, finding solutions that human designers missed. For e-commerce education, this validates that AI memory for customer relationships is still an open problem with enormous room for improvement -- a valuable area for students and practitioners to understand.</p>
+<h3 id="zero-click-commerce-and-the-universal-commerce-protocol">Zero-Click Commerce and the Universal Commerce Protocol</h3>
+<p>Industry analysis in early 2026 identifies a paradigm shift toward <strong>zero-click commerce</strong> -- transactions where the consumer never searches, clicks, or visits a website.<a href="commercetools" title="2026). &quot;7 AI Trends Shaping Agentic Commerce in 2026.&quot; [commercetools.com](https://commercetools.com/blog/ai-trends-shaping-agentic-commerce">^29</a> AI agents anticipate needs, negotiate deals, and execute purchases autonomously within user-defined guardrails. McKinsey projects $1 trillion in US B2C retail alone by 2030 from agentic commerce, with global projections reaching $3--5 trillion.<a href="McKinsey" title="2026). &quot;The agentic commerce opportunity: How AI agents are ushering in a new era for consumers and merchants.&quot; [mckinsey.com](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants">^30</a></p>
+<p>The <strong>Universal Commerce Protocol (UCP)</strong> is emerging as an open standard enabling AI agents to interact with commerce backends consistently across the shopping journey. This addresses a critical infrastructure gap: if product data is unstructured or inconsistent, even capable shopping agents cannot reliably include products in their candidate sets.</p>
+<p><strong>Learning application:</strong> Zero-click commerce fundamentally changes what commerce education must teach. When AI agents mediate purchases, the skills that matter shift from "finding good deals" to "configuring agent intent correctly" and "auditing agent decisions." Business students need to understand how to make their products machine-readable and agent-accessible -- a competency that didn't exist two years ago. The UCP standardization effort mirrors how web standards (HTML, HTTP) transformed commerce in the 1990s -- understanding these protocols becomes a core business literacy.</p>
+<h3 id="socioverse-simulating-consumer-populations-at-scale">SocioVerse: Simulating Consumer Populations at Scale</h3>
+<p>Zhang et al. (April 2026) introduced SocioVerse, a world model for social simulation powered by 10 million real-world user profiles characterized across 15 demographic dimensions.[^31] Validated on presidential election prediction, breaking news feedback, and national economic surveys, SocioVerse demonstrates that LLM-agent-driven world models can accurately simulate population-level social behaviors.</p>
+<p><strong>Learning application for e-commerce:</strong> SocioVerse provides the missing link between <a href="predictive-simulation-learning.html">predictive simulation</a> and market research. Rather than conducting expensive focus groups or A/B tests, businesses could simulate consumer reactions to product launches, pricing changes, or marketing campaigns against a demographically calibrated population model. A marketing student could test "how would different income brackets respond to this promotional strategy?" against 10 million simulated consumers -- a scale impossible with human participants. This extends <a href="#shopsimulator-rl-training-ground-for-shopping-agents">ShopSimulator's</a> individual-level shopping simulation to population-level market simulation.</p>
+<h3 id="empirical-evidence-ai-tutoring-outperforms-traditional-commerce-education">Empirical Evidence: AI Tutoring Outperforms Traditional Commerce Education</h3>
+<p>A landmark RCT by Kestin et al. (Scientific Reports, 2025) demonstrated that AI tutoring outperforms in-class active learning with effect sizes of 0.73--1.3 standard deviations, while simultaneously improving engagement and motivation.[^32] While conducted in physics education, the implications for commerce training are direct: the same predict-verify-adapt loop that makes AI tutoring effective in physics applies to business skill development -- sales forecasting, inventory management, and customer behavior prediction all benefit from immediate, personalized feedback loops that AI tutors provide.</p>
+<h3 id="criterion-validity-of-llm-as-judge-for-conversational-commerce">Criterion Validity of LLM-as-Judge for Conversational Commerce</h3>
+<p>Chen et al. (March 2026) investigated whether LLM-based dialogue evaluation scores actually predict business outcomes in conversational commerce.[^33] Through a two-phase empirical study on a Chinese matchmaking platform (130 conversations), they found that evaluation dimensions have <strong>unequal predictive value</strong>: Need Elicitation and Pacing Strategy significantly predict conversion, while Contextual Memory shows no detectable association. Equally-weighted composite scores underperformed their strongest individual dimensions. Crucially, they discovered that "AI agents execute sales behaviors without building user trust," creating an agent-type confound that initially masked the true patterns.</p>
+<p><strong>Learning application:</strong> This paper provides the first empirical evidence that conversational AI quality metrics diverge from actual outcome metrics in commerce -- a finding with direct implications for education. Just as an AI shopping agent can score high on dialogue quality while failing to convert sales, an AI tutor can score high on pedagogical rubrics while failing to produce learning gains. The authors' proposed three-layer evaluation architecture (rubric evaluation → criterion validity testing → outcome alignment) should be adopted by educational AI: measure not just tutoring quality but whether quality predicts actual student learning. The trust-building finding connects to <a href="#aces-auditing-ai-shopping-agent-behavior">ACES's</a> bias research -- agents optimized for efficiency without trust-building produce systematically worse outcomes.</p>
+<h3 id="cogsearch-cognitive-aligned-multi-agent-e-commerce-search-production-deployed">CogSearch: Cognitive-Aligned Multi-Agent E-Commerce Search (Production Deployed)</h3>
+<p>Zhai et al. (March 2026) introduced CogSearch, a multi-agent framework that mimics human cognitive workflows for e-commerce search, shifting from relevance-focused retrieval to comprehensive decision support.[^35] The system was deployed in online production testing with measurable results: 5% reduced decision costs, 0.41% overall conversion rate increase, and ~30% conversion improvement on complex queries.</p>
+<p><strong>Learning application:</strong> CogSearch demonstrates that cognitive science-inspired AI architectures produce measurable business improvements in production. The shift from "find matching products" to "support the purchase decision" parallels the shift in education from "find matching content" to "support the learning process." The ~30% improvement on complex queries is particularly significant -- it shows that AI excels precisely where users struggle most, analogous to how AI tutoring shows the largest gains for difficult material (<a href="#empirical-evidence-ai-tutoring-outperforms-traditional-commerce-education">Kestin et al.</a>). For commerce education, CogSearch provides a concrete case study of how cognitive science principles translate to production AI systems with measurable ROI.</p>
+<h3 id="collusive-pricing-under-llm-a-regulatory-warning">Collusive Pricing Under LLM: A Regulatory Warning</h3>
+<p>Cao &amp; Hu (January 2026, revised March 2026) demonstrated that delegating pricing decisions to LLMs can facilitate inadvertent collusion when competing sellers use the same pre-trained model.[^36] A critical threshold in output fidelity determines outcomes: below it, competitive pricing prevails; above it, collusive pricing emerges. Infrequent retraining amplifies collusive tendencies.</p>
+<p><strong>Learning application:</strong> This paper is essential reading for anyone building or studying AI-powered commerce systems. It reveals that the same <a href="recursive-self-improvement.html">recursive self-improvement</a> dynamics that make AI pricing agents effective (learning from market feedback, optimizing revenue) can produce anticompetitive outcomes without explicit intent. For business and economics education, this provides a concrete case study of how AI optimization can produce emergent harms -- students need to understand that "AI optimized my pricing" does not mean "AI priced fairly." The regulatory implications are immediate: as <a href="#zero-click-commerce-and-the-universal-commerce-protocol">zero-click commerce</a> scales to McKinsey's projected $1-5 trillion, the potential for algorithmic collusion becomes a systemic risk.</p>
+<h3 id="gpa-learning-gui-process-automation-from-demonstrations">GPA: Learning GUI Process Automation from Demonstrations</h3>
+<p>Zhao et al. (April 2026) introduced GPA, a vision-based system that learns GUI automation from single demonstrations, achieving superior success rates to Gemini 3 Pro on extended GUI tasks while executing 10× faster.[^34] The system uses Sequential Monte Carlo localization for robustness, readiness calibration for deterministic performance, and runs entirely locally for privacy.</p>
+<p><strong>Learning application:</strong> GPA enables a new category of commerce learning tool: automated demonstration capture and replay for e-commerce operations. A business student could watch an expert perform complex multi-step commerce workflows (supplier negotiations across platforms, inventory management across dashboards, promotional campaign setup) and GPA could encode these as repeatable, adaptable automation scripts. This bridges <a href="predictive-simulation-learning.md#dynaweb-dreaming-about-the-web">DynaWeb's</a> dreamed web environments with real-world commerce operations -- rather than simulating web interactions, GPA learns them from observation. The privacy-preserving local execution is particularly relevant for commerce applications involving sensitive pricing, inventory, or customer data.</p>
+<h3 id="salesrlagent-reinforcement-learning-for-sales-conversion-optimization">SalesRLAgent: Reinforcement Learning for Sales Conversion Optimization</h3>
+<p>Moradi et al. (March 2025) introduced SalesRLAgent, a reinforcement learning framework for optimizing sales conversion prediction and real-time action recommendations.[^37] The system treats each customer interaction as a sequential decision problem, learning when to recommend products, adjust pricing, or trigger follow-up actions based on browsing signals and purchase history.</p>
+<p><strong>Learning application:</strong> SalesRLAgent demonstrates how RL -- the same framework powering <a href="predictive-simulation-learning.html">DreamerV3's</a> world model agents and <a href="recursive-self-improvement.html">SkillRL's</a> skill discovery -- can optimize the human side of commerce. For business education, this provides a concrete case study of how abstract RL concepts (states, actions, rewards, policies) map to tangible commerce decisions. A business student could use a SalesRLAgent-style simulator to practice sales strategy optimization, learning how sequential decisions compound -- exactly the kind of long-horizon reasoning that <a href="predictive-simulation-learning.html">YC-Bench</a> shows most AI agents (and most humans) find difficult.</p>
+<h3 id="a4l-architecture-for-ai-augmented-learning-at-scale">A4L: Architecture for AI-Augmented Learning at Scale</h3>
+<p>Goel et al. (2025) present A4L (Architecture for AI-Augmented Learning), a data architecture developed at the National AI Institute for Adult Learning and Online Education that creates feedback loops between learning analytics and AI agents.[^38] The system collects interaction data from learners, analyzes it for personalization signals, and feeds results back to teachers, learners, and AI agents simultaneously.</p>
+<p><strong>Key design principle:</strong> A4L treats the learning ecosystem as a multi-stakeholder system where data flows bidirectionally -- AI agents don't just deliver content but also generate data that improves the system and informs human educators. This dual objective of "personalized and scalable" mirrors the tension in e-commerce between individual customer attention and mass-market efficiency.</p>
+<p><strong>Learning application:</strong> A4L provides the infrastructure blueprint for translating e-commerce personalization architectures into educational systems. The data architecture mirrors what <a href="#shopping-companion-memory-augmented-assistance">Shopping Companion</a> does for individual users and what <a href="#agenticrs-architecture-self-improving-recommender-lifecycle">AgenticRS-Architecture</a> does for recommendation lifecycles -- but applied to learning outcomes rather than purchase behavior. The multi-stakeholder feedback loop (learner + teacher + AI) extends beyond the typical agent-user dyad in commerce, suggesting that educational AI requires richer coordination than shopping AI. For e-commerce training specifically, A4L could power platforms that teach business skills while simultaneously learning which pedagogical approaches work best for different learner profiles -- a <a href="recursive-self-improvement.html">recursive self-improvement</a> loop at the institutional level.</p>
+<h3 id="agenticshop-benchmarking-personalized-product-curation-www-2026">AgenticShop: Benchmarking Personalized Product Curation (WWW 2026)</h3>
+<p>Kim et al. (WWW 2026, Dubai) introduced AgenticShop, the first benchmark evaluating how well agentic systems curate products for personalized web shopping in open-web settings.[^39] Existing benchmarks focus on simplified single-platform searches and overlook personalization. AgenticShop uses realistic scenarios with diverse user profiles and a checklist-driven evaluation framework measuring retrieval quality, preference alignment, and cross-platform coverage.</p>
+<p><strong>Key finding:</strong> Current agentic systems remain "largely insufficient" for real-world personalized product curation, particularly in open-web environments where products span multiple platforms and formats.</p>
+<p><strong>Learning application:</strong> AgenticShop exposes the gap between current AI shopping capability and what consumers actually need: personalized curation across the open web, not just search within a single platform. For commerce education, this provides a concrete benchmark for teaching students about the limitations of AI-mediated shopping -- understanding <em>where agents fail</em> is as important as understanding where they succeed. The benchmark's emphasis on personalization connects to <a href="#memrerank-compact-preference-memory-for-personalization">MemRerank's</a> compact preference memory: without effective user modeling, open-web curation degrades to generic search. For educational AI, AgenticShop's open-web evaluation framework could be adapted to measure how well AI tutors curate learning resources across diverse sources -- a skill increasingly important as educational content fragments across platforms.</p>
+<h3 id="oecd-2026-ai-tutoring-design-principles-apply-to-commerce-training">OECD 2026: AI Tutoring Design Principles Apply to Commerce Training</h3>
+<p>The OECD Digital Education Outlook 2026 reports experimental evidence with direct implications for AI-assisted commerce education.<a href="OECD" title="2026). *OECD Digital Education Outlook 2026*. [oecd.org](https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">^40</a> Key findings include:</p>
+<ul>
+<li><strong>AI-supported less-experienced tutors</strong> saw significant improvements in tutoring quality and student mathematics mastery -- demonstrating that AI amplifies human capability most effectively for those who need it most</li>
+<li><strong>Teacher preparation time reduced by 31%</strong> for secondary science teachers in England using AI tools</li>
+<li><strong>Critical design dependency:</strong> A Türkiye experiment showed 127% improvement with tutoring-designed GPT-4 but 17% worse performance after removal, proving that AI tools must be designed to build independent capability, not dependency</li>
+</ul>
+<p><strong>Learning application for commerce:</strong> These findings directly inform how AI should be deployed for commerce skill development. New sales employees, customer service agents, or supply chain planners (the "less-experienced tutors" of commerce) would benefit most from AI-augmented training -- but only if the AI is designed to build independent decision-making rather than create reliance on AI recommendations. The 31% preparation time reduction maps to commerce operations: AI could reduce the time managers spend creating training materials, pricing analyses, or market reports. The dependency warning is critical for commerce: a sales agent trained <em>with</em> AI recommendation support who can't function <em>without</em> it is a liability, not an asset. This connects to <a href="predictive-simulation-learning.html">Skill0's</a> progressive withdrawal principle -- commerce training AI should scaffold skills and then remove itself.</p>
+<h2 id="dark-patterns-and-llm-shopping-agent-vulnerability">Dark Patterns and LLM Shopping Agent Vulnerability</h2>
+<p>Ersoy et al. (IEEE Symposium on Security &amp; Privacy 2026) conducted the first systematic study of how deceptive UI designs -- "dark patterns" -- manipulate LLM-based web agents in e-commerce and other web contexts.[^46] Using LiteAgent (a lightweight evaluation framework capturing comprehensive interaction logs and screen recordings) and TrickyArena (a controlled sandbox with e-commerce, streaming, and news platforms featuring realistic dark patterns), they evaluated six popular LLM-based agents across three language models.</p>
+<p><strong>Critical findings:</strong>
+- Agents are susceptible to dark patterns an average of <strong>41% of the time</strong>
+- A single dark pattern reduces Task Success Rate for all models, with GPT-4o showing the largest decline (28.9% TSR drop)
+- Visual design modifications, HTML code adjustments, and combined dark patterns further increase agent susceptibility
+- E-commerce dark patterns (fake urgency timers, misleading discount labels, hidden subscription opt-ins) are particularly effective against agents</p>
+<p><strong>Learning application:</strong> This research has profound implications for both AI-mediated commerce and commerce education:</p>
+<ol>
+<li>
+<p><strong>Consumer protection:</strong> As agentic commerce scales toward the $1-5 trillion projected by McKinsey, the finding that AI shopping agents are systematically vulnerable to manipulation means consumers who delegate purchasing to AI agents may be <em>more</em> susceptible to exploitation than if they shopped themselves. This connects directly to <a href="#aces-auditing-ai-shopping-agent-behavior">ACES's</a> findings on position bias and model-dependent brand favoritism -- agents have consistent, predictable, and exploitable weaknesses.</p>
+</li>
+<li>
+<p><strong>Commerce education:</strong> Business students need to understand both sides of this dynamic: how dark patterns work (for ethical analysis), how AI agents respond to them (for system design), and how to build AI-resistant fair marketplaces (for responsible commerce). The TrickyArena benchmark could serve as a teaching tool -- having students design shopping agents that resist manipulation would develop both AI literacy and ethical reasoning.</p>
+</li>
+<li>
+<p><strong>Simulation fidelity:</strong> This finding strengthens the case that <a href="predictive-simulation-learning.md#adversarial-simulation-dark-patterns-and-agent-vulnerability">predictive simulation learning</a> environments must include adversarial elements. An agent trained in clean simulations (idealized product listings, honest pricing) will fail when encountering real-world e-commerce environments rife with dark patterns. Educational simulations for business and consumer skills should include deceptive elements to build robust judgment.</p>
+</li>
+<li>
+<p><strong>Regulatory implications:</strong> Combined with <a href="#collusive-pricing-under-llm-a-regulatory-warning">Collusive Pricing Under LLM</a>, this creates a dual threat: AI agents both <em>create</em> market distortions (inadvertent collusion) and are <em>vulnerable to</em> market manipulation (dark patterns). Effective commerce regulation must address both directions.</p>
+</li>
+</ol>
+<h2 id="open-tutorai-from-commerce-personalization-to-learning-platforms">Open TutorAI: From Commerce Personalization to Learning Platforms</h2>
+<p>El Hajji et al. (February 2026) released Open TutorAI, an open-source educational platform that demonstrates how agentic commerce architectures translate directly into learning systems.[^41] The platform integrates LLM-powered tutoring, customizable 3D avatars for multimodal interaction, and structured onboarding that captures learner goals and preferences -- mirroring how <a href="#shopping-companion-memory-augmented-assistance">Shopping Companion</a> captures user purchase preferences.</p>
+<p><strong>Architecture parallels to commerce:</strong>
+- <strong>Preference capture</strong> mirrors e-commerce onboarding: just as shopping agents profile customer tastes, Open TutorAI profiles learner goals and knowledge levels during initial interaction
+- <strong>Multi-stakeholder interfaces</strong> (learners, educators, parents) extend beyond the typical agent-user dyad, paralleling how commerce platforms serve buyers, sellers, and platform operators
+- <strong>Embedded learning analytics</strong> track engagement patterns and generate actionable feedback -- the educational equivalent of conversion analytics and customer behavior tracking</p>
+<p><strong>Key design choice:</strong> Open TutorAI uses a modular, open-source architecture built on OpenWebUI, enabling RAG-based content retrieval and adaptive dialogue -- the same infrastructure patterns powering <a href="#productresearch-deep-research-agents-for-shopping">ProductResearch's</a> multi-agent research framework.</p>
+<p><strong>Learning application:</strong> Open TutorAI validates the thesis of <a href="cross-cutting-connections.md#connection-7-from-agentic-commerce-to-agentic-education">Connection 7</a> in practice: agentic commerce architectures (memory-augmented agents, adaptive personalization, multi-stakeholder coordination) transfer to education with minimal architectural modification. The platform's avatar-based modality adds an engagement dimension that commerce agents typically lack -- suggesting that educational applications may <em>exceed</em> commerce platforms in user engagement when they incorporate immersive elements. For e-commerce training specifically, Open TutorAI could serve as the platform for teaching the commerce skills described throughout this article, creating a recursive loop where the educational platform itself embodies the agentic patterns it teaches.</p>
+<h2 id="the-knowledge-creation-paradox-when-ai-helps-individuals-but-hurts-communities">The Knowledge Creation Paradox: When AI Helps Individuals but Hurts Communities</h2>
+<p>Sun (April 2026) modeled a fundamental paradox for AI-mediated commerce and learning: <strong>AI improves individual answers but can slow collective knowledge creation</strong>.[^42] The paper identifies two mechanisms:</p>
+<ol>
+<li><strong>Flow margin:</strong> Users who can solve problems privately with AI stop posting questions and answers publicly, reducing the collective knowledge archive</li>
+<li><strong>Resolution margin:</strong> AI raises the opportunity cost of contributing to shared knowledge -- why write a detailed product review or troubleshooting guide when AI can answer individually?</li>
+</ol>
+<p>These mechanisms create <strong>self-undermining feedback loops</strong>: as AI improves, fewer people contribute to the knowledge bases that AI itself relies on, potentially creating "low-archive traps" where both AI quality and community knowledge degrade together.</p>
+<p><strong>Learning application for e-commerce:</strong> This finding has immediate implications for the product review ecosystem that powers recommendation systems. If AI shopping agents reduce the incentive for customers to write detailed reviews (because AI can answer product questions directly), the very data that trains better shopping agents erodes. The same dynamic threatens commerce training: if new employees use AI to solve problems without documenting solutions, institutional knowledge atrophies. This creates a design requirement for <a href="cross-cutting-connections.html">agentic commerce systems</a>: effective AI agents must not only serve individual users but also <strong>incentivize contributions back to collective knowledge</strong> -- perhaps by making it easy to convert AI-assisted problem-solving into public documentation, or by rewarding review contributions within the commerce platform. The parallel to education is direct: AI tutoring that solves problems for students without requiring them to articulate solutions publicly (<a href="#the-illusion-of-understanding">study groups, forums, peer teaching</a>) degrades the collaborative learning environment.</p>
+<h3 id="the-illusion-of-understanding-modality-matters-for-learning">The Illusion of Understanding: Modality Matters for Learning</h3>
+<p>Taneja, Singh &amp; Goel (Georgia Tech, April 2026) conducted a controlled experiment (n=124) comparing three learning modalities for biology: multimodal conversational AI (text + images), text-only conversational AI, and traditional textbook search.[^43]</p>
+<p><strong>Critical finding:</strong> While multimodal AI achieved the highest post-test scores, text-only conversational AI created an <strong>"illusion of understanding"</strong> -- participants rated it as more engaging and helpful than textbook search, yet produced <em>lower</em> learning outcomes. The engaging conversational interface masked the absence of visual grounding, leading students to overestimate their comprehension.</p>
+<p><strong>Learning application for e-commerce:</strong> This finding directly extends the <a href="#oecd-2026-ai-tutoring-design-principles-apply-to-commerce-training">OECD scaffolding-dependency evidence</a> with modality-specific nuance. For commerce training, it suggests that text-only chatbot assistants (common in customer service and sales training) may create a false sense of competency -- trainees feel they understand pricing strategy or customer psychology but perform worse than those who learned from structured visual materials. The implication is that commerce training platforms should incorporate multimodal content (visual dashboards, interactive data visualizations, video demonstrations) rather than relying on conversational AI alone. For product recommendation, it raises a parallel concern: conversational shopping agents that explain recommendations in text may feel more helpful than visual comparison tools while actually producing <em>worse</em> purchase decisions.</p>
+<h3 id="rsir-recursive-self-improving-recommendations-without-external-data">RSIR: Recursive Self-Improving Recommendations Without External Data</h3>
+<p>Zhang et al. (February 2026) introduced RSIR (Recursive Self-Improving Recommendation), the first framework where a recommendation model bootstraps its own performance through recursive self-improvement without external data or teacher models.[^44] The system generates synthetic user interaction sequences, filters them for quality and consistency, and retrains on the enriched dataset -- repeating this cycle for cumulative gains.</p>
+<p><strong>Key findings:</strong>
+- Recursive self-improvement is model-agnostic and overcomes data sparsity, the fundamental bottleneck in recommendation quality
+- Quality control (fidelity filtering) is essential to prevent degeneration -- without it, hallucinated interactions pollute training data
+- Weaker models can create effective training curricula for stronger ones</p>
+<p><strong>Learning application:</strong> RSIR demonstrates that the <a href="recursive-self-improvement.html">recursive self-improvement</a> paradigm directly solves a core e-commerce problem: cold-start and sparse-data limitations in personalization. For commerce education, RSIR provides a concrete case study of how iterative self-improvement works in production settings -- students learning about recommendation systems can see the full loop from data generation through quality control to model improvement. The fidelity control mechanism is particularly instructive: it teaches that self-improvement without verification degenerates, mirroring the <a href="recursive-self-improvement.md#the-variance-inequality-a-unified-theory-of-self-improvement">Variance Inequality's</a> theoretical prediction that strengthening the verifier matters more than strengthening the generator. Combined with <a href="#agenticrs-architecture-self-improving-recommender-lifecycle">AgenticRS-Architecture's</a> multi-agent lifecycle, RSIR completes the recursive commerce loop: AgenticRS provides the architecture, RSIR provides the self-improvement mechanism, and <a href="#memrerank-compact-preference-memory-for-personalization">MemRerank</a> provides the compact user representations that make the cycle efficient.</p>
+<h3 id="intellicode-centralized-learner-modeling-for-commerce-training">IntelliCode: Centralized Learner Modeling for Commerce Training</h3>
+<p>IntelliCode (December 2025) introduces a multi-agent LLM tutoring system built around a centralized, versioned <strong>learner state</strong> that integrates mastery estimates, misconceptions, review schedules, and engagement signals.[^45] This centralized model enables multiple specialized agents (content delivery, assessment, scaffolding) to coordinate around a shared understanding of the learner.</p>
+<p><strong>Learning application for commerce:</strong> IntelliCode's architecture provides a blueprint for AI-powered commerce training platforms where multiple learning objectives must be coordinated. A new e-commerce employee needs to develop product knowledge, customer interaction skills, platform fluency, and analytical capability simultaneously -- these aren't independent skills but interact in complex ways. IntelliCode's centralized learner state enables coordination: if the product knowledge agent detects a gap in electronics categories, the customer interaction agent can prioritize electronics-related role-play scenarios. This mirrors how <a href="#shopping-companion-memory-augmented-assistance">Shopping Companion's</a> unified preference memory coordinates across shopping tasks -- both systems benefit from maintaining a single, versioned model of the user rather than siloed per-task profiles. The versioned aspect is critical: it enables <a href="recursive-self-improvement.html">recursive self-improvement</a> over the learner model itself, tracking not just current state but the trajectory of improvement.</p>
+<h3 id="www-2026-llm-agents-for-recommendation-systems">WWW 2026: LLM &amp; Agents for Recommendation Systems</h3>
+<p>The WWW 2026 workshop on "LLM &amp; Agents for Recommendation Systems" (Dubai, April 2026) brings together researchers across recommendation systems, multi-agent learning, information retrieval, and mechanism design to address the transformation of commerce through agentic AI.[^47] Key workshop themes include:</p>
+<ul>
+<li><strong>Agent-driven personalization</strong> -- Moving from passive recommendation to active agent-mediated commerce</li>
+<li><strong>Transparency and responsibility</strong> -- Designing agent systems that are auditable and fair</li>
+<li><strong>Multi-agent coordination</strong> -- Enabling multiple specialized agents to collaborate on commerce tasks</li>
+<li><strong>Mechanism design</strong> -- Game-theoretic approaches to marketplace fairness when agents mediate transactions</li>
+</ul>
+<p><strong>Learning application:</strong> The workshop's convergence of recommendation systems and multi-agent learning reflects a broader trend: commerce AI is shifting from single-model optimization to coordinated multi-agent systems. For commerce education, this creates a new competency requirement -- understanding not just individual recommendation algorithms but how multiple agents interact in marketplace settings. The mechanism design thread is particularly important: as <a href="#collusive-pricing-under-llm-a-regulatory-warning">Collusive Pricing Under LLM</a> demonstrates, agent-mediated commerce can produce emergent dynamics (collusion, bias amplification) that don't arise from any individual agent's behavior but from their interaction. Students preparing for careers in AI-mediated commerce need to understand these system-level dynamics, not just component-level performance.</p>
+<h3 id="switching-based-deep-learning-adaptive-recommendation-by-user-type">Switching-Based Deep Learning: Adaptive Recommendation by User Type</h3>
+<p>Saini et al. (Scientific Reports, 2026) published a switching-based deep learning framework that dynamically transitions between integrated recommendation models based on user categorization.[^48] Users are classified into three categories based on engagement levels and interaction patterns, with the system seamlessly switching recommendation strategies to match each category's characteristics.</p>
+<p><strong>Key innovation:</strong> Rather than applying a single recommendation approach to all users, the switching mechanism recognizes that different user types (new users, active browsers, power buyers) need fundamentally different recommendation strategies -- addressing the cold-start problem for new users and the filter-bubble problem for experienced ones.</p>
+<p><strong>Learning application:</strong> The switching framework formalizes a principle that experienced educators know intuitively: different learners need different approaches. A novice shopper exploring a new product category needs broad exposure (analogous to introductory coursework), while an expert buyer needs precise optimization (analogous to advanced study). This connects to <a href="recursive-self-improvement.md#ladder-recursive-problem-decomposition">LADDER's</a> scaffolded difficulty and <a href="recursive-self-improvement.md#gasp-guided-asymmetric-self-play-for-code">GASP's</a> zone of proximal development: all three systems adapt their strategy based on the user's current capability level. For commerce training, this framework teaches students that personalization is not just about <em>what</em> to recommend but about <em>how</em> to recommend -- selecting the right interaction paradigm for each customer segment.</p>
+<h3 id="clawarena-evolving-information-challenges-in-commerce-domains">ClawArena: Evolving Information Challenges in Commerce Domains</h3>
+<p>Ji et al. (UNC Chapel Hill, April 2026) introduced ClawArena, a benchmark testing AI agents across 8 professional domains -- including commerce-relevant finance, business, and economics scenarios -- where information <em>evolves during the task</em>.[^49] Unlike static shopping benchmarks, ClawArena presents agents with conflicting evidence across multiple sources, mid-task updates that invalidate earlier conclusions, and implicit user preferences that emerge through corrections rather than explicit statements.</p>
+<p><strong>Key findings:</strong>
+- Model capability accounts for 15.4% of performance variation; framework design impacts 9.2%
+- Self-evolving skill frameworks (like <a href="recursive-self-improvement.md#skillx-hierarchical-skill-knowledge-bases-for-agent-transfer">SkillX</a>) partially close model capability gaps
+- Agents that maintain explicit uncertainty representations outperform those that commit early to conclusions</p>
+<p><strong>Learning application for commerce:</strong> ClawArena captures a dimension of real shopping expertise that no prior benchmark tests: the ability to revise purchase decisions when information changes. A savvy consumer doesn't just compare static product listings -- they update preferences when new reviews arrive, when prices fluctuate, when a friend reports a product defect. ClawArena's finding that <em>update strategy</em> determines performance (not just update frequency) explains why <a href="#interruptbench-handling-mid-task-user-changes-in-shopping">InterruptBench's</a> shopping agents degrade during longer sessions: they lack principled belief revision mechanisms. For business education, ClawArena provides a training framework for teaching students to reason under conflicting market intelligence -- a core skill for supply chain managers, financial analysts, and marketing strategists who must constantly revise forecasts as new data arrives.</p>
+<h3 id="repurchase-prediction-with-genetic-algorithms-and-deep-learning">Repurchase Prediction with Genetic Algorithms and Deep Learning</h3>
+<p>Chen et al. (Scientific Reports, 2026) combine genetic algorithms with deep learning to predict e-commerce repurchase behavior and optimize marketing resource allocation.[^50] The system identifies which customers are likely to return and which marketing interventions maximize repurchase probability.</p>
+<p><strong>Learning application:</strong> This work connects <a href="predictive-simulation-learning.html">predictive simulation</a> directly to marketing education. By combining evolutionary optimization (genetic algorithms select marketing strategies) with deep learning prediction (neural networks forecast customer behavior), the system demonstrates a predict-then-optimize loop that business students can study as a concrete example of <a href="cross-cutting-connections.md#connection-30-predict-then-verify-as-a-universal-learning-paradigm">the predict-then-verify paradigm</a> applied to commerce. The genetic algorithm component introduces an evolutionary search over marketing strategies that mirrors <a href="recursive-self-improvement.md#agent0-self-evolving-agents-from-zero-data">Agent0's</a> co-evolutionary approach: just as Agent0 co-evolves curriculum and execution agents, this system co-evolves marketing strategies and customer response predictions.</p>
+<h3 id="world-models-for-commerce-from-demand-simulation-to-market-prediction">World Models for Commerce: From Demand Simulation to Market Prediction</h3>
+<p>The convergence of <a href="predictive-simulation-learning.html">predictive simulation</a> and e-commerce is producing a new category of systems that don't just react to consumer behavior but <em>simulate</em> it before it happens. Three recent advances create a complete simulation stack for commerce learning:</p>
+<ol>
+<li><strong><a href="#socioverse-simulating-consumer-populations-at-scale">SocioVerse</a></strong> (Zhang et al., 2026) simulates population-level consumer reactions using 10 million real-world profiles -- enabling market-level prediction of product launch outcomes, pricing changes, and campaign effectiveness.[^51]</li>
+<li><strong><a href="predictive-simulation-learning.md#dreamer-4-training-agents-inside-scalable-world-models">Dreamer 4</a></strong> (Hafner et al., 2025) demonstrates that complex decision-making skills can be learned entirely from observation data without real-world interaction -- implying that commerce agents could be trained on historical shopping data alone, without expensive live A/B testing.[^52]</li>
+<li><strong><a href="predictive-simulation-learning.md#medsim-ai-simulation-based-deliberate-practice-in-medical-education">MedSimAI</a></strong> (Hicke et al., 2026) validates that AI-simulated practice environments produce real skill gains (Cohen's d = 0.75) in professional training -- evidence that transfers to commerce training where sales representatives, customer service agents, and supply chain managers need safe environments to practice complex decision-making.[^53]</li>
+</ol>
+<p><strong>Learning application:</strong> Together, these advances enable a commerce learning pipeline that didn't exist a year ago: train agents on historical data (Dreamer 4 approach), simulate market responses at population scale (SocioVerse), and validate that simulation-trained skills transfer to real performance (MedSimAI evidence). A business school could offer students a simulated market where they manage pricing, inventory, and marketing for a product -- with the simulation calibrated against real market dynamics and their performance measured against validated skill assessment rubrics.</p>
+<h3 id="www-2026-workshop-llm-agents-are-reshaping-recommendation-science">WWW 2026 Workshop: LLM Agents Are Reshaping Recommendation Science</h3>
+<p>The WWW 2026 workshop on "LLM &amp; Agents for Recommendation Systems" (Dubai, April 2026) crystallizes an inflection point: recommendation systems are transitioning from passive content filtering to active agentic mediation.[^47] The workshop identifies four transformation vectors:</p>
+<ol>
+<li><strong>From retrieval to conversation:</strong> Shopping moves from "search and filter" to "describe and delegate"</li>
+<li><strong>From single-model to multi-agent:</strong> Specialized agents (product researcher, price tracker, preference modeler) collaborate rather than a single model doing everything</li>
+<li><strong>From efficiency to transparency:</strong> As agents make purchasing decisions, explainability becomes a regulatory requirement, not a nice-to-have</li>
+<li><strong>From platform-bound to open-web:</strong> Agents must curate across the entire web, not just within a single retailer's catalog</li>
+</ol>
+<p><strong>Learning application:</strong> These four vectors define the curriculum for the next generation of commerce education. Students need to understand conversational commerce design (vector 1), multi-agent system architecture (vector 2), AI transparency and compliance (vector 3), and cross-platform data integration (vector 4). Traditional commerce curricula focused on marketing, supply chain, and finance are necessary but insufficient -- understanding agent architecture and behavior is becoming a core business competency.</p>
+<h3 id="conversational-product-recommendation-via-reinforcement-learning">Conversational Product Recommendation via Reinforcement Learning</h3>
+<p>Recent work on optimizing conversational product recommendation (2025-2026) applies reinforcement learning to enable agents that learn optimal dialogue policies for shopping conversations.[^55] Rather than following scripted product presentations, RL-trained agents discover that a few well-targeted questions can outperform presenting many product options. The agents learn when to ask clarifying questions, when to present options, and when to close, adapting their strategy based on customer response patterns.</p>
+<p><strong>Learning application:</strong> This work bridges the <a href="#solicit-then-suggest-the-economics-of-agentic-purchasing">Solicit-Then-Suggest</a> theoretical framework with practical RL implementation. For commerce education, conversational RL provides a concrete case study of how abstract concepts (dialogue policies, state spaces, reward signals) map to tangible business outcomes (conversion rates, customer satisfaction). A business student could use an RL-trained shopping conversation simulator to practice customer interaction strategies, receiving feedback not just on what they recommended but on <em>how</em> they elicited preferences -- the "inquiry depth" that Cao &amp; Hu's model identifies as substituting for product variety.</p>
+<h3 id="empowering-recommender-systems-with-agentic-ai">Empowering Recommender Systems with Agentic AI</h3>
+<p>Research presented at Springer Nature (2026) demonstrates how agentic AI transforms passive recommendation systems into active personalization agents that adapt online to evolving user preferences.[^56] The key shift: rather than periodically retraining on batch data, agentic recommender systems continuously learn from each interaction, maintain persistent user models, and proactively seek information to reduce uncertainty about user preferences.</p>
+<p><strong>Learning application:</strong> The shift from batch to continuous learning in recommendation systems mirrors the shift from periodic assessment to continuous formative assessment in education. A tutoring system that operates like an agentic recommender would continuously adapt its teaching strategy based on each student response, rather than waiting for end-of-unit tests to update its model of the student. This connects to <a href="#agenticrs-architecture-self-improving-recommender-lifecycle">AgenticRS-Architecture's</a> autonomous evolution agents and extends the parallel between recommendation systems and tutoring systems identified in <a href="#from-commerce-agents-to-education-agents-the-agentic-workflow-bridge">From Commerce Agents to Education Agents</a>.</p>
+<h2 id="challenges">Challenges</h2>
+<ol>
+<li><strong>Trust and transparency</strong> -- Users need to understand why an AI recommends a product and whether its incentives are aligned with theirs</li>
+<li><strong>Adversarial manipulation</strong> -- Sellers can optimize product descriptions to exploit AI agent biases</li>
+<li><strong>Privacy</strong> -- Long-term preference memory creates sensitive user profiles</li>
+<li><strong>Evaluation difficulty</strong> -- Real purchase satisfaction is delayed and multifactorial</li>
+<li><strong>Generalization</strong> -- Shopping agents trained on one platform may not transfer to others</li>
+<li><strong>Regulatory uncertainty</strong> -- AI-mediated commerce faces evolving legal frameworks across jurisdictions</li>
+<li><strong>Intent volatility</strong> -- Users change their minds mid-task; current agents handle this poorly (InterruptBench)</li>
+<li><strong>Knowledge creation paradox</strong> -- AI agents that serve individual users well may undermine the collective knowledge bases (reviews, forums) that improve the ecosystem (<a href="#the-knowledge-creation-paradox-when-ai-helps-individuals-but-hurts-communities">Sun, 2026</a>)</li>
+<li><strong>Evolving information environments</strong> -- Commerce information changes continuously (prices, reviews, availability); agents must revise beliefs in real time (<a href="#clawarena-evolving-information-challenges-in-commerce-domains">ClawArena</a>)</li>
+</ol>
+<h2 id="genetic-algorithms-deep-learning-for-repurchase-prediction">Genetic Algorithms + Deep Learning for Repurchase Prediction</h2>
+<p>Chen et al. (2026) combine genetic algorithms with deep neural networks to predict e-commerce repurchase behavior and optimize marketing strategies.[^50] The genetic algorithm evolves feature selection and model hyperparameters simultaneously, while the deep learning model handles the nonlinear prediction task. Published in <em>Scientific Reports</em>, the work demonstrates that evolutionary optimization of the prediction pipeline produces significantly better results than manual tuning.</p>
+<p><strong>Learning application:</strong> This paper bridges <a href="recursive-self-improvement.html">recursive self-improvement</a> and e-commerce prediction: the genetic algorithm <em>recursively</em> improves the prediction model through evolutionary search -- the same generate-evaluate-select loop that powers <a href="#agenticrs-architecture-self-improving-recommender-lifecycle">DGM</a> and <a href="recursive-self-improvement.md#a-evolve-open-source-self-rewriting-agent-workflows">A-Evolve</a>. For educational applications, this suggests that learning assessment models could similarly evolve: a genetic algorithm could optimize which features of student behavior best predict learning outcomes, which assessment questions best discriminate understanding levels, and which intervention timings produce the greatest improvement.</p>
+<h2 id="agentic-markets-are-volatile-updated-aces-findings-on-market-instability">Agentic Markets Are Volatile: Updated ACES Findings on Market Instability</h2>
+<p>Allouah et al.'s expanded ACES study (revised December 2025) reveals that agentic e-commerce markets are <strong>fundamentally more volatile</strong> than human-centric commerce.[^54] The updated findings add three critical dimensions to the original bias and concentration results:</p>
+<ol>
+<li><strong>Model updates reshuffle market shares:</strong> When an LLM provider updates their model, agent purchasing patterns shift dramatically -- products that were favored by one model version may be ignored by the next, creating unpredictable demand fluctuations for sellers</li>
+<li><strong>Choice homogeneity concentrates demand:</strong> Agents converge on a few "modal" products, ignoring alternatives that human shoppers would consider -- creating winner-take-all dynamics that differ from human-driven markets</li>
+<li><strong>Seller optimization is effective but fragile:</strong> Sellers who optimize product descriptions for AI agents can gain significant market share, but these optimizations break when the underlying model changes</li>
+</ol>
+<p><strong>Learning application:</strong> These findings transform commerce education. Traditional marketing curricula assume relatively stable consumer preferences and gradual market shifts. In agentic markets, a product's competitive position can change overnight due to a model update -- a dynamic that has no historical precedent. Business students must learn to build resilient strategies that work across different AI models and model versions, not just optimize for the current dominant agent. The finding that agentic markets create winner-take-all dynamics connects directly to <a href="#collusive-pricing-under-llm-a-regulatory-warning">Collusive Pricing Under LLM</a>: concentrated demand from AI agents combined with AI-driven pricing creates systemic fragility. For <a href="predictive-simulation-learning.html">predictive simulation</a>, these volatility patterns are ideal targets for world model training -- a commerce simulation that includes model-update-driven demand shocks would teach resilience in ways that static market simulations cannot.</p>
+<h2 id="perfusion-sell-it-before-you-make-it-ai-generated-commerce">PerFusion: "Sell It Before You Make It" -- AI-Generated Commerce</h2>
+<p>Chen et al. (Alibaba, March 2026; KDD 2026) introduced PerFusion, a personalized text-to-image generation system that enables a radical new business model: <strong>generating AI-designed products, listing them for sale, and only manufacturing items that receive sufficient orders</strong>.[^57] The system addresses a critical gap in traditional e-commerce: merchants must invest in physical prototyping, photography, and inventory before knowing whether customers want the product.</p>
+<p><strong>Technical approach:</strong>
+- <strong>PerFusion Reward Model:</strong> Estimates user preferences using a feature-crossing-based personalized plug-in that captures how different user segments respond to visual design choices
+- <strong>PerFusion Generator:</strong> An adaptive network that models diverse preferences across user groups, optimized via a group-level preference alignment objective that learns from comparative behavior across multiple images
+- <strong>Deployed at scale</strong> on Alibaba's platform for fashion items, with AI-generated photorealistic images featuring digital models</p>
+<p><strong>Key results:</strong>
+- <strong>13% relative improvement</strong> in both click-through rate and conversion rate over human-designed counterparts
+- <strong>7.9% decrease in return rate</strong> -- AI-personalized designs better match what customers actually want
+- Merchants can test market demand with zero physical inventory, dramatically reducing risk and time-to-market</p>
+<p><strong>Learning application:</strong> PerFusion represents the most concrete commercial application of <a href="predictive-simulation-learning.html">predictive simulation learning</a> in e-commerce: the AI <em>simulates</em> the product before it exists, tests it against a model of customer preferences, and only the successful simulations become real products. This is the learning-commerce loop in its purest form -- simulation → prediction → market validation → production. For business education, PerFusion is a transformative case study: students learning product design, marketing, or supply chain management can see how AI collapses the traditional product development cycle from months to hours. The 7.9% return rate decrease is particularly instructive -- it demonstrates that AI-personalized products create <em>better matches</em> between customer intent and product reality, which connects directly to <a href="#solicit-then-suggest-the-economics-of-agentic-purchasing">Solicit-Then-Suggest's</a> theoretical framework on preference elicitation. For the commerce training platforms described in <a href="#intellicode-centralized-learner-modeling-for-commerce-training">IntelliCode</a> and <a href="#open-tutorai-from-commerce-personalization-to-learning-platforms">Open TutorAI</a>, PerFusion provides a real-world case study of how simulation-based decision-making outperforms traditional approaches.</p>
+<h2 id="multi-turn-rl-for-customer-service-agent-training">Multi-Turn RL for Customer Service Agent Training</h2>
+<p>Modecrua et al. (April 2026) demonstrate that small language models trained with carefully calibrated per-turn rewards can outperform frontier models at complex customer service tasks.[^58] Using the Tau-Bench airline benchmark -- a realistic multi-turn customer interaction scenario -- they show that reward design matters more than model scale for multi-step conversational tasks.</p>
+<p><strong>Key results:</strong>
+- A 4B-parameter model trained with Iterative Reward Calibration <strong>outperforms GPT-4.1 (49.4%) and GPT-4o (42.8%)</strong> on realistic customer service tasks
+- A 30B MoE model approaches Claude Sonnet 4.5 (70.0%) performance
+- <strong>Critical finding:</strong> Poorly designed dense rewards <em>reduce</em> performance -- getting the feedback signal right matters more than having a larger model</p>
+<p><strong>Learning application:</strong> This paper has direct implications for AI-powered commerce training. The customer service domain is both a high-value commercial application and a natural training ground for interpersonal skills. The finding that a 4B model outperforms GPT-4.1 through better reward calibration (not more parameters) means that small, deployable models can provide expert-level customer service training when the feedback mechanism is well-designed. For commerce education, this suggests that training simulations don't need frontier-model budgets -- they need well-calibrated assessment rubrics. The Iterative Reward Calibration methodology itself is instructive: rather than hand-designing evaluation criteria, the system discovers which conversational signals predict customer satisfaction from empirical data. A commerce training platform could apply the same methodology to discover which trainee behaviors predict real-world sales success, creating data-driven assessment rather than subjective evaluation.</p>
+<h2 id="the-learning-commerce-loop-how-subject-mastery-transfers-to-real-world-application">The Learning-Commerce Loop: How Subject Mastery Transfers to Real-World Application</h2>
+<pre><code class="language-mermaid">graph TD
+    subgraph Simulate[&quot;1. Simulation Builds Understanding&quot;]
+        SIM[ShopSimulator / DynaWeb&lt;br&gt;Safe practice environment]
+        WM[World Model of Market&lt;br&gt;SocioVerse population sim]
+    end
+    subgraph Improve[&quot;2. Recursive Improvement Deepens Expertise&quot;]
+        RSIR[RSIR: Self-improving recs&lt;br&gt;Fidelity-controlled bootstrapping]
+        AGENT[AgenticRS Architecture&lt;br&gt;AutoTrain → AutoFeature → AutoPerf]
+    end
+    subgraph Apply[&quot;3. Commerce Provides Authentic Assessment&quot;]
+        DEPLOY[Real purchases / conversions&lt;br&gt;Ground-truth feedback signal]
+        METRIC[Criterion Validity Testing&lt;br&gt;Metric → actual business outcome]
+    end
+    subgraph Learn[&quot;4. Applied Experience Generates New Questions&quot;]
+        EDGE[Edge cases: adversarial sellers&lt;br&gt;changing preferences, disruptions]
+        NEW[New simulation targets&lt;br&gt;New improvement goals]
+    end
+    SIM --&gt; RSIR
+    WM --&gt; AGENT
+    RSIR --&gt; DEPLOY
+    AGENT --&gt; METRIC
+    DEPLOY --&gt; EDGE
+    METRIC --&gt; EDGE
+    EDGE --&gt; NEW
+    NEW --&gt; SIM
+    NEW --&gt; WM
+</code></pre>
+<h3 id="comparative-performance-of-e-commerce-ai-approaches-2025-2026">Comparative Performance of E-Commerce AI Approaches (2025-2026)</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>System</th>
+<th>Key Metric</th>
+<th>Result</th>
+<th>Improvement Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory-augmented agent</td>
+<td>Shopping Companion[^1]</td>
+<td>Task success rate</td>
+<td>Outperforms GPT-5 baselines</td>
+<td>Dual-reward RL + preference memory</td>
+</tr>
+<tr>
+<td>Simulation-trained agent</td>
+<td>ShopSimulator[^18]</td>
+<td>Shopping task accuracy</td>
+<td>RL agent &gt; SFT-only agent</td>
+<td>Reinforcement learning in simulated storefronts</td>
+</tr>
+<tr>
+<td>Self-improving recommender</td>
+<td>RSIR[^44]</td>
+<td>Recommendation accuracy</td>
+<td>Model-agnostic improvement</td>
+<td>Fidelity-controlled recursive data generation</td>
+</tr>
+<tr>
+<td>AI-generated products</td>
+<td>PerFusion[^57]</td>
+<td>Click-through rate</td>
+<td>+13% vs human-designed</td>
+<td>Personalized text-to-image with reward model</td>
+</tr>
+<tr>
+<td>Small model + calibrated RL</td>
+<td>Multi-Turn RL[^58]</td>
+<td>Customer service accuracy</td>
+<td>4B model &gt; GPT-4.1</td>
+<td>Iterative reward calibration per turn</td>
+</tr>
+<tr>
+<td>Population simulation</td>
+<td>SocioVerse[^31]</td>
+<td>Behavioral prediction</td>
+<td>10M real user profiles</td>
+<td>LLM agents + demographic calibration</td>
+</tr>
+<tr>
+<td>Collaborative memory</td>
+<td>MemRec[^59]</td>
+<td>Recommendation quality</td>
+<td>Cross-user knowledge transfer</td>
+<td>Dynamic collaborative memory graph</td>
+</tr>
+<tr>
+<td>World model evaluation</td>
+<td>AlignUSER[^60]</td>
+<td>Evaluator alignment</td>
+<td>Counterfactual trajectory alignment</td>
+<td>LLM agents as synthetic users</td>
+</tr>
+</tbody>
+</table>
+<p>A central theme emerging from the research in this article is the <strong>learning-commerce loop</strong>: the same AI techniques that help people learn subjects more effectively also help them apply that knowledge in commercial contexts. This creates a virtuous cycle:</p>
+<ol>
+<li><strong>Simulation builds understanding</strong> -- <a href="predictive-simulation-learning.html">Predictive simulation</a> helps learners build mental models of domains (supply chains, markets, customer behavior)</li>
+<li><strong>Recursive improvement deepens expertise</strong> -- <a href="recursive-self-improvement.html">Self-improvement loops</a> allow both AI systems and human learners to iteratively refine their strategies</li>
+<li><strong>Commerce provides authentic assessment</strong> -- Real purchasing decisions, market outcomes, and business results provide the ground-truth feedback that both validates learning and drives further improvement</li>
+<li><strong>Applied experience generates new learning questions</strong> -- Encountering real-world edge cases (adversarial sellers, changing preferences, supply chain disruptions) motivates new rounds of simulation and study</li>
+</ol>
+<p>This loop is visible across the systems described here: <a href="#shopsimulator-rl-training-ground-for-shopping-agents">ShopSimulator</a> provides the simulation layer, <a href="#agenticrs-architecture-self-improving-recommender-lifecycle">AgenticRS-Architecture</a> provides the recursive improvement layer, and real e-commerce deployment provides the authentic assessment layer. The <a href="recursive-self-improvement.md#iclr-2026-workshop-on-recursive-self-improvement-the-field-crystallizes">ICLR 2026 RSI Workshop</a> explicitly recognizes enterprise applications as a key deployment domain for this pattern.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> -- Research automation methodology applicable to commerce</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> -- Quality evaluation parallels product review</li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> -- LLMs powering agentic commerce</li>
+<li><a href="predictive-simulation-learning.html">Predictive Simulation Learning</a> -- Simulation for demand and behavior prediction</li>
+<li><a href="recursive-self-improvement.html">Recursive Self-Improvement</a> -- Self-improving recommendation systems</li>
+<li><a href="open-ended-discovery.html">Open-Ended Discovery</a> -- Discovering trends and patterns</li>
+<li><a href="cross-cutting-connections.html">Cross-Cutting Connections</a> -- How simulation, recursion, and commerce reinforce each other</li>
+<li><a href="blockchain-ai-optimization.html">Blockchain for AI Optimization</a> -- Decentralized commerce and verification</li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a> -- A/B testing and experiment automation</li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a> -- Visual product understanding</li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> -- Search strategies for product discovery</li>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> -- Finding e-commerce AI research</li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> -- Discovering new papers</li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a> -- E-commerce AI paper collection</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> -- Monitoring new research</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Yu, Z. et al. (2026). "Shopping Companion: A Memory-Augmented LLM Agent for Real-World E-Commerce Tasks." <a href="https://arxiv.org/abs/2603.14864">arXiv:2603.14864</a>
+[^2]: Allouah, A. et al. (2025). "What Is Your AI Agent Buying? Evaluation, Biases, Model Dependence, &amp; Emerging Implications for Agentic E-Commerce." <a href="https://arxiv.org/abs/2508.02630">arXiv:2508.02630</a>
+[^3]: Sun, L. et al. (2025). "LLM Agent Meets Agentic AI: Can LLM Agents Simulate Customers to Evaluate Agentic-AI-based Shopping Assistants?" <a href="https://arxiv.org/abs/2509.21501">arXiv:2509.21501</a>
+[^4]: Nguyen, H.N. et al. (2026). "LLMGreenRec: LLM-Based Multi-Agent Recommender System for Sustainable E-Commerce." <a href="https://arxiv.org/abs/2603.11025">arXiv:2603.11025</a>
+[^5]: Saini, K. et al. (2026). "A switching-based deep learning framework for personalized and adaptive E-commerce recommendations." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-40024-5">DOI: 10.1038/s41598-026-40024-5</a>
+[^6]: Wang, J. et al. (2025). "ShoppingBench: A Real-World Intent-Grounded Shopping Benchmark for LLM-based Agents." <a href="https://arxiv.org/abs/2508.04266">arXiv:2508.04266</a>
+[^7]: Jain, A.M. (2025). "Predicting E-commerce Purchase Behavior using a DQN-Inspired Deep Learning Model." <a href="https://arxiv.org/abs/2506.17543">arXiv:2506.17543</a>
+[^8]: Qi, Y. et al. (2025). "Leveraging LLM-Based Agents for Intelligent Supply Chain Planning." <a href="https://arxiv.org/abs/2509.03811">arXiv:2509.03811</a>
+[^9]: Fang, L. et al. (2025). "Generative AI and Firm Productivity: Field Experiments in Online Retail." <a href="https://arxiv.org/abs/2510.12049">arXiv:2510.12049</a>
+[^10]: GenAIECommerce 2025 Workshop. <em>RecSys 2025</em>. <a href="https://genai-ecommerce.github.io/GenAIECommerce2025">genai-ecommerce.github.io</a>
+[^11]: Wang, J., Xiao, K., Zhao, H., Luo, T. &amp; Zeng, X. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." <a href="https://arxiv.org/abs/2602.23716">arXiv:2602.23716</a>
+[^12]: "Personalized Recommendation System of E-Commerce in the Digital Economy Era: Enhancing Social Connections with Graph Attention Networks." <em>Applied Artificial Intelligence</em> (2025). <a href="https://www.tandfonline.com/doi/full/10.1080/08839514.2025.2487417">DOI: 10.1080/08839514.2025.2487417</a>
+[^13]: Envive AI (2026). "63 AI Personalization in eCommerce Lift Statistics." <a href="https://www.envive.ai/post/ai-personalization-in-ecommerce-lift-statistics">envive.ai</a></p>
+<p>[^15]: "AI-powered personalization in e-commerce: Governance, consumer behavior, and exploratory insights from big data analytics." <em>Technological Forecasting and Social Change</em> (2025). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0160791X25002234">DOI: 10.1016/j.techfore.2025</a>
+[^16]: Cao, S. &amp; Hu, M. (2026). "A Solicit-Then-Suggest Model of Agentic Purchasing." <a href="https://arxiv.org/abs/2603.20972">arXiv:2603.20972</a>
+[^17]: Peng, Z. et al. (2026). "MemRerank: Preference Memory for Personalized Product Reranking." <a href="https://arxiv.org/abs/2603.29247">arXiv:2603.29247</a>
+[^18]: Wang, P. et al. (2026). "ShopSimulator: Evaluating and Exploring RL-Driven LLM Agent for Shopping Assistants." <a href="https://arxiv.org/abs/2601.18225">arXiv:2601.18225</a>
+[^19]: Xu, J. et al. (2026). "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation." <a href="https://arxiv.org/abs/2603.19710">arXiv:2603.19710</a>
+[^20]: Wilczewski, P. &amp; Skotheim, K. (2026). "Forecasting Supply Chain Disruptions with Foresight Learning." <a href="https://arxiv.org/abs/2604.01298">arXiv:2604.01298</a>
+[^21]: Kamalov, F. et al. (2025). "Evolution of AI in Education: Agentic Workflows." <a href="https://arxiv.org/abs/2504.20082">arXiv:2504.20082</a>
+[^22]: Zhang, H. et al. (2026). "AgenticRS-Architecture: System Design for Agentic Recommender Systems." <a href="https://arxiv.org/abs/2603.26085">arXiv:2603.26085</a>
+[^23]: Ranganathan, S., Dharmaratnakar, A., Sinha, A. &amp; Das, D. (2026). "Multi-Agent Video Recommenders: Evolution, Patterns, and Open Challenges." <a href="https://arxiv.org/abs/2604.02211">arXiv:2604.02211</a>
+[^24]: Kim, S., Heo, R., Seo, Y., Yeo, J. &amp; Lee, D. (2026). "AgenticShop: Benchmarking Agentic Product Curation for Personalized Web Shopping." <em>WWW 2026</em>. <a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a>
+[^25]: Liu, J. et al. (2026). "Hierarchical Memory Orchestration for Personalized Persistent Agents." <a href="https://arxiv.org/abs/2604.01670">arXiv:2604.01670</a>
+[^26]: Archer, R., Ghili, S. &amp; Haghpanah, N. (2026). "Pay-Per-Crawl Pricing for AI: The LM-Tree Agent." <a href="https://arxiv.org/abs/2604.01416">arXiv:2604.01416</a>
+[^27]: Zou, H.P., Miao, C., Huang, W.-C., Chen, Y., Zhou, Y. et al. (2026). "When Users Change Their Mind: Evaluating Interruptible Agents in Long-Horizon Web Navigation." <a href="https://arxiv.org/abs/2604.00892">arXiv:2604.00892</a>
+[^28]: Liu, J., Ling, Z., Qiu, S., Liu, Y. et al. (2026). "Omni-SimpleMem: Autoresearch-Guided Discovery of Lifelong Multimodal Agent Memory." <a href="https://arxiv.org/abs/2604.01007">arXiv:2604.01007</a></p>
+<p>[^31]: Zhang, L. et al. (2026). "SocioVerse: A World Model for Social Simulation Powered by LLM Agents and A Pool of 10 Million Real-World Users." <a href="https://arxiv.org/abs/2504.10157">arXiv:2504.10157</a>
+[^32]: Kestin, G. et al. (2025). "AI tutoring outperforms in-class active learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-025-97652-6">DOI: 10.1038/s41598-025-97652-6</a>
+[^33]: Chen, L., Liu, Q., Lin, W. &amp; Liang, F. (2026). "Criterion Validity of LLM-as-Judge for Business Outcomes in Conversational Commerce." <a href="https://arxiv.org/abs/2604.00022">arXiv:2604.00022</a>
+[^34]: Zhao, Z., Liew, J.H., Yang, Y., Yang, W., Luo, Z., Sahoo, D., Savarese, S. &amp; Li, J. (2026). "GPA: Learning GUI Process Automation from Demonstrations." <a href="https://arxiv.org/abs/2604.01676">arXiv:2604.01676</a>
+[^35]: Zhai, Z., Chen, M., Xia, H., Li, J., Zhou, R. &amp; Yang, M. (2026). "CogSearch: Cognitive-Aligned Multi-Agent Framework for E-Commerce Search." <a href="https://arxiv.org/abs/2603.11927">arXiv:2603.11927</a>
+[^36]: Cao, S. &amp; Hu, M. (2026). "Collusive Pricing Under LLM." <a href="https://arxiv.org/abs/2601.01279">arXiv:2601.01279</a>
+[^37]: Moradi, M. et al. (2025). "SalesRLAgent: A Reinforcement Learning Approach to Sales Conversion Prediction and Optimization." <a href="https://arxiv.org/abs/2503.23303">arXiv:2503.23303</a>
+[^38]: Goel, A., Thajchayapong, P., Nandan, V., Sikka, H. &amp; Rugaber, S. (2025). "A4L: An Architecture for AI-Augmented Learning." <a href="https://arxiv.org/abs/2505.06314">arXiv:2505.06314</a>
+[^39]: Kim, S., Heo, R., Seo, Y., Yeo, J. &amp; Lee, D. (2026). "AgenticShop: Benchmarking Agentic Product Curation for Personalized Web Shopping." <em>WWW 2026</em>. <a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a></p>
+<p>[^41]: El Hajji, M., Ait Baha, T., Dakir, A., Fadili, H. &amp; Es-Saady, Y. (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." <a href="https://arxiv.org/abs/2602.07176">arXiv:2602.07176</a>
+[^42]: Sun, K. (2026). "When AI Improves Answers but Slows Knowledge Creation." <a href="https://arxiv.org/abs/2604.00468">arXiv:2604.00468</a>
+[^43]: Taneja, K., Singh, A. &amp; Goel, A. (2026). "Impact of Multimodal and Conversational AI on Learning Outcomes and Experience." <a href="https://arxiv.org/abs/2604.02221">arXiv:2604.02221</a>
+[^44]: Zhang, L., Wang, H., Liu, Z., Yin, M., Huang, Y., Li, J., Guo, W., Liu, Y., Guo, H., Lian, D. &amp; Chen, E. (2026). "Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control." <a href="https://arxiv.org/abs/2602.15659">arXiv:2602.15659</a>
+[^45]: "IntelliCode: A Multi-Agent LLM Tutoring System with Centralized Learner Modeling." (2025). <a href="https://arxiv.org/abs/2512.18669">arXiv:2512.18669</a>
+[^46]: Ersoy, D., Lee, B., Shreekumar, A., Arunasalam, A., Ibrahim, M., Bianchi, A. &amp; Celik, Z.B. (2025). "Investigating the Impact of Dark Patterns on LLM-Based Web Agents." <em>IEEE S&amp;P 2026</em>. <a href="https://arxiv.org/abs/2510.18113">arXiv:2510.18113</a>
+[^47]: "LLM &amp; Agents for Recommendation Systems." <em>WWW 2026 Workshop</em>. <a href="https://llmandagents4recsys.github.io/">Workshop website</a>
+[^48]: Saini, K. et al. (2026). "A switching-based deep learning framework for personalized and adaptive E-commerce recommendations." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-40024-5">DOI: 10.1038/s41598-026-40024-5</a>
+[^49]: Ji, H., Xiong, K., Han, S., Xia, P. et al. (2026). "ClawArena: Benchmarking AI Agents in Evolving Information Environments." <a href="https://arxiv.org/abs/2604.04202">arXiv:2604.04202</a>
+[^50]: Chen, W. et al. (2026). "Predicting repurchase behavior and optimizing marketing for e-commerce users with genetic algorithms and deep learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-45903-5">DOI: 10.1038/s41598-026-45903-5</a>
+[^51]: Zhang, L. et al. (2026). "SocioVerse: A World Model for Social Simulation Powered by LLM Agents and A Pool of 10 Million Real-World Users." <a href="https://arxiv.org/abs/2504.10157">arXiv:2504.10157</a>
+[^52]: Hafner, D., Yan, W. &amp; Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." <a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a>
+[^53]: Hicke, Y. et al. (2026). "MedSimAI: Simulation and Formative Feedback Generation to Enhance Deliberate Practice in Medical Education." <em>LAK 2026</em>. <a href="https://arxiv.org/abs/2503.05793">arXiv:2503.05793</a>
+[^54]: Allouah, A., Besbes, O., Figueroa, J.D., Kanoria, Y. &amp; Kumar, A. (2025). "What Is Your AI Agent Buying? Evaluation, Biases, Model Dependence, &amp; Emerging Implications for Agentic E-Commerce." Revised December 2025. <a href="https://arxiv.org/abs/2508.02630">arXiv:2508.02630</a>
+[^55]: "Optimizing Conversational Product Recommendation via Reinforcement Learning." (2025). <a href="https://arxiv.org/abs/2507.01060">arXiv:2507.01060</a>
+[^56]: "Empowering Recommender Systems with Agentic AI: Towards Adaptive Online Personalization." <em>Springer Nature</em> (2026). <a href="https://link.springer.com/chapter/10.1007/978-3-032-14107-1_23">DOI: 10.1007/978-3-032-14107-1_23</a>
+[^57]: Chen, X. et al. (2026). "Sell It Before You Make It: Revolutionizing E-Commerce with Personalized AI-Generated Items." <em>KDD 2026</em>. <a href="https://arxiv.org/abs/2503.22182">arXiv:2503.22182</a>
+[^58]: Modecrua, W., Kaewtawee, K., Pachtrachai, K. &amp; Kraisingkorn, T. (2026). "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration." <a href="https://arxiv.org/abs/2604.02869">arXiv:2604.02869</a>
+[^59]: Chen, W., Zhao, Y., Huang, J., Ye, Z., Ju, C.M., Zhao, T., Shah, N., Chen, L. &amp; Zhang, Y. (2026). "MemRec: Collaborative Memory-Augmented Agentic Recommender System." <a href="https://arxiv.org/abs/2601.08816">arXiv:2601.08816</a>
+[^60]: Bougie, N., Marconi, G.M., Yip, T. &amp; Watanabe, N. (2026). "AlignUSER: Human-Aligned LLM Agents via World Models for Recommender System Evaluation." <a href="https://arxiv.org/abs/2601.00930">arXiv:2601.00930</a></p>
+<p>[^67]: ShoppingComp benchmark (2025). "ShoppingComp: Are LLMs Really Ready for Your Shopping Cart?" <a href="https://arxiv.org/abs/2511.22978">arXiv:2511.22978</a></p>
+<p>[^68]: Peng, Q. et al. (2025). "A Survey on LLM-powered Agents for Recommender Systems." <a href="https://arxiv.org/abs/2502.10050">arXiv:2502.10050</a></p>
+</main>
+</body>
+</html>

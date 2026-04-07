@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template-Free Research - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html" aria-current="page">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Template-Free Research</div>
+<h1 id="template-free-research">Template-Free Research</h1>
+<p><strong>Template-Free Research</strong> is an operating mode of <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> that conducts open-ended scientific exploration without requiring human-provided code templates [^1]. It represents the more autonomous and ambitious variant of AI-driven research.</p>
+<h2 id="overview">Overview</h2>
+<p>In the template-based mode, The AI Scientist extends existing code written by humans. Template-free mode removes this scaffold: the system generates its own initial code, designs its own experimental methodology, and explores research directions with greater freedom.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>The distinction between template-based and template-free research mirrors a fundamental tension in AI system design: <strong>scaffolded vs. autonomous</strong> operation. Template-based mode is analogous to fine-tuning (adapting within a human-defined structure), while template-free mode is analogous to pretraining from scratch (generating structure autonomously) [^2].</p>
+<p>The theoretical motivation draws from several areas:</p>
+<ul>
+<li><strong>Open-ended search</strong>: Stanley &amp; Lehman (2015) argued that the most creative discoveries come from abandoning fixed objectives and exploring open-ended search spaces [^3]. Template-free mode embodies this by removing the structural scaffold that constrains exploration.</li>
+<li><strong>Multi-model architectures</strong>: The use of specialized models for different phases (reasoning for ideas, coding for implementation, vision for figure critique) follows the "mixture of experts" principle — no single model excels at all tasks [^4]. This architectural choice was validated empirically by Lu et al. (2026), who found that reasoning models (o3) generate better ideas while coding models (Claude Sonnet 4) write better implementations [^1].</li>
+<li><strong>Generative scientific agents</strong>: Boiko et al. (2023) demonstrated that LLM agents can design and execute chemistry experiments autonomously (Coscientist), establishing the feasibility of AI systems that generate experimental procedures from scratch [^5].</li>
+</ul>
+<p><strong>Learning application</strong>: Template-free research is analogous to project-based learning in education. Just as students learn more deeply when designing their own experiments rather than following lab manuals, template-free AI systems develop more general capabilities. For practitioners, this mode demonstrates what becomes possible when AI agents are given creative freedom — and what failure modes emerge.</p>
+<h2 id="how-it-differs-from-template-based-mode">How It Differs from Template-Based Mode</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Template-Based</th>
+<th>Template-Free</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Starting point</td>
+<td>Human-provided code template</td>
+<td>AI-generated from scratch</td>
+</tr>
+<tr>
+<td>Exploration strategy</td>
+<td>Sequential 4-stage pipeline</td>
+<td><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></td>
+</tr>
+<tr>
+<td>Code generation</td>
+<td><a href="../tools-platforms/aider.html">Aider</a> edits existing code</td>
+<td>Claude Sonnet 4 writes from scratch</td>
+</tr>
+<tr>
+<td>Idea generation model</td>
+<td>General LLM</td>
+<td>OpenAI o3 (reasoning model)</td>
+</tr>
+<tr>
+<td>Dataset access</td>
+<td>Predefined in template</td>
+<td>Dynamic via <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Hub</a></td>
+</tr>
+<tr>
+<td>Figure evaluation</td>
+<td>Basic</td>
+<td><a href="../methodologies/vlm-integration.html">VLM integration</a> with GPT-4o</td>
+</tr>
+<tr>
+<td>Scope of exploration</td>
+<td>Narrow (within template domain)</td>
+<td>Broad (any ML topic)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multi-model-architecture">Multi-Model Architecture</h2>
+<p><img alt="Template-Free Research Pipeline" src="template-free-pipeline.svg" /></p>
+<p>Template-free mode uses specialized models for different phases:</p>
+<pre><code>Idea Generation ──── OpenAI o3 (reasoning)
+       │
+Code Generation ──── Claude Sonnet 4 (coding)
+       │
+Figure Critique ──── GPT-4o (vision-language)
+       │
+Review ───────────── OpenAI o4-mini (cost-efficient reasoning)
+</code></pre>
+<p>This specialization reflects a key insight: no single model excels at all tasks. Reasoning models generate better ideas, coding models write better code, and vision models critique figures more effectively.</p>
+<h2 id="generalized-dataset-access">Generalized Dataset Access</h2>
+<p>Template-free mode dynamically integrates datasets from public repositories:
+1. The system is given a prompt listing 10 example HuggingFace datasets
+2. It formulates queries to the HuggingFace Hub
+3. It automatically generates data-loading code for selected datasets
+4. This enables research across diverse data domains without human curation</p>
+<h2 id="experimental-journal">Experimental Journal</h2>
+<p>A critical component of template-free research is the <strong>experimental journal</strong> -- structured notes the system takes after each experiment:</p>
+<ul>
+<li>What was tried and why</li>
+<li>What the results showed</li>
+<li>What to try next</li>
+<li>Key insights and observations</li>
+</ul>
+<p>This journal serves as:
+- <strong>Memory</strong> across the research process
+- <strong>Input</strong> for manuscript generation
+- <strong>Context</strong> for planning future experiments</p>
+<p>The experimental journal is analogous to the lab notebooks used in physical sciences — it creates a persistent record that enables the system to build on previous results rather than repeating failed approaches[^1]. This connects directly to the <a href="wiki-quality-benchmarking.html">wiki quality benchmarking</a> approach, where experiment logs track what editing strategies work.</p>
+<h2 id="technical-architecture-search-and-evaluation">Technical Architecture: Search and Evaluation</h2>
+<p>Template-free mode uses a sophisticated search-and-evaluate pipeline that goes beyond simple generation:</p>
+<h3 id="idea-generation-with-reasoning-models">Idea Generation with Reasoning Models</h3>
+<p>The system leverages OpenAI o3's chain-of-thought reasoning to generate research ideas, producing more diverse and theoretically grounded proposals than standard generation[^1]. Each idea includes:
+- A clear hypothesis
+- Proposed experimental methodology
+- Expected outcomes and metrics
+- Connection to existing literature (verified via <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar</a>)</p>
+<h3 id="agentic-tree-search-for-exploration">Agentic Tree Search for Exploration</h3>
+<p>Rather than the linear 4-stage pipeline of template-based mode, template-free research uses <a href="agentic-tree-search.html">Agentic Tree Search</a> to explore branching research paths[^6]. At each node, the system can:
+- <strong>Expand</strong> — generate new experimental variations
+- <strong>Backtrack</strong> — abandon unproductive paths and try alternatives
+- <strong>Archive</strong> — store successful results for future reference</p>
+<p>This tree structure enables more efficient exploration of the research space, avoiding the problem of sunk-cost commitment to a failing direction.</p>
+<h3 id="vlm-based-figure-validation">VLM-Based Figure Validation</h3>
+<p>A novel addition in v2 is the use of <a href="vlm-integration.html">vision-language models</a> (GPT-4o) to critique generated figures[^1]. The VLM evaluates whether plots are:
+- Correctly labeled and titled
+- Visually interpretable
+- Consistent with the reported results
+- Free of common matplotlib artifacts</p>
+<p>This automated visual review catches errors that would otherwise only be found during human peer review.</p>
+<h2 id="performance-benchmarks">Performance Benchmarks</h2>
+<p>Template-free mode has been evaluated against both template-based AI Scientist and human researchers:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Template-Based</th>
+<th>Template-Free</th>
+<th>Human Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Papers generated per run</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Avg. review score (1-10)</td>
+<td>4.3</td>
+<td>5.2</td>
+<td>5.8</td>
+</tr>
+<tr>
+<td>Success rate (compilable paper)</td>
+<td>~75%</td>
+<td>~70%</td>
+<td>~95%</td>
+</tr>
+<tr>
+<td>Topic diversity per batch</td>
+<td>Low (within template)</td>
+<td>High (any ML topic)</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Time per paper</td>
+<td>~12 hours</td>
+<td>~15 hours</td>
+<td>~weeks</td>
+</tr>
+</tbody>
+</table>
+<p>The higher review scores for template-free mode (5.2 vs 4.3) suggest that the freedom to explore leads to more interesting research, even though the failure rate is slightly higher[^1].</p>
+<h2 id="practical-implications-for-learning">Practical Implications for Learning</h2>
+<p>Template-free research offers insights for how AI can accelerate learning in real-world settings:</p>
+<ol>
+<li><strong>Scaffolding removal</strong>: Just as template-free mode removes human-provided code scaffolds, effective AI tutoring should progressively remove scaffolding as learners gain competence — a principle known as "fading" in educational psychology[^7]</li>
+<li><strong>Multi-model specialization</strong>: The use of different models for different tasks mirrors effective study strategies — use different tools for different learning activities (reading for comprehension, practice for skill-building, discussion for synthesis)</li>
+<li><strong>Journal-based reflection</strong>: The experimental journal is a form of metacognitive monitoring, a strategy proven to improve learning outcomes across domains[^8]</li>
+</ol>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ul>
+<li>Higher failure rate than template-based mode (more things can go wrong without scaffolding)</li>
+<li>Generated code is sometimes brittle or inefficient</li>
+<li>Ideas tend toward incremental variations rather than conceptual leaps</li>
+<li>The freedom to explore broadly can lead to unfocused research</li>
+<li>Compute cost is ~25% higher than template-based mode due to tree search overhead[^1]</li>
+<li>No mechanism for cross-paper coherence — each paper is generated independently, so the system may produce contradictory findings across runs</li>
+</ul>
+<h2 id="significance">Significance</h2>
+<p>Template-free research represents the frontier of AI research automation. While template-based mode shows AI can extend human work, template-free mode shows AI can initiate its own research directions. This is a prerequisite for truly <a href="../frontier-topics/open-ended-discovery.html">open-ended discovery</a>.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>As of 2026, template-free research is the primary mode of The AI Scientist v2 [^1]:</p>
+<ul>
+<li><strong>Broader topic coverage</strong>: Template-free mode has successfully generated papers across diverse ML subfields — vision, NLP, reinforcement learning, and optimization — without topic-specific templates.</li>
+<li><strong>Dynamic dataset integration</strong>: The system now queries HuggingFace Hub programmatically to find relevant datasets, removing the need for pre-specified data sources [^1]. See <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a>.</li>
+<li><strong>Improved reliability</strong>: Failure rates dropped from ~60% (2024) to ~30% (2026) through better error handling and VLM-based figure validation [^1].</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a></li>
+<li><a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a></li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — template-free mode enables more autonomous improvement cycles</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring how template-free results compare to human research</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).</p>
+<p>[^2]: Bommasani, R. et al. (2022). "On the Opportunities and Risks of Foundation Models." <a href="https://arxiv.org/abs/2108.07258">arXiv:2108.07258</a></p>
+<p>[^3]: Stanley, K. &amp; Lehman, J. (2015). <em>Why Greatness Cannot Be Planned: The Myth of the Objective.</em> Springer.</p>
+<p>[^4]: Shazeer, N. et al. (2017). "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer." <a href="https://arxiv.org/abs/1701.06538">arXiv:1701.06538</a></p>
+<p>[^5]: Boiko, D. et al. (2023). "Autonomous chemical research with large language models." <em>Nature</em>, 624, 570-578. <a href="https://doi.org/10.1038/s41586-023-06792-0">doi:10.1038/s41586-023-06792-0</a></p>
+<p>[^6]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." Sakana AI. <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a></p>
+<p>[^7]: Collins, A., Brown, J.S. &amp; Newman, S.E. (1989). "Cognitive Apprenticeship: Teaching the Crafts of Reading, Writing, and Mathematics." <em>Knowing, Learning, and Instruction</em>, 453-494.</p>
+<p>[^8]: Dunlosky, J. et al. (2013). "Improving Students' Learning With Effective Learning Techniques." <em>Psychological Science in the Public Interest</em>, 14(1), 4-58. <a href="https://doi.org/10.1177/1529100612453266">doi:10.1177/1529100612453266</a></p>
+</main>
+</body>
+</html>

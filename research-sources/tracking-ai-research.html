@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tracking AI Research - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html" aria-current="page">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Research Sources &rsaquo; Tracking AI Research</div>
+<h1 id="tracking-ai-research">Tracking AI Research</h1>
+<h2 id="overview">Overview</h2>
+<p>Tracking AI research is the practice of systematically monitoring, filtering, and synthesizing the flood of new publications, preprints, and code releases across artificial intelligence. With over 500 AI papers published daily on arXiv alone[^1], manual tracking is infeasible -- making automated pipelines essential for researchers, practitioners, and AI systems alike. This article covers the APIs, feeds, tools, and workflows that form the infrastructure layer powering automated literature review in systems like <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> and <a href="../tools-platforms/autoresearch.html">Autoresearch</a>.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>The challenge of research tracking has grown exponentially with the AI boom. Between 2019 and 2025, the annual volume of AI papers on arXiv increased roughly threefold[^2], outpacing any individual's ability to stay current. Traditional approaches -- attending conferences, subscribing to journals, following citation chains -- were designed for a slower era.</p>
+<p>Modern research tracking draws on three foundational ideas:</p>
+<ol>
+<li><strong>Information retrieval</strong> -- Keyword, semantic, and citation-graph search over large corpora (see <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>)</li>
+<li><strong>Recommender systems</strong> -- Personalized paper feeds that learn researcher preferences, analogous to the recommendation engines used in <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a>[^3]</li>
+<li><strong>Agentic literature review</strong> -- LLM-based agents that autonomously search, filter, summarize, and synthesize papers as part of the research pipeline (see <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>)</li>
+</ol>
+<p>The shift from passive reading to active, agent-driven tracking is a key enabler of fully automated research workflows. Predictive simulation systems (see <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a>) also benefit from continuous tracking, as new world-model papers inform simulation architecture choices.</p>
+<p>The diagram below shows how research tracking feeds into the full AI-assisted learning pipeline -- from paper discovery through synthesis and simulation to real-world application:</p>
+<p><img alt="AI-Assisted Learning Pipeline" src="ai-learning-pipeline.svg" /></p>
+<h2 id="apis-for-programmatic-access">APIs for Programmatic Access</h2>
+<h3 id="primary-apis">Primary APIs</h3>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Best For</th>
+<th>Auth</th>
+<th>Rate Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers</a></td>
+<td>Daily curated AI/ML papers</td>
+<td>None</td>
+<td>None (CDN)</td>
+</tr>
+<tr>
+<td><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar</a></td>
+<td>Deep citation graphs, all fields</td>
+<td>Optional</td>
+<td>100 req/5 min</td>
+</tr>
+<tr>
+<td>arXiv API</td>
+<td>Full arXiv access, real-time</td>
+<td>None</td>
+<td>Polite use</td>
+</tr>
+<tr>
+<td>OpenAlex</td>
+<td>Open bibliographic data</td>
+<td>None</td>
+<td>100K/day</td>
+</tr>
+<tr>
+<td>CrossRef</td>
+<td>DOI resolution, metadata</td>
+<td>None</td>
+<td>Polite pool</td>
+</tr>
+</tbody>
+</table>
+<h3 id="integration-patterns">Integration Patterns</h3>
+<p><strong>Daily monitoring pipeline:</strong></p>
+<pre><code>HF Papers API (daily feed)
+    │
+    ├── New paper detected
+    │   ├── Semantic Scholar → citation context
+    │   ├── arXiv API → full text / PDF
+    │   └── Store in local database
+    │
+    └── Weekly digest generation
+</code></pre>
+<p><strong>Literature review for AI Scientist:</strong></p>
+<pre><code>Research idea generated
+    │
+    ├── Semantic Scholar search (up to 20 rounds)
+    │   ├── Title + abstract matching
+    │   ├── Citation graph traversal
+    │   └── Citation justification generation
+    │
+    └── Novelty assessment: duplicate? → discard
+</code></pre>
+<h2 id="curated-feeds-and-newsletters">Curated Feeds and Newsletters</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Format</th>
+<th>Frequency</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HuggingFace Daily Papers</td>
+<td>Web + API</td>
+<td>Daily</td>
+<td>Community-curated AI/ML</td>
+</tr>
+<tr>
+<td>Papers With Code</td>
+<td>Web + API</td>
+<td>Daily</td>
+<td>Papers with implementations</td>
+</tr>
+<tr>
+<td>arXiv Sanity</td>
+<td>Web</td>
+<td>Daily</td>
+<td>Personalized arXiv filtering</td>
+</tr>
+<tr>
+<td>The Batch (deeplearning.ai)</td>
+<td>Newsletter</td>
+<td>Weekly</td>
+<td>AI news and papers</td>
+</tr>
+<tr>
+<td>Import AI</td>
+<td>Newsletter</td>
+<td>Weekly</td>
+<td>AI research + policy</td>
+</tr>
+<tr>
+<td>ML News (Weights &amp; Biases)</td>
+<td>Newsletter</td>
+<td>Weekly</td>
+<td>ML tooling + research</td>
+</tr>
+<tr>
+<td>Ahead of AI (Sebastian Raschka)</td>
+<td>Newsletter</td>
+<td>Bi-weekly</td>
+<td>Deep technical analysis</td>
+</tr>
+</tbody>
+</table>
+<h2 id="social-and-community-sources">Social and Community Sources</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>What to Follow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X/Twitter</td>
+<td>@_akhaliq (daily paper threads), @papers_daily</td>
+</tr>
+<tr>
+<td>Reddit</td>
+<td>r/MachineLearning, r/LocalLLaMA</td>
+</tr>
+<tr>
+<td>Discord</td>
+<td>EleutherAI, HuggingFace, ML Collective</td>
+</tr>
+<tr>
+<td>YouTube</td>
+<td>Yannic Kilcher, Two Minute Papers, 3Blue1Brown</td>
+</tr>
+</tbody>
+</table>
+<h2 id="building-your-own-research-tracker">Building Your Own Research Tracker</h2>
+<h3 id="minimal-setup-python">Minimal Setup (Python)</h3>
+<pre><code class="language-python">import requests
+from datetime import date
+
+def get_daily_papers():
+    &quot;&quot;&quot;Fetch today's curated papers from HuggingFace.&quot;&quot;&quot;
+    url = &quot;https://huggingface.co/api/daily_papers&quot;
+    return requests.get(url).json()[&quot;results&quot;]
+
+def search_related(title, limit=5):
+    &quot;&quot;&quot;Find related work via Semantic Scholar.&quot;&quot;&quot;
+    url = &quot;https://api.semanticscholar.org/graph/v1/paper/search&quot;
+    params = {&quot;query&quot;: title, &quot;limit&quot;: limit,
+              &quot;fields&quot;: &quot;title,abstract,year,citationCount&quot;}
+    return requests.get(url, params=params).json().get(&quot;data&quot;, [])
+
+# Daily routine
+for paper in get_daily_papers():
+    print(f&quot;NEW: {paper['title']}&quot;)
+    related = search_related(paper['title'])
+    for r in related:
+        print(f&quot;  Related: {r['title']} ({r['year']}, {r['citationCount']} cites)&quot;)
+</code></pre>
+<h3 id="advanced-setup">Advanced Setup</h3>
+<ul>
+<li><strong>Vector database</strong> (Pinecone, Weaviate, ChromaDB) for semantic paper search</li>
+<li><strong>RSS feeds</strong> from arXiv categories (cs.AI, cs.LG, cs.CL)</li>
+<li><strong>GitHub trending</strong> for research implementations</li>
+<li><strong>Conference calendars</strong> for submission deadlines and proceedings</li>
+</ul>
+<h2 id="conference-proceedings-as-sources">Conference Proceedings as Sources</h2>
+<table>
+<thead>
+<tr>
+<th>Conference</th>
+<th>When</th>
+<th>Focus</th>
+<th>Acceptance Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeurIPS</td>
+<td>December</td>
+<td>Broad ML</td>
+<td>~25%</td>
+</tr>
+<tr>
+<td>ICML</td>
+<td>July</td>
+<td>Core ML</td>
+<td>~25%</td>
+</tr>
+<tr>
+<td>ICLR</td>
+<td>May</td>
+<td>Representation learning</td>
+<td>~32%</td>
+</tr>
+<tr>
+<td>ACL/EMNLP</td>
+<td>Varies</td>
+<td>NLP</td>
+<td>~25%</td>
+</tr>
+<tr>
+<td>CVPR/ICCV/ECCV</td>
+<td>Varies</td>
+<td>Computer vision</td>
+<td>~25%</td>
+</tr>
+<tr>
+<td>AAAI</td>
+<td>February</td>
+<td>Broad AI</td>
+<td>~20%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>The research tracking landscape has matured significantly in 2025-2026:</p>
+<ul>
+<li><strong>LLM-powered paper agents</strong> -- Tools like Elicit, Consensus, and Semantic Scholar's TLDR feature now use LLMs to summarize and compare papers automatically[^4]. The AI Scientist v2 integrates up to 20 rounds of Semantic Scholar search per paper[^5].</li>
+<li><strong>Multimodal tracking</strong> -- Vision-language models (see <a href="../methodologies/vlm-integration.html">VLM Integration</a>) enable agents to parse figures and tables from papers, not just text.</li>
+<li><strong>Real-time feeds</strong> -- HuggingFace Daily Papers has become the de facto community-curated feed for AI/ML, with same-day coverage of trending preprints.</li>
+<li><strong>AI-assisted learning applications</strong> -- Research tracking is increasingly integrated into educational AI tutors. A landmark 2025 Harvard RCT showed AI tutoring outperforms traditional active learning[^6], and systems like GuideAI use real-time biosensory feedback to personalize content delivery[^7]. These systems rely on up-to-date research tracking to keep curricula current.</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Information overload</strong> -- Even automated systems struggle with the sheer volume; filtering for relevance remains an open problem</li>
+<li><strong>Citation lag</strong> -- New papers take months to accumulate citations, making impact-based filtering unreliable for recent work</li>
+<li><strong>API rate limits</strong> -- Semantic Scholar (100 req/5 min), arXiv (polite use) and others constrain real-time monitoring</li>
+<li><strong>Bias toward popular topics</strong> -- Community-curated feeds (HuggingFace, Reddit) over-represent trending topics at the expense of niche but important work</li>
+<li><strong>Reproducibility gaps</strong> -- Tracking papers is not the same as tracking reproducible results; see <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a> for approaches to verify claims</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a></li>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a></li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ol>
+<li>HuggingFace Daily Papers. <a href="https://huggingface.co/papers">huggingface.co/papers</a></li>
+<li>Semantic Scholar. <a href="https://www.semanticscholar.org/">semanticscholar.org</a></li>
+<li>arXiv API. <a href="https://arxiv.org/help/api/">arxiv.org/help/api</a></li>
+<li>Papers With Code. <a href="https://paperswithcode.com/">paperswithcode.com</a></li>
+</ol>
+<p>[^1]: Approximately 500+ AI-related papers are posted daily across cs.AI, cs.LG, cs.CL, and cs.CV categories on arXiv as of 2025.
+[^2]: Sevilla, J. et al. (2022). "Compute Trends Across Three Eras of Machine Learning." <a href="https://arxiv.org/abs/2202.05924">arXiv:2202.05924</a>. Updated estimates suggest the trend has accelerated through 2025.
+[^3]: Peng, Q. et al. (2025). "A Survey on LLM-powered Agents for Recommender Systems." EMNLP 2025 Findings. <a href="https://arxiv.org/abs/2502.10050">arXiv:2502.10050</a>
+[^4]: Lo, K. et al. (2023). "Semantic Scholar Open Data Platform." <a href="https://arxiv.org/abs/2301.10140">arXiv:2301.10140</a>
+[^5]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).
+[^6]: Kestin, G. et al. (2025). "AI Tutoring Outperforms Active Learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-025-97652-6">doi:10.1038/s41598-025-97652-6</a>
+[^7]: Shukla, A. et al. (2026). "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions." <a href="https://arxiv.org/abs/2601.20402">arXiv:2601.20402</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,471 @@
+{
+  "papers": {
+    "2604.02870": {
+      "id": "2604.02870",
+      "title": "Token Warping Helps MLLMs Look from Nearby Viewpoints",
+      "authors": [
+        "Phillip Y. Lee",
+        "Chanho Park",
+        "Mingue Park",
+        "Seungwoo Yoo",
+        "Juil Koo"
+      ],
+      "summary": "Can warping tokens, rather than pixels, help multimodal large language models (MLLMs) understand how a scene appears from a nearby viewpoint? While MLLMs perform well on visual reasoning, they remain fragile to viewpoint changes, as pixel-wise warping is highly sensitive to small depth errors and often introduces geometric distortions. Drawing on theories of mental imagery that posit part-level structural representations as the basis for human perspective transformation, we examine whether image",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T00:22:36.726805",
+      "published_date": "2026-04-02T20:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 16,
+      "url": "https://arxiv.org/abs/2604.02870",
+      "pdf_url": "https://arxiv.org/pdf/2604.02870",
+      "arxiv_id": "2604.02870"
+    },
+    "2604.03016": {
+      "id": "2604.03016",
+      "title": "Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?",
+      "authors": [
+        "Qianshan Wei",
+        "Yishan Yang",
+        "Siyi Wang",
+        "Jinglin Chen",
+        "Binyu Wang"
+      ],
+      "summary": "Multimodal Large Language Models (MLLMs) are evolving from passive observers into active agents, solving problems through Visual Expansion (invoking visual tools) and Knowledge Expansion (open-web search). However, existing evaluations fall short: they lack flexible tool integration, test visual and search tools separately, and evaluate primarily by final answers. Consequently, they cannot verify if tools were actually invoked, applied correctly, or used efficiently. To address this, we introduc",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T00:22:36.727058",
+      "published_date": "2026-04-02T20:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 54,
+      "url": "https://arxiv.org/abs/2604.03016",
+      "pdf_url": "https://arxiv.org/pdf/2604.03016",
+      "arxiv_id": "2604.03016"
+    },
+    "2603.27183": {
+      "id": "2603.27183",
+      "title": "Communicating about Space: Language-Mediated Spatial Integration Across Partial Views",
+      "authors": [
+        "Ankur Sikarwar",
+        "Debangan Mishra",
+        "Sudarshan Nikhil",
+        "Ponnurangam Kumaraguru",
+        "Aishwarya Agrawal"
+      ],
+      "summary": "Humans build shared spatial understanding by communicating partial, viewpoint-dependent observations. We ask whether Multimodal Large Language Models (MLLMs) can do the same, aligning distinct egocentric views through dialogue to form a coherent, allocentric mental model of a shared environment. To study this systematically, we introduce COSMIC, a benchmark for Collaborative Spatial Communication. In this setting, two static MLLM agents observe a 3D indoor environment from different viewpoints a",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T00:22:36.727244",
+      "published_date": "2026-03-28T04:01:50.000Z",
+      "year": 2026,
+      "relevance_score": 24,
+      "url": "https://arxiv.org/abs/2603.27183",
+      "pdf_url": "https://arxiv.org/pdf/2603.27183",
+      "arxiv_id": "2603.27183"
+    },
+    "2604.01487": {
+      "id": "2604.01487",
+      "title": "AgentSocialBench: Evaluating Privacy Risks in Human-Centered Agentic Social Networks",
+      "authors": [
+        "Prince Zizhuang Wang",
+        "Shuli Jiang"
+      ],
+      "summary": "With the rise of personalized, persistent LLM agent frameworks such as OpenClaw, human-centered agentic social networks in which teams of collaborative AI agents serve individual users in a social network across multiple domains are becoming a reality. This setting creates novel privacy challenges: agents must coordinate across domain boundaries, mediate between humans, and interact with other users' agents, all while protecting sensitive personal information. While prior work has evaluated mult",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T00:22:36.727393",
+      "published_date": "2026-03-31T20:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 39,
+      "url": "https://arxiv.org/abs/2604.01487",
+      "pdf_url": "https://arxiv.org/pdf/2604.01487",
+      "arxiv_id": "2604.01487"
+    },
+    "2604.02368": {
+      "id": "2604.02368",
+      "title": "Xpertbench: Expert Level Tasks with Rubrics-Based Evaluation",
+      "authors": [
+        "Xue Liu",
+        "Xin Ma",
+        "Yuxin Ma",
+        "Yongchang Peng",
+        "Duo Wang"
+      ],
+      "summary": "As Large Language Models (LLMs) exhibit plateauing performance on conventional benchmarks, a pivotal challenge persists: evaluating their proficiency in complex, open-ended tasks characterizing genuine expert-level cognition. Existing frameworks suffer from narrow domain coverage, reliance on generalist tasks, or self-evaluation biases. To bridge this gap, we present XpertBench, a high-fidelity benchmark engineered to assess LLMs across authentic professional domains. XpertBench consists of 1,34",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T00:22:36.727519",
+      "published_date": "2026-03-26T20:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 16,
+      "url": "https://arxiv.org/abs/2604.02368",
+      "pdf_url": "https://arxiv.org/pdf/2604.02368",
+      "arxiv_id": "2604.02368"
+    },
+    "2511.00062": {
+      "id": "2511.00062",
+      "title": "Cosmos-Predict2.5: World Simulation with Video Foundation Models for Physical AI",
+      "authors": ["NVIDIA Research"],
+      "summary": "Cosmos-Predict2.5 unifies Text2World, Image2World, and Video2World generation in a single flow-based model trained on 200M curated video clips with RL post-training. Released at 2B and 14B scales with open weights.",
+      "source": "web_search",
+      "source_detail": "NVIDIA GitHub + HuggingFace Blog",
+      "date_found": "2026-04-07T12:00:00.000000",
+      "published_date": "2026-03-01T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 72,
+      "url": "https://arxiv.org/abs/2511.00062",
+      "pdf_url": "https://arxiv.org/pdf/2511.00062",
+      "arxiv_id": "2511.00062"
+    },
+    "2504.20082": {
+      "id": "2504.20082",
+      "title": "Evolution of AI in Education: Agentic Workflows",
+      "authors": ["Firuz Kamalov", "David Santandreu Calonge", "Linda Smail", "Dilshod Azizov", "Dimple R. Thadani", "Theresa Kwong", "Amara Atif"],
+      "summary": "First systematic analysis of how agentic AI design patterns (reflection, planning, tool use, multi-agent collaboration) apply to educational contexts, with a practical multi-agent essay evaluation demonstration.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T12:00:00.000000",
+      "published_date": "2026-04-01T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 65,
+      "url": "https://arxiv.org/abs/2504.20082",
+      "pdf_url": "https://arxiv.org/pdf/2504.20082",
+      "arxiv_id": "2504.20082"
+    },
+    "2601.05930": {
+      "id": "2601.05930",
+      "title": "Can We Predict Before Executing Machine Learning Agents? (FOREAGENT)",
+      "authors": ["Jia Zheng", "Jiaqi Zhang", "Yuankai Luo", "Yongkun Mao", "Yuyan Gao", "Lei Du", "Hui Chen", "Ningyu Zhang"],
+      "summary": "FOREAGENT employs a Predict-then-Verify loop that internalizes execution priors to substitute costly runtime checks with instantaneous predictive reasoning, achieving 6x acceleration in convergence and +6% performance gain.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T12:00:00.000000",
+      "published_date": "2026-01-10T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 68,
+      "url": "https://arxiv.org/abs/2601.05930",
+      "pdf_url": "https://arxiv.org/pdf/2601.05930",
+      "arxiv_id": "2601.05930"
+    },
+    "2602.02454": {
+      "id": "2602.02454",
+      "title": "World-Gymnast: Training Robots with Reinforcement Learning in a World Model",
+      "authors": ["Ansh Kumar Sharma", "Yixiang Sun", "Ninghao Lu", "Yunzhe Zhang", "Jiarao Liu", "Sherry Yang"],
+      "summary": "RL inside learned video world models outperforms supervised fine-tuning by 18x and software simulation by 2x on Bridge robot setup. VLM-generated rewards. Iterative co-improvement of world model and policy.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2026-02-02T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 75,
+      "url": "https://arxiv.org/abs/2602.02454",
+      "pdf_url": "https://arxiv.org/pdf/2602.02454",
+      "arxiv_id": "2602.02454"
+    },
+    "2505.13934": {
+      "id": "2505.13934",
+      "title": "RLVR-World: Training World Models with Reinforcement Learning",
+      "authors": ["Jialong Wu", "Shaofeng Yin", "Ningya Feng", "Mingsheng Long"],
+      "summary": "RL with verifiable rewards for training world models. Task-specific optimization outperforms maximum likelihood across text games, web navigation, robotics. NeurIPS 2025.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2025-05-20T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 70,
+      "url": "https://arxiv.org/abs/2505.13934",
+      "pdf_url": "https://arxiv.org/pdf/2505.13934",
+      "arxiv_id": "2505.13934"
+    },
+    "2511.01824": {
+      "id": "2511.01824",
+      "title": "Simulating Environments with Reasoning Models for Agent Training (Simia)",
+      "authors": ["Yuetai Li", "Huseyin A Inan", "Xiang Yue", "Wei-Ning Chen", "Lukas Wutschitz", "Janardhan Kulkarni", "Radha Poovendran", "Robert Sim", "Saravan Rajmohan"],
+      "summary": "LLMs simulate realistic environment feedback without real testbed access. Simia-SFT and Simia-RL approaches match GPT-4o on agent benchmarks. Collapses simulation engineering from months to minutes.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2025-11-03T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 74,
+      "url": "https://arxiv.org/abs/2511.01824",
+      "pdf_url": "https://arxiv.org/pdf/2511.01824",
+      "arxiv_id": "2511.01824"
+    },
+    "2601.20402": {
+      "id": "2601.20402",
+      "title": "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions",
+      "authors": ["Ananya Shukla", "Chaitanya Modi", "Satvik Bajpai", "Siddharth Siddharth"],
+      "summary": "Multi-modal LLM tutoring with real-time biosensory feedback (eye gaze, heart rate, posture). Significant learning gains. IUI 2026. Adds physiological dimension to learner state modeling.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2026-01-28T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 71,
+      "url": "https://arxiv.org/abs/2601.20402",
+      "pdf_url": "https://arxiv.org/pdf/2601.20402",
+      "arxiv_id": "2601.20402"
+    },
+    "2504.08066": {
+      "id": "2504.08066",
+      "title": "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search",
+      "authors": ["Yutaro Yamada", "Robert Tjarko Lange", "Cong Lu", "Shengran Hu", "Chris Lu", "Jakob Foerster", "Jeff Clune", "David Ha"],
+      "summary": "First fully AI-generated paper to pass peer review at ICLR workshop (scores 6/7/6). Template-free, progressive agentic tree search. Demonstrates recursive self-improvement for knowledge creation.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2025-04-10T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 73,
+      "url": "https://arxiv.org/abs/2504.08066",
+      "pdf_url": "https://arxiv.org/pdf/2504.08066",
+      "arxiv_id": "2504.08066"
+    },
+    "2508.02630v3": {
+      "id": "2508.02630v3",
+      "title": "ACES v3: Agentic E-Commerce Markets Are Volatile and Fundamentally Different",
+      "authors": ["Amine Allouah", "Omar Besbes", "Josue D Figueroa", "Yash Kanoria", "Akshit Kumar"],
+      "summary": "Expanded study: model updates reshuffle market shares, agents concentrate demand on modal products, seller optimization is effective but fragile. Agentic markets are volatile and fundamentally different from human-centric commerce.",
+      "source": "web_search",
+      "source_detail": "arXiv revision tracking",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2025-12-17T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 69,
+      "url": "https://arxiv.org/abs/2508.02630",
+      "pdf_url": "https://arxiv.org/pdf/2508.02630",
+      "arxiv_id": "2508.02630"
+    },
+    "2509.26603": {
+      "id": "2509.26603",
+      "title": "DeepScientist: Advancing Frontier-Pushing Scientific Findings Progressively",
+      "authors": ["HuggingFace Trending"],
+      "summary": "Autonomously conducts scientific discovery through Bayesian Optimization, surpassing human SOTA on multiple AI tasks.",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Trending",
+      "date_found": "2026-04-07T18:00:00.000000",
+      "published_date": "2025-09-01T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 58,
+      "url": "https://arxiv.org/abs/2509.26603",
+      "pdf_url": "https://arxiv.org/pdf/2509.26603",
+      "arxiv_id": "2509.26603"
+    },
+    "2604.04707": {
+      "id": "2604.04707",
+      "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+      "authors": ["Bohan Zeng", "DataFlow Team"],
+      "summary": "First unified definition of world models: centered on perception, interaction, and long-term memory. Provides standardized inference framework integrating models across tasks.",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-04-06T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 70,
+      "url": "https://arxiv.org/abs/2604.04707",
+      "pdf_url": "https://arxiv.org/pdf/2604.04707",
+      "arxiv_id": "2604.04707"
+    },
+    "2604.03253": {
+      "id": "2604.03253",
+      "title": "Self-Execution Simulation Improves Coding Models",
+      "authors": ["Gallil Maimon", "Ori Yoran", "Felix Kreuk", "Michael Hassid", "Gal Cohen", "Pierre Chambon", "Yossi Adi"],
+      "summary": "Training coding models to trace execution step-by-step with RL from verifiable rewards. Enables self-verification through internal simulation rather than external feedback.",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-04-04T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 68,
+      "url": "https://arxiv.org/abs/2604.03253",
+      "pdf_url": "https://arxiv.org/pdf/2604.03253",
+      "arxiv_id": "2604.03253"
+    },
+    "2604.00830": {
+      "id": "2604.00830",
+      "title": "Learning to Learn-at-Test-Time: Language Agents with Learnable Adaptation Policies",
+      "authors": ["Zhanzhi Lou", "Hui Chen", "Yibo Li", "Qian Wang", "Bryan Hooi"],
+      "summary": "Meta-TTL formulates test-time adaptation as bi-level optimization. Inner loop executes TTL, outer loop uses evolutionary search to refine policies. Outperforms hand-crafted baselines.",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-04-01T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 72,
+      "url": "https://arxiv.org/abs/2604.00830",
+      "pdf_url": "https://arxiv.org/pdf/2604.00830",
+      "arxiv_id": "2604.00830"
+    },
+    "2603.19461": {
+      "id": "2603.19461",
+      "title": "Hyperagents: Recursive Metacognitive Self-Improvement",
+      "authors": ["Jenny Zhang", "Bingchen Zhao", "Wannan Yang", "Jakob Foerster", "Jeff Clune", "Minqi Jiang", "Sam Devlin", "Tatiana Shavrina"],
+      "summary": "Self-referential agents where the meta-level modification procedure itself is editable. ICLR 2026. Meta-level gains transfer across domains. Extends Darwin Gödel Machine.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-03-25T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 76,
+      "url": "https://arxiv.org/abs/2603.19461",
+      "pdf_url": "https://arxiv.org/pdf/2603.19461",
+      "arxiv_id": "2603.19461"
+    },
+    "2604.04804": {
+      "id": "2604.04804",
+      "title": "SkillX: Automatically Constructing Skill Knowledge Bases for Agents",
+      "authors": ["Zhejiang University"],
+      "summary": "Automated framework for constructing hierarchical skill knowledge bases from agent trajectories. ICML 2026. Enables efficient skill transfer to new tasks.",
+      "source": "huggingface",
+      "source_detail": "HuggingFace Daily Papers",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-04-06T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 64,
+      "url": "https://arxiv.org/abs/2604.04804",
+      "pdf_url": "https://arxiv.org/pdf/2604.04804",
+      "arxiv_id": "2604.04804"
+    },
+    "2510.11290": {
+      "id": "2510.11290",
+      "title": "Evolution in Simulation: AI-Agent School with Dual Memory for High-Fidelity Educational Dynamics",
+      "authors": ["Sheng Jin", "Haoming Wang", "Zhiqi Gao", "Yongbo Yang", "Bao Chunjia", "Chengliang Wang"],
+      "summary": "LLM-based multi-agent school simulation with dual memory (experience + knowledge). Produces high-fidelity behavioral data for educational research. EMNLP 2025.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2025-10-13T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 67,
+      "url": "https://arxiv.org/abs/2510.11290",
+      "pdf_url": "https://arxiv.org/pdf/2510.11290",
+      "arxiv_id": "2510.11290"
+    },
+    "2602.03094": {
+      "id": "2602.03094",
+      "title": "Test-time Recursive Thinking: Self-Improvement without External Feedback",
+      "authors": ["Yufan Zhuang", "Chandan Singh", "Liyuan Liu", "Yelong Shen", "Dinghuai Zhang", "Jingbo Shang", "Jianfeng Gao", "Weizhu Chen"],
+      "summary": "Iterative self-improvement at inference time. Open-source models reach 100% on AIME-24/25. Closed-source models improve 10-15pp on hard coding. No retraining needed.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2026-02-05T00:00:00.000Z",
+      "year": 2026,
+      "relevance_score": 71,
+      "url": "https://arxiv.org/abs/2602.03094",
+      "pdf_url": "https://arxiv.org/pdf/2602.03094",
+      "arxiv_id": "2602.03094"
+    },
+    "2503.00735": {
+      "id": "2503.00735",
+      "title": "LADDER: Self-Improving LLMs Through Recursive Problem Decomposition",
+      "authors": ["Toby Simonds", "Akira Yoshiyama"],
+      "summary": "Recursive difficulty-driven self-improvement. Llama 3.2 3B improves from 1% to 82% on math. Qwen2.5 7B reaches 90% on MIT Integration Bee. No human feedback needed.",
+      "source": "web_search",
+      "source_detail": "arXiv search",
+      "date_found": "2026-04-07T22:00:00.000000",
+      "published_date": "2025-03-01T00:00:00.000Z",
+      "year": 2025,
+      "relevance_score": 73,
+      "url": "https://arxiv.org/abs/2503.00735",
+      "pdf_url": "https://arxiv.org/pdf/2503.00735",
+      "arxiv_id": "2503.00735"
+    }
+  },
+  "last_hf_date": null,
+  "last_ss_query_index": 3,
+  "runs": [
+    {
+      "timestamp": "2026-04-07T22:00:00.000000",
+      "hf_new": 3,
+      "ss_new": 0,
+      "web_new": 5,
+      "total_papers": 23,
+      "top_papers": [
+        {
+          "title": "Hyperagents: Recursive Metacognitive Self-Improvement",
+          "score": 76
+        },
+        {
+          "title": "LADDER: Self-Improving LLMs Through Recursive Problem Decomposition",
+          "score": 73
+        },
+        {
+          "title": "Learning to Learn-at-Test-Time: Language Agents with Learnable Adaptation Policies",
+          "score": 72
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-04-07T18:00:00.000000",
+      "hf_new": 1,
+      "ss_new": 0,
+      "web_new": 6,
+      "total_papers": 15,
+      "top_papers": [
+        {
+          "title": "World-Gymnast: Training Robots with Reinforcement Learning in a World Model",
+          "score": 75
+        },
+        {
+          "title": "Simulating Environments with Reasoning Models for Agent Training (Simia)",
+          "score": 74
+        },
+        {
+          "title": "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery",
+          "score": 73
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-04-07T12:00:00.000000",
+      "hf_new": 0,
+      "ss_new": 0,
+      "web_new": 3,
+      "total_papers": 8,
+      "top_papers": [
+        {
+          "title": "Cosmos-Predict2.5: World Simulation with Video Foundation Models for Physical AI",
+          "score": 72
+        },
+        {
+          "title": "Can We Predict Before Executing Machine Learning Agents? (FOREAGENT)",
+          "score": 68
+        },
+        {
+          "title": "Evolution of AI in Education: Agentic Workflows",
+          "score": 65
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-04-07T00:24:22.925007",
+      "hf_new": 5,
+      "ss_new": 0,
+      "total_papers": 5,
+      "top_papers": [
+        {
+          "title": "Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?",
+          "score": 54
+        },
+        {
+          "title": "AgentSocialBench: Evaluating Privacy Risks in Human-Centered Agentic Social Netw",
+          "score": 39
+        },
+        {
+          "title": "Communicating about Space: Language-Mediated Spatial Integration Across Partial ",
+          "score": 24
+        },
+        {
+          "title": "Token Warping Helps MLLMs Look from Nearby Viewpoints",
+          "score": 16
+        },
+        {
+          "title": "Xpertbench: Expert Level Tasks with Rubrics-Based Evaluation",
+          "score": 16
+        }
+      ]
+    }
+  ]
+}

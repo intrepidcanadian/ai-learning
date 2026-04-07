@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f97316"/>
+    </marker>
+    <linearGradient id="sim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bfdbfe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rec-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbf7d0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="com-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffedd5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed7aa;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">From Skill Discovery to Real-World Mastery: The Curriculum-Skill Pipeline</text>
+  <text x="450" y="52" text-anchor="middle" font-size="12" fill="#64748b">How LLM-guided curricula, skill extraction, and iterative reward calibration connect simulation, recursion, and commerce</text>
+
+  <!-- Phase 1: Skill Discovery (left column) -->
+  <rect x="30" y="80" width="260" height="200" rx="12" fill="url(#sim-grad)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="160" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">1. DISCOVER SKILLS</text>
+  <text x="160" y="122" text-anchor="middle" font-size="11" fill="#3b82f6">Predictive Simulation</text>
+
+  <rect x="50" y="135" width="220" height="36" rx="6" fill="white" stroke="#93c5fd" stroke-width="1"/>
+  <text x="160" y="150" text-anchor="middle" font-size="11" fill="#1e3a5f">SkillFoundry: Mine skills from</text>
+  <text x="160" y="164" text-anchor="middle" font-size="11" fill="#1e3a5f">papers, APIs, notebooks (71% novel)</text>
+
+  <rect x="50" y="180" width="220" height="36" rx="6" fill="white" stroke="#93c5fd" stroke-width="1"/>
+  <text x="160" y="195" text-anchor="middle" font-size="11" fill="#1e3a5f">CODE-GEN: Generate validated</text>
+  <text x="160" y="209" text-anchor="middle" font-size="11" fill="#1e3a5f">assessments (79-99% quality)</text>
+
+  <rect x="50" y="225" width="220" height="36" rx="6" fill="white" stroke="#93c5fd" stroke-width="1"/>
+  <text x="160" y="240" text-anchor="middle" font-size="11" fill="#1e3a5f">World Renderer: AAA game data</text>
+  <text x="160" y="254" text-anchor="middle" font-size="11" fill="#1e3a5f">for high-fidelity simulation</text>
+
+  <!-- Phase 2: Skill Organization (center column) -->
+  <rect x="320" y="80" width="260" height="200" rx="12" fill="url(#rec-grad)" stroke="#22c55e" stroke-width="2"/>
+  <text x="450" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">2. SEQUENCE &amp; IMPROVE</text>
+  <text x="450" y="122" text-anchor="middle" font-size="11" fill="#22c55e">Recursive Self-Improvement</text>
+
+  <rect x="340" y="135" width="220" height="36" rx="6" fill="white" stroke="#86efac" stroke-width="1"/>
+  <text x="450" y="150" text-anchor="middle" font-size="11" fill="#14532d">LLM-Guided Curriculum: Sequence</text>
+  <text x="450" y="164" text-anchor="middle" font-size="11" fill="#14532d">concepts adaptively (74% faster)</text>
+
+  <rect x="340" y="180" width="220" height="36" rx="6" fill="white" stroke="#86efac" stroke-width="1"/>
+  <text x="450" y="195" text-anchor="middle" font-size="11" fill="#14532d">SkillX: Organize into hierarchical</text>
+  <text x="450" y="209" text-anchor="middle" font-size="11" fill="#14532d">knowledge base (plan/func/atomic)</text>
+
+  <rect x="340" y="225" width="220" height="36" rx="6" fill="white" stroke="#86efac" stroke-width="1"/>
+  <text x="450" y="240" text-anchor="middle" font-size="11" fill="#14532d">Iterative Reward Calibration:</text>
+  <text x="450" y="254" text-anchor="middle" font-size="11" fill="#14532d">4B model beats GPT-4.1</text>
+
+  <!-- Phase 3: Skill Application (right column) -->
+  <rect x="610" y="80" width="260" height="200" rx="12" fill="url(#com-grad)" stroke="#f97316" stroke-width="2"/>
+  <text x="740" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#9a3412">3. APPLY &amp; VALIDATE</text>
+  <text x="740" y="122" text-anchor="middle" font-size="11" fill="#f97316">Commerce &amp; Real-World</text>
+
+  <rect x="630" y="135" width="220" height="36" rx="6" fill="white" stroke="#fdba74" stroke-width="1"/>
+  <text x="740" y="150" text-anchor="middle" font-size="11" fill="#7c2d12">PerFusion: Simulate products,</text>
+  <text x="740" y="164" text-anchor="middle" font-size="11" fill="#7c2d12">sell before manufacturing (+13% CTR)</text>
+
+  <rect x="630" y="180" width="220" height="36" rx="6" fill="white" stroke="#fdba74" stroke-width="1"/>
+  <text x="740" y="195" text-anchor="middle" font-size="11" fill="#7c2d12">Multi-Turn RL: Customer service</text>
+  <text x="740" y="209" text-anchor="middle" font-size="11" fill="#7c2d12">training with calibrated rewards</text>
+
+  <rect x="630" y="225" width="220" height="36" rx="6" fill="white" stroke="#fdba74" stroke-width="1"/>
+  <text x="740" y="240" text-anchor="middle" font-size="11" fill="#7c2d12">Market validation provides</text>
+  <text x="740" y="254" text-anchor="middle" font-size="11" fill="#7c2d12">ground-truth feedback signal</text>
+
+  <!-- Arrows between phases -->
+  <line x1="290" y1="180" x2="318" y2="180" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="580" y1="180" x2="608" y2="180" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Central learning pipeline (bottom) -->
+  <rect x="100" y="320" width="700" height="130" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="450" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">The Learning Pipeline: How AI Helps You Master Any Subject</text>
+
+  <!-- Pipeline steps -->
+  <rect x="120" y="360" width="150" height="70" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="195" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">SIMULATE</text>
+  <text x="195" y="400" text-anchor="middle" font-size="10" fill="#475569">Practice in simulated</text>
+  <text x="195" y="413" text-anchor="middle" font-size="10" fill="#475569">environments risk-free</text>
+
+  <rect x="300" y="360" width="150" height="70" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="375" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">RECURSE</text>
+  <text x="375" y="400" text-anchor="middle" font-size="10" fill="#475569">Iteratively refine through</text>
+  <text x="375" y="413" text-anchor="middle" font-size="10" fill="#475569">adaptive curriculum</text>
+
+  <rect x="480" y="360" width="150" height="70" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="555" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#9a3412">APPLY</text>
+  <text x="555" y="400" text-anchor="middle" font-size="10" fill="#475569">Deploy skills in real</text>
+  <text x="555" y="413" text-anchor="middle" font-size="10" fill="#475569">commercial contexts</text>
+
+  <rect x="660" y="360" width="120" height="70" rx="8" fill="#fefce8" stroke="#eab308" stroke-width="1.5"/>
+  <text x="720" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#854d0e">VALIDATE</text>
+  <text x="720" y="400" text-anchor="middle" font-size="10" fill="#475569">Market/real-world</text>
+  <text x="720" y="413" text-anchor="middle" font-size="10" fill="#475569">outcomes confirm</text>
+
+  <!-- Pipeline arrows -->
+  <line x1="270" y1="395" x2="298" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="450" y1="395" x2="478" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="630" y1="395" x2="658" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Feedback loop arrow (validate back to simulate) -->
+  <path d="M 720 430 L 720 465 Q 720 475 710 475 L 205 475 Q 195 475 195 465 L 195 432" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="450" y="490" text-anchor="middle" font-size="10" fill="#854d0e">Feedback drives new simulation cycles</text>
+
+  <!-- Concrete example box -->
+  <rect x="100" y="510" width="700" height="95" rx="10" fill="#fefce8" stroke="#eab308" stroke-width="1"/>
+  <text x="450" y="533" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Example: Learning E-Commerce Product Design</text>
+  <text x="120" y="553" font-size="10.5" fill="#44403c">1. SIMULATE: AI generates product designs in PerFusion, testing against predicted customer preferences</text>
+  <text x="120" y="570" font-size="10.5" fill="#44403c">2. RECURSE: LLM-guided curriculum sequences design skills (color theory -> layout -> personalization) based on learner progress</text>
+  <text x="120" y="587" font-size="10.5" fill="#44403c">3. APPLY: Learner deploys AI-generated products on real marketplace; PerFusion achieves +13% CTR, -7.9% return rate</text>
+  <text x="120" y="604" font-size="10.5" fill="#44403c">4. VALIDATE: Market outcomes feed back into simulation, refining both the learner's skills and the AI's preference model</text>
+
+  <!-- Source attribution -->
+  <text x="450" y="618" text-anchor="middle" font-size="9" fill="#94a3b8">Sources: SkillFoundry (arXiv:2604.03964) | LLM-Guided Curriculum (arXiv:2604.00076) | PerFusion/KDD 2026 (arXiv:2503.22182) | Iterative Reward Calibration (arXiv:2604.02869)</text>
+</svg>

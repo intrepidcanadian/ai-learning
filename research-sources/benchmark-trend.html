@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality Benchmark - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html" aria-current="page">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Research Sources &rsaquo; Quality Benchmark</div>
+<h1 id="quality-benchmark">Quality Benchmark</h1>
+<p>Automated quality scores for the wiki's articles across all categories. Articles are scored with tier-aware expectations: <strong>flagship</strong> articles face the highest quality bar, <strong>standard</strong> articles have moderate expectations, and <strong>reference</strong> articles are evaluated primarily on linking and consistency.</p>
+<p>Scores are computed by <a href="../benchmark_wiki.py"><code>benchmark_wiki.py</code></a> across seven dimensions: structural completeness, depth, currency, sourcing, internal linking, consistency, and freshness. See <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> for full methodology.</p>
+<h2 id="current-score">Current Score</h2>
+<p><strong>Overall: 82.4/100</strong> | 25 articles | 91,713 words</p>
+<p>Tier scores: <strong>Standard:</strong> 79.6 | <strong>Flagship:</strong> 97.1</p>
+<p>Coverage: 5 substantial | 0 stubs (0.0%)</p>
+<p>Freshness: 100.0% updated this week | median age: 0.0 days</p>
+<p><em>Last benchmarked: 2026-04-07T21:01</em></p>
+<h3 id="core-concepts">Core Concepts</h3>
+<table>
+<thead>
+<tr>
+<th>Article</th>
+<th>Tier</th>
+<th>Struct</th>
+<th>Depth</th>
+<th>Currency</th>
+<th>Sourcing</th>
+<th>Linking</th>
+<th>Consist</th>
+<th>Fresh</th>
+<th><strong>Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>automated-scientific-discovery</td>
+<td>standard</td>
+<td>100</td>
+<td>75</td>
+<td>58</td>
+<td>94</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>89.0</strong></td>
+</tr>
+<tr>
+<td>the-ai-scientist</td>
+<td>standard</td>
+<td>100</td>
+<td>53</td>
+<td>64</td>
+<td>82</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>84.8</strong></td>
+</tr>
+<tr>
+<td>foundation-models-for-research</td>
+<td>standard</td>
+<td>100</td>
+<td>39</td>
+<td>42</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>82.1</strong></td>
+</tr>
+<tr>
+<td>automated-peer-review</td>
+<td>standard</td>
+<td>100</td>
+<td>48</td>
+<td>43</td>
+<td>78</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>80.3</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tools-platforms">Tools &amp; Platforms</h3>
+<table>
+<thead>
+<tr>
+<th>Article</th>
+<th>Tier</th>
+<th>Struct</th>
+<th>Depth</th>
+<th>Currency</th>
+<th>Sourcing</th>
+<th>Linking</th>
+<th>Consist</th>
+<th>Fresh</th>
+<th><strong>Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>autoresearch</td>
+<td>standard</td>
+<td>100</td>
+<td>52</td>
+<td>57</td>
+<td>86</td>
+<td>66</td>
+<td>100</td>
+<td>99</td>
+<td><strong>77.4</strong></td>
+</tr>
+<tr>
+<td>huggingface-papers-api</td>
+<td>standard</td>
+<td>100</td>
+<td>64</td>
+<td>45</td>
+<td>65</td>
+<td>70</td>
+<td>100</td>
+<td>99</td>
+<td><strong>75.0</strong></td>
+</tr>
+<tr>
+<td>semantic-scholar-api</td>
+<td>standard</td>
+<td>100</td>
+<td>54</td>
+<td>32</td>
+<td>74</td>
+<td>70</td>
+<td>100</td>
+<td>99</td>
+<td><strong>73.0</strong></td>
+</tr>
+<tr>
+<td>aider</td>
+<td>standard</td>
+<td>100</td>
+<td>31</td>
+<td>45</td>
+<td>42</td>
+<td>80</td>
+<td>100</td>
+<td>99</td>
+<td><strong>68.6</strong></td>
+</tr>
+<tr>
+<td>aide</td>
+<td>standard</td>
+<td>100</td>
+<td>31</td>
+<td>33</td>
+<td>54</td>
+<td>70</td>
+<td>100</td>
+<td>99</td>
+<td><strong>66.6</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="methodologies">Methodologies</h3>
+<table>
+<thead>
+<tr>
+<th>Article</th>
+<th>Tier</th>
+<th>Struct</th>
+<th>Depth</th>
+<th>Currency</th>
+<th>Sourcing</th>
+<th>Linking</th>
+<th>Consist</th>
+<th>Fresh</th>
+<th><strong>Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wiki-quality-benchmarking</td>
+<td>standard</td>
+<td>100</td>
+<td>69</td>
+<td>57</td>
+<td>79</td>
+<td>96</td>
+<td>100</td>
+<td>99</td>
+<td><strong>84.9</strong></td>
+</tr>
+<tr>
+<td>automated-experiment-design</td>
+<td>standard</td>
+<td>100</td>
+<td>58</td>
+<td>37</td>
+<td>94</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>83.3</strong></td>
+</tr>
+<tr>
+<td>template-free-research</td>
+<td>standard</td>
+<td>100</td>
+<td>62</td>
+<td>37</td>
+<td>66</td>
+<td>90</td>
+<td>100</td>
+<td>99</td>
+<td><strong>77.7</strong></td>
+</tr>
+<tr>
+<td>vlm-integration</td>
+<td>standard</td>
+<td>100</td>
+<td>64</td>
+<td>50</td>
+<td>52</td>
+<td>80</td>
+<td>100</td>
+<td>99</td>
+<td><strong>75.9</strong></td>
+</tr>
+<tr>
+<td>agentic-tree-search</td>
+<td>standard</td>
+<td>100</td>
+<td>60</td>
+<td>20</td>
+<td>63</td>
+<td>90</td>
+<td>100</td>
+<td>99</td>
+<td><strong>74.4</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontier-topics">Frontier Topics</h3>
+<table>
+<thead>
+<tr>
+<th>Article</th>
+<th>Tier</th>
+<th>Struct</th>
+<th>Depth</th>
+<th>Currency</th>
+<th>Sourcing</th>
+<th>Linking</th>
+<th>Consist</th>
+<th>Fresh</th>
+<th><strong>Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recursive-self-improvement</td>
+<td>flagship</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td>96</td>
+<td>94</td>
+<td>100</td>
+<td>99</td>
+<td><strong>98.4</strong></td>
+</tr>
+<tr>
+<td>ai-ecommerce-learning</td>
+<td>flagship</td>
+<td>100</td>
+<td>97</td>
+<td>100</td>
+<td>95</td>
+<td>88</td>
+<td>100</td>
+<td>99</td>
+<td><strong>97.2</strong></td>
+</tr>
+<tr>
+<td>predictive-simulation-learning</td>
+<td>flagship</td>
+<td>100</td>
+<td>97</td>
+<td>98</td>
+<td>96</td>
+<td>88</td>
+<td>100</td>
+<td>99</td>
+<td><strong>97.1</strong></td>
+</tr>
+<tr>
+<td>cross-cutting-connections</td>
+<td>flagship</td>
+<td>100</td>
+<td>97</td>
+<td>100</td>
+<td>87</td>
+<td>88</td>
+<td>100</td>
+<td>99</td>
+<td><strong>95.6</strong></td>
+</tr>
+<tr>
+<td>ai-safety-in-research</td>
+<td>standard</td>
+<td>100</td>
+<td>48</td>
+<td>76</td>
+<td>100</td>
+<td>77</td>
+<td>100</td>
+<td>99</td>
+<td><strong>84.0</strong></td>
+</tr>
+<tr>
+<td>open-ended-discovery</td>
+<td>standard</td>
+<td>100</td>
+<td>46</td>
+<td>65</td>
+<td>91</td>
+<td>88</td>
+<td>100</td>
+<td>99</td>
+<td><strong>82.9</strong></td>
+</tr>
+<tr>
+<td>scaling-laws-research</td>
+<td>standard</td>
+<td>100</td>
+<td>53</td>
+<td>51</td>
+<td>91</td>
+<td>77</td>
+<td>100</td>
+<td>99</td>
+<td><strong>79.6</strong></td>
+</tr>
+<tr>
+<td>blockchain-ai-optimization</td>
+<td>standard</td>
+<td>100</td>
+<td>66</td>
+<td>51</td>
+<td>62</td>
+<td>78</td>
+<td>100</td>
+<td>99</td>
+<td><strong>77.4</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="research-sources">Research Sources</h3>
+<table>
+<thead>
+<tr>
+<th>Article</th>
+<th>Tier</th>
+<th>Struct</th>
+<th>Depth</th>
+<th>Currency</th>
+<th>Sourcing</th>
+<th>Linking</th>
+<th>Consist</th>
+<th>Fresh</th>
+<th><strong>Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key-papers</td>
+<td>standard</td>
+<td>100</td>
+<td>67</td>
+<td>84</td>
+<td>64</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>87.2</strong></td>
+</tr>
+<tr>
+<td>tracking-ai-research</td>
+<td>standard</td>
+<td>100</td>
+<td>66</td>
+<td>55</td>
+<td>82</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>85.4</strong></td>
+</tr>
+<tr>
+<td>institutions-and-labs</td>
+<td>standard</td>
+<td>100</td>
+<td>62</td>
+<td>49</td>
+<td>70</td>
+<td>100</td>
+<td>100</td>
+<td>99</td>
+<td><strong>82.1</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="score-trend">Score Trend</h2>
+<p><strong>Overall composite:</strong> 88.3 -&gt; 82.4  <code>▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄</code></p>
+<h3 id="run-history">Run History</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Ver</th>
+<th>Overall</th>
+<th>Articles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>88.3</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>88.3</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>88.3</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>90.6</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.1</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.0</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>93.1</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>94.4</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>95.4</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>96.4</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>97.6</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v1</td>
+<td><strong>97.6</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>63.1</strong></td>
+<td>24</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>62.7</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>62.7</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>68.2</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>68.2</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>72.4</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>72.4</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>74.8</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>74.8</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>76.7</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>76.7</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>77.1</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>77.1</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>79.3</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>79.8</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>80.6</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>80.6</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>82.5</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>82.4</strong></td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-issues">Open Issues</h2>
+<p><em>No issues found -- all articles pass all checks.</em></p>
+<hr />
+<p><em>This page is auto-generated by <code>benchmark_wiki.py</code>. Do not edit manually.</em></p>
+</main>
+</body>
+</html>

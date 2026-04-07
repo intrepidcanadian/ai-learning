@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursive Self-Improvement - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html" aria-current="page">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Frontier Topics &rsaquo; Recursive Self-Improvement</div>
+<h1 id="recursive-self-improvement">Recursive Self-Improvement</h1>
+<p><strong>Recursive Self-Improvement</strong> refers to AI systems that iteratively enhance their own capabilities -- improving not just at tasks, but at the process of improvement itself. These systems create compounding learning loops where each iteration produces a more capable agent than the last.</p>
+<h2 id="overview">Overview</h2>
+<p>Traditional AI training is a one-shot process: a human designs the training procedure, runs it, and deploys the result. Recursive self-improvement breaks this pattern by making the AI an active participant in its own improvement:</p>
+<ol>
+<li>The agent attempts tasks</li>
+<li>It evaluates its own performance</li>
+<li>It modifies itself (code, prompts, strategies, or weights) to perform better</li>
+<li>The improved agent repeats from step 1</li>
+</ol>
+<p>When the improvement process itself can be improved (meta-improvement), the system becomes truly recursive -- and potentially accelerating.</p>
+<p>This paradigm is deeply relevant to AI-assisted learning: a tutoring system that recursively improves its teaching strategies based on student outcomes would become more effective with every interaction.</p>
+<h2 id="key-systems">Key Systems</h2>
+<pre><code class="language-mermaid">graph TD
+    subgraph Generate[&quot;Generate Candidates&quot;]
+        DGM[Darwin Godel Machine&lt;br&gt;Evolve agent variants]
+        HYPER[Hyperagents&lt;br&gt;Edit the improvement process itself]
+        LADDER[LADDER&lt;br&gt;Recursive problem decomposition]
+    end
+    subgraph Verify[&quot;Verify Improvement&quot;]
+        BENCH[Benchmark evaluation&lt;br&gt;SWE-bench, AIME, etc.]
+        RLVR[RLVR / WAV&lt;br&gt;Verifiable rewards]
+        SRLM[SRLM&lt;br&gt;Uncertainty-aware calibration]
+    end
+    subgraph Deploy[&quot;Deploy &amp; Recurse&quot;]
+        SKILL[Skill0 + SkillRL&lt;br&gt;Internalize &amp; compose skills]
+        META[MetaClaw&lt;br&gt;Continual meta-learning]
+        CORAL[CORAL&lt;br&gt;Multi-agent evolution]
+    end
+    DGM --&gt;|candidates| BENCH
+    HYPER --&gt;|meta-candidates| RLVR
+    LADDER --&gt;|difficulty variants| SRLM
+    BENCH --&gt;|verified best| SKILL
+    RLVR --&gt;|reward signal| META
+    SRLM --&gt;|calibrated output| CORAL
+    SKILL --&gt;|new base| DGM
+    META --&gt;|improved mechanism| HYPER
+    CORAL --&gt;|shared discoveries| LADDER
+</code></pre>
+<h3 id="comparative-overview-of-recursive-self-improvement-systems-2025-2026">Comparative Overview of Recursive Self-Improvement Systems (2025-2026)</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Approach</th>
+<th>Key Result</th>
+<th>Self-Improvement Type</th>
+<th>Safety Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DGM[^1]</td>
+<td>Evolutionary agent variants</td>
+<td>20%→50% SWE-bench</td>
+<td>Code-level mutation</td>
+<td>Archive of best variants</td>
+</tr>
+<tr>
+<td>Hyperagents[^2]</td>
+<td>Meta-agent edits improvement process</td>
+<td>Cross-domain transfer</td>
+<td>Meta-improvement</td>
+<td>Editable mechanism itself</td>
+</tr>
+<tr>
+<td>LADDER[^3]</td>
+<td>Recursive problem simplification</td>
+<td>1%→82% on undergrad math</td>
+<td>Curriculum self-generation</td>
+<td>Progressive difficulty</td>
+</tr>
+<tr>
+<td>TRT[^5]</td>
+<td>Inference-time recursive verification</td>
+<td>100% on AIME-25</td>
+<td>Test-time self-improvement</td>
+<td>Self-consistency check</td>
+</tr>
+<tr>
+<td>RSIR[^48]</td>
+<td>Recommender self-training with fidelity</td>
+<td>Model-agnostic improvement</td>
+<td>Data-level bootstrapping</td>
+<td>Fidelity control filter</td>
+</tr>
+<tr>
+<td>CORAL[^30]</td>
+<td>Multi-agent collaborative evolution</td>
+<td>3-10× improvement rate</td>
+<td>Population-based evolution</td>
+<td>Diversity maintenance</td>
+</tr>
+<tr>
+<td>SAHOO[^15]</td>
+<td>Alignment-preserving self-improvement</td>
+<td>18.3% code improvement</td>
+<td>Safeguarded recursion</td>
+<td>Alignment drift monitoring</td>
+</tr>
+<tr>
+<td>A-Evolve<a href="A-Evolve" title="2026). &quot;Open Source A-Evolve: Self-Rewriting AI Workflows.&quot; [GitHub](https://github.com/EvoAgentX/EvoAgentX); [opensourceforu.com](https://www.opensourceforu.com/2026/04/open-source-a-evolve-brings-self-rewriting-ai-workflows-to-startups/">^61</a></td>
+<td>Git-native self-rewriting agents</td>
+<td>Evolving code workflows</td>
+<td>Full-stack self-modification</td>
+<td>Gate stage validation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Learning application:</strong> This table reveals a taxonomy of self-improvement strategies that maps directly to human learning: code-level mutation parallels trying new study techniques; curriculum self-generation parallels adjusting difficulty; test-time verification parallels checking your work; and population-based evolution parallels study groups sharing discoveries. Each approach addresses a different bottleneck in the learning loop.</p>
+<h3 id="darwin-godel-machine-dgm">Darwin Godel Machine (DGM)</h3>
+<p>Zhang et al. (Sakana AI, 2025) introduced the DGM, a self-improving coding agent that rewrites its own Python codebase using evolutionary principles.[^1] It maintains a growing archive of agent variants, creates mutations via a foundation model, and selects the best performers.</p>
+<p><strong>Results:</strong>
+- SWE-bench: autonomously improved from 20.0% to 50.0% solve rate
+- Polyglot benchmark: improved from 14.2% to 30.7%
+- Agents independently discovered improvements like better code editing tools and context window management</p>
+<p><strong>Learning connection:</strong> Mirrors how a human learner iteratively refines study strategies -- trying different approaches, keeping what works, discarding what doesn't.</p>
+<p><strong>Learning application:</strong> DGM demonstrates a complete self-improvement loop that transfers to educational settings: generate candidate strategies → evaluate in sandbox → select the best → iterate. A student could apply this same loop to study technique optimization, and an AI tutor could use it to evolve its pedagogical approaches over time.</p>
+<h3 id="hyperagents">Hyperagents</h3>
+<p>Zhang et al. (2026) extend the DGM concept with Hyperagents -- self-referential agents that integrate a task agent with a meta agent into a single editable program, where the modification mechanism itself can be edited.[^2]</p>
+<p>Key advance: DGM-Hyperagents improve not just task performance but their own improvement process. Meta-level improvements (persistent memory, performance tracking) transfer across domains and accumulate across runs.</p>
+<p><strong>Learning connection:</strong> This is the AI equivalent of "learning how to learn" -- metacognition made computational. An AI tutor with this capability would not only get better at teaching but also get better at figuring out how to get better at teaching.</p>
+<p><strong>Learning application:</strong> Hyperagents demonstrate that the improvement mechanism itself can be improved -- a second-order learning capability. For educational AI, this means tutoring systems that don't just adapt content but adapt their adaptation strategy, discovering better ways to personalize instruction as they accumulate teaching experience.</p>
+<h3 id="ladder-recursive-problem-decomposition">LADDER: Recursive Problem Decomposition</h3>
+<p>Simonds &amp; Yoshiyama (2025) introduced LADDER (Learning through Autonomous Difficulty-Driven Example Recursion), which enables LLMs to improve by recursively generating progressively simpler variants of hard problems.[^3]</p>
+<p><strong>Results:</strong>
+- Improved Llama 3.2 3B from 1% to 82% accuracy on undergraduate math
+- Enabled a 7B model to achieve 73% on the 2025 MIT Integration Bee
+- No curated datasets or human feedback required</p>
+<p><strong>Learning connection:</strong> Directly models scaffolded learning. An AI learning assistant could use this approach to create personalized difficulty ladders, automatically generating easier practice problems that build toward mastery of harder ones.</p>
+<p><strong>Learning application:</strong> LADDER operationalizes Vygotsky's zone of proximal development: by recursively decomposing hard problems into easier variants, it generates a personalized difficulty curriculum without requiring human curriculum designers. For any subject domain, a LADDER-based tutor could automatically create scaffolded practice sequences that bridge the gap between what a student knows and what they need to learn.</p>
+<h3 id="spell-self-play-for-long-context-learning">SPELL: Self-Play for Long-Context Learning</h3>
+<p>SPELL (ICLR 2026) is a self-play RL framework where a single LLM plays three roles -- questioner, responder, and verifier -- to improve long-context reasoning without human labels.[^4] An automated curriculum gradually increases document length and adapts question difficulty.</p>
+<p><strong>Results:</strong> 7.6-point average gain in pass@8 on Qwen3-30B-A3B-Thinking across six long-context benchmarks.</p>
+<p><strong>Learning connection:</strong> The three-role self-play loop (ask, answer, verify) mirrors the Socratic method and self-testing. An AI study system could generate questions from reading material, attempt answers, and self-verify -- a complete autonomous study cycle.</p>
+<h3 id="test-time-recursive-thinking-trt">Test-Time Recursive Thinking (TRT)</h3>
+<p>Zhuang et al. (2026) introduced TRT, an iterative self-improvement framework that improves LLM performance at inference time with no retraining.[^5] It conditions generation on rollout-specific strategies, accumulated knowledge, and self-generated verification signals.</p>
+<p><strong>Results:</strong>
+- Open-source models reached 100% accuracy on AIME 2024/2025 math competition problems
+- Closed-source models improved 10.4--14.8 percentage points on hard coding tasks</p>
+<p><strong>Learning connection:</strong> Recursive reflection at "test time" is analogous to a student re-checking work and refining reasoning during an exam. This strategy -- generating, verifying, and revising -- is teachable and effective for human learners.</p>
+<p><strong>Learning application:</strong> TRT's 100% AIME accuracy through recursive self-verification validates the pedagogical principle of "checking your work." An AI tutor could teach this metacognitive skill explicitly by modeling the generate-verify-revise loop for students, showing them how to catch their own errors through structured self-reflection rather than relying on external feedback.</p>
+<h3 id="recursive-self-aggregation-rsa">Recursive Self-Aggregation (RSA)</h3>
+<p>Venkatraman et al. (2025) proposed RSA, a test-time scaling method inspired by evolutionary algorithms that iteratively refines a population of candidate reasoning chains through recursive aggregation.[^6]</p>
+<p><strong>Results:</strong> A 4B-parameter model (Qwen3-4B) achieved competitive performance with much larger models like DeepSeek-R1 and o3-mini across AIME-25, HMMT-25, and LiveCodeBench.</p>
+<p><strong>Learning connection:</strong> Mirrors collaborative learning and iterative refinement -- generating multiple candidate solutions, combining the best elements, and repeating. For education, this suggests "ensemble thinking" strategies.</p>
+<h3 id="self-developing-discovering-improvement-algorithms">Self-Developing: Discovering Improvement Algorithms</h3>
+<p>Ishibashi, Yano &amp; Oyamada (NAACL 2025) created the Self-Developing framework, which enables LLMs to autonomously discover, implement, and refine their own improvement algorithms as executable code.[^7]</p>
+<p><strong>Results:</strong> Discovered novel model-merging algorithms that outperformed human-designed methods by 6% on GSM8k. Discovered algorithms generalized to out-of-domain models with 7.4% gains.</p>
+<p><strong>Learning connection:</strong> The deepest form of recursive improvement -- inventing one's own learning algorithms. Points toward AI systems that could discover novel pedagogical techniques.</p>
+<h3 id="darwin-network">DARWIN Network</h3>
+<p>Jiang (2026) presented DARWIN (Dynamic Agentically Rewriting Self-Improving Network), which uses a genetic-algorithm structure where multiple independent GPT agents modify each other's training code in mutation-like steps.[^8] Uses persistent JSON-based memory to track reasoning and correlate code changes with performance.</p>
+<p><strong>Learning connection:</strong> The peer-modification approach mirrors peer learning and peer review in education. Persistent memory tracking what changes led to improvements models reflective journaling.</p>
+<h3 id="gasp-guided-asymmetric-self-play-for-code">GASP: Guided Asymmetric Self-Play for Code</h3>
+<p>Jana et al. (March 2026) introduced GASP (Guided Asymmetric Self-Play), where a teacher LLM generates progressively harder coding problems for a student LLM, grounded by real "goalpost" questions.[^14] The teacher first creates an easier variant, then a harder variant, gradually closing the gap to the goalpost difficulty. GASP improves pass@20 on LiveCodeBench by 2.5% over unguided self-play and solves hard problems unreachable by all baselines. Accepted as a spotlight at the ICLR 2026 RSI Workshop.</p>
+<p><strong>Learning connection:</strong> GASP formalizes the "zone of proximal development" computationally -- the teacher generates problems just beyond the student's current ability, creating an optimal difficulty gradient. This is directly applicable to adaptive tutoring: an AI tutor could generate practice problems calibrated to push the learner without overwhelming them.</p>
+<h3 id="sahoo-safety-guardrails-for-recursive-improvement">SAHOO: Safety Guardrails for Recursive Improvement</h3>
+<p>Sahoo et al. (March 2026) address a critical risk in recursive self-improvement: alignment drift.[^15] SAHOO introduces three safeguards: a Goal Drift Index (GDI) combining semantic, lexical, and structural signals to detect when an agent's objectives shift during self-modification; constraint preservation checks for safety invariants; and regression-risk quantification to flag improvement cycles that undo prior gains. The system achieves 18.3% improvement on code tasks and 16.8% on reasoning while maintaining low constraint violations across 189 tasks. Accepted at the ICLR 2026 RSI Workshop.</p>
+<p><strong>Learning connection:</strong> SAHOO addresses the educational equivalent of "teaching to the test" -- where optimization for a metric diverges from genuine learning. AI tutoring systems that recursively improve their teaching strategies need similar guardrails to ensure they're actually improving student understanding, not just improving scores on narrow assessments.</p>
+<h3 id="posttrainbench-can-agents-train-other-agents">PostTrainBench: Can Agents Train Other Agents?</h3>
+<p>Rank et al. (March 2026) benchmark whether frontier LLM agents can autonomously post-train a base LLM on a single H100 GPU within 10 hours.[^16] Agents are given full autonomy to search the web, run experiments, and curate training data. The best agents reach 23.2% overall (vs. 51.1% for provider instruction-tuned models), but exceed official models in targeted scenarios (89% vs. 67% on BFCL). Accepted as an oral at the ICLR 2026 RSI Workshop.</p>
+<p><strong>Learning connection:</strong> PostTrainBench measures whether AI can teach itself from scratch -- the purest form of recursive self-improvement. The finding that agents can exceed provider models in narrow domains while underperforming broadly mirrors a common pattern in human expertise: self-directed learning excels in focused areas but benefits from structured curricula for breadth.</p>
+<h3 id="memapo-self-evolving-memory-for-prompt-optimization">MemAPO: Self-Evolving Memory for Prompt Optimization</h3>
+<p>Liang et al. (March 2026) reconceptualize prompt optimization as self-evolving experience accumulation.[^17] MemAPO maintains dual memory: successful reasoning trajectories distilled into reusable strategy templates, and incorrect generations organized into structured error patterns. Through iterative self-reflection and memory editing, the system continuously improves prompts while reducing optimization cost by ~57.2% compared to TextGrad.</p>
+<p><strong>Learning connection:</strong> MemAPO mirrors how expert practitioners develop intuition -- accumulating a library of successful strategies and failure patterns over time. The dual-memory architecture (what worked / what failed) is directly analogous to the educational practice of maintaining both exemplar solutions and common misconception libraries.</p>
+<h3 id="self-distillation-policy-optimization-sdpo-learning-from-your-own-mistakes">Self-Distillation Policy Optimization (SDPO): Learning from Your Own Mistakes</h3>
+<p>Hübotter et al. (January 2026) introduced SDPO, which transforms the model's ability to retrospectively identify its own errors into a dense learning signal.[^19] Rather than learning only from a scalar outcome reward per attempt (the standard RL approach), SDPO treats the current model conditioned on feedback as a self-teacher and distills its feedback-informed next-token predictions back into the policy.</p>
+<p><strong>Results:</strong>
+- On competitive programming: SDPO reaches 48.8% accuracy vs. 41.2% for GRPO, achieving GRPO's final performance in 4× fewer generations
+- At test time, achieves equivalent discovery rates as best-of-k sampling using 3× fewer attempts
+- Improves across scientific reasoning, tool use, and competitive programming</p>
+<p><strong>Learning connection:</strong> SDPO formalizes a powerful learning strategy: reviewing your own work with the answer in hand. When a student solves a problem, then re-reads their solution knowing the correct answer, they can identify exactly where their reasoning went wrong. SDPO automates this self-review into a training signal, suggesting that AI tutors should help students build this retrospective self-critique habit.</p>
+<h3 id="self-distilled-rlvr-rlsd-combining-self-teaching-with-verified-rewards">Self-Distilled RLVR (RLSD): Combining Self-Teaching with Verified Rewards</h3>
+<p>Yang et al. (April 2026) address a limitation of pure self-distillation: learning signals solely from a privileged teacher create information leakage and unstable long-term training.[^20] RLSD combines self-distillation (providing token-level policy guidance for update magnitudes) with RLVR (supplying reliable update directions from environmental feedback). This hybrid simultaneously harnesses the strengths of both approaches, achieving improved convergence and greater training stability.</p>
+<p><strong>Learning connection:</strong> The RLSD insight -- that self-teaching alone is insufficient without external verification -- maps directly to education. Students who only study independently (self-distillation) can develop blind spots; periodic external assessment (verified rewards) corrects trajectory. The optimal learning strategy combines both, which is exactly what RLSD demonstrates computationally.</p>
+<h3 id="test-time-scaling-makes-overtraining-compute-optimal">Test-Time Scaling Makes Overtraining Compute-Optimal</h3>
+<p>Roberts et al. (April 2026) introduce Train-to-Test (T²) scaling laws that jointly optimize model size, training tokens, and inference-time samples under fixed end-to-end compute budgets.[^22] The central finding: when accounting for inference costs, optimal pretraining shifts radically into the "overtraining" regime -- training smaller models on more data than Chinchilla-optimal, then compensating with more test-time compute (multiple samples, verification, refinement).</p>
+<p><strong>Results:</strong> Heavily overtrained models following T² scaling substantially outperform Chinchilla-optimal models at equivalent total (train + inference) cost. Findings survive post-training, making them relevant for deployed systems.</p>
+<p><strong>Learning connection:</strong> T² scaling formalizes a deep educational insight: it's often better to over-learn fundamentals (overtraining) and then invest more effort in careful reasoning at test time (test-time scaling) than to spread study evenly. A student who deeply memorizes multiplication tables (overtrained on basics) and then reasons carefully through novel problems (test-time compute) outperforms one who studies proportionally at every level. This validates the "drill fundamentals, then reason" pedagogical approach.</p>
+<h3 id="skillrl-recursive-skill-discovery-and-evolution">SkillRL: Recursive Skill Discovery and Evolution</h3>
+<p>Chojecki et al. (February 2026) introduced SkillRL (Skill-augmented Reinforcement Learning), a framework that bridges raw experience and policy improvement through automatic skill discovery and recursive evolution.[^23] Rather than learning monolithic policies, SkillRL agents extract high-level, reusable behavioral patterns ("skills") from experience, then recursively compose and refine these skills to tackle increasingly complex tasks.</p>
+<p><strong>Learning connection:</strong> SkillRL formalizes how expertise develops through skill chunking -- a well-established finding in cognitive science. Novice chess players think about individual moves; experts think in patterns and strategies built from composed sub-skills. An AI tutor built on SkillRL principles could help students identify the reusable "skills" within a domain (e.g., recognizing problem types in math, identifying rhetorical patterns in writing) and recursively compose them into higher-order competencies.</p>
+<h3 id="training-llm-tutors-to-maximize-student-learning">Training LLM Tutors to Maximize Student Learning</h3>
+<p>Scarlatos et al. (AIED 2025) directly address the goal of recursive improvement in educational AI by training LLM-based tutors to maximize student correctness during dialogues.[^24] Their approach generates candidate tutor responses, scores them using an LLM-based student model and GPT-4o pedagogical evaluation, and trains Llama 3.1 8B via direct preference optimization. The optimized tutor produces significantly higher chances of correct student responses while maintaining pedagogical quality matching GPT-4o.</p>
+<p><strong>Learning connection:</strong> This paper closes the loop between recursive self-improvement research and educational application. The tutor improves recursively: generate responses → evaluate via student model → optimize → generate better responses. The key insight is that the optimization target is <em>student learning outcomes</em>, not tutor fluency -- the system improves at causing learning, not just at sounding knowledgeable. This distinction between optimizing for downstream impact versus surface quality is central to effective recursive improvement in any domain.</p>
+<h3 id="tr-icrl-test-time-rethinking-for-in-context-reinforcement-learning">TR-ICRL: Test-Time Rethinking for In-Context Reinforcement Learning</h3>
+<p>Jiang et al. (April 2026) introduced TR-ICRL, a framework that improves LLM performance at test time by retrieving relevant unlabeled instances, generating multiple candidate responses, and using majority voting to create pseudo-labels that guide iterative refinement with reward signals.[^25] Unlike TRT (which uses rollout-specific strategies), TR-ICRL operates in a setting where ground-truth rewards are unavailable -- the agent must construct its own verification signal from consistency across candidates.</p>
+<p><strong>Results:</strong>
+- 21.23% average improvement on MedQA
+- 137.59% improvement on AIME2024 for Qwen2.5-7B
+- Works on both reasoning and knowledge-intensive tasks</p>
+<p><strong>Learning connection:</strong> TR-ICRL demonstrates that self-improvement is possible even without external answer keys -- the agent bootstraps verification from the consistency of its own diverse attempts. This mirrors a powerful self-study technique: if a student solves a problem multiple ways and gets the same answer each time, confidence is justified. TR-ICRL automates this "convergent verification" into a learning signal, suggesting that AI tutors could teach students to use solution diversity as a proxy for correctness.</p>
+<h3 id="sica-a-self-improving-coding-agent">SICA: A Self-Improving Coding Agent</h3>
+<p>Robeyns, Szummer &amp; Aitchison (2025) demonstrated that an agent equipped with basic coding tools can autonomously edit its own codebase to improve benchmark performance.[^26] SICA (Self-Improving Coding Agent) uses LLM reflection and code updates as a non-gradient-based learning mechanism.</p>
+<p><strong>Results:</strong>
+- Performance improvements from 17% to 53% on SWE-bench Verified
+- Additional gains on LiveCodeBench and synthetic benchmarks
+- Submitted as NeurIPS 2025 preprint</p>
+<p><strong>Learning connection:</strong> SICA shows that self-improvement through code editing (rather than weight updates) is a viable and data-efficient learning mechanism. This has direct implications for educational AI: a tutoring system could improve by rewriting its own prompting strategies and tool-use patterns based on student outcomes, without requiring expensive retraining. The "reflection + code edit" loop is analogous to a teacher revising their lesson plans after each class.</p>
+<h3 id="simulating-novice-students-via-machine-unlearning-recursive-teaching-learning-loops">Simulating Novice Students via Machine Unlearning: Recursive Teaching-Learning Loops</h3>
+<p>Song, Guo &amp; Lin (March 2026) address a fundamental problem in AI-assisted education: LLMs are too knowledgeable to simulate novice students convincingly.[^27] Even when prompted to "act like a beginner," LLMs produce expert-level explanations. The solution: apply machine unlearning to deliberately reduce an LLM's knowledge to a novice level on targeted topics (e.g., Python programming), then measure whether the "unlearned" agent can reacquire knowledge through structured teaching dialogue.</p>
+<p><strong>Key results:</strong>
+- Machine unlearning produces AI agents with more novice-like responses than prompt-only baselines
+- Agents recovered measurable portions of unlearned knowledge through teaching interactions
+- Dialogue analysis identified distinct patterns of conceptual development correlated with knowledge recovery</p>
+<p><strong>Learning connection:</strong> This creates a recursive loop: (1) start with an expert model, (2) unlearn to create a novice, (3) teach the novice, (4) measure what was relearned, (5) use the relearning patterns to improve teaching strategies. This is recursion applied to the <em>representation of knowledge itself</em> -- the model's knowledge state is the variable being recursively refined. For "learning by teaching" pedagogy (where students deepen understanding by explaining concepts to others), this provides a scalable AI partner that genuinely doesn't know the material yet can authentically relearn through dialogue.</p>
+<h3 id="skill0-progressive-skill-internalization-as-recursive-withdrawal">Skill0: Progressive Skill Internalization as Recursive Withdrawal</h3>
+<p>Lu et al. (April 2026) introduced Skill0, which embeds procedural skills into LLM agents through a curriculum that progressively withdraws skill context.[^28] The Dynamic Curriculum evaluates which skills the agent has internalized and removes those from the context, while retaining skills still needed.</p>
+<p><strong>Results:</strong> +9.7% on ALFWorld, +6.6% on Search-QA over standard RL, achieving zero-shot autonomous behavior without runtime skill retrieval.</p>
+<p><strong>Learning connection:</strong> Skill0 implements a <em>recursive fading</em> process: at each training stage, the system evaluates what the agent has learned, removes that support, and repeats. This is recursive self-improvement applied to the scaffolding itself -- not just improving performance, but improving the efficiency of the learning support. The connection to <a href="#ladder-recursive-problem-decomposition">LADDER's</a> progressive difficulty is precise: LADDER recursively simplifies problems to build up, while Skill0 recursively removes support to build independence. Together they define two complementary directions of recursive educational scaffolding.</p>
+<h3 id="the-path-to-conversational-ai-tutors-a-framework-for-recursive-pedagogical-improvement">The Path to Conversational AI Tutors: A Framework for Recursive Pedagogical Improvement</h3>
+<p>Vanacore, Baker, Closser &amp; Roschelle (February 2026) propose a "keep, change, center, study" framework for building conversational AI tutors that integrate proven ITS methods with generative AI capabilities.[^29] The framework identifies what to retain from legacy systems (knowledge tracing, affect detection), what to transform (dynamic content generation, dialogic scaffolding), what to center (meaning-making, student agency, granular reasoning diagnosis), and what to study (efficacy, student experience, classroom integration).</p>
+<p><strong>Learning connection:</strong> This framework is significant because it explicitly structures recursive improvement of the tutoring system itself. Each component can be independently improved: knowledge tracing gets better with more student data (recursive data loop), affect detection improves with more emotional signals (recursive sensing loop), and dialogic scaffolding improves with better language models (recursive capability loop). The "study" component -- measuring efficacy and experience -- closes the outer recursive loop, ensuring the whole system improves based on evidence of actual learning outcomes. This connects directly to Scarlatos et al.'s work on <a href="#training-llm-tutors-to-maximize-student-learning">training tutors for student outcomes</a> and provides the architectural framework within which such recursive optimization operates.</p>
+<h3 id="when-does-self-play-actually-work">When Does Self-Play Actually Work?</h3>
+<p>Liu et al. (March 2026) provide theoretical and empirical analysis of when self-play leads to sustainable self-evolution in LLMs.[^18] They identify a critical condition: the triadic Proposer/Solver/Verifier pipeline must ensure <strong>learnable information gain increases</strong> across iterations. Without this condition, self-play stagnates.</p>
+<p><strong>Learning connection:</strong> This result formalizes why some practice strategies lead to improvement while others plateau. If practice doesn't generate new, learnable challenges (information gain), repetition produces diminishing returns. An AI tutor could use this principle to detect when a student's practice routine has stopped producing learning gains and needs restructuring.</p>
+<h2 id="the-metacognition-framework">The Metacognition Framework</h2>
+<p>Liu &amp; van der Schaar (2025) argue in an influential position paper that truly self-improving agents require <strong>intrinsic metacognitive learning</strong> -- not just fixed improvement loops designed by humans.[^9] They identify three necessary components:</p>
+<ol>
+<li><strong>Metacognitive knowledge</strong> -- Self-awareness of capabilities and limitations</li>
+<li><strong>Metacognitive planning</strong> -- Choosing which learning approaches to use</li>
+<li><strong>Metacognitive evaluation</strong> -- Analyzing whether learning strategies are working</li>
+</ol>
+<p>This maps directly onto educational psychology's concept of metacognition -- the single strongest predictor of learning success. An AI system with these properties could model and teach metacognitive skills to human learners.</p>
+<h2 id="verification-the-critical-constraint">Verification: The Critical Constraint</h2>
+<p>A recurring theme: recursive self-improvement works reliably only where outcomes are <strong>verifiable</strong> -- mathematics, code, structured reasoning. In domains without clear ground truth (creative writing, open-ended research), self-improvement can drift or degenerate.</p>
+<p>This constraint shapes where recursive AI learning systems can be deployed:</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Verifiability</th>
+<th>Self-Improvement Potential</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mathematics</td>
+<td>High (proofs, numerical answers)</td>
+<td>Very high (LADDER, TRT)</td>
+</tr>
+<tr>
+<td>Programming</td>
+<td>High (tests, benchmarks)</td>
+<td>Very high (DGM, Hyperagents)</td>
+</tr>
+<tr>
+<td>Science</td>
+<td>Medium (experimental results)</td>
+<td>High with guardrails</td>
+</tr>
+<tr>
+<td>Language/Writing</td>
+<td>Low (subjective quality)</td>
+<td>Limited without human feedback</td>
+</tr>
+<tr>
+<td>Business decisions</td>
+<td>Medium (delayed outcomes)</td>
+<td>Moderate with simulation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="connections-to-other-topics">Connections to Other Topics</h2>
+<h3 id="to-predictive-simulation">To Predictive Simulation</h3>
+<p><a href="predictive-simulation-learning.html">Predictive simulation learning</a> and recursive self-improvement are complementary: world models improve through recursive refinement of predictions, while self-improving agents can use simulation to evaluate proposed self-modifications before committing to them. The emergence of efficient world models like <a href="predictive-simulation-learning.md#leworldmodel-stable-jepa-from-pixels">LeWM</a> (48× faster planning than prior approaches) makes simulation-verified recursive improvement practical -- agents can test modifications in simulation at interactive speeds rather than waiting for slow rollouts. The <a href="predictive-simulation-learning.md#self-improving-world-models-the-wav-framework">World Action Verifier</a> (WAV, April 2026) makes this connection explicit: world models that verify their own predictions via forward-inverse asymmetry are performing recursive self-improvement at the representation level, achieving 2× sample efficiency gains.</p>
+<h3 id="to-open-ended-discovery">To Open-Ended Discovery</h3>
+<p><a href="open-ended-discovery.html">Open-ended discovery</a> can be viewed as recursive self-improvement applied to the space of ideas rather than the space of agent architectures. The AI Scientist's archive mechanism is a form of recursive accumulation.</p>
+<h3 id="to-e-commerce-applications">To E-Commerce Applications</h3>
+<p>Recommendation systems in <a href="ai-ecommerce-learning.html">AI for e-commerce</a> benefit from recursive improvement: each user interaction provides feedback that refines the model, which produces better recommendations, which generate more informative interactions.</p>
+<h3 id="to-scaling-laws">To Scaling Laws</h3>
+<p><a href="scaling-laws-research.html">Scaling laws for research automation</a> predict how recursive improvement compounds: each iteration's gains are bounded by the current model's capability, but model upgrades can unlock new improvement trajectories.</p>
+<h2 id="challenges">Challenges</h2>
+<ol>
+<li><strong>Reward hacking</strong> -- Self-improving systems may exploit evaluation metrics without genuine improvement</li>
+<li><strong>Degenerate loops</strong> -- Improvement may plateau or oscillate without converging</li>
+<li><strong>Safety</strong> -- Unconstrained self-improvement raises alignment concerns (see <a href="ai-safety-in-research.html">AI Safety in Research</a>)</li>
+<li><strong>Verification bottleneck</strong> -- Improvement is limited to domains where progress can be measured</li>
+<li><strong>Catastrophic forgetting</strong> -- Self-modification may destroy previously learned capabilities</li>
+<li><strong>Compute cost</strong> -- Each improvement iteration requires significant resources</li>
+</ol>
+<h2 id="the-iclr-2026-workshop">The ICLR 2026 Workshop</h2>
+<p>The establishment of a dedicated ICLR 2026 Workshop on AI with Recursive Self-Improvement (April 26-27, 2026, Rio de Janeiro) signals that this is now a mainstream research area. The workshop notes that "LLM agents now rewrite their own codebases or prompts, scientific discovery pipelines schedule continual fine-tuning, and robotics stacks patch controllers from streaming telemetry."[^10]</p>
+<p>The workshop organizes contributions around five lenses: change targets, temporal regime, mechanisms/drivers, operating contexts, and evidence of improvement. Confirmed speakers include Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Graham Neubig (CMU/OpenHands), and Yoshua Bengio-affiliated researchers from Mila.[^10]</p>
+<h3 id="notable-accepted-papers">Notable Accepted Papers</h3>
+<p><strong>GRAM (Generative Recursive Attention Model):</strong> Injects stochastic guidance at each recursion step, producing diverse trajectories that reach multiple valid solutions while naturally enabling parallel inference-time scaling.[^11] This addresses a key limitation of sequential reasoning -- getting stuck in local optima -- by maintaining population diversity throughout the recursive process.</p>
+<p><strong>Code as Harness:</strong> LLMs code their own evaluation harnesses to improve task performance, addressing the validity-checking problem in domains like game-playing where ground-truth verification is non-trivial.[^12] This is a form of recursive self-improvement where the agent improves not by modifying its weights but by building better scaffolding around itself.</p>
+<p><strong>Agentic Context Engineering (ACE):</strong> Demonstrates that data selection matters substantially for agent learning -- achieving comparable performance using only ~30% of the full training set through strategic example selection.[^13] This finding connects to <a href="#ladder-recursive-problem-decomposition">LADDER's</a> insight that what you train on matters more than how much you train on.</p>
+<p><strong>Learning application:</strong> The ICLR workshop's acceptance of these papers validates a key educational principle: improvement comes not just from more practice (more data, more compute) but from better-structured practice (curriculum design, selective examples, diverse strategies). These techniques could power adaptive tutoring systems that recursively optimize which exercises to present and how to structure feedback.</p>
+<h3 id="agent0-self-evolving-agents-from-zero-data">Agent0: Self-Evolving Agents from Zero Data</h3>
+<p>Zhang, Hu, Lu, Lange &amp; Clune (2025) introduced Agent0, a fully autonomous co-evolutionary framework that builds capable LLM agents without any human-annotated data.[^45] Two agents initialized from the same base LLM enter a symbiotic competition: a <em>curriculum agent</em> proposes increasingly challenging frontier tasks, and an <em>executor agent</em> learns to solve them. Through iterative co-evolution with seamless tool integration, the system bootstraps complex capabilities from nothing.</p>
+<p><strong>Results:</strong>
+- Qwen3-8B-Base improved by 18% on mathematical reasoning and 24% on general reasoning benchmarks
+- Accepted as an <strong>Oral</strong> at the ICLR 2026 Workshop on Recursive Self-Improvement (1 of 4 orals out of 110 accepted papers)
+- No external datasets, human feedback, or curated examples required</p>
+<p><strong>Learning connection:</strong> Agent0 represents the purest form of self-bootstrapped learning: starting with no knowledge and building capability through self-generated challenges and self-evaluated solutions. This mirrors the educational principle of <em>productive struggle</em> -- learning that occurs when students generate their own problems and work through them without external guidance. For AI tutoring, Agent0 suggests that a system could bootstrap a complete curriculum for any domain by co-evolving task generation and task-solving capabilities, eliminating the need for manually curated educational content. The co-evolutionary structure (curriculum agent + executor agent) maps directly onto the teacher-student dynamic: the curriculum agent "teaches" by selecting appropriate challenges, while the executor "learns" by solving them. Combined with <a href="#gasp-guided-asymmetric-self-play-for-code">GASP's</a> guided difficulty calibration and <a href="#ladder-recursive-problem-decomposition">LADDER's</a> recursive problem decomposition, Agent0 completes a trio of self-play systems: LADDER simplifies (top-down), GASP calibrates (frontier-tracking), and Agent0 co-evolves (bottom-up from zero).</p>
+<h3 id="coral-autonomous-multi-agent-evolution-for-open-ended-discovery">CORAL: Autonomous Multi-Agent Evolution for Open-Ended Discovery</h3>
+<p>Qu et al. (April 2026) introduced CORAL, a multi-agent framework where continuously operating agents explore, reflect, and collaborate through shared persistent memory and asynchronous execution.[^30] Unlike single-agent recursive systems (DGM, Hyperagents), CORAL achieves recursive improvement through a <em>population</em> of agents that independently explore, share discoveries, and build on each other's insights.</p>
+<p><strong>Results:</strong>
+- 3-10× higher improvement rates than traditional evolutionary approaches on math and optimization tasks
+- Agents spontaneously develop specialization and knowledge-sharing protocols
+- Persistent shared memory enables cross-agent learning transfer</p>
+<p><strong>Learning connection:</strong> CORAL computationally validates collaborative learning theory -- the finding that groups of learners who share insights and build on each other's work outperform individual learners, even highly capable ones. The 3-10× improvement rate over single-agent evolution suggests that educational AI systems should facilitate multi-agent collaboration (multiple tutoring perspectives, peer learning networks) rather than relying on a single monolithic tutor. The persistent shared memory mirrors a class wiki or shared study repository that accumulates collective understanding.</p>
+<h3 id="evoskills-co-evolutionary-skill-generation-and-verification">EvoSkills: Co-Evolutionary Skill Generation and Verification</h3>
+<p>Zhang et al. (April 2026) introduced EvoSkills, where a Skill Generator iteratively produces and refines skill bundles, co-evolving with a surrogate verifier that provides feedback without access to ground-truth test content.[^31] Both components improve together -- the generator creates better skills, and the verifier becomes better at evaluating them.</p>
+<p><strong>Learning connection:</strong> EvoSkills demonstrates a recursive improvement pattern where both the <em>learner</em> and the <em>evaluator</em> improve simultaneously. This mirrors the educational reality that good teaching requires good assessment, and that assessment quality should improve alongside teaching quality. An AI tutoring system built on this principle would recursively improve both its instruction and its ability to evaluate student understanding -- addressing the <a href="#challenges">verification bottleneck</a> from a co-evolutionary rather than static perspective.</p>
+<h3 id="simple-self-distillation-minimal-recursive-improvement-for-code">Simple Self-Distillation: Minimal Recursive Improvement for Code</h3>
+<p>Zhang et al. (April 2026) show that an embarrassingly simple recursive loop -- sampling solutions from a model and fine-tuning on the correct ones -- improves Qwen3-30B from 42.4% to 55.3% pass@1 on LiveCodeBench v6.[^32] The method works across 4B-30B parameter scales with no architectural changes, resolving a "precision-exploration conflict" where greedy decoding is precise but narrow while sampling is diverse but noisy.</p>
+<p><strong>Learning connection:</strong> This result is striking because it shows that the <em>simplest possible</em> recursive self-improvement loop (practice → keep successes → practice again) produces substantial gains. This validates the most basic form of deliberate practice: attempting problems, identifying correct solutions, and training on those solutions. An AI tutor could implement this principle by having students solve many variants, identifying their successful strategies, and reinforcing those patterns through targeted practice. The finding that this works at small model scales (4B) suggests it's accessible for resource-constrained educational deployments.</p>
+<h3 id="hill-learning-to-hint-for-reinforcement-learning">HiLL: Learning to Hint for Reinforcement Learning</h3>
+<p>Xia et al. (April 2026) address "advantage collapse" in RL training by jointly training a <em>hinter</em> and a <em>reasoner</em>.[^33] The hinter dynamically generates contextual hints based on the reasoner's current errors, creating an adaptive scaffolding system. A novel "hint reliance" metric measures dependency on scaffolding, with theory showing that lower reliance predicts better transfer to unscaffolded performance.</p>
+<p><strong>Learning connection:</strong> HiLL is the most direct computational model of adaptive tutoring yet published. The hinter learns <em>how to help</em> while the reasoner learns <em>how to solve</em> -- and critically, the hinter learns to reduce its own helpfulness over time (decreasing hint reliance). This is precisely what expert human tutors do: provide scaffolding calibrated to the learner's current difficulty, then gradually withdraw it. The hint reliance metric provides a quantitative measure of learner independence -- something education research has long sought. Combined with <a href="predictive-simulation-learning.html">Skill0's</a> progressive withdrawal and <a href="#gasp-guided-asymmetric-self-play-for-code">GASP's</a> difficulty calibration, HiLL completes a trio of systems that formalize scaffolded learning: Skill0 withdraws <em>knowledge context</em>, GASP calibrates <em>problem difficulty</em>, and HiLL adapts <em>hint quality and frequency</em>.</p>
+<h3 id="slow-strategic-logical-inference-workspace-for-cognitive-adaptation-in-ai-tutoring">SLOW: Strategic Logical-Inference Workspace for Cognitive Adaptation in AI Tutoring</h3>
+<p>Wei, Li &amp; Jiang (March 2026) introduced SLOW, a theory-informed tutoring framework that separates learner-state inference from instructional action selection via a transparent reasoning workspace.[^34] The system includes causal evidence parsing, fuzzy cognitive diagnosis, counterfactual stability analysis, and prospective affective reasoning to anticipate the emotional impacts of instruction before delivering it.</p>
+<p><strong>Learning connection:</strong> SLOW represents the most sophisticated integration of cognitive science into AI tutoring yet published. Rather than treating tutoring as a text generation task, it models the student's cognitive and affective state explicitly, reasons counterfactually about alternative instructional approaches, and selects actions that optimize both learning and emotional outcomes. The transparent reasoning workspace makes the tutor's pedagogical reasoning auditable -- a teacher can inspect <em>why</em> the system chose a particular intervention. This addresses the trust gap in AI tutoring: when the system can explain its reasoning, educators can verify its pedagogical soundness. SLOW closes the loop between <a href="#training-llm-tutors-to-maximize-student-learning">Scarlatos et al.'s</a> outcome optimization and <a href="#the-path-to-conversational-ai-tutors-a-framework-for-recursive-pedagogical-improvement">Vanacore et al.'s</a> framework, providing the deliberative reasoning layer that connects them.</p>
+<h3 id="llmimic-teaching-ai-literacy-through-role-play">LLMimic: Teaching AI Literacy Through Role-Play</h3>
+<p>Fan, Ge, Jia &amp; Shi (April 2026) created LLMimic, an interactive educational tool where participants role-play as LLMs progressing through training stages.[^35] A study of 274 participants showed significantly improved AI literacy (p&lt;0.001), reduced susceptibility to AI persuasion (p&lt;0.05), and enhanced truthfulness in recommendation scenarios.</p>
+<p><strong>Learning connection:</strong> LLMimic inverts the typical AI-for-learning paradigm -- instead of AI teaching humans domain knowledge, humans learn about AI by <em>becoming</em> it. This experiential approach to AI literacy produced measurably stronger outcomes than passive instruction. The reduced susceptibility to AI persuasion is particularly relevant for e-commerce (see <a href="ai-ecommerce-learning.html">AI for E-Commerce Learning</a>): consumers who understand how LLMs work are better equipped to critically evaluate AI shopping recommendations. LLMimic also demonstrates that recursive self-improvement concepts (training stages, fine-tuning, RLHF) can themselves be taught through simulation -- a meta-application where the subject matter of this wiki becomes the curriculum.</p>
+<h3 id="the-variance-inequality-a-unified-theory-of-self-improvement">The Variance Inequality: A Unified Theory of Self-Improvement</h3>
+<p>Chojecki (December 2025) derived the first rigorous theoretical framework for when recursive self-improvement succeeds or fails.[^36] The central result is the <strong>Variance Inequality</strong> -- a spectral condition on the Generator-Verifier-Updater (GVU) operator that determines whether self-improvement is stable. The GVU operator is defined as the canonical engine of self-improvement, and the success or failure of any self-improving agent is determined by the spectral properties of this operator.</p>
+<p><strong>Key results:</strong>
+- Derives a "Second Law of AGI Dynamics": entropy (hallucination) tends to increase unless the combined signal from generation and verification is strong enough relative to noise and curvature
+- Unifies STaR, SPIN, Reflexion, GANs, and AlphaZero as specific topological realizations of the GVU operator
+- Proves that <strong>strengthening the verifier, not the generator</strong> is the correct response to training plateaus</p>
+<p><strong>Learning connection:</strong> The Variance Inequality provides the theoretical foundation for understanding why some learning strategies improve while others plateau. In education terms: a student who merely generates more practice attempts (stronger generator) without improving their ability to check their work (stronger verifier) will stagnate. The theory prescribes a specific remedy -- invest in verification capacity. This connects directly to <a href="#tr-icrl-test-time-rethinking-for-in-context-reinforcement-learning">TR-ICRL's</a> convergent verification and <a href="#self-distillation-policy-optimization-sdpo-learning-from-your-own-mistakes">SDPO's</a> retrospective self-critique, both of which strengthen the verification side of the learning loop.</p>
+<h3 id="langmarl-multi-agent-recursive-improvement-in-language-space">LangMARL: Multi-Agent Recursive Improvement in Language Space</h3>
+<p>LangMARL (April 2026) introduces the first framework that brings credit assignment and policy gradient evolution from cooperative multi-agent RL into the language space.[^37] Each agent maintains a natural language policy, while a centralized language critic performs causal credit assignment by analyzing complete episodic trajectories in natural language.</p>
+<p><strong>Architecture:</strong>
+1. <strong>Language Policy Actors:</strong> Each agent selects actions conditioned on textual observations
+2. <strong>Centralized Language Critic:</strong> Observes full trajectories and assigns agent-specific language credits
+3. <strong>Language Policy Gradient Estimator:</strong> Converts credits into language-form policy update directions
+4. <strong>Language Policy Optimizer:</strong> Aggregates gradients and applies semantic policy updates via LLM operators</p>
+<p><strong>Results:</strong> Strong performance maintained across varying numbers of agents on reasoning, QA, coding, and game tasks.</p>
+<p><strong>Learning connection:</strong> LangMARL formalizes how groups of learners can recursively improve through structured feedback in natural language. The credit assignment mechanism -- determining which agent's action contributed to success or failure -- mirrors a key challenge in collaborative learning: when a study group succeeds or fails, which member's contribution was decisive? LangMARL's solution (causal analysis of full trajectories) suggests that effective peer learning requires explicit attribution of contributions, not just shared outcomes. This extends <a href="#coral-autonomous-multi-agent-evolution-for-open-ended-discovery">CORAL's</a> population-based improvement by adding principled credit assignment.</p>
+<h3 id="metaclaw-continual-meta-learning-with-skill-evolution">MetaClaw: Continual Meta-Learning with Skill Evolution</h3>
+<p>MetaClaw (2026) introduces a continual meta-learning framework that jointly evolves a base LLM policy and a library of reusable behavioral skills.[^38] The framework features two key mechanisms: (1) <strong>skill-driven fast adaptation</strong> that analyzes failure trajectories via an LLM evolver to synthesize new skills, enabling immediate improvement with zero downtime, and (2) <strong>opportunistic policy optimization</strong> that updates model weights via RL during user-inactive periods.</p>
+<p><strong>Results:</strong>
+- Skill-driven adaptation improves accuracy by up to 32% relative
+- Full pipeline advances Kimi-K2.5 accuracy from 21.4% to 40.6%
+- New skills are synthesized from failure analysis without retraining</p>
+<p><strong>Learning connection:</strong> MetaClaw implements the most realistic model of how human expertise develops over time: practitioners build a growing library of domain-specific skills (pattern recognition, heuristics, procedures) while simultaneously deepening their fundamental capabilities. The "zero downtime" skill synthesis mirrors how an experienced teacher develops new pedagogical strategies <em>during</em> teaching, not just between semesters. Combined with <a href="#skillrl-recursive-skill-discovery-and-evolution">SkillRL's</a> recursive skill composition and <a href="#skill0-progressive-skill-internalization-as-recursive-withdrawal">Skill0's</a> progressive withdrawal, MetaClaw completes a lifecycle of skill development: discovery (SkillRL) → internalization (Skill0) → continual evolution (MetaClaw).</p>
+<h3 id="therefore-i-am-i-think-pre-reasoning-decisions-challenge-recursive-deliberation">"Therefore I am. I Think": Pre-Reasoning Decisions Challenge Recursive Deliberation</h3>
+<p>Esakkiraja et al. (April 2026) made a striking discovery: reasoning models encode tool-calling decisions in hidden representations <strong>before</strong> generating chain-of-thought reasoning.[^41] A linear probe extracts these pre-reasoning decisions with high accuracy. When activation steering alters decisions, the chain-of-thought <em>rationalizes the change</em> rather than resisting it -- suggesting that current "reasoning" may be more post-hoc justification than genuine deliberation.</p>
+<p><strong>Learning connection:</strong> This finding challenges a core assumption of recursive self-improvement: that iterative reasoning produces progressively better answers through genuine deliberation. If models commit to answers early and then rationalize, then recursive thinking strategies (TRT, RSA) may improve output quality not through deeper reasoning but through increased diversity of initial commitments. For education, this mirrors a well-known cognitive bias: students who "show their work" may be constructing post-hoc justifications rather than revealing their actual reasoning process. AI tutors that evaluate chain-of-thought may be assessing rationalization quality rather than reasoning quality. The implication for <a href="#self-distillation-policy-optimization-sdpo-learning-from-your-own-mistakes">SDPO</a> and <a href="ai-ecommerce-learning.md#criterion-validity-of-llm-as-judge-for-conversational-commerce">Criterion Validity research</a> is direct: if self-critique is rationalization, then the "verification" side of the learning loop may need to operate on representations rather than generated text.</p>
+<h3 id="asi-evolve-ai-accelerates-ai-across-the-stack">ASI-Evolve: AI Accelerates AI Across the Stack</h3>
+<p>Xu et al. (March 2026) introduced ASI-Evolve, a framework combining evolutionary agents with a "cognition base" and analyzer to drive iterative self-improvement across the AI development stack itself.[^39] The system demonstrates recursive capability in three areas: neural architecture design (discovering 105 state-of-the-art linear attention architectures), data curation (improving benchmark performance by an average of 3.96 points), and reinforcement learning algorithm design (improvements up to 12.5 points). Initial evidence shows transfer beyond AI into mathematics and biomedicine.</p>
+<p><strong>Learning connection:</strong> ASI-Evolve represents the most ambitious form of recursive self-improvement yet demonstrated: AI improving the tools used to build AI. The cognition base -- a growing repository of discoveries and strategies -- mirrors how scientific communities accumulate knowledge across generations. For education, this suggests a model where an AI tutoring platform could recursively improve not just its teaching strategies (as in <a href="#training-llm-tutors-to-maximize-student-learning">Scarlatos et al.</a>) but the underlying learning algorithms, assessment rubrics, and curriculum structures simultaneously. The transfer to non-AI domains (math, biomedicine) validates that recursive improvement methods are not domain-specific -- they are general meta-strategies applicable wherever improvement can be measured.</p>
+<h3 id="apriel-reasoner-difficulty-aware-recursive-reasoning">Apriel-Reasoner: Difficulty-Aware Recursive Reasoning</h3>
+<p>Pardinas et al. (April 2026) developed Apriel-Reasoner, a 15B-parameter model trained with reinforcement learning across five domains using an adaptive domain sampling mechanism and a difficulty-aware length penalty.[^40] The length penalty encourages longer reasoning for hard problems and shorter traces for easy ones, producing 30-50% shorter reasoning traces while improving accuracy on AIME 2025 and GPQA.</p>
+<p><strong>Learning connection:</strong> Apriel-Reasoner formalizes an important metacognitive skill: knowing when to think more and when to think less. The difficulty-aware length penalty is the computational equivalent of a student who spends more time on hard exam questions and breezes through easy ones -- a study skill that educational research identifies as characteristic of expert test-takers. Combined with <a href="#test-time-scaling-makes-overtraining-compute-optimal">T² scaling's</a> finding that overtraining + test-time compute is optimal, Apriel-Reasoner adds the nuance that test-time compute should be <em>adaptively</em> allocated based on problem difficulty.</p>
+<h3 id="agentic-mme-measuring-what-agentic-capabilities-actually-add">Agentic-MME: Measuring What Agentic Capabilities Actually Add</h3>
+<p>Wei et al. (April 2026) introduced Agentic-MME, a process-verified benchmark measuring what agentic capabilities (tool invocation, web search, multi-step reasoning) actually contribute to multimodal intelligence.[^42] The benchmark comprises 418 real-world tasks across 6 domains and 3 difficulty levels, with over 2,000 stepwise checkpoints requiring manual validation. Unlike outcome-only benchmarks, Agentic-MME evaluates <em>intermediate decision quality</em> -- how efficiently the agent reaches the right answer relative to human problem-solving trajectories.</p>
+<p><strong>Key finding:</strong> The top model (Gemini 3 Pro) achieved only 56.3% overall, dropping to 23.0% on hard tasks. This reveals a large capability gap between current agentic systems and reliable autonomous performance.</p>
+<p><strong>Learning connection:</strong> Agentic-MME provides the first process-level evaluation of self-improving agents in multimodal contexts. The benchmark's emphasis on intermediate checkpoints -- not just final outcomes -- mirrors formative assessment in education: evaluating <em>how</em> a student solves a problem, not just whether they get the right answer. For recursive self-improvement, the finding that agentic capabilities degrade sharply on hard tasks suggests that current self-improvement loops are most effective on medium-difficulty problems, with a "difficulty ceiling" that requires qualitatively different recursive strategies (not just more iterations) to break through. This connects to <a href="#gasp-guided-asymmetric-self-play-for-code">GASP's</a> difficulty calibration and <a href="#apriel-reasoner-difficulty-aware-recursive-reasoning">Apriel-Reasoner's</a> adaptive compute allocation.</p>
+<h3 id="prism-personalized-skill-mastery-through-generative-ai">PRISM: Personalized Skill Mastery Through Generative AI</h3>
+<p>The PRISM framework (Personalized, Rapid, and Immersive Skill Mastery; Vats et al., 2024) integrates digital twin technology with emotion-aware instructional support for personalizing experiential learning.[^43] The system creates individualized learning pathways by combining real-time affect detection with generative AI content adaptation, targeting the development of procedural skills through guided practice.</p>
+<p><strong>Learning connection:</strong> PRISM extends the recursive self-improvement paradigm into affective computing for education. The system recursively adapts not just to cognitive performance (what the learner knows) but to emotional state (how the learner feels) -- creating a dual-loop improvement cycle where content difficulty and emotional scaffolding co-evolve. This complements <a href="#slow-strategic-logical-inference-workspace-for-cognitive-adaptation-in-ai-tutoring">SLOW's</a> prospective affective reasoning by adding real-time affect detection to the tutoring loop. For e-commerce, PRISM's digital twin approach mirrors <a href="ai-ecommerce-learning.html">Shopping Companion's</a> preference memory -- both build persistent user models that deepen over time.</p>
+<h3 id="grandcode-superhuman-competitive-programming-via-agentic-rl">GrandCode: Superhuman Competitive Programming via Agentic RL</h3>
+<p>Li et al. (DeepReinforce, April 2026) introduced GrandCode, the first AI system to consistently beat all human participants in live Codeforces competitions, achieving Grandmaster-level performance.[^46] The system introduces <strong>Agentic GRPO</strong> (Group Relative Policy Optimization for agentic rollouts), which solves a fundamental challenge in recursive self-improvement: how to assign credit across multi-stage agent interactions with delayed rewards.</p>
+<p><strong>Key innovation:</strong> Agentic GRPO combines two mechanisms:
+1. <strong>Immediate reward updates</strong> from per-step feedback (compilation, test results)
+2. <strong>Delayed correction</strong> from final competition outcomes, retroactively adjusting the credit assigned to earlier decisions</p>
+<p>This dual-timescale credit assignment enables the agent to learn not just <em>what</em> works but <em>when</em> in a multi-step process each decision contributed to the final outcome.</p>
+<p><strong>Learning connection:</strong> GrandCode represents the most dramatic demonstration of recursive self-improvement achieving superhuman performance in a competitive, adversarial domain with objective evaluation. The Agentic GRPO mechanism directly addresses a core educational challenge: when a student completes a multi-step project (research paper, software system, business plan), how should feedback on the final product inform improvement of intermediate skills? Traditional education gives final grades; GrandCode's dual-timescale approach shows that combining immediate feedback (tests, checkpoints) with retroactive attribution from final outcomes produces superior learning. This connects to <a href="#gasp-guided-asymmetric-self-play-for-code">GASP's</a> progressive difficulty generation -- GrandCode's live competition setting provides the ultimate adaptive curriculum, where difficulty is determined by human opponents who also improve.</p>
+<h3 id="memory-intelligence-agent-bidirectional-memory-for-deep-research">Memory Intelligence Agent: Bidirectional Memory for Deep Research</h3>
+<p>Qiao et al. (April 2026) introduced the Memory Intelligence Agent (MIA), a deep research framework integrating <strong>non-parametric memory</strong> (compressed search trajectories from past research) and <strong>parametric memory</strong> (internalized knowledge) with RL-based coordination between a Memory Manager, Planner, and Executor.[^47]</p>
+<p><strong>Key innovation:</strong> Bidirectional memory conversion -- non-parametric search trajectories can be compressed and internalized into parametric knowledge, while parametric knowledge can generate new search strategies that produce fresh non-parametric memories. This creates a self-reinforcing cycle where research experience improves both stored knowledge and future research capability.</p>
+<p><strong>Learning connection:</strong> MIA formalizes the distinction between two types of learning that education research has long recognized: <strong>episodic memory</strong> (remembering specific experiences, like solved problems) and <strong>semantic memory</strong> (generalized knowledge extracted from many episodes). Human experts convert between these constantly -- a doctor remembers specific patient cases (episodic) and extracts diagnostic patterns (semantic). MIA's RL-coordinated bidirectional conversion offers a computational model of this process. For <a href="ai-ecommerce-learning.html">e-commerce learning</a>, MIA unifies the memory architectures of <a href="ai-ecommerce-learning.html">Shopping Companion's</a> long-term preference memory and <a href="ai-ecommerce-learning.html">MemRerank's</a> compact preference representations into a single framework: purchase histories (non-parametric) inform preference models (parametric), which in turn guide future shopping research (generating new non-parametric trajectories).</p>
+<h3 id="oecd-evidence-the-scaffolding-dependency-tradeoff-in-recursive-tutoring">OECD Evidence: The Scaffolding-Dependency Tradeoff in Recursive Tutoring</h3>
+<p>The OECD Digital Education Outlook 2026 reports a field experiment from Türkiye that has direct implications for recursive self-improvement in AI tutoring.<a href="OECD" title="2026). *OECD Digital Education Outlook 2026*. [oecd.org](https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">^44</a> Students using standard GPT-4 improved performance by 48% during use, but performed <strong>17% worse</strong> after removal. A tutoring-designed version improved performance by 127% during use -- but even this version created some dependency.</p>
+<p><strong>Learning connection:</strong> This finding operationalizes a fundamental tension in recursive self-improvement applied to education: the system that makes students perform best <em>during</em> interaction is not the system that produces the best <em>post-interaction</em> capability. In self-improvement terms, the "generator" (the AI providing answers) is too strong relative to the "verifier" (the student's own understanding), violating the <a href="#the-variance-inequality-a-unified-theory-of-self-improvement">Variance Inequality's</a> principle that verification must dominate generation. The tutoring version's better outcomes align with <a href="predictive-simulation-learning.html">Skill0's</a> progressive withdrawal and <a href="#hill-learning-to-hint-for-reinforcement-learning">HiLL's</a> decreasing hint reliance -- scaffolding that <em>removes itself</em> is the key to building independent capability. This creates a design principle for recursive AI tutors: each improvement cycle must optimize for post-scaffolding performance, not during-scaffolding performance. A tutor that recursively improves on "how well students do with my help" will converge to a different (and worse) system than one optimizing for "how well students do without my help."</p>
+<h3 id="rsir-can-recommender-systems-teach-themselves">RSIR: Can Recommender Systems Teach Themselves?</h3>
+<p>Zhang et al. (February 2026) introduced RSIR (Recursive Self-Improving Recommendation), a framework where recommender systems bootstrap their own performance without external data or teacher models.[^48] The system operates in three steps: (1) the current model generates candidate user interaction sequences, (2) quality control mechanisms filter outputs for consistency, and (3) an improved model trains on the enriched dataset. This cycle repeats, producing cumulative performance gains across benchmarks.</p>
+<p><strong>Key insight:</strong> Recursive self-improvement is a <strong>general, model-agnostic approach to overcoming data sparsity</strong> -- the fundamental bottleneck in recommendation systems. Weaker models can effectively create training curricula for stronger ones through this iterative process.</p>
+<p><strong>Learning connection:</strong> RSIR bridges recursive self-improvement and <a href="ai-ecommerce-learning.html">e-commerce learning</a> directly. A recommendation system that teaches itself mirrors how domain expertise develops through practice: an e-commerce analyst initially makes crude predictions about customer behavior, but each prediction-outcome cycle refines their model. RSIR formalizes this by showing that the recursive loop (predict → evaluate → retrain) works even without external supervision. The quality control mechanism is the critical component -- analogous to the <a href="#the-variance-inequality-a-unified-theory-of-self-improvement">Variance Inequality's</a> requirement that verification must dominate generation. Without it, the system degenerates (hallucinated interactions pollute training data, just as unverified study habits reinforce mistakes). For educational AI, RSIR suggests that adaptive tutoring systems could recursively improve their content recommendations using the same predict-filter-retrain loop, generating and evaluating practice problems without requiring curated datasets.</p>
+<h3 id="recursive-language-models-context-management-as-self-improvement">Recursive Language Models: Context Management as Self-Improvement</h3>
+<p>Prime Intellect's Recursive Language Models (RLMs, 2026) introduce a paradigm where the model actively manages its own context by delegating heavy processing to Python scripts and sub-LLM instances rather than consuming long inputs directly.[^49] Rather than summarizing (which loses information), RLMs offload context to a persistent Python REPL, spawn sub-LLMs for parallel processing via <code>llm_batch()</code>, and iteratively refine answers through a staged generation process.</p>
+<p><strong>Key results:</strong>
+- Outperformed standard LLMs on real data classification tasks (~1.5M characters)
+- Higher main-model token efficiency through delegation to sub-LLMs
+- Performance limited by lack of native RLM training (current models aren't trained with recursive scaffolding)</p>
+<p><strong>Learning connection:</strong> RLMs represent a qualitatively different form of recursive self-improvement: rather than improving weights or prompts, the model improves its <em>cognitive strategy</em> -- learning when to think directly, when to delegate, and when to recurse. This mirrors a critical study skill: knowing when to work through a problem yourself, when to look something up, and when to break it into sub-problems. The finding that current models underperform because they lack RLM training validates the broader principle that recursive strategies must be practiced to be effective -- just as students must practice problem decomposition, not just hear about it. Combined with <a href="#hyperagents">Hyperagents'</a> self-modification and <a href="#metaclaw-continual-meta-learning-with-skill-evolution">MetaClaw's</a> skill evolution, RLMs add a third axis of self-improvement: not just <em>what</em> the agent knows or <em>how</em> it improves, but <em>how it manages its own thinking process</em>.</p>
+<h3 id="ai-pedagogy-dialogic-social-learning-for-artificial-agents">AI Pedagogy: Dialogic Social Learning for Artificial Agents</h3>
+<p>Research on AI Pedagogy (2025-2026) investigates whether structured pedagogical interactions can enhance learning in LLMs themselves, introducing training via teacher-learner dialogues across four pedagogical strategies: top-down exposition, bottom-up induction, learner-driven questioning, and teacher-guided inquiry.[^50]</p>
+<p><strong>Learning connection:</strong> This work inverts the typical framing: rather than asking "can AI teach humans?", it asks "can AI <em>learn</em> more effectively through the same pedagogical methods that work for humans?" If dialogic learning improves AI capability, it suggests a recursive loop: AI systems that learn better through structured dialogue can then use those same dialogue structures to teach humans more effectively, having internalized not just the content but the <em>pedagogy</em> itself. This connects <a href="#slow-strategic-logical-inference-workspace-for-cognitive-adaptation-in-ai-tutoring">SLOW's</a> tutoring framework with <a href="#llmimic-teaching-ai-literacy-through-role-play">LLMimic's</a> experiential learning -- a system that learns through Socratic dialogue would naturally teach through Socratic dialogue, creating a pedagogical mirror between how the AI was trained and how it instructs. For <a href="ai-ecommerce-learning.html">e-commerce education</a>, this implies that shopping agents trained through structured product-comparison dialogues would develop not just product knowledge but the ability to guide consumers through effective comparison processes.</p>
+<h3 id="self-reflective-rlms-uncertainty-aware-recursive-context-management">Self-Reflective RLMs: Uncertainty-Aware Recursive Context Management</h3>
+<p>Zhang et al. (March 2026) augment Recursive Language Models with uncertainty-aware self-reflection, introducing SRLM (Self-Reflective Program Search for Long Context).[^52] The system leverages three intrinsic signals -- self-consistency across multiple rollouts, reasoning trace length, and verbalized confidence -- to decide when recursive processing is reliable and when to re-examine. SRLM yields up to 22% improvement over standard RLMs under the same compute budget.</p>
+<p><strong>Learning connection:</strong> SRLM formalizes a critical metacognitive skill: knowing when you <em>don't</em> know. Standard RLMs process context recursively but cannot assess whether their recursive decomposition was effective. SRLM adds what educational psychologists call "calibration" -- the ability to accurately judge one's own confidence. Students who can identify when their understanding is shaky (low self-consistency, high uncertainty) learn more efficiently because they know where to focus additional study. An AI tutor built on SRLM principles could teach students to develop calibration skills by modeling the self-reflection process: "I got different answers when I approached this two different ways -- that means I need to revisit my understanding." This connects to <a href="#tr-icrl-test-time-rethinking-for-in-context-reinforcement-learning">TR-ICRL's</a> convergent verification (using solution diversity as a proxy for correctness) and extends it with explicit uncertainty quantification.</p>
+<h3 id="hyperagents-metacognitive-self-modification-iclr-2026">HyperAgents: Metacognitive Self-Modification (ICLR 2026)</h3>
+<p>Zhang et al. (Meta, March 2026) introduced HyperAgents, extending the Darwin Gödel Machine into a framework where the meta-level modification procedure <em>itself</em> is editable, enabling metacognitive self-modification.[^64] DGM-Hyperagents demonstrate cumulative improvements across runs, with meta-level gains (persistent memory, performance tracking) transferring across domains. The paper was accepted at ICLR 2026, establishing metacognitive self-modification as a recognized research direction.</p>
+<p><strong>Key advance:</strong> Unlike prior self-improving systems where the improvement mechanism is fixed, HyperAgents can improve <em>how they improve</em>. The modification mechanism becomes a first-class editable component, creating truly recursive metacognition.</p>
+<p><strong>Learning connection:</strong> HyperAgents is the most direct computational model of "learning to learn" -- the metacognitive skill that educational psychology identifies as the strongest predictor of academic success. A HyperAgent-based tutoring system wouldn't just get better at teaching content; it would get better at discovering how to get better at teaching. The cross-domain transfer of meta-level improvements suggests that metacognitive skills (study strategies, self-monitoring, time management) are genuinely domain-general -- a finding consistent with educational research showing that metacognition training transfers across subjects.</p>
+<h3 id="self-execution-simulation-recursive-verification-through-code-tracing">Self-Execution Simulation: Recursive Verification Through Code Tracing</h3>
+<p>Maimon et al. (April 2026) show that training coding models to trace through program execution step-by-step produces a self-verification mechanism: the model can simulate running candidate solutions and identify errors before submission.[^65] Combined with RL from verifiable rewards, this creates a recursive loop where execution simulation improves code generation, which provides better traces for further simulation training.</p>
+<p><strong>Learning connection:</strong> Self-execution simulation implements a powerful recursive learning strategy for programming: the model doesn't just generate code but <em>mentally runs</em> it, checking each step against expected behavior. This mirrors the "rubber duck debugging" technique where explaining code step-by-step reveals errors invisible during writing. For programming education, this approach could power tutors that help students develop the critical skill of mental execution -- predicting what code will do before running it, then comparing prediction to reality.</p>
+<h3 id="the-iclr-2026-workshop-crystallizing-the-science-of-self-improvement">The ICLR 2026 Workshop: Crystallizing the Science of Self-Improvement</h3>
+<p>The ICLR 2026 Workshop on AI with Recursive Self-Improvement (April 26-27, Rio de Janeiro) represents a milestone: the first major venue dedicated exclusively to formalizing recursive self-improvement as a research discipline.[^53] The workshop organized contributions through six research lenses that provide a taxonomy for the field:</p>
+<ol>
+<li><strong>What changes:</strong> Parameters, world models, memory, or tools</li>
+<li><strong>When changes occur:</strong> Within episodes, at test time, or post-deployment</li>
+<li><strong>How changes are produced:</strong> Reward learning, imitation, or evolutionary search</li>
+<li><strong>Operating domains:</strong> Web/UI, games, robotics, or scientific discovery</li>
+<li><strong>Alignment and safety:</strong> Governing self-modification</li>
+<li><strong>Evaluation and benchmarks:</strong> Measuring genuine improvement vs. metric gaming</li>
+</ol>
+<p><strong>Invited speakers</strong> included Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Graham Neubig (CMU/OpenHands), Bang Liu (Mila), Arman Cohan (Yale), Matej Balog (Google DeepMind), Yu Su (Ohio State), and Yuandong Tian.</p>
+<p><strong>Learning connection:</strong> The workshop's six-lens taxonomy provides a framework for understanding how any learning system -- artificial or human -- can improve itself. For educational AI design, these lenses translate to: What aspect of the tutor improves (content, pedagogy, assessment)? When does improvement happen (during a lesson, between sessions, across semesters)? What drives improvement (student outcomes, engagement metrics, expert evaluation)? The explicit inclusion of "alignment and safety" as a core lens reflects the <a href="#oecd-evidence-the-scaffolding-dependency-tradeoff-in-recursive-tutoring">OECD evidence</a> that unguarded self-improvement in tutoring can produce dependency rather than learning.</p>
+<h3 id="skill0-in-context-agentic-rl-for-skill-internalization">SKILL0: In-Context Agentic RL for Skill Internalization</h3>
+<p>Lu et al. (ZJU, April 2026) introduced SKILL0, the first RL framework that formulates skill internalization as an explicit training objective, moving agents from inference-time skill dependence to fully autonomous zero-shot behavior.[^54] The key problem: inference-time skill augmentation is fundamentally limited because retrieval noise introduces irrelevant guidance and injected skill content imposes substantial token overhead. SKILL0 provides structured skill guidance during training rollouts and removes it entirely at inference, with a Dynamic Curriculum that withdraws each skill only when the current policy no longer benefits from it.</p>
+<p><strong>Key results:</strong>
+- ALFWorld: +9.7% over standard RL baseline
+- Search-QA: +6.6% over standard RL baseline
+- Fewer than 0.5k tokens per step (highly efficient context)
+- Zero-shot autonomous behavior without runtime skill retrieval</p>
+<p><strong>Learning connection:</strong> SKILL0 provides the most rigorous computational implementation of scaffolded withdrawal yet published. The Dynamic Curriculum's helpfulness-driven annealing -- withdrawing each skill only when the policy no longer benefits -- is precisely what good human tutoring does: checking whether the student still needs support before removing it. Unlike <a href="#hill-learning-to-hint-for-reinforcement-learning">HiLL's</a> hint-based scaffolding (which adapts hint quality) or <a href="#ladder-recursive-problem-decomposition">LADDER's</a> difficulty progression (which adapts problem complexity), SKILL0 adapts the <em>amount of domain knowledge provided</em> -- the most direct analogue to textbook-to-independence learning. The finding that agents achieve zero-shot performance after training with scaffolding validates the educational principle that well-designed scaffolding doesn't create dependency -- it creates internalized competence. This result contrasts sharply with the <a href="#oecd-evidence-the-scaffolding-dependency-tradeoff-in-recursive-tutoring">OECD's</a> finding that standard GPT-4 use creates dependency, suggesting the difference lies in whether the scaffolding is designed for progressive withdrawal (SKILL0) or maintained indefinitely (standard AI assistance).</p>
+<h3 id="skillx-hierarchical-skill-knowledge-bases-for-agent-transfer">SkillX: Hierarchical Skill Knowledge Bases for Agent Transfer</h3>
+<p>Yu et al. (Zhejiang University, April 2026; ICML 2026) introduced SkillX, a framework for automatically constructing hierarchical, plug-and-play skill knowledge bases that transfer across LLM agents and environments.[^55] SkillX structures experience into three composable levels:</p>
+<ol>
+<li><strong>Planning Skills</strong> -- high-level task organization, ordered subtask sequences with dependencies</li>
+<li><strong>Functional Skills</strong> -- reusable tool-based subroutines with name, documentation, and invocation patterns</li>
+<li><strong>Atomic Skills</strong> -- single-tool specifications with parameter configurations, constraints, and failure modes</li>
+</ol>
+<p>A three-stage pipeline (extraction from trajectories → iterative refinement via merge/filter/update → exploratory expansion targeting under-explored tools) builds skill libraries that improve weaker models by ~10 percentage points on BFCL-v3 and AppWorld benchmarks.</p>
+<p><strong>Key finding:</strong> Hierarchical skill representations transfer far more effectively than monolithic workflows or raw trajectories. Functional skills contribute most to performance; planning skills most help weaker models; atomic skills clarify ambiguous APIs.</p>
+<p><strong>Learning connection:</strong> SkillX formalizes the educational concept of <em>knowledge transfer through structured curricula</em>. Just as a textbook organizes knowledge hierarchically (chapters → sections → definitions), SkillX organizes agent experience into planning → functional → atomic layers. The finding that hierarchical representations transfer better than raw experience validates the educational principle that structured knowledge is more portable than raw practice. For tutoring AI, SkillX suggests organizing learned teaching strategies at multiple levels: lesson planning skills (how to sequence topics), instructional skills (how to explain a concept using analogies), and atomic skills (how to phrase a hint that doesn't give away the answer). The exploratory expansion phase -- targeting under-explored capabilities -- mirrors adaptive testing in education: identifying gaps in the skill library rather than reinforcing known strengths.</p>
+<h3 id="memory-intelligence-agent-structured-self-improving-memory">Memory Intelligence Agent: Structured Self-Improving Memory</h3>
+<p>Qiao et al. (April 2026) introduced the Memory Intelligence Agent (MIA), a framework where agents build and evolve structured memory through experience rather than relying on raw context storage.[^56] MIA separates procedural memory (how to do things), semantic memory (factual knowledge), and episodic memory (specific experiences), with memory consolidation and interference resolution mechanisms inspired by cognitive psychology.</p>
+<p><strong>Learning connection:</strong> MIA bridges cognitive science and agent architecture by implementing the same memory systems that underpin human expertise development. The procedural-semantic-episodic distinction maps directly to educational taxonomy: a medical student develops procedural memory (how to perform an exam), semantic memory (disease characteristics), and episodic memory (memorable patient cases). The interference resolution mechanism -- detecting and reconciling conflicting memories -- addresses the same challenge as <a href="predictive-simulation-learning.md#clawarena-belief-revision-in-evolving-information-environments">ClawArena's</a> belief revision: how to update knowledge when new evidence contradicts prior understanding. For <a href="ai-ecommerce-learning.html">e-commerce learning</a>, MIA's structured memory could power shopping agents that maintain distinct memories of product categories (semantic), purchase procedures (procedural), and specific customer interactions (episodic), with consolidation mechanisms that prevent outdated product knowledge from interfering with current recommendations.</p>
+<h3 id="canvas-ai-teaching-agent-recursive-improvement-enters-the-lms">Canvas AI Teaching Agent: Recursive Improvement Enters the LMS</h3>
+<p>In March 2026, Instructure (the company behind Canvas LMS) launched a production AI teaching agent embedded directly within the learning management system used by thousands of institutions worldwide.<a href="Instructure" title="2026). &quot;Canvas Unrolls AI Teaching Agent.&quot; [insidehighered.com](https://www.insidehighered.com/news/tech-innovation/artificial-intelligence/2026/03/23/canvas-unrolls-ai-teaching-agent">^57</a> Unlike research prototypes, this represents the first recursive improvement system deployed at institutional scale in education. The agent assists instructors with course design, assignment creation, and student feedback -- and crucially, adapts its recommendations based on accumulated institutional data about what teaching strategies produce better outcomes.</p>
+<p><strong>Learning connection:</strong> The Canvas deployment marks a transition from recursive self-improvement as a research concept to recursive self-improvement as a deployed educational product. The institutional scale means the agent can learn across hundreds of courses and thousands of students simultaneously, discovering patterns that no individual instructor could observe. This creates a feedback loop: the agent recommends strategies → instructors implement them → student outcomes provide feedback → the agent updates recommendations. The key question -- echoing the <a href="#oecd-evidence-the-scaffolding-dependency-tradeoff-in-recursive-tutoring">OECD scaffolding-dependency evidence</a> -- is whether this recursive loop optimizes for genuine student learning or for metrics that correlate poorly with learning. The <a href="ai-ecommerce-learning.md#criterion-validity-of-llm-as-judge-for-conversational-commerce">Criterion Validity research</a> applies directly: evaluation dimensions must be validated against actual learning outcomes, not assumed to predict them.</p>
+<h3 id="dreamer-4-implies-observation-based-recursive-improvement">Dreamer 4 Implies Observation-Based Recursive Improvement</h3>
+<p>Hafner, Yan &amp; Lillicrap's Dreamer 4 (2025), while primarily a <a href="predictive-simulation-learning.md#dreamer-4-training-agents-inside-scalable-world-models">world model advance</a>, has profound implications for recursive self-improvement.[^58] By demonstrating that agents can develop complex skills (obtaining diamonds in Minecraft -- over 20,000 sequential actions) purely from offline observation data without any environment interaction, Dreamer 4 shows that the "act" step in the recursive improvement loop can be replaced by "imagine":</p>
+<ol>
+<li>Observe demonstrations (offline data)</li>
+<li>Build a world model from observation</li>
+<li>Imagine strategies and evaluate them in the model</li>
+<li>Recursively improve the world model and policy simultaneously</li>
+</ol>
+<p>This <strong>observation-based recursion</strong> dramatically reduces the cost and risk of recursive self-improvement. A coding agent need not execute every candidate solution; a tutoring agent need not try every pedagogical strategy with real students. Instead, both can improve by imagining outcomes within their world model and recursively refining that model's accuracy. Combined with <a href="predictive-simulation-learning.md#rwml-reinforcement-learning-for-world-model-training">RWML's</a> finding that RL-based world model training outperforms supervised learning, this suggests a pipeline: build world model from observation → recursively improve in imagination → selectively verify in reality.</p>
+<h3 id="medsimai-recursive-improvement-validated-in-professional-training">MedSimAI: Recursive Improvement Validated in Professional Training</h3>
+<p>MedSimAI's multi-institutional trial (Hicke et al., 2026; 410 medical students) provides the first large-scale evidence that AI-simulated practice environments can recursively improve professional skills.[^59] The system's 59.5% voluntary repeat engagement rate demonstrates that when simulation reduces stakes and social anxiety, learners <em>choose</em> to practice recursively -- completing the predict-verify-update loop repeatedly without external compulsion.</p>
+<p><strong>Learning connection:</strong> The divergent results across institutions (significant improvement at one site, null effect at another) reveals a critical insight for recursive self-improvement in education: the <em>context</em> of deployment matters as much as the <em>system</em> itself. This parallels the finding in <a href="#asi-evolve-ai-accelerates-ai-across-the-stack">ASI-Evolve</a> that recursive improvement transfers across domains but with variable effectiveness. For AI tutoring systems, this means recursive improvement algorithms must be sensitive to institutional context -- the same pedagogical strategy may need different recursion rates, feedback granularity, or scaffolding withdrawal timelines in different settings.</p>
+<h3 id="evoscientist-self-evolving-multi-agent-research-through-persistent-memory">EvoScientist: Self-Evolving Multi-Agent Research Through Persistent Memory</h3>
+<p>Chen et al. (March 2026) introduced EvoScientist, an evolving multi-agent AI scientist framework where three specialized agents -- a Researcher Agent, an Engineer Agent, and an Evolution Manager Agent -- continuously improve their research strategies through persistent memory and self-evolution.[^60]</p>
+<p>Unlike static AI scientist systems that rely on hand-designed pipelines, EvoScientist maintains two persistent memory modules: an <em>ideation memory</em> summarizing feasible research directions from top-ranked ideas, and an <em>experimentation memory</em> capturing effective data processing and model training strategies. The Evolution Manager distills insights from prior interactions into reusable knowledge, enabling the system to avoid repeating failed experiments and pursue increasingly promising directions.</p>
+<p><strong>Results:</strong> Outperforms 7 open-source and commercial state-of-the-art systems in scientific idea generation across novelty, feasibility, relevance, and clarity (both automated and human evaluation).</p>
+<p><strong>Learning connection:</strong> EvoScientist demonstrates recursive self-improvement applied to the research process itself -- the agents get better at doing research by accumulating research experience. The dual-memory architecture (ideation + experimentation) mirrors how expert researchers develop: maintaining separate intuitions about what problems are worth pursuing (ideation memory) and what technical approaches work in practice (experimentation memory). For educational AI, this suggests that tutoring systems should maintain similarly distinct memory systems: one tracking which teaching strategies seem promising (pedagogical ideation) and another tracking which implementations actually produced learning gains (pedagogical experimentation). The human-on-the-loop paradigm -- where AI co-evolves with human researchers rather than replacing them -- provides a model for <a href="predictive-simulation-learning.md#situated-learning-through-simulation-bridging-virtual-and-real-world-contexts">AI-assisted learning</a> that preserves human agency while accelerating improvement.</p>
+<h3 id="ai-scientist-v2-first-ai-generated-peer-reviewed-scientific-paper">AI Scientist v2: First AI-Generated Peer-Reviewed Scientific Paper</h3>
+<p>Yamada et al. (Sakana AI / UBC / Oxford, April 2025) introduced The AI Scientist-v2, an autonomous research system that iteratively formulates hypotheses, designs and executes experiments, analyzes data, and authors complete scientific manuscripts.[^63] The system achieved a historic milestone: the first fully AI-generated paper to pass peer review at an ICLR workshop, receiving scores of 6, 7, and 6 -- competitive with human-authored submissions.</p>
+<p><strong>Key advances over v1:</strong>
+- <strong>Template-free research:</strong> Eliminates reliance on human-authored code templates, generalizing across diverse ML domains
+- <strong>Progressive agentic tree search:</strong> A dedicated experiment manager agent orchestrates hypothesis exploration using tree-structured search, avoiding the local optima that plagued v1's linear pipeline
+- <strong>Full autonomy:</strong> From literature review through experimental design to manuscript writing, with no human intervention</p>
+<p><strong>Learning connection:</strong> AI Scientist v2 represents the most complete demonstration of recursive self-improvement applied to knowledge creation. The system doesn't just improve at a fixed task -- it generates <em>new knowledge</em> through iterative refinement. The progressive tree search is a direct application of <a href="../methodologies/agentic-tree-search.html">agentic tree search</a> to the research process itself: exploring multiple hypotheses in parallel, pruning unpromising directions, and deepening investigation of successful ones. For educational AI, the architecture suggests a model where tutoring systems could autonomously generate, test, and refine pedagogical interventions -- not just apply known strategies but <em>discover new ones</em> through systematic experimentation. The peer review milestone also raises important questions: if AI can produce research indistinguishable from human work, how should educational institutions evaluate student vs. AI contributions? Combined with <a href="#evoscientist-self-evolving-multi-agent-research-through-persistent-memory">EvoScientist's</a> persistent memory and <a href="#a-evolve-open-source-self-rewriting-agent-workflows">A-Evolve's</a> production deployment, AI Scientist v2 suggests that recursive self-improvement in research is transitioning from demonstration to routine capability.</p>
+<h3 id="a-evolve-open-source-self-rewriting-agent-workflows">A-Evolve: Open-Source Self-Rewriting Agent Workflows</h3>
+<p>The open-source release of A-Evolve (April 2026) marks a significant shift in recursive self-improvement: from research prototype to production-ready infrastructure.<a href="A-Evolve" title="2026). &quot;Open Source A-Evolve: Self-Rewriting AI Workflows.&quot; [GitHub](https://github.com/EvoAgentX/EvoAgentX); [opensourceforu.com](https://www.opensourceforu.com/2026/04/open-source-a-evolve-brings-self-rewriting-ai-workflows-to-startups/">^61</a> A-Evolve provides a universal framework for building AI agents that autonomously rewrite their own prompts, logic, skills, and configuration files through a five-stage evolutionary loop:</p>
+<ol>
+<li><strong>Solve:</strong> Execute the current task</li>
+<li><strong>Observe:</strong> Benchmark performance against metrics</li>
+<li><strong>Evolve:</strong> Mutate weak components (prompts, tools, skills, memory)</li>
+<li><strong>Gate:</strong> Validate that mutations actually improve performance</li>
+<li><strong>Reload:</strong> Deploy improved version and repeat</li>
+</ol>
+<p><strong>Key innovations:</strong>
+- <strong>Git-native reproducibility:</strong> Every mutation is versioned as tagged checkpoints (evo-1, evo-2), enabling rollback, auditability, and safe experimentation
+- <strong>File-level self-modification:</strong> Unlike prompt-layer optimization, A-Evolve directly edits real workspace files including manifest configurations, prompts, tools, and skills
+- <strong>Three-line setup:</strong> Runs in standard Python workflows with leading LLM backends</p>
+<p><strong>Results:</strong> 79.4% on MCP-Atlas (#1), 76.8% on SWE-bench Verified, 76.5% on Terminal-Bench 2.0.</p>
+<p><strong>Learning connection:</strong> A-Evolve operationalizes the <a href="#hyperagents">DGM/Hyperagent</a> paradigm for practical deployment. The Git-native approach solves a critical problem identified in <a href="#sahoo-safety-guardrails-for-recursive-improvement">SAHOO's</a> safety guardrails work: traceability. Every self-modification is versioned, enabling the kind of regression-risk quantification SAHOO prescribes. For educational AI, A-Evolve's architecture could power tutoring systems that evolve their teaching strategies with full auditability -- administrators could trace exactly when and why a tutoring agent changed its approach, and roll back changes that degrade student outcomes. The Observe-Evolve-Gate loop is structurally identical to the <a href="predictive-simulation-learning.md#theoretical-foundations">predict-verify-adapt cycle</a> that underlies effective learning.</p>
+<h2 id="iclr-2026-workshop-on-recursive-self-improvement-the-field-crystallizes">ICLR 2026 Workshop on Recursive Self-Improvement: The Field Crystallizes</h2>
+<p>The ICLR 2026 Workshop on AI with Recursive Self-Improvement (April 26-27, 2026, Rio de Janeiro) represents a milestone: the first major venue dedicated exclusively to RSI as a research field.[^62] Organized alongside ICLR 2026, the workshop brings together researchers from Stanford (Chelsea Finn), CMU/OpenHands (Graham Neubig), UBC/DeepMind (Jeff Clune), and other leading groups.</p>
+<p>The workshop frames RSI across six research dimensions that map directly to the systems described in this article:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Question</th>
+<th>Systems in This Wiki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>What changes</strong></td>
+<td>Parameters, world models, memory, tools, architectures</td>
+<td>DGM (code), Hyperagents (meta-code), MemAPO (prompts), SkillX (skill libraries)</td>
+</tr>
+<tr>
+<td><strong>When changes occur</strong></td>
+<td>Within episodes, at test time, post-deployment</td>
+<td>TRT (test-time), SPELL (training), Canvas AI (post-deployment)</td>
+</tr>
+<tr>
+<td><strong>How changes happen</strong></td>
+<td>Reward/value learning, imitation, evolutionary search</td>
+<td>DGM (evolution), LADDER (curriculum), SKILL0 (RL with scaffolding)</td>
+</tr>
+<tr>
+<td><strong>Where systems operate</strong></td>
+<td>Web/UI, games, robotics, science, enterprise</td>
+<td>DynaWeb (web), Dreamer 4 (games), RISE (robotics), EvoScientist (science)</td>
+</tr>
+<tr>
+<td><strong>Safety</strong></td>
+<td>Long-horizon stability, regression risk, alignment</td>
+<td>SAHOO (alignment guardrails), A-Evolve (Git-native audit trail)</td>
+</tr>
+<tr>
+<td><strong>Evaluation</strong></td>
+<td>Benchmarks, optimization, curricula</td>
+<td>PostTrainBench (post-training), GrandCode (competitive programming)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key invited speakers</strong> include Chelsea Finn (Stanford), whose work on meta-learning underpins much of the "learning to learn" paradigm explored here; Graham Neubig (CMU/OpenHands), whose open-source agent infrastructure enables practical RSI deployment; and Jeff Clune (UBC/DeepMind), whose Darwin Godel Machine[^1] and Hyperagents[^2] are foundational RSI systems.</p>
+<p><strong>Learning connection:</strong> The workshop's emergence signals that recursive self-improvement has matured from a speculative concept into a recognized research field with its own evaluation standards, safety frameworks, and application domains. For educational AI, this means the tools and techniques described in this article are transitioning from proof-of-concept to deployable systems. The workshop's emphasis on safety and evaluation -- not just capability -- reflects the <a href="predictive-simulation-learning.md#oecd-evidence-pedagogical-design-determines-whether-ai-simulation-helps-or-harms">OECD's evidence</a> that how AI is deployed matters as much as what it can do.</p>
+<h3 id="skillfoundry-self-evolving-agent-skill-libraries-from-scientific-resources">SkillFoundry: Self-Evolving Agent Skill Libraries from Scientific Resources</h3>
+<p>Shen et al. (April 2026) introduced SkillFoundry, a framework that converts heterogeneous scientific resources -- repositories, APIs, scripts, notebooks, and papers -- into validated, reusable agent skills through iterative closed-loop validation.[^66] The system organizes domains as knowledge trees, mines high-value resources, extracts operational contracts (task scope, inputs/outputs, execution steps, validation tests), and iteratively expands the skill library through validation cycles.</p>
+<p><strong>Key results:</strong>
+- 71.1% of mined skills differ from existing hand-crafted skill libraries (SkillHub, SkillSMP)
+- Improved performance on five of six MoSciBench datasets
+- Successfully designed task-specific skills for genomics applications including cell type annotation</p>
+<p><strong>Learning connection:</strong> SkillFoundry complements <a href="#skillx-hierarchical-skill-knowledge-bases-for-agent-transfer">SkillX's</a> top-down organizational framework with a bottom-up <em>discovery</em> mechanism: while SkillX structures existing experience into hierarchical skill bases, SkillFoundry actively mines new skills from unstructured scientific resources. Together they form a complete skill ecosystem: SkillFoundry discovers and validates skills from the wild, SkillX organizes them for efficient retrieval and transfer. For educational AI, this suggests a model where a learning platform could automatically extract skills from textbooks, lab manuals, and online courses -- converting static educational resources into executable, validated learning modules. The 71.1% novelty rate demonstrates that automated mining discovers skills that human curators miss, which for education means surfacing implicit competencies that textbooks teach but don't explicitly name. Combined with <a href="#skill0-in-context-agentic-rl-for-skill-internalization">SKILL0's</a> progressive internalization and <a href="#skillrl-recursive-skill-discovery-and-evolution">SkillRL's</a> evolutionary discovery, SkillFoundry provides the raw material that feeds the entire skill development pipeline.</p>
+<h3 id="multi-turn-rl-with-iterative-reward-calibration">Multi-Turn RL with Iterative Reward Calibration</h3>
+<p>Modecrua et al. (April 2026) address a core challenge in training tool-calling agents: how to design per-turn rewards for multi-turn tasks where credit assignment is ambiguous.[^67] Their Iterative Reward Calibration methodology uses empirical discriminative analysis of rollout data to discover which turn-level signals actually predict task success, combining MT-GRPO and GTPO techniques.</p>
+<p><strong>Key results:</strong>
+- Qwen3.5-4B improved from 63.8% to 66.7%, <strong>outperforming GPT-4.1 (49.4%) and GPT-4o (42.8%)</strong> despite being 50× smaller
+- Qwen3-30B-A3B improved from 58.0% to 69.5%, approaching Claude Sonnet 4.5 (70.0%)
+- First published RL training results on Tau-Bench airline customer service benchmark
+- Critical finding: poorly designed dense rewards <em>reduce</em> performance -- reward design is as important as model capability</p>
+<p><strong>Learning connection:</strong> This paper addresses a fundamental obstacle to recursive self-improvement in multi-step tasks: how does a self-improving system know which step in a long sequence was responsible for success or failure? The finding that a 4B model can outperform GPT-4.1 at customer service through better reward calibration (not more parameters) is a direct validation of the <a href="#the-variance-inequality-a-unified-theory-of-self-improvement">Variance Inequality's</a> principle: strengthening the verifier matters more than strengthening the generator. For educational AI, this translates directly: a tutoring system that can accurately attribute learning outcomes to specific instructional decisions (which explanation helped? which question confused?) will improve faster than one with a more powerful language model but blunter feedback. The customer service domain connects naturally to <a href="ai-ecommerce-learning.html">e-commerce learning</a> -- training agents to handle complex multi-turn customer interactions is both a commercial application and a testbed for the recursive improvement of conversational skills.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> -- End-to-end research automation</li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a> -- Self-improving discovery systems</li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> -- Models that recursively improve</li>
+<li><a href="cross-cutting-connections.html">Cross-Cutting Connections</a> -- How simulation, recursion, and commerce reinforce each other</li>
+<li><a href="predictive-simulation-learning.html">Predictive Simulation Learning</a> -- Learning through imagined outcomes</li>
+<li><a href="ai-ecommerce-learning.html">AI for E-Commerce Learning</a> -- Applied recursive learning in commerce</li>
+<li><a href="open-ended-discovery.html">Open-Ended Discovery</a> -- Unbounded exploration</li>
+<li><a href="ai-safety-in-research.html">AI Safety in Automated Research</a> -- Guardrails for self-improvement</li>
+<li><a href="scaling-laws-research.html">Scaling Laws for Research Automation</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> -- Search strategies for self-improvement</li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a> -- Autonomous research methodology</li>
+<li><a href="../tools-platforms/aider.html">Aider</a> -- Coding assistant used in self-improving agents</li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a> -- Autonomous experimentation tool</li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a> -- RSI paper collection</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> -- Who is working on RSI</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Zhang, J., Hu, S., Lu, C., Lange, R. &amp; Clune, J. (2025). "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents." <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a>
+[^2]: Zhang, J. et al. (2026). "Hyperagents." <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a>
+[^3]: Simonds, T. &amp; Yoshiyama, A. (2025). "LADDER: Self-Improving LLMs Through Recursive Problem Decomposition." <a href="https://arxiv.org/abs/2503.00735">arXiv:2503.00735</a>
+[^4]: "SPELL: Self-Play Reinforcement Learning for Evolving Long-Context Language Models." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2509.23863">arXiv:2509.23863</a>
+[^5]: Zhuang, Y. et al. (2026). "Test-time Recursive Thinking: Self-Improvement without External Feedback." <a href="https://arxiv.org/abs/2602.03094">arXiv:2602.03094</a>
+[^6]: Venkatraman, S. et al. (2025). "Recursive Self-Aggregation Unlocks Deep Thinking in Large Language Models." <a href="https://arxiv.org/abs/2509.26626">arXiv:2509.26626</a>
+[^7]: Ishibashi, Y., Yano, T. &amp; Oyamada, M. (2025). "Can Large Language Models Invent Algorithms to Improve Themselves?" <em>NAACL 2025</em>. <a href="https://arxiv.org/abs/2410.15639">arXiv:2410.15639</a>
+[^8]: Jiang, H. (2026). "DARWIN: Dynamic Agentically Rewriting Self-Improving Network." <a href="https://arxiv.org/abs/2602.05848">arXiv:2602.05848</a>
+[^9]: Liu, T. &amp; van der Schaar, M. (2025). "Truly Self-Improving Agents Require Intrinsic Metacognitive Learning." <a href="https://arxiv.org/abs/2506.05109">arXiv:2506.05109</a>
+[^10]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. <a href="https://recursive-workshop.github.io/">Workshop website</a>; <a href="https://openreview.net/forum?id=OsPQ6zTQXV">OpenReview</a>
+[^11]: "GRAM: Generative Recursive Attention Model." <em>ICLR 2026 Workshop on AI with Recursive Self-Improvement</em>. <a href="https://openreview.net/pdf/cb0d33e74ecb64051d93d47865ebd10e7b5fafb6.pdf">OpenReview</a>
+[^12]: "Code as Harness." <em>ICLR 2026 Workshop on AI with Recursive Self-Improvement</em>. <a href="https://openreview.net/pdf/f360998199ff94c1ebfbe0a7d9fcd72e837f915f.pdf">OpenReview</a>
+[^13]: "Agentic Context Engineering." <em>ICLR 2026 Workshop on AI with Recursive Self-Improvement</em>. <a href="https://openreview.net/pdf/11c0b32aa0bd6286b261b1178b377affbb02f64d.pdf">OpenReview</a>
+[^14]: Jana, S. et al. (2026). "GASP: Guided Asymmetric Self-Play For Coding LLMs." <em>ICLR 2026 RSI Workshop (Spotlight)</em>. <a href="https://arxiv.org/abs/2603.15957">arXiv:2603.15957</a>
+[^15]: Sahoo, S. et al. (2026). "SAHOO: Safeguarded Alignment for High-Order Optimization Objectives in Recursive Self-Improvement." <em>ICLR 2026 RSI Workshop</em>. <a href="https://arxiv.org/abs/2603.06333">arXiv:2603.06333</a>
+[^16]: Rank, B. et al. (2026). "PostTrainBench: Can LLM Agents Automate LLM Post-Training?" <em>ICLR 2026 RSI Workshop (Oral)</em>. <a href="https://arxiv.org/abs/2603.08640">arXiv:2603.08640</a>
+[^17]: Liang, G. et al. (2026). "MemAPO: Generalizable Self-Evolving Memory for Automatic Prompt Optimization." <a href="https://arxiv.org/abs/2603.21520">arXiv:2603.21520</a>
+[^18]: Liu, W. et al. (2026). "Self-Play Only Evolves When Self-Synthetic Pipeline Ensures Learnable Information Gain." <a href="https://arxiv.org/abs/2603.02218">arXiv:2603.02218</a>
+[^19]: Hübotter, J. et al. (2026). "Reinforcement Learning via Self-Distillation." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2601.20802">arXiv:2601.20802</a>
+[^20]: Yang, C. et al. (2026). "Self-Distilled RLVR." <a href="https://arxiv.org/abs/2604.03128">arXiv:2604.03128</a>
+[^21]: Prime Intellect (2026). "Recursive Language Models: The Paradigm of 2026." <a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a>
+[^22]: Roberts, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal." <a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a>
+[^23]: Chojecki, P. et al. (2026). "SkillRL: Evolving Agents via Recursive Skill-Augmented Reinforcement Learning." <a href="https://arxiv.org/abs/2602.08234">arXiv:2602.08234</a>
+[^24]: Scarlatos, A., Liu, N., Lee, J., Baraniuk, R. &amp; Lan, A. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." <em>AIED 2025</em>. <a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a>
+[^25]: Jiang, W. et al. (2026). "TR-ICRL: Test-Time Rethinking for In-Context Reinforcement Learning." <a href="https://arxiv.org/abs/2604.00438">arXiv:2604.00438</a>
+[^26]: Robeyns, M., Szummer, M. &amp; Aitchison, L. (2025). "A Self-Improving Coding Agent." <a href="https://arxiv.org/abs/2504.15228">arXiv:2504.15228</a>
+[^27]: Song, J., Guo, Z. &amp; Lin, J. (2026). "Simulating Novice Students Using Machine Unlearning and Relearning in Large Language Models." <a href="https://arxiv.org/abs/2603.26142">arXiv:2603.26142</a>
+[^28]: Lu, Z. et al. (2026). "Skill0: In-Context Agentic Reinforcement Learning for Skill Internalization." <a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a>
+[^29]: Vanacore, K., Baker, R.S., Closser, A.H. &amp; Roschelle, J. (2026). "The Path to Conversational AI Tutors: Integrating Tutoring Best Practices and Targeted Technologies to Produce Scalable AI Agents." <a href="https://arxiv.org/abs/2602.19303">arXiv:2602.19303</a>
+[^30]: Qu, A., Zheng, H., Zhou, Z., Yan, Y., Tang, Y. et al. (2026). "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery." <a href="https://arxiv.org/abs/2604.01658">arXiv:2604.01658</a>
+[^31]: Zhang, H., Fan, S., Zou, H.P., Chen, Y., Wang, Z., Zhou, J., Li, C., Huang, W.-C., Yao, Y., Zheng, K., Liu, X., Li, X. &amp; Yu, P.S. (2026). "EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification." <a href="https://arxiv.org/abs/2604.01687">arXiv:2604.01687</a>
+[^32]: Zhang, R., Bai, R.H., Zheng, H., Jaitly, N., Collobert, R. &amp; Zhang, Y. (2026). "Embarrassingly Simple Self-Distillation Improves Code Generation." <a href="https://arxiv.org/abs/2604.01193">arXiv:2604.01193</a>
+[^33]: Xia, Y., Xu, C., Yao, Z., McAuley, J. &amp; He, Y. (2026). "Learning to Hint for Reinforcement Learning." <a href="https://arxiv.org/abs/2604.00698">arXiv:2604.00698</a>
+[^34]: Wei, Y., Li, R. &amp; Jiang, B. (2026). "SLOW: Strategic Logical-inference Open Workspace for Cognitive Adaptation in AI Tutoring." <a href="https://arxiv.org/abs/2603.28062">arXiv:2603.28062</a>
+[^35]: Fan, Q., Ge, M., Jia, C. &amp; Shi, W. (2026). "Train Yourself as an LLM." <a href="https://arxiv.org/abs/2604.02637">arXiv:2604.02637</a>
+[^36]: Chojecki, P. (2025). "Self-Improving AI Agents through Self-Play." <a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a>
+[^37]: "LangMARL: Natural Language Multi-Agent Reinforcement Learning." (2026). <a href="https://arxiv.org/abs/2604.00722">arXiv:2604.00722</a>
+[^38]: "MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild." (2026). See <a href="https://liner.com/review/metaclaw-just-talk-agent-that-metalearns-and-evolves-in-wild">Liner review</a>
+[^39]: Xu, W., Mi, T., Liu, Y., Nan, Y., Zhou, Z., Ye, L., Zhang, L., Qiao, Y. &amp; Liu, P. (2026). "ASI-Evolve: AI Accelerates AI." <a href="https://arxiv.org/abs/2603.29640">arXiv:2603.29640</a>
+[^40]: Pardinas, R., Kamalloo, E., Vazquez, D. &amp; Drouin, A. (2026). "Apriel-Reasoner: RL Post-Training for General-Purpose and Efficient Reasoning." <a href="https://arxiv.org/abs/2604.02007">arXiv:2604.02007</a>
+[^41]: Esakkiraja, E., Rajeswar, S., Akhiyarov, D. &amp; Venkatesaramani, R. (2026). "Therefore I am. I Think." <a href="https://arxiv.org/abs/2604.01202">arXiv:2604.01202</a>
+[^42]: Wei, Q. et al. (2026). "Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?" <a href="https://arxiv.org/abs/2604.03016">arXiv:2604.03016</a>
+[^43]: Vats, S., Datta, S., Shastri, D.V. &amp; Hariharan, R. (2024). "PRISM: A Personalized, Rapid, and Immersive Skill Mastery Framework for Personalizing Experiential Learning through Generative AI." <a href="https://arxiv.org/abs/2411.14433">arXiv:2411.14433</a></p>
+<p>[^45]: Zhang, J., Hu, S., Lu, C., Lange, R. &amp; Clune, J. (2025). "Agent0: Unleashing Self-Evolving Agents from Zero Data via Tool-Integrated Reasoning." <em>ICLR 2026 RSI Workshop (Oral)</em>. <a href="https://arxiv.org/abs/2511.16043">arXiv:2511.16043</a>
+[^46]: Li, X., Sun, X., Wang, G., Su, S., Shum, C. &amp; Li, J. (2026). "GrandCode: Achieving Grandmaster Level in Competitive Programming via Agentic Reinforcement Learning." <a href="https://arxiv.org/abs/2604.02721">arXiv:2604.02721</a>
+[^47]: Qiao, J., Meng, W., Cheng, Y., Lin, Z., Zhang, Z., Tan, X., Gong, J., Shao, K. &amp; Xie, Y. (2026). "Memory Intelligence Agent." <a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a>
+[^48]: Zhang, L., Wang, H., Liu, Z., Yin, M., Huang, Y., Li, J., Guo, W., Liu, Y., Guo, H., Lian, D. &amp; Chen, E. (2026). "Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control." <a href="https://arxiv.org/abs/2602.15659">arXiv:2602.15659</a>
+[^49]: Prime Intellect (2026). "Recursive Language Models: The Paradigm of 2026." <a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a>; Zhang, A.L. et al. (2025). "Recursive Language Models." <a href="https://arxiv.org/abs/2512.24601">arXiv:2512.24601</a>
+[^50]: "AI Pedagogy: Dialogic Social Learning for Artificial Agents." <a href="https://arxiv.org/abs/2507.21065">arXiv:2507.21065</a>
+[^51]: Zhang, A.L., Kraska, T. &amp; Khattab, O. (2025). "Recursive Language Models." <a href="https://arxiv.org/abs/2512.24601">arXiv:2512.24601</a>
+[^52]: "Recursive Language Models Meet Uncertainty: The Surprising Effectiveness of Self-Reflective Program Search for Long Context." (2026). <a href="https://arxiv.org/abs/2603.15653">arXiv:2603.15653</a>
+[^53]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. April 26-27, 2026, Rio de Janeiro. <a href="https://recursive-workshop.github.io/">Workshop website</a>; <a href="https://openreview.net/pdf?id=OsPQ6zTQXV">OpenReview summary</a>
+[^54]: Lu, Z., Yao, Z., Wu, J., Han, C., Gu, Q., Cai, X., Lu, W., Xiao, J., Zhuang, Y. &amp; Shen, Y. (2026). "SKILL0: In-Context Agentic Reinforcement Learning for Skill Internalization." <a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a>
+[^55]: Yu, Z., Xie, X., Yao, W., Fang, R., Qiao, S., Cao, K., Zheng, G., Qi, X., Zhang, P. &amp; Deng, S. (2026). "SkillX: Automatically Constructing Skill Knowledge Bases for Agents." <em>ICML 2026</em>. <a href="https://arxiv.org/abs/2604.04804">arXiv:2604.04804</a>
+[^56]: Qiao, J., Meng, W., Cheng, Y., Lin, Z., Zhang, Z., Tan, X., Gong, J., Shao, K. &amp; Xie, Y. (2026). "Memory Intelligence Agent." <a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a></p>
+<p>[^58]: Hafner, D., Yan, W. &amp; Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." <a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a>
+[^59]: Hicke, Y. et al. (2026). "MedSimAI: Simulation and Formative Feedback Generation to Enhance Deliberate Practice in Medical Education." <em>LAK 2026</em>. <a href="https://arxiv.org/abs/2503.05793">arXiv:2503.05793</a>
+[^60]: Chen, Z. et al. (2026). "EvoScientist: Towards Multi-Agent Evolving AI Scientists for End-to-End Scientific Discovery." <a href="https://arxiv.org/abs/2603.08127">arXiv:2603.08127</a></p>
+<p>[^62]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. April 26-27, 2026, Rio de Janeiro. Speakers: Chelsea Finn (Stanford), Graham Neubig (CMU/OpenHands), Jeff Clune (UBC/DeepMind), Yuandong Tian, Matej Balog (Google DeepMind), Bang Liu (Mila), Yu Su (Ohio State), Arman Cohan (Yale). <a href="https://recursive-workshop.github.io/">Workshop website</a>; <a href="https://openreview.net/forum?id=OsPQ6zTQXV">OpenReview</a>
+[^63]: Yamada, Y., Lange, R.T., Lu, C., Hu, S., Lu, C., Foerster, J., Clune, J. &amp; Ha, D. (2025). "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search." <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a>
+[^64]: Zhang, J., Zhao, B., Yang, W., Foerster, J., Clune, J., Jiang, M., Devlin, S. &amp; Shavrina, T. (2026). "Hyperagents: Recursive Metacognitive Self-Improvement." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a>
+[^65]: Maimon, G., Yoran, O., Kreuk, F., Hassid, M., Cohen, G., Chambon, P. &amp; Adi, Y. (2026). "Self-Execution Simulation Improves Coding Models." <a href="https://arxiv.org/abs/2604.03253">arXiv:2604.03253</a>
+[^66]: Shen, S., Cheng, W., Ma, M., Turcan, A., Zhang, M.J. &amp; Ma, J. (2026). "SkillFoundry: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources." <a href="https://arxiv.org/abs/2604.03964">arXiv:2604.03964</a>
+[^67]: Modecrua, W., Kaewtawee, K., Pachtrachai, K. &amp; Kraisingkorn, T. (2026). "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration." <a href="https://arxiv.org/abs/2604.02869">arXiv:2604.02869</a></p>
+</main>
+</body>
+</html>

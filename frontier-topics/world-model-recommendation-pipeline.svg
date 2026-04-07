@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9333ea"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .title { font-size: 16px; font-weight: bold; fill: #1e293b; }
+    .subtitle { font-size: 11px; fill: #64748b; }
+    .boxLabel { font-size: 13px; font-weight: bold; fill: white; }
+    .boxDetail { font-size: 10px; fill: white; opacity: 0.9; }
+    .sysLabel { font-size: 11px; font-weight: bold; fill: #1e293b; }
+    .sysDetail { font-size: 9.5px; fill: #475569; }
+    .connLabel { font-size: 10px; font-weight: bold; }
+    .insightLabel { font-size: 10.5px; font-weight: bold; fill: #1e293b; }
+    .insightText { font-size: 9.5px; fill: #475569; }
+  </style>
+
+  <!-- Background -->
+  <rect width="900" height="520" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" class="title">World Models as Recommendation Evaluation Engines</text>
+  <text x="450" y="46" text-anchor="middle" class="subtitle">Three independent systems formalize recommendation as next-state prediction in a user world model</text>
+
+  <!-- Core concept: World Model (center) -->
+  <rect x="335" y="70" width="230" height="60" rx="10" fill="#1e40af"/>
+  <text x="450" y="94" text-anchor="middle" class="boxLabel">World Model Core</text>
+  <text x="450" y="110" text-anchor="middle" class="boxDetail">Predict next state given (history, action)</text>
+
+  <!-- Three systems row -->
+  <!-- AlignUSER -->
+  <rect x="30" y="170" width="250" height="90" rx="8" fill="#2563eb" opacity="0.9"/>
+  <text x="155" y="195" text-anchor="middle" class="boxLabel">AlignUSER (Jan 2026)</text>
+  <text x="155" y="212" text-anchor="middle" class="boxDetail">Next-state prediction for user behavior</text>
+  <text x="155" y="228" text-anchor="middle" class="boxDetail">Counterfactual trajectory alignment</text>
+  <text x="155" y="244" text-anchor="middle" class="boxDetail">LLM agents as synthetic evaluators</text>
+
+  <!-- LLM-as-Judge -->
+  <rect x="325" y="170" width="250" height="90" rx="8" fill="#16a34a" opacity="0.9"/>
+  <text x="450" y="195" text-anchor="middle" class="boxLabel">LLM-as-Judge (Nov 2025)</text>
+  <text x="450" y="212" text-anchor="middle" class="boxDetail">Pairwise preference reasoning</text>
+  <text x="450" y="228" text-anchor="middle" class="boxDetail">Preference function properties matter</text>
+  <text x="450" y="244" text-anchor="middle" class="boxDetail">Not model size but what is captured</text>
+
+  <!-- GWM -->
+  <rect x="620" y="170" width="250" height="90" rx="8" fill="#9333ea" opacity="0.9"/>
+  <text x="745" y="195" text-anchor="middle" class="boxLabel">Graph World Model (Jul 2025)</text>
+  <text x="745" y="212" text-anchor="middle" class="boxDetail">Unified graph + unstructured states</text>
+  <text x="745" y="228" text-anchor="middle" class="boxDetail">6 tasks incl. recommendation + planning</text>
+  <text x="745" y="244" text-anchor="middle" class="boxDetail">Cross-task architectural transfer</text>
+
+  <!-- Arrows from core to systems -->
+  <line x1="380" y1="130" x2="200" y2="168" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="450" y1="130" x2="450" y2="168" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="520" y1="130" x2="700" y2="168" stroke="#9333ea" stroke-width="2" marker-end="url(#arrowPurple)"/>
+
+  <!-- Cross-domain mapping -->
+  <rect x="30" y="295" width="840" height="25" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="450" y="312" text-anchor="middle" class="insightLabel">Cross-Domain Mapping: Every recommender is implicitly a world model</text>
+
+  <!-- Three domain columns -->
+  <!-- Simulation -->
+  <rect x="30" y="335" width="260" height="100" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="30" y="335" width="260" height="24" rx="6" fill="#2563eb" opacity="0.1"/>
+  <text x="160" y="352" text-anchor="middle" class="sysLabel" fill="#2563eb">Simulation</text>
+  <text x="40" y="372" class="sysDetail">Predict: future environment states</text>
+  <text x="40" y="387" class="sysDetail">Counterfactual: "what if action B?"</text>
+  <text x="40" y="402" class="sysDetail">Pairwise: compare simulation outcomes</text>
+  <text x="40" y="417" class="sysDetail">Transfer: one model, many environments</text>
+
+  <!-- Recursion -->
+  <rect x="320" y="335" width="260" height="100" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+  <rect x="320" y="335" width="260" height="24" rx="6" fill="#16a34a" opacity="0.1"/>
+  <text x="450" y="352" text-anchor="middle" class="sysLabel" fill="#16a34a">Recursion</text>
+  <text x="330" y="372" class="sysDetail">Predict: own future performance</text>
+  <text x="330" y="387" class="sysDetail">Counterfactual: "what if I modified X?"</text>
+  <text x="330" y="402" class="sysDetail">Pairwise: compare agent variants (DGM)</text>
+  <text x="330" y="417" class="sysDetail">Transfer: one meta-learner, many tasks</text>
+
+  <!-- Commerce -->
+  <rect x="610" y="335" width="260" height="100" rx="6" fill="white" stroke="#9333ea" stroke-width="1.5"/>
+  <rect x="610" y="335" width="260" height="24" rx="6" fill="#9333ea" opacity="0.1"/>
+  <text x="740" y="352" text-anchor="middle" class="sysLabel" fill="#9333ea">Commerce</text>
+  <text x="620" y="372" class="sysDetail">Predict: user response to recommendation</text>
+  <text x="620" y="387" class="sysDetail">Counterfactual: "what if product Y?"</text>
+  <text x="620" y="402" class="sysDetail">Pairwise: compare recommendation slates</text>
+  <text x="620" y="417" class="sysDetail">Transfer: one GWM, rec + planning</text>
+
+  <!-- Bidirectional arrows between domains -->
+  <line x1="290" y1="385" x2="320" y2="385" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <line x1="580" y1="385" x2="610" y2="385" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+
+  <!-- Education insight -->
+  <rect x="30" y="460" width="840" height="45" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="450" y="478" text-anchor="middle" class="insightLabel">Education: "What would this student learn if we assigned exercise B instead of A?"</text>
+  <text x="450" y="494" text-anchor="middle" class="insightText">Counterfactual tutoring evaluation + cross-subject transfer via GWM = simulation-before-action for pedagogy</text>
+</svg>

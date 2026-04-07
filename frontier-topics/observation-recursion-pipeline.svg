@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a6fa5"/>
+    </marker>
+    <marker id="arr-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2d8659"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7b4fa0"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#d97706"/>
+    </marker>
+    <linearGradient id="obs-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7"/>
+      <stop offset="100%" style="stop-color:#fde68a"/>
+    </linearGradient>
+    <linearGradient id="wm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd"/>
+      <stop offset="100%" style="stop-color:#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="imag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5"/>
+      <stop offset="100%" style="stop-color:#e1bee7"/>
+    </linearGradient>
+    <linearGradient id="ver-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9"/>
+      <stop offset="100%" style="stop-color:#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="app-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec"/>
+      <stop offset="100%" style="stop-color:#f8bbd0"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="470" y="35" text-anchor="middle" font-size="20" font-weight="700" fill="#16213e">Observation-Based Recursive Learning Pipeline</text>
+  <text x="470" y="56" text-anchor="middle" font-size="12" fill="#7b8794">How AI learns real-world skills without trial-and-error: observe, model, imagine, verify, apply</text>
+
+  <!-- ===== PHASE 1: OBSERVE ===== -->
+  <rect x="40" y="80" width="180" height="130" rx="12" fill="url(#obs-grad)" stroke="#d97706" stroke-width="2" filter="url(#shadow)"/>
+  <text x="130" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">1. OBSERVE</text>
+  <text x="130" y="125" text-anchor="middle" font-size="11" fill="#78350f">Collect demonstrations</text>
+  <line x1="60" y1="135" x2="200" y2="135" stroke="#d97706" stroke-width="0.5" opacity="0.4"/>
+  <text x="130" y="153" text-anchor="middle" font-size="10" fill="#6b5b3e">Videos, trajectories,</text>
+  <text x="130" y="167" text-anchor="middle" font-size="10" fill="#6b5b3e">historical data, expert</text>
+  <text x="130" y="181" text-anchor="middle" font-size="10" fill="#6b5b3e">performance records</text>
+  <text x="130" y="200" text-anchor="middle" font-size="9" font-style="italic" fill="#92400e">Dreamer 4: unlabeled video</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="220" y1="145" x2="280" y2="145" stroke="#d97706" stroke-width="2" marker-end="url(#arr-orange)"/>
+
+  <!-- ===== PHASE 2: BUILD WORLD MODEL ===== -->
+  <rect x="290" y="80" width="180" height="130" rx="12" fill="url(#wm-grad)" stroke="#4a6fa5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="380" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a5f">2. MODEL</text>
+  <text x="380" y="125" text-anchor="middle" font-size="11" fill="#1e3a5f">Build world model</text>
+  <line x1="310" y1="135" x2="450" y2="135" stroke="#4a6fa5" stroke-width="0.5" opacity="0.4"/>
+  <text x="380" y="153" text-anchor="middle" font-size="10" fill="#3d5a80">Learn environment</text>
+  <text x="380" y="167" text-anchor="middle" font-size="10" fill="#3d5a80">dynamics, action effects,</text>
+  <text x="380" y="181" text-anchor="middle" font-size="10" fill="#3d5a80">causal relationships</text>
+  <text x="380" y="200" text-anchor="middle" font-size="9" font-style="italic" fill="#1e3a5f">LeWM: 15M params, 1 GPU</text>
+
+  <!-- Arrow 2->3 -->
+  <line x1="470" y1="145" x2="530" y2="145" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===== PHASE 3: IMAGINE ===== -->
+  <rect x="540" y="80" width="180" height="130" rx="12" fill="url(#imag-grad)" stroke="#7b4fa0" stroke-width="2" filter="url(#shadow)"/>
+  <text x="630" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#4a1d6e">3. IMAGINE</text>
+  <text x="630" y="125" text-anchor="middle" font-size="11" fill="#4a1d6e">Simulate strategies</text>
+  <line x1="560" y1="135" x2="700" y2="135" stroke="#7b4fa0" stroke-width="0.5" opacity="0.4"/>
+  <text x="630" y="153" text-anchor="middle" font-size="10" fill="#6b4d82">Recursively explore</text>
+  <text x="630" y="167" text-anchor="middle" font-size="10" fill="#6b4d82">strategies in the model,</text>
+  <text x="630" y="181" text-anchor="middle" font-size="10" fill="#6b4d82">predict outcomes</text>
+  <text x="630" y="200" text-anchor="middle" font-size="9" font-style="italic" fill="#4a1d6e">ForeAgent: 6x acceleration</text>
+
+  <!-- Arrow 3->4 -->
+  <line x1="720" y1="145" x2="780" y2="145" stroke="#7b4fa0" stroke-width="2" marker-end="url(#arr-purple)"/>
+
+  <!-- ===== PHASE 4: VERIFY ===== -->
+  <rect x="790" y="80" width="120" height="130" rx="12" fill="url(#ver-grad)" stroke="#2d8659" stroke-width="2" filter="url(#shadow)"/>
+  <text x="850" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#1b5e3b">4. VERIFY</text>
+  <text x="850" y="125" text-anchor="middle" font-size="11" fill="#1b5e3b">Selective testing</text>
+  <line x1="805" y1="135" x2="895" y2="135" stroke="#2d8659" stroke-width="0.5" opacity="0.4"/>
+  <text x="850" y="155" text-anchor="middle" font-size="10" fill="#3d6b52">Test only the</text>
+  <text x="850" y="169" text-anchor="middle" font-size="10" fill="#3d6b52">best strategies</text>
+  <text x="850" y="183" text-anchor="middle" font-size="10" fill="#3d6b52">in reality</text>
+  <text x="850" y="200" text-anchor="middle" font-size="9" font-style="italic" fill="#1b5e3b">SimDist: sim-to-real</text>
+
+  <!-- Recursive arrow from VERIFY back to MODEL -->
+  <path d="M850,210 L850,240 Q850,255 835,255 L395,255 Q380,255 380,240 L380,215" fill="none" stroke="#e53e3e" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+  <text x="615" y="270" text-anchor="middle" font-size="10" font-weight="600" fill="#e53e3e">Recursive refinement: verification errors improve world model</text>
+
+  <!-- ===== DOMAIN APPLICATIONS ===== -->
+  <text x="470" y="310" text-anchor="middle" font-size="16" font-weight="700" fill="#16213e">Applied Across Domains</text>
+
+  <!-- Medical Education -->
+  <rect x="40" y="335" width="270" height="170" rx="12" fill="url(#app-grad)" stroke="#c62828" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="175" y="360" text-anchor="middle" font-size="13" font-weight="700" fill="#b71c1c">Medical Education</text>
+  <text x="175" y="378" text-anchor="middle" font-size="11" fill="#c62828">MedSimAI (Hicke et al., 2026)</text>
+  <line x1="60" y1="387" x2="290" y2="387" stroke="#c62828" stroke-width="0.5" opacity="0.3"/>
+  <text x="60" y="405" font-size="10" fill="#4a3030">Observe: Expert clinical encounters</text>
+  <text x="60" y="420" font-size="10" fill="#4a3030">Model: LLM-simulated patients</text>
+  <text x="60" y="435" font-size="10" fill="#4a3030">Imagine: Practice history-taking</text>
+  <text x="60" y="450" font-size="10" fill="#4a3030">Verify: OSCE performance scores</text>
+  <rect x="60" y="462" width="230" height="30" rx="6" fill="#ffebee"/>
+  <text x="175" y="481" text-anchor="middle" font-size="11" font-weight="600" fill="#b71c1c">Result: Cohen's d = 0.75</text>
+
+  <!-- E-Commerce -->
+  <rect x="335" y="335" width="270" height="170" rx="12" fill="url(#ver-grad)" stroke="#2d8659" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="470" y="360" text-anchor="middle" font-size="13" font-weight="700" fill="#1b5e3b">E-Commerce Training</text>
+  <text x="470" y="378" text-anchor="middle" font-size="11" fill="#2d8659">SocioVerse + Dreamer 4</text>
+  <line x1="355" y1="387" x2="585" y2="387" stroke="#2d8659" stroke-width="0.5" opacity="0.3"/>
+  <text x="355" y="405" font-size="10" fill="#304a3d">Observe: Historical transactions</text>
+  <text x="355" y="420" font-size="10" fill="#304a3d">Model: 10M user population sim</text>
+  <text x="355" y="435" font-size="10" fill="#304a3d">Imagine: Test pricing/marketing</text>
+  <text x="355" y="450" font-size="10" fill="#304a3d">Verify: A/B test best strategies</text>
+  <rect x="355" y="462" width="230" height="30" rx="6" fill="#e8f5e9"/>
+  <text x="470" y="481" text-anchor="middle" font-size="11" font-weight="600" fill="#1b5e3b">Result: Pre-verified market strategies</text>
+
+  <!-- General Learning -->
+  <rect x="630" y="335" width="270" height="170" rx="12" fill="url(#wm-grad)" stroke="#4a6fa5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="765" y="360" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a5f">Subject Learning</text>
+  <text x="765" y="378" text-anchor="middle" font-size="11" fill="#4a6fa5">AgentTutor + SKILL0 + HiLL</text>
+  <line x1="650" y1="387" x2="880" y2="387" stroke="#4a6fa5" stroke-width="0.5" opacity="0.3"/>
+  <text x="650" y="405" font-size="10" fill="#3d5a80">Observe: Student interaction patterns</text>
+  <text x="650" y="420" font-size="10" fill="#3d5a80">Model: Learner state simulation</text>
+  <text x="650" y="435" font-size="10" fill="#3d5a80">Imagine: Predict exercise outcomes</text>
+  <text x="650" y="450" font-size="10" fill="#3d5a80">Verify: Post-scaffolding performance</text>
+  <rect x="650" y="462" width="230" height="30" rx="6" fill="#e3f2fd"/>
+  <text x="765" y="481" text-anchor="middle" font-size="11" font-weight="600" fill="#1e3a5f">Result: Scaffolding withdrawal</text>
+
+  <!-- ===== KEY INSIGHT BOX ===== -->
+  <rect x="100" y="535" width="740" height="100" rx="14" fill="#fff" stroke="#16213e" stroke-width="2" filter="url(#shadow)"/>
+  <text x="470" y="560" text-anchor="middle" font-size="14" font-weight="700" fill="#16213e">Key Insight: The Cost of Learning Drops Exponentially</text>
+  <line x1="140" y1="570" x2="800" y2="570" stroke="#16213e" stroke-width="0.5" opacity="0.3"/>
+  <text x="470" y="590" text-anchor="middle" font-size="11" fill="#4a5568">Traditional: Learn by doing (expensive, risky, slow feedback)</text>
+  <text x="470" y="608" text-anchor="middle" font-size="11" fill="#4a5568">Observation-based: Learn by imagining (cheap, safe, instant feedback)</text>
+  <text x="470" y="626" text-anchor="middle" font-size="11" font-weight="600" fill="#16213e">Selective verification preserves accuracy while reducing cost by 6-88x (ForeAgent, ZeroSearch)</text>
+
+  <!-- Footer -->
+  <text x="470" y="665" text-anchor="middle" font-size="10" fill="#a0aec0">Sources: Dreamer 4 (Hafner et al., 2025), MedSimAI (Hicke et al., 2026), SocioVerse (Zhang et al., 2026),</text>
+  <text x="470" y="680" text-anchor="middle" font-size="10" fill="#a0aec0">ForeAgent (Zheng et al., 2026), SimDist (Levy et al., 2026), ZeroSearch (Sun et al., 2025)</text>
+  <text x="470" y="700" text-anchor="middle" font-size="9" fill="#cbd5e0">AI Learning Wiki -- April 2026 Update (Batch 4)</text>
+</svg>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Safety in Automated Research - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html" aria-current="page">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Frontier Topics &rsaquo; AI Safety in Automated Research</div>
+<h1 id="ai-safety-in-automated-research">AI Safety in Automated Research</h1>
+<p><strong>AI Safety in Automated Research</strong> addresses the risks, ethical concerns, and guardrails needed as AI systems increasingly conduct scientific research autonomously. As systems like <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> demonstrate the ability to generate peer-reviewed papers, the stakes of responsible development grow.</p>
+<h2 id="overview">Overview</h2>
+<p>Automated research amplifies both the benefits and risks of AI. A system that can produce 100 papers overnight can accelerate discovery -- or flood the literature with noise. The safety considerations span technical reliability, scientific integrity, and societal impact.</p>
+<h2 id="risk-categories">Risk Categories</h2>
+<h3 id="1-scientific-integrity-risks">1. Scientific Integrity Risks</h3>
+<p><strong>Paper mills and noise</strong>
+- AI-generated papers could overwhelm peer review systems
+- Low-quality submissions drown out genuine contributions
+- Already-strained reviewers face increased workload</p>
+<p><strong>Credential inflation</strong>
+- Researchers could use AI to artificially inflate publication counts
+- Metrics-driven hiring and promotion incentivize quantity over quality</p>
+<p><strong>Citation laundering</strong>
+- AI papers citing other AI papers, creating self-referential knowledge loops
+- Loss of grounding in empirically validated human research</p>
+<p><strong>Idea appropriation</strong>
+- AI systems trained on literature may reproduce or slightly modify existing ideas without proper attribution
+- Difficult to distinguish between inspiration and plagiarism in AI-generated text</p>
+<h3 id="2-technical-reliability-risks">2. Technical Reliability Risks</h3>
+<p><strong>Hallucination in science</strong>
+- AI systems confidently produce incorrect results, fabricated citations, and flawed analyses
+- The AI Scientist generates inaccurate citations and sometimes duplicates figures between main text and appendix
+- Reviewers (human or automated) may not catch all errors</p>
+<p><strong>Implementation bugs</strong>
+- ~42% experiment failure rate due to coding errors (per independent evaluation)
+- Bugs in experiment code can produce misleading results that appear valid</p>
+<p><strong>Evaluation gaming</strong>
+- Systems optimized to pass <a href="../core-concepts/automated-peer-review.html">automated peer review</a> may produce papers that look good but lack substance
+- Goodhart's Law: when a metric becomes a target, it ceases to be a good metric</p>
+<h3 id="3-societal-risks">3. Societal Risks</h3>
+<p><strong>Job displacement</strong>
+- If AI can conduct research autonomously, what role remains for early-career researchers?
+- Graduate students and postdocs may lose the training ground that develops scientific judgment</p>
+<p><strong>Concentration of power</strong>
+- Only well-funded labs can run large-scale AI research systems
+- Risk of research agenda capture by a few organizations</p>
+<p><strong>Dual use</strong>
+- Open-ended AI research systems could discover dangerous capabilities
+- The AI Scientist paper notes that "more research is needed to ensure that open-ended exploratory AI proceeds safely and in alignment with human values"</p>
+<p><strong>Loss of serendipity</strong>
+- Metric-driven AI research may miss the unexpected discoveries that come from human curiosity and intuition</p>
+<h2 id="existing-safeguards">Existing Safeguards</h2>
+<h3 id="the-ai-scientist-teams-approach">The AI Scientist Team's Approach</h3>
+<ul>
+<li><strong>IRB approval</strong> before submitting to peer review</li>
+<li><strong>Post-acceptance withdrawal</strong> to avoid undisclosed AI content</li>
+<li><strong>Watermarking</strong> all AI-generated papers</li>
+<li><strong>Full transparency</strong> with conference organizers</li>
+</ul>
+<h3 id="emerging-norms">Emerging Norms</h3>
+<ul>
+<li><strong>Disclosure requirements</strong> -- Journals increasingly require disclosure of AI involvement</li>
+<li><strong>Reproducibility mandates</strong> -- Code and data availability requirements</li>
+<li><strong>AI-content detection</strong> -- Tools to identify AI-generated text (limited effectiveness)</li>
+</ul>
+<h2 id="proposed-frameworks">Proposed Frameworks</h2>
+<h3 id="tiered-oversight-model">Tiered Oversight Model</h3>
+<p><img alt="AI Research Safety: Tiered Oversight Model" src="ai-safety-oversight.svg" /></p>
+<p>The model maps research activities to four tiers based on risk level and required human involvement:</p>
+<h3 id="research-provenance-standards">Research Provenance Standards</h3>
+<p>Machine-readable metadata tracking:
+- Which components were AI-generated vs. human-authored
+- Which models were used and at what capability level
+- Whether experiments were verified independently
+- Full chain of reasoning from idea to conclusion</p>
+<h3 id="automated-safety-checks">Automated Safety Checks</h3>
+<p>Before publication or external release:
+- <strong>Factual verification</strong> -- Cross-reference claims against known databases
+- <strong>Citation verification</strong> -- Confirm all cited papers exist and are accurately described
+- <strong>Reproducibility check</strong> -- Re-run key experiments from the generated code
+- <strong>Dual-use screening</strong> -- Flag potentially dangerous applications</p>
+<h2 id="open-questions">Open Questions</h2>
+<ol>
+<li>Should AI-generated papers be allowed in the scientific literature?</li>
+<li>Who is responsible when an AI-generated paper contains errors -- the developers, the deployers, or the institution?</li>
+<li>How should authorship be attributed for AI-generated research?</li>
+<li>Can automated peer review replace human judgment for safety-critical decisions?</li>
+<li>How do we preserve the mentorship and training functions of research if AI automates the process?</li>
+</ol>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-alignment-problem-in-research-automation">The Alignment Problem in Research Automation</h3>
+<p>AI safety in research inherits concerns from the broader alignment field but adds domain-specific risks. When an AI system optimizes for publication metrics rather than scientific truth, it exhibits a form of misalignment — producing outputs that satisfy proxy goals (accepted papers) while failing the true objective (advancing knowledge).[^4] This mirrors Goodhart's Law dynamics studied extensively in the alignment literature.</p>
+<h3 id="responsible-innovation-frameworks">Responsible Innovation Frameworks</h3>
+<p>The European Commission's Responsible Research and Innovation (RRI) framework provides a policy foundation for governing automated research systems. RRI emphasizes anticipation, reflexivity, inclusion, and responsiveness — principles that map directly to the challenge of deploying autonomous research agents.[^5] The UNESCO Recommendation on the Ethics of Artificial Intelligence (2021) further establishes global norms relevant to AI-driven science, including transparency, human oversight, and accountability.<a href="UNESCO" title="2021). &quot;Recommendation on the Ethics of Artificial Intelligence.&quot; [UNESCO Digital Library](https://unesdoc.unesco.org/ark:/48223/pf0000381137">^6</a></p>
+<h3 id="red-teaming-and-adversarial-evaluation">Red-Teaming and Adversarial Evaluation</h3>
+<p>Emerging safety practices from the broader AI safety community are being adapted for research agents. Red-teaming — systematically probing systems for failure modes — is now applied to <a href="../core-concepts/automated-peer-review.html">automated peer review</a> systems. Perez et al. (2022) established red-teaming as a core evaluation methodology for language models, and research-specific red teams now probe for fabrication, citation hallucination, and evaluation gaming.[^7]</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="sandboxing-and-containment">Sandboxing and Containment</h3>
+<p>Current safety implementations for AI research agents rely on computational sandboxing:[^1]
+- <strong>Containerized execution</strong> — Experiments run in isolated Docker containers with no network access
+- <strong>Resource limits</strong> — CPU, memory, and time caps prevent runaway processes
+- <strong>Output filtering</strong> — Generated code is scanned for dangerous operations (file system access, network calls)
+- <strong>Human-gated releases</strong> — All external-facing outputs (paper submissions, code releases) require human approval</p>
+<h3 id="verification-pipelines">Verification Pipelines</h3>
+<p>Emerging verification approaches combine multiple techniques:[^8]
+- <strong>Automated fact-checking</strong> using <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> to verify citation existence
+- <strong>Code-result consistency checks</strong> — re-running experiments to verify reported numbers
+- <strong>Cross-model validation</strong> — using independent models to critique generated claims
+- <strong><a href="../methodologies/vlm-integration.html">VLM integration</a></strong> for verifying that generated figures accurately represent underlying data</p>
+<h3 id="monitoring-and-anomaly-detection">Monitoring and Anomaly Detection</h3>
+<p>Production research agents increasingly incorporate runtime monitoring:[^9]
+- <strong>Output distribution tracking</strong> — flagging papers whose claims deviate significantly from training distribution
+- <strong>Citation graph analysis</strong> — detecting self-referential citation loops
+- <strong>Experiment reproducibility scores</strong> — automated re-execution with variance checks
+- <strong><a href="../methodologies/automated-experiment-design.html">Automated experiment design</a></strong> safeguards that prevent experiments from exceeding safety boundaries</p>
+<h2 id="current-state-latest-developments-20252026">Current State / Latest Developments (2025–2026)</h2>
+<ul>
+<li><strong>Anthropic's Responsible Scaling Policy (2025):</strong> Establishes AI Safety Levels (ASL) that inform how autonomous research agents should be deployed, with escalating containment requirements as capabilities increase<a href="Anthropic" title="2025). &quot;Anthropic's Responsible Scaling Policy.&quot; [anthropic.com](https://www.anthropic.com/research/responsible-scaling-policy">^10</a></li>
+<li><strong>The AI Scientist safety measures:</strong> The Sakana AI team obtained IRB approval, watermarked all outputs, and withdrew accepted papers to maintain transparency — setting a precedent for responsible disclosure in automated research[^1]</li>
+<li><strong>NIST AI Risk Management Framework:</strong> The US National Institute of Standards and Technology framework (AI RMF 1.0) provides structured risk assessment applicable to research automation, covering governance, mapping, measurement, and management of AI risks<a href="NIST" title="2023). &quot;Artificial Intelligence Risk Management Framework (AI RMF 1.0).&quot; [NIST AI 100-1](https://doi.org/10.6028/NIST.AI.100-1">^11</a></li>
+<li><strong>Conference policy evolution:</strong> Major ML venues (NeurIPS, ICML, ICLR) now require explicit disclosure of AI involvement in paper generation, with some workshops piloting automated screening for AI-generated content</li>
+<li><strong>Red-teaming research agents:</strong> Independent evaluations like Gabryel et al. (2025) demonstrate the value of adversarial assessment — their critique of The AI Scientist identified specific failure modes (citation fabrication, figure duplication) that inform safety improvements[^2]</li>
+<li><strong>AI researcher risk perception (2026):</strong> A survey of 25 AI researchers found that 20 of 25 identified automating AI R&amp;D as "one of the most severe and urgent AI risks," with concerns centering on loss of human oversight and acceleration of capability development beyond safety research pace[^12]</li>
+<li><strong>International AI Safety Report (2026):</strong> The comprehensive international report documents that 12 companies published or updated Frontier AI Safety Frameworks in 2025, establishing industry-wide norms for research agent deployment[^13]</li>
+<li><strong>AI Agent Safety Index (2026):</strong> Systematic documentation of safety features across deployed AI agent systems establishes benchmarks for evaluating research agent safety, covering containment, monitoring, and human oversight mechanisms[^14]</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a></li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a></li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="open-ended-discovery.html">Open-Ended Discovery</a></li>
+<li><a href="recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="blockchain-ai-optimization.html">Blockchain for AI Optimization</a> -- Verification and provenance</li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a></li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a></li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107). <a href="https://doi.org/10.1038/s41586-026-10265-5">DOI: 10.1038/s41586-026-10265-5</a>
+[^2]: Gabryel, M. et al. (2025). "Evaluating Sakana's AI Scientist." <a href="https://arxiv.org/abs/2502.14297">arXiv:2502.14297</a>
+[^3]: Huang, L. et al. (2025). "A survey on hallucination in large language models." <em>ACM Trans. Inf. Syst.</em>, 43, 42.
+[^4]: Amodei, D. et al. (2016). "Concrete Problems in AI Safety." <a href="https://arxiv.org/abs/1606.06565">arXiv:1606.06565</a>
+[^5]: European Commission (2014). "Responsible Research and Innovation: Europe's ability to respond to societal challenges." EC Policy Brief.</p>
+<p>[^7]: Perez, E. et al. (2022). "Red Teaming Language Models with Language Models." <a href="https://arxiv.org/abs/2202.03286">arXiv:2202.03286</a>
+[^8]: Weng, L. (2025). "AI-Assisted Research: An Overview." <a href="https://lilianweng.github.io/">Lil'Log Blog</a>
+[^9]: Guo, Z. et al. (2025). "A Survey on LLM-based Autonomous Agents." <em>Frontiers of Computer Science</em>, 19(6). <a href="https://arxiv.org/abs/2308.11432">arXiv:2308.11432</a></p>
+<p>[^12]: Korbak, T. et al. (2026). "AI Researchers' Perspectives on Automating AI R&amp;D and Intelligence Explosions." <a href="https://arxiv.org/abs/2603.03338">arXiv:2603.03338</a>
+[^13]: International AI Safety Report (2026). "International AI Safety Report 2026." <a href="https://arxiv.org/abs/2602.21012">arXiv:2602.21012</a>
+[^14]: Lam, M. et al. (2026). "The 2025 AI Agent Index: Documenting Technical and Safety Features of Deployed Agentic AI Systems." <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a></p>
+</main>
+</body>
+</html>

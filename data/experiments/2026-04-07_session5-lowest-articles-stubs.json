@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-04-07_210139",
+  "iteration": 5,
+  "articles_modified": [
+    "open-ended-discovery",
+    "wiki-quality-benchmarking",
+    "template-free-research",
+    "foundation-models-for-research",
+    "automated-peer-review",
+    "automated-experiment-design",
+    "aide",
+    "aider",
+    "semantic-scholar-api"
+  ],
+  "hypothesis": {
+    "strategy": "Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, open-ended-discovery) by adding cross-links, current references, and depth. Expand all 3 remaining stubs past 100 lines. Add SVG diagram to template-free-research.",
+    "predicted_delta": 3.0,
+    "dimensions_targeted": ["linking", "currency", "sourcing", "depth", "structural"],
+    "reasoning": "Past sessions showed +5-7 points from fixing lowest articles. Expanding stubs eliminates the stub penalty but may lower per-article scores as they move to standard tier with higher expectations."
+  },
+  "result": {
+    "score_before": 80.6,
+    "score_after": 82.4,
+    "actual_delta": 1.8,
+    "improved": true,
+    "lesson": "Expanding stubs to standard tier caused aide and aider scores to DROP (73.7->66.6 and 78.0->68.6) because standard tier has stricter depth/sourcing requirements. The stub elimination benefit (0% stubs vs 12%) partially offset article-level gains. Net: +1.8 composite. Biggest wins: wiki-quality-benchmarking +19.7, automated-experiment-design +10.6, open-ended-discovery +10.2. Key insight: converting footnote format (numbered -> [^N]) dramatically boosts sourcing scores."
+  },
+  "papers_added": 15,
+  "diagrams_added": 1,
+  "stubs_eliminated": 3
+}

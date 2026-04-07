@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a6fa5"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38a169"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#805ad5"/>
+    </marker>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7fafc"/>
+      <stop offset="100%" style="stop-color:#edf2f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="520" rx="12" fill="url(#bg)" stroke="#d2d8e2" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-size="16" font-weight="700" fill="#16213e">The LLM-Simulated Training Pipeline: From Description to Deployment</text>
+  <text x="450" y="52" text-anchor="middle" font-size="11" fill="#7b8794">How simulation barriers collapse from months of engineering to minutes of description (April 2026)</text>
+
+  <!-- Phase 1: Describe -->
+  <rect x="30" y="80" width="170" height="140" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+  <text x="115" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#2b6cb0">1. DESCRIBE</text>
+  <text x="115" y="120" text-anchor="middle" font-size="10" fill="#4a5568">Natural language</text>
+  <text x="115" y="135" text-anchor="middle" font-size="10" fill="#4a5568">scenario specification</text>
+  <rect x="45" y="148" width="140" height="22" rx="4" fill="#bee3f8"/>
+  <text x="115" y="163" text-anchor="middle" font-size="9" fill="#2b6cb0">Simia (Nov 2025)</text>
+  <rect x="45" y="176" width="140" height="22" rx="4" fill="#bee3f8"/>
+  <text x="115" y="191" text-anchor="middle" font-size="9" fill="#2b6cb0">EduVerse (AAAI 2026)</text>
+
+  <!-- Phase 2: Simulate -->
+  <rect x="230" y="80" width="170" height="140" rx="10" fill="#f0fff4" stroke="#38a169" stroke-width="1.5"/>
+  <text x="315" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#276749">2. SIMULATE</text>
+  <text x="315" y="120" text-anchor="middle" font-size="10" fill="#4a5568">LLM or world model</text>
+  <text x="315" y="135" text-anchor="middle" font-size="10" fill="#4a5568">generates environment</text>
+  <rect x="245" y="148" width="140" height="22" rx="4" fill="#c6f6d5"/>
+  <text x="315" y="163" text-anchor="middle" font-size="9" fill="#276749">World-Gymnast (Feb 2026)</text>
+  <rect x="245" y="176" width="140" height="22" rx="4" fill="#c6f6d5"/>
+  <text x="315" y="191" text-anchor="middle" font-size="9" fill="#276749">RLVR-World (NeurIPS 2025)</text>
+
+  <!-- Phase 3: Train -->
+  <rect x="430" y="80" width="170" height="140" rx="10" fill="#faf5ff" stroke="#805ad5" stroke-width="1.5"/>
+  <text x="515" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#553c9a">3. TRAIN</text>
+  <text x="515" y="120" text-anchor="middle" font-size="10" fill="#4a5568">RL inside world model</text>
+  <text x="515" y="135" text-anchor="middle" font-size="10" fill="#4a5568">with verifiable rewards</text>
+  <rect x="445" y="148" width="140" height="22" rx="4" fill="#e9d8fd"/>
+  <text x="515" y="163" text-anchor="middle" font-size="9" fill="#553c9a">Dreamer 4 (offline RL)</text>
+  <rect x="445" y="176" width="140" height="22" rx="4" fill="#e9d8fd"/>
+  <text x="515" y="191" text-anchor="middle" font-size="9" fill="#553c9a">SKILL0 (scaffolded)</text>
+
+  <!-- Phase 4: Adapt -->
+  <rect x="630" y="80" width="170" height="140" rx="10" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+  <text x="715" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#975a16">4. ADAPT &amp; DEPLOY</text>
+  <text x="715" y="120" text-anchor="middle" font-size="10" fill="#4a5568">Sim-to-real transfer</text>
+  <text x="715" y="135" text-anchor="middle" font-size="10" fill="#4a5568">+ biosensory feedback</text>
+  <rect x="645" y="148" width="140" height="22" rx="4" fill="#fefcbf"/>
+  <text x="715" y="163" text-anchor="middle" font-size="9" fill="#975a16">SimDist (Mar 2026)</text>
+  <rect x="645" y="176" width="140" height="22" rx="4" fill="#fefcbf"/>
+  <text x="715" y="191" text-anchor="middle" font-size="9" fill="#975a16">GuideAI (IUI 2026)</text>
+
+  <!-- Arrows between phases -->
+  <line x1="200" y1="150" x2="228" y2="150" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="400" y1="150" x2="428" y2="150" stroke="#38a169" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="600" y1="150" x2="628" y2="150" stroke="#805ad5" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Recursive feedback arrow -->
+  <path d="M 715 220 L 715 250 Q 715 265 700 265 L 130 265 Q 115 265 115 250 L 115 220" fill="none" stroke="#e53e3e" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <text x="415" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#e53e3e">Recursive improvement: deployment outcomes refine simulation scenarios</text>
+
+  <!-- Application examples -->
+  <text x="450" y="315" text-anchor="middle" font-size="13" font-weight="700" fill="#16213e">Domain Applications</text>
+
+  <!-- Medical -->
+  <rect x="30" y="335" width="270" height="80" rx="8" fill="#fff5f5" stroke="#fc8181" stroke-width="1"/>
+  <text x="165" y="355" text-anchor="middle" font-size="11" font-weight="600" fill="#c53030">Medical Training</text>
+  <text x="165" y="372" text-anchor="middle" font-size="9" fill="#4a5568">Describe: "Acute chest pain, 68yr male, diabetic"</text>
+  <text x="165" y="386" text-anchor="middle" font-size="9" fill="#4a5568">Simulate: LLM-generated patient responses (Simia)</text>
+  <text x="165" y="400" text-anchor="middle" font-size="9" fill="#4a5568">Train: Practice diagnosis (MedSimAI, d=0.75)</text>
+
+  <!-- Commerce -->
+  <rect x="315" y="335" width="270" height="80" rx="8" fill="#fffff0" stroke="#ecc94b" stroke-width="1"/>
+  <text x="450" y="355" text-anchor="middle" font-size="11" font-weight="600" fill="#975a16">Commerce Education</text>
+  <text x="450" y="372" text-anchor="middle" font-size="9" fill="#4a5568">Describe: "Price war in semiconductor market"</text>
+  <text x="450" y="386" text-anchor="middle" font-size="9" fill="#4a5568">Simulate: Population model (SocioVerse, 10M users)</text>
+  <text x="450" y="400" text-anchor="middle" font-size="9" fill="#4a5568">Train: Market strategy (ShopSimulator + RLVR-World)</text>
+
+  <!-- General -->
+  <rect x="600" y="335" width="270" height="80" rx="8" fill="#f0fff4" stroke="#68d391" stroke-width="1"/>
+  <text x="735" y="355" text-anchor="middle" font-size="11" font-weight="600" fill="#276749">Subject Mastery</text>
+  <text x="735" y="372" text-anchor="middle" font-size="9" fill="#4a5568">Describe: "Organic chemistry lab, ester synthesis"</text>
+  <text x="735" y="386" text-anchor="middle" font-size="9" fill="#4a5568">Simulate: Physics-grounded reactions (Cosmos 2.5)</text>
+  <text x="735" y="400" text-anchor="middle" font-size="9" fill="#4a5568">Train: Predict-then-verify (FOREAGENT paradigm)</text>
+
+  <!-- Key insight box -->
+  <rect x="100" y="440" width="700" height="55" rx="8" fill="#16213e"/>
+  <text x="450" y="462" text-anchor="middle" font-size="11" font-weight="700" fill="#e8eaf0">KEY INSIGHT: The simulation bottleneck has shifted from engineering to pedagogical design.</text>
+  <text x="450" y="480" text-anchor="middle" font-size="10" fill="#a8b2c1">Simia + World-Gymnast + RLVR-World reduce environment creation from months → minutes.</text>
+  <text x="450" y="494" text-anchor="middle" font-size="10" fill="#a8b2c1">The OECD evidence shows that design quality (127% vs -17%) now determines learning outcomes.</text>
+</svg>

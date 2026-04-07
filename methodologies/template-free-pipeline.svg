@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+    <linearGradient id="ideaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#86efac;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="evalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcd34d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="writeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce7f3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9a8d4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="archiveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0e7ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a5b4fc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">Template-Free Research Pipeline</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#64748b">Multi-model architecture with agentic tree search</text>
+
+  <!-- Phase 1: Idea Generation -->
+  <rect x="40" y="80" width="160" height="120" rx="12" fill="url(#ideaGrad)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="120" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">Idea Generation</text>
+  <text x="120" y="128" text-anchor="middle" font-size="10" fill="#1e40af">OpenAI o3</text>
+  <line x1="60" y1="138" x2="180" y2="138" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="120" y="156" text-anchor="middle" font-size="9" fill="#1e3a5f">Chain-of-thought</text>
+  <text x="120" y="170" text-anchor="middle" font-size="9" fill="#1e3a5f">reasoning for novel</text>
+  <text x="120" y="184" text-anchor="middle" font-size="9" fill="#1e3a5f">hypotheses</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="200" y1="140" x2="240" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Phase 2: Code Generation -->
+  <rect x="250" y="80" width="160" height="120" rx="12" fill="url(#codeGrad)" stroke="#22c55e" stroke-width="2"/>
+  <text x="330" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Code Generation</text>
+  <text x="330" y="128" text-anchor="middle" font-size="10" fill="#166534">Claude Sonnet 4</text>
+  <line x1="270" y1="138" x2="390" y2="138" stroke="#22c55e" stroke-width="0.5"/>
+  <text x="330" y="156" text-anchor="middle" font-size="9" fill="#14532d">Full Python scripts</text>
+  <text x="330" y="170" text-anchor="middle" font-size="9" fill="#14532d">from scratch + data</text>
+  <text x="330" y="184" text-anchor="middle" font-size="9" fill="#14532d">loading via HF Hub</text>
+
+  <!-- Arrow 2->3 -->
+  <line x1="410" y1="140" x2="450" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Phase 3: Experiment + Evaluate -->
+  <rect x="460" y="80" width="160" height="120" rx="12" fill="url(#evalGrad)" stroke="#eab308" stroke-width="2"/>
+  <text x="540" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#854d0e">Run + Evaluate</text>
+  <text x="540" y="128" text-anchor="middle" font-size="10" fill="#854d0e">GPT-4o (figures)</text>
+  <line x1="480" y1="138" x2="600" y2="138" stroke="#eab308" stroke-width="0.5"/>
+  <text x="540" y="156" text-anchor="middle" font-size="9" fill="#713f12">Execute experiments,</text>
+  <text x="540" y="170" text-anchor="middle" font-size="9" fill="#713f12">VLM figure critique,</text>
+  <text x="540" y="184" text-anchor="middle" font-size="9" fill="#713f12">log to journal</text>
+
+  <!-- Arrow 3->4 -->
+  <line x1="620" y1="140" x2="660" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Phase 4: Write Paper -->
+  <rect x="670" y="80" width="110" height="120" rx="12" fill="url(#writeGrad)" stroke="#ec4899" stroke-width="2"/>
+  <text x="725" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#9d174d">Write Paper</text>
+  <text x="725" y="128" text-anchor="middle" font-size="10" fill="#9d174d">o4-mini</text>
+  <line x1="685" y1="138" x2="765" y2="138" stroke="#ec4899" stroke-width="0.5"/>
+  <text x="725" y="156" text-anchor="middle" font-size="9" fill="#831843">LaTeX manuscript</text>
+  <text x="725" y="170" text-anchor="middle" font-size="9" fill="#831843">generation +</text>
+  <text x="725" y="184" text-anchor="middle" font-size="9" fill="#831843">automated review</text>
+
+  <!-- Agentic Tree Search box -->
+  <rect x="160" y="240" width="480" height="200" rx="12" fill="url(#archiveGrad)" stroke="#6366f1" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="400" y="268" text-anchor="middle" font-size="14" font-weight="bold" fill="#3730a3">Agentic Tree Search (explores branching paths)</text>
+
+  <!-- Tree nodes -->
+  <circle cx="400" cy="310" r="16" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+  <text x="400" y="314" text-anchor="middle" font-size="9" font-weight="bold" fill="#3730a3">Root</text>
+
+  <!-- Branch 1 -->
+  <line x1="384" y1="322" x2="300" y2="365" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="300" cy="375" r="14" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="300" y="379" text-anchor="middle" font-size="8" fill="#3730a3">Exp A</text>
+
+  <line x1="288" y1="387" x2="250" y2="415" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="250" cy="420" r="10" fill="#fecaca" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="250" y="424" text-anchor="middle" font-size="7" fill="#991b1b">fail</text>
+
+  <line x1="312" y1="387" x2="350" y2="415" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="350" cy="420" r="10" fill="#bbf7d0" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="350" y="424" text-anchor="middle" font-size="7" fill="#166534">ok</text>
+
+  <!-- Branch 2 -->
+  <line x1="400" y1="326" x2="400" y2="365" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="400" cy="375" r="14" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="400" y="379" text-anchor="middle" font-size="8" fill="#3730a3">Exp B</text>
+
+  <line x1="400" y1="389" x2="400" y2="415" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="400" cy="420" r="10" fill="#bbf7d0" stroke="#22c55e" stroke-width="2"/>
+  <text x="400" y="424" text-anchor="middle" font-size="7" font-weight="bold" fill="#166534">best</text>
+
+  <!-- Branch 3 -->
+  <line x1="416" y1="322" x2="500" y2="365" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="500" cy="375" r="14" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="500" y="379" text-anchor="middle" font-size="8" fill="#3730a3">Exp C</text>
+
+  <line x1="488" y1="387" x2="460" y2="415" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="460" cy="420" r="10" fill="#fecaca" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="460" y="424" text-anchor="middle" font-size="7" fill="#991b1b">fail</text>
+
+  <line x1="512" y1="387" x2="540" y2="415" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="540" cy="420" r="10" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="540" y="424" text-anchor="middle" font-size="7" fill="#854d0e">ok</text>
+
+  <!-- Feedback arrow from tree search back to phases -->
+  <path d="M 160 340 Q 80 340 80 220 Q 80 140 120 140" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="55" y="250" font-size="9" fill="#6366f1" transform="rotate(-90,55,250)">backtrack + retry</text>
+
+  <!-- Legend -->
+  <text x="40" y="480" font-size="10" fill="#64748b">Each phase uses a specialized model. Tree search enables backtracking from failed experiments.</text>
+</svg>

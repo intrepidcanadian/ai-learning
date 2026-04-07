@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoresearch (Karpathy) - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html" aria-current="page">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Tools & Platforms &rsaquo; Autoresearch (Karpathy)</div>
+<h1 id="autoresearch-karpathy">Autoresearch (Karpathy)</h1>
+<p><strong>Autoresearch</strong> is a minimal framework by Andrej Karpathy that enables AI coding agents (Claude, Codex, etc.) to conduct fully autonomous machine learning research on a single GPU, without human supervision. The human sets the research direction, goes to sleep, and wakes up to ~100 completed experiments and (hopefully) an improved model.</p>
+<p><strong>Repository:</strong> <a href="https://github.com/karpathy/autoresearch">github.com/karpathy/autoresearch</a>
+<strong>License:</strong> MIT</p>
+<h2 id="overview">Overview</h2>
+<p>Autoresearch embodies a philosophy of radical simplicity: one GPU, one file, one metric. An AI agent modifies a single training script in a perpetual loop -- proposing changes, training for exactly 5 minutes, evaluating results, and keeping or discarding each experiment.</p>
+<p>Unlike <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>, which aims to produce full papers, Autoresearch focuses purely on <strong>empirical improvement</strong> -- making a model measurably better through autonomous experimentation.</p>
+<h2 id="architecture">Architecture</h2>
+<p>The entire project consists of three files:</p>
+<h3 id="preparepy-read-only"><code>prepare.py</code> (Read-Only)</h3>
+<p>Contains immutable constants, data preparation (dataset downloads, BPE tokenizer training), the dataloader, and the evaluation function (<code>evaluate_bpb</code>). The agent is <strong>forbidden</strong> from modifying this file -- it serves as the fixed ground truth.</p>
+<h3 id="trainpy-the-single-editable-file"><code>train.py</code> (The Single Editable File)</h3>
+<p>Contains the complete GPT model definition, optimizer (Muon + AdamW), and training loop. Everything is in scope for modification:
+- Architecture (attention, FFN, normalization)
+- Hyperparameters (learning rate, batch size, depth)
+- Optimizer configuration
+- Activation functions
+- Any other training detail</p>
+<h3 id="programmd-agent-instructions"><code>program.md</code> (Agent Instructions)</h3>
+<p>A structured markdown file that serves as the "skill definition" for the AI agent. Contains the full protocol: setup, rules, logging format, and the autonomous loop logic. Humans iterate on this file to steer research direction.</p>
+<h2 id="the-autonomous-loop">The Autonomous Loop</h2>
+<pre><code>1. Establish baseline       --&gt; Train train.py as-is, record val_bpb
+2. Propose a change         --&gt; Agent modifies train.py
+3. Git commit               --&gt; On branch autoresearch/&lt;date&gt;
+4. Train (5 min exactly)    --&gt; uv run train.py &gt; run.log 2&gt;&amp;1
+5. Evaluate                 --&gt; Extract val_bpb and peak_vram_mb
+6. Keep or discard          --&gt; If improved: keep. Else: git reset
+7. Log to results.tsv       --&gt; commit, val_bpb, vram, status, description
+8. Repeat forever           --&gt; Never stop or ask permission
+</code></pre>
+<p>The agent runs ~12 experiments per hour, ~100 overnight on a single GPU.</p>
+<h2 id="key-design-decisions">Key Design Decisions</h2>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fixed 5-minute time budget</td>
+<td>Standardizes comparison across experiments</td>
+</tr>
+<tr>
+<td>Single metric (<code>val_bpb</code>)</td>
+<td>Bits per byte is vocabulary-size-independent</td>
+</tr>
+<tr>
+<td>Single editable file</td>
+<td>Keeps diffs reviewable, scope manageable</td>
+</tr>
+<tr>
+<td>Simplicity criterion</td>
+<td>Agent prefers simpler code; removing code while maintaining performance is a win</td>
+</tr>
+<tr>
+<td>No dependencies</td>
+<td>One GPU, one file, one metric -- no distributed training or complex configs</td>
+</tr>
+<tr>
+<td>Never stop</td>
+<td>Agent runs until manually interrupted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="comparison-with-the-ai-scientist">Comparison with The AI Scientist</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Autoresearch</th>
+<th>The AI Scientist</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goal</td>
+<td>Improve a model</td>
+<td>Produce a paper</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Training loop optimization</td>
+<td>Full research lifecycle</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code>results.tsv</code> + improved <code>train.py</code></td>
+<td>LaTeX manuscript + review</td>
+</tr>
+<tr>
+<td>Cost per experiment</td>
+<td>~$0.01--0.10 (API calls)</td>
+<td>$6--15 per paper</td>
+</tr>
+<tr>
+<td>Human role</td>
+<td>Write <code>program.md</code>, review in morning</td>
+<td>Set research subfield</td>
+</tr>
+<tr>
+<td>Models used</td>
+<td>Any coding agent</td>
+<td>Multi-model ensemble</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>3 files</td>
+<td>Complex agentic pipeline</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hardware-requirements">Hardware Requirements</h2>
+<ul>
+<li>Single NVIDIA GPU (tested on H100)</li>
+<li>Python 3.10+</li>
+<li><code>uv</code> package manager</li>
+</ul>
+<p>For smaller GPUs: use lower-entropy datasets (TinyStories), reduce vocab size, lower sequence length, reduce model depth, decrease batch size.</p>
+<h2 id="community">Community</h2>
+<p>The project has spawned community forks for:
+- <strong>macOS</strong> (MPS/MLX backends)
+- <strong>Windows</strong> (RTX GPUs)
+- <strong>AMD GPUs</strong> (ROCm)</p>
+<h2 id="significance">Significance</h2>
+<p>Autoresearch represents a different philosophy from The AI Scientist: rather than automating the full research communication pipeline, it automates the <strong>core empirical loop</strong> that drives ML progress. It shifts the human role from "person who runs experiments" to "person who designs the research program and reviews results."</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>Autoresearch builds on the idea that <strong>empirical ML research is fundamentally a search problem</strong>: given a fixed evaluation metric, find the model configuration that optimizes it. This frames the agent's role as an optimization process over code space [^1].</p>
+<p>Key intellectual foundations:</p>
+<ul>
+<li><strong>Neural architecture search (NAS)</strong>: Zoph &amp; Le (2017) demonstrated that AI agents can search over neural network architectures to find designs that outperform human-designed models [^2]. Autoresearch generalizes this: instead of searching architectures only, the agent searches over the entire training configuration.</li>
+<li><strong>AI-generating algorithms (AI-GAs)</strong>: Clune (2019) proposed systems that automatically generate the components of AI — architectures, learning rules, and training environments — in an open-ended loop [^3]. Autoresearch is a minimal, practical instantiation of this vision.</li>
+<li><strong>Coding agents for research</strong>: The rise of capable coding agents (Claude, Codex, Gemini) made it practical to have AI systems modify and execute research code autonomously [^4]. Autoresearch's contribution is showing that a <em>minimal</em> agent loop — one file, one metric, one GPU — is sufficient for meaningful research progress.</li>
+</ul>
+<p><strong>Learning application</strong>: Autoresearch demonstrates a powerful study technique for ML practitioners. By setting up a simple experiment loop (hypothesis → code change → evaluate → keep or discard), learners can develop intuition for which changes matter. The "overnight 100 experiments" pattern is directly applicable to coursework and personal projects — set up automated hyperparameter sweeps and review results in the morning.</p>
+<h2 id="current-state-latest-developments-20252026">Current State / Latest Developments (2025–2026)</h2>
+<ul>
+<li><strong>Agentic research frameworks proliferating:</strong> Autoresearch's minimal loop has influenced a wave of more sophisticated agentic research systems. The "Agentic AI for Scientific Discovery" survey (Chen et al., 2025) identifies Autoresearch as a key exemplar of the "empirical loop" pattern alongside more complex systems like AIDE and The AI Scientist[^5]</li>
+<li><strong>World model integration:</strong> Dyna-Mind (Yu et al., 2025) extends the empirical loop concept by teaching agents to build internal simulations of experiment outcomes before running them, reducing the number of physical experiments needed by up to 40%[^6]. This predict-then-verify approach could make Autoresearch-style loops more compute-efficient</li>
+<li><strong>Self-play for agent improvement:</strong> Recent work on self-improving AI through self-play (Singh et al., 2025) formalizes the keep-or-discard pattern as a Generator-Verifier-Updater operator, providing theoretical grounding for why Autoresearch's simple loop converges to better solutions[^7]</li>
+<li><strong>Community adoption (2025–2026):</strong> The project has grown beyond its original H100 target, with active forks supporting Apple Silicon (MLX), AMD ROCm, and consumer GPUs. Several university ML courses now use Autoresearch as a teaching tool for autonomous experimentation</li>
+<li><strong>Safety considerations:</strong> The AI Agent Index (2026) documents safety features across deployed agent systems, highlighting that Autoresearch's sandboxed single-file design is one of the safer autonomous research patterns — modifications are confined to <code>train.py</code> and easily auditable via git diff[^8]</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../tools-platforms/aide.html">AIDE</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a></li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — how Autoresearch experiments compound according to scaling relationships</li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — the keep-or-discard loop as a minimal form of recursive improvement</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — community forks and developments around Autoresearch</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Karpathy, A. (2025). "Autoresearch." <a href="https://github.com/karpathy/autoresearch">github.com/karpathy/autoresearch</a></p>
+<p>[^2]: Zoph, B. &amp; Le, Q. (2017). "Neural Architecture Search with Reinforcement Learning." <a href="https://arxiv.org/abs/1611.01578">arXiv:1611.01578</a></p>
+<p>[^3]: Clune, J. (2019). "AI-Generating Algorithms, an Alternate Paradigm for Producing General Artificial Intelligence." <a href="https://arxiv.org/abs/1905.10985">arXiv:1905.10985</a></p>
+<p>[^4]: Jimenez, C. et al. (2024). "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" <a href="https://arxiv.org/abs/2310.06770">arXiv:2310.06770</a></p>
+<p>[^5]: Chen, Z. et al. (2025). "Agentic AI for Scientific Discovery: A Survey of Progress, Challenges, and Future Directions." <a href="https://arxiv.org/abs/2503.08979">arXiv:2503.08979</a></p>
+<p>[^6]: Yu, X., Peng, B. &amp; Galley, M. (2025). "Dyna-Mind: Learning to Simulate from Experience for Better AI Agents." <a href="https://arxiv.org/abs/2510.09577">arXiv:2510.09577</a></p>
+<p>[^7]: Singh, A. et al. (2025). "Self-Improving AI Agents through Self-Play." <a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a></p>
+<p>[^8]: Lam, M. et al. (2026). "The 2025 AI Agent Index: Documenting Technical and Safety Features of Deployed Agentic AI Systems." <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a></p>
+</main>
+</body>
+</html>

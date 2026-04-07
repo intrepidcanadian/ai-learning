@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Learning Wiki - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="tools-platforms/aider.html">Aider</a>
+<a href="tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="methodologies/template-free-research.html">Template-Free Research</a>
+<a href="methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="research-sources/key-papers.html">Key Papers and References</a>
+<a href="research-sources/latest-papers.html">Latest Papers</a>
+<a href="research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb">Home</div>
+<h1 id="wikipedia-for-ai-learning-research">Wikipedia for AI Learning Research</h1>
+<p>The open knowledge base for AI-driven scientific discovery, automated research, and the future of machine learning.</p>
+<h2 id="what-this-is">What This Is</h2>
+<p>A structured, interlinked collection of articles covering the rapidly evolving field of <strong>AI-automated research</strong> -- from foundational concepts to cutting-edge tools, methodologies, and frontier topics. This wiki serves as the canonical reference for anyone learning about, building, or contributing to AI research automation.</p>
+<h2 id="directory-structure">Directory Structure</h2>
+<pre><code>core-concepts/          Foundational ideas and systems
+tools-platforms/        Software, APIs, and frameworks
+methodologies/          Technical approaches and architectures
+frontier-topics/        Emerging and speculative research directions
+research-sources/       Where to find and track new research
+</code></pre>
+<h2 id="quick-navigation">Quick Navigation</h2>
+<h3 id="core-concepts">Core Concepts</h3>
+<ul>
+<li><a href="core-concepts/the-ai-scientist.html">The AI Scientist</a> -- End-to-end automated AI research system</li>
+<li><a href="core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a> -- History and landscape of AI in science</li>
+<li><a href="core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> -- How LLMs power research automation</li>
+<li><a href="core-concepts/automated-peer-review.html">Automated Peer Review</a> -- AI systems that evaluate scientific papers</li>
+</ul>
+<h3 id="tools-platforms">Tools &amp; Platforms</h3>
+<ul>
+<li><a href="tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a> -- Autonomous ML research on a single GPU</li>
+<li><a href="tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a> -- Programmatic access to daily AI research</li>
+<li><a href="tools-platforms/aide.html">AIDE</a> -- AI-driven exploration in code space</li>
+<li><a href="tools-platforms/aider.html">Aider</a> -- AI coding assistant for research implementation</li>
+<li><a href="tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> -- Literature search and citation graph access</li>
+</ul>
+<h3 id="methodologies">Methodologies</h3>
+<ul>
+<li><a href="methodologies/agentic-tree-search.html">Agentic Tree Search</a> -- Tree-structured experiment exploration</li>
+<li><a href="methodologies/template-free-research.html">Template-Free Research</a> -- Open-ended AI research without scaffolds</li>
+<li><a href="methodologies/automated-experiment-design.html">Automated Experiment Design</a> -- How AI plans and runs experiments</li>
+<li><a href="methodologies/vlm-integration.html">Vision-Language Model Integration</a> -- Using VLMs for figure critique and data analysis</li>
+<li><a href="methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> -- How this wiki measures and improves its own quality</li>
+</ul>
+<h3 id="frontier-topics">Frontier Topics</h3>
+<ul>
+<li><a href="frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a> -- Decentralized compute, verification, and incentive alignment</li>
+<li><a href="frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a> -- AI systems that explore without boundaries</li>
+<li><a href="frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a> -- Risks, ethics, and guardrails</li>
+<li><a href="frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> -- How research quality scales with compute and model capability</li>
+<li><a href="frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> -- World models, mental rehearsal, and learning by imagining outcomes</li>
+<li><a href="frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> -- AI systems that improve their own improvement process</li>
+<li><a href="frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a> -- Agentic commerce, recommendation, and applied AI learning</li>
+<li><a href="frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> -- How simulation, recursion, and commerce research reinforce each other</li>
+</ul>
+<h3 id="research-sources">Research Sources</h3>
+<ul>
+<li><a href="research-sources/latest-papers.html">Latest Papers</a> -- Auto-updated feed of new research (updated daily via cron)</li>
+<li><a href="research-sources/tracking-ai-research.html">Tracking AI Research</a> -- APIs, feeds, and tools for staying current</li>
+<li><a href="research-sources/key-papers.html">Key Papers and References</a> -- Essential reading list with annotations</li>
+<li><a href="research-sources/institutions-and-labs.html">Research Institutions and Labs</a> -- Who is building what</li>
+<li><a href="research-sources/benchmark-trend.html">Quality Benchmark</a> -- Score trend tracking wiki quality over time</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>Each article follows a consistent structure:
+1. <strong>Overview</strong> -- What it is, in plain language
+2. <strong>Background</strong> -- Context and history
+3. <strong>Technical Details</strong> -- How it works
+4. <strong>Current State</strong> -- Latest developments and results
+5. <strong>Limitations</strong> -- Known issues and open problems
+6. <strong>See Also</strong> -- Links to related articles
+7. <strong>References</strong> -- Primary sources with links</p>
+<hr />
+<p><em>Last updated: 2026-04-07 (scheduled update — batch 9: added LLM-Guided Curriculum Learning (74% training acceleration), CODE-GEN agentic educational content generation, Generative World Renderer (AAA game data), SkillFoundry self-evolving skill libraries (71% novel skills), Multi-Turn RL with Iterative Reward Calibration (4B beats GPT-4.1), PerFusion "sell before you make" (KDD 2026, +13% CTR at Alibaba); 3 new cross-cutting connections (59-61); new Curriculum-Skill Pipeline diagram; 6 new papers tracked)</em></p>
+</main>
+</body>
+</html>

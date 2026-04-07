@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aider - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html" aria-current="page">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Tools & Platforms &rsaquo; Aider</div>
+<h1 id="aider">Aider</h1>
+<p><strong>Aider</strong> is an open-source AI coding assistant designed to implement features, fix bugs, and refactor code within existing repositories. It serves as the primary code generation engine in the template-based mode of <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>.</p>
+<p><strong>Repository:</strong> <a href="https://github.com/paul-gauthier/aider">github.com/paul-gauthier/aider</a></p>
+<h2 id="overview">Overview</h2>
+<p>Aider operates as a command-line tool that connects to LLMs (GPT-4, Claude, etc.) and makes targeted edits to files in a git repository. Unlike general-purpose chat interfaces, Aider is designed for <strong>precise code modification</strong> -- it understands repository structure, generates diffs, and commits changes.</p>
+<h2 id="role-in-ai-research-automation">Role in AI Research Automation</h2>
+<p>In The AI Scientist's template-based mode, Aider handles:</p>
+<ol>
+<li><strong>Experiment implementation</strong> -- Translating research ideas into code changes</li>
+<li><strong>Bug fixing</strong> -- Debugging failed experimental runs</li>
+<li><strong>Code refactoring</strong> -- Restructuring code for new experimental designs</li>
+<li><strong>LaTeX generation</strong> -- Writing manuscript sections during the write-up phase</li>
+</ol>
+<p>Aider's ability to make targeted edits (rather than generating entire files) is critical for maintaining codebases across iterative experimental cycles.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>Git-native</strong> -- Every edit is a git commit, enabling easy rollback</li>
+<li><strong>Repository-aware</strong> -- Understands file dependencies and project structure</li>
+<li><strong>Multi-model support</strong> -- Works with GPT-4, Claude, Llama, and others</li>
+<li><strong>Diff-based editing</strong> -- Generates minimal changes rather than full file rewrites</li>
+<li><strong>Conversation context</strong> -- Maintains context across multiple edits</li>
+</ul>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>Aider sits within a broader lineage of AI-assisted programming tools. The theoretical foundation rests on <strong>edit-based code generation</strong> -- rather than generating entire files (which scales poorly to large codebases), Aider generates minimal diffs that preserve surrounding context[^1]. This approach draws on:</p>
+<ul>
+<li><strong>Repository-aware prompting</strong> -- Including file structure and dependency information in the LLM context window, so edits respect the codebase's architecture</li>
+<li><strong>Git as version control</strong> -- Treating every edit as a commit enables easy rollback, forming an implicit tree of experimental branches -- conceptually related to <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>[^2]</li>
+<li><strong>Human-in-the-loop iteration</strong> -- Aider's conversation-based interface enables rapid feedback cycles between human intent and AI execution</li>
+</ul>
+<p>Aider benchmarks (the "aider leaderboard") track how well different LLMs perform at code editing tasks, providing empirical data on which foundation models (see <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>) are most effective for research automation coding[^3].</p>
+<h2 id="comparison-with-other-coding-tools">Comparison with Other Coding Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Primary Use</th>
+<th>Integration Style</th>
+<th>Research Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aider</td>
+<td>Code editing</td>
+<td>CLI, git-native</td>
+<td>AI Scientist (template mode)</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>Agentic coding</td>
+<td>CLI, terminal</td>
+<td>General research coding</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td>Code editing</td>
+<td>IDE (VS Code fork)</td>
+<td>Interactive development</td>
+</tr>
+<tr>
+<td>GitHub Copilot</td>
+<td>Code completion</td>
+<td>IDE plugin</td>
+<td>Inline suggestions</td>
+</tr>
+<tr>
+<td><a href="../tools-platforms/aide.html">AIDE</a></td>
+<td>Agentic experiments</td>
+<td>Python API</td>
+<td>Solution-space exploration</td>
+</tr>
+</tbody>
+</table>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>As of early 2026, Aider has matured significantly[^4]:</p>
+<ul>
+<li><strong>Multi-model support</strong> -- Works with GPT-4o, Claude Sonnet 4, DeepSeek-R1, Llama 3, and others via a unified model interface</li>
+<li><strong>Architect mode</strong> -- A two-model pattern where a "planner" model (often a reasoning model like o3) designs changes and an "editor" model (often Claude Sonnet 4) implements them. This mirrors the multi-model architecture used in <a href="../methodologies/template-free-research.html">Template-Free Research</a>[^5]</li>
+<li><strong>Repository map</strong> -- Automatically generates a concise map of the codebase to include in prompts, using tree-sitter to identify classes, functions, and imports across the project</li>
+<li><strong>Integration with The AI Scientist v2</strong> -- The Nature-published AI Scientist uses Aider for template-based code generation across thousands of experiments[^5]</li>
+<li><strong>Leaderboard-driven development</strong> -- Aider maintains public LLM leaderboards (coding accuracy, edit format compliance) that provide empirical data on which <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> perform best at code editing tasks[^3]. These leaderboards have become a de facto benchmark for assessing model coding capabilities.</li>
+</ul>
+<h3 id="how-aider-supports-learning">How Aider Supports Learning</h3>
+<p>Aider's conversational interface makes it a powerful learning tool for developers:</p>
+<ol>
+<li><strong>Incremental understanding</strong> -- By making targeted edits rather than rewriting files, Aider's diffs teach users exactly what changed and why, making it easier to learn new patterns</li>
+<li><strong>Git as audit trail</strong> -- Every edit is a commit, creating a reviewable history of how a codebase evolved — invaluable for learning from AI-assisted development</li>
+<li><strong>Multi-language support</strong> -- As Aider expands beyond Python, it helps practitioners learn new languages by showing idiomatic code patterns in context</li>
+<li><strong>Research to practice bridge</strong> -- Aider connects research automation (via The AI Scientist) to everyday development, demonstrating how techniques from <a href="../methodologies/automated-experiment-design.html">automated experiment design</a> apply to practical coding</li>
+</ol>
+<h2 id="technical-architecture">Technical Architecture</h2>
+<p>Aider's architecture involves several key components that work together:</p>
+<h3 id="edit-formats">Edit Formats</h3>
+<p>Aider supports multiple edit formats optimized for different models[^1]:
+- <strong>Whole file</strong> — sends and receives complete files (simple but token-expensive)
+- <strong>Search/replace</strong> — uses search-and-replace blocks for precise edits (most efficient)
+- <strong>Unified diff</strong> — standard diff format familiar to developers
+- <strong>Architect</strong> — two-step format where one model plans and another implements</p>
+<h3 id="repository-map">Repository Map</h3>
+<p>The repo map is a critical innovation. Aider uses tree-sitter to parse the codebase and extract a concise summary of all classes, functions, methods, and imports[^1]. This map is included in every LLM prompt, giving the model awareness of the full project structure without consuming the entire context window. The map is dynamically filtered based on relevance to the current task.</p>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Context window constraints</strong> -- Large codebases exceed even 200K-token windows; Aider's repo map mitigates but doesn't fully solve this</li>
+<li><strong>Non-determinism</strong> -- Same prompt can yield different edits across runs, complicating reproducibility</li>
+<li><strong>Language bias</strong> -- Strongest performance on Python; less reliable for other languages</li>
+<li><strong>No native experiment tracking</strong> -- Unlike <a href="../tools-platforms/autoresearch.html">Autoresearch</a>, Aider doesn't manage experimental workflows or results databases</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a></li>
+<li><a href="../tools-platforms/aide.html">AIDE</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Automated Research</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Gauthier, P. (2024). "Aider: AI pair programming in your terminal." <a href="https://github.com/paul-gauthier/aider">github.com/paul-gauthier/aider</a>
+[^2]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).
+[^3]: Aider LLM Leaderboards. <a href="https://aider.chat/docs/leaderboards/">aider.chat/docs/leaderboards</a>
+[^4]: Aider Changelog. <a href="https://aider.chat/HISTORY.html">aider.chat/HISTORY.html</a>
+[^5]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." Sakana AI. <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a6fa5"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2d8659"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7b4fa0"/>
+    </marker>
+    <linearGradient id="sim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd"/>
+      <stop offset="100%" style="stop-color:#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="rec-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5"/>
+      <stop offset="100%" style="stop-color:#e1bee7"/>
+    </linearGradient>
+    <linearGradient id="com-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9"/>
+      <stop offset="100%" style="stop-color:#c8e6c9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-size="20" font-weight="700" fill="#16213e">The Unified AI Learning Loop</text>
+  <text x="450" y="55" text-anchor="middle" font-size="12" fill="#7b8794">How Simulation, Recursion, and Commerce Converge to Improve Real-World Learning</text>
+
+  <!-- Central loop: PREDICT → ACT → OBSERVE → UPDATE -->
+  <circle cx="450" cy="310" r="95" fill="none" stroke="#d2d8e2" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Central label -->
+  <text x="450" y="305" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">Universal</text>
+  <text x="450" y="322" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">Learning Loop</text>
+
+  <!-- Loop stages -->
+  <rect x="410" y="195" width="80" height="30" rx="15" fill="#4a6fa5" filter="url(#shadow)"/>
+  <text x="450" y="215" text-anchor="middle" font-size="11" font-weight="600" fill="white">PREDICT</text>
+
+  <rect x="530" y="290" width="65" height="30" rx="15" fill="#4a6fa5" filter="url(#shadow)"/>
+  <text x="562" y="310" text-anchor="middle" font-size="11" font-weight="600" fill="white">ACT</text>
+
+  <rect x="410" y="395" width="80" height="30" rx="15" fill="#4a6fa5" filter="url(#shadow)"/>
+  <text x="450" y="415" text-anchor="middle" font-size="11" font-weight="600" fill="white">OBSERVE</text>
+
+  <rect x="355" y="290" width="75" height="30" rx="15" fill="#4a6fa5" filter="url(#shadow)"/>
+  <text x="392" y="310" text-anchor="middle" font-size="11" font-weight="600" fill="white">UPDATE</text>
+
+  <!-- Loop arrows -->
+  <path d="M490,210 Q540,230 540,290" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M570,320 Q560,380 490,405" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M410,410 Q370,380 370,320" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M380,290 Q390,230 410,215" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- === SIMULATION DOMAIN (Left) === -->
+  <rect x="30" y="80" width="260" height="200" rx="12" fill="url(#sim-grad)" stroke="#1976d2" stroke-width="2" filter="url(#shadow)"/>
+  <text x="160" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1565c0">Predictive Simulation</text>
+
+  <text x="50" y="133" font-size="10" font-weight="600" fill="#1565c0">PREDICT:</text>
+  <text x="110" y="133" font-size="10" fill="#37474f">World model imagines future states</text>
+  <text x="50" y="153" font-size="10" font-weight="600" fill="#1565c0">ACT:</text>
+  <text x="80" y="153" font-size="10" fill="#37474f">Agent executes in simulated env</text>
+  <text x="50" y="173" font-size="10" font-weight="600" fill="#1565c0">OBSERVE:</text>
+  <text x="110" y="173" font-size="10" fill="#37474f">Compare prediction vs. reality</text>
+  <text x="50" y="193" font-size="10" font-weight="600" fill="#1565c0">UPDATE:</text>
+  <text x="108" y="193" font-size="10" fill="#37474f">Refine world model parameters</text>
+
+  <line x1="50" y1="210" x2="270" y2="210" stroke="#90caf9" stroke-width="1"/>
+  <text x="160" y="230" text-anchor="middle" font-size="9" fill="#546e7a">DreamerV3 · V-JEPA 2 · LeWM · PiJEPA</text>
+  <text x="160" y="245" text-anchor="middle" font-size="9" fill="#546e7a">Genie 3 · EgoSim · Value-Guided JEPA</text>
+  <text x="160" y="260" text-anchor="middle" font-size="9" fill="#546e7a">WAV · DynaWeb · Dark Patterns (adversarial)</text>
+
+  <!-- === RECURSION DOMAIN (Right) === -->
+  <rect x="610" y="80" width="260" height="200" rx="12" fill="url(#rec-grad)" stroke="#7b1fa2" stroke-width="2" filter="url(#shadow)"/>
+  <text x="740" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#6a1b9a">Recursive Self-Improvement</text>
+
+  <text x="630" y="133" font-size="10" font-weight="600" fill="#6a1b9a">PREDICT:</text>
+  <text x="690" y="133" font-size="10" fill="#37474f">Agent's own future performance</text>
+  <text x="630" y="153" font-size="10" font-weight="600" fill="#6a1b9a">ACT:</text>
+  <text x="660" y="153" font-size="10" fill="#37474f">Self-modify code/prompts/weights</text>
+  <text x="630" y="173" font-size="10" font-weight="600" fill="#6a1b9a">OBSERVE:</text>
+  <text x="693" y="173" font-size="10" fill="#37474f">Measure performance delta</text>
+  <text x="630" y="193" font-size="10" font-weight="600" fill="#6a1b9a">UPDATE:</text>
+  <text x="688" y="193" font-size="10" fill="#37474f">Keep improvements, discard regressions</text>
+
+  <line x1="630" y1="210" x2="850" y2="210" stroke="#ce93d8" stroke-width="1"/>
+  <text x="740" y="230" text-anchor="middle" font-size="9" fill="#546e7a">DGM · Hyperagents · LADDER · MetaClaw</text>
+  <text x="740" y="245" text-anchor="middle" font-size="9" fill="#546e7a">SkillRL · SRLM · SDPO · Agent0 · CORAL</text>
+  <text x="740" y="260" text-anchor="middle" font-size="9" fill="#546e7a">HiLL · Skill0 · Variance Inequality</text>
+
+  <!-- === COMMERCE DOMAIN (Bottom) === -->
+  <rect x="320" y="470" width="260" height="195" rx="12" fill="url(#com-grad)" stroke="#2e7d32" stroke-width="2" filter="url(#shadow)"/>
+  <text x="450" y="498" text-anchor="middle" font-size="15" font-weight="700" fill="#1b5e20">AI for E-Commerce</text>
+
+  <text x="340" y="523" font-size="10" font-weight="600" fill="#1b5e20">PREDICT:</text>
+  <text x="400" y="523" font-size="10" fill="#37474f">User behavior and preferences</text>
+  <text x="340" y="543" font-size="10" font-weight="600" fill="#1b5e20">ACT:</text>
+  <text x="370" y="543" font-size="10" fill="#37474f">Recommend, search, transact</text>
+  <text x="340" y="563" font-size="10" font-weight="600" fill="#1b5e20">OBSERVE:</text>
+  <text x="400" y="563" font-size="10" fill="#37474f">Purchase/abandon/engage data</text>
+  <text x="340" y="583" font-size="10" font-weight="600" fill="#1b5e20">UPDATE:</text>
+  <text x="398" y="583" font-size="10" fill="#37474f">Refine recommendation model</text>
+
+  <line x1="340" y1="600" x2="560" y2="600" stroke="#a5d6a7" stroke-width="1"/>
+  <text x="450" y="620" text-anchor="middle" font-size="9" fill="#546e7a">Shopping Companion · ACES · MemRerank</text>
+  <text x="450" y="635" text-anchor="middle" font-size="9" fill="#546e7a">SocioVerse · Dark Patterns · AgenticShop</text>
+  <text x="450" y="650" text-anchor="middle" font-size="9" fill="#546e7a">ShopSimulator · LM-Tree · CogSearch</text>
+
+  <!-- === CONNECTION ARROWS === -->
+  <!-- Simulation → Recursion -->
+  <path d="M290,160 Q450,100 610,160" fill="none" stroke="#7b4fa0" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowhead-purple)"/>
+  <text x="450" y="118" text-anchor="middle" font-size="9" font-weight="600" fill="#7b4fa0">Simulation enables</text>
+  <text x="450" y="130" text-anchor="middle" font-size="9" font-weight="600" fill="#7b4fa0">safe self-modification</text>
+
+  <!-- Recursion → Commerce -->
+  <path d="M700,280 Q680,420 580,480" fill="none" stroke="#2d8659" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowhead-green)"/>
+  <text x="680" y="380" text-anchor="middle" font-size="9" font-weight="600" fill="#2d8659">Self-improving</text>
+  <text x="680" y="392" text-anchor="middle" font-size="9" font-weight="600" fill="#2d8659">recommendations</text>
+
+  <!-- Commerce → Simulation -->
+  <path d="M320,510 Q200,420 170,280" fill="none" stroke="#1976d2" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="210" y="400" text-anchor="middle" font-size="9" font-weight="600" fill="#1565c0">Fast feedback</text>
+  <text x="210" y="412" text-anchor="middle" font-size="9" font-weight="600" fill="#1565c0">for simulation</text>
+
+  <!-- === EDUCATION OUTPUT (Bottom center) === -->
+  <rect x="70" y="520" width="210" height="130" rx="10" fill="#fff8e1" stroke="#f9a825" stroke-width="2" filter="url(#shadow)"/>
+  <text x="175" y="548" text-anchor="middle" font-size="13" font-weight="700" fill="#e65100">Real-World Learning</text>
+  <text x="175" y="548" text-anchor="middle" font-size="13" font-weight="700" fill="#e65100">Real-World Learning</text>
+  <line x1="90" y1="558" x2="260" y2="558" stroke="#ffe082" stroke-width="1"/>
+  <text x="90" y="578" font-size="9" fill="#4e342e">1. Simulation-based skill practice</text>
+  <text x="90" y="594" font-size="9" fill="#4e342e">2. Self-improving AI tutors</text>
+  <text x="90" y="610" font-size="9" fill="#4e342e">3. Personalized learning paths</text>
+  <text x="90" y="626" font-size="9" fill="#4e342e">4. Scaffolded withdrawal (Skill0/HiLL)</text>
+  <text x="90" y="642" font-size="9" fill="#4e342e">5. Adversarial robustness training</text>
+
+  <!-- Arrow from all three to education -->
+  <path d="M160,280 L160,520" fill="none" stroke="#f9a825" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- === KEY PRINCIPLES (Right side) === -->
+  <rect x="620" y="420" width="250" height="150" rx="10" fill="#fafafa" stroke="#bdbdbd" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="745" y="445" text-anchor="middle" font-size="12" font-weight="700" fill="#37474f">Unifying Principles</text>
+  <line x1="640" y1="455" x2="850" y2="455" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="640" y="475" font-size="9" fill="#546e7a">1. Information gain per iteration (Variance Ineq.)</text>
+  <text x="640" y="493" font-size="9" fill="#546e7a">2. Predict-then-verify is universal (ForeAgent)</text>
+  <text x="640" y="511" font-size="9" fill="#546e7a">3. Scaffold, then withdraw (LADDER+Skill0)</text>
+  <text x="640" y="529" font-size="9" fill="#546e7a">4. Policy prior + world model (PiJEPA)</text>
+  <text x="640" y="547" font-size="9" fill="#546e7a">5. Adversarial fidelity matters (Dark Patterns)</text>
+  <text x="640" y="565" font-size="9" fill="#546e7a">6. Calibrate uncertainty (SRLM)</text>
+</svg>

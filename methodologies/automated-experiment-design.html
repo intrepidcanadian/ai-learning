@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automated Experiment Design - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html" aria-current="page">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Automated Experiment Design</div>
+<h1 id="automated-experiment-design">Automated Experiment Design</h1>
+<p><strong>Automated Experiment Design</strong> refers to AI systems that plan, implement, execute, and evaluate scientific experiments without human intervention. It is the operational core of systems like <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> and <a href="../tools-platforms/autoresearch.html">Autoresearch</a>.</p>
+<h2 id="overview">Overview</h2>
+<p>In traditional research, a human scientist designs experiments based on intuition, literature knowledge, and theoretical understanding. Automated experiment design replaces this with LLM-driven planning, where the model:</p>
+<ol>
+<li>Identifies what hypothesis to test</li>
+<li>Plans the experimental methodology</li>
+<li>Writes the implementation code</li>
+<li>Executes and collects results</li>
+<li>Analyzes outcomes and plans next steps</li>
+</ol>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>Automated experiment design has roots in several fields:</p>
+<ul>
+<li><strong>Design of experiments (DoE)</strong>: Fisher (1935) established statistical principles for efficient experimentation — randomization, replication, and blocking [^4]. Modern automated experiment design applies these principles computationally, with LLMs replacing human judgment about which experiments to run next.</li>
+<li><strong>Bayesian optimization</strong>: Snoek et al. (2012) applied Bayesian optimization to hyperparameter tuning, using a surrogate model to predict which configurations are worth testing [^5]. This is the mathematical foundation for sequential experiment selection.</li>
+<li><strong>Active learning</strong>: The idea that a learner should choose which data points to query next (Settles, 2009) directly parallels automated experiment design — the system chooses which experiments to run based on expected information gain [^6].</li>
+<li><strong>Autonomous scientific agents</strong>: Boiko et al. (2023) demonstrated with Coscientist that LLM agents can design and execute chemistry experiments end-to-end, establishing the feasibility of fully autonomous experiment design beyond ML [^7].</li>
+</ul>
+<p><strong>Learning application</strong>: Understanding automated experiment design teaches a transferable skill: structured experimentation. Whether optimizing a machine learning model, A/B testing a product feature, or designing a research study, the same principles apply — define metrics clearly, control variables systematically, and use results to inform next steps.</p>
+<h2 id="approaches">Approaches</h2>
+<h3 id="sequential-loop-autoresearch">Sequential Loop (Autoresearch)</h3>
+<p>The simplest approach: propose one change, test it, keep or discard, repeat.</p>
+<pre><code>Baseline --&gt; Propose --&gt; Run (5 min) --&gt; Evaluate --&gt; Keep/Discard --&gt; Repeat
+</code></pre>
+<p><strong>Strengths:</strong> Simple, easy to track, minimal overhead
+<strong>Weaknesses:</strong> No parallel exploration, local optima risk</p>
+<h3 id="staged-pipeline-ai-scientist-template-based">Staged Pipeline (AI Scientist, Template-Based)</h3>
+<p>Four sequential stages with different experimental objectives:</p>
+<ol>
+<li><strong>Preliminary investigation</strong> -- Validate approach, establish baselines</li>
+<li><strong>Hyperparameter tuning</strong> -- Systematic optimization</li>
+<li><strong>Research execution</strong> -- Core hypothesis testing</li>
+<li><strong>Ablation studies</strong> -- Component contribution analysis</li>
+</ol>
+<p><strong>Strengths:</strong> Structured, mirrors human research methodology
+<strong>Weaknesses:</strong> Fixed pipeline may miss opportunities</p>
+<h3 id="tree-search-ai-scientist-template-free">Tree Search (AI Scientist, Template-Free)</h3>
+<p>Branching exploration with pruning. See <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>.</p>
+<p><strong>Strengths:</strong> Explores broadly, handles failure gracefully
+<strong>Weaknesses:</strong> Higher compute cost, complex orchestration</p>
+<h3 id="code-space-search-aide">Code Space Search (AIDE)</h3>
+<p>Treats the space of all possible programs as the search domain. See <a href="../tools-platforms/aide.html">AIDE</a>.</p>
+<p><strong>Strengths:</strong> Unconstrained solution space
+<strong>Weaknesses:</strong> High variance, harder to interpret</p>
+<h2 id="common-design-patterns">Common Design Patterns</h2>
+<h3 id="fixed-time-budget">Fixed Time Budget</h3>
+<p>Both Autoresearch (5 minutes per run) and The AI Scientist use fixed time budgets per experiment. This enables fair comparison across experiments with different architectures or hyperparameters.</p>
+<h3 id="single-metric-optimization">Single Metric Optimization</h3>
+<p>Autoresearch uses <code>val_bpb</code>; The AI Scientist evaluates on task-specific metrics. Having a single, clear optimization target simplifies the keep/discard decision.</p>
+<h3 id="experimental-journal">Experimental Journal</h3>
+<p>Systems that maintain notes across experiments (The AI Scientist's journal, Autoresearch's <code>results.tsv</code>) perform better because they can learn from past failures and build on past successes.</p>
+<h3 id="git-based-version-control">Git-Based Version Control</h3>
+<p>Both systems use git commits to track each experimental state, enabling clean rollback on failure and full reproducibility.</p>
+<h2 id="failure-handling">Failure Handling</h2>
+<p>A critical aspect of automated experimentation:</p>
+<table>
+<thead>
+<tr>
+<th>Failure Type</th>
+<th>Detection</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Syntax error</td>
+<td>Immediate</td>
+<td>Auto-fix and retry</td>
+</tr>
+<tr>
+<td>Runtime crash</td>
+<td>During execution</td>
+<td>Log error, discard experiment</td>
+</tr>
+<tr>
+<td>OOM</td>
+<td>During execution</td>
+<td>Reduce batch/model size, retry</td>
+</tr>
+<tr>
+<td>Performance regression</td>
+<td>After evaluation</td>
+<td>Discard, log insight</td>
+</tr>
+<tr>
+<td>Hanging process</td>
+<td>Timeout</td>
+<td>Kill and discard</td>
+</tr>
+</tbody>
+</table>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>As of 2026, automated experiment design has matured across several dimensions:</p>
+<ul>
+<li><strong>Multi-modal experiments</strong>: Systems now design experiments involving text, images, and code simultaneously, enabled by vision-language models<a href="OpenAI" title="2024). &quot;GPT-4o System Card.&quot; [openai.com/research](https://openai.com/research/gpt-4o-system-card">^8</a>. The AI Scientist v2 uses GPT-4o for automated figure critique as part of its experiment evaluation pipeline[^9].</li>
+<li><strong>Cost-aware design</strong>: Recent systems balance expected information gain against compute cost, avoiding expensive experiments when cheaper ones suffice[^1]. This is particularly important as experiment budgets scale — running hundreds of experiments per paper requires careful resource allocation.</li>
+<li><strong>Cross-domain transfer</strong>: Experiment design strategies learned in one domain (e.g., NLP) can transfer to others (e.g., computer vision), suggesting general-purpose experiment planning is feasible[^3].</li>
+<li><strong>Tree-structured exploration</strong>: The AI Scientist v2's <a href="agentic-tree-search.html">Agentic Tree Search</a> represents a major advance, allowing the system to maintain multiple experimental branches and backtrack from dead ends rather than committing to a single path[^9]. This mirrors how expert researchers maintain multiple hypotheses simultaneously.</li>
+<li><strong>MLE-bench standardization</strong>: Chan et al. (2025) introduced MLE-bench, a standardized benchmark for evaluating ML engineering agents on Kaggle-style tasks[^10]. This provides the first rigorous comparison of automated experiment design approaches, with <a href="../tools-platforms/aide.html">AIDE</a> achieving 16.9% solve rates compared to 8.7% for baselines.</li>
+<li><strong>Foundation model improvements</strong>: The progression from GPT-4 to o3/o4-mini and Claude Sonnet 4 has qualitatively improved experiment design — reasoning models generate more creative hypotheses while coding models implement them more reliably[^9]. See <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>.</li>
+<li><strong>Application to real-world learning</strong>: Automated experiment design principles are being applied to educational contexts, where AI tutors design personalized learning experiments — test a teaching approach, measure comprehension, adjust strategy[^11]. This connects experiment design to the broader goal of AI-accelerated learning.</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ul>
+<li><strong>Novelty vs. exploitation</strong>: Automated systems tend toward incremental experiments that optimize known approaches, rather than creative leaps that test fundamentally new ideas.</li>
+<li><strong>Safety in physical experiments</strong>: For chemistry, biology, or robotics experiments, automated design must incorporate safety constraints that are difficult to formalize.</li>
+<li><strong>Evaluation complexity</strong>: When the metric is easy to game (e.g., overfitting to a validation set), automated experiment design can exploit rather than genuinely improve.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — primary system implementing automated experiment design</li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a> — the broader goal experiment design serves</li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — models that power automated experiment design</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> — evaluating the output of automated experiments</li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a> — sequential experiment loop implementation</li>
+<li><a href="../tools-platforms/aide.html">AIDE</a> — code-space search for ML experiments</li>
+<li><a href="agentic-tree-search.html">Agentic Tree Search</a> — structured tree exploration for experiments</li>
+<li><a href="template-free-research.html">Template-Free Research</a> — open-ended experiment design without scaffolding</li>
+<li><a href="wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> — the same experiment-driven approach applied to wiki articles</li>
+<li><a href="vlm-integration.html">VLM Integration</a> — visual evaluation in experiment pipelines</li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulating experiments before running them</li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — experiment loops that improve their own design process</li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — A/B testing as experiment design in e-commerce</li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — how experiment quality scales with compute</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring new experiment design approaches</li>
+<li><a href="../research-sources/key-papers.html">Key Papers</a> — foundational papers on automated experimentation</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — research groups advancing experiment automation</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).</p>
+<p>[^2]: Karpathy, A. (2025). "Autoresearch." <a href="https://github.com/karpathy/autoresearch">github.com/karpathy/autoresearch</a></p>
+<p>[^3]: Jiang, Z. et al. (2025). "AIDE: AI-driven exploration in the space of code." <a href="https://arxiv.org/abs/2502.13138">arXiv:2502.13138</a></p>
+<p>[^4]: Fisher, R. A. (1935). <em>The Design of Experiments.</em> Oliver &amp; Boyd.</p>
+<p>[^5]: Snoek, J. et al. (2012). "Practical Bayesian Optimization of Machine Learning Algorithms." <a href="https://arxiv.org/abs/1206.2944">arXiv:1206.2944</a></p>
+<p>[^6]: Settles, B. (2009). "Active Learning Literature Survey." University of Wisconsin-Madison, CS Technical Report 1648.</p>
+<p>[^7]: Boiko, D. et al. (2023). "Autonomous chemical research with large language models." <em>Nature</em>, 624, 570-578. <a href="https://doi.org/10.1038/s41586-023-06792-0">doi:10.1038/s41586-023-06792-0</a></p>
+<p>[^9]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a></p>
+<p>[^10]: Chan, J. et al. (2025). "MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering." <a href="https://arxiv.org/abs/2410.07095">arXiv:2410.07095</a></p>
+<p>[^11]: VanLehn, K. (2025). "The Relative Effectiveness of Human Tutoring, Intelligent Tutoring Systems, and Other Tutoring Systems." <em>Educational Psychologist</em>, 46(4), 197-221. <a href="https://doi.org/10.1080/00461520.2011.611369">doi:10.1080/00461520.2011.611369</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Tree Search - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html" aria-current="page">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Agentic Tree Search</div>
+<h1 id="agentic-tree-search">Agentic Tree Search</h1>
+<p><strong>Agentic Tree Search</strong> is an experiment exploration strategy used by <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> (template-free mode) to systematically explore a tree of experimental directions, using extra test-time compute to find better research outcomes [^1].</p>
+<h2 id="overview">Overview</h2>
+<p>Instead of running experiments sequentially (as in the template-based mode or <a href="../tools-platforms/autoresearch.html">Autoresearch</a>), agentic tree search structures experimentation as a tree where each node represents an experiment. Nodes branch when an experiment suggests multiple follow-up directions, and are pruned when they fail or underperform.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>Tree search has a long history in AI, from minimax in game-playing to Monte Carlo Tree Search (MCTS) in AlphaGo [^2]. The key insight of agentic tree search is applying this exploration strategy to <em>scientific experimentation</em> rather than game states.</p>
+<p>The theoretical motivation comes from three sources:</p>
+<ul>
+<li><strong>Test-time compute scaling</strong>: Snell et al. (2024) demonstrated that allocating more compute at inference time — through search, verification, and self-correction — can be more effective than scaling model parameters alone [^3]. Agentic tree search applies this principle to research: more experimental "thinking" (nodes explored) yields better results.</li>
+<li><strong>LLM-guided search</strong>: Unlike classical MCTS which uses random rollouts, agentic tree search uses an LLM to propose branches. This is related to work on Language Agent Tree Search (LATS) by Zhou et al. (2024), which combines LLM reasoning with tree search for complex decision-making [^4].</li>
+<li><strong>Scientific method as search</strong>: Research can be formalized as search over hypothesis space. Each experiment narrows the space, and branching represents the multiple directions a result might suggest. This framing connects to Langley et al.'s (1987) work on computational scientific discovery [^5].</li>
+</ul>
+<p><strong>Learning application</strong>: For students of AI research methodology, agentic tree search illustrates how structured exploration outperforms unstructured trial-and-error. The same principle applies to learning itself — systematically exploring subtopics (breadth) while going deep on promising areas (depth) mirrors the explore-exploit tradeoff in tree search.</p>
+<h2 id="architecture">Architecture</h2>
+<p><img alt="Agentic Tree Search Diagram" src="agentic-tree-search-diagram.svg" /></p>
+<h3 id="node-structure">Node Structure</h3>
+<p>Each node in the tree contains:
+- <strong>Experiment script</strong> -- A Python file implementing the experiment
+- <strong>High-level plan</strong> -- Textual description of what the experiment tests
+- <strong>Error trace</strong> -- Execution errors, if applicable
+- <strong>Runtime</strong> -- Wall-clock execution time
+- <strong>Performance metrics</strong> -- Training/validation metrics from the run
+- <strong>Plots</strong> -- Generated visualizations
+- <strong>VLM feedback</strong> -- Critique from a <a href="../methodologies/vlm-integration.html">vision-language model</a>
+- <strong>Status</strong> -- Buggy or non-buggy</p>
+<h3 id="execution-cycle-per-node">Execution Cycle Per Node</h3>
+<pre><code>1. Generate plan + code     (Claude Sonnet 4)
+2. Execute in Python interpreter
+   ├── Error? --&gt; Mark buggy, record error, stop
+   └── Success? --&gt; Continue
+3. Save outputs to numpy files
+4. Generate plots
+5. VLM critique of plots    (GPT-4o)
+   ├── Issues? --&gt; Mark buggy, record feedback
+   └── Clean? --&gt; Mark non-buggy
+6. Branch: propose child experiments
+</code></pre>
+<h3 id="tree-growth-strategy">Tree Growth Strategy</h3>
+<p>The tree grows through four stages, mirroring the scientific method:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Purpose</th>
+<th>Node Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Preliminary Investigation</td>
+<td>Establish baselines and validate approach</td>
+<td>Initial experiments</td>
+</tr>
+<tr>
+<td>2. Hyperparameter Tuning</td>
+<td>Optimize key parameters</td>
+<td>Grid/random search nodes</td>
+</tr>
+<tr>
+<td>3. Research Agenda Execution</td>
+<td>Test core hypotheses</td>
+<td>Main experiment nodes</td>
+</tr>
+<tr>
+<td>4. Ablation Studies</td>
+<td>Isolate component contributions</td>
+<td>Controlled removal experiments</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aggregation">Aggregation</h3>
+<p>After tree exploration completes, the system selects the <strong>best-performing path</strong> through the tree. Results from this path form the basis of the manuscript. The aggregation considers:
+- Validation performance
+- Experimental coherence (do the experiments tell a story?)
+- Figure quality (VLM-assessed)</p>
+<h2 id="performance-scaling">Performance Scaling</h2>
+<p>The AI Scientist paper shows that research quality improves with the number of experimental nodes explored:</p>
+<pre><code>Quality
+  ^
+  |        ___________
+  |      /
+  |    /
+  |  /
+  | /
+  +-------------------&gt; Number of nodes
+  5    10   15   20   25   30
+</code></pre>
+<p>This demonstrates that <strong>test-time compute</strong> (more experiments) directly translates to better research output.</p>
+<h2 id="comparison-with-linear-experimentation">Comparison with Linear Experimentation</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Tree Search</th>
+<th>Linear (Autoresearch-style)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exploration</td>
+<td>Breadth + depth</td>
+<td>Depth only</td>
+</tr>
+<tr>
+<td>Parallelism</td>
+<td>Natural branching</td>
+<td>Sequential</td>
+</tr>
+<tr>
+<td>Failure handling</td>
+<td>Prune branch, try alternatives</td>
+<td>Reset and retry</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Open-ended exploration</td>
+<td>Targeted optimization</td>
+</tr>
+<tr>
+<td>Overhead</td>
+<td>Higher (tree management)</td>
+<td>Minimal</td>
+</tr>
+</tbody>
+</table>
+<h2 id="connection-to-mcts">Connection to MCTS</h2>
+<p>Agentic tree search draws conceptual parallels with <strong>Monte Carlo Tree Search (MCTS)</strong>, the algorithm behind AlphaGo:
+- Both explore a tree of possibilities
+- Both use evaluation feedback to guide exploration
+- Both balance exploration (new directions) vs. exploitation (refining promising paths)</p>
+<p>However, agentic tree search uses LLM-generated plans as the branching heuristic rather than random rollouts.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>As of 2026, agentic tree search has moved from a research prototype to a core component of The AI Scientist v2's template-free mode [^1]. Key developments:</p>
+<ul>
+<li><strong>Adaptive branching</strong>: Later iterations dynamically adjust the branching factor based on result uncertainty — high-variance results trigger more branches, while clear results proceed linearly [^1].</li>
+<li><strong>VLM-in-the-loop pruning</strong>: Vision-language models evaluate experimental plots at each node, pruning branches with visualization artifacts before they waste compute <a href="OpenAI" title="2024). &quot;GPT-4o System Card.&quot; [openai.com/research](https://openai.com/research/gpt-4o-system-card">^6</a>.</li>
+<li><strong>Multi-objective search</strong>: Recent work explores balancing novelty and performance in the tree objective, rather than optimizing performance alone [^7].</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ul>
+<li><strong>Computational cost</strong>: Exploring a 25-node tree requires ~25x the compute of a single linear experiment, making it expensive for large-scale experiments.</li>
+<li><strong>LLM branching quality</strong>: The quality of proposed branches depends heavily on the LLM's scientific understanding. Weak models propose redundant or trivial variations.</li>
+<li><strong>No theoretical guarantees</strong>: Unlike MCTS (which converges to optimal play given enough rollouts), agentic tree search lacks formal convergence properties.</li>
+<li><strong>Aggregation difficulty</strong>: Selecting the "best path" through the tree for manuscript generation is subjective and may miss important negative results on pruned branches.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a></li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — uses simulation to predict experimental outcomes before running them</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — discovering new experiment directions from the literature</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).</p>
+<p>[^2]: Silver, D. et al. (2016). "Mastering the game of Go with deep neural networks and tree search." <em>Nature</em>, 529, 484--489. <a href="https://doi.org/10.1038/nature16961">doi:10.1038/nature16961</a></p>
+<p>[^3]: Snell, C. et al. (2024). "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters." <a href="https://arxiv.org/abs/2408.03314">arXiv:2408.03314</a></p>
+<p>[^4]: Zhou, A. et al. (2024). "Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models." <a href="https://arxiv.org/abs/2310.04406">arXiv:2310.04406</a></p>
+<p>[^5]: Langley, P. et al. (1987). <em>Scientific Discovery: Computational Explorations of the Creative Processes.</em> MIT Press.</p>
+<p>[^7]: Lehman, J. et al. (2020). "Abandoning Objectives: Evolution Through the Search for Novelty Alone." <a href="https://arxiv.org/abs/2008.08639">arXiv:2008.08639</a></p>
+</main>
+</body>
+</html>

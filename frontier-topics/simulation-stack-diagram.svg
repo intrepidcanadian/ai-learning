@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="physGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="digGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="socGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">The Three-Layer Simulation Stack for AI Learning</text>
+
+  <!-- Physical Layer -->
+  <rect x="40" y="55" width="220" height="180" rx="12" fill="url(#physGrad)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Physical Layer</text>
+  <text x="150" y="100" text-anchor="middle" font-size="11" fill="#475569">Object dynamics, physics, space</text>
+  <line x1="60" y1="110" x2="240" y2="110" stroke="#3b82f6" stroke-width="0.5" opacity="0.5"/>
+  <text x="60" y="130" font-size="10" fill="#334155">DreamerV3</text>
+  <text x="60" y="147" font-size="10" fill="#334155">Genie 3</text>
+  <text x="60" y="164" font-size="10" fill="#334155">V-JEPA 2</text>
+  <text x="60" y="181" font-size="10" fill="#334155">Cosmos-Predict2.5</text>
+  <text x="60" y="200" font-size="10" fill="#334155">LeWM</text>
+  <text x="150" y="225" text-anchor="middle" font-size="10" font-style="italic" fill="#64748b">Engineering, surgery, robotics</text>
+
+  <!-- Digital Layer -->
+  <rect x="290" y="55" width="220" height="180" rx="12" fill="url(#digGrad)" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="400" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#5b21b6">Digital Layer</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11" fill="#475569">Websites, interfaces, info</text>
+  <line x1="310" y1="110" x2="490" y2="110" stroke="#8b5cf6" stroke-width="0.5" opacity="0.5"/>
+  <text x="310" y="130" font-size="10" fill="#334155">WebWorld (+9.2% WebArena)</text>
+  <text x="310" y="147" font-size="10" fill="#334155">DynaWeb</text>
+  <text x="310" y="164" font-size="10" fill="#334155">Simia</text>
+  <text x="310" y="181" font-size="10" fill="#334155">ShopSimulator</text>
+  <text x="310" y="200" font-size="10" fill="#334155">Code World Models</text>
+  <text x="400" y="225" text-anchor="middle" font-size="10" font-style="italic" fill="#64748b">Research, e-commerce, data</text>
+
+  <!-- Social Layer -->
+  <rect x="540" y="55" width="220" height="180" rx="12" fill="url(#socGrad)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="650" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">Social Layer</text>
+  <text x="650" y="100" text-anchor="middle" font-size="11" fill="#475569">Behavior, groups, markets</text>
+  <line x1="560" y1="110" x2="740" y2="110" stroke="#f59e0b" stroke-width="0.5" opacity="0.5"/>
+  <text x="560" y="130" font-size="10" fill="#334155">SocioVerse (10M+ profiles)</text>
+  <text x="560" y="147" font-size="10" fill="#334155">AI-Agent School</text>
+  <text x="560" y="164" font-size="10" fill="#334155">EduVerse</text>
+  <text x="560" y="181" font-size="10" fill="#334155">Social-JEPA</text>
+  <text x="560" y="200" font-size="10" fill="#334155">LLMimic</text>
+  <text x="650" y="225" text-anchor="middle" font-size="10" font-style="italic" fill="#64748b">Sales, teaching, management</text>
+
+  <!-- Connecting arrows between layers -->
+  <path d="M 260 145 L 290 145" stroke="#6366f1" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 290 155 L 260 155" stroke="#6366f1" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 510 145 L 540 145" stroke="#d97706" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 540 155 L 510 155" stroke="#d97706" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#6366f1" stroke="none"/>
+    </marker>
+  </defs>
+
+  <!-- Shared Architecture Box -->
+  <rect x="120" y="260" width="560" height="60" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="400" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">Shared Architecture: Predict -> Act -> Observe -> Update</text>
+  <text x="400" y="305" text-anchor="middle" font-size="11" fill="#64748b">Same loop, different substrates -- innovations transfer across layers</text>
+
+  <!-- Three domain boxes at bottom -->
+  <rect x="40" y="345" width="220" height="130" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="150" y="370" text-anchor="middle" font-size="13" font-weight="bold" fill="#991b1b">Simulation</text>
+  <text x="60" y="392" font-size="10" fill="#334155">World models predict states</text>
+  <text x="60" y="409" font-size="10" fill="#334155">across all three layers</text>
+  <text x="60" y="432" font-size="10" font-style="italic" fill="#64748b">Physical: object dynamics</text>
+  <text x="60" y="449" font-size="10" font-style="italic" fill="#64748b">Digital: web interactions</text>
+  <text x="60" y="466" font-size="10" font-style="italic" fill="#64748b">Social: population behavior</text>
+
+  <rect x="290" y="345" width="220" height="130" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="400" y="370" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Recursion</text>
+  <text x="310" y="392" font-size="10" fill="#334155">Self-improving agents optimize</text>
+  <text x="310" y="409" font-size="10" fill="#334155">across all three layers</text>
+  <text x="310" y="432" font-size="10" font-style="italic" fill="#64748b">DGM/Hyperagents: meta-level</text>
+  <text x="310" y="449" font-size="10" font-style="italic" fill="#64748b">SKILL0/LADDER: scaffolding</text>
+  <text x="310" y="466" font-size="10" font-style="italic" fill="#64748b">MetaClaw: continual evolution</text>
+
+  <rect x="540" y="345" width="220" height="130" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="650" y="370" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Commerce</text>
+  <text x="560" y="392" font-size="10" fill="#334155">E-commerce spans all three:</text>
+  <text x="560" y="409" font-size="10" fill="#334155">products + platforms + people</text>
+  <text x="560" y="432" font-size="10" font-style="italic" fill="#64748b">Products: PerFusion simulation</text>
+  <text x="560" y="449" font-size="10" font-style="italic" fill="#64748b">Platforms: ShopSimulator</text>
+  <text x="560" y="466" font-size="10" font-style="italic" fill="#64748b">People: Shopping Companion</text>
+
+  <!-- Vertical connectors from shared arch to domains -->
+  <line x1="150" y1="320" x2="150" y2="345" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="400" y1="320" x2="400" y2="345" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="650" y1="320" x2="650" y2="345" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+</svg>

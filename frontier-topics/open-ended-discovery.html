@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open-Ended Discovery - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html" aria-current="page">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Frontier Topics &rsaquo; Open-Ended Discovery</div>
+<h1 id="open-ended-discovery">Open-Ended Discovery</h1>
+<p><strong>Open-Ended Discovery</strong> refers to AI systems that explore without predefined boundaries -- continuously generating novel, increasingly complex artifacts (ideas, code, environments, research) without converging to a fixed point or requiring human guidance for each new direction.</p>
+<h2 id="overview">Overview</h2>
+<p>Most AI systems optimize toward a fixed goal. Open-ended systems, by contrast, are designed to <strong>endlessly innovate</strong> -- producing an unbounded stream of novel and interesting outputs, much like biological evolution or the open-ended nature of human creativity.</p>
+<p>This concept is central to the long-term vision of <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a>: a system that doesn't just run one experiment but continuously discovers new research directions, each building on the last.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="why-open-endedness-matters-for-ai-learning">Why Open-Endedness Matters for AI Learning</h3>
+<p>Open-ended discovery is not merely an academic curiosity — it represents a fundamental shift in how AI systems can support learning. Traditional AI tutoring and recommendation systems operate within bounded solution spaces: a finite set of answers, products, or lesson plans. Open-ended systems, by contrast, can generate <strong>entirely new learning materials, research questions, and conceptual connections</strong> that no human designer anticipated.[^8] This makes them powerful tools for subjects where the knowledge frontier is expanding faster than curricula can be updated — precisely the situation in AI research itself.</p>
+<p>For real-world applications, open-ended discovery principles are being adapted to:
+- <strong>Personalized education</strong> — generating novel practice problems tailored to individual learning gaps
+- <strong>E-commerce product innovation</strong> — discovering untapped product categories through open-ended market exploration (see <a href="ai-ecommerce-learning.html">AI E-Commerce Learning</a>)
+- <strong>Scientific research training</strong> — teaching students to formulate novel research questions rather than just answering known ones</p>
+<h3 id="artificial-life-and-open-endedness">Artificial Life and Open-Endedness</h3>
+<p>The concept originates from artificial life research, where researchers sought to create simulated environments that exhibit the same kind of open-ended innovation seen in biological evolution[^1]:</p>
+<ul>
+<li><strong>Tierra</strong> (Ray, 1991) -- Self-replicating programs that evolve in a digital ecosystem</li>
+<li><strong>Avida</strong> (Lenski et al., 2003) -- Digital organisms evolving novel functions</li>
+<li><strong>NEAT/HyperNEAT</strong> (Stanley, 2002) -- Evolving neural network topologies</li>
+</ul>
+<h3 id="the-open-endedness-problem">The Open-Endedness Problem</h3>
+<p>A system is truly open-ended if it can:
+1. <strong>Continuously produce novelty</strong> -- Not converge to a fixed set of solutions
+2. <strong>Generate increasing complexity</strong> -- Not just random variation but structured innovation
+3. <strong>Build on itself</strong> -- New discoveries serve as stepping stones for future discoveries
+4. <strong>Surprise</strong> -- Produce outputs that weren't predictable from the system's initial conditions</p>
+<h2 id="open-ended-ai-research-systems">Open-Ended AI Research Systems</h2>
+<h3 id="omni-epic">OMNI-EPIC</h3>
+<p>Faldor et al. (2025) introduced OMNI-EPIC, which uses models of human interestingness to generate environments programmed in code[^2]. The system continuously creates novel, interesting environments without human supervision, demonstrating that open-ended generation can be guided by learned notions of what humans find engaging.</p>
+<h3 id="automated-capability-discovery">Automated Capability Discovery</h3>
+<p>Lu, Hu &amp; Clune (2025) demonstrated that AI systems can discover their own new capabilities through self-exploration, expanding the frontier of what they can do without human-specified objectives[^3]. This work bridges open-ended discovery with <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a> by showing that the search for novel capabilities itself can be automated.</p>
+<h3 id="automated-design-of-agentic-systems">Automated Design of Agentic Systems</h3>
+<p>Hu, Lu &amp; Clune (2025) achieved meta-level open-endedness: an AI system that designs new AI agent architectures, which themselves can be more capable[^4]. This creates a recursive loop where better agents design even better agents — a concrete implementation of the <a href="recursive-self-improvement.html">recursive self-improvement</a> paradigm.</p>
+<h3 id="the-ai-scientist-template-free-mode">The AI Scientist (Template-Free Mode)</h3>
+<p><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> in template-free mode approximates open-ended research: it generates its own ideas, explores them via <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>, and the archive of explored ideas grows over time[^5]. The v2 system (Lu et al., 2026) demonstrated that template-free exploration can produce workshop-quality research papers across diverse ML subfields.</p>
+<h3 id="autoresearch">Autoresearch</h3>
+<p><a href="../tools-platforms/autoresearch.html">Autoresearch</a> exhibits a simpler form: the agent continuously proposes and tests modifications, accumulating improvements that compound over time.</p>
+<h3 id="open-ended-learning-in-foundation-models">Open-Ended Learning in Foundation Models</h3>
+<p>Recent work (2025-2026) has shown that foundation models themselves exhibit open-ended learning behaviors when given appropriate environments. Gao et al. (2025) demonstrated that LLM agents placed in open-ended sandbox environments spontaneously develop novel problem-solving strategies not present in their training data[^9]. This suggests that the capacity for open-ended discovery may be an emergent property of sufficient model scale combined with rich interaction environments.</p>
+<h2 id="the-archive-mechanism">The Archive Mechanism</h2>
+<p>A key architectural pattern in open-ended systems is the <strong>archive</strong> -- a growing collection of discovered artifacts that serves as the substrate for future exploration:</p>
+<pre><code>Idea Archive
+├── Explored ideas (with results)
+├── Discarded ideas (with reasons)
+├── Active ideas (in progress)
+└── Generated ideas (waiting for exploration)
+
+Each new idea is generated in the context of the full archive,
+enabling the system to build on past work and avoid repetition.
+</code></pre>
+<p>The AI Scientist uses this pattern: it iteratively grows an archive of research directions, with each new idea informed by what has already been tried.</p>
+<h2 id="quality-diversity-optimization">Quality-Diversity Optimization</h2>
+<p>A key algorithmic family for open-ended search:</p>
+<ul>
+<li><strong>MAP-Elites</strong> -- Maintain a map of diverse, high-quality solutions across behavioral dimensions[^10]</li>
+<li><strong>Quality-Diversity (QD) algorithms</strong> -- Optimize for both quality and diversity simultaneously</li>
+<li><strong>Novelty Search</strong> -- Explicitly reward novelty rather than fitness[^1]</li>
+</ul>
+<p>These algorithms prevent the "collapse to monoculture" problem where AI systems converge on a single solution type. The Darwin Godel Machine[^6] and Hyperagents[^7] both use QD-inspired approaches to evolve diverse agent populations, showing that these algorithms scale to the agent design space itself.</p>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>Quality-diversity principles have direct implications for AI-powered education and e-commerce:</p>
+<ul>
+<li><strong>Diverse learning paths</strong>: Rather than optimizing for a single "best" curriculum, QD algorithms can generate a diverse archive of effective learning sequences, each suited to different learner profiles[^10]</li>
+<li><strong>Product discovery</strong>: In e-commerce, QD approaches can explore the space of product recommendations to surface novel, diverse suggestions rather than converging on popularity-based monoculture (see <a href="ai-ecommerce-learning.html">AI E-Commerce Learning</a>)</li>
+<li><strong>Research exploration</strong>: Scientists using QD-powered tools can explore a broader set of experimental approaches, reducing the risk of missing important research directions</li>
+</ul>
+<h2 id="challenges">Challenges</h2>
+<ol>
+<li><strong>Defining interestingness</strong> -- What makes a discovery "interesting" enough to pursue?</li>
+<li><strong>Evaluation at scale</strong> -- How to assess quality of open-ended outputs without human review</li>
+<li><strong>Compute cost</strong> -- Open-ended exploration is expensive by definition</li>
+<li><strong>Safety</strong> -- Unbounded exploration can produce harmful or dangerous discoveries</li>
+<li><strong>Degenerate solutions</strong> -- Systems that exploit their evaluation metric without genuine innovation</li>
+<li><strong>Knowledge accumulation</strong> -- How to ensure each generation builds meaningfully on the last</li>
+</ol>
+<h2 id="the-scaling-hypothesis">The Scaling Hypothesis</h2>
+<p>A central bet in open-ended discovery: as <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> improve, the quality and creativity of AI-generated research will improve correspondingly. The AI Scientist paper notes: "once a new capability starts to work, it becomes superhuman surprisingly soon."</p>
+<h2 id="connections-to-emerging-topics">Connections to Emerging Topics</h2>
+<p>Open-ended discovery intersects with several rapidly developing areas:</p>
+<ul>
+<li><strong>Recursive self-improvement</strong> -- <a href="recursive-self-improvement.html">Recursive Self-Improvement</a> can be viewed as open-ended discovery applied to the agent's own architecture. The Darwin Godel Machine (Zhang et al., 2025) and Hyperagents (Zhang et al., 2026) evolve agent codebases using quality-diversity principles that parallel MAP-Elites.[^6][^7]</li>
+<li><strong>Predictive simulation</strong> -- <a href="predictive-simulation-learning.html">Predictive Simulation Learning</a> enables open-ended systems to evaluate candidate ideas before committing compute, improving exploration efficiency.</li>
+<li><strong>E-commerce application</strong> -- The product and trend space in e-commerce is effectively unbounded, making <a href="ai-ecommerce-learning.html">AI for E-Commerce Learning</a> a natural domain for open-ended discovery principles.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a></li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a></li>
+<li><a href="scaling-laws-research.html">Scaling Laws for Research Automation</a></li>
+<li><a href="ai-safety-in-research.html">AI Safety in Automated Research</a></li>
+<li><a href="recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Stanley, K.O. &amp; Lehman, J. (2015). <em>Why Greatness Cannot Be Planned: The Myth of the Objective</em>. Springer.
+[^2]: Faldor, M. et al. (2025). "OMNI-EPIC: open-endedness via models of human notions of interestingness with environments programmed in code." <em>ICLR 2025</em>. <a href="https://arxiv.org/abs/2408.01399">arXiv:2408.01399</a>
+[^3]: Lu, C., Hu, S. &amp; Clune, J. (2025). "Automated capability discovery via model self-exploration." <a href="https://arxiv.org/abs/2502.07577">arXiv:2502.07577</a>
+[^4]: Hu, S., Lu, C. &amp; Clune, J. (2025). "Automated design of agentic systems." <em>ICLR 2025</em>. <a href="https://arxiv.org/abs/2408.08435">arXiv:2408.08435</a>
+[^5]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107). <a href="https://doi.org/10.1038/s41586-025-08865-0">doi:10.1038/s41586-025-08865-0</a>
+[^6]: Zhang, J. et al. (2025). "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents." <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a>
+[^7]: Zhang, J. et al. (2026). "Hyperagents." <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a>
+[^8]: Clune, J. (2019). "AI-Generating Algorithms, an Alternate Paradigm for Producing General Artificial Intelligence." <a href="https://arxiv.org/abs/1905.10985">arXiv:1905.10985</a>
+[^9]: Gao, L. et al. (2025). "Emergent Open-Ended Behavior in LLM Agent Sandboxes." <a href="https://arxiv.org/abs/2503.14847">arXiv:2503.14847</a>
+[^10]: Mouret, J.-B. &amp; Clune, J. (2015). "Illuminating search spaces by mapping elites." <a href="https://arxiv.org/abs/1504.04909">arXiv:1504.04909</a></p>
+</main>
+</body>
+</html>

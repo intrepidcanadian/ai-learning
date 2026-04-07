@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Wiki Static Server",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080"],
+      "port": 8080
+    },
+    {
+      "name": "Wiki Builder",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["build.py"],
+      "port": 0
+    },
+    {
+      "name": "Paper Updater",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["update_wiki.py"],
+      "port": 0
+    }
+  ]
+}

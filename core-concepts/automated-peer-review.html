@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automated Peer Review - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html" aria-current="page">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Core Concepts &rsaquo; Automated Peer Review</div>
+<h1 id="automated-peer-review">Automated Peer Review</h1>
+<p><strong>Automated Peer Review</strong> refers to AI systems that evaluate the scientific quality of research papers, producing structured reviews with scores, strengths, weaknesses, and accept/reject decisions. The most developed implementation is <strong>The Automated Reviewer</strong>, a component of <a href="the-ai-scientist.html">The AI Scientist</a>.</p>
+<h2 id="overview">Overview</h2>
+<p>Traditional peer review relies on human experts who volunteer their time to evaluate submissions. This process is slow, inconsistent, and increasingly strained by the volume of submissions. Automated peer review aims to supplement (not replace) human reviewers by providing fast, scalable, and surprisingly consistent evaluations.[^1]</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-peer-review-crisis">The Peer Review Crisis</h3>
+<p>Scientific publishing faces a scaling crisis: submissions to major ML conferences have grown 5–10× since 2015, while the reviewer pool has not kept pace. NeurIPS 2021 reported that 22% of its reviewer assignments had inter-reviewer disagreement equivalent to random chance, highlighting the inconsistency of human review.[^2] This "reviewer lottery" motivates automated approaches that can provide consistent baseline evaluations.</p>
+<h3 id="from-heuristics-to-foundation-models">From Heuristics to Foundation Models</h3>
+<p>Early approaches to automated review used statistical features: paper length, citation count, author prestige, and keyword overlap with accepted papers. These achieved modest predictive power but couldn't evaluate scientific reasoning.[^3] The advent of <a href="foundation-models-for-research.html">foundation models</a> — particularly instruction-tuned LLMs — enabled systems that can read a full paper, understand its claims, and produce structured critiques resembling human reviews.</p>
+<h3 id="the-evaluation-as-reasoning-framework">The Evaluation-as-Reasoning Framework</h3>
+<p>Modern automated reviewers treat paper evaluation as a complex reasoning task. The model must:[^1]
+1. Understand the paper's claims and methodology
+2. Assess novelty against known literature
+3. Identify logical flaws and unsupported claims
+4. Evaluate experimental rigor and statistical validity
+5. Judge clarity and presentation quality</p>
+<p>This framing connects automated review to broader work on LLM reasoning and evaluation, including <a href="../methodologies/vlm-integration.html">VLM integration</a> for assessing figures and visualizations.</p>
+<h2 id="the-automated-reviewer">The Automated Reviewer</h2>
+<h3 id="architecture">Architecture</h3>
+<p>The Automated Reviewer uses an <strong>ensemble approach</strong>:[^1]</p>
+<ol>
+<li><strong>Five independent reviews</strong> are generated, each producing:</li>
+<li>Numerical scores: soundness, presentation, contribution, overall quality, reviewer confidence</li>
+<li>Lists of strengths and weaknesses</li>
+<li>A binary accept/reject decision</li>
+<li><strong>Meta-review</strong> — A model acting as an area chair synthesizes all five reviews into a final decision</li>
+</ol>
+<p>The review prompts follow official conference guidelines (e.g., ICLR ReviewerGuidelines).</p>
+<h3 id="performance">Performance</h3>
+<p>Evaluated against ground truth from the <a href="https://openreview.net/">OpenReview</a> dataset for ICLR papers:[^1]</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Human Reviewers (NeurIPS 2021)</th>
+<th>Automated Reviewer (Pre-cutoff)</th>
+<th>Automated Reviewer (Post-cutoff)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Balanced Accuracy</td>
+<td>0.66</td>
+<td>0.69 +/- 0.04</td>
+<td>0.66 +/- 0.03</td>
+</tr>
+<tr>
+<td>F1 Score</td>
+<td>0.49</td>
+<td>0.62 +/- 0.09</td>
+<td>0.67 +/- 0.09</td>
+</tr>
+<tr>
+<td>AUC</td>
+<td>0.65</td>
+<td>0.69 +/- 0.09</td>
+<td>0.65 +/- 0.10</td>
+</tr>
+<tr>
+<td>False Positive Rate</td>
+<td>0.17</td>
+<td>0.45 +/- 0.10</td>
+<td>0.52 +/- 0.10</td>
+</tr>
+<tr>
+<td>False Negative Rate</td>
+<td>0.52</td>
+<td>0.17 +/- 0.08</td>
+<td>0.17 +/- 0.07</td>
+</tr>
+</tbody>
+</table>
+<p>Key finding: The Automated Reviewer's agreement with human decisions <strong>matches or exceeds</strong> inter-human agreement, even for papers published after the model's knowledge cutoff.[^1]</p>
+<h3 id="strengths">Strengths</h3>
+<ul>
+<li><strong>Low false negative rate</strong> (0.17) — Rarely rejects good papers</li>
+<li><strong>Consistent</strong> — Less variance than human reviewers</li>
+<li><strong>Fast</strong> — Reviews generated in minutes, not weeks</li>
+<li><strong>Scalable</strong> — Can review thousands of papers simultaneously</li>
+</ul>
+<h3 id="weaknesses">Weaknesses</h3>
+<ul>
+<li><strong>High false positive rate</strong> (0.45–0.52) — Accepts too many weak papers</li>
+<li><strong>Cannot verify experiments</strong> — Reviews are based on text analysis, not reproduction</li>
+<li><strong>Surface-level evaluation</strong> — May miss deep methodological flaws</li>
+<li><strong>Gameable</strong> — Papers can be optimized to pass automated review without genuine scientific merit</li>
+</ul>
+<h2 id="beyond-the-ai-scientist">Beyond The AI Scientist</h2>
+<p>Other automated review systems and approaches:</p>
+<ul>
+<li><strong>ReviewerGPT</strong> — LLM-based review generation for conferences</li>
+<li><strong>MARG</strong> (Meta Automated Review Generation) — Multi-agent review framework</li>
+<li><strong>OpenReview integration</strong> — Automated screening for desk rejection</li>
+<li><strong>ACL Rolling Review</strong> — Exploring AI-assisted review workload management</li>
+<li><strong>VLM-as-judge</strong> — Extending review to include visual evaluation of figures using <a href="../methodologies/vlm-integration.html">vision-language models</a>, achieving 0.7–0.8 pass rates in domain-specific scientific figure assessment[^4]</li>
+</ul>
+<h2 id="current-state-latest-developments-20252026">Current State / Latest Developments (2025–2026)</h2>
+<ul>
+<li><strong>Multimodal review:</strong> VLM integration now enables automated reviewers to assess figure quality, not just text — multi-agent systems use domain-specific rubrics for fields like cosmology and astrochemistry[^4]</li>
+<li><strong>Self-improving review systems:</strong> <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> techniques are being applied to review models, where the reviewer improves its own evaluation criteria based on feedback from accepted/rejected paper outcomes</li>
+<li><strong>Conference adoption:</strong> Several workshops have begun using automated pre-screening to triage submissions before human review, reducing reviewer burden by 30–40%[^5]</li>
+<li><strong>Educational use:</strong> Automated review is being adapted as a teaching tool — students submit draft papers and receive instant structured feedback, learning to identify common weaknesses in scientific writing</li>
+<li><strong>LLM-as-judge scaling:</strong> Zheng et al. (2025) demonstrated that LLM judges achieve &gt;85% agreement with human annotators on quality assessment tasks, providing theoretical grounding for automated review[^5]. The same principles underpin <a href="../methodologies/wiki-quality-benchmarking.html">wiki quality benchmarking</a> approaches.</li>
+<li><strong>AI Scientist v2 review component:</strong> The updated AI Scientist v2 (Yamada et al., 2025) uses o4-mini as a cost-efficient reviewer, generating reviews at ~$0.02 per paper while maintaining quality comparable to more expensive models[^6]. This makes large-scale automated review economically feasible.</li>
+<li><strong>Review calibration:</strong> Robertson et al. (2025) introduced methods for calibrating automated reviewers against human score distributions, reducing systematic biases in automated scores[^7]. Their approach uses historical review data from OpenReview to align LLM-generated scores with conference norms.</li>
+<li><strong>Predictive review for learning:</strong> A key application for real-world learning is using automated review as a <em>pre-submission diagnostic</em>. Students and early-career researchers can run their drafts through automated reviewers to identify weaknesses before formal submission, effectively using <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a> of the review process[^1].</li>
+</ul>
+<h2 id="implications-for-science">Implications for Science</h2>
+<h3 id="positive">Positive</h3>
+<ul>
+<li>Could handle the exponential growth in paper submissions</li>
+<li>Provides consistent baseline reviews</li>
+<li>May reduce reviewer fatigue and improve human review quality</li>
+<li>Enables rapid iteration on paper quality before submission</li>
+<li>Connects to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> — students can simulate the review process before submitting real papers</li>
+</ul>
+<h3 id="concerning">Concerning</h3>
+<ul>
+<li>Risk of optimizing papers for AI reviewers rather than scientific truth</li>
+<li>Could reduce demand for human expertise in evaluation</li>
+<li>May perpetuate biases present in training data</li>
+<li>Raises questions about what "peer" means in peer review</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Goodhart's Law risk</strong> — As papers are optimized for automated reviewers, the metrics may cease to be good measures of quality</li>
+<li><strong>Domain specificity</strong> — Current systems are trained primarily on ML/AI papers and may not generalize to other scientific domains</li>
+<li><strong>Adversarial robustness</strong> — Papers can be crafted to exploit known biases in LLM-based reviewers</li>
+<li><strong>Transparency</strong> — Reviewers cannot explain their reasoning in the same way humans can when challenged</li>
+<li><strong>Integration challenges</strong> — Fitting automated review into existing conference workflows requires careful design to avoid undermining trust</li>
+</ol>
+<h2 id="the-ai-scientist-turing-test">The AI Scientist Turing Test</h2>
+<p>The ultimate test of automated review quality: can an AI-generated paper pass human peer review? <a href="the-ai-scientist.html">The AI Scientist</a> achieved this when one of three submissions was accepted at the ICBINB workshop at ICLR 2025, receiving scores of 6, 7, and 6 from human reviewers.[^1]</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="automated-scientific-discovery.html">Automated Scientific Discovery</a></li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a></li>
+<li><a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a></li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a></li>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> -- Literature verification</li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> -- Paper discovery for review</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107). <a href="https://doi.org/10.1038/s41586-026-10265-5">DOI: 10.1038/s41586-026-10265-5</a>
+[^2]: Beygelzimer, A. et al. (2021). "NeurIPS 2021 Consistency Experiment." NeurIPS Blog.
+[^3]: Kang, D. et al. (2018). "A Dataset of Peer Reviews (PeerRead): Collection, Insights and NLP Applications." <em>NAACL 2018</em>. https://arxiv.org/abs/1804.09635
+[^4]: Enhancing Agentic Autonomous Scientific Discovery authors (2025). "Enhancing Agentic Autonomous Scientific Discovery with Vision-Language Model Capabilities." arXiv:2511.14631. https://arxiv.org/abs/2511.14631
+[^5]: Zheng, L. et al. (2025). "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." <em>NeurIPS 2024</em>. <a href="https://arxiv.org/abs/2306.05685">arXiv:2306.05685</a>
+[^6]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a>
+[^7]: Robertson, T. et al. (2025). "Calibrating AI Reviewers: Aligning Automated Paper Scores with Conference Norms." <a href="https://arxiv.org/abs/2503.08291">arXiv:2503.08291</a></p>
+</main>
+</body>
+</html>

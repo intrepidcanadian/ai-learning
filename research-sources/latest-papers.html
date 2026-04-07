@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latest Papers - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html" aria-current="page">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Research Sources &rsaquo; Latest Papers</div>
+<h1 id="latest-papers">Latest Papers</h1>
+<p>Auto-updated feed of recent AI research relevant to research automation, foundation models, agentic systems, and related topics. Last updated: 2026-04-07 (scheduled update — batch 7).</p>
+<p><strong>130 papers tracked</strong> | Sources: <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Daily Papers</a>, <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar</a>, Web research</p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update-batch-7">Week of April 06, 2026 (April 7 scheduled update — batch 7)</h2>
+<h3 id="world-gymnast-training-robots-with-reinforcement-learning-in-a-world-model-124"><a href="https://arxiv.org/abs/2602.02454">World-Gymnast: Training Robots with Reinforcement Learning in a World Model</a> [^124]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Sharma, Sun, Lu, Zhang, Liu &amp; Yang</strong> (February 2026)</p>
+<blockquote>
+<p>RL inside learned video world models outperforms supervised fine-tuning by 18× and software simulation by 2×. VLM-generated rewards eliminate hand-crafted reward engineering. Supports diverse instructions, novel scenes, and iterative co-improvement of world model and policy. Paradigm shift: the world model <em>is</em> the training environment.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.02454">arXiv:2602.02454</a> -- Found via Web search</em></p>
+<h3 id="rlvr-world-training-world-models-with-reinforcement-learning-125"><a href="https://arxiv.org/abs/2505.13934">RLVR-World: Training World Models with Reinforcement Learning</a> [^125]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Wu, Yin, Feng &amp; Long</strong> (May 2025; NeurIPS 2025)</p>
+<blockquote>
+<p>Replaces maximum likelihood training with RL using verifiable rewards for world models. Task-specific optimization produces better downstream agent performance across text games, web navigation, and robotics. Addresses the fundamental question: world models should be optimized for decision-relevant prediction, not visual fidelity.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2505.13934">arXiv:2505.13934</a> -- Found via Web search</em></p>
+<h3 id="simia-simulating-environments-with-reasoning-models-for-agent-training-126"><a href="https://arxiv.org/abs/2511.01824">Simia: Simulating Environments with Reasoning Models for Agent Training</a> [^126]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Li, Inan, Yue, Chen, Wutschitz, Kulkarni, Poovendran, Sim &amp; Rajmohan</strong> (November 2025)</p>
+<blockquote>
+<p>LLMs generate realistic environment feedback without access to actual testbed data or APIs. Simia-SFT amplifies seed data into diverse trajectories; Simia-RL enables RL training through LLM-simulated feedback. Fine-tuned open models match GPT-4o and approach o4-mini on τ²-Bench. Collapses simulation engineering barrier from months to minutes.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2511.01824">arXiv:2511.01824</a> -- Found via Web search</em></p>
+<h3 id="guideai-real-time-personalized-learning-with-biosensory-feedback-127"><a href="https://arxiv.org/abs/2601.20402">GuideAI: Real-time Personalized Learning with Biosensory Feedback</a> [^127]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Shukla, Modi, Bajpai &amp; Siddharth</strong> (January 2026; IUI 2026)</p>
+<blockquote>
+<p>Multi-modal framework combining LLM tutoring with real-time eye gaze tracking, heart rate variability, posture detection, and note-taking behavior. Dynamically adjusts material complexity and provides physiological guidance. Statistically significant gains in problem-solving and knowledge retention (n=25). Adds the missing physiological dimension to learner state modeling.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.20402">arXiv:2601.20402</a> -- Found via Web search</em></p>
+<h3 id="the-ai-scientist-v2-workshop-level-automated-scientific-discovery-via-agentic-tree-search-128"><a href="https://arxiv.org/abs/2504.08066">The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search</a> [^128]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Yamada, Lange, Lu, Hu, Lu, Foerster, Clune &amp; Ha (Sakana AI / UBC / Oxford)</strong> (April 2025)</p>
+<blockquote>
+<p>First fully AI-generated paper to pass peer review at an ICLR workshop (scores 6/7/6). Template-free research across ML domains. Progressive agentic tree search with dedicated experiment manager. Demonstrates recursive self-improvement applied to knowledge creation itself -- AI systems that generate verifiable new scientific findings.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a> -- Found via Web search</em></p>
+<h3 id="aces-v3-agentic-e-commerce-markets-are-volatile-129"><a href="https://arxiv.org/abs/2508.02630">ACES v3: Agentic E-Commerce Markets Are Volatile</a> [^129]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Allouah, Besbes, Figueroa, Kanoria &amp; Kumar</strong> (August 2025; revised December 2025)</p>
+<blockquote>
+<p>Expanded study reveals model updates drastically reshuffle market shares, agents concentrate demand on few "modal" products creating winner-take-all dynamics, and seller optimization is effective but fragile across model versions. Concludes agentic markets are "volatile and fundamentally different from human-centric commerce." Critical for commerce education curriculum design.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2508.02630">arXiv:2508.02630</a> -- Found via Web search</em></p>
+<h3 id="deepscientist-advancing-frontier-pushing-scientific-findings-progressively-130"><a href="https://arxiv.org/abs/2509.26603">DeepScientist: Advancing Frontier-Pushing Scientific Findings Progressively</a> [^130]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>HuggingFace Trending</strong> (April 2026)</p>
+<blockquote>
+<p>Autonomously conducts scientific discovery through Bayesian Optimization, surpassing human state-of-the-art methods on multiple AI tasks. Progressive approach generates increasingly novel findings.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2509.26603">arXiv:2509.26603</a> -- Found via HuggingFace Trending</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update-batch-5">Week of April 06, 2026 (April 7 scheduled update — batch 5)</h2>
+<h3 id="eduverse-a-user-defined-multi-agent-simulation-space-for-education-scenario-119"><a href="https://arxiv.org/abs/2510.05650">EduVerse: A User-Defined Multi-Agent Simulation Space for Education Scenario</a> [^119]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Ma, Hu, Zhu, Wang, Kang, Liu &amp; Cheong</strong> (October 2025; AAAI 2026 AI4Ed Workshop)</p>
+<blockquote>
+<p>First user-defined multi-agent simulation space for educational scenarios. CIE (Cognition-Interaction-Evolution) three-layer architecture ensures agent consistency, authentic interaction, and longitudinal adaptation. Simulated classroom IRF rates (0.28-0.64) closely match real classrooms (0.37-0.49). Positive transition rates increase 11.7% across sessions. Human-in-the-loop interface allows real users to join simulated classrooms. Fills the "social learning simulation" gap between individual learner models and population models.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2510.05650">arXiv:2510.05650</a> -- Found via AAAI 2026 workshop program</em></p>
+<h3 id="evoscientist-multi-agent-evolving-ai-scientists-for-end-to-end-scientific-discovery-120"><a href="https://arxiv.org/abs/2603.08127">EvoScientist: Multi-Agent Evolving AI Scientists for End-to-End Scientific Discovery</a> [^120]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Chen et al.</strong> (March 2026)</p>
+<blockquote>
+<p>Self-evolving multi-agent framework with three specialized agents (Researcher, Engineer, Evolution Manager) that continuously improve through persistent dual memory (ideation + experimentation). Outperforms 7 SOTA AI scientist systems on novelty, feasibility, relevance, and clarity. Human-on-the-loop paradigm preserves researcher agency. Dual-memory architecture mirrors how expert researchers develop separate intuitions for problem selection and technical execution.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.08127">arXiv:2603.08127</a> -- Found via Web search</em></p>
+<h3 id="a-evolve-open-source-self-rewriting-ai-workflows-121"><a href="https://github.com/EvoAgentX/EvoAgentX">A-Evolve: Open-Source Self-Rewriting AI Workflows</a> [^121]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>EvoAgentX</strong> (April 2026)</p>
+<blockquote>
+<p>First production-ready open-source framework for self-rewriting AI agents. Five-stage evolutionary loop (Solve-Observe-Evolve-Gate-Reload) with Git-native reproducibility -- every mutation versioned as tagged checkpoints. Directly edits workspace files (prompts, tools, skills, memory). 79.4% on MCP-Atlas (#1), 76.8% on SWE-bench Verified. Operationalizes DGM/Hyperagent paradigm with full auditability. Three-line setup with leading LLM backends.</p>
+</blockquote>
+<p><em><a href="https://github.com/EvoAgentX/EvoAgentX">GitHub</a> -- Found via Web search</em></p>
+<h3 id="connecting-education-with-reality-ai-as-a-catalyst-for-situated-learning-122"><a href="https://www.tandfonline.com/doi/full/10.1080/00131725.2025.2596001">Connecting Education with Reality: AI as a Catalyst for Situated Learning</a> [^122]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Taylor &amp; Francis</strong> (January 2026)</p>
+<blockquote>
+<p>Theoretical framework positioning AI as a catalyst for situated learning -- connecting education to authentic, real-world contexts. Argues that contextual authenticity matters more than technical sophistication for transfer. Provides the pedagogical foundation for why grounded world models and realistic simulation environments produce better learning outcomes than abstract benchmarks. Complements OECD 2026 evidence on scaffolding design.</p>
+</blockquote>
+<p><em><a href="https://www.tandfonline.com/doi/full/10.1080/00131725.2025.2596001">DOI: 10.1080/00131725.2025.2596001</a> -- Found via Web search</em></p>
+<h3 id="socioverse-world-model-for-social-simulation-at-scale-123"><a href="https://arxiv.org/abs/2504.10157">SocioVerse: World Model for Social Simulation at Scale</a> [^123]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zhang et al. (Fudan/Rochester/Indiana/Xiaohongshu)</strong> (April 2025; HuggingFace trending April 2026)</p>
+<blockquote>
+<p>LLM-agent-driven world model for social simulation with 10 million real-world user profiles across 15 demographic dimensions. Four alignment components (Social Environment, User Engine, Scenario Engine, Behavior Engine). Validated on presidential election prediction, breaking news feedback, and national economic surveys. Bridges world models from physical to social environments -- enables simulation of population-level consumer behavior for commerce and policy education.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2504.10157">arXiv:2504.10157</a> -- Found via HuggingFace Daily Papers</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update-batch-4">Week of April 06, 2026 (April 7 scheduled update — batch 4)</h2>
+<h3 id="dreamer-4-training-agents-inside-of-scalable-world-models-114"><a href="https://arxiv.org/abs/2509.24527">Dreamer 4: Training Agents Inside of Scalable World Models</a> [^114]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Hafner, Yan &amp; Lillicrap (DeepMind)</strong> (September 2025; integrated April 2026)</p>
+<blockquote>
+<p>First agent to obtain diamonds in Minecraft purely from offline data (20,000+ sequential actions from raw pixels without environment interaction). Shortcut forcing objective enables real-time inference (21 FPS) on single GPU. 6x context length over prior world models. Demonstrates observation-based learning without trial-and-error -- profound implications for educational simulation where safe practice environments are essential.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a> -- Found via Web search</em></p>
+<h3 id="medsimai-simulation-and-formative-feedback-for-medical-education-115"><a href="https://arxiv.org/abs/2503.05793">MedSimAI: Simulation and Formative Feedback for Medical Education</a> [^115]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Hicke et al. (Cornell/Yale/UCSF)</strong> (2026; LAK 2026)</p>
+<blockquote>
+<p>First multi-institutional trial of AI-simulated patient encounters (410 students, 3 medical schools). 59.5% voluntary repeat engagement. OSCE scores improved 82.8 to 88.8 (p &lt; 0.001, Cohen's d = 0.75) at one institution. Automated scoring achieved 87% accuracy. Divergent results across institutions reveal deployment sensitivity. Strongest domain-specific evidence that simulation-based learning transfers to real professional performance.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2503.05793">arXiv:2503.05793</a> -- Found via Web search</em></p>
+<h3 id="comprehensive-review-of-ai-based-intelligent-tutoring-systems-116"><a href="https://arxiv.org/abs/2507.18882">Comprehensive Review of AI-based Intelligent Tutoring Systems</a> [^116]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zerkouk, Mihoubi &amp; Chikhaoui</strong> (July 2025; integrated April 2026)</p>
+<blockquote>
+<p>Most comprehensive systematic review of ITS (2010-2025). Student modeling identified as weakest component. STEM subjects show most consistent positive outcomes. Adaptive feedback timing matters more than quantity. Simulation integration within ITS lacks standardized evaluation. Contextualizes individual system results within 15-year field trajectory.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2507.18882">arXiv:2507.18882</a> -- Found via Web search</em></p>
+<h3 id="canvas-ai-teaching-agent-production-deployment-117"><a href="https://www.insidehighered.com/news/tech-innovation/artificial-intelligence/2026/03/23/canvas-unrolls-ai-teaching-agent">Canvas AI Teaching Agent (Production Deployment)</a> [^117]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Instructure</strong> (March 2026)</p>
+<blockquote>
+<p>First production-deployed recursive self-improvement system in education at institutional scale. AI teaching agent embedded in Canvas LMS assists with course design, assignment creation, and student feedback. Adapts recommendations based on accumulated institutional data about teaching strategy effectiveness. Raises questions about optimization target alignment with genuine learning outcomes.</p>
+</blockquote>
+<p><em><a href="https://www.insidehighered.com/news/tech-innovation/artificial-intelligence/2026/03/23/canvas-unrolls-ai-teaching-agent">insidehighered.com</a> -- Found via Web search</em></p>
+<h3 id="iclr-2026-workshop-on-ai-with-recursive-self-improvement-118"><a href="https://recursive-workshop.github.io/">ICLR 2026 Workshop on AI with Recursive Self-Improvement</a> [^118]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Workshop</strong> (April 26-27, 2026; Rio de Janeiro)</p>
+<blockquote>
+<p>First major venue dedicated exclusively to formalizing recursive self-improvement as a research discipline. Six-lens taxonomy: what changes, when, how, operating domains, alignment/safety, evaluation. Invited speakers: Chelsea Finn, Jeff Clune, Graham Neubig, Bang Liu, Arman Cohan, Matej Balog, Yu Su, Yuandong Tian. Already covered in previous update; research results now being integrated as papers become available post-workshop.</p>
+</blockquote>
+<p><em><a href="https://recursive-workshop.github.io/">recursive-workshop.github.io</a> -- Found via Web search</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update-batch-3">Week of April 06, 2026 (April 7 scheduled update — batch 3)</h2>
+<h3 id="openworldlib-unified-codebase-and-definition-of-advanced-world-models-107"><a href="https://arxiv.org/abs/2604.04707">OpenWorldLib: Unified Codebase and Definition of Advanced World Models</a> [^107]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zeng et al. (Peking U / Kuaishou / HKUST / Tsinghua / NUS)</strong> (April 2026)</p>
+<blockquote>
+<p>First standardized definition and unified inference framework for world models. Six composable modules (Operator, Reasoning, Synthesis, Representation, Memory, Pipeline). Critically distinguishes what qualifies as a world model from what doesn't -- text-to-video (Sora) excluded for lacking perception and interaction. Benchmarks interactive video generation, 3D reconstruction, VLA, and multimodal reasoning. Enables cross-domain composability for educational simulations.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="skillx-automatically-constructing-skill-knowledge-bases-for-agents-108"><a href="https://arxiv.org/abs/2604.04804">SkillX: Automatically Constructing Skill Knowledge Bases for Agents</a> [^108]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Yu et al. (Zhejiang University)</strong> (April 2026; ICML 2026)</p>
+<blockquote>
+<p>Hierarchical skill knowledge base: planning skills (task decomposition), functional skills (reusable procedures), atomic skills (single operations). Improves weaker models by ~10pp on BFCL-v3 and AppWorld. Functional skills contribute most; planning skills most help weaker agents. Transfers better than raw trajectories or monolithic workflows. Creates direct bridge between agent skill organization and educational curriculum design.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04804">arXiv:2604.04804</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="clawarena-benchmarking-ai-agents-in-evolving-information-environments-109"><a href="https://arxiv.org/abs/2604.04202">ClawArena: Benchmarking AI Agents in Evolving Information Environments</a> [^109]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Ji et al. (UNC Chapel Hill)</strong> (April 2026)</p>
+<blockquote>
+<p>64 scenarios across 8 professional domains testing multi-source conflict reasoning, dynamic belief revision, and implicit personalization. Information evolves during the task. Model capability: 15.4% performance range; framework design: 9.2%. Self-evolving skill frameworks partially close capability gaps. Formalizes belief revision as a testable learning skill across simulation, commerce, and education.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04202">arXiv:2604.04202</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="genie-3-interactive-world-generation-at-scale-110"><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/">Genie 3: Interactive World Generation at Scale</a> [^110]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Google DeepMind</strong> (January 2026; publicly available)</p>
+<blockquote>
+<p>First commercially available general-purpose world model. Generates interactive 3D environments at 24 fps / 720p from text prompts. Auto-regressive frame generation conditioned on user actions. Promptable world events (weather, objects). SIMA agent compatibility. Consistency limited to ~minutes; limited action space. Consumer entry point for simulation-based learning.</p>
+</blockquote>
+<p><em><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/">deepmind.google/blog/genie-3</a> -- Found via Web search</em></p>
+<h3 id="world-models-survey-understanding-vs-predicting-111"><a href="https://dl.acm.org/doi/10.1145/3746449">World Models Survey: Understanding vs. Predicting</a> [^111]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>ACM Computing Surveys, Vol. 58 No. 4</strong> (2026)</p>
+<blockquote>
+<p>Comprehensive survey distinguishing two fundamental world model functions: understanding present state vs. predicting future dynamics. Covers autonomous driving, robotics, social simulacra. The understanding-prediction distinction maps to conceptual vs. procedural learning -- educational world models need both capabilities.</p>
+</blockquote>
+<p><em><a href="https://dl.acm.org/doi/10.1145/3746449">DOI: 10.1145/3746449</a> -- Found via Web search</em></p>
+<h3 id="memory-intelligence-agent-112"><a href="https://arxiv.org/abs/2604.04503">Memory Intelligence Agent</a> [^112]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Qiao et al.</strong> (April 2026)</p>
+<blockquote>
+<p>Structured self-improving memory with procedural/semantic/episodic separation. Bidirectional conversion between episodic and semantic memory. Interference resolution inspired by cognitive psychology. Implements knowledge consolidation pattern applicable to tutoring and commerce agents.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="recursive-language-models-the-paradigm-of-2026-113"><a href="https://www.primeintellect.ai/blog/rlm">Recursive Language Models: The Paradigm of 2026</a> [^113]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Prime Intellect</strong> (January 2026)</p>
+<blockquote>
+<p>RLMs let models actively manage context by delegating to Python scripts and sub-LLMs. Outperforms standard LLMs on 1.5M-character real data tasks. Maintains performance at context lengths where standard LLMs score zero. Paradigm shift from bigger context to smarter context management. Implications for long-horizon tutoring and multi-session learning.</p>
+</blockquote>
+<p><em><a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a> -- Found via Web search</em></p>
+<h3 id="repurchase-prediction-with-genetic-algorithms-and-deep-learning-114"><a href="https://www.nature.com/articles/s41598-026-45903-5">Repurchase Prediction with Genetic Algorithms and Deep Learning</a> [^114]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a></p>
+<p><strong>Chen et al.</strong> (<em>Scientific Reports</em>, 2026)</p>
+<blockquote>
+<p>Combines genetic algorithms with deep learning for repurchase behavior prediction and marketing resource optimization. Demonstrates predict-then-optimize loop applicable to marketing education as a concrete case study of the predict-then-verify paradigm.</p>
+</blockquote>
+<p><em><a href="https://www.nature.com/articles/s41598-026-45903-5">DOI: 10.1038/s41598-026-45903-5</a> -- Found via Web search</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update-batch-2">Week of April 06, 2026 (April 7 scheduled update — batch 2)</h2>
+<h3 id="video-generation-models-as-world-models-efficiency-survey-99"><a href="https://arxiv.org/abs/2603.28489">Video Generation Models as World Models: Efficiency Survey</a> [^99]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>He, Guo, Lin &amp; Yu (HKU)</strong> (March 2026)</p>
+<blockquote>
+<p>First comprehensive survey on efficiency for video-based world models. Three-dimensional taxonomy: efficient modeling paradigms (diffusion distillation, 48→6 step reduction), efficient architectures (64× spatial compression, linear O(N) attention), and efficient inference (WorldCache 3.7× speedup, FP4 quantization). Demonstrates that <strong>efficiency is a fundamental prerequisite</strong> for practical world simulation, not just an engineering concern. Directly enables classroom-deployable educational simulations on commodity hardware.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.28489">arXiv:2603.28489</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="grounding-world-simulation-in-a-real-world-metropolis-100"><a href="https://arxiv.org/abs/2603.15583">Grounding World Simulation in a Real-World Metropolis</a> [^100]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Li et al. (Tsinghua/SenseTime)</strong> (March 2026)</p>
+<blockquote>
+<p>Grounds world simulation models in real metropolitan environments (Shanghai), generating physically accurate simulations of actual urban settings validated against ground-truth sensor data. Represents a shift from <em>generic</em> simulation to <em>grounded</em> simulation -- world models calibrated to specific real places. Enables applied learning simulations for urban planning, traffic engineering, and logistics anchored in real-world conditions.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.15583">arXiv:2603.15583</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="agenttutor-multi-turn-interactive-teaching-101"><a href="https://arxiv.org/abs/2601.04219">AgentTutor: Multi-Turn Interactive Teaching</a> [^101]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Liu, Song, Lou, Wu &amp; Li</strong> (January 2026)</p>
+<blockquote>
+<p>Five-module multi-agent tutoring framework: curriculum decomposition, learner assessment, dynamic strategy adjustment, teaching reflection, and knowledge memory. Moves beyond single-turn Q&amp;A to sustained adaptive instruction. The teaching reflection module implements recursive self-improvement applied to pedagogy. Bridges domain simulation and learner simulation via predict-verify tutoring loops.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.04219">arXiv:2601.04219</a> -- Found via arXiv search</em></p>
+<h3 id="iclr-2026-workshop-on-ai-with-recursive-self-improvement-102"><a href="https://recursive-workshop.github.io/">ICLR 2026 Workshop on AI with Recursive Self-Improvement</a> [^102]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Workshop</strong> (April 26-27, 2026, Rio de Janeiro)</p>
+<blockquote>
+<p>First major venue dedicated to recursive self-improvement as a discipline. Six research lenses: what changes, when, how, operating domains, alignment/safety, and evaluation. Invited speakers: Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Graham Neubig (CMU), Bang Liu (Mila), and others. Signals that recursive self-improvement has moved from speculation to engineering discipline.</p>
+</blockquote>
+<p><em><a href="https://recursive-workshop.github.io/">recursive-workshop.github.io</a> -- Found via Web search</em></p>
+<h3 id="skill0-in-context-agentic-rl-for-skill-internalization-103"><a href="https://arxiv.org/abs/2604.02268">SKILL0: In-Context Agentic RL for Skill Internalization</a> [^103]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Lu et al. (ZJU)</strong> (April 2026)</p>
+<blockquote>
+<p>First RL framework formulating skill internalization as an explicit training objective. Provides skill guidance during training, removes it at inference. Dynamic Curriculum withdraws each skill only when the agent no longer benefits. +9.7% on ALFWorld, +6.6% on Search-QA, &lt;0.5k tokens per step. Most rigorous implementation of scaffolded withdrawal -- contrasts with OECD evidence that standard AI creates dependency. Already tracked in simulation and recursion articles; this entry elevates it as a standalone contribution.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="metaclaw-continual-meta-learning-agent-104"><a href="https://arxiv.org/abs/2603.17187">MetaClaw: Continual Meta-Learning Agent</a> [^104]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>UNC Chapel Hill</strong> (March 2026)</p>
+<blockquote>
+<p>Continual meta-learning framework: skill-driven fast adaptation (analyzes failures, synthesizes new skills, zero downtime) + opportunistic policy optimization (RL weight updates during idle windows). Advances Kimi-K2.5 from 21.4% to 40.6%. Completes the skill lifecycle: SkillRL (discovery) → Skill0 (internalization) → MetaClaw (continual evolution). Production-viable via proxy architecture that scales to large LLMs without local GPUs.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.17187">arXiv:2603.17187</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="www-2026-llm-agents-for-recommendation-systems-105"><a href="https://llmandagents4recsys.github.io/">WWW 2026: LLM &amp; Agents for Recommendation Systems</a> [^105]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a></p>
+<p><strong>Workshop at WWW 2026</strong> (Dubai, April 2026)</p>
+<blockquote>
+<p>Workshop bridging recommendation systems, multi-agent learning, information retrieval, and mechanism design. Focus on transparent, scalable, responsible agent-driven personalization. Key theme: the shift from single-model recommendation to coordinated multi-agent commerce systems. Mechanism design track addresses emergent market dynamics (collusion, bias amplification) from agent interactions.</p>
+</blockquote>
+<p><em><a href="https://llmandagents4recsys.github.io/">llmandagents4recsys.github.io</a> -- Found via Web search</em></p>
+<h3 id="switching-based-deep-learning-for-adaptive-e-commerce-recommendations-106"><a href="https://www.nature.com/articles/s41598-026-40024-5">Switching-Based Deep Learning for Adaptive E-Commerce Recommendations</a> [^106]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a></p>
+<p><strong>Saini et al.</strong> (<em>Scientific Reports</em>, 2026)</p>
+<blockquote>
+<p>Dynamic switching mechanism transitions between recommendation models based on user categorization (new users, active browsers, power buyers). Addresses cold-start and filter-bubble problems by recognizing that different user types need fundamentally different recommendation strategies. Formalizes the educational principle that different learners need different approaches -- maps to LADDER's scaffolded difficulty and GASP's zone of proximal development.</p>
+</blockquote>
+<p><em><a href="https://www.nature.com/articles/s41598-026-40024-5">DOI: 10.1038/s41598-026-40024-5</a> -- Found via Web search</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-scheduled-update">Week of April 06, 2026 (April 7 scheduled update)</h2>
+<h3 id="pijepa-policy-guided-world-model-planning-for-visual-navigation-93"><a href="https://arxiv.org/abs/2603.25981">PiJEPA: Policy-Guided World Model Planning for Visual Navigation</a> [^93]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Chahe &amp; Zhou</strong> (March 26, 2026)</p>
+<blockquote>
+<p>Two-stage framework combining learned navigation policies with latent JEPA world model planning. Octo-based policy with frozen V-JEPA-2/DINOv2 encoders warm-starts MPPI planning over a JEPA world model, achieving superior goal-reaching accuracy over both standalone policy and uninformed planning. Key insight: <strong>policy priors make world model planning practical</strong> -- undirected search in even good world models is inefficient. Formalizes "activate prior knowledge before exploration" as an architectural principle.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.25981">arXiv:2603.25981</a> | <a href="https://github.com/AmirhoseinCh/PiJEPA">GitHub</a> -- Found via Web research</em></p>
+<h3 id="value-guided-action-planning-with-jepa-world-models-94"><a href="https://arxiv.org/abs/2601.00844">Value-Guided Action Planning with JEPA World Models</a> [^94]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Destrade, Bounou, Le Lidec, Ponce &amp; LeCun</strong> (World Modeling Workshop 2026)</p>
+<blockquote>
+<p>Shapes JEPA representation spaces using implicit Q-learning so that distances between state embeddings approximate the negative goal-conditioned value function. Standard JEPA representations optimize for prediction accuracy; value-guided training restructures them so "nearby" embeddings correspond to states that are <em>actionably</em> close. Demonstrates significantly improved planning performance. Extends the JEPA family from pure prediction into <strong>goal-structured representations</strong>.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.00844">arXiv:2601.00844</a> -- Found via Web research</em></p>
+<h3 id="dark-patterns-on-llm-based-web-agents-95"><a href="https://arxiv.org/abs/2510.18113">Dark Patterns on LLM-Based Web Agents</a> [^95]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Ersoy, Lee, Shreekumar, Arunasalam, Ibrahim, Bianchi &amp; Celik (Purdue)</strong> (IEEE S&amp;P 2026)</p>
+<blockquote>
+<p>First systematic study of dark pattern impact on LLM web agents. TrickyArena benchmark across e-commerce, streaming, and news. Agents susceptible <strong>41% of the time</strong> on average; GPT-4o drops 28.9% TSR from a single dark pattern. Combining multiple patterns and modifying HTML further increases susceptibility. Reveals that <strong>clean simulation training produces fragile agents</strong> -- adversarial fidelity is the missing dimension of simulation quality. Critical for consumer protection as agentic commerce scales.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2510.18113">arXiv:2510.18113</a> -- Found via Web research</em></p>
+<h3 id="self-reflective-program-search-for-long-context-srlm-96"><a href="https://arxiv.org/abs/2603.15653">Self-Reflective Program Search for Long Context (SRLM)</a> [^96]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Authors</strong> (March 2026)</p>
+<blockquote>
+<p>Augments Recursive Language Models with uncertainty-aware self-reflection using three intrinsic signals: self-consistency, reasoning trace length, and verbalized confidence. Yields <strong>up to 22% improvement over standard RLMs</strong> under the same time budget. Formalizes metacognitive monitoring -- knowing when recursive processing is reliable vs. when to re-examine. Completes the generate-verify-calibrate stack for recursive self-improvement.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.15653">arXiv:2603.15653</a> -- Found via Web research</em></p>
+<h3 id="skill0-in-context-agentic-rl-for-skill-internalization-97"><a href="https://arxiv.org/abs/2604.02268">SKILL0: In-Context Agentic RL for Skill Internalization</a> [^97]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Lu, Yao, Wu, Han, Gu, Cai, Lu, Xiao, Zhuang &amp; Shen</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Embeds procedural skills into LLM agent parameters via a training-time curriculum that progressively withdraws skill context. Dynamic Curriculum evaluates which skills are internalized and removes those from context while retaining needed ones. +9.7% on ALFWorld, +6.6% on Search-QA over standard RL, achieving zero-shot autonomous behavior. Implements <strong>recursive fading</strong> -- scaffolded withdrawal as a learning mechanism. Already tracked in <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> and <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a>.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a> -- Found via HuggingFace Daily Papers</em></p>
+<hr />
+<h2 id="week-of-april-06-2026-april-7-late-night-update">Week of April 06, 2026 (April 7 late night update)</h2>
+<h3 id="memory-intelligence-agent-deep-research-with-bidirectional-memory-86"><a href="https://arxiv.org/abs/2604.04503">Memory Intelligence Agent: Deep Research with Bidirectional Memory</a> [^86]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Qiao, Meng, Cheng, Lin, Zhang, Tan, Gong, Shao &amp; Xie</strong> (April 6, 2026)</p>
+<blockquote>
+<p>Deep research agent framework integrating non-parametric memory (compressed search trajectories) and parametric memory with RL-based coordination between Memory Manager, Planner, and Executor. Key innovation: <strong>bidirectional conversion</strong> between memory types -- non-parametric search trajectories can be internalized into parametric knowledge (and vice versa), enabling test-time learning across eleven benchmarks. Unifies the memory architectures of <a href="../frontier-topics/ai-ecommerce-learning.html">Shopping Companion</a> and <a href="../frontier-topics/ai-ecommerce-learning.html">MemRerank</a> into a general framework.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a> | <a href="https://arxiv.org/pdf/2604.04503">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="vero-open-rl-recipe-for-general-visual-reasoning-87"><a href="https://arxiv.org/abs/2604.04917">Vero: Open RL Recipe for General Visual Reasoning</a> [^87]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Sarch, Cai, Wang, Wu, Chen &amp; Liu (Princeton)</strong> (April 6, 2026)</p>
+<blockquote>
+<p>Open-weight VLM family using scaled RL across 600K samples from 59 datasets spanning 6 task categories. Starting from Qwen3-VL-8B-Instruct, outperforms Qwen3-VL-8B-Thinking on 23/30 benchmarks without proprietary thinking data. Critical finding: <strong>different task categories elicit distinct reasoning patterns that transfer poorly in isolation</strong> -- visual reasoning requires heterogeneous training, not just more data. Connects to <a href="../frontier-topics/recursive-self-improvement.html">LADDER</a>'s recursive decomposition as an approach to bridging task-specific reasoning gaps.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04917">arXiv:2604.04917</a> | <a href="https://arxiv.org/pdf/2604.04917">PDF</a> -- Found via HuggingFace Trending</em></p>
+<h3 id="clawarena-benchmarking-ai-agents-in-evolving-information-environments-88"><a href="https://arxiv.org/abs/2604.04202">ClawArena: Benchmarking AI Agents in Evolving Information Environments</a> [^88]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Ji, Xiong, Han, Xia et al.</strong> (April 5, 2026)</p>
+<blockquote>
+<p>64 scenarios across 8 professional domains testing multi-source conflict reasoning, dynamic belief revision, and implicit personalization. Key finding: model capability accounts for ~15% performance range while framework design impacts ~9%. <strong>Belief revision difficulty depends on update strategy, not mere presence of updates</strong> -- how agents revise predictions matters more than whether they do. Directly relevant to <a href="../frontier-topics/predictive-simulation-learning.html">World Action Verifier</a>'s forward-inverse asymmetry for self-improving world models.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.04202">arXiv:2604.04202</a> | <a href="https://arxiv.org/pdf/2604.04202">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="grandcode-grandmaster-level-competitive-programming-via-agentic-rl-89"><a href="https://arxiv.org/abs/2604.02721">GrandCode: Grandmaster-Level Competitive Programming via Agentic RL</a> [^89]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Li, Sun, Wang, Su, Shum &amp; Li (DeepReinforce)</strong> (April 3, 2026)</p>
+<blockquote>
+<p>First AI system to consistently beat all human participants in live Codeforces competitions. Introduces <strong>Agentic GRPO</strong> -- Group Relative Policy Optimization for multi-stage agent rollouts with delayed rewards, combining immediate reward updates with delayed correction for effective credit assignment. Represents the most concrete demonstration of <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> achieving superhuman performance in a competitive, adversarial domain.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02721">arXiv:2604.02721</a> | <a href="https://arxiv.org/pdf/2604.02721">PDF</a> -- Found via Web research</em></p>
+<h3 id="multimodal-vs-text-only-conversational-ai-the-illusion-of-understanding-90"><a href="https://arxiv.org/abs/2604.02221">Multimodal vs. Text-Only Conversational AI: The Illusion of Understanding</a> [^90]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Taneja, Singh &amp; Goel (Georgia Tech)</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Controlled study (n=124) comparing multimodal conversational AI, text-only conversational AI, and textbook search for learning biology. Multimodal AI achieved highest post-test scores. Critical finding: <strong>text-only conversation creates an "illusion of understanding"</strong> -- perceived as more engaging than textbook search yet produced <em>lower</em> learning outcomes. Directly extends <a href="../frontier-topics/cross-cutting-connections.html">OECD scaffolding-dependency findings</a> with modality-specific evidence.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02221">arXiv:2604.02221</a> | <a href="https://arxiv.org/pdf/2604.02221">PDF</a> -- Found via Web research</em></p>
+<h3 id="when-ai-improves-answers-but-slows-knowledge-creation-91"><a href="https://arxiv.org/abs/2604.00468">When AI Improves Answers but Slows Knowledge Creation</a> [^91]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Sun, K.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Models a paradox: AI helps individual learning but undermines collective knowledge archives. Two mechanisms: a <strong>"flow margin"</strong> (users solve problems privately with AI, reducing public posts) and a <strong>"resolution margin"</strong> (AI raises contributors' opportunity costs). Creates self-undermining "low-archive traps." Directly relevant to e-commerce knowledge platforms, product review ecosystems, and any domain where collective knowledge accumulation matters for learning.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00468">arXiv:2604.00468</a> | <a href="https://arxiv.org/pdf/2604.00468">PDF</a> -- Found via Web research</em></p>
+<h3 id="wildworld-large-scale-dataset-for-dynamic-world-modeling-80"><a href="https://arxiv.org/abs/2603.23497">WildWorld: Large-Scale Dataset for Dynamic World Modeling</a> [^80]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Li et al. (Shanda AI)</strong> (March 24, 2026)</p>
+<blockquote>
+<p>108M frames from Monster Hunter: Wilds with 450+ actions and explicit state annotations (skeletons, world states, camera poses, depth maps). WildBench evaluation reveals persistent challenges in long-horizon state consistency. Largest action-conditioned world modeling dataset. Enables game-to-education simulation pipeline.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.23497">arXiv:2603.23497</a> | <a href="https://github.com/ShandaAI/WildWorld">GitHub</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="gigaworld-policy-efficient-action-centered-world-action-model-81"><a href="https://arxiv.org/abs/2603.17240">GigaWorld-Policy: Efficient Action-Centered World-Action Model</a> [^81]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>GigaAI</strong> (March 18, 2026)</p>
+<blockquote>
+<p>Action-centered WAM decoupling visual and action representations. 9× faster than Motus baseline with +7% task success rate on real robots. Enables interactive-speed simulation-based training for robotic skill learning.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.17240">arXiv:2603.17240</a> | <a href="https://huggingface.co/papers/2603.17240">HuggingFace</a> -- Found via HuggingFace Trending</em></p>
+<h3 id="oecd-digital-education-outlook-2026-scaffolding-vs-dependency-82"><a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">OECD Digital Education Outlook 2026: Scaffolding vs. Dependency</a> [^82]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>OECD</strong> (January 2026)</p>
+<blockquote>
+<p>International synthesis of AI education experiments. Türkiye RCT: standard GPT-4 +48% during use, -17% after removal; tutoring GPT-4 +127%. England: AI reduces lesson prep by 31%; AI-assisted less-experienced tutors improve student mastery. Critical finding: pedagogical design determines whether AI helps or harms. Strongest policy evidence for scaffolded withdrawal.</p>
+</blockquote>
+<p><em><a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">oecd.org</a> -- Found via Web research</em></p>
+<h3 id="agenticshop-benchmarking-agentic-product-curation-www-2026-83"><a href="https://arxiv.org/abs/2602.12315">AgenticShop: Benchmarking Agentic Product Curation (WWW 2026)</a> [^83]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Kim, Heo, Seo, Yeo &amp; Lee</strong> (February 12, 2026) -- <em>WWW 2026, Dubai</em></p>
+<blockquote>
+<p>First benchmark for agentic product curation in open-web shopping with diverse user profiles. Checklist-driven evaluation for retrieval quality, preference alignment, cross-platform coverage. Finding: current agentic systems remain "largely insufficient" for personalized open-web shopping.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a> | <a href="https://arxiv.org/pdf/2602.12315">PDF</a> -- Found via Web research</em></p>
+<h3 id="rwml-reinforcement-world-model-learning-for-llm-based-agents-84"><a href="https://arxiv.org/abs/2602.05842">RWML: Reinforcement World Model Learning for LLM-based Agents</a> [^84]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Yu et al.</strong> (February 2026)</p>
+<blockquote>
+<p>Self-supervised world model training using semantic similarity "sim-to-real gap rewards." +6.9pp on ALFWorld, +5.7pp on τ²Bench over direct reward RL. More robust than LLM-as-judge; less prone to reward hacking. Matches expert-data training through pure self-supervision. Bridges world modeling and recursive self-improvement.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.05842">arXiv:2602.05842</a> | <a href="https://arxiv.org/pdf/2602.05842">PDF</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="foreagent-predict-then-verify-loop-for-ml-agents-73"><a href="https://arxiv.org/abs/2601.05930">ForeAgent: Predict-Then-Verify Loop for ML Agents</a> [^73]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zheng, Zhang, Luo, Mao, Gao, Du, Chen &amp; Zhang</strong> (January 9, 2026)</p>
+<blockquote>
+<p>Breaks the Generate-Execute-Feedback bottleneck by internalizing execution priors into a predict-then-verify loop. 6× convergence acceleration, +6% over execution-based baselines. LLMs achieve 61.5% prediction accuracy when primed with verified data analysis. Formalizes "study smarter, not harder" computationally.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.05930">arXiv:2601.05930</a> | <a href="https://arxiv.org/pdf/2601.05930">PDF</a> -- Found via Web research</em></p>
+<h3 id="agentic-mme-what-agentic-capability-really-brings-to-multimodal-intelligence-74"><a href="https://arxiv.org/abs/2604.03016">Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?</a> [^74]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Wei et al.</strong> (April 3, 2026)</p>
+<blockquote>
+<p>Process-verified benchmark with 418 tasks, 2,000+ stepwise checkpoints measuring what agentic capabilities (tool use, web search) add to multimodal intelligence. Top model (Gemini 3 Pro) achieves 56.3% overall, dropping to 23.0% on hard tasks. Reveals large capability gap for autonomous multimodal performance.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03016">arXiv:2604.03016</a> | <a href="https://arxiv.org/pdf/2604.03016">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="self-distilled-rlvr-combining-self-teaching-with-verified-rewards-75"><a href="https://arxiv.org/abs/2604.03128">Self-Distilled RLVR: Combining Self-Teaching with Verified Rewards</a> [^75]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Yang et al.</strong> (April 3, 2026)</p>
+<blockquote>
+<p>RLSD combines self-distillation (token-level policy guidance) with RLVR (reliable update directions from environmental feedback). Achieves higher convergence ceiling and superior training stability compared to either approach alone. Validates the "study-then-test" learning cycle computationally.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03128">arXiv:2604.03128</a> | <a href="https://arxiv.org/pdf/2604.03128">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="a4l-architecture-for-ai-augmented-learning-76"><a href="https://arxiv.org/abs/2505.06314">A4L: Architecture for AI-Augmented Learning</a> [^76]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Goel, Thajchayapong, Nandan, Sikka &amp; Rugaber</strong> (May 2025, revised October 2025)</p>
+<blockquote>
+<p>Data architecture creating bidirectional feedback loops between learners, teachers, and AI agents for personalized education at scale. Multi-stakeholder design mirrors e-commerce personalization infrastructure. Developed at National AI Institute for Adult Learning.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2505.06314">arXiv:2505.06314</a> | <a href="https://arxiv.org/pdf/2505.06314">PDF</a> -- Found via Web research</em></p>
+<h3 id="salesrlagent-rl-for-sales-conversion-optimization-77"><a href="https://arxiv.org/abs/2503.23303">SalesRLAgent: RL for Sales Conversion Optimization</a> [^77]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Moradi et al.</strong> (March 2025)</p>
+<blockquote>
+<p>Reinforcement learning framework treating customer interactions as sequential decision problems. Optimizes when to recommend products, adjust pricing, or trigger follow-ups. Demonstrates how abstract RL concepts map to tangible commerce decisions for business education.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2503.23303">arXiv:2503.23303</a> | <a href="https://arxiv.org/pdf/2503.23303">PDF</a> -- Found via Web research</em></p>
+<h3 id="incoder-32b-thinking-industrial-code-world-model-78"><a href="https://arxiv.org/abs/2604.03144">InCoder-32B-Thinking: Industrial Code World Model</a> [^78]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Yang et al.</strong> (April 3, 2026)</p>
+<blockquote>
+<p>Industrial Code World Model (ICWM) predicts execution outcomes before compilation for Verilog, GPU, and embedded code. 81.3% on LiveCodeBench v5, 84.0% on CAD-Coder. Extends world models from physical environments into software execution via Error-driven Chain-of-Thought synthesis.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03144">arXiv:2604.03144</a> | <a href="https://arxiv.org/pdf/2604.03144">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="lome-learning-human-object-manipulation-with-action-conditioned-egocentric-world-model-59"><a href="https://arxiv.org/abs/2603.27449">LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model</a> [^59]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Gao, Yang, Xu, Chen &amp; Wang</strong> (March 28, 2026)</p>
+<blockquote>
+<p>Egocentric world model generating realistic human-object interactions as videos conditioned on images, text, and per-frame actions. Produces physically authentic outcomes (liquid flowing, objects deforming) without explicit physics simulation. Completes the observation-to-action pipeline with V-JEPA 2 and EgoSim.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.27449">arXiv:2603.27449</a> | <a href="https://arxiv.org/pdf/2603.27449">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="video-models-reason-early-exploiting-plan-commitment-for-maze-solving-60"><a href="https://arxiv.org/abs/2603.30043">Video Models Reason Early: Exploiting Plan Commitment for Maze Solving</a> [^60]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Newman, Zhu &amp; Russakovsky</strong> (March 31, 2026)</p>
+<blockquote>
+<p>Video diffusion models commit to high-level plans within first denoising steps. Path length (not obstacle density) determines difficulty, with failure threshold at 12 steps. ChEaP method improves maze accuracy from 7% to 67%. Reveals planning capabilities in generative models.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.30043">arXiv:2603.30043</a> | <a href="https://arxiv.org/pdf/2603.30043">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="asi-evolve-ai-accelerates-ai-61"><a href="https://arxiv.org/abs/2603.29640">ASI-Evolve: AI Accelerates AI</a> [^61]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Xu et al.</strong> (March 31, 2026)</p>
+<blockquote>
+<p>Recursive self-improvement across the full AI stack: architecture design (105 SOTA linear attention architectures), data curation (+3.96pp avg), RL algorithm design (+12.5pp). Transfer beyond AI to math and biomedicine. Most general form of AI self-improvement demonstrated.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.29640">arXiv:2603.29640</a> | <a href="https://arxiv.org/pdf/2603.29640">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="from-multi-agent-to-single-agent-when-is-skill-distillation-beneficial-62"><a href="https://arxiv.org/abs/2604.01608">From Multi-Agent to Single-Agent: When Is Skill Distillation Beneficial?</a> [^62]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Xu, Fang, Li &amp; Zhang</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Skill utility governed by evaluation metric, not task. Introduces Metric Freedom (F) predictor. Adaptive distillation achieves 8× cost reduction, 15× latency improvement while matching multi-agent performance. Explains when multi-agent → single-agent compression works.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01608">arXiv:2604.01608</a> | <a href="https://arxiv.org/pdf/2604.01608">PDF</a> -- Found via Web research</em></p>
+<h3 id="criterion-validity-of-llm-as-judge-for-business-outcomes-in-conversational-commerce-63"><a href="https://arxiv.org/abs/2604.00022">Criterion Validity of LLM-as-Judge for Business Outcomes in Conversational Commerce</a> [^63]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Chen, Liu, Lin &amp; Liang</strong> (March 11, 2026)</p>
+<blockquote>
+<p>First empirical study of whether LLM dialogue evaluation predicts actual business conversion. Dimensions have unequal predictive value; equally-weighted composites underperform. AI agents "execute sales behaviors without building user trust." Proposes three-layer evaluation architecture.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00022">arXiv:2604.00022</a> | <a href="https://arxiv.org/pdf/2604.00022">PDF</a> -- Found via Web research</em></p>
+<h3 id="gpa-learning-gui-process-automation-from-demonstrations-64"><a href="https://arxiv.org/abs/2604.01676">GPA: Learning GUI Process Automation from Demonstrations</a> [^64]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Zhao et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Vision-based GUI automation learning from single demonstrations. Outperforms Gemini 3 Pro at 10× speed. Sequential Monte Carlo localization for robustness. Privacy-preserving local execution. Bridges simulated and real-world commerce automation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01676">arXiv:2604.01676</a> | <a href="https://arxiv.org/pdf/2604.01676">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="v-jepa-21-unlocking-dense-features-in-video-self-supervised-learning-66"><a href="https://arxiv.org/abs/2603.14482">V-JEPA 2.1: Unlocking Dense Features in Video Self-Supervised Learning</a> [^66]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Mur-Labadia et al. (Meta FAIR)</strong> (March 15, 2026)</p>
+<blockquote>
+<p>Extends V-JEPA 2 with dense predictive loss, deep self-supervision, and multi-modal tokenizers. 20-point improvement in real-robot grasping. 7.71 mAP on Ego4D, 40.8 Recall@5 on EPIC-KITCHENS. Demonstrates dense spatial features are critical for robotic transfer.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.14482">arXiv:2603.14482</a> | <a href="https://arxiv.org/pdf/2603.14482">PDF</a> -- Found via Web research</em></p>
+<h3 id="swirl-self-improving-world-modelling-with-latent-actions-67"><a href="https://arxiv.org/abs/2602.06130">SWIRL: Self-Improving World Modelling with Latent Actions</a> [^67]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Qiu et al.</strong> (February 5, 2026)</p>
+<blockquote>
+<p>Self-improving world model framework that discovers latent actions from state sequences via forward-inverse dynamics alternation with GRPO. 14-28% gains across visual dynamics, state transformation, and world prediction benchmarks. No action labels required.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.06130">arXiv:2602.06130</a> | <a href="https://arxiv.org/pdf/2602.06130">PDF</a> -- Found via Web research</em></p>
+<h3 id="dreamer-jepa-convergence-three-independent-papers-68"><a href="https://arxiv.org/abs/2603.07083">Dreamer-JEPA Convergence: Three Independent Papers</a> [^68]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Multiple groups</strong> (March 2026)</p>
+<blockquote>
+<p>Three papers independently merge Dreamer and JEPA families: Dreamer-CDP (JEPA predictor in DreamerV3), R2-Dreamer (decoder-free with Barlow Twins, 1.59× faster, ICLR 2026), NE-Dreamer (temporal transformer for embedding prediction). All match/exceed DreamerV3 without pixel reconstruction.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.07083">arXiv:2603.07083</a>, <a href="https://arxiv.org/abs/2603.18202">arXiv:2603.18202</a>, <a href="https://arxiv.org/abs/2603.02765">arXiv:2603.02765</a> -- Found via Web research</em></p>
+<h3 id="cogsearch-cognitive-aligned-multi-agent-e-commerce-search-70"><a href="https://arxiv.org/abs/2603.11927">CogSearch: Cognitive-Aligned Multi-Agent E-Commerce Search</a> [^70]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Zhai et al.</strong> (March 12, 2026)</p>
+<blockquote>
+<p>Production-deployed multi-agent e-commerce search mimicking human cognitive workflows. 5% reduced decision costs, 0.41% conversion rate increase, ~30% conversion improvement on complex queries. Shifts from relevance-matching to decision support.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.11927">arXiv:2603.11927</a> | <a href="https://arxiv.org/pdf/2603.11927">PDF</a> -- Found via Web research</em></p>
+<h3 id="collusive-pricing-under-llm-71"><a href="https://arxiv.org/abs/2601.01279">Collusive Pricing Under LLM</a> [^71]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Cao &amp; Hu</strong> (January 2026, revised March 2026)</p>
+<blockquote>
+<p>LLM-delegated pricing can facilitate inadvertent collusion when competing sellers use the same model. Critical fidelity threshold separates competitive from collusive outcomes. Infrequent retraining amplifies collusion. Major regulatory implication for AI-powered commerce.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.01279">arXiv:2601.01279</a> | <a href="https://arxiv.org/pdf/2601.01279">PDF</a> -- Found via Web research</em></p>
+<h3 id="therefore-i-am-i-think-69"><a href="https://arxiv.org/abs/2604.01202">Therefore I am. I Think</a> [^69]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Esakkiraja et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Reasoning models encode tool-calling decisions in hidden representations BEFORE chain-of-thought generation. Activation steering causes expanded deliberation in 7-79% of cases, but the CoT rationalizes changes rather than resisting them. Challenges the assumption that recursive reasoning is genuine deliberation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01202">arXiv:2604.01202</a> | <a href="https://arxiv.org/pdf/2604.01202">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="apriel-reasoner-rl-post-training-for-general-purpose-and-efficient-reasoning-65"><a href="https://arxiv.org/abs/2604.02007">Apriel-Reasoner: RL Post-Training for General-Purpose and Efficient Reasoning</a> [^65]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Pardinas, Kamalloo, Vazquez &amp; Drouin</strong> (April 2, 2026)</p>
+<blockquote>
+<p>15B model with difficulty-aware length penalty producing 30-50% shorter reasoning traces while improving accuracy. Adaptive domain sampling for multi-domain RL optimization. Formalizes metacognitive resource allocation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02007">arXiv:2604.02007</a> | <a href="https://arxiv.org/pdf/2604.02007">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="socioverse-a-world-model-for-social-simulation-50"><a href="https://arxiv.org/abs/2504.10157">SocioVerse: A World Model for Social Simulation</a> [^50]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zhang et al.</strong> (April 2026)</p>
+<blockquote>
+<p>LLM-agent-driven world model for social simulation with 10 million real-world user profiles across 15 demographic dimensions. Validated on election prediction, news feedback, and economic surveys. Extends world models from physical to social environments, enabling population-scale market simulation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2504.10157">arXiv:2504.10157</a> | <a href="https://arxiv.org/pdf/2504.10157">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="dreamer-4-training-agents-inside-of-scalable-world-models-51"><a href="https://arxiv.org/abs/2509.24527">Dreamer 4: Training Agents Inside of Scalable World Models</a> [^51]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Hafner &amp; Yan</strong> (September 2025, newly indexed)</p>
+<blockquote>
+<p>First agent to obtain diamonds in Minecraft purely from offline data, using 100× less data than prior methods. Real-time inference (≥20 FPS) on a single GPU. Demonstrates world models can learn complex long-horizon skills from observation alone.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a> | <a href="https://danijar.com/project/dreamer4/">Project page</a> -- Found via Web research</em></p>
+<h3 id="dreamerad-latent-world-model-for-autonomous-driving-52"><a href="https://arxiv.org/abs/2603.24587">DreamerAD: Latent World Model for Autonomous Driving</a> [^52]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Yang, Zheng et al.</strong> (March 2026)</p>
+<blockquote>
+<p>First latent world model for driving RL. Compresses diffusion sampling 100→1 steps (80× speedup). Achieves 87.7 EPDMS on NavSim v2. Enables imagination-based driving policy learning at interactive speeds.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.24587">arXiv:2603.24587</a> | <a href="https://arxiv.org/pdf/2603.24587">PDF</a> -- Found via Web research</em></p>
+<h3 id="gvu-operator-variance-inequality-for-self-improvement-53"><a href="https://arxiv.org/abs/2512.02731">GVU Operator / Variance Inequality for Self-Improvement</a> [^53]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Chojecki</strong> (December 2025, newly indexed)</p>
+<blockquote>
+<p>Derives the Variance Inequality -- a spectral condition for stable self-improvement. Unifies STaR, SPIN, Reflexion, GANs, AlphaZero as GVU operator realizations. "Second Law of AGI Dynamics": entropy increases unless verification signal dominates noise. Key practical insight: strengthen the verifier, not the generator.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a> | <a href="https://arxiv.org/pdf/2512.02731">PDF</a> -- Found via Web research</em></p>
+<h3 id="langmarl-natural-language-multi-agent-rl-54"><a href="https://arxiv.org/abs/2604.00722">LangMARL: Natural Language Multi-Agent RL</a> [^54]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>April 2026</strong></p>
+<blockquote>
+<p>First framework bringing credit assignment and policy gradient evolution into language space. Language Policy Actors + Centralized Language Critic + Language Policy Gradient Estimator. Strong multi-agent coordination across reasoning, QA, coding, and game tasks.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00722">arXiv:2604.00722</a> | <a href="https://arxiv.org/pdf/2604.00722">PDF</a> -- Found via Web research</em></p>
+<h3 id="metaclaw-continual-meta-learning-agent-55"><a href="https://liner.com/review/metaclaw-just-talk-agent-that-metalearns-and-evolves-in-wild">MetaClaw: Continual Meta-Learning Agent</a> [^55]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>2026</strong></p>
+<blockquote>
+<p>Continual meta-learning framework jointly evolving LLM policy and reusable skill library. Skill-driven fast adaptation (+32% accuracy); full pipeline 21.4% → 40.6%. Zero downtime skill synthesis from failure analysis.</p>
+</blockquote>
+<p><em>Found via Web research</em></p>
+<h3 id="ai-tutoring-outperforms-active-learning-rct-56"><a href="https://www.nature.com/articles/s41598-025-97652-6">AI Tutoring Outperforms Active Learning (RCT)</a> [^56]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Kestin et al.</strong> (<em>Scientific Reports</em>, 2025)</p>
+<blockquote>
+<p>RCT with 194 physics students: AI tutor outperforms in-class active learning (effect size 0.73--1.3 SD). Students more engaged, more motivated. Completion rates +70%, dropout -15%. Strongest causal evidence for simulation-based tutoring.</p>
+</blockquote>
+<p><em><a href="https://www.nature.com/articles/s41598-025-97652-6">DOI: 10.1038/s41598-025-97652-6</a> -- Found via Web research</em></p>
+<h3 id="mckinsey-agentic-commerce-opportunity-57"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants">McKinsey: Agentic Commerce Opportunity</a> [^57]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">E-commerce</a></p>
+<p><strong>McKinsey</strong> (2026)</p>
+<blockquote>
+<p>Projects $1T US B2C / $3-5T global agentic commerce by 2030. Zero-click commerce emerging as dominant paradigm. Universal Commerce Protocol (UCP) standardizing agent-backend interactions.</p>
+</blockquote>
+<p><em><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants">mckinsey.com</a> -- Found via Web research</em></p>
+<h3 id="oecd-digital-education-outlook-2026-58"><a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">OECD Digital Education Outlook 2026</a> [^58]</h3>
+<p><code>MEDIUM RELEVANCE</code> -- <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>OECD</strong> (2026)</p>
+<blockquote>
+<p>Comprehensive analysis of generative AI in education across three scenarios: students learning subject knowledge, students and teachers together, teachers supporting their work. Validates teacher-AI collaboration as superior to either alone.</p>
+</blockquote>
+<p><em><a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">oecd.org</a> -- Found via Web research</em></p>
+<h3 id="coral-autonomous-multi-agent-evolution-for-open-ended-discovery-40"><a href="https://arxiv.org/abs/2604.01658">CORAL: Autonomous Multi-Agent Evolution for Open-Ended Discovery</a> [^40]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting: population learning</a></p>
+<p><strong>Qu et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Multi-agent framework where agents explore, reflect, and collaborate through shared persistent memory. 3-10× higher improvement rates than single-agent evolution. Validates collaborative learning at computational level.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01658">arXiv:2604.01658</a> | <a href="https://arxiv.org/pdf/2604.01658">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="egosim-egocentric-world-simulator-for-embodied-interaction-41"><a href="https://arxiv.org/abs/2604.01001">EgoSim: Egocentric World Simulator for Embodied Interaction</a> [^41]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Hao et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Closed-loop first-person world simulator maintaining spatial consistency across multi-stage interactions. Includes EgoCap smartphone capture system for low-cost training data collection. Enables first-person simulation-based learning for manipulation tasks.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01001">arXiv:2604.01001</a> | <a href="https://arxiv.org/pdf/2604.01001">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="evoskills-self-evolving-agent-skills-via-co-evolutionary-verification-42"><a href="https://arxiv.org/abs/2604.01687">EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification</a> [^42]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Zhang et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Skill Generator and surrogate verifier co-evolve: generator creates better skills, verifier becomes better at evaluating them. Both improve together without ground-truth test content. Demonstrated on SkillsBench across multiple LLMs.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01687">arXiv:2604.01687</a> | <a href="https://arxiv.org/pdf/2604.01687">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="hill-learning-to-hint-for-reinforcement-learning-43"><a href="https://arxiv.org/abs/2604.00698">HiLL: Learning to Hint for Reinforcement Learning</a> [^43]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting: scaffolding</a></p>
+<p><strong>Xia et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Joint hinter-reasoner training addresses advantage collapse. Hinter generates contextual hints based on errors. Novel "hint reliance" metric measures scaffolding dependency; lower reliance predicts better transfer. Most direct computational model of adaptive tutoring.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00698">arXiv:2604.00698</a> | <a href="https://arxiv.org/pdf/2604.00698">PDF</a> -- Found via Web research</em></p>
+<h3 id="simple-self-distillation-improves-code-generation-44"><a href="https://arxiv.org/abs/2604.01193">Simple Self-Distillation Improves Code Generation</a> [^44]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Zhang et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Simplest possible recursive loop (sample → fine-tune on successes) improves Qwen3-30B from 42.4% to 55.3% on LiveCodeBench v6. Works at 4B-30B scale. Validates deliberate practice as minimal self-improvement mechanism.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01193">arXiv:2604.01193</a> | <a href="https://arxiv.org/pdf/2604.01193">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="yc-bench-long-term-business-simulation-benchmark-45"><a href="https://arxiv.org/abs/2604.01212">YC-Bench: Long-Term Business Simulation Benchmark</a> [^45]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>He et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Agents run simulated startups over one-year horizons. Only 3/12 frontier models exceed initial capital. Claude Opus 4.6 scores highest. Tests cascading decision consequences in business -- critical for MBA-level simulation education.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01212">arXiv:2604.01212</a> | <a href="https://arxiv.org/pdf/2604.01212">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="drivedreamer-policy-geometry-grounded-world-action-model-46"><a href="https://arxiv.org/abs/2604.01765">DriveDreamer-Policy: Geometry-Grounded World-Action Model</a> [^46]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Zhou et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Unifies depth, video prediction, and planning for driving. 89.2 PDMS on Navsim v1. Shows geometric grounding complements video imagination for better predictions. Validates that structural accuracy matters alongside visual fidelity in simulations.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01765">arXiv:2604.01765</a> | <a href="https://arxiv.org/pdf/2604.01765">PDF</a> -- Found via Web research</em></p>
+<h3 id="slow-strategic-logical-inference-workspace-for-ai-tutoring-47"><a href="https://arxiv.org/abs/2603.28062">SLOW: Strategic Logical-inference Workspace for AI Tutoring</a> [^47]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + Cross-cutting: education</p>
+<p><strong>Wei, Li &amp; Jiang</strong> (March 30, 2026)</p>
+<blockquote>
+<p>Theory-informed tutoring separating learner-state inference from instructional selection. Includes causal evidence parsing, fuzzy cognitive diagnosis, counterfactual stability analysis, and prospective affective reasoning. Most sophisticated cognitive science integration in AI tutoring to date.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.28062">arXiv:2603.28062</a> | <a href="https://arxiv.org/pdf/2603.28062">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="llmimic-train-yourself-as-an-llm-48"><a href="https://arxiv.org/abs/2604.02637">LLMimic: Train Yourself as an LLM</a> [^48]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Fan, Ge, Jia &amp; Shi</strong> (April 3, 2026)</p>
+<blockquote>
+<p>Interactive role-play where participants experience LLM training stages. 274-person study: improved AI literacy (p&lt;0.001), reduced AI persuasion susceptibility (p&lt;0.05). Direct implications for consumer protection in AI-mediated commerce.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02637">arXiv:2604.02637</a> | <a href="https://arxiv.org/pdf/2604.02637">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="interruptbench-evaluating-interruptible-shopping-agents-49"><a href="https://arxiv.org/abs/2604.00892">InterruptBench: Evaluating Interruptible Shopping Agents</a> [^49]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Zou et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Benchmarks how LLM agents handle mid-task user interruptions (additions, revisions, retractions) during shopping. Even frontier models struggle with intent changes. Reveals critical gap between AI agent and human shopping flexibility.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00892">arXiv:2604.00892</a> | <a href="https://arxiv.org/pdf/2604.00892">PDF</a> -- Found via Web research</em></p>
+<h3 id="omni-simplemem-lifelong-multimodal-agent-memory-50"><a href="https://arxiv.org/abs/2604.01007">Omni-SimpleMem: Lifelong Multimodal Agent Memory</a> [^50]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + Cross-cutting: memory</p>
+<p><strong>Liu et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Autonomous research pipeline discovers unified memory framework for persistent agents. +411% F1 on LoCoMo, +214% on Mem-Gallery. Architecture changes &gt;&gt; hyperparameter tuning. Essential for lifelong personalization in commerce and education.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01007">arXiv:2604.01007</a> | <a href="https://arxiv.org/pdf/2604.01007">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="agent-world-model-infinity-synthetic-environments-for-agentic-rl-34"><a href="https://arxiv.org/abs/2602.10090">Agent World Model: Infinity Synthetic Environments for Agentic RL</a> [^34]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting: synthetic environments</a></p>
+<p><strong>Wang et al.</strong> (February 10, 2026)</p>
+<blockquote>
+<p>Pipeline generating 1,000 fully synthetic, code-driven environments with 35,062 tools and database-backed state transitions for agent RL training. Agents trained exclusively in synthetic environments achieve robust OOD generalization. Superior to LLM-simulated environments for consistency.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.10090">arXiv:2602.10090</a> | <a href="https://arxiv.org/pdf/2602.10090">PDF</a></em></p>
+<h3 id="skill0-in-context-agentic-rl-for-skill-internalization-35"><a href="https://arxiv.org/abs/2604.02268">Skill0: In-Context Agentic RL for Skill Internalization</a> [^35]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Lu et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Training-time curriculum progressively withdraws skill context as agents internalize capabilities. Dynamic Curriculum evaluates skill helpfulness on-policy. +9.7% ALFWorld, +6.6% Search-QA. Achieves zero-shot behavior without runtime skill retrieval. Formalizes scaffolded withdrawal.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a> | <a href="https://arxiv.org/pdf/2604.02268">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="simulating-novice-students-via-machine-unlearning-and-relearning-36"><a href="https://arxiv.org/abs/2603.26142">Simulating Novice Students via Machine Unlearning and Relearning</a> [^36]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + Cross-cutting: education</p>
+<p><strong>Song, Guo &amp; Lin</strong> (March 27, 2026)</p>
+<blockquote>
+<p>Machine unlearning creates novice-level AI students from expert LLMs for learning-by-teaching pedagogy. Unlearned agents produce more authentic novice responses than prompt-only baselines. Measures knowledge recovery through teaching dialogue, identifying patterns of conceptual development.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.26142">arXiv:2603.26142</a> | <a href="https://arxiv.org/pdf/2603.26142">PDF</a></em></p>
+<h3 id="the-path-to-conversational-ai-tutors-37"><a href="https://arxiv.org/abs/2602.19303">The Path to Conversational AI Tutors</a> [^37]</h3>
+<p><code>HIGH RELEVANCE</code> -- Cross-cutting: <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> + education</p>
+<p><strong>Vanacore, Baker, Closser &amp; Roschelle</strong> (February 22, 2026)</p>
+<blockquote>
+<p>"Keep, change, center, study" framework for conversational AI tutors integrating proven ITS methods (knowledge tracing, affect detection) with generative AI capabilities (dynamic content, dialogic scaffolding). Research agenda for scalable, pedagogically sound tutoring.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.19303">arXiv:2602.19303</a> | <a href="https://arxiv.org/pdf/2602.19303">PDF</a></em></p>
+<h3 id="pay-per-crawl-pricing-for-ai-the-lm-tree-agent-38"><a href="https://arxiv.org/abs/2604.01416">Pay-Per-Crawl Pricing for AI: The LM-Tree Agent</a> [^38]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Archer, Ghili &amp; Haghpanah</strong> (April 1, 2026)</p>
+<blockquote>
+<p>LLM-based adaptive pricing mechanism discovers content value categories from purchase feedback alone. 65% revenue improvement over uniform pricing; 40% over publisher's 8-segment taxonomy. Tested on 8,939 articles with 80,451 queries. Self-improving pricing through recursive feedback.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01416">arXiv:2604.01416</a> | <a href="https://arxiv.org/pdf/2604.01416">PDF</a></em></p>
+<h3 id="recursive-language-models-the-paradigm-of-2026-39"><a href="https://www.primeintellect.ai/blog/rlm">Recursive Language Models: The Paradigm of 2026</a> [^39]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Prime Intellect</strong> (2026)</p>
+<blockquote>
+<p>Models that manage their own context through persistent Python REPL, delegating sub-tasks to child LLM instances. Maintains performance across 1.5M-character inputs. Already covered in recursive-self-improvement.md but included here for tracking completeness.</p>
+</blockquote>
+<p><em><a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a></em></p>
+<h3 id="rise-self-improving-robot-policy-with-compositional-world-model-27"><a href="https://arxiv.org/abs/2602.11075">RISE: Self-Improving Robot Policy with Compositional World Model</a> [^27]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></p>
+<p><strong>Yang et al.</strong> (February 11, 2026)</p>
+<blockquote>
+<p>Compositional World Model for robot RL: dynamics prediction + progress value estimation enable imagination-driven policy improvement. +35-45% absolute gains across manipulation tasks without additional physical trials. Demonstrates learning through imagination as a universal self-improvement mechanism.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.11075">arXiv:2602.11075</a> | <a href="https://arxiv.org/pdf/2602.11075">PDF</a></em></p>
+<h3 id="autoworld-scaling-multi-agent-traffic-simulation-with-self-supervised-world-models-28"><a href="https://arxiv.org/abs/2603.28963">AutoWorld: Scaling Multi-Agent Traffic Simulation with Self-Supervised World Models</a> [^28]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Pourkeshavatz, Liu &amp; Rhinehart</strong> (March 30, 2026)</p>
+<blockquote>
+<p>Fully self-supervised world model from unlabeled LiDAR data for traffic simulation. Motion-aware latent supervision + cascaded DPP sampling. First on WOSAC leaderboard (Realism Meta Metric). Scales with additional unlabeled data.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.28963">arXiv:2603.28963</a> | <a href="https://arxiv.org/pdf/2603.28963">PDF</a></em></p>
+<h3 id="agenticshop-benchmarking-agentic-product-curation-for-personalized-web-shopping-29"><a href="https://arxiv.org/abs/2602.12315">AgenticShop: Benchmarking Agentic Product Curation for Personalized Web Shopping</a> [^29]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Kim et al.</strong> (February 12, 2026) -- <em>WWW 2026</em></p>
+<blockquote>
+<p>First benchmark for evaluating agentic shopping systems on personalized product curation in open-web environments. Checklist-driven evaluation framework. Finds current agentic systems remain largely insufficient for real-world exploratory shopping.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a> | <a href="https://arxiv.org/pdf/2602.12315">PDF</a></em></p>
+<h3 id="hierarchical-memory-orchestration-for-personalized-persistent-agents-30"><a href="https://arxiv.org/abs/2604.01670">Hierarchical Memory Orchestration for Personalized Persistent Agents</a> [^30]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + Cross-cutting: memory architectures</p>
+<p><strong>Liu et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Three-tier memory management (primary cache, secondary priority, global archive) with persona-driven redistribution. SOTA across multiple benchmarks. Deployed in OpenClaw. Connects to MemRerank and MemAPO as a spectrum of memory strategies.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01670">arXiv:2604.01670</a> | <a href="https://arxiv.org/pdf/2604.01670">PDF</a></em></p>
+<h3 id="tr-icrl-test-time-rethinking-for-in-context-reinforcement-learning-31"><a href="https://arxiv.org/abs/2604.00438">TR-ICRL: Test-Time Rethinking for In-Context Reinforcement Learning</a> [^31]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Jiang et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Test-time improvement without ground-truth rewards. Retrieves unlabeled instances, generates diverse candidates, uses majority voting for pseudo-labels. 137.59% improvement on AIME2024, 21.23% on MedQA for Qwen2.5-7B. Demonstrates self-improvement through convergent verification.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.00438">arXiv:2604.00438</a> | <a href="https://arxiv.org/pdf/2604.00438">PDF</a></em></p>
+<h3 id="a-self-improving-coding-agent-sica-32"><a href="https://arxiv.org/abs/2504.15228">A Self-Improving Coding Agent (SICA)</a> [^32]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Robeyns, Szummer &amp; Aitchison</strong> (April 2025)</p>
+<blockquote>
+<p>Agent edits its own codebase via LLM reflection, improving from 17% to 53% on SWE-bench Verified. Non-gradient-based learning through code self-modification. Demonstrates data-efficient recursive improvement.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2504.15228">arXiv:2504.15228</a> | <a href="https://arxiv.org/pdf/2504.15228">PDF</a></em></p>
+<h3 id="open-tutorai-an-open-source-platform-for-personalized-and-immersive-learning-33"><a href="https://arxiv.org/abs/2602.07176">Open TutorAI: An Open-source Platform for Personalized and Immersive Learning</a> [^33]</h3>
+<p><code>MED RELEVANCE</code> -- Cross-cutting: education + agentic AI</p>
+<p><strong>El Hajji et al.</strong> (February 6, 2026)</p>
+<blockquote>
+<p>Open-source LLM-powered tutoring platform with text and avatar-based modalities. Adaptive learner profiling during onboarding, integrated learning analytics, separate interfaces for learners/educators/parents. Demonstrates convergence of agentic commerce architectures with educational applications.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.07176">arXiv:2602.07176</a> | <a href="https://arxiv.org/pdf/2602.07176">PDF</a></em></p>
+<h3 id="incoder-32b-thinking-industrial-code-world-model-for-thinking-21"><a href="https://arxiv.org/abs/2604.03144">InCoder-32B-Thinking: Industrial Code World Model for Thinking</a> [^21]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> extends to code execution</p>
+<p><strong>Yang et al.</strong> (April 3, 2026) -- <em>HuggingFace Daily Papers</em></p>
+<blockquote>
+<p>Industrial Code World Model trained on Verilog simulation and GPU profiling traces. Predicts compilation and execution outcomes before running code, enabling self-verification. 81.3% on LiveCodeBench v5, 84.0% on CAD-Coder. First world model for industrial software execution.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03144">arXiv:2604.03144</a> | <a href="https://arxiv.org/pdf/2604.03144">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="multi-agent-video-recommenders-evolution-patterns-and-open-challenges-22"><a href="https://arxiv.org/abs/2604.02211">Multi-Agent Video Recommenders: Evolution, Patterns, and Open Challenges</a> [^22]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></p>
+<p><strong>Ranganathan et al.</strong> (April 2, 2026)</p>
+<blockquote>
+<p>Survey of multi-agent architectures redefining video recommendation through coordinated specialized agents. Identifies self-improving architectures and lifelong personalization as key open challenges. Proposes hybrid RL-LLM systems as a research direction.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.02211">arXiv:2604.02211</a> | <a href="https://arxiv.org/pdf/2604.02211">PDF</a></em></p>
+<h3 id="agenticrs-architecture-system-design-for-agentic-recommender-systems-23"><a href="https://arxiv.org/abs/2603.26085">AgenticRS-Architecture: System Design for Agentic Recommender Systems</a> [^23]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></p>
+<p><strong>Zhang et al.</strong> (March 27, 2026)</p>
+<blockquote>
+<p>Replaces traditional recommendation pipelines with interacting evolution agents (AutoTrain, AutoFeature, AutoPerf) possessing long-term memory and self-improvement capability. AutoTrain automates paper-driven model reproduction and refinement.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.26085">arXiv:2603.26085</a> | <a href="https://arxiv.org/pdf/2603.26085">PDF</a></em></p>
+<h3 id="reinforcement-world-model-learning-for-llm-based-agents-24"><a href="https://arxiv.org/abs/2602.05842">Reinforcement World Model Learning for LLM-based Agents</a> [^24]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></p>
+<p><strong>Yu et al.</strong> (February 2026)</p>
+<blockquote>
+<p>Self-supervised world model learning for LLM agents using semantic similarity rewards. Aligns predicted next states with observed states. +6.9 points on ALFWorld, +5.7 on τ² Bench over direct reward RL. Matches expert-data training through pure self-supervision.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.05842">arXiv:2602.05842</a> | <a href="https://arxiv.org/pdf/2602.05842">PDF</a> -- Found via HuggingFace Papers</em></p>
+<h3 id="skillrl-evolving-agents-via-recursive-skill-augmented-reinforcement-learning-25"><a href="https://arxiv.org/abs/2602.08234">SkillRL: Evolving Agents via Recursive Skill-Augmented Reinforcement Learning</a> [^25]</h3>
+<p><code>MED RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Chojecki et al.</strong> (February 2026)</p>
+<blockquote>
+<p>Framework bridging raw experience and policy improvement through automatic skill discovery and recursive evolution. Agents extract reusable behavioral patterns and recursively compose them for complex tasks.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2602.08234">arXiv:2602.08234</a> | <a href="https://arxiv.org/pdf/2602.08234">PDF</a></em></p>
+<h3 id="training-llm-based-tutors-to-improve-student-learning-outcomes-in-dialogues-26"><a href="https://arxiv.org/abs/2503.06424">Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues</a> [^26]</h3>
+<p><code>HIGH RELEVANCE</code> -- Cross-cutting: <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> + education</p>
+<p><strong>Scarlatos et al.</strong> (2025) -- <em>AIED 2025</em></p>
+<blockquote>
+<p>Trains LLM tutors to maximize student correctness via DPO on candidate responses scored by student model + GPT-4o. Llama 3.1 8B produces significantly higher correct student responses while matching GPT-4o pedagogical quality. Direct evidence that recursive optimization can improve human learning outcomes.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a> | <a href="https://arxiv.org/pdf/2503.06424">PDF</a></em></p>
+<h3 id="agent0-self-evolving-agents-from-zero-data-iclr-2026-rsi-oral-85"><a href="https://arxiv.org/abs/2511.16043">Agent0: Self-Evolving Agents from Zero Data (ICLR 2026 RSI Oral)</a> [^85]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/cross-cutting-connections.html">Cross-cutting</a></p>
+<p><strong>Zhang, Hu, Lu, Lange &amp; Clune</strong> (November 2025; accepted as <strong>Oral</strong> at ICLR 2026 RSI Workshop, 1 of 4 orals out of 110 papers)</p>
+<blockquote>
+<p>Fully autonomous co-evolutionary framework bootstrapping capable agents from zero data. Curriculum agent generates frontier tasks, executor agent learns to solve them. Qwen3-8B-Base improved 18% on math, 24% on general reasoning without any human annotations. Purest form of self-bootstrapped learning demonstrated to date. Co-evolutionary teacher-student dynamic maps directly to educational curriculum generation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2511.16043">arXiv:2511.16043</a> | <a href="https://github.com/aiming-lab/Agent0">GitHub</a> -- Found via ICLR 2026 RSI Workshop accepted papers</em></p>
+<h3 id="world-action-verifier-self-improving-world-models-via-forward-inverse-asymmetry-1"><a href="https://arxiv.org/abs/2604.01985">World Action Verifier: Self-Improving World Models via Forward-Inverse Asymmetry</a> [^1]</h3>
+<p><code>HIGH RELEVANCE</code> -- Bridges <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a> and <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></p>
+<p><strong>April 2, 2026</strong></p>
+<blockquote>
+<p>World models that identify their own prediction errors and self-correct by decomposing prediction into state plausibility and action reachability verification. Achieves 2× sample efficiency and 18% policy improvement across nine tasks.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01985">arXiv:2604.01985</a> | <a href="https://arxiv.org/pdf/2604.01985">PDF</a></em></p>
+<h3 id="forecasting-supply-chain-disruptions-with-foresight-learning-2"><a href="https://arxiv.org/abs/2604.01298">Forecasting Supply Chain Disruptions with Foresight Learning</a> [^2]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> + <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a></p>
+<p><strong>Wilczewski &amp; Skotheim</strong> (April 1, 2026)</p>
+<blockquote>
+<p>End-to-end framework training LLMs to produce calibrated probabilistic forecasts of supply chain disruptions from news. Outperforms GPT-5 on accuracy and calibration. Training induces structured probabilistic reasoning without explicit prompting.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01298">arXiv:2604.01298</a> | <a href="https://arxiv.org/pdf/2604.01298">PDF</a></em></p>
+<h3 id="self-distilled-rlvr-15"><a href="https://arxiv.org/abs/2604.03128">Self-Distilled RLVR</a> [^15]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Yang et al.</strong> (April 3, 2026)</p>
+<blockquote>
+<p>Combines self-distillation (token-level policy guidance) with RLVR (verified reward direction) for stable self-improvement. Demonstrates that pure self-distillation creates information leakage; the hybrid RLSD approach achieves superior convergence and training stability.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03128">arXiv:2604.03128</a> | <a href="https://arxiv.org/pdf/2604.03128">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="test-time-scaling-makes-overtraining-compute-optimal-16"><a href="https://arxiv.org/abs/2604.01411">Test-Time Scaling Makes Overtraining Compute-Optimal</a> [^16]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a> + <a href="../frontier-topics/scaling-laws-research.html">Scaling laws</a></p>
+<p><strong>Roberts et al.</strong> (April 1, 2026)</p>
+<blockquote>
+<p>Introduces T² scaling laws jointly optimizing model size, training tokens, and inference samples. When accounting for inference cost, optimal pretraining shifts into heavy overtraining. Validated by pretraining models in the predicted optimal regime. Results survive post-training.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a> | <a href="https://arxiv.org/pdf/2604.01411">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="do-world-action-models-generalize-better-than-vlas-a-robustness-study-17"><a href="https://arxiv.org/abs/2603.22078">Do World Action Models Generalize Better than VLAs? A Robustness Study</a> [^17]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Zhang et al.</strong> (March 23, 2026)</p>
+<blockquote>
+<p>First systematic robustness comparison of WAMs vs VLAs. WAMs show strong robustness from spatiotemporal priors (LingBot-VA: 74.2%, Cosmos-Policy: 82.2%), but VLAs can match with diverse training data. How video priors are integrated matters more than their mere presence.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.22078">arXiv:2603.22078</a> | <a href="https://arxiv.org/pdf/2603.22078">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="towards-practical-world-model-based-rl-for-vlas-18"><a href="https://arxiv.org/abs/2603.20607">Towards Practical World Model-based RL for VLAs</a> [^18]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Zhang et al.</strong> (March 21, 2026)</p>
+<blockquote>
+<p>VLA-MBPO framework tackles pixel-level world modeling, multi-view consistency, and compounding errors. Uses Unified Multimodal Models, Interleaved View Decoding, and Chunk-level Branched Rollout. Significant improvements in policy performance and sample efficiency on simulated and real robotic tasks.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.20607">arXiv:2603.20607</a> | <a href="https://arxiv.org/pdf/2603.20607">PDF</a></em></p>
+<h3 id="reinforcement-learning-via-self-distillation-sdpo-19"><a href="https://arxiv.org/abs/2601.20802">Reinforcement Learning via Self-Distillation (SDPO)</a> [^19]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Hübotter et al.</strong> (January 2026) -- <em>ICLR 2026</em></p>
+<blockquote>
+<p>Self-Distillation Policy Optimization treats the feedback-conditioned model as a self-teacher, converting tokenized feedback into dense learning signals. Reaches 48.8% vs 41.2% (GRPO) on competitive programming in 4× fewer generations. 3× fewer attempts for equivalent discovery rates at test time.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.20802">arXiv:2601.20802</a> | <a href="https://arxiv.org/pdf/2601.20802">PDF</a></em></p>
+<h3 id="evolution-of-ai-in-education-agentic-workflows-20"><a href="https://arxiv.org/abs/2504.20082">Evolution of AI in Education: Agentic Workflows</a> [^20]</h3>
+<p><code>MED RELEVANCE</code> -- Cross-cutting: <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a> architecture parallels</p>
+<p><strong>Kamalov et al.</strong> (2025, revised January 2026)</p>
+<blockquote>
+<p>Analyzes AI agents in education through four paradigms (reflection, planning, tool use, multi-agent collaboration) structurally identical to agentic commerce architectures. Multi-agent essay scoring framework demonstrates improved consistency over standalone LLMs.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2504.20082">arXiv:2504.20082</a> | <a href="https://arxiv.org/pdf/2504.20082">PDF</a></em></p>
+<h3 id="agentic-mme-what-agentic-capability-really-brings-to-multimodal-intelligence-3"><a href="https://arxiv.org/abs/2604.03016">Agentic-MME: What Agentic Capability Really Brings to Multimodal Intelligence?</a> [^3]</h3>
+<p><code>MED RELEVANCE</code></p>
+<p><strong>Wei et al.</strong> (2026)</p>
+<blockquote>
+<p>Evaluates how agentic capabilities (visual tool use, web search) enhance multimodal LLMs beyond passive observation.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.03016">arXiv:2604.03016</a> | <a href="https://arxiv.org/pdf/2604.03016">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<h3 id="agentsocialbench-evaluating-privacy-risks-in-human-centered-agentic-social-networks-4"><a href="https://arxiv.org/abs/2604.01487">AgentSocialBench: Evaluating Privacy Risks in Human-Centered Agentic Social Networks</a> [^4]</h3>
+<p><code>MED RELEVANCE</code></p>
+<p><strong>Wang &amp; Jiang</strong> (2026)</p>
+<blockquote>
+<p>Evaluates privacy risks in agentic social networks where teams of AI agents serve individual users across domains.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2604.01487">arXiv:2604.01487</a> | <a href="https://arxiv.org/pdf/2604.01487">PDF</a> -- Found via HuggingFace Daily Papers</em></p>
+<hr />
+<h2 id="week-of-march-30-2026">Week of March 30, 2026</h2>
+<h3 id="thinkjepa-empowering-latent-world-models-with-large-vision-language-reasoning-model-5"><a href="https://arxiv.org/abs/2603.22281">ThinkJEPA: Empowering Latent World Models with Large Vision-Language Reasoning Model</a> [^5]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Zhang et al.</strong> (March 23, 2026)</p>
+<blockquote>
+<p>Dual-pathway framework integrating VLMs with JEPA-style latent world models. One branch handles fine-grained motion dynamics; a VLM "thinker" provides long-horizon semantic guidance. Superior on hand-manipulation trajectory prediction.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.22281">arXiv:2603.22281</a> | <a href="https://arxiv.org/pdf/2603.22281">PDF</a></em></p>
+<h3 id="social-jepa-emergent-geometric-isomorphism-in-independently-trained-world-models-6"><a href="https://arxiv.org/abs/2603.02263">Social-JEPA: Emergent Geometric Isomorphism in Independently Trained World Models</a> [^6]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a></p>
+<p><strong>Zhang et al.</strong> (February 28, 2026)</p>
+<blockquote>
+<p>Independently trained JEPA world models spontaneously develop geometrically isomorphic latent spaces. Classifiers transfer between agents without retraining -- a computational analogue of convergent understanding.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.02263">arXiv:2603.02263</a> | <a href="https://arxiv.org/pdf/2603.02263">PDF</a></em></p>
+<h3 id="memrerank-preference-memory-for-personalized-product-reranking-7"><a href="https://arxiv.org/abs/2603.29247">MemRerank: Preference Memory for Personalized Product Reranking</a> [^7]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Peng et al.</strong> (March 31, 2026)</p>
+<blockquote>
+<p>Compact preference memory framework for LLM shopping agents. RL-trained memory extractor distills purchase history into query-independent signals. 10.6pp accuracy gain over raw history approaches.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.29247">arXiv:2603.29247</a> | <a href="https://arxiv.org/pdf/2603.29247">PDF</a></em></p>
+<h3 id="a-solicit-then-suggest-model-of-agentic-purchasing-8"><a href="https://arxiv.org/abs/2603.20972">A Solicit-Then-Suggest Model of Agentic Purchasing</a> [^8]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Cao &amp; Hu</strong> (March 21, 2026)</p>
+<blockquote>
+<p>Formalizes conversational agentic purchasing economics. Finds inquiry depth and product variety are substitutes for reducing preference uncertainty. Optimal strategy uses Voronoi partitioning.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.20972">arXiv:2603.20972</a> | <a href="https://arxiv.org/pdf/2603.20972">PDF</a></em></p>
+<h3 id="gasp-guided-asymmetric-self-play-for-coding-llms-9"><a href="https://arxiv.org/abs/2603.15957">GASP: Guided Asymmetric Self-Play For Coding LLMs</a> [^9]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Jana et al.</strong> (March 16, 2026) -- <em>ICLR 2026 RSI Workshop Spotlight</em></p>
+<blockquote>
+<p>Teacher LLM generates progressively harder coding problems grounded by real goalpost questions. 2.5% pass@20 improvement on LiveCodeBench; solves hard problems unreachable by baselines.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.15957">arXiv:2603.15957</a> | <a href="https://arxiv.org/pdf/2603.15957">PDF</a></em></p>
+<h3 id="sahoo-safeguarded-alignment-for-recursive-self-improvement-10"><a href="https://arxiv.org/abs/2603.06333">SAHOO: Safeguarded Alignment for Recursive Self-Improvement</a> [^10]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Sahoo et al.</strong> (March 6, 2026) -- <em>ICLR 2026 RSI Workshop</em></p>
+<blockquote>
+<p>Safety guardrails for recursive improvement loops: Goal Drift Index, constraint preservation, regression-risk quantification. 18.3% code improvement and 16.8% reasoning improvement with low constraint violations.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.06333">arXiv:2603.06333</a> | <a href="https://arxiv.org/pdf/2603.06333">PDF</a></em></p>
+<h3 id="posttrainbench-can-llm-agents-automate-llm-post-training-11"><a href="https://arxiv.org/abs/2603.08640">PostTrainBench: Can LLM Agents Automate LLM Post-Training?</a> [^11]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Rank et al.</strong> (March 9, 2026) -- <em>ICLR 2026 RSI Workshop Oral</em></p>
+<blockquote>
+<p>Benchmarks whether frontier LLM agents can autonomously post-train a base LLM on a single GPU. Best agents reach 23.2% overall but exceed provider models in targeted scenarios (89% vs. 67% on BFCL).</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.08640">arXiv:2603.08640</a> | <a href="https://arxiv.org/pdf/2603.08640">PDF</a></em></p>
+<h3 id="memapo-generalizable-self-evolving-memory-for-automatic-prompt-optimization-12"><a href="https://arxiv.org/abs/2603.21520">MemAPO: Generalizable Self-Evolving Memory for Automatic Prompt Optimization</a> [^12]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Liang et al.</strong> (March 23, 2026)</p>
+<blockquote>
+<p>Prompt optimization as self-evolving experience accumulation. Dual memory of success strategies and error patterns. 57.2% cost reduction vs. TextGrad with best average performance.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.21520">arXiv:2603.21520</a> | <a href="https://arxiv.org/pdf/2603.21520">PDF</a></em></p>
+<h3 id="dynaweb-model-based-reinforcement-learning-of-web-agents-13"><a href="https://arxiv.org/abs/2601.22149">DynaWeb: Model-Based Reinforcement Learning of Web Agents</a> [^13]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive simulation</a> + <a href="../frontier-topics/ai-ecommerce-learning.html">AI for e-commerce</a></p>
+<p><strong>Ding et al.</strong> (January 29, 2026)</p>
+<blockquote>
+<p>LLM-based web world model enables agents to train through "imagination." Blends imagined rollouts with expert trajectories. WebArena: 26.7% → 31.0%; WebVoyager: 32.6% → 38.7%.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2601.22149">arXiv:2601.22149</a> | <a href="https://arxiv.org/pdf/2601.22149">PDF</a></em></p>
+<h3 id="self-play-only-evolves-when-self-synthetic-pipeline-ensures-learnable-information-gain-14"><a href="https://arxiv.org/abs/2603.02218">Self-Play Only Evolves When Self-Synthetic Pipeline Ensures Learnable Information Gain</a> [^14]</h3>
+<p><code>HIGH RELEVANCE</code> -- <a href="../frontier-topics/recursive-self-improvement.html">Recursive self-improvement</a></p>
+<p><strong>Liu et al.</strong> (March 2, 2026)</p>
+<blockquote>
+<p>Theoretical and empirical analysis of when self-play leads to sustainable self-evolution. Identifies learnable information gain as the critical condition; without it, self-play stagnates.</p>
+</blockquote>
+<p><em><a href="https://arxiv.org/abs/2603.02218">arXiv:2603.02218</a> | <a href="https://arxiv.org/pdf/2603.02218">PDF</a></em></p>
+<hr />
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="key-papers.html">Key Papers and References</a> -- Curated essential reading</li>
+<li><a href="tracking-ai-research.html">Tracking AI Research</a> -- APIs and methodology</li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: "World Action Verifier: Self-Improving World Models via Forward-Inverse Asymmetry." (2026). <a href="https://arxiv.org/abs/2604.01985">arXiv:2604.01985</a>.
+[^2]: Wilczewski, P. &amp; Skotheim, K. (2026). "Forecasting Supply Chain Disruptions with Foresight Learning." <a href="https://arxiv.org/abs/2604.01298">arXiv:2604.01298</a>.
+[^3]: Qianshan Wei et al. (2026). "Agentic-MME." <a href="https://arxiv.org/abs/2604.03016">arXiv:2604.03016</a>. Retrieved via HuggingFace Daily Papers.
+[^4]: Prince Zizhuang Wang &amp; Shuli Jiang (2026). "AgentSocialBench." <a href="https://arxiv.org/abs/2604.01487">arXiv:2604.01487</a>. Retrieved via HuggingFace Daily Papers.
+[^5]: Zhang, H. et al. (2026). "ThinkJEPA." <a href="https://arxiv.org/abs/2603.22281">arXiv:2603.22281</a>.
+[^6]: Zhang, H. et al. (2026). "Social-JEPA." <a href="https://arxiv.org/abs/2603.02263">arXiv:2603.02263</a>.
+[^7]: Peng, Z. et al. (2026). "MemRerank." <a href="https://arxiv.org/abs/2603.29247">arXiv:2603.29247</a>.
+[^8]: Cao, S. &amp; Hu, M. (2026). "A Solicit-Then-Suggest Model of Agentic Purchasing." <a href="https://arxiv.org/abs/2603.20972">arXiv:2603.20972</a>.
+[^9]: Jana, S. et al. (2026). "GASP." <em>ICLR 2026 RSI Workshop (Spotlight)</em>. <a href="https://arxiv.org/abs/2603.15957">arXiv:2603.15957</a>.
+[^10]: Sahoo, S. et al. (2026). "SAHOO." <em>ICLR 2026 RSI Workshop</em>. <a href="https://arxiv.org/abs/2603.06333">arXiv:2603.06333</a>.
+[^11]: Rank, B. et al. (2026). "PostTrainBench." <em>ICLR 2026 RSI Workshop (Oral)</em>. <a href="https://arxiv.org/abs/2603.08640">arXiv:2603.08640</a>.
+[^12]: Liang, G. et al. (2026). "MemAPO." <a href="https://arxiv.org/abs/2603.21520">arXiv:2603.21520</a>.
+[^13]: Ding, H. et al. (2026). "DynaWeb." <a href="https://arxiv.org/abs/2601.22149">arXiv:2601.22149</a>.
+[^14]: Liu, W. et al. (2026). "Self-Play Only Evolves When..." <a href="https://arxiv.org/abs/2603.02218">arXiv:2603.02218</a>.
+[^15]: Yang, C. et al. (2026). "Self-Distilled RLVR." <a href="https://arxiv.org/abs/2604.03128">arXiv:2604.03128</a>. Retrieved via HuggingFace Daily Papers.
+[^16]: Roberts, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal." <a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a>. Retrieved via HuggingFace Daily Papers.
+[^17]: Zhang, Z. et al. (2026). "Do World Action Models Generalize Better than VLAs?" <a href="https://arxiv.org/abs/2603.22078">arXiv:2603.22078</a>. Retrieved via HuggingFace Daily Papers.
+[^18]: Zhang, Z. et al. (2026). "Towards Practical World Model-based RL for VLAs." <a href="https://arxiv.org/abs/2603.20607">arXiv:2603.20607</a>.
+[^19]: Hübotter, J. et al. (2026). "Reinforcement Learning via Self-Distillation." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2601.20802">arXiv:2601.20802</a>.
+[^20]: Kamalov, F. et al. (2025). "Evolution of AI in Education: Agentic Workflows." <a href="https://arxiv.org/abs/2504.20082">arXiv:2504.20082</a>.
+[^21]: Yang, J. et al. (2026). "InCoder-32B-Thinking: Industrial Code World Model for Thinking." <a href="https://arxiv.org/abs/2604.03144">arXiv:2604.03144</a>. Retrieved via HuggingFace Daily Papers.
+[^22]: Ranganathan, S. et al. (2026). "Multi-Agent Video Recommenders: Evolution, Patterns, and Open Challenges." <a href="https://arxiv.org/abs/2604.02211">arXiv:2604.02211</a>.
+[^23]: Zhang, H. et al. (2026). "AgenticRS-Architecture: System Design for Agentic Recommender Systems." <a href="https://arxiv.org/abs/2603.26085">arXiv:2603.26085</a>.
+[^24]: Yu, X. et al. (2026). "Reinforcement World Model Learning for LLM-based Agents." <a href="https://arxiv.org/abs/2602.05842">arXiv:2602.05842</a>. Retrieved via HuggingFace Papers.
+[^25]: Chojecki, P. et al. (2026). "SkillRL: Evolving Agents via Recursive Skill-Augmented Reinforcement Learning." <a href="https://arxiv.org/abs/2602.08234">arXiv:2602.08234</a>.
+[^26]: Scarlatos, A. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." <em>AIED 2025</em>. <a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a>.</p>
+<p>[^27]: Yang, J. et al. (2026). "RISE: Self-Improving Robot Policy with Compositional World Model." <a href="https://arxiv.org/abs/2602.11075">arXiv:2602.11075</a>.
+[^28]: Pourkeshavatz, M., Liu, T. &amp; Rhinehart, N. (2026). "AutoWorld: Scaling Multi-Agent Traffic Simulation with Self-Supervised World Models." <a href="https://arxiv.org/abs/2603.28963">arXiv:2603.28963</a>.
+[^29]: Kim, S. et al. (2026). "AgenticShop: Benchmarking Agentic Product Curation for Personalized Web Shopping." <em>WWW 2026</em>. <a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a>.
+[^30]: Liu, J. et al. (2026). "Hierarchical Memory Orchestration for Personalized Persistent Agents." <a href="https://arxiv.org/abs/2604.01670">arXiv:2604.01670</a>.
+[^31]: Jiang, W. et al. (2026). "TR-ICRL: Test-Time Rethinking for In-Context Reinforcement Learning." <a href="https://arxiv.org/abs/2604.00438">arXiv:2604.00438</a>.
+[^32]: Robeyns, M., Szummer, M. &amp; Aitchison, L. (2025). "A Self-Improving Coding Agent." <a href="https://arxiv.org/abs/2504.15228">arXiv:2504.15228</a>.
+[^33]: El Hajji, M. et al. (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." <a href="https://arxiv.org/abs/2602.07176">arXiv:2602.07176</a>.</p>
+<p>[^34]: Wang, Z. et al. (2026). "Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning." <a href="https://arxiv.org/abs/2602.10090">arXiv:2602.10090</a>.
+[^35]: Lu, Z. et al. (2026). "Skill0: In-Context Agentic Reinforcement Learning for Skill Internalization." <a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a>. Retrieved via HuggingFace Daily Papers.
+[^36]: Song, J., Guo, Z. &amp; Lin, J. (2026). "Simulating Novice Students Using Machine Unlearning and Relearning in Large Language Models." <a href="https://arxiv.org/abs/2603.26142">arXiv:2603.26142</a>.
+[^37]: Vanacore, K., Baker, R.S., Closser, A.H. &amp; Roschelle, J. (2026). "The Path to Conversational AI Tutors." <a href="https://arxiv.org/abs/2602.19303">arXiv:2602.19303</a>.
+[^38]: Archer, R., Ghili, S. &amp; Haghpanah, N. (2026). "Pay-Per-Crawl Pricing for AI: The LM-Tree Agent." <a href="https://arxiv.org/abs/2604.01416">arXiv:2604.01416</a>.
+[^39]: Prime Intellect (2026). "Recursive Language Models: The Paradigm of 2026." <a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a>.
+[^40]: Qu, A. et al. (2026). "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery." <a href="https://arxiv.org/abs/2604.01658">arXiv:2604.01658</a>. Retrieved via HuggingFace Daily Papers.
+[^41]: Hao, J. et al. (2026). "EgoSim: Egocentric World Simulator for Embodied Interaction Generation." <a href="https://arxiv.org/abs/2604.01001">arXiv:2604.01001</a>. Retrieved via HuggingFace Daily Papers.
+[^42]: Zhang, H. et al. (2026). "EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification." <a href="https://arxiv.org/abs/2604.01687">arXiv:2604.01687</a>. Retrieved via HuggingFace Daily Papers.
+[^43]: Xia, Y. et al. (2026). "Learning to Hint for Reinforcement Learning." <a href="https://arxiv.org/abs/2604.00698">arXiv:2604.00698</a>.
+[^44]: Zhang, R. et al. (2026). "Embarrassingly Simple Self-Distillation Improves Code Generation." <a href="https://arxiv.org/abs/2604.01193">arXiv:2604.01193</a>. Retrieved via HuggingFace Daily Papers.
+[^45]: He, M. et al. (2026). "YC-Bench: Benchmarking AI Agents for Long-Term Planning and Consistent Execution." <a href="https://arxiv.org/abs/2604.01212">arXiv:2604.01212</a>. Retrieved via HuggingFace Daily Papers.
+[^46]: Zhou, Y. et al. (2026). "DriveDreamer-Policy: A Geometry-Grounded World-Action Model." <a href="https://arxiv.org/abs/2604.01765">arXiv:2604.01765</a>.
+[^47]: Wei, Y., Li, R. &amp; Jiang, B. (2026). "SLOW: Strategic Logical-inference Open Workspace for AI Tutoring." <a href="https://arxiv.org/abs/2603.28062">arXiv:2603.28062</a>. Retrieved via HuggingFace Daily Papers.
+[^48]: Fan, Q., Ge, M., Jia, C. &amp; Shi, W. (2026). "Train Yourself as an LLM." <a href="https://arxiv.org/abs/2604.02637">arXiv:2604.02637</a>. Retrieved via HuggingFace Daily Papers.
+[^49]: Zou, H.P. et al. (2026). "When Users Change Their Mind: Evaluating Interruptible Agents in Long-Horizon Web Navigation." <a href="https://arxiv.org/abs/2604.00892">arXiv:2604.00892</a>.
+[^50]: Liu, J. et al. (2026). "Omni-SimpleMem: Autoresearch-Guided Discovery of Lifelong Multimodal Agent Memory." <a href="https://arxiv.org/abs/2604.01007">arXiv:2604.01007</a>. Retrieved via HuggingFace Daily Papers.
+[^51]: Hafner, D. &amp; Yan, W. (2025). "Training Agents Inside of Scalable World Models." <a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a>.
+[^52]: Yang, P. et al. (2026). "DreamerAD: Efficient Reinforcement Learning via Latent World Model for Autonomous Driving." <a href="https://arxiv.org/abs/2603.24587">arXiv:2603.24587</a>.
+[^53]: Chojecki, P. (2025). "Self-Improving AI Agents through Self-Play." <a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a>.
+[^54]: "LangMARL: Natural Language Multi-Agent Reinforcement Learning." (2026). <a href="https://arxiv.org/abs/2604.00722">arXiv:2604.00722</a>.
+[^55]: "MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild." (2026).
+[^56]: Kestin, G. et al. (2025). "AI tutoring outperforms in-class active learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-025-97652-6">DOI: 10.1038/s41598-025-97652-6</a>.
+[^57]: McKinsey (2026). "The agentic commerce opportunity." <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants">mckinsey.com</a>.
+[^58]: OECD (2026). "OECD Digital Education Outlook 2026." <a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">oecd.org</a>.
+[^59]: Gao, Q., Yang, J., Xu, Q., Chen, L. &amp; Wang, Y. (2026). "LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model." <a href="https://arxiv.org/abs/2603.27449">arXiv:2603.27449</a>. Retrieved via HuggingFace Daily Papers.
+[^60]: Newman, K., Zhu, T. &amp; Russakovsky, O. (2026). "Video Models Reason Early: Exploiting Plan Commitment for Maze Solving." <a href="https://arxiv.org/abs/2603.30043">arXiv:2603.30043</a>. Retrieved via HuggingFace Daily Papers.
+[^61]: Xu, W. et al. (2026). "ASI-Evolve: AI Accelerates AI." <a href="https://arxiv.org/abs/2603.29640">arXiv:2603.29640</a>. Retrieved via HuggingFace Daily Papers.
+[^62]: Xu, B., Fang, D., Li, H. &amp; Zhang, K. (2026). "From Multi-Agent to Single-Agent: When Is Skill Distillation Beneficial?" <a href="https://arxiv.org/abs/2604.01608">arXiv:2604.01608</a>. Retrieved via Web research.
+[^63]: Chen, L., Liu, Q., Lin, W. &amp; Liang, F. (2026). "Criterion Validity of LLM-as-Judge for Business Outcomes in Conversational Commerce." <a href="https://arxiv.org/abs/2604.00022">arXiv:2604.00022</a>. Retrieved via Web research.
+[^64]: Zhao, Z. et al. (2026). "GPA: Learning GUI Process Automation from Demonstrations." <a href="https://arxiv.org/abs/2604.01676">arXiv:2604.01676</a>. Retrieved via HuggingFace Daily Papers.
+[^65]: Pardinas, R., Kamalloo, E., Vazquez, D. &amp; Drouin, A. (2026). "Apriel-Reasoner: RL Post-Training for General-Purpose and Efficient Reasoning." <a href="https://arxiv.org/abs/2604.02007">arXiv:2604.02007</a>. Retrieved via HuggingFace Daily Papers.
+[^66]: Mur-Labadia, L. et al. (2026). "V-JEPA 2.1: Unlocking Dense Features in Video Self-Supervised Learning." <a href="https://arxiv.org/abs/2603.14482">arXiv:2603.14482</a>. Retrieved via Web research.
+[^67]: Qiu, Y. et al. (2026). "Self-Improving World Modelling with Latent Actions." <a href="https://arxiv.org/abs/2602.06130">arXiv:2602.06130</a>. Retrieved via Web research.
+[^68]: Hauri, M. &amp; Zenke, F. (2026). "Dreamer-CDP." <a href="https://arxiv.org/abs/2603.07083">arXiv:2603.07083</a>; "R2-Dreamer." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2603.18202">arXiv:2603.18202</a>; Bredis, G. et al. (2026). "NE-Dreamer." <a href="https://arxiv.org/abs/2603.02765">arXiv:2603.02765</a>. Retrieved via Web research.
+[^69]: Esakkiraja, E., Rajeswar, S., Akhiyarov, D. &amp; Venkatesaramani, R. (2026). "Therefore I am. I Think." <a href="https://arxiv.org/abs/2604.01202">arXiv:2604.01202</a>. Retrieved via HuggingFace Daily Papers.
+[^70]: Zhai, Z. et al. (2026). "CogSearch: Cognitive-Aligned Multi-Agent Framework for E-Commerce Search." <a href="https://arxiv.org/abs/2603.11927">arXiv:2603.11927</a>. Retrieved via Web research.
+[^71]: Cao, S. &amp; Hu, M. (2026). "Collusive Pricing Under LLM." <a href="https://arxiv.org/abs/2601.01279">arXiv:2601.01279</a>. Retrieved via Web research.</p>
+<p>[^80]: Li, Z. et al. (2026). "WildWorld: A Large-Scale Dataset for Dynamic World Modeling." <a href="https://arxiv.org/abs/2603.23497">arXiv:2603.23497</a>. Retrieved via HuggingFace Daily Papers.
+[^81]: GigaAI (2026). "GigaWorld-Policy: Efficient Action-Centered World-Action Model." <a href="https://arxiv.org/abs/2603.17240">arXiv:2603.17240</a>. Retrieved via HuggingFace Trending.
+[^82]: OECD (2026). "OECD Digital Education Outlook 2026." <a href="https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html">oecd.org</a>. Retrieved via Web research.
+[^83]: Kim, S. et al. (2026). "AgenticShop." <em>WWW 2026</em>. <a href="https://arxiv.org/abs/2602.12315">arXiv:2602.12315</a>. Retrieved via Web research.
+[^84]: Yu, X. et al. (2026). "Reinforcement World Model Learning for LLM-based Agents." <a href="https://arxiv.org/abs/2602.05842">arXiv:2602.05842</a>. Retrieved via HuggingFace Papers.
+[^85]: Zhang, J. et al. (2025). "Agent0." <em>ICLR 2026 RSI Workshop (Oral)</em>. <a href="https://arxiv.org/abs/2511.16043">arXiv:2511.16043</a>. Retrieved via Web research.
+[^86]: Qiao, J. et al. (2026). "Memory Intelligence Agent." <a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a>. Retrieved via HuggingFace Daily Papers.
+[^87]: Sarch, G., Cai, L., Wang, Q., Wu, H., Chen, D. &amp; Liu, Z. (2026). "Vero: An Open RL Recipe for General Visual Reasoning." <a href="https://arxiv.org/abs/2604.04917">arXiv:2604.04917</a>. Retrieved via HuggingFace Trending.
+[^88]: Ji, H., Xiong, K., Han, S., Xia, P. et al. (2026). "ClawArena: Benchmarking AI Agents in Evolving Information Environments." <a href="https://arxiv.org/abs/2604.04202">arXiv:2604.04202</a>. Retrieved via HuggingFace Daily Papers.
+[^89]: Li, X., Sun, X., Wang, G., Su, S., Shum, C. &amp; Li, J. (2026). "GrandCode: Achieving Grandmaster Level in Competitive Programming via Agentic Reinforcement Learning." <a href="https://arxiv.org/abs/2604.02721">arXiv:2604.02721</a>. Retrieved via Web research.
+[^90]: Taneja, K., Singh, A. &amp; Goel, A. (2026). "Impact of Multimodal and Conversational AI on Learning Outcomes and Experience." <a href="https://arxiv.org/abs/2604.02221">arXiv:2604.02221</a>. Retrieved via Web research.
+[^91]: Sun, K. (2026). "When AI Improves Answers but Slows Knowledge Creation." <a href="https://arxiv.org/abs/2604.00468">arXiv:2604.00468</a>. Retrieved via Web research.</p>
+<h2 id="update-2026-04-07-scheduled">Update: 2026-04-07 (Scheduled)</h2>
+<h3 id="new-entries">New Entries</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Area</th>
+<th>Key Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SimDist (Levy et al., 2026)</td>
+<td>Simulation</td>
+<td>Sim-to-real transfer via world model distillation; rapid adaptation without relearning</td>
+</tr>
+<tr>
+<td>Valid Student Simulation (Yuan et al., 2026)</td>
+<td>Simulation + Education</td>
+<td>Epistemic State Specification for realistic LLM-based student simulation; identifies competence paradox</td>
+</tr>
+<tr>
+<td>RWML (Peng et al., 2026)</td>
+<td>Simulation</td>
+<td>RL-based world model training for LLM agents; 19.6pt improvement, less forgetting than SFT</td>
+</tr>
+<tr>
+<td>RSIR (Zhang et al., 2026)</td>
+<td>Recursion + E-Commerce</td>
+<td>Recursive self-improving recommendations without external data; model-agnostic data sparsity solution</td>
+</tr>
+<tr>
+<td>Recursive Language Models (Prime Intellect, 2026)</td>
+<td>Recursion</td>
+<td>Context management via recursive delegation; paradigm for long-horizon agent cognition</td>
+</tr>
+<tr>
+<td>AI Pedagogy (2025-2026)</td>
+<td>Recursion + Education</td>
+<td>Dialogic teacher-learner training for LLMs; 4 pedagogical strategies tested</td>
+</tr>
+<tr>
+<td>IntelliCode (2025)</td>
+<td>E-Commerce + Education</td>
+<td>Centralized versioned learner state for multi-agent tutoring coordination</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-cutting-connections-added">Cross-Cutting Connections Added</h3>
+<ul>
+<li><strong>Connection 21: Sim-Distill-Adapt Pipeline</strong> -- SimDist + RSIR + Valid Student Simulation form a unified pipeline from cheap simulation through recursive improvement to realistic deployment</li>
+<li><strong>Connection 22: Recursive Language Models Unify Context Management</strong> -- RLMs provide architectural pattern for managing long-horizon context across simulation, self-improvement, and commerce domains</li>
+</ul>
+<h3 id="sources">Sources</h3>
+<p>[^92]: Levy, J. et al. (2026). "Simulation Distillation: Pretraining World Models in Simulation for Rapid Real-World Adaptation." <a href="https://arxiv.org/abs/2603.15759">arXiv:2603.15759</a>. Retrieved via arXiv search.
+[^93]: Yuan, Z. et al. (2026). "Towards Valid Student Simulation with Large Language Models." <a href="https://arxiv.org/abs/2601.05473">arXiv:2601.05473</a>. Retrieved via arXiv search.
+[^94]: Peng, B. et al. (2026). "Reinforcement World Model Learning for LLM-based Agents." <a href="https://arxiv.org/abs/2602.05842">arXiv:2602.05842</a>. Retrieved via HuggingFace Papers.
+[^95]: Zhang, L. et al. (2026). "Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control." <a href="https://arxiv.org/abs/2602.15659">arXiv:2602.15659</a>. Retrieved via arXiv search.
+[^96]: Prime Intellect (2026). "Recursive Language Models: The Paradigm of 2026." <a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a>. Retrieved via Web search.
+[^97]: "AI Pedagogy: Dialogic Social Learning for Artificial Agents." <a href="https://arxiv.org/abs/2507.21065">arXiv:2507.21065</a>. Retrieved via arXiv search.
+[^98]: "IntelliCode: A Multi-Agent LLM Tutoring System with Centralized Learner Modeling." <a href="https://arxiv.org/abs/2512.18669">arXiv:2512.18669</a>. Retrieved via arXiv search.
+[^99]: He, M., Guo, H., Lin, J. &amp; Yu, Y. (2026). "Video Generation Models as World Models: Efficient Paradigms, Architectures and Algorithms." <a href="https://arxiv.org/abs/2603.28489">arXiv:2603.28489</a>. Retrieved via HuggingFace Papers.
+[^100]: Li, J. et al. (2026). "Grounding World Simulation Models in a Real-World Metropolis." <a href="https://arxiv.org/abs/2603.15583">arXiv:2603.15583</a>. Retrieved via HuggingFace Papers.
+[^101]: Liu, Y., Song, Z., Lou, J., Wu, C. &amp; Li, J. (2026). "AgentTutor: Empowering Personalized Learning with Multi-Turn Interactive Teaching." <a href="https://arxiv.org/abs/2601.04219">arXiv:2601.04219</a>. Retrieved via arXiv search.
+[^102]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. <a href="https://recursive-workshop.github.io/">recursive-workshop.github.io</a>. Retrieved via Web search.
+[^103]: Lu, Z. et al. (2026). "SKILL0: In-Context Agentic Reinforcement Learning for Skill Internalization." <a href="https://arxiv.org/abs/2604.02268">arXiv:2604.02268</a>. Retrieved via HuggingFace Papers.
+[^104]: "MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild." <a href="https://arxiv.org/abs/2603.17187">arXiv:2603.17187</a>. Retrieved via HuggingFace Papers.
+[^105]: "LLM &amp; Agents for Recommendation Systems." <em>WWW 2026 Workshop</em>. <a href="https://llmandagents4recsys.github.io/">llmandagents4recsys.github.io</a>. Retrieved via Web search.
+[^106]: Saini, K. et al. (2026). "A switching-based deep learning framework for personalized and adaptive E-commerce recommendations." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-40024-5">DOI: 10.1038/s41598-026-40024-5</a>. Retrieved via Web search.
+[^107]: Zeng, B. et al. (2026). "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models." <a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a>. Retrieved via HuggingFace Daily Papers.
+[^108]: Yu, Z. et al. (2026). "SkillX: Automatically Constructing Skill Knowledge Bases for Agents." <em>ICML 2026</em>. <a href="https://arxiv.org/abs/2604.04804">arXiv:2604.04804</a>. Retrieved via HuggingFace Daily Papers.
+[^109]: Ji, H. et al. (2026). "ClawArena: Benchmarking AI Agents in Evolving Information Environments." <a href="https://arxiv.org/abs/2604.04202">arXiv:2604.04202</a>. Retrieved via HuggingFace Daily Papers.
+[^110]: Google DeepMind (2026). "Genie 3: A New Frontier for World Models." <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/">deepmind.google/blog/genie-3</a>. Retrieved via Web search.
+[^111]: "Understanding World or Predicting Future? A Comprehensive Survey of World Models." <em>ACM Computing Surveys</em>, 58(4), 2026. <a href="https://dl.acm.org/doi/10.1145/3746449">DOI: 10.1145/3746449</a>. Retrieved via Web search.
+[^112]: Qiao, J. et al. (2026). "Memory Intelligence Agent." <a href="https://arxiv.org/abs/2604.04503">arXiv:2604.04503</a>. Retrieved via HuggingFace Daily Papers.
+[^113]: Prime Intellect (2026). "Recursive Language Models: The Paradigm of 2026." <a href="https://www.primeintellect.ai/blog/rlm">primeintellect.ai/blog/rlm</a>. Retrieved via Web search.
+[^114]: Hafner, D., Yan, W. &amp; Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." <a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a>. Retrieved via Web search.
+[^115]: Hicke, Y. et al. (2026). "MedSimAI: Simulation and Formative Feedback Generation to Enhance Deliberate Practice in Medical Education." <em>LAK 2026</em>. <a href="https://arxiv.org/abs/2503.05793">arXiv:2503.05793</a>. Retrieved via Web search.
+[^116]: Zerkouk, M., Mihoubi, M. &amp; Chikhaoui, B. (2025). "A Comprehensive Review of AI-based Intelligent Tutoring Systems: Applications and Challenges." <a href="https://arxiv.org/abs/2507.18882">arXiv:2507.18882</a>. Retrieved via Web search.
+[^117]: Instructure (2026). "Canvas Unrolls AI Teaching Agent." <a href="https://www.insidehighered.com/news/tech-innovation/artificial-intelligence/2026/03/23/canvas-unrolls-ai-teaching-agent">insidehighered.com</a>. Retrieved via Web search.
+[^118]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. April 26-27, 2026, Rio de Janeiro. <a href="https://recursive-workshop.github.io/">recursive-workshop.github.io</a>. Retrieved via Web search.
+[^114]: Chen, W. et al. (2026). "Predicting repurchase behavior and optimizing marketing for e-commerce users with genetic algorithms and deep learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-45903-5">DOI: 10.1038/s41598-026-45903-5</a>. Retrieved via Web search.</p>
+<h2 id="update-2026-04-07-scheduled-batch-6">Update: 2026-04-07 (Scheduled — Batch 6)</h2>
+<h3 id="new-entries_1">New Entries</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Area</th>
+<th>Key Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cosmos-Predict2.5 (NVIDIA, 2026)</td>
+<td>Simulation</td>
+<td>Unified Text/Image/Video2World generation at 2B-14B scale; 200M video clips; open weights</td>
+</tr>
+<tr>
+<td>Agentic Workflows in Education (Kamalov et al., 2026)</td>
+<td>Simulation + Education</td>
+<td>First systematic analysis of reflection/planning/tool-use/multi-agent patterns in education</td>
+</tr>
+<tr>
+<td>ICLR 2026 RSI Workshop (April 26-27)</td>
+<td>Recursion</td>
+<td>First dedicated venue for recursive self-improvement; 6-dimension research taxonomy</td>
+</tr>
+<tr>
+<td>Repurchase Prediction with GA+DL (Chen et al., 2026)</td>
+<td>E-Commerce</td>
+<td>Evolutionary optimization of prediction pipeline for e-commerce repurchase behavior</td>
+</tr>
+<tr>
+<td>FOREAGENT (Zheng et al., 2026)</td>
+<td>Simulation + Recursion</td>
+<td>Predict-then-verify loop achieves 6× acceleration; 3.2× search space expansion</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-cutting-connections-added_1">Cross-Cutting Connections Added</h3>
+<ul>
+<li><strong>Connection 50: Predict-Improve-Apply Cycle</strong> -- Formalizes the three-phase learning cycle (simulation → recursion → authentic deployment) with evidence chain across domains</li>
+<li><strong>Connection 51: Agentic Education Workflows</strong> -- Four agentic patterns (reflection, planning, tool use, multi-agent) map to specific systems across all three wiki domains</li>
+</ul>
+<h3 id="diagram-added">Diagram Added</h3>
+<ul>
+<li><strong>Predict-Improve-Apply Cycle</strong> (<code>predict-improve-apply-cycle.svg</code>) -- Visual representation of the three-phase cycle showing how simulation, recursion, and commerce domains work together for real-world subject mastery</li>
+</ul>
+<h3 id="sources_1">Sources</h3>
+<p>[^119]: NVIDIA Research (2026). "Cosmos-Predict2.5: World Simulation with Video Foundation Models for Physical AI." <a href="https://github.com/nvidia-cosmos/cosmos-predict2.5">GitHub</a>; <a href="https://arxiv.org/abs/2511.00062">arXiv:2511.00062</a>; <a href="https://huggingface.co/blog/nvidia/cosmos-predict-and-transfer2-5">HuggingFace Blog</a>. Retrieved via Web search.
+[^120]: Kamalov, F. et al. (2026). "Evolution of AI in Education: Agentic Workflows." <a href="https://arxiv.org/abs/2504.20082">arXiv:2504.20082</a>. Retrieved via Web search.
+[^121]: ICLR 2026 Workshop on AI with Recursive Self-Improvement. April 26-27, 2026, Rio de Janeiro. Speakers: Chelsea Finn (Stanford), Graham Neubig (CMU), Jeff Clune (UBC/DeepMind), et al. <a href="https://recursive-workshop.github.io/">recursive-workshop.github.io</a>; <a href="https://openreview.net/forum?id=OsPQ6zTQXV">OpenReview</a>. Retrieved via Web search.
+[^122]: Chen, W. et al. (2026). "Predicting repurchase behavior and optimizing marketing for e-commerce users with genetic algorithms and deep learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-026-45903-5">DOI: 10.1038/s41598-026-45903-5</a>. Retrieved via Web search.
+[^123]: Zheng, J. et al. (2026). "Can We Predict Before Executing Machine Learning Agents?" <a href="https://arxiv.org/abs/2601.05930">arXiv:2601.05930</a>. Retrieved via Web search.</p>
+<hr />
+<h2 id="update-2026-04-07-scheduled-batch-7">Update: 2026-04-07 (Scheduled — Batch 7)</h2>
+<h3 id="new-entries_2">New Entries</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Area</th>
+<th>Key Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenWorldLib (Zeng et al., 2026)</td>
+<td>Simulation</td>
+<td>First unified definition of world models centered on perception, interaction, and long-term memory</td>
+</tr>
+<tr>
+<td>Self-Execution Simulation (Maimon et al., 2026)</td>
+<td>Simulation + Recursion</td>
+<td>Training coding models to trace execution step-by-step with RL; self-verification via internal simulation</td>
+</tr>
+<tr>
+<td>Meta-TTL (Lou et al., 2026)</td>
+<td>Recursion</td>
+<td>Test-time adaptation as bi-level optimization; evolutionary search refines adaptation policies</td>
+</tr>
+<tr>
+<td>Hyperagents (Zhang et al., 2026)</td>
+<td>Recursion</td>
+<td>Self-referential agents with editable meta-level modification; ICLR 2026; extends Darwin Godel Machine</td>
+</tr>
+<tr>
+<td>SkillX (Zhejiang University, 2026)</td>
+<td>Simulation + Recursion</td>
+<td>Hierarchical skill knowledge bases from agent trajectories; ICML 2026; enables skill transfer</td>
+</tr>
+<tr>
+<td>AI-Agent School (Jin et al., 2025)</td>
+<td>Simulation + Education</td>
+<td>Multi-agent school simulation with dual memory (experience + knowledge); EMNLP 2025</td>
+</tr>
+<tr>
+<td>Test-time Recursive Thinking (Zhuang et al., 2026)</td>
+<td>Recursion</td>
+<td>Iterative self-improvement at inference; 100% on AIME-24/25; no retraining needed</td>
+</tr>
+<tr>
+<td>LADDER (Simonds &amp; Yoshiyama, 2025)</td>
+<td>Recursion</td>
+<td>Recursive difficulty-driven self-improvement; Llama 3B: 1% to 82% on math; no human feedback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-cutting-connections-added_2">Cross-Cutting Connections Added</h3>
+<ul>
+<li><strong>Connection 52: Internal Simulation for Self-Verification</strong> -- Self-Execution Simulation + Test-time Recursive Thinking show models can verify their own outputs through internal execution traces rather than external feedback</li>
+<li><strong>Connection 53: Hierarchical Skill Transfer</strong> -- SkillX + LADDER + Hyperagents form a progression from skill extraction to recursive decomposition to meta-cognitive self-modification</li>
+<li><strong>Connection 54: Dual Memory for Educational Fidelity</strong> -- AI-Agent School's dual memory architecture (experience + knowledge) parallels the simulation-recursion split across the wiki's learning framework</li>
+</ul>
+<h3 id="sources_2">Sources</h3>
+<p>[^124]: Zeng, B. et al. (2026). "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models." <a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a>. Retrieved via HuggingFace Daily Papers.
+[^125]: Maimon, G. et al. (2026). "Self-Execution Simulation Improves Coding Models." <a href="https://arxiv.org/abs/2604.03253">arXiv:2604.03253</a>. Retrieved via HuggingFace Daily Papers.
+[^126]: Lou, Z. et al. (2026). "Learning to Learn-at-Test-Time: Language Agents with Learnable Adaptation Policies." <a href="https://arxiv.org/abs/2604.00830">arXiv:2604.00830</a>. Retrieved via HuggingFace Daily Papers.
+[^127]: Zhang, J. et al. (2026). "Hyperagents: Recursive Metacognitive Self-Improvement." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a>. Retrieved via arXiv search.
+[^128]: Zhejiang University (2026). "SkillX: Automatically Constructing Skill Knowledge Bases for Agents." <em>ICML 2026</em>. <a href="https://arxiv.org/abs/2604.04804">arXiv:2604.04804</a>. Retrieved via HuggingFace Daily Papers.
+[^129]: Jin, S. et al. (2025). "Evolution in Simulation: AI-Agent School with Dual Memory for High-Fidelity Educational Dynamics." <em>EMNLP 2025</em>. <a href="https://arxiv.org/abs/2510.11290">arXiv:2510.11290</a>. Retrieved via arXiv search.
+[^130]: Zhuang, Y. et al. (2026). "Test-time Recursive Thinking: Self-Improvement without External Feedback." <a href="https://arxiv.org/abs/2602.03094">arXiv:2602.03094</a>. Retrieved via arXiv search.
+[^131]: Simonds, T. &amp; Yoshiyama, A. (2025). "LADDER: Self-Improving LLMs Through Recursive Problem Decomposition." <a href="https://arxiv.org/abs/2503.00735">arXiv:2503.00735</a>. Retrieved via arXiv search.</p>
+<hr />
+<h2 id="update-2026-04-07-scheduled-batch-9">Update: 2026-04-07 (Scheduled — Batch 9)</h2>
+<h3 id="new-entries_3">New Entries</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Area</th>
+<th>Key Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM-Guided Curriculum Learning (Alasti et al., 2026)</td>
+<td>Simulation + Education</td>
+<td>LLM dynamically generates RL agent curricula; 74% training acceleration; DAI 2025 Oral</td>
+</tr>
+<tr>
+<td>CODE-GEN (Duan et al., 2026)</td>
+<td>Simulation + Education</td>
+<td>Agentic two-agent system for pedagogically validated question generation; 79.9-98.6% quality</td>
+</tr>
+<tr>
+<td>Generative World Renderer (Shanda AI, 2026)</td>
+<td>Simulation</td>
+<td>AAA game dataset for generative inverse/forward rendering; high-fidelity world model training data</td>
+</tr>
+<tr>
+<td>SkillFoundry (Shen et al., 2026)</td>
+<td>Recursion</td>
+<td>Self-evolving skill libraries from scientific resources; 71.1% novel skills vs. hand-crafted libraries</td>
+</tr>
+<tr>
+<td>Multi-Turn RL with Iterative Reward Calibration (Modecrua et al., 2026)</td>
+<td>Recursion + Commerce</td>
+<td>4B model outperforms GPT-4.1 on customer service via reward calibration; first Tau-Bench RL results</td>
+</tr>
+<tr>
+<td>PerFusion / "Sell It Before You Make It" (Chen et al., KDD 2026)</td>
+<td>Commerce + Simulation</td>
+<td>AI-generated products deployed at Alibaba; +13% CTR, -7.9% return rate; "simulate before manufacturing"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-cutting-connections-added_3">Cross-Cutting Connections Added</h3>
+<ul>
+<li><strong>Connection 59: LLM-Guided Curricula Bridge All Three Domains</strong> -- Adaptive sequencing by LLMs works identically across simulation (game actions), recursion (skill progression), and commerce (platform onboarding)</li>
+<li><strong>Connection 60: PerFusion Shows Simulation-to-Commerce is a Direct Pipeline</strong> -- "Sell before you make" collapses product development into simulate → predict → sell → manufacture</li>
+<li><strong>Connection 61: Skill Extraction Parallels Across Scientific, Educational, and Commercial Domains</strong> -- SkillFoundry, SkillX, and AgenticRS show the same pattern: unstructured experience → structured skills → validated transfer</li>
+</ul>
+<h3 id="diagram-added_1">Diagram Added</h3>
+<ul>
+<li><strong>Curriculum-Skill Pipeline</strong> (<code>curriculum-skill-pipeline.svg</code>) -- Three-phase pipeline showing how skill discovery (simulation), sequencing &amp; improvement (recursion), and application &amp; validation (commerce) connect for real-world subject mastery, with concrete e-commerce product design example</li>
+</ul>
+<h3 id="sources_3">Sources</h3>
+<p>[^132]: Alasti, A., Erdal, E., Celik, Y. &amp; Eimer, T. (2026). "Learning to Play Blackjack: A Curriculum Learning Perspective." <em>DAI 2025 (Oral)</em>. <a href="https://arxiv.org/abs/2604.00076">arXiv:2604.00076</a>. Retrieved via arXiv search.
+[^133]: Duan, X., Nwanganga, F. &amp; Wang, C. (2026). "CODE-GEN: A Human-in-the-Loop RAG-Based Agentic AI System for Multiple-Choice Question Generation." <a href="https://arxiv.org/abs/2604.03926">arXiv:2604.03926</a>. Retrieved via arXiv search.
+[^134]: Shanda AI Research Tokyo (2026). "Generative World Renderer." <a href="https://arxiv.org/abs/2604.02329">arXiv:2604.02329</a>. Retrieved via HuggingFace Trending Papers.
+[^135]: Shen, S., Cheng, W., Ma, M., Turcan, A., Zhang, M.J. &amp; Ma, J. (2026). "SkillFoundry: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources." <a href="https://arxiv.org/abs/2604.03964">arXiv:2604.03964</a>. Retrieved via arXiv search.
+[^136]: Modecrua, W., Kaewtawee, K., Pachtrachai, K. &amp; Kraisingkorn, T. (2026). "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration." <a href="https://arxiv.org/abs/2604.02869">arXiv:2604.02869</a>. Retrieved via arXiv search.
+[^137]: Chen, X. et al. (2026). "Sell It Before You Make It: Revolutionizing E-Commerce with Personalized AI-Generated Items." <em>KDD 2026</em>. <a href="https://arxiv.org/abs/2503.22182">arXiv:2503.22182</a>. Retrieved via Web search.</p>
+<hr />
+<p><em>This page is auto-updated. Last manual review: 2026-04-07.</em></p>
+</main>
+</body>
+</html>

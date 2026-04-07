@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Papers and References - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html" aria-current="page">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Research Sources &rsaquo; Key Papers and References</div>
+<h1 id="key-papers-and-references">Key Papers and References</h1>
+<h2 id="overview">Overview</h2>
+<p>This article is a curated, annotated reading list of the most important papers for understanding AI research automation — from foundational theoretical work to cutting-edge systems. Papers are organized by topic to help readers build a structured understanding of how AI is transforming the research lifecycle. Each entry includes the paper's core contribution and practical relevance. This list complements <a href="tracking-ai-research.html">Tracking AI Research</a>, which covers <em>how</em> to discover new papers, while this article focuses on <em>which</em> papers matter most and why.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>The field of AI research automation draws from three intellectual traditions, each represented by landmark papers in this collection:</p>
+<ol>
+<li><strong>Philosophy of computational discovery</strong> — Starting with Simon and Langley's work showing that scientific reasoning can be modeled as heuristic search, through to modern <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> that automate the full research cycle.[^1]</li>
+<li><strong>Scaling and capability research</strong> — The empirical study of how AI capabilities grow with compute, data, and parameters, establishing the predictive frameworks that underpin today's research automation systems.[^2]</li>
+<li><strong>Agentic AI and self-improvement</strong> — The emerging paradigm of AI systems that not only conduct research but improve their own research capabilities through <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> and <a href="../methodologies/agentic-tree-search.html">agentic tree search</a>.[^3]</li>
+</ol>
+<p>Understanding these traditions helps readers navigate the reading list strategically: foundational papers provide context, systems papers show current capabilities, and frontier papers point to where the field is heading.</p>
+<h2 id="foundational-papers">Foundational Papers</h2>
+<h3 id="end-to-end-research-automation">End-to-End Research Automation</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lu et al. "Towards end-to-end automation of AI research"</strong></td>
+<td>2026</td>
+<td>First AI system to produce a peer-reviewed paper. Introduces The AI Scientist and Automated Reviewer. <a href="https://doi.org/10.1038/s41586-026-10265-5">Nature</a></td>
+</tr>
+<tr>
+<td><strong>Jiang et al. "AIDE: AI-driven exploration in the space of code"</strong></td>
+<td>2025</td>
+<td>Treats program space as the search domain for ML experimentation. <a href="https://arxiv.org/abs/2502.13138">arXiv:2502.13138</a></td>
+</tr>
+<tr>
+<td><strong>Huang et al. "MLAgentBench"</strong></td>
+<td>2024</td>
+<td>Benchmark for evaluating AI agents on ML experimentation tasks. <a href="https://arxiv.org/abs/2310.03302">ICML 2024</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="foundation-models">Foundation Models</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Anthropic. "The Claude 3 Model Family"</strong></td>
+<td>2024</td>
+<td>Opus, Sonnet, Haiku model family used in AI Scientist</td>
+</tr>
+<tr>
+<td><strong>Grattafiori et al. "The Llama 3 herd of models"</strong></td>
+<td>2024</td>
+<td>Open-source foundation models. <a href="https://arxiv.org/abs/2407.21783">arXiv:2407.21783</a></td>
+</tr>
+<tr>
+<td><strong>OpenAI. "GPT-5 System Card"</strong></td>
+<td>2025</td>
+<td>Advances in reducing hallucination</td>
+</tr>
+<tr>
+<td><strong>Bommasani et al. "On the Opportunities and Risks of Foundation Models"</strong></td>
+<td>2021</td>
+<td>Seminal analysis of foundation model landscape. <a href="https://arxiv.org/abs/2108.07258">arXiv:2108.07258</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="open-ended-discovery">Open-Ended Discovery</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Faldor et al. "OMNI-EPIC"</strong></td>
+<td>2025</td>
+<td>Open-endedness via models of human interestingness. <a href="https://arxiv.org/abs/2405.15568">ICLR 2025</a></td>
+</tr>
+<tr>
+<td><strong>Lu, Hu &amp; Clune. "Automated capability discovery"</strong></td>
+<td>2025</td>
+<td>AI discovering its own capabilities through self-exploration. <a href="https://arxiv.org/abs/2502.07577">arXiv:2502.07577</a></td>
+</tr>
+<tr>
+<td><strong>Hu, Lu &amp; Clune. "Automated design of agentic systems"</strong></td>
+<td>2025</td>
+<td>Meta-level: AI designing better AI agents. <a href="https://arxiv.org/abs/2408.08435">ICLR 2025</a></td>
+</tr>
+<tr>
+<td><strong>Stanley &amp; Lehman. <em>Why Greatness Cannot Be Planned</em></strong></td>
+<td>2015</td>
+<td>The intellectual foundation for objective-free search</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-for-scientific-discovery">AI for Scientific Discovery</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jumper et al. "AlphaFold"</strong></td>
+<td>2021</td>
+<td>Protein structure prediction breakthrough. <a href="https://doi.org/10.1038/s41586-021-03819-2">Nature</a></td>
+</tr>
+<tr>
+<td><strong>Merchant et al. "Scaling deep learning for materials discovery"</strong></td>
+<td>2023</td>
+<td>GNoME: 2.2M new stable materials. <a href="https://doi.org/10.1038/s41586-023-06735-9">Nature</a></td>
+</tr>
+<tr>
+<td><strong>Szymanski et al. "Autonomous laboratory"</strong></td>
+<td>2023</td>
+<td>A-Lab: robotic synthesis of novel materials. <a href="https://doi.org/10.1038/s41586-023-06734-w">Nature</a></td>
+</tr>
+<tr>
+<td><strong>Waltz &amp; Buchanan. "Automating science"</strong></td>
+<td>2009</td>
+<td>Early vision for computational scientific discovery. <a href="https://doi.org/10.1126/science.1172781">Science</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="agentic-ai-patterns">Agentic AI Patterns</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baek et al. "ResearchAgent"</strong></td>
+<td>2025</td>
+<td>Iterative idea generation over literature. <a href="https://arxiv.org/abs/2404.07738">NAACL 2025</a></td>
+</tr>
+<tr>
+<td><strong>Wang et al. "AutoSurvey"</strong></td>
+<td>2024</td>
+<td>LLMs writing survey papers. <a href="https://arxiv.org/abs/2306.10870">NeurIPS 2024</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="predictive-simulation-and-world-models">Predictive Simulation and World Models</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Zheng et al. "Can We Predict Before Executing Machine Learning Agents?"</strong></td>
+<td>2026</td>
+<td>ForeAgent: predict-then-verify loop achieving 6× convergence acceleration for ML agents. <a href="https://arxiv.org/abs/2601.05930">arXiv:2601.05930</a></td>
+</tr>
+<tr>
+<td><strong>Richens et al. "General Agents Need World Models"</strong></td>
+<td>2025</td>
+<td>Formal proof that generalization requires world models. <a href="https://arxiv.org/abs/2506.01622">arXiv:2506.01622</a></td>
+</tr>
+<tr>
+<td><strong>Hafner et al. "DreamerV3"</strong></td>
+<td>2025</td>
+<td>General world-model agent mastering 150+ tasks via imagination. <a href="https://www.nature.com/articles/s41586-025-08744-2">Nature</a></td>
+</tr>
+<tr>
+<td><strong>Assran et al. "V-JEPA 2"</strong></td>
+<td>2025</td>
+<td>Video world models transferring to zero-shot robotic manipulation. <a href="https://arxiv.org/abs/2506.09985">arXiv:2506.09985</a></td>
+</tr>
+<tr>
+<td><strong>Alonso et al. "DIAMOND"</strong></td>
+<td>2024</td>
+<td>Diffusion world models for RL, 46% above human on Atari. <a href="https://arxiv.org/abs/2405.12399">arXiv:2405.12399</a></td>
+</tr>
+<tr>
+<td><strong>Guan et al. "Computer-Using World Model"</strong></td>
+<td>2026</td>
+<td>Predicting UI state changes for desktop software agents. <a href="https://arxiv.org/abs/2602.17365">arXiv:2602.17365</a></td>
+</tr>
+<tr>
+<td><strong>Zhang et al. "World-in-World"</strong></td>
+<td>2025</td>
+<td>First closed-loop benchmark for world models. <a href="https://arxiv.org/abs/2510.18135">arXiv:2510.18135</a></td>
+</tr>
+<tr>
+<td><strong>Yu et al. "Dyna-Think"</strong></td>
+<td>2025</td>
+<td>Framework integrating planning with internal world models alongside reasoning and acting. <a href="https://arxiv.org/abs/2506.00320">arXiv:2506.00320</a></td>
+</tr>
+<tr>
+<td><strong>Yu et al. "Dyna-Mind"</strong></td>
+<td>2025</td>
+<td>Two-stage training teaching agents to simulate environments, with Dyna-GRPO for long-horizon planning. <a href="https://arxiv.org/abs/2510.09577">arXiv:2510.09577</a></td>
+</tr>
+<tr>
+<td><strong>OpenWorldLib (DataFlow Team)</strong></td>
+<td>2026</td>
+<td>Unified definition and open codebase for world models research. <a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="recursive-self-improvement">Recursive Self-Improvement</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Zhang et al. "Darwin Godel Machine"</strong></td>
+<td>2025</td>
+<td>Self-improving coding agent via evolutionary self-rewriting. <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a></td>
+</tr>
+<tr>
+<td><strong>Zhang et al. "Hyperagents"</strong></td>
+<td>2026</td>
+<td>Meta-level self-improvement: improving the improvement process. <a href="https://arxiv.org/abs/2603.19461">arXiv:2603.19461</a></td>
+</tr>
+<tr>
+<td><strong>Simonds &amp; Yoshiyama. "LADDER"</strong></td>
+<td>2025</td>
+<td>Recursive problem decomposition for self-improving LLMs. <a href="https://arxiv.org/abs/2503.00735">arXiv:2503.00735</a></td>
+</tr>
+<tr>
+<td><strong>Zhuang et al. "Test-time Recursive Thinking"</strong></td>
+<td>2026</td>
+<td>Self-improvement at inference time, 100% on AIME. <a href="https://arxiv.org/abs/2602.03094">arXiv:2602.03094</a></td>
+</tr>
+<tr>
+<td><strong>Liu &amp; van der Schaar. "Intrinsic Metacognitive Learning"</strong></td>
+<td>2025</td>
+<td>Position paper: true self-improvement needs metacognition. <a href="https://arxiv.org/abs/2506.05109">arXiv:2506.05109</a></td>
+</tr>
+<tr>
+<td><strong>Ishibashi et al. "Self-Developing"</strong></td>
+<td>2025</td>
+<td>LLMs discovering their own improvement algorithms. <a href="https://arxiv.org/abs/2410.15639">arXiv:2410.15639</a></td>
+</tr>
+<tr>
+<td><strong>Godel Agent</strong></td>
+<td>2025</td>
+<td>Self-referential framework enabling agents to recursively modify their own logic via LLMs. <a href="https://arxiv.org/abs/2410.04444">arXiv:2410.04444</a></td>
+</tr>
+<tr>
+<td><strong>Singh et al. "Self-Improving AI through Self-Play"</strong></td>
+<td>2025</td>
+<td>Formalizes recursive self-improvement as Generator-Verifier-Updater operator. <a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a></td>
+</tr>
+<tr>
+<td><strong>MARS "Learn Like Humans"</strong></td>
+<td>2026</td>
+<td>Meta-cognitive reflection for efficient self-improvement in a single recurrence cycle. <a href="https://arxiv.org/abs/2601.11974">arXiv:2601.11974</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-augmented-learning">AI-Augmented Learning</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Goel et al. "A4L: An Architecture for AI-Augmented Learning"</strong></td>
+<td>2025</td>
+<td>Data architecture for bidirectional feedback between learners, teachers, and AI agents. <a href="https://arxiv.org/abs/2505.06314">arXiv:2505.06314</a></td>
+</tr>
+<tr>
+<td><strong>Wei et al. "Agentic-MME"</strong></td>
+<td>2026</td>
+<td>Process-verified benchmark for multimodal agentic capabilities with 2,000+ stepwise checkpoints. <a href="https://arxiv.org/abs/2604.03016">arXiv:2604.03016</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-for-e-commerce">AI for E-Commerce</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Yu et al. "Shopping Companion"</strong></td>
+<td>2026</td>
+<td>Memory-augmented LLM agent for persistent shopping assistance. <a href="https://arxiv.org/abs/2603.14864">arXiv:2603.14864</a></td>
+</tr>
+<tr>
+<td><strong>Allouah et al. "ACES"</strong></td>
+<td>2025</td>
+<td>Auditing AI shopping agent biases across frontier models. <a href="https://arxiv.org/abs/2508.02630">arXiv:2508.02630</a></td>
+</tr>
+<tr>
+<td><strong>Wang et al. "ShoppingBench"</strong></td>
+<td>2025</td>
+<td>Real-world intent-grounded shopping benchmark, 2.5M+ products. <a href="https://arxiv.org/abs/2508.04266">arXiv:2508.04266</a></td>
+</tr>
+<tr>
+<td><strong>Qi et al. "Supply Chain Planning Agent"</strong></td>
+<td>2025</td>
+<td>Production LLM agent at JD.com: 40% faster planning. <a href="https://arxiv.org/abs/2509.03811">arXiv:2509.03811</a></td>
+</tr>
+<tr>
+<td><strong>Fang et al. "GenAI and Firm Productivity"</strong></td>
+<td>2025</td>
+<td>Field experiments: AI impact varies by e-commerce workflow. <a href="https://arxiv.org/abs/2510.12049">arXiv:2510.12049</a></td>
+</tr>
+<tr>
+<td><strong>LREF "LLM-based Relevance Framework"</strong></td>
+<td>2025</td>
+<td>LLM-based search relevance with supervised fine-tuning and DPO de-biasing for e-commerce. <a href="https://arxiv.org/abs/2503.09223">arXiv:2503.09223</a></td>
+</tr>
+<tr>
+<td><strong>ShopSimulator</strong></td>
+<td>2026</td>
+<td>Large-scale RL benchmark for LLM shopping agents; best models achieve &lt;40% success. <a href="https://arxiv.org/abs/2601.18225">arXiv:2601.18225</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-safety-in-research">AI Safety in Research</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Korbak et al. "AI Researchers' Perspectives on Automating R&amp;D"</strong></td>
+<td>2026</td>
+<td>20/25 AI researchers identify automated R&amp;D as most severe/urgent risk. <a href="https://arxiv.org/abs/2603.03338">arXiv:2603.03338</a></td>
+</tr>
+<tr>
+<td><strong>International AI Safety Report</strong></td>
+<td>2026</td>
+<td>Comprehensive international report; 12 companies updated safety frameworks in 2025. <a href="https://arxiv.org/abs/2602.21012">arXiv:2602.21012</a></td>
+</tr>
+<tr>
+<td><strong>AI Agent Index</strong></td>
+<td>2026</td>
+<td>Systematic safety feature documentation across deployed agent systems. <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a></td>
+</tr>
+<tr>
+<td><strong>ForesightSafety Bench</strong></td>
+<td>2026</td>
+<td>Governance and evaluation framework for frontier AI risks. <a href="https://arxiv.org/abs/2602.14135">arXiv:2602.14135</a></td>
+</tr>
+<tr>
+<td><strong>Chen et al. "Agentic AI for Scientific Discovery"</strong></td>
+<td>2025</td>
+<td>Survey of LLM-driven agents for literature, experimentation, and reporting. <a href="https://arxiv.org/abs/2503.08979">arXiv:2503.08979</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="independent-evaluations">Independent Evaluations</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gabryel et al. "Evaluating Sakana's AI Scientist"</strong></td>
+<td>2025</td>
+<td>Critical assessment: "resembles a rushed undergraduate paper" but acknowledges real progress. <a href="https://arxiv.org/abs/2502.14297">arXiv:2502.14297</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scaling-laws">Scaling Laws</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Core Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kaplan et al. "Scaling Laws for Neural Language Models"</strong></td>
+<td>2020</td>
+<td>Power-law relationships between compute/data/params and performance. <a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a></td>
+</tr>
+<tr>
+<td><strong>Hoffmann et al. "Chinchilla"</strong></td>
+<td>2022</td>
+<td>Compute-optimal training ratios. <a href="https://arxiv.org/abs/2203.15556">arXiv:2203.15556</a></td>
+</tr>
+<tr>
+<td><strong>Kwa et al. "Measuring AI ability to complete long tasks"</strong></td>
+<td>2025</td>
+<td>Task complexity doubling every ~7 months. <a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">METR Blog</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-read-this-list">How to Read This List</h2>
+<ul>
+<li><strong>Start with</strong> Lu et al. (2026) -- the Nature paper that ties everything together</li>
+<li><strong>For context</strong>, read Waltz &amp; Buchanan (2009) and Bommasani et al. (2021)</li>
+<li><strong>For tools</strong>, read AIDE (Jiang et al.) and check <a href="../tools-platforms/autoresearch.html">Autoresearch</a> on GitHub</li>
+<li><strong>For open-endedness</strong>, start with Stanley &amp; Lehman (2015), then OMNI-EPIC</li>
+<li><strong>For world models</strong>, start with Richens et al. (2025) for theory, then DreamerV3 for practice, then ForeAgent for applied predict-then-verify</li>
+<li><strong>For AI-augmented learning</strong>, start with A4L for architecture, then Agentic-MME for evaluation</li>
+<li><strong>For recursive self-improvement</strong>, start with the Darwin Godel Machine, then Hyperagents</li>
+<li><strong>For e-commerce AI</strong>, start with ACES for bias awareness, then Shopping Companion for agent design</li>
+<li><strong>For AI safety</strong>, start with the International AI Safety Report for landscape, then AI Researchers' Perspectives for risk assessment</li>
+<li><strong>For critique</strong>, read Gabryel et al. (2025) alongside the Nature paper</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="tracking-ai-research.html">Tracking AI Research</a> -- How to discover new papers</li>
+<li><a href="institutions-and-labs.html">Research Institutions and Labs</a> -- Who is publishing what</li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a></li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a></li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a></li>
+<li><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a></li>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a></li>
+</ul>
+<h2 id="updating-this-list">Updating This List</h2>
+<p>This list should be updated as new landmark papers are published. Use the <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> and <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> to discover candidates.</p>
+<h2 id="references">References</h2>
+<p>[^1]: Langley, P., Simon, H.A., Bradshaw, G.L. &amp; Zytkow, J.M. (1987). <em>Scientific Discovery: Computational Explorations of the Creative Process</em>. MIT Press.
+[^2]: Kaplan, J. et al. (2020). "Scaling Laws for Neural Language Models." <a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a>
+[^3]: Zhang, J. et al. (2025). "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents." <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a></p>
+</main>
+</body>
+</html>

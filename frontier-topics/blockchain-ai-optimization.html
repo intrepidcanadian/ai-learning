@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blockchain for AI Optimization - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html" aria-current="page">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Frontier Topics &rsaquo; Blockchain for AI Optimization</div>
+<h1 id="blockchain-for-ai-optimization">Blockchain for AI Optimization</h1>
+<p><strong>Blockchain for AI Optimization</strong> explores the intersection of decentralized ledger technology and artificial intelligence -- using blockchain to coordinate, incentivize, verify, and scale AI research and computation.</p>
+<h2 id="overview">Overview</h2>
+<p>AI research automation (see <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>, <a href="../tools-platforms/autoresearch.html">Autoresearch</a>) requires significant compute resources, generates valuable intellectual property, and raises questions about trust and verification. Blockchain offers potential solutions across several dimensions:</p>
+<ul>
+<li><strong>Decentralized compute</strong> -- Distributing GPU workloads across a network</li>
+<li><strong>Verification</strong> -- Proving that experiments were run correctly</li>
+<li><strong>Incentive alignment</strong> -- Rewarding contributors to open research</li>
+<li><strong>Provenance</strong> -- Tracking the origin and evolution of ideas and data</li>
+</ul>
+<h2 id="key-application-areas">Key Application Areas</h2>
+<h3 id="1-decentralized-compute-networks">1. Decentralized Compute Networks</h3>
+<p>AI training requires expensive GPU clusters. Decentralized networks allow anyone with hardware to contribute compute and earn tokens.</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gensyn</strong></td>
+<td>Decentralized ML training with verification proofs</td>
+</tr>
+<tr>
+<td><strong>Render Network</strong></td>
+<td>GPU rendering/compute marketplace</td>
+</tr>
+<tr>
+<td><strong>Akash</strong></td>
+<td>Open cloud compute marketplace</td>
+</tr>
+<tr>
+<td><strong>io.net</strong></td>
+<td>Aggregated GPU clusters from distributed sources</td>
+</tr>
+<tr>
+<td><strong>Together AI</strong></td>
+<td>Decentralized inference infrastructure</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relevance to AI research:</strong> Systems like Autoresearch could distribute experiments across decentralized GPU networks, enabling parallel exploration at lower cost than centralized cloud providers.</p>
+<h3 id="2-verifiable-computation">2. Verifiable Computation</h3>
+<p>How do you prove an AI experiment was run correctly? Blockchain-based verification approaches:</p>
+<ul>
+<li><strong>Optimistic verification</strong> -- Assume results are correct; challenge if suspicious (fraud proofs)</li>
+<li><strong>Zero-knowledge proofs</strong> -- Prove computation was performed correctly without revealing the data</li>
+<li><strong>Trusted execution environments (TEEs)</strong> -- Hardware-attested computation</li>
+<li><strong>Consensus-based verification</strong> -- Multiple nodes run the same experiment and compare</li>
+</ul>
+<p><strong>Relevance to AI research:</strong> Automated peer review (see <a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>) could be strengthened by on-chain proof that experiments were actually executed as described.</p>
+<h3 id="3-incentive-mechanisms-for-open-research">3. Incentive Mechanisms for Open Research</h3>
+<p>Traditional research incentives (grants, tenure, citations) are slow and centralized. Blockchain enables new models:</p>
+<ul>
+<li><strong>Token-gated research DAOs</strong> -- Communities that fund and govern research directions</li>
+<li><strong>Retroactive public goods funding</strong> -- Rewarding research after its impact is demonstrated (e.g., Optimism's RetroPGF)</li>
+<li><strong>Prediction markets for research</strong> -- Betting on which ideas will replicate or produce breakthroughs</li>
+<li><strong>NFTs for research artifacts</strong> -- Provenance tracking for datasets, models, and papers</li>
+</ul>
+<h3 id="4-data-provenance-and-integrity">4. Data Provenance and Integrity</h3>
+<ul>
+<li><strong>On-chain dataset registries</strong> -- Immutable records of training data lineage</li>
+<li><strong>Model versioning</strong> -- Tracking model weights and training histories</li>
+<li><strong>Reproducibility proofs</strong> -- Cryptographic attestation that results can be reproduced</li>
+<li><strong>Anti-plagiarism</strong> -- Timestamp-based priority claims for research ideas</li>
+</ul>
+<h3 id="5-federated-learning-blockchain">5. Federated Learning + Blockchain</h3>
+<p>Combining privacy-preserving ML with decentralized coordination:</p>
+<ul>
+<li><strong>Secure aggregation</strong> -- Multiple parties train on private data; blockchain coordinates model updates</li>
+<li><strong>Data marketplaces</strong> -- Selling access to training data without revealing it</li>
+<li><strong>Compliance</strong> -- Auditable training provenance for regulatory requirements</li>
+</ul>
+<h2 id="architecture-blockchain-enhanced-ai-research-pipeline">Architecture: Blockchain-Enhanced AI Research Pipeline</h2>
+<pre><code>Idea Generation ──── On-chain idea registry (priority + provenance)
+       │
+Experiment Design ── Smart contract: define experiment spec
+       │
+Compute ──────────── Decentralized GPU network runs experiments
+       │
+Verification ─────── ZK proofs / fraud proofs of correct execution
+       │
+Results ──────────── On-chain results registry (immutable)
+       │
+Peer Review ──────── Token-incentivized reviewer network
+       │
+Publication ──────── Decentralized science (DeSci) platforms
+</code></pre>
+<h2 id="decentralized-science-desci">Decentralized Science (DeSci)</h2>
+<p>A broader movement applying blockchain to all of science:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ResearchHub</strong></td>
+<td>Token-incentivized paper discussion and review</td>
+</tr>
+<tr>
+<td><strong>Molecule</strong></td>
+<td>Decentralized drug discovery funding</td>
+</tr>
+<tr>
+<td><strong>VitaDAO</strong></td>
+<td>Longevity research DAO</td>
+</tr>
+<tr>
+<td><strong>LabDAO</strong></td>
+<td>Decentralized wet-lab services</td>
+</tr>
+<tr>
+<td><strong>DeSci Labs</strong></td>
+<td>On-chain research publishing (dpub)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="challenges">Challenges</h2>
+<ol>
+<li><strong>Overhead</strong> -- Blockchain adds latency and complexity to already complex AI pipelines</li>
+<li><strong>Cost</strong> -- On-chain transactions have fees; not practical for high-frequency logging</li>
+<li><strong>Scalability</strong> -- Current L1s can't handle the throughput needed for experiment coordination</li>
+<li><strong>Adoption</strong> -- Academic researchers are slow to adopt crypto tooling</li>
+<li><strong>Verification complexity</strong> -- Proving ML computation correctness is an unsolved problem at scale</li>
+<li><strong>Token incentives can distort research</strong> -- Optimizing for token rewards may diverge from optimizing for truth</li>
+</ol>
+<h2 id="practical-opportunities-today">Practical Opportunities Today</h2>
+<ul>
+<li>Use <strong>IPFS/Arweave</strong> for immutable storage of datasets, model weights, and papers</li>
+<li>Use <strong>smart contracts</strong> to manage research bounties and funding</li>
+<li>Use <strong>decentralized compute</strong> (Gensyn, Akash) for distributed Autoresearch experiments</li>
+<li>Use <strong>on-chain timestamps</strong> for research priority claims</li>
+</ul>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>The blockchain-AI intersection has seen significant activity in 2025-2026:</p>
+<ul>
+<li><strong>Verifiable ML training</strong> -- Gensyn launched its mainnet in 2025, enabling decentralized ML training with cryptographic verification proofs<a href="Gensyn." title="2025). &quot;Verifiable ML Training: Technical Overview.&quot; [gensyn.ai](https://www.gensyn.ai/">^1</a>. This addresses the reproducibility challenge that plagues <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>.</li>
+<li><strong>AI agent economies</strong> -- Multi-agent reinforcement learning for dynamic pricing (see <a href="ai-ecommerce-learning.html">AI E-Commerce Learning</a>) is being explored with blockchain-based settlement for autonomous agent transactions[^2].</li>
+<li><strong>DeSci momentum</strong> -- ResearchHub surpassed 50,000 papers in its incentivized review system. VitaDAO funded over $5M in longevity research through token governance<a href="VitaDAO." title="2025). &quot;VitaDAO Governance Report 2025.&quot; [vitadao.com](https://www.vitadao.com/">^3</a>.</li>
+<li><strong>ZK-ML advances</strong> -- Zero-knowledge proofs for ML inference verification (EZKL, Modulus Labs) have made verifiable AI computation practical for small models, though scaling to large foundation models remains an open challenge[^4].</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a></li>
+<li><a href="open-ended-discovery.html">Open-Ended Discovery</a></li>
+<li><a href="ai-safety-in-research.html">AI Safety in Automated Research</a></li>
+<li><a href="scaling-laws-research.html">Scaling Laws for Research Automation</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Automated Research</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^2]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a></p>
+<p>[^4]: Modulus Labs. (2025). "The Cost of Intelligence: Proving ML Inference On-Chain." <a href="https://www.moduluslabs.xyz/">moduluslabs.xyz</a>
+[^5]: DeSci Foundation. "Decentralized Science: An Overview."
+[^6]: ResearchHub. <a href="https://www.researchhub.com/">researchhub.com</a>
+[^7]: Buterin, V. (2024). "Retroactive Public Goods Funding."</p>
+</main>
+</body>
+</html>

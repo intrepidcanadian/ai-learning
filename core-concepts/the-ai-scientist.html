@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Scientist - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html" aria-current="page">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Core Concepts &rsaquo; The AI Scientist</div>
+<h1 id="the-ai-scientist">The AI Scientist</h1>
+<p><strong>The AI Scientist</strong> is the first comprehensive system designed to autonomously conduct the entire machine learning research lifecycle — from idea generation to peer-reviewed publication. Developed by <a href="https://sakana.ai/">Sakana AI</a> in collaboration with researchers from the University of Oxford and the University of British Columbia, it was published in <em>Nature</em> (Volume 651, Issue 8107, 2026).[^1]</p>
+<h2 id="overview">Overview</h2>
+<p>The AI Scientist automates five sequential phases of scientific research:</p>
+<ol>
+<li><strong>Idea Generation</strong> — Iteratively grows an archive of research directions and hypotheses within a user-specified ML subfield. Each idea includes a title, reasoning, and experimental plan.</li>
+<li><strong>Novelty Filtering</strong> — Connects to the <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> and web search to discard ideas that too closely resemble existing literature.</li>
+<li><strong>Experimentation</strong> — Writes code, runs experiments, collects results, and takes structured notes in the style of an experimental journal.</li>
+<li><strong>Manuscript Generation</strong> — Fills a LaTeX conference template section by section, queries literature for citations (up to 20 search rounds), and auto-corrects compilation errors.</li>
+<li><strong>Automated Peer Review</strong> — Evaluates the scientific quality of the generated paper using <a href="automated-peer-review.html">The Automated Reviewer</a>.</li>
+</ol>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>The AI Scientist builds on decades of work in <a href="automated-scientific-discovery.html">automated scientific discovery</a>. Three intellectual threads converge in its design:</p>
+<h3 id="from-expert-systems-to-foundation-models">From Expert Systems to Foundation Models</h3>
+<p>Early automated science systems like DENDRAL (1965) and BACON (1978) used hand-coded heuristics to make discoveries in narrow domains.[^4] The AI Scientist replaces these brittle rules with <a href="foundation-models-for-research.html">foundation models</a> that can read papers, write code, and reason about experiments using natural language — a qualitative leap in flexibility and scope.</p>
+<h3 id="the-open-ended-search-paradigm">The Open-Ended Search Paradigm</h3>
+<p>Jeff Clune's work on open-endedness — systems that continually generate novel artifacts of increasing complexity — directly inspired the AI Scientist's idea generation mechanism.[^5] Rather than optimizing a fixed objective, the system maintains a growing archive of diverse research directions, selecting underexplored areas for investigation. This connects to broader work on <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a>, where the Darwin Gödel Machine (from the same research group) later demonstrated open-ended agent self-improvement.[^6]</p>
+<h3 id="agentic-coding-as-scientific-method">Agentic Coding as Scientific Method</h3>
+<p>The system's experimentation phase treats coding as a form of scientific inquiry. By combining AI code generation (<a href="../tools-platforms/aider.html">Aider</a>, Claude Sonnet) with structured experiment design, the AI Scientist implements the scientific method computationally: hypothesize (idea generation), test (code + run), analyze (metrics + <a href="../methodologies/vlm-integration.html">VLM critique</a>), and communicate (manuscript).[^1]</p>
+<h2 id="two-operating-modes">Two Operating Modes</h2>
+<h3 id="template-based-mode">Template-Based Mode</h3>
+<p>The system extends human-provided code templates as initial scaffolds. The experiment execution proceeds through four stages:
+- <strong>Preliminary investigation</strong> — Baseline runs
+- <strong>Hyperparameter tuning</strong> — Systematic optimization
+- <strong>Research agenda execution</strong> — Core experiments
+- <strong>Ablation studies</strong> — Isolating contributions of individual components</p>
+<p>Uses <a href="../tools-platforms/aider.html">Aider</a> as the coding assistant.</p>
+<h3 id="template-free-mode">Template-Free Mode</h3>
+<p>Operates with minimal prior guidance, generating initial code from scratch. Key differences:
+- Uses <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> for experiment exploration
+- Leverages multiple specialized models: OpenAI o3 for idea generation, Claude Sonnet 4 for code generation, GPT-4o for vision-language tasks, o4-mini for review
+- Includes <a href="../methodologies/vlm-integration.html">VLM integration</a> for figure critique
+- Dynamically accesses datasets from <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Hub</a></p>
+<p>See <a href="../methodologies/template-free-research.html">Template-Free Research</a> for a deep dive.</p>
+<h2 id="key-results">Key Results</h2>
+<h3 id="peer-review-milestone">Peer Review Milestone</h3>
+<p>Three AI-generated manuscripts were submitted to the <strong>ICBINB workshop at ICLR 2025</strong> (acceptance rate: 70%). One was accepted with scores of 6, 7, and 6 (weak accept, accept, weak accept), ranking in the top 45% of submissions.[^1]</p>
+<p>This represents the first known instance of a fully AI-generated paper passing standard peer review at a top-tier ML conference workshop.</p>
+<h3 id="automated-reviewer-performance">Automated Reviewer Performance</h3>
+<p>The Automated Reviewer achieved <strong>69% balanced accuracy</strong> in predicting human reviewer decisions, comparable to inter-human agreement measured in the NeurIPS 2021 consistency study (66% balanced accuracy).[^1]</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Human (NeurIPS)</th>
+<th>Automated Reviewer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Balanced Accuracy</td>
+<td>0.66</td>
+<td>0.69 +/- 0.04</td>
+</tr>
+<tr>
+<td>F1 Score</td>
+<td>0.49</td>
+<td>0.62 +/- 0.09</td>
+</tr>
+<tr>
+<td>AUC</td>
+<td>0.65</td>
+<td>0.69 +/- 0.09</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cost">Cost</h3>
+<p>Generating a full research paper costs <strong>$6–$15</strong> and requires approximately <strong>3.5 hours</strong> of human involvement.[^1]</p>
+<h2 id="current-state-latest-developments-20252026">Current State / Latest Developments (2025–2026)</h2>
+<ul>
+<li><strong>Nature publication (2026):</strong> The AI Scientist v2 paper was published in <em>Nature</em> Volume 651, marking a milestone for autonomous AI research systems[^1]</li>
+<li><strong>Self-improving descendants:</strong> The Darwin Gödel Machine, from the same UBC/Sakana research group, extends the open-ended paradigm to agent self-modification, achieving 50% on SWE-bench through autonomous evolution[^6]</li>
+<li><strong>VLM-enhanced pipelines:</strong> Multi-agent systems now use VLM-as-a-judge to evaluate scientific figures, achieving 0.7–0.8 pass rates in domain-specific evaluation[^7]</li>
+<li><strong>World model integration:</strong> Emerging work on <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> suggests future AI Scientists could learn through simulated environments rather than direct experimentation[^8]</li>
+<li><strong>Educational applications:</strong> The AI Scientist's methodology is being adapted for teaching research skills — students can observe how an AI conducts research and learn the scientific method by analogy (see <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> for applied learning contexts)</li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>Generates naive or underdeveloped ideas lacking deep methodological rigor</li>
+<li>~42% of experiments fail due to coding errors (per independent evaluation)[^3]</li>
+<li>Susceptible to hallucinations: inaccurate citations, duplicated figures</li>
+<li>Shallow literature review (median 5 citations per paper)</li>
+<li>Currently limited to <strong>computational ML experiments only</strong></li>
+<li>Cannot yet consistently meet main conference standards (32% acceptance rate at ICLR 2025 main)</li>
+</ul>
+<p>An independent evaluation (Gabryel et al., arXiv:2502.14297) described output quality as resembling "a rushed undergraduate paper," while acknowledging the system as genuine progress toward Artificial Research Intelligence.[^3]</p>
+<h2 id="ethical-considerations">Ethical Considerations</h2>
+<p>The Sakana AI team:
+- Obtained <strong>IRB approval</strong> before submitting to peer review
+- <strong>Withdrew the accepted submission</strong> after acceptance to avoid undisclosed AI content in the literature
+- <strong>Watermarks all AI-generated papers</strong> for transparency
+- Collaborated with ICLR 2025 leadership and workshop organizers</p>
+<h2 id="technology-stack">Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Model/Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Idea generation (template-free)</td>
+<td>OpenAI o3</td>
+</tr>
+<tr>
+<td>Code generation</td>
+<td>Claude Sonnet 4, Aider</td>
+</tr>
+<tr>
+<td>Vision-language tasks</td>
+<td>GPT-4o</td>
+</tr>
+<tr>
+<td>Cost-efficient reasoning</td>
+<td>OpenAI o4-mini</td>
+</tr>
+<tr>
+<td>Literature search</td>
+<td>Semantic Scholar API</td>
+</tr>
+<tr>
+<td>Dataset access</td>
+<td>HuggingFace Hub</td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="automated-scientific-discovery.html">Automated Scientific Discovery</a></li>
+<li><a href="automated-peer-review.html">Automated Peer Review</a></li>
+<li><a href="foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a></li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a></li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a></li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a></li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a></li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Lu, C., Lu, C., Lange, R.T., Yamada, Y., Hu, S., Foerster, J., Ha, D. &amp; Clune, J. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107). <a href="https://doi.org/10.1038/s41586-026-10265-5">DOI: 10.1038/s41586-026-10265-5</a>
+[^2]: Sakana AI. "The AI Scientist: Now Published in Nature." <a href="https://sakana.ai/ai-scientist-nature/">sakana.ai/ai-scientist-nature</a>
+[^3]: Gabryel, M. et al. (2025). "Evaluating Sakana's AI Scientist." <a href="https://arxiv.org/abs/2502.14297">arXiv:2502.14297</a>
+[^4]: Langley, P., Simon, H.A., Bradshaw, G.L. &amp; Zytkow, J.M. (1987). <em>Scientific Discovery: Computational Explorations of the Creative Process</em>. MIT Press.
+[^5]: Clune, J. (2019). "AI-Generating Algorithms, an Alternate Paradigm for Producing General Artificial Intelligence." arXiv:1905.10985.
+[^6]: Zhang, J., Hu, S., Lu, C., Lange, R. &amp; Clune, J. (2025). "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents." arXiv:2505.22954. https://arxiv.org/abs/2505.22954
+[^7]: Enhancing Agentic Autonomous Scientific Discovery authors (2025). "Enhancing Agentic Autonomous Scientific Discovery with Vision-Language Model Capabilities." arXiv:2511.14631. https://arxiv.org/abs/2511.14631
+[^8]: Yang, S. (2026). "World Models as an Intermediary between Agents and the Real World." arXiv:2602.00785. https://arxiv.org/abs/2602.00785</p>
+</main>
+</body>
+</html>

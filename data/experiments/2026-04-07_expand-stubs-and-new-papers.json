@@ -1,0 +1,35 @@
+{
+  "date": "2026-04-07",
+  "strategy": "Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated-scientific-discovery, the-ai-scientist, automated-peer-review) with background sections, 2025-2026 paper references, cross-category links, and an SVG diagram",
+  "predicted_delta": 5.0,
+  "dimensions_targeted": ["structural", "depth", "sourcing", "linking", "currency"],
+  "reasoning": "Memory indicated stubs at 44% (target <20%). Expanding lowest-scoring articles with missing sections (background, references) and cross-links addresses the benchmark's top scoring dimensions simultaneously. Adding new papers from web search improves sourcing and currency.",
+  "before_score": 62.7,
+  "after_score": 68.2,
+  "actual_delta": 5.5,
+  "stub_before": "44.0%",
+  "stub_after": "28.0%",
+  "article_improvements": {
+    "institutions-and-labs": {"before": 46.4, "after": 82.1, "delta": 35.7},
+    "vlm-integration": {"before": 47.1, "after": 74.2, "delta": 27.1},
+    "automated-scientific-discovery": {"before": 49.9, "after": 85.0, "delta": 35.1},
+    "the-ai-scientist": {"before": 59.1, "after": 82.1, "delta": 23.0},
+    "automated-peer-review": {"before": 54.3, "after": 69.0, "delta": 14.7}
+  },
+  "new_papers_added": [
+    "Zhang et al. 2025 - Darwin Godel Machine (arXiv:2505.22954)",
+    "Zhuang et al. 2026 - Test-time Recursive Thinking (arXiv:2602.03094)",
+    "LADDER 2025 - Self-Improving LLMs (arXiv:2503.00735)",
+    "Hyperagents 2026 (arXiv:2603.19461)",
+    "VLM survey 2025 - 26K papers (arXiv:2510.09586)",
+    "VLM-as-judge 2025 (arXiv:2511.14631)",
+    "VLA models 2025 (arXiv:2505.04769)",
+    "VLM4VLA 2026 (arXiv:2601.03309)",
+    "Jurenka et al. 2025 - LearnLM AI tutoring RCT (arXiv:2512.23633)",
+    "Open TutorAI 2026 (arXiv:2602.07176)",
+    "Yang 2026 - World Models (arXiv:2602.00785)",
+    "Kang et al. 2018 - PeerRead (arXiv:1804.09635)"
+  ],
+  "diagram_added": "core-concepts/automated-discovery-pipeline.svg",
+  "lesson": "Expanding the 5 lowest-scoring articles with background sections, footnoted references, and cross-category links yielded +5.5 composite points. Stubs dropped from 44% to 28%. Background sections are the single highest-leverage addition for stubs — they boost structural, depth, and sourcing simultaneously."
+}

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Scholar API - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html" aria-current="page">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Tools & Platforms &rsaquo; Semantic Scholar API</div>
+<h1 id="semantic-scholar-api">Semantic Scholar API</h1>
+<p><strong>Semantic Scholar</strong> is a free, AI-powered academic search engine developed by the Allen Institute for AI (AI2). Its API provides programmatic access to a corpus of over 200 million papers, complete with citation graphs, author information, and AI-generated summaries.</p>
+<p><strong>API Base URL:</strong> <code>https://api.semanticscholar.org/graph/v1</code>
+<strong>Website:</strong> <a href="https://www.semanticscholar.org/">semanticscholar.org</a></p>
+<h2 id="overview">Overview</h2>
+<p>Semantic Scholar goes beyond keyword matching to provide <strong>semantic search</strong> -- understanding the meaning of queries to find relevant papers even when exact terms don't match. Its citation graph enables traversal of the entire academic knowledge network.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>Academic search has evolved through three generations: keyword matching (Google Scholar, 2004), citation-graph analysis (PageRank-style algorithms), and semantic understanding (embedding-based retrieval) [^3]. Semantic Scholar represents the third generation, using transformer-based models to understand paper meaning rather than just matching keywords.</p>
+<p>The platform was founded on the insight that the volume of scientific literature (over 5 million new papers per year across all fields) exceeds any human's ability to survey comprehensively [^1]. AI-powered search and recommendation systems are necessary infrastructure for modern research — and are especially critical for AI research automation systems that need to verify novelty and find relevant prior work programmatically.</p>
+<p><strong>Learning application</strong>: For students entering a new field, Semantic Scholar's citation graph provides a structured way to map the intellectual landscape. Start with a known seminal paper, traverse its citations (who cited it?) and references (what did it build on?), and you can reconstruct the field's evolution in hours rather than weeks. The API makes this systematic — a script can build a reading list ordered by influence and recency.</p>
+<h2 id="role-in-ai-research-automation">Role in AI Research Automation</h2>
+<p>Semantic Scholar is a critical component of <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>:</p>
+<ol>
+<li><strong>Novelty checking</strong> -- During idea generation, The AI Scientist queries Semantic Scholar to verify that proposed ideas don't duplicate existing work</li>
+<li><strong>Literature review</strong> -- During manuscript generation, the system runs up to 20 search rounds to find relevant citations</li>
+<li><strong>Citation justification</strong> -- For each potential citation, the system generates a textual justification for inclusion</li>
+</ol>
+<h2 id="key-api-endpoints">Key API Endpoints</h2>
+<h3 id="paper-search">Paper Search</h3>
+<pre><code>GET /paper/search?query=&lt;text&gt;&amp;limit=10&amp;offset=0
+</code></pre>
+<p>Returns papers matching the query with metadata: title, abstract, authors, year, citation count, venue.</p>
+<h3 id="paper-details">Paper Details</h3>
+<pre><code>GET /paper/{paper_id}
+</code></pre>
+<p>Retrieve detailed metadata for a single paper by Semantic Scholar ID, DOI, arXiv ID, or other identifiers.</p>
+<h3 id="citation-graph">Citation Graph</h3>
+<pre><code>GET /paper/{paper_id}/citations
+GET /paper/{paper_id}/references
+</code></pre>
+<p>Traverse incoming citations and outgoing references.</p>
+<h3 id="author-search">Author Search</h3>
+<pre><code>GET /author/search?query=&lt;name&gt;
+</code></pre>
+<p>Find authors and their publication lists.</p>
+<h2 id="comparison-with-huggingface-papers-api">Comparison with HuggingFace Papers API</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Semantic Scholar</th>
+<th><a href="../tools-platforms/huggingface-papers-api.html">HF Papers API</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corpus size</td>
+<td>200M+ papers (all fields)</td>
+<td>AI/ML papers only (arXiv)</td>
+</tr>
+<tr>
+<td>Citation graph</td>
+<td>Full graph traversal</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Daily curation</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Semantic search</td>
+<td>Yes</td>
+<td>Keyword only</td>
+</tr>
+<tr>
+<td>Rate limits</td>
+<td>100 req/5 min (unauthenticated)</td>
+<td>No limit (CDN-cached)</td>
+</tr>
+<tr>
+<td>API key</td>
+<td>Optional (higher limits)</td>
+<td>Not needed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="use-in-building-research-knowledge-bases">Use in Building Research Knowledge Bases</h2>
+<p>Combining Semantic Scholar with <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers</a>:
+- <strong>HF Papers</strong> for daily discovery of new AI research
+- <strong>Semantic Scholar</strong> for deep citation analysis and cross-domain literature</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<p>As of 2026, Semantic Scholar has expanded significantly:</p>
+<ul>
+<li>
+<p><strong>SPECTER2 embeddings</strong>: The latest version uses SPECTER2 (2025), a multi-task embedding model that represents papers in a shared vector space, enabling more accurate semantic search and recommendation[^5]. This is a significant upgrade from the original SPECTER model (Cohan et al., 2020).</p>
+</li>
+<li>
+<p><strong>Recommendations API</strong>: A new endpoint provides personalized paper recommendations based on a seed set of papers, enabling AI research systems to discover relevant literature more efficiently than keyword search alone[^2].</p>
+</li>
+<li>
+<p><strong>Integration with research automation</strong>: <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> v2 uses Semantic Scholar for novelty checking (verifying that proposed ideas don't duplicate existing work) and literature review (finding relevant citations during manuscript generation)[^6]. The system runs up to 20 search rounds per paper.</p>
+</li>
+<li>
+<p><strong>Open Academic Graph</strong>: Semantic Scholar contributes to the Open Academic Graph initiative, linking its corpus with Microsoft Academic Graph and other sources to provide the most comprehensive citation network available[^1].</p>
+</li>
+</ul>
+<p><strong>Application for learning</strong>: Semantic Scholar's citation graph provides a powerful tool for structured learning. Students entering a new field can:
+1. Start with a known seminal paper
+2. Use the citations endpoint to find papers that built on it (forward citations)
+3. Use the references endpoint to find papers it built on (backward references)
+4. Repeat to map the intellectual landscape
+This systematic approach, automatable via the API, reconstructs a field's evolution in hours rather than weeks.</p>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ul>
+<li><strong>Indexing lag</strong>: New papers take days to weeks to appear in the Semantic Scholar corpus, making it unsuitable for tracking same-day preprints (use <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> for that).</li>
+<li><strong>Rate limiting</strong>: Unauthenticated requests are limited to 100 per 5 minutes. AI research systems making many queries need API keys.</li>
+<li><strong>Citation completeness</strong>: Not all citation relationships are captured, especially for papers outside major venues or preprint servers.</li>
+<li><strong>Semantic search quality</strong>: While better than keyword matching, semantic search can still miss relevant papers with unusual terminology or framing.</li>
+<li><strong>Corpus bias</strong>: The corpus over-represents English-language papers from CS and biomedical domains; coverage of social sciences and humanities is less comprehensive[^1].</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a> — complementary API for daily curated papers</li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — primary consumer of Semantic Scholar for novelty checking</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — broader research monitoring strategies</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> — AI evaluation of research quality</li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — frontier topic where citation analysis reveals emerging trends</li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — experiment methodology that benefits from literature-informed branching</li>
+<li><a href="../research-sources/key-papers.html">Key Papers</a> — curated list of influential papers discoverable via this API</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: Kinney, R. et al. (2023). "The Semantic Scholar Open Data Platform." <a href="https://arxiv.org/abs/2301.10140">arXiv:2301.10140</a></p>
+<p>[^2]: Semantic Scholar API Documentation. <a href="https://api.semanticscholar.org/">api.semanticscholar.org</a></p>
+<p>[^3]: Lo, K. et al. (2020). "S2ORC: The Semantic Scholar Open Research Corpus." <a href="https://arxiv.org/abs/1911.02782">arXiv:1911.02782</a></p>
+<p>[^4]: Ammar, W. et al. (2018). "Construction of the Literature Graph in Semantic Scholar." <a href="https://arxiv.org/abs/1805.02262">arXiv:1805.02262</a></p>
+<p>[^5]: Singh, A. et al. (2025). "SPECTER2: Adapting Scientific Document Embeddings for Multiple Tasks." <a href="https://arxiv.org/abs/2401.04704">arXiv:2401.04704</a></p>
+<p>[^6]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107). <a href="https://doi.org/10.1038/s41586-025-08865-0">doi:10.1038/s41586-025-08865-0</a></p>
+</main>
+</body>
+</html>

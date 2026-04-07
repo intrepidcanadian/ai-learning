@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hugging Face Papers API - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html" aria-current="page">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+</nav>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Tools & Platforms &rsaquo; Hugging Face Papers API</div>
+<h1 id="hugging-face-papers-api">Hugging Face Papers API</h1>
+<p>The <strong>Hugging Face Papers API</strong> provides free, public, no-authentication-required access to AI/ML research papers curated daily on <a href="https://huggingface.co">huggingface.co</a>. It powers the <strong>Daily Papers</strong> feature and serves as a programmatic gateway to track the latest AI research from arXiv.</p>
+<p><strong>API Docs:</strong> <a href="https://github.com/0x0is1/hf-papers-api-docs">github.com/0x0is1/hf-papers-api-docs</a>
+<strong>Base URL:</strong> <code>https://huggingface.co</code></p>
+<h2 id="overview">Overview</h2>
+<p>The API provides three endpoints for discovering, searching, and retrieving AI research papers. All responses are JSON, may be CDN-cached, and require no API keys. It is used internally by HuggingFace's SvelteKit frontend and freely available for external consumption.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<p>The challenge of research discovery — finding relevant papers among thousands published daily — has driven the development of programmatic research APIs. ArXiv, the primary preprint server for AI/ML, publishes ~500 papers per day in computer science alone [^1]. Without curation, researchers face information overload.</p>
+<p>HuggingFace's Daily Papers feature addresses this through <strong>community-driven curation</strong>: researchers upvote and discuss papers on the platform, and an editorial process surfaces the most significant work each day [^2]. The Papers API exposes this curation layer programmatically, enabling automated research tracking pipelines.</p>
+<p>The API fills a specific niche in the research tooling ecosystem:</p>
+<ul>
+<li><strong>ArXiv API</strong>: Provides raw access to all preprints but no quality signal — you get everything, unfiltered [^1].</li>
+<li><strong>Semantic Scholar API</strong>: Provides citation graphs and semantic search but lags real-time by days to weeks [^3]. See <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> for details.</li>
+<li><strong>HF Papers API</strong>: Provides curated, same-day access to the most discussed papers with zero authentication overhead.</li>
+</ul>
+<p>For AI learning research specifically, the API enables a key workflow: monitoring daily papers for new developments in <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a>, <a href="../core-concepts/foundation-models-for-research.html">foundation models</a>, and related topics, then feeding those discoveries into knowledge bases like this wiki.</p>
+<p><strong>Practical learning application</strong>: Students and researchers can build personalized paper feeds using this API — filtering by topic, tracking citation patterns over time, and generating weekly reading lists. This transforms passive paper consumption into an active, structured learning process.</p>
+<h2 id="endpoints">Endpoints</h2>
+<h3 id="1-daily-papers-feed">1. Daily Papers Feed</h3>
+<pre><code>GET /api/daily_papers
+</code></pre>
+<p>Returns a paginated list of papers curated for a specific date.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td>string (YYYY-MM-DD)</td>
+<td>today</td>
+<td>Date to fetch papers for</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>integer</td>
+<td>1</td>
+<td>Page number</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>integer</td>
+<td>~10-20</td>
+<td>Results per page</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;date&quot;: &quot;2026-04-06&quot;,
+  &quot;count&quot;: 42,
+  &quot;next&quot;: &quot;/api/daily_papers?date=2026-04-06&amp;page=2&quot;,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;arxiv_id&quot;: &quot;2604.01234&quot;,
+      &quot;title&quot;: &quot;Paper Title&quot;,
+      &quot;authors&quot;: [&quot;Author One&quot;, &quot;Author Two&quot;],
+      &quot;summary&quot;: &quot;Abstract text...&quot;,
+      &quot;published_date&quot;: &quot;2026-04-05&quot;,
+      &quot;link&quot;: &quot;https://arxiv.org/abs/2604.01234&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="2-paper-search">2. Paper Search</h3>
+<pre><code>GET /api/papers/search?q=&lt;query&gt;
+</code></pre>
+<p>Searches across titles, abstracts, and author names. Returns ~20-25 results.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Search query</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-single-paper-detail">3. Single Paper Detail</h3>
+<pre><code>GET /api/papers/{arxiv_id}
+</code></pre>
+<p>Returns enriched metadata for a single paper, including additional fields:
+- <code>pdf_url</code> -- Direct link to PDF
+- <code>doi</code> -- Digital Object Identifier
+- <code>categories</code> -- arXiv categories (e.g., <code>["cs.CL", "cs.LG"]</code>)</p>
+<h2 id="use-cases-for-ai-learning-research">Use Cases for AI Learning Research</h2>
+<h3 id="daily-monitoring">Daily Monitoring</h3>
+<p>Poll <code>/api/daily_papers</code> daily to build a curated feed of new AI research. This is how research tracking tools and newsletters source their content.</p>
+<h3 id="topic-tracking">Topic Tracking</h3>
+<p>Use <code>/api/papers/search</code> to monitor specific areas:
+- <code>q=automated+research</code> -- Track AI research automation
+- <code>q=foundation+models</code> -- Track LLM developments
+- <code>q=reinforcement+learning</code> -- Track RL advances</p>
+<h3 id="building-research-indexes">Building Research Indexes</h3>
+<p>Combine with <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> to build rich citation graphs and research landscapes.</p>
+<h3 id="feeding-ai-research-agents">Feeding AI Research Agents</h3>
+<p>Systems like <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> can use this API to discover new papers for literature review and novelty checking.</p>
+<h2 id="integration-example">Integration Example</h2>
+<pre><code class="language-python">import requests
+from datetime import date
+
+# Get today's papers
+response = requests.get(&quot;https://huggingface.co/api/daily_papers&quot;)
+papers = response.json()[&quot;results&quot;]
+
+for paper in papers:
+    print(f&quot;[{paper['arxiv_id']}] {paper['title']}&quot;)
+    print(f&quot;  Authors: {', '.join(paper['authors'])}&quot;)
+    print(f&quot;  {paper['summary'][:200]}...&quot;)
+    print()
+</code></pre>
+<h2 id="companion-tools">Companion Tools</h2>
+<ul>
+<li><strong><a href="https://github.com/0x0is1/hf-papers-app">hf-papers-app</a></strong> -- User-facing application wrapping this API</li>
+<li><strong>OpenAPI spec</strong> -- Available at <code>docs/api/openapi.yaml</code> in the docs repo for client generation</li>
+</ul>
+<h2 id="comparison-with-other-research-apis">Comparison with Other Research APIs</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>HF Papers API</th>
+<th>Semantic Scholar</th>
+<th>arXiv API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auth required</td>
+<td>No</td>
+<td>No (rate-limited)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Curated feed</td>
+<td>Yes (daily)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Basic keyword</td>
+<td>Advanced semantic</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td>Citation data</td>
+<td>No</td>
+<td>Yes (full graph)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Categories</td>
+<td>Via arXiv ID</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Real-time</td>
+<td>~daily</td>
+<td>~weekly lag</td>
+<td>Real-time</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ul>
+<li><strong>Curation bias</strong>: The Daily Papers feed reflects HuggingFace community interests, which skew toward NLP, generative AI, and open-source models. Papers in robotics, formal verification, or theoretical CS may be underrepresented.</li>
+<li><strong>No citation data</strong>: Unlike Semantic Scholar, the API does not provide citation counts or citation graphs, limiting bibliometric analysis.</li>
+<li><strong>Rate limiting</strong>: While no API key is required, aggressive polling may be throttled by CDN-level rate limits (undocumented).</li>
+<li><strong>Search limitations</strong>: The search endpoint uses basic keyword matching rather than semantic search, so queries must be specific.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — citation graph and semantic search complement to HF Papers</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — broader strategies for monitoring research output</li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — AI research system that can use this API for literature discovery</li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — frontier topic frequently surfaced in HF daily papers</li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — research direction tracked via this API</li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a> — template-free mode uses HuggingFace Hub for dataset discovery</li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — experiment methodology that benefits from automated paper discovery</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[^1]: ArXiv submission statistics. <a href="https://arxiv.org/stats/monthly_submissions">arxiv.org/stats</a> — Over 20,000 CS papers per month as of 2025.</p>
+<p>[^2]: Hugging Face Daily Papers. <a href="https://huggingface.co/papers">huggingface.co/papers</a> — Community-curated daily research feed.</p>
+<p>[^3]: Kinney, R. et al. (2023). "The Semantic Scholar Open Data Platform." <a href="https://arxiv.org/abs/2301.10140">arXiv:2301.10140</a></p>
+<p>[^4]: HF Papers API Documentation. <a href="https://github.com/0x0is1/hf-papers-api-docs">github.com/0x0is1/hf-papers-api-docs</a></p>
+<p>[^5]: Wolf, T. et al. (2020). "Transformers: State-of-the-Art Natural Language Processing." <a href="https://arxiv.org/abs/1910.03771">arXiv:1910.03771</a> — HuggingFace platform foundation.</p>
+</main>
+</body>
+</html>

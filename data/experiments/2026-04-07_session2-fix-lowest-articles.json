@@ -1,0 +1,34 @@
+{
+  "date": "2026-04-07",
+  "session": "session2-fix-lowest-articles",
+  "hypothesis": {
+    "strategy": "Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-for-research, aider, blockchain-ai-optimization) with overview/background sections, fix broken links via path normalization, add cross-category links, and add sourced footnotes with 2025-2026 papers",
+    "predicted_delta": 4.0,
+    "dimensions_targeted": ["structural", "sourcing", "linking", "consistency"],
+    "reasoning": "Previous session showed background sections are highest-leverage additions (+35 for institutions-and-labs). Broken links in consistency scorer penalize -3 per link. Cross-category linking gaps leave 30 points on the table per article. Targeting the 4 lowest-scoring articles maximizes composite impact due to tier-weighted averaging."
+  },
+  "edits": [
+    "tracking-ai-research: Added overview + background sections, 7 footnoted references, 10 cross-category links, fixed broken sibling links, added Current State and Limitations sections",
+    "foundation-models-for-research: Added Background/Theoretical Foundations section with 6 footnoted references, added cross-links to research-sources and frontier-topics, fixed consistency-checker link paths",
+    "aider: Added Background section, Current State, Limitations, 5 footnoted references, cross-links to all 5 categories",
+    "blockchain-ai-optimization: Added Current State section with 4 sourced developments, cross-links to methodologies and research-sources, converted bare references to footnotes",
+    "predictive-simulation-learning: Added 2 new papers (RLVR-World, UK tutoring RCT, LLM-based tutor training) to Current State",
+    "key-papers: Fixed broken sibling links",
+    "Created ai-learning-pipeline.svg diagram for tracking-ai-research article"
+  ],
+  "result": {
+    "before_composite": 68.2,
+    "after_composite": 72.4,
+    "actual_delta": 4.2,
+    "key_article_deltas": {
+      "tracking-ai-research": {"before": 52.0, "after": 85.4, "delta": 33.4},
+      "foundation-models-for-research": {"before": 53.4, "after": 74.9, "delta": 21.5},
+      "aider": {"before": 53.0, "after": 77.5, "delta": 24.5},
+      "blockchain-ai-optimization": {"before": 55.0, "after": 77.4, "delta": 22.4},
+      "key-papers": {"before": 65.5, "after": 66.6, "delta": 1.1}
+    },
+    "stubs_before": 7,
+    "stubs_after": 6,
+    "lesson": "Targeting the 4 lowest-scoring standard/reference articles with background sections, footnotes, and cross-links yielded +4.2 composite points exactly as predicted. The consistency checker's link resolution from frontier-topics/ requires using ../category/ path format for sibling links in non-frontier-topics articles. Aider moved from stub to standard with just background + current state sections."
+  }
+}

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a6fa5"/>
+    </marker>
+    <marker id="arrow-light" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5b9df5"/>
+    </marker>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16213e"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <linearGradient id="center-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a6fa5"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="white"/>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#16213e">The Convergence of Test-Time Learning Strategies</text>
+  <text x="400" y="50" text-anchor="middle" font-size="11" fill="#4a6fa5">Four independent research streams arriving at one principle</text>
+
+  <!-- ============================================ -->
+  <!-- CENTER CIRCLE -->
+  <!-- ============================================ -->
+  <circle cx="400" cy="265" r="72" fill="url(#center-grad)" filter="url(#shadow)"/>
+  <circle cx="400" cy="265" r="72" fill="none" stroke="#5b9df5" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="white">Test-Time</text>
+  <text x="400" y="273" text-anchor="middle" font-size="14" font-weight="700" fill="white">Learning</text>
+  <text x="400" y="293" text-anchor="middle" font-size="9" fill="#c5d5ea">Learning continues</text>
+  <text x="400" y="304" text-anchor="middle" font-size="9" fill="#c5d5ea">during deployment</text>
+
+  <!-- ============================================ -->
+  <!-- INPUT STREAM 1: Meta-TTL (top-left) -->
+  <!-- ============================================ -->
+  <rect x="50" y="75" width="195" height="70" rx="10" fill="#e2e6ed" stroke="#4a6fa5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="147" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#16213e">Meta-TTL</text>
+  <text x="147" y="118" text-anchor="middle" font-size="10" fill="#2d3748">Evolves adaptation policies</text>
+  <text x="147" y="134" text-anchor="middle" font-size="9" fill="#4a6fa5">meta-learning at inference</text>
+
+  <!-- Arrow: Meta-TTL → center -->
+  <path d="M245,135 Q320,180 358,210" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============================================ -->
+  <!-- INPUT STREAM 2: TRT (top-right) -->
+  <!-- ============================================ -->
+  <rect x="555" y="75" width="195" height="70" rx="10" fill="#e2e6ed" stroke="#4a6fa5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="652" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#16213e">TRT</text>
+  <text x="652" y="118" text-anchor="middle" font-size="10" fill="#2d3748">Recursive self-verification</text>
+  <text x="652" y="134" text-anchor="middle" font-size="9" fill="#4a6fa5">test-resolve-test loops</text>
+
+  <!-- Arrow: TRT → center -->
+  <path d="M555,135 Q480,180 442,210" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============================================ -->
+  <!-- INPUT STREAM 3: HyperAgents (bottom-left) -->
+  <!-- ============================================ -->
+  <rect x="50" y="315" width="195" height="70" rx="10" fill="#e2e6ed" stroke="#4a6fa5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="147" y="340" text-anchor="middle" font-size="13" font-weight="700" fill="#16213e">HyperAgents</text>
+  <text x="147" y="358" text-anchor="middle" font-size="10" fill="#2d3748">Edits own improvement process</text>
+  <text x="147" y="374" text-anchor="middle" font-size="9" fill="#4a6fa5">self-modifying agent policies</text>
+
+  <!-- Arrow: HyperAgents → center -->
+  <path d="M245,340 Q310,310 335,285" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============================================ -->
+  <!-- INPUT STREAM 4: Self-Execution Sim (bottom-right) -->
+  <!-- ============================================ -->
+  <rect x="555" y="315" width="195" height="70" rx="10" fill="#e2e6ed" stroke="#4a6fa5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="652" y="340" text-anchor="middle" font-size="13" font-weight="700" fill="#16213e">Self-Execution Sim</text>
+  <text x="652" y="358" text-anchor="middle" font-size="10" fill="#2d3748">Traces code before running</text>
+  <text x="652" y="374" text-anchor="middle" font-size="9" fill="#4a6fa5">predictive execution analysis</text>
+
+  <!-- Arrow: Self-Execution Sim → center -->
+  <path d="M555,340 Q490,310 465,285" fill="none" stroke="#4a6fa5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- ============================================ -->
+  <!-- CONVERGENCE LABEL -->
+  <!-- ============================================ -->
+  <text x="305" y="185" text-anchor="middle" font-size="8" font-weight="600" fill="#5b9df5" transform="rotate(-30,305,185)">converges</text>
+  <text x="500" y="185" text-anchor="middle" font-size="8" font-weight="600" fill="#5b9df5" transform="rotate(30,500,185)">converges</text>
+  <text x="295" y="320" text-anchor="middle" font-size="8" font-weight="600" fill="#5b9df5" transform="rotate(20,295,320)">converges</text>
+  <text x="510" y="320" text-anchor="middle" font-size="8" font-weight="600" fill="#5b9df5" transform="rotate(-20,510,320)">converges</text>
+
+  <!-- ============================================ -->
+  <!-- OUTPUT SECTION: Three application arrows -->
+  <!-- ============================================ -->
+
+  <!-- Vertical connector from center down -->
+  <line x1="400" y1="337" x2="400" y2="405" stroke="#16213e" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <text x="400" y="395" text-anchor="middle" font-size="9" font-weight="600" fill="#16213e">enables</text>
+
+  <!-- Three-way split line -->
+  <line x1="150" y1="415" x2="650" y2="415" stroke="#e2e6ed" stroke-width="2"/>
+  <line x1="150" y1="415" x2="150" y2="425" stroke="#16213e" stroke-width="2"/>
+  <line x1="400" y1="415" x2="400" y2="425" stroke="#16213e" stroke-width="2"/>
+  <line x1="650" y1="415" x2="650" y2="425" stroke="#16213e" stroke-width="2"/>
+
+  <!-- Output 1: Education -->
+  <rect x="55" y="425" width="190" height="65" rx="8" fill="#16213e" filter="url(#shadow)"/>
+  <text x="150" y="448" text-anchor="middle" font-size="12" font-weight="700" fill="#5b9df5">Education</text>
+  <text x="150" y="466" text-anchor="middle" font-size="9" fill="#c5d5ea">Tutors adapt to each</text>
+  <text x="150" y="479" text-anchor="middle" font-size="9" fill="#c5d5ea">student in real time</text>
+
+  <!-- Output 2: Commerce -->
+  <rect x="305" y="425" width="190" height="65" rx="8" fill="#16213e" filter="url(#shadow)"/>
+  <text x="400" y="448" text-anchor="middle" font-size="12" font-weight="700" fill="#5b9df5">Commerce</text>
+  <text x="400" y="466" text-anchor="middle" font-size="9" fill="#c5d5ea">Shopping agents learn user</text>
+  <text x="400" y="479" text-anchor="middle" font-size="9" fill="#c5d5ea">preferences per session</text>
+
+  <!-- Output 3: Science -->
+  <rect x="555" y="425" width="190" height="65" rx="8" fill="#16213e" filter="url(#shadow)"/>
+  <text x="650" y="448" text-anchor="middle" font-size="12" font-weight="700" fill="#5b9df5">Science</text>
+  <text x="650" y="466" text-anchor="middle" font-size="9" fill="#c5d5ea">Research agents refine</text>
+  <text x="650" y="479" text-anchor="middle" font-size="9" fill="#c5d5ea">hypotheses during experiments</text>
+
+  <!-- Drop lines into output boxes -->
+  <line x1="150" y1="415" x2="150" y2="425" stroke="#16213e" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="400" y1="415" x2="400" y2="425" stroke="#16213e" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="650" y1="415" x2="650" y2="425" stroke="#16213e" stroke-width="2" marker-end="url(#arrow-dark)"/>
+
+  <!-- ============================================ -->
+  <!-- KEY PRINCIPLE BANNER -->
+  <!-- ============================================ -->
+  <rect x="80" y="520" width="640" height="50" rx="8" fill="#e2e6ed" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="400" y="542" text-anchor="middle" font-size="10" font-weight="600" fill="#16213e">KEY PRINCIPLE</text>
+  <text x="400" y="559" text-anchor="middle" font-size="11" fill="#2d3748">The same predict  &#x2192;  act  &#x2192;  verify  &#x2192;  adapt loop drives all four strategies</text>
+
+  <!-- Small decorative cycle icon in key principle box -->
+  <circle cx="115" cy="545" r="12" fill="none" stroke="#5b9df5" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <path d="M115,533 L118,537 L112,537 Z" fill="#5b9df5"/>
+  <circle cx="685" cy="545" r="12" fill="none" stroke="#5b9df5" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <path d="M685,533 L688,537 L682,537 Z" fill="#5b9df5"/>
+</svg>

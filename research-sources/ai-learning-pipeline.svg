@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8eeff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="track" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6" />
+      <stop offset="100%" style="stop-color:#2563eb" />
+    </linearGradient>
+    <linearGradient id="synth" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6" />
+      <stop offset="100%" style="stop-color:#7c3aed" />
+    </linearGradient>
+    <linearGradient id="sim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4" />
+      <stop offset="100%" style="stop-color:#0891b2" />
+    </linearGradient>
+    <linearGradient id="tutor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981" />
+      <stop offset="100%" style="stop-color:#059669" />
+    </linearGradient>
+    <linearGradient id="apply" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b" />
+      <stop offset="100%" style="stop-color:#d97706" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="520" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">AI-Assisted Learning Pipeline: From Research to Real-World Application</text>
+
+  <!-- Stage 1: Research Tracking -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="60" width="160" height="100" rx="10" fill="url(#track)"/>
+    <text x="120" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="white">Research Tracking</text>
+    <text x="120" y="110" text-anchor="middle" font-size="10" fill="#dbeafe">arXiv, HuggingFace</text>
+    <text x="120" y="124" text-anchor="middle" font-size="10" fill="#dbeafe">Semantic Scholar</text>
+    <text x="120" y="138" text-anchor="middle" font-size="10" fill="#dbeafe">500+ papers/day</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M200 110 L240 110" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 2: AI Synthesis -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="60" width="160" height="100" rx="10" fill="url(#synth)"/>
+    <text x="330" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="white">AI Synthesis</text>
+    <text x="330" y="110" text-anchor="middle" font-size="10" fill="#ede9fe">LLM agents filter</text>
+    <text x="330" y="124" text-anchor="middle" font-size="10" fill="#ede9fe">summarize, connect</text>
+    <text x="330" y="138" text-anchor="middle" font-size="10" fill="#ede9fe">cross-reference</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <path d="M410 110 L450 110" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 3: Predictive Simulation -->
+  <g filter="url(#shadow)">
+    <rect x="460" y="60" width="160" height="100" rx="10" fill="url(#sim)"/>
+    <text x="540" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="white">World Models</text>
+    <text x="540" y="110" text-anchor="middle" font-size="10" fill="#cffafe">Simulate outcomes</text>
+    <text x="540" y="124" text-anchor="middle" font-size="10" fill="#cffafe">before acting</text>
+    <text x="540" y="138" text-anchor="middle" font-size="10" fill="#cffafe">V-JEPA, Genie, DreamerV3</text>
+  </g>
+
+  <!-- Arrow down from simulation -->
+  <path d="M540 160 L540 200" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 4: AI Tutor -->
+  <g filter="url(#shadow)">
+    <rect x="400" y="210" width="280" height="110" rx="10" fill="url(#tutor)"/>
+    <text x="540" y="240" text-anchor="middle" font-size="13" font-weight="600" fill="white">AI Tutoring System</text>
+    <text x="540" y="260" text-anchor="middle" font-size="10" fill="#d1fae5">Personalized curriculum</text>
+    <text x="540" y="274" text-anchor="middle" font-size="10" fill="#d1fae5">Adaptive difficulty (GuideAI)</text>
+    <text x="540" y="288" text-anchor="middle" font-size="10" fill="#d1fae5">Outperforms active learning (Harvard RCT)</text>
+    <text x="540" y="302" text-anchor="middle" font-size="10" fill="#d1fae5">Multi-modal feedback loops</text>
+  </g>
+
+  <!-- Arrow down from tutor -->
+  <path d="M540 320 L540 360" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 5: Real-World Application -->
+  <g filter="url(#shadow)">
+    <rect x="300" y="370" width="460" height="110" rx="10" fill="url(#apply)"/>
+    <text x="530" y="398" text-anchor="middle" font-size="13" font-weight="600" fill="white">Real-World Application</text>
+    <g font-size="10" fill="#fef3c7">
+      <text x="410" y="420">E-Commerce</text>
+      <text x="410" y="434">Pricing, shopping agents</text>
+      <text x="410" y="448">supply chain optimization</text>
+      <text x="600" y="420">Professional Skills</text>
+      <text x="600" y="434">Medical simulation (MedSimAI)</text>
+      <text x="600" y="448">Teacher training (VR)</text>
+      <text x="530" y="468" text-anchor="middle" font-weight="500" fill="white">Authentic outcomes drive further learning</text>
+    </g>
+  </g>
+
+  <!-- Recursive improvement loop (left side) -->
+  <g>
+    <rect x="40" y="210" width="160" height="100" rx="10" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="120" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="#ef4444">Recursive</text>
+    <text x="120" y="256" text-anchor="middle" font-size="12" font-weight="600" fill="#ef4444">Self-Improvement</text>
+    <text x="120" y="278" text-anchor="middle" font-size="10" fill="#6b7280">System improves its</text>
+    <text x="120" y="292" text-anchor="middle" font-size="10" fill="#6b7280">own learning process</text>
+  </g>
+
+  <!-- Arrows for recursive loop -->
+  <path d="M200 260 L390 260" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#redarrow)"/>
+
+  <!-- Feedback arrow from application back to tracking -->
+  <path d="M300 430 L120 430 L120 370 L120 170" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="68" y="300" font-size="9" fill="#64748b" transform="rotate(-90,68,300)">Feedback loop</text>
+
+  <!-- Arrow from synthesis down to recursive -->
+  <path d="M330 160 L330 185 L200 185 L200 205 L175 205" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,3" fill="none"/>
+
+  <!-- Legend -->
+  <g transform="translate(40, 485)">
+    <text x="0" y="0" font-size="9" fill="#64748b">Solid arrows = primary data flow | Dashed arrows = feedback and recursive improvement loops</text>
+  </g>
+
+  <!-- Arrowhead markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+    </marker>
+    <marker id="redarrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+    </marker>
+  </defs>
+</svg>

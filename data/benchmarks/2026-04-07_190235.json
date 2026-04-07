@@ -1,0 +1,141 @@
+{
+  "timestamp": "2026-04-07T19:02:35.812660",
+  "summary": {
+    "overall_composite": 93.0,
+    "article_count": 4,
+    "total_lines": 3285,
+    "total_words": 60207,
+    "lowest_scoring": "cross-cutting-connections",
+    "highest_scoring": "recursive-self-improvement"
+  },
+  "articles": {
+    "predictive-simulation": {
+      "key": "predictive-simulation",
+      "file": "frontier-topics/predictive-simulation-learning.md",
+      "lines": 818,
+      "words": 16611,
+      "scores": {
+        "structural": 100,
+        "depth": 77,
+        "currency": 98,
+        "sourcing": 95,
+        "linking": 96,
+        "consistency": 100,
+        "composite": 93.7
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.2
+      },
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 72,
+      "h3_count": 15,
+      "footnote_count": 79,
+      "internal_link_count": 28
+    },
+    "recursive-self-improvement": {
+      "key": "recursive-self-improvement",
+      "file": "frontier-topics/recursive-self-improvement.md",
+      "lines": 688,
+      "words": 12794,
+      "scores": {
+        "structural": 100,
+        "depth": 77,
+        "currency": 99,
+        "sourcing": 96,
+        "linking": 100,
+        "consistency": 100,
+        "composite": 94.5
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.2
+      },
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 64,
+      "footnote_count": 67,
+      "internal_link_count": 24
+    },
+    "ai-ecommerce-learning": {
+      "key": "ai-ecommerce-learning",
+      "file": "frontier-topics/ai-ecommerce-learning.md",
+      "lines": 623,
+      "words": 11405,
+      "scores": {
+        "structural": 100,
+        "depth": 78,
+        "currency": 100,
+        "sourcing": 94,
+        "linking": 92,
+        "consistency": 100,
+        "composite": 93.6
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.2
+      },
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 23,
+      "h3_count": 53,
+      "footnote_count": 58,
+      "internal_link_count": 35
+    },
+    "cross-cutting-connections": {
+      "key": "cross-cutting-connections",
+      "file": "frontier-topics/cross-cutting-connections.md",
+      "lines": 1156,
+      "words": 19397,
+      "scores": {
+        "structural": 100,
+        "depth": 70,
+        "currency": 100,
+        "sourcing": 86,
+        "linking": 92,
+        "consistency": 100,
+        "composite": 90.4
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.2
+      },
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 79,
+      "h3_count": 5,
+      "footnote_count": 88,
+      "internal_link_count": 48
+    }
+  }
+}

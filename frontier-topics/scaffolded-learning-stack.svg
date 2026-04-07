@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a6fa5"/>
+    </marker>
+    <marker id="arr-fade" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c0392b"/>
+    </marker>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0"/>
+      <stop offset="100%" style="stop-color:#ffe0b2"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8eaf6"/>
+      <stop offset="100%" style="stop-color:#c5cae9"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0f2f1"/>
+      <stop offset="100%" style="stop-color:#b2dfdb"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec"/>
+      <stop offset="100%" style="stop-color:#f8bbd0"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5"/>
+      <stop offset="100%" style="stop-color:#e1bee7"/>
+    </linearGradient>
+    <filter id="sh" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="720" fill="#fafbfc" rx="8"/>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1a237e">The Five-Layer Scaffolded Learning Stack</text>
+  <text x="480" y="58" text-anchor="middle" font-size="12" fill="#546e7a">How AI builds independent competence through progressive support withdrawal (April 2026)</text>
+
+  <!-- Timeline arrow across top -->
+  <line x1="80" y1="85" x2="880" y2="85" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="80" y="78" font-size="11" fill="#455a64" font-weight="600">Novice</text>
+  <text x="855" y="78" font-size="11" fill="#455a64" font-weight="600">Expert</text>
+  <text x="480" y="78" text-anchor="middle" font-size="10" fill="#78909c">Scaffolding withdraws as competence grows →</text>
+
+  <!-- Layer 5: Memory Consolidation (top) -->
+  <rect x="60" y="100" width="840" height="90" rx="10" fill="url(#g5)" filter="url(#sh)" stroke="#9c27b0" stroke-width="1.5"/>
+  <text x="80" y="122" font-size="14" font-weight="700" fill="#6a1b9a">Layer 5: Memory Consolidation</text>
+  <text x="80" y="140" font-size="11" fill="#4a148c">Converts episodes → abstractions → transferable knowledge</text>
+  <rect x="100" y="150" width="160" height="30" rx="5" fill="#ce93d8" opacity="0.6"/>
+  <text x="180" y="170" text-anchor="middle" font-size="10" fill="#4a148c" font-weight="600">Memory Intelligence Agent</text>
+  <rect x="290" y="150" width="130" height="30" rx="5" fill="#ce93d8" opacity="0.6"/>
+  <text x="355" y="170" text-anchor="middle" font-size="10" fill="#4a148c" font-weight="600">MemRerank</text>
+  <rect x="450" y="150" width="130" height="30" rx="5" fill="#ce93d8" opacity="0.6"/>
+  <text x="515" y="170" text-anchor="middle" font-size="10" fill="#4a148c" font-weight="600">MetaClaw Skills</text>
+  <text x="620" y="165" font-size="10" fill="#6a1b9a" font-style="italic">Timescale: across sessions</text>
+
+  <!-- Layer 4: Environment Simulation -->
+  <rect x="60" y="200" width="840" height="90" rx="10" fill="url(#g4)" filter="url(#sh)" stroke="#c62828" stroke-width="1.5"/>
+  <text x="80" y="222" font-size="14" font-weight="700" fill="#b71c1c">Layer 4: Environment Simulation</text>
+  <text x="80" y="240" font-size="11" fill="#c62828">Provides safe practice environments that improve over time</text>
+  <rect x="100" y="250" width="110" height="30" rx="5" fill="#ef9a9a" opacity="0.6"/>
+  <text x="155" y="270" text-anchor="middle" font-size="10" fill="#b71c1c" font-weight="600">EgoSim</text>
+  <rect x="230" y="250" width="110" height="30" rx="5" fill="#ef9a9a" opacity="0.6"/>
+  <text x="285" y="270" text-anchor="middle" font-size="10" fill="#b71c1c" font-weight="600">ShopSimulator</text>
+  <rect x="360" y="250" width="110" height="30" rx="5" fill="#ef9a9a" opacity="0.6"/>
+  <text x="415" y="270" text-anchor="middle" font-size="10" fill="#b71c1c" font-weight="600">DreamerV3</text>
+  <rect x="490" y="250" width="130" height="30" rx="5" fill="#ef9a9a" opacity="0.6"/>
+  <text x="555" y="270" text-anchor="middle" font-size="10" fill="#b71c1c" font-weight="600">Grounded SimDist</text>
+  <text x="660" y="265" font-size="10" fill="#c62828" font-style="italic">Timescale: per curriculum</text>
+
+  <!-- Layer 3: Difficulty Calibration -->
+  <rect x="60" y="300" width="840" height="90" rx="10" fill="url(#g3)" filter="url(#sh)" stroke="#00695c" stroke-width="1.5"/>
+  <text x="80" y="322" font-size="14" font-weight="700" fill="#004d40">Layer 3: Difficulty Calibration</text>
+  <text x="80" y="340" font-size="11" fill="#00695c">Adjusts challenge level to the learner's zone of proximal development</text>
+  <rect x="100" y="350" width="100" height="30" rx="5" fill="#80cbc4" opacity="0.6"/>
+  <text x="150" y="370" text-anchor="middle" font-size="10" fill="#004d40" font-weight="600">GASP</text>
+  <rect x="220" y="350" width="100" height="30" rx="5" fill="#80cbc4" opacity="0.6"/>
+  <text x="270" y="370" text-anchor="middle" font-size="10" fill="#004d40" font-weight="600">LADDER</text>
+  <rect x="340" y="350" width="140" height="30" rx="5" fill="#80cbc4" opacity="0.6"/>
+  <text x="410" y="370" text-anchor="middle" font-size="10" fill="#004d40" font-weight="600">Switching Framework</text>
+  <rect x="500" y="350" width="100" height="30" rx="5" fill="#80cbc4" opacity="0.6"/>
+  <text x="550" y="370" text-anchor="middle" font-size="10" fill="#004d40" font-weight="600">Agent0</text>
+  <text x="640" y="365" font-size="10" fill="#00695c" font-style="italic">Timescale: per session</text>
+
+  <!-- Layer 2: Skill Scaffolding -->
+  <rect x="60" y="400" width="840" height="90" rx="10" fill="url(#g2)" filter="url(#sh)" stroke="#283593" stroke-width="1.5"/>
+  <text x="80" y="422" font-size="14" font-weight="700" fill="#1a237e">Layer 2: Skill Scaffolding</text>
+  <text x="80" y="440" font-size="11" fill="#283593">Progressively withdraws domain knowledge as the learner internalizes</text>
+  <rect x="100" y="450" width="100" height="30" rx="5" fill="#9fa8da" opacity="0.6"/>
+  <text x="150" y="470" text-anchor="middle" font-size="10" fill="#1a237e" font-weight="600">SKILL0</text>
+  <rect x="220" y="450" width="140" height="30" rx="5" fill="#9fa8da" opacity="0.6"/>
+  <text x="290" y="470" text-anchor="middle" font-size="10" fill="#1a237e" font-weight="600">AgentTutor</text>
+  <rect x="380" y="450" width="100" height="30" rx="5" fill="#9fa8da" opacity="0.6"/>
+  <text x="430" y="470" text-anchor="middle" font-size="10" fill="#1a237e" font-weight="600">SLOW</text>
+  <text x="520" y="465" font-size="10" fill="#283593" font-style="italic">Timescale: per episode</text>
+
+  <!-- Layer 1: Hint Generation (bottom) -->
+  <rect x="60" y="500" width="840" height="90" rx="10" fill="url(#g1)" filter="url(#sh)" stroke="#e65100" stroke-width="1.5"/>
+  <text x="80" y="522" font-size="14" font-weight="700" fill="#bf360c">Layer 1: Hint Generation</text>
+  <text x="80" y="540" font-size="11" fill="#e65100">Dynamically generates contextual hints calibrated to current errors</text>
+  <rect x="100" y="550" width="80" height="30" rx="5" fill="#ffcc80" opacity="0.6"/>
+  <text x="140" y="570" text-anchor="middle" font-size="10" fill="#bf360c" font-weight="600">HiLL</text>
+  <rect x="200" y="550" width="120" height="30" rx="5" fill="#ffcc80" opacity="0.6"/>
+  <text x="260" y="570" text-anchor="middle" font-size="10" fill="#bf360c" font-weight="600">ForeAgent</text>
+  <rect x="340" y="550" width="130" height="30" rx="5" fill="#ffcc80" opacity="0.6"/>
+  <text x="405" y="570" text-anchor="middle" font-size="10" fill="#bf360c" font-weight="600">AgentTutor hints</text>
+  <text x="510" y="565" font-size="10" fill="#e65100" font-style="italic">Timescale: per step</text>
+
+  <!-- Withdrawal arrows on the right -->
+  <text x="920" y="195" text-anchor="middle" font-size="9" fill="#c0392b" font-weight="600" transform="rotate(-90 920 300)">← Support withdrawn as competence grows →</text>
+
+  <!-- Fading support bars -->
+  <rect x="740" y="510" width="140" height="15" rx="3" fill="#e65100" opacity="0.8"/>
+  <rect x="780" y="410" width="100" height="15" rx="3" fill="#283593" opacity="0.6"/>
+  <rect x="810" y="310" width="70" height="15" rx="3" fill="#00695c" opacity="0.4"/>
+  <rect x="830" y="210" width="50" height="15" rx="3" fill="#c62828" opacity="0.3"/>
+  <rect x="845" y="110" width="35" height="15" rx="3" fill="#9c27b0" opacity="0.2"/>
+  <text x="810" y="605" text-anchor="middle" font-size="9" fill="#546e7a">Support level</text>
+  <text x="810" y="616" text-anchor="middle" font-size="9" fill="#546e7a">(fades per layer)</text>
+
+  <!-- Bottom: Three domain applications -->
+  <rect x="60" y="640" width="260" height="65" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="1"/>
+  <text x="190" y="660" text-anchor="middle" font-size="12" font-weight="700" fill="#0d47a1">Predictive Simulation</text>
+  <text x="190" y="676" text-anchor="middle" font-size="9" fill="#1565c0">World models predict outcomes;</text>
+  <text x="190" y="688" text-anchor="middle" font-size="9" fill="#1565c0">learner verifies in simulation</text>
+
+  <rect x="350" y="640" width="260" height="65" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1"/>
+  <text x="480" y="660" text-anchor="middle" font-size="12" font-weight="700" fill="#4a148c">Recursive Self-Improvement</text>
+  <text x="480" y="676" text-anchor="middle" font-size="9" fill="#7b1fa2">Each layer recursively improves</text>
+  <text x="480" y="688" text-anchor="middle" font-size="9" fill="#7b1fa2">based on learning outcomes</text>
+
+  <rect x="640" y="640" width="260" height="65" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+  <text x="770" y="660" text-anchor="middle" font-size="12" font-weight="700" fill="#1b5e20">E-Commerce Learning</text>
+  <text x="770" y="676" text-anchor="middle" font-size="9" fill="#2e7d32">Same stack applies: hints → skills</text>
+  <text x="770" y="688" text-anchor="middle" font-size="9" fill="#2e7d32">→ difficulty → simulation → memory</text>
+
+  <!-- Connecting lines to domains -->
+  <line x1="190" y1="595" x2="190" y2="640" stroke="#1565c0" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="480" y1="595" x2="480" y2="640" stroke="#7b1fa2" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="770" y1="595" x2="770" y2="640" stroke="#2e7d32" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- Key insight box -->
+  <rect x="620" y="95" width="270" height="45" rx="6" fill="#fff8e1" stroke="#f9a825" stroke-width="1"/>
+  <text x="755" y="112" text-anchor="middle" font-size="9" font-weight="700" fill="#f57f17">KEY INSIGHT (OECD 2026):</text>
+  <text x="755" y="126" text-anchor="middle" font-size="9" fill="#e65100">AI that performs FOR users → dependency</text>
+  <text x="755" y="138" text-anchor="middle" font-size="9" fill="#2e7d32">AI that scaffolds THEN withdraws → mastery</text>
+</svg>
