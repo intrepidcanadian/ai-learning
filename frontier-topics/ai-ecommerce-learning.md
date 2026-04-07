@@ -479,6 +479,90 @@ The convergence of [predictive simulation](predictive-simulation-learning.md) an
 
 **Learning application:** Together, these advances enable a commerce learning pipeline that didn't exist a year ago: train agents on historical data (Dreamer 4 approach), simulate market responses at population scale (SocioVerse), and validate that simulation-trained skills transfer to real performance (MedSimAI evidence). A business school could offer students a simulated market where they manage pricing, inventory, and marketing for a product -- with the simulation calibrated against real market dynamics and their performance measured against validated skill assessment rubrics.
 
+## Ad Performance Simulation: Predicting ROI Before Spending
+
+A convergence of world models, VLM-based creative assessment, and generative auto-bidding is enabling a new paradigm in digital advertising: **simulate ad performance before committing budget**. This section synthesizes how the simulation, multimodal assessment, and optimization techniques described throughout this wiki apply to paid advertising — one of e-commerce's highest-stakes learning problems.
+
+### The Ad Simulation Pipeline
+
+Traditional paid advertising operates on a costly trial-and-error loop: create ads, spend budget, measure results, iterate. The emerging simulation-first approach inverts this:
+
+![Ad Performance Simulation Pipeline](ad-simulation-pipeline.svg)
+
+1. **Creative generation** — Generate ad variants (images, copy, CTAs) using generative AI, similar to [PerFusion's](#perfusion-sell-it-before-you-make-it----ai-generated-commerce) "sell it before you make it" approach
+2. **VLM-based creative assessment** — Use [vision-language models](../methodologies/vlm-integration.md) to score each creative on visual clarity, emotional appeal, brand consistency, and text readability before any human review[^61]
+3. **Audience simulation** — Model audience reactions using population-scale simulators like [SocioVerse](#socioverse-simulating-consumer-populations-at-scale), which can predict demographic-specific responses across 10 million calibrated user profiles[^31]
+4. **Bid optimization** — Use generative auto-bidding models (GRAD) to optimize budget allocation across predicted-best creatives and audiences[^62]
+5. **Calibration against reality** — Deploy top-predicted ads in limited live tests, then use results to calibrate the simulator for next iteration
+
+This pipeline is the paid-advertising instantiation of the [predict-then-verify paradigm](cross-cutting-connections.md#connection-30-predict-then-verify-as-a-universal-learning-paradigm) that runs throughout this wiki.
+
+### MiroFish: Multi-Agent Simulation for Campaign Prediction
+
+MiroFish is an open-source multi-agent prediction engine that constructs parallel digital worlds populated by thousands of autonomous AI agents — each with unique personality, memory, and behavioral logic — to simulate complex scenarios before they happen in reality[^63]. While not purpose-built for advertising, its architecture directly addresses ad simulation needs:
+
+- **Demographic-calibrated agents** — Each simulated consumer has personality traits, preferences, and behavioral patterns seeded from real-world data, enabling realistic modeling of how different audience segments respond to ad creatives
+- **Emergent behavior** — Rather than predicting individual responses, MiroFish models how opinions propagate through social networks — critical for viral marketing campaigns and influencer advertising where second-order effects dominate
+- **Scenario testing** — Marketers can test "what if" scenarios ("if we raise prices 15%, how does sentiment shift across segments?") before committing budget
+- **Integration with world models** — MiroFish's simulation approach connects to [Dreamer 4's](predictive-simulation-learning.md#dreamer-4-training-agents-inside-scalable-world-models) learned world models: both systems learn dynamics from observation data and generate predictions without real-world interaction
+
+The combination of MiroFish (population simulation) with SocioVerse (demographic calibration) and VLM creative assessment creates a full-stack ad simulation environment where creative quality, audience targeting, and budget allocation can all be optimized before a single dollar is spent.
+
+### Agentic Multimodal AI for Hyperpersonalized Advertising
+
+Gupta et al. (April 2026) present an AI-driven competitive advertising framework that integrates retrieval-augmented generation (RAG), multimodal reasoning, and adaptive persona-based targeting for hyperpersonalized B2B and B2C advertising[^61]. The framework uses synthetic experiments designed to mirror real-world conditions — simulating market dynamics, consumer behaviors, and competitive scenarios — to optimize ad strategies before deployment.
+
+**Key capabilities:**
+- **Multimodal ad assessment** — VLMs analyze ad creative images alongside copy text, scoring visual-verbal alignment, emotional resonance, and cultural appropriateness across target demographics
+- **Persona-based simulation** — Rather than treating audiences as statistical distributions, the system creates detailed consumer personas and simulates their reactions to specific ad variants, mirroring [Shopping Companion's](#shopping-companion-memory-augmented-assistance) preference memory approach
+- **Competitive dynamics** — The framework models competitor responses, preventing the optimization blind spot where an ad strategy looks optimal in isolation but fails when competitors react
+- **Privacy-preserving simulation** — By training on synthetic populations rather than real user data, the system avoids the privacy concerns that constrain traditional A/B testing
+
+**Learning application:** This framework demonstrates how the AIDE-style code-search paradigm could be applied to advertising optimization. Instead of searching over Python scripts (as AIDE does for ML tasks), an advertising AIDE would search over creative-audience-bid configurations, evaluating each combination in simulation before live deployment. A marketing student could use this framework to practice campaign optimization in a realistic simulated market — building intuition for which creative elements drive performance across different audience segments, without spending real ad budget.
+
+### Generative Auto-Bidding: GRAD and Beyond
+
+GRAD (Generative Reward-driven Ad-bidding with Mixture-of-Experts) represents the optimization layer of the ad simulation stack[^62]. Deployed at scale on Meituan (one of the world's largest online platforms), GRAD uses:
+
+- **Action Mixture-of-Experts** — Dynamically generates novel bidding strategies beyond historically observed actions, exploring the bid-space through constrained generation rather than exhaustive search
+- **Causal Transformer Value Estimator** — Performs counterfactual inference to evaluate the reward of *unexecuted* actions under complex advertiser constraints — predicting "what would have happened if we bid X instead of Y"
+- **Production results** — 2.18% increase in GMV (Gross Merchandise Value) and 10.68% increase in ROI at Meituan scale
+
+GRAD's counterfactual reasoning connects directly to [predictive simulation learning](predictive-simulation-learning.md): the model builds an internal world model of auction dynamics and uses it to predict outcomes of untried strategies. Combined with VLM creative assessment and population simulation, this creates a closed-loop system where:
+
+```
+Generate creative → VLM scores quality → Simulate audience response
+     → GRAD optimizes bid → Predict ROI → Compare to threshold
+     → Deploy or iterate
+```
+
+Related generative bidding systems (GAVE, CBD, EGDB) extend this approach with diffusion models and expert-guided planning, suggesting that the auto-bidding landscape is rapidly converging on simulation-first optimization[^64].
+
+### LLM-Generated Ads: Persuasion at Scale
+
+Tan et al. (2025) demonstrated that LLM-generated advertisements significantly outperform human-created content when tested across four foundational psychological principles — authority, consensus, cognition, and scarcity[^65]. The finding that AI-generated ads achieve persuasion *superiority* (not just parity) has profound implications for the simulation pipeline:
+
+- **Creative generation becomes the cheap step** — If LLMs can generate high-quality ad copy and VLMs can assess visual creative, the bottleneck shifts from creative production to *predicting which creative will perform best for which audience*
+- **Simulation becomes the expensive step** — The value of population-scale simulation (SocioVerse, MiroFish) increases when creative generation is commoditized, because selecting the right creative-audience match is what determines ROI
+- **Creative ≈ 70% of campaign performance** — Industry data indicates that creative quality is now the single largest lever in advertising performance, making simulation-based creative optimization the highest-ROI investment in the ad pipeline[^66]
+
+### The AIDE Pattern Applied to Ad Optimization
+
+The [AIDE](../tools-platforms/aide.md) code-search paradigm maps naturally to advertising optimization. Where AIDE searches over Python scripts to maximize an ML metric, an "Ad-AIDE" would search over campaign configurations to maximize ROAS:
+
+| AIDE (ML Research) | Ad-AIDE (Advertising) |
+|---|---|
+| Search space: all Python programs | Search space: all creative × audience × bid configs |
+| Metric: NDCG@10, accuracy | Metric: ROAS, CTR, CPA |
+| Draft: new model architecture | Draft: new creative concept + targeting strategy |
+| Improve: refine best solution | Improve: optimize bids + refine audience segments |
+| Execution: train model | Execution: simulate in MiroFish/SocioVerse |
+| Feedback: test metrics | Feedback: simulated conversion rates |
+
+The solution tree structure is particularly valuable for advertising: each node represents a creative-audience-bid combination, with branches representing refinements. The tree itself becomes an ablation study — revealing which elements of the ad (image style? headline framing? audience segment?) contributed most to predicted performance.
+
+**Learning application:** This mapping provides a concrete bridge between AI research methodology and marketing practice. A business student learning both ML and marketing can see that campaign optimization and model training are structurally identical problems — both are search over a solution space guided by a metric. The [Autoresearch](../tools-platforms/autoresearch.md) pattern ("set up experiments, go to sleep, wake up to results") applies directly: configure the simulation, let it explore overnight, review the top-performing campaigns in the morning. This transforms ad optimization from an art (relying on creative intuition) into a science (systematic search with measurable outcomes) — the same transformation that [The AI Scientist](../core-concepts/the-ai-scientist.md) brought to ML research.
+
 ### WWW 2026 Workshop: LLM Agents Are Reshaping Recommendation Science
 
 The WWW 2026 workshop on "LLM & Agents for Recommendation Systems" (Dubai, April 2026) crystallizes an inflection point: recommendation systems are transitioning from passive content filtering to active agentic mediation.[^47] The workshop identifies four transformation vectors:
@@ -694,3 +778,15 @@ This loop is visible across the systems described here: [ShopSimulator](#shopsim
 [^67]: ShoppingComp benchmark (2025). "ShoppingComp: Are LLMs Really Ready for Your Shopping Cart?" [arXiv:2511.22978](https://arxiv.org/abs/2511.22978)
 
 [^68]: Peng, Q. et al. (2025). "A Survey on LLM-powered Agents for Recommender Systems." [arXiv:2502.10050](https://arxiv.org/abs/2502.10050)
+
+[^61]: Gupta, A. et al. (2026). "Agentic Multimodal AI for Hyperpersonalized B2B and B2C Advertising in Competitive Markets." [arXiv:2504.00338](https://arxiv.org/abs/2504.00338)
+
+[^62]: Li, H. et al. (2025). "GRAD: Generative Reward-driven Ad-bidding with Mixture-of-Experts for Automated Ad Bidding Optimization." [arXiv:2508.02002](https://arxiv.org/abs/2508.02002)
+
+[^63]: MiroFish: Multi-Agent AI Prediction Engine. [github.com/666ghj/MiroFish](https://github.com/666ghj/MiroFish)
+
+[^64]: Cai, H. et al. (2025). "Generative Auto-Bidding via Diffusion Completer-Aligner in Large-Scale Competitive Auctions." [arXiv:2509.03348](https://arxiv.org/abs/2509.03348)
+
+[^65]: Tan, Z. et al. (2025). "LLM-Generated Ads: From Personalization Parity to Persuasion Superiority." [arXiv:2512.03373](https://arxiv.org/abs/2512.03373)
+
+[^66]: Digital Applied (2026). "AI Ad Creative Benchmarks 2026: CTR and ROAS Data." [digitalapplied.com](https://www.digitalapplied.com/blog/ai-ad-creative-benchmark-2026-ctr-roas-data)

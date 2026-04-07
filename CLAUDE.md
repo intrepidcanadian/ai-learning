@@ -20,15 +20,35 @@ This wiki covers AI learning research across 5 categories and ~24 articles:
 **Every session that edits wiki content MUST follow this loop:**
 
 1. **Benchmark first.** Run `python3 benchmark_wiki.py` before any edits. This takes <1s, no API calls.
-2. **Read the scorecard.** Identify the lowest-scoring article and its specific issues (listed in "TOP ISSUES TO FIX").
-3. **Fix the worst issues.** Prioritize by tier and score:
-   - If all flagship articles are above 95, prioritize stubs and standard articles
+2. **Read the scorecard.** The benchmark outputs two metrics and a mode recommendation:
+   - **Quality** (0-100): average composite score across all articles
+   - **Coverage** (0-100): percentage of internal topic references that resolve to existing articles. Topics referenced in cross-links but lacking their own article are "red-link gaps."
+   - **Action mode**: the benchmark recommends either Quality mode or Coverage mode based on the coverage threshold (80%).
+3. **Follow the recommended mode:**
+
+   **Coverage mode** (coverage < 80%):
+   - Priority: write new articles for the most-referenced red-link gaps
+   - The benchmark lists gaps sorted by reference count — start with the most-referenced
+   - New articles should use **conservative linking** — only link to topics that already have articles, don't introduce new red links (prevents thrashing)
+   - A new article will temporarily lower the quality score (it starts low-scoring) — that's expected and will be corrected in a subsequent quality-mode session
+
+   **Quality mode** (coverage >= 80%):
+   - Priority: improve lowest-scoring existing articles
+   - If all flagship articles are above 95, prioritize standard articles
    - For stubs (<100 lines), expand to standard size rather than micro-optimizing
-   - Target: <20% stubs in the wiki — expand stubs before creating new articles
    - Fix priorities: missing sections (structural) > missing footnotes (sourcing) > missing cross-links (linking) > stale content (currency)
+   - Adding richer cross-links may introduce new red-link gaps — this is fine, as it creates natural pressure to write new articles in future coverage-mode sessions
+
 4. **Re-run the benchmark** after edits to confirm improvement. This also regenerates `research-sources/benchmark-trend.md` with the updated score trend.
 5. **Rebuild the wiki** with `python3 build.py` so the HTML benchmark page is current.
-6. **Repeat** from step 1 if the composite score is still below target.
+6. **Repeat** from step 1 if the recommended mode still suggests work.
+
+### Quality vs Coverage dynamics
+- Each session does one thing: either improve quality OR expand coverage
+- Improving quality (adding cross-links) may lower coverage → triggers coverage mode next session
+- Expanding coverage (writing new articles) may lower quality → triggers quality mode next session
+- This oscillation is intentional — the wiki is never "done"
+- The system converges when both metrics are above threshold and stable
 
 ### Benchmark commands
 ```bash

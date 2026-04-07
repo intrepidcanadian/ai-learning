@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" rx="12" fill="#fafafa" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="960" height="52" rx="12" fill="url(#titleGrad)"/>
+  <rect x="0" y="26" width="960" height="26" fill="url(#titleGrad)"/>
+  <text x="480" y="35" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Ad Performance Simulation Pipeline: Predict ROI Before Spending</text>
+
+  <!-- Traditional approach (crossed out) -->
+  <rect x="30" y="70" width="900" height="40" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="480" y="95" text-anchor="middle" fill="#b91c1c" font-size="13">❌ Traditional: Create ads → Spend $10K → Measure results → Learn what worked → Repeat (slow, expensive)</text>
+
+  <!-- Step 1: Generate -->
+  <rect x="30" y="130" width="170" height="100" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="115" y="155" text-anchor="middle" fill="#1e40af" font-size="13" font-weight="bold">1. Generate</text>
+  <text x="115" y="175" text-anchor="middle" fill="#2563eb" font-size="10">LLM creates ad variants:</text>
+  <text x="115" y="190" text-anchor="middle" fill="#2563eb" font-size="10">images, copy, CTAs</text>
+  <text x="115" y="208" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">PerFusion / GPT-4o</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="200" y1="180" x2="225" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: VLM Assess -->
+  <rect x="230" y="130" width="170" height="100" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="315" y="155" text-anchor="middle" fill="#92400e" font-size="13" font-weight="bold">2. VLM Assess</text>
+  <text x="315" y="175" text-anchor="middle" fill="#b45309" font-size="10">Score each creative:</text>
+  <text x="315" y="190" text-anchor="middle" fill="#b45309" font-size="10">clarity, emotion, brand</text>
+  <text x="315" y="208" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">VLM-as-Judge</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="400" y1="180" x2="425" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Simulate -->
+  <rect x="430" y="130" width="170" height="100" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="515" y="155" text-anchor="middle" fill="#166534" font-size="13" font-weight="bold">3. Simulate</text>
+  <text x="515" y="175" text-anchor="middle" fill="#15803d" font-size="10">Model audience reactions</text>
+  <text x="515" y="190" text-anchor="middle" fill="#15803d" font-size="10">across demographics</text>
+  <text x="515" y="208" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">SocioVerse / MiroFish</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="600" y1="180" x2="625" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Optimize -->
+  <rect x="630" y="130" width="170" height="100" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="715" y="155" text-anchor="middle" fill="#5b21b6" font-size="13" font-weight="bold">4. Optimize Bids</text>
+  <text x="715" y="175" text-anchor="middle" fill="#7c3aed" font-size="10">Generative auto-bidding</text>
+  <text x="715" y="190" text-anchor="middle" fill="#7c3aed" font-size="10">allocates budget</text>
+  <text x="715" y="208" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">GRAD / Action-MoE</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="800" y1="180" x2="825" y2="180" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Deploy -->
+  <rect x="830" y="130" width="110" height="100" rx="10" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="885" y="155" text-anchor="middle" fill="#9d174d" font-size="13" font-weight="bold">5. Deploy</text>
+  <text x="885" y="175" text-anchor="middle" fill="#be185d" font-size="10">Top predicted</text>
+  <text x="885" y="190" text-anchor="middle" fill="#be185d" font-size="10">ads go live</text>
+  <text x="885" y="208" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">Limited test</text>
+
+  <!-- Feedback loop arrow -->
+  <path d="M 885 230 L 885 260 L 115 260 L 115 230" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-green)"/>
+  <text x="500" y="255" text-anchor="middle" fill="#16a34a" font-size="11" font-weight="bold">Calibration Loop: real results refine the simulator for next iteration</text>
+
+  <!-- AIDE Search Tree Section -->
+  <text x="50" y="300" fill="#475569" font-size="14" font-weight="bold">AIDE-Style Solution Tree for Ad Optimization</text>
+
+  <!-- Root node -->
+  <rect x="380" y="315" width="200" height="35" rx="6" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="480" y="338" text-anchor="middle" fill="#4338ca" font-size="11" font-weight="bold">Task: Maximize ROAS for product X</text>
+
+  <!-- Branch lines -->
+  <line x1="420" y1="350" x2="180" y2="375" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="480" y1="350" x2="480" y2="375" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="540" y1="350" x2="780" y2="375" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Draft A -->
+  <rect x="80" y="375" width="200" height="50" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="180" y="395" text-anchor="middle" fill="#c2410c" font-size="10" font-weight="bold">Draft A: Product-focused creative</text>
+  <text x="180" y="412" text-anchor="middle" fill="#ea580c" font-size="10">Simulated ROAS: 2.1x</text>
+
+  <!-- Draft B -->
+  <rect x="380" y="375" width="200" height="50" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="480" y="395" text-anchor="middle" fill="#c2410c" font-size="10" font-weight="bold">Draft B: Lifestyle creative</text>
+  <text x="480" y="412" text-anchor="middle" fill="#ea580c" font-size="10">Simulated ROAS: 3.4x</text>
+
+  <!-- Draft C -->
+  <rect x="680" y="375" width="200" height="50" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="780" y="395" text-anchor="middle" fill="#c2410c" font-size="10" font-weight="bold">Draft C: UGC-style creative</text>
+  <text x="780" y="412" text-anchor="middle" fill="#ea580c" font-size="10">Simulated ROAS: 2.8x</text>
+
+  <!-- Improve branches from B (best) -->
+  <line x1="440" y1="425" x2="340" y2="455" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="520" y1="425" x2="620" y2="455" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Improve B1 -->
+  <rect x="240" y="455" width="200" height="50" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="340" y="475" text-anchor="middle" fill="#166534" font-size="10" font-weight="bold">Improve B1: + scarcity CTA</text>
+  <text x="340" y="492" text-anchor="middle" fill="#15803d" font-size="10">Simulated ROAS: 3.9x</text>
+
+  <!-- Improve B2 -->
+  <rect x="520" y="455" width="200" height="50" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="620" y="475" text-anchor="middle" fill="#166534" font-size="10" font-weight="bold">Improve B2: + VLM-optimized image</text>
+  <text x="620" y="492" text-anchor="middle" fill="#15803d" font-size="10">Simulated ROAS: 4.3x ★ BEST</text>
+
+  <!-- Best indicator -->
+  <rect x="725" y="462" width="40" height="20" rx="4" fill="#22c55e"/>
+  <text x="745" y="477" text-anchor="middle" fill="white" font-size="9" font-weight="bold">DEPLOY</text>
+
+  <!-- Pruned indicator on A -->
+  <line x1="80" y1="375" x2="280" y2="425" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+  <line x1="280" y1="375" x2="80" y2="425" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Legend -->
+  <rect x="30" y="530" width="900" height="55" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="50" y="552" fill="#334155" font-size="11" font-weight="bold">Key Insight:</text>
+  <text x="140" y="552" fill="#475569" font-size="11">The same search-over-solutions pattern that powers AIDE (ML research) and Autoresearch (model training)</text>
+  <text x="50" y="572" fill="#475569" font-size="11">applies to advertising: generate creative variants, simulate performance, optimize bids — all before spending a dollar of ad budget.</text>
+</svg>
