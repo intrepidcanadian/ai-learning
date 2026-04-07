@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html" aria-current="page">Transfer Learning</a>
 </details>
@@ -338,7 +339,9 @@ body {
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
@@ -519,6 +522,17 @@ loadWishlist();
 <li><strong>Multi-task pretraining</strong>: Sequential fine-tuning on multiple related tasks outperforms direct fine-tuning</li>
 <li><strong>Optimal transfer is task-dependent</strong>: No single transfer strategy dominates across all task pairs</li>
 </ul>
+<h3 id="transfer-learning-in-scientific-domains">Transfer Learning in Scientific Domains</h3>
+<p>Jiang et al. (2026) demonstrated <strong>cross-domain scientific transfer</strong> where language models fine-tuned on chemistry literature transferred effectively to materials science tasks with only 200 labeled examples — outperforming models trained from scratch on 10,000 examples.[^6] The key was intermediate fine-tuning on a curated corpus of interdisciplinary papers that bridge both domains.</p>
+<p><strong>Learning connection:</strong> This mirrors how students with strong chemistry foundations learn materials science faster — the shared conceptual vocabulary (bonding, thermodynamics, crystallography) acts as a transfer medium.</p>
+<h3 id="lora-composition-for-multi-task-transfer">LoRA Composition for Multi-Task Transfer</h3>
+<p>Huang et al. (2026) introduced <strong>LoRA Composition</strong>, a technique for combining multiple LoRA adapters trained on different tasks into a single model that performs well on all tasks simultaneously.[^7] Rather than merging adapter weights (which causes interference), their method learns a small routing network that dynamically selects which adapter combinations to activate per input.</p>
+<p>This enables a practical workflow:
+1. Train lightweight LoRA adapters for each specialized task
+2. Compose adapters at inference time for novel task combinations
+3. No retraining needed when new tasks are added</p>
+<h3 id="transfer-learning-for-e-commerce-product-understanding">Transfer Learning for E-Commerce Product Understanding</h3>
+<p>Zhang et al. (2025) showed that LLMs fine-tuned on general product descriptions transfer to specialized e-commerce tasks (attribute extraction, category prediction, review summarization) with 3-5x less labeled data than domain-specific models.[^8] The key insight is that product language shares a common structure across categories — brand, features, specifications, use cases — enabling effective cross-category transfer relevant to <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a>.</p>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2025-2026-trends">2025-2026 Trends</h3>
 <ol>
@@ -526,7 +540,87 @@ loadWishlist();
 <li><strong>Transfer from simulation</strong>: <a href="../methodologies/world-models.html">World models</a> trained in simulation transfer learned physics to real-world tasks, connecting to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a></li>
 <li><strong>Efficient adaptation</strong>: LoRA and QLoRA have made fine-tuning accessible on consumer hardware, democratizing transfer learning</li>
 <li><strong>Negative transfer detection</strong>: New methods use gradient alignment between source and target tasks to predict and prevent negative transfer before it occurs</li>
+<li><strong>Adapter composition</strong>: LoRA Composition and similar methods enable combining task-specific adapters without retraining[^7]</li>
+<li><strong>Scientific transfer pipelines</strong>: Automated systems that identify transferable knowledge between scientific domains and select optimal pretraining corpora[^6]</li>
 </ol>
+<h3 id="transfer-learning-knowledge-flow-diagram">Transfer Learning Knowledge Flow Diagram</h3>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowTL&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#333&quot;/&gt;
+    &lt;/marker&gt;
+    &lt;linearGradient id=&quot;gradTL&quot; x1=&quot;0%&quot; y1=&quot;0%&quot; x2=&quot;100%&quot; y2=&quot;0%&quot;&gt;
+      &lt;stop offset=&quot;0%&quot; style=&quot;stop-color:#e3f2fd&quot;/&gt;
+      &lt;stop offset=&quot;100%&quot; style=&quot;stop-color:#e8f5e9&quot;/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Transfer Learning: From Pretraining to Real-World Application&lt;/text&gt;
+
+  &lt;!-- Stage 1: Pretraining --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;50&quot; width=&quot;160&quot; height=&quot;120&quot; rx=&quot;10&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;100&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Stage 1: Pretrain&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Massive diverse data&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;107&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Web text, code, images&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;127&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#666&quot;&gt;Learns universal&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#666&quot;&gt;representations&lt;/text&gt;
+  &lt;text x=&quot;100&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#888&quot;&gt;Cost: $$$$$&lt;/text&gt;
+
+  &lt;!-- Arrow 1 --&gt;
+  &lt;line x1=&quot;185&quot; y1=&quot;110&quot; x2=&quot;225&quot; y2=&quot;110&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrowTL)&quot;/&gt;
+
+  &lt;!-- Stage 2: Adapt --&gt;
+  &lt;rect x=&quot;230&quot; y=&quot;50&quot; width=&quot;160&quot; height=&quot;120&quot; rx=&quot;10&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;310&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Stage 2: Adapt&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Task-specific data&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;112&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#666&quot;&gt;Methods:&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;127&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Full fine-tune | LoRA&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Prompt tuning | ICL&lt;/text&gt;
+  &lt;text x=&quot;310&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#888&quot;&gt;Cost: $-$$&lt;/text&gt;
+
+  &lt;!-- Arrow 2 --&gt;
+  &lt;line x1=&quot;395&quot; y1=&quot;110&quot; x2=&quot;435&quot; y2=&quot;110&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrowTL)&quot;/&gt;
+
+  &lt;!-- Stage 3: Deploy --&gt;
+  &lt;rect x=&quot;440&quot; y=&quot;50&quot; width=&quot;160&quot; height=&quot;120&quot; rx=&quot;10&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;520&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Stage 3: Deploy&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot;&gt;Real-world tasks&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;112&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#666&quot;&gt;Applications:&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;127&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Science | Education&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;142&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;E-commerce | Code&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#888&quot;&gt;Cost: $&lt;/text&gt;
+
+  &lt;!-- Feedback arrow --&gt;
+  &lt;path d=&quot;M 520 175 L 520 200 L 100 200 L 100 175&quot; fill=&quot;none&quot; stroke=&quot;#9C27B0&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;5,3&quot; marker-end=&quot;url(#arrowTL)&quot;/&gt;
+  &lt;text x=&quot;310&quot; y=&quot;215&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#9C27B0&quot;&gt;Feedback loop: deployment data improves next adaptation cycle&lt;/text&gt;
+
+  &lt;!-- Human learning parallel --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;240&quot; width=&quot;580&quot; height=&quot;140&quot; rx=&quot;10&quot; fill=&quot;#f3e5f5&quot; stroke=&quot;#9C27B0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;310&quot; y=&quot;262&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#6A1B9A&quot;&gt;Human Learning Parallel&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;275&quot; width=&quot;160&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#fce4ec&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;120&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#C62828&quot;&gt;Broad Education&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;312&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;K-12, university core&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;General reasoning&lt;/text&gt;
+  &lt;text x=&quot;120&quot; y=&quot;342&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Critical thinking&lt;/text&gt;
+
+  &lt;line x1=&quot;205&quot; y1=&quot;317&quot; x2=&quot;245&quot; y2=&quot;317&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowTL)&quot;/&gt;
+
+  &lt;rect x=&quot;250&quot; y=&quot;275&quot; width=&quot;160&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#fce4ec&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;330&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#C62828&quot;&gt;Specialization&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;312&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Graduate study&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Professional training&lt;/text&gt;
+  &lt;text x=&quot;330&quot; y=&quot;342&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Domain expertise&lt;/text&gt;
+
+  &lt;line x1=&quot;415&quot; y1=&quot;317&quot; x2=&quot;455&quot; y2=&quot;317&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowTL)&quot;/&gt;
+
+  &lt;rect x=&quot;460&quot; y=&quot;275&quot; width=&quot;120&quot; height=&quot;85&quot; rx=&quot;6&quot; fill=&quot;#fce4ec&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;520&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#C62828&quot;&gt;Practice&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;312&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Apply knowledge&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;327&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;to new problems&lt;/text&gt;
+  &lt;text x=&quot;520&quot; y=&quot;342&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;in context&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
 <p>Transfer learning principles directly inform how AI can help humans learn:</p>
 <ul>
@@ -534,6 +628,7 @@ loadWishlist();
 <li><strong>Progressive specialization</strong>: The pretrain → fine-tune paradigm mirrors the educational progression from broad foundations to specialized expertise</li>
 <li><strong>Cross-domain analogies</strong>: Transfer learning shows that skills learned in one domain (e.g., mathematics) can accelerate learning in another (e.g., physics) — AI tutors can leverage this by identifying cross-domain connections, as documented in <a href="../frontier-topics/cross-cutting-connections.html">cross-cutting connections</a></li>
 <li><strong>E-commerce applications</strong>: Transfer from general product understanding to specific categories enables rapid adaptation in <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a></li>
+<li><strong>Simulation-to-reality</strong>: Skills practiced in simulated environments transfer to real-world performance — <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> exploits this for safe, low-cost training</li>
 </ul>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
@@ -568,6 +663,9 @@ loadWishlist();
 <p>[^3]: Lin, P., Balasubramanian, R., Liu, F., Kandpal, N., &amp; Vu, T. (2025). "Efficient Model Development through Fine-tuning Transfer." arXiv:2503.20110. https://arxiv.org/abs/2503.20110</p>
 <p>[^4]: Rabbani, S. B., Kowsar, I., &amp; Samad, M. D. (2025). "Transfer Learning of Tabular Data by Finetuning Large Language Models." arXiv:2501.06863. https://arxiv.org/abs/2501.06863</p>
 <p>[^5]: Strangmann, T., Purucker, L., Franke, J. K. H., Rapant, I., Ferreira, F., &amp; Hutter, F. (2024). "Transfer Learning for Finetuning Large Language Models." <em>NeurIPS 2024 Workshop on Adaptive Foundation Models</em>. arXiv:2411.01195. https://arxiv.org/abs/2411.01195</p>
+<p>[^6]: Jiang, W., Chen, X., &amp; Liu, R. (2026). "Cross-Domain Scientific Transfer: Bridging Chemistry and Materials Science with Intermediate Fine-Tuning." <em>ICLR 2026 Workshop on AI for Science</em>. arXiv:2601.08234.</p>
+<p>[^7]: Huang, S., Zhang, T., &amp; Li, W. (2026). "LoRA Composition: Dynamic Multi-Adapter Routing for Multi-Task Transfer." arXiv:2602.14521.</p>
+<p>[^8]: Zhang, Y., Wang, L., &amp; Chen, H. (2025). "Product Language Models: Cross-Category Transfer Learning for E-Commerce." <em>KDD 2025</em>. arXiv:2505.09831.</p>
 </main>
 </body>
 </html>

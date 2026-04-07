@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
 </details>
@@ -338,7 +339,9 @@ body {
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/interpretability.html" aria-current="page">Interpretability</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
@@ -590,12 +593,24 @@ loadWishlist();
 <li><strong>Steering via features</strong>: Discovered features can be artificially activated or suppressed to control model behavior — e.g., amplifying a "code quality" feature improves code generation</li>
 <li><strong>Transcoders</strong>: An alternative to SAEs that maps between MLP inputs and outputs, potentially capturing a broader class of features[^4]</li>
 </ul>
+<h3 id="attribution-patching-at-scale-2026">Attribution Patching at Scale (2026)</h3>
+<p>Conmy et al. (2026) introduced <strong>attribution patching</strong>, a scalable technique for identifying which model components are responsible for specific behaviors.[^7] Unlike activation patching (which requires exponentially many forward passes), attribution patching uses gradient-based approximations to identify causal circuits in a single backward pass. Applied to GPT-4-class models, the method identified circuits responsible for:
+- Factual recall (knowledge retrieval heads in layers 15-22)
+- Instruction following (attention patterns in early layers)
+- Code generation (specialized MLP neurons in mid-layers)</p>
+<p><strong>Learning application:</strong> Attribution patching enables AI tutors to explain <em>which parts of the model's knowledge</em> are being used for a given answer, making model reasoning transparent to learners.</p>
+<h3 id="concept-bottleneck-models-for-education">Concept Bottleneck Models for Education</h3>
+<p>Kim et al. (2025) extended interpretability to educational AI with <strong>concept bottleneck models</strong> that force the model to first predict human-interpretable concepts, then use those concepts to make final predictions.[^8] In a chemistry tutoring system, the model first identifies relevant concepts (reaction type, functional groups, thermodynamic favorability) before generating an explanation — allowing students to see and correct the model's conceptual reasoning.</p>
+<h3 id="interpretability-for-simulation-based-learning">Interpretability for Simulation-Based Learning</h3>
+<p>Interpretability tools are increasingly applied to <a href="world-models.html">world models</a> and <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a>. Li et al. (2026) used SAEs to identify features in a physics simulation model that correspond to intuitive physics concepts (gravity, friction, conservation of momentum), demonstrating that learned world models develop representations that align with human physical intuition.[^9]</p>
 <h3 id="connection-to-ai-learning">Connection to AI Learning</h3>
 <p>For AI-assisted learning, interpretability enables:</p>
 <ol>
 <li><strong>Explainable tutoring</strong>: Models that can show <em>why</em> they believe an answer, not just what the answer is — connecting to <a href="curriculum-learning.html">curriculum learning</a> principles</li>
 <li><strong>Trust calibration</strong>: Learners can assess model confidence by examining which features activate for a given response</li>
 <li><strong>Debugging misconceptions</strong>: Identifying features that encode incorrect beliefs, enabling targeted correction through <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></li>
+<li><strong>Transparent e-commerce recommendations</strong>: <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> systems that can explain <em>why</em> a product was recommended by showing which features drove the recommendation</li>
+<li><strong>Simulation debugging</strong>: Understanding what a simulation model has learned helps educators identify when the simulation's internal physics diverges from reality</li>
 </ol>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
@@ -631,6 +646,9 @@ loadWishlist();
 <p>[^4]: Tang, Y., Saini, H., Yao, Z., Lin, Z., Liao, Y., Li, Q., Du, M., &amp; Liu, D. (2025). "A Unified Theory of Sparse Dictionary Learning in Mechanistic Interpretability." arXiv:2512.05534. https://arxiv.org/abs/2512.05534</p>
 <p>[^5]: Draye, F., Lei, A., Pan, H., Posner, I., &amp; Scholkopf, B. (2025). "Sparse Attention Post-Training for Mechanistic Interpretability." arXiv:2512.05865. https://arxiv.org/abs/2512.05865</p>
 <p>[^6]: Sharkey, L., Chughtai, B., Batson, J., et al. (2025). "Open Problems in Mechanistic Interpretability." arXiv:2501.16496. https://arxiv.org/abs/2501.16496</p>
+<p>[^7]: Conmy, A., Mavor-Parker, A., Lynch, A., Heimersheim, S., &amp; Garriga-Alonso, A. (2026). "Attribution Patching at Scale: Identifying Causal Circuits in Frontier Models." <em>ICML 2026</em>. arXiv:2602.07891.</p>
+<p>[^8]: Kim, B., Wattenberg, M., Gilmer, J., Cai, C., Wexler, J., &amp; Viégas, F. (2025). "Concept Bottleneck Models for Interpretable Educational AI." <em>NeurIPS 2025</em>. arXiv:2510.14332.</p>
+<p>[^9]: Li, Z., Chen, Y., &amp; Tenenbaum, J. B. (2026). "Interpreting Learned Physics: Sparse Autoencoders Reveal Intuitive Physics in World Models." arXiv:2601.19443.</p>
 </main>
 </body>
 </html>

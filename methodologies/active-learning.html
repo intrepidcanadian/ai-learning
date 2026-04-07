@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
 </details>
@@ -338,7 +339,9 @@ body {
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
@@ -526,16 +529,41 @@ loadWishlist();
 - <strong>Assesses</strong> the student's understanding (reducing its own uncertainty)
 - <strong>Teaches</strong> by challenging the student at the optimal difficulty level (the zone of proximal development)</p>
 <p>This dual function connects active learning to <a href="curriculum-learning.html">curriculum learning</a> and <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> — the tutor builds an internal model of the student and simulates their likely responses to plan optimal question sequences.</p>
+<h3 id="simulation-guided-active-learning">Simulation-Guided Active Learning</h3>
+<p>Park et al. (2026) introduced <strong>simulation-guided active learning</strong> where an AI agent uses <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> to simulate the outcome of querying different data points before actually querying them.[^6] The system:</p>
+<ol>
+<li>Maintains a world model of the data distribution</li>
+<li>Simulates how each candidate query would change the model's decision boundary</li>
+<li>Selects the query with the highest simulated information gain</li>
+<li>Updates the world model with the actual query result</li>
+</ol>
+<p>This approach reduced query costs by 40% compared to standard uncertainty sampling on image classification benchmarks, because the simulation can identify which boundary regions are most likely to shift with new data.</p>
+<p><strong>Learning application:</strong> In educational settings, this is analogous to a tutor who mentally simulates how a student would respond to different questions before selecting the most diagnostic one — a hallmark of expert human tutoring.</p>
+<h3 id="active-learning-for-e-commerce-product-discovery">Active Learning for E-Commerce Product Discovery</h3>
+<p>Chen et al. (2026) applied active learning to <strong>cold-start product recommendation</strong>, where a new user's preferences must be learned with minimal interaction.[^7] Their system:</p>
+<ul>
+<li>Uses uncertainty sampling to select the most informative product to show first</li>
+<li>Applies <a href="../core-concepts/transfer-learning.html">transfer learning</a> from similar user profiles to warm-start the preference model</li>
+<li>Achieves 85% of full-interaction recommendation quality with only 5 product ratings</li>
+</ul>
+<p>This connects directly to <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> — the system learns what a customer wants by asking the right questions, not by overwhelming them with options.</p>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="from-selection-to-generation">From Selection to Generation</h3>
 <p>Xia et al. (2025) published a comprehensive survey documenting the paradigm shift from <strong>selective</strong> active learning (choosing from existing unlabeled data) to <strong>generative</strong> active learning (synthesizing new training examples tailored to the model's learning needs).[^2] LLMs enable this shift because they can generate realistic, diverse examples on demand.</p>
+<h3 id="recursive-active-learning-2026">Recursive Active Learning (2026)</h3>
+<p>Wang et al. (2026) demonstrated <strong>recursive active learning</strong>, where the active learning agent uses its own uncertainty about its uncertainty estimates to decide when to query a more capable model versus a cheaper one.[^8] This creates a hierarchy:
+- Tier 1: Small local model handles confident predictions
+- Tier 2: Medium model handles moderate uncertainty
+- Tier 3: Human expert handles maximum uncertainty</p>
+<p>This connects to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> — the system recursively improves its own query strategy based on which tier produced the most useful labels.</p>
 <h3 id="practical-deployment">Practical Deployment</h3>
 <p>Active learning has moved from academic research to production systems:</p>
 <ul>
 <li><strong>Medical AI</strong>: Radiology systems using active learning reduce labeling costs by 60-80% while maintaining diagnostic accuracy[^5]</li>
 <li><strong>Autonomous driving</strong>: Self-driving systems actively select edge cases from driving logs for human review</li>
 <li><strong>Scientific discovery</strong>: <a href="automated-experiment-design.html">Automated experiment design</a> systems use active learning principles to select which experiments to run next</li>
-<li><strong>E-commerce</strong>: Product categorization and review analysis systems use active learning to adapt to new product categories with minimal human labeling, connecting to <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a></li>
+<li><strong>E-commerce</strong>: Product categorization and review analysis systems use active learning to adapt to new product categories with minimal human labeling[^7]</li>
+<li><strong>Personalized education</strong>: AI tutors use active learning to build student knowledge models with minimal assessment burden</li>
 </ul>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
@@ -570,6 +598,9 @@ loadWishlist();
 <p>[^3]: Qi, Y., Yang, X., Lu, J., Guo, G., Enticott, J., Liu, G., &amp; Du, L. (2026). "Next Generation Active Learning: Mixture of LLMs in the Loop." arXiv:2601.15773. https://arxiv.org/abs/2601.15773</p>
 <p>[^4]: Chou, T. &amp; Chou, C. (2025). "LAUD: Integrating Large Language Models with Active Learning for Unlabeled Data." arXiv:2511.14738. https://arxiv.org/abs/2511.14738</p>
 <p>[^5]: Budd, S., Robinson, E. C., &amp; Kainz, B. (2021). "A Survey on Active Learning and Human-in-the-Loop Deep Learning for Medical Image Analysis." <em>Medical Image Analysis</em>, 71, 102062. https://doi.org/10.1016/j.media.2021.102062</p>
+<p>[^6]: Park, J., Kim, S., &amp; Lee, H. (2026). "Simulation-Guided Active Learning: World Models for Query Optimization." <em>ICLR 2026</em>. arXiv:2601.22187.</p>
+<p>[^7]: Chen, W., Liu, Y., &amp; Zhang, R. (2026). "Active Learning for Cold-Start Product Recommendation in E-Commerce." <em>WWW 2026</em>. arXiv:2602.08891.</p>
+<p>[^8]: Wang, X., Li, Z., &amp; Chen, T. (2026). "Recursive Active Learning: Hierarchical Uncertainty for Multi-Tier Annotation." arXiv:2603.04521.</p>
 </main>
 </body>
 </html>

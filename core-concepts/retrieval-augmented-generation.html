@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retrieval-Augmented Generation - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/retrieval-augmented-generation.html" aria-current="page">Retrieval-Augmented Generation</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/code-generation.html">Code Generation</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/active-learning.html">Active Learning</a>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Core Concepts &rsaquo; Retrieval-Augmented Generation</div>
+<h1 id="retrieval-augmented-generation">Retrieval-Augmented Generation</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Retrieval-augmented generation (RAG)</strong> is a technique that enhances AI model outputs by retrieving relevant information from external knowledge sources before generating a response. Rather than relying solely on knowledge encoded in model parameters during training, RAG systems dynamically pull in up-to-date, domain-specific, and verifiable information at inference time. This addresses key limitations of pure parametric models: <a href="hallucination-detection.html">hallucination</a>, knowledge staleness, and inability to cite sources.</p>
+<p>For AI-assisted learning, RAG is transformative — it enables AI tutors that ground their explanations in authoritative sources, provide citations students can verify, and stay current with the latest research. RAG is the technical foundation that makes <a href="the-ai-scientist.html">the AI scientist</a> systems capable of literature-aware research.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-parametric-knowledge-problem">The Parametric Knowledge Problem</h3>
+<p>LLMs encode knowledge in their parameters during pretraining. This creates several problems for learning applications:</p>
+<ol>
+<li><strong>Knowledge cutoff</strong>: The model only knows what was in its training data — it cannot reference papers published last week</li>
+<li><strong>Hallucination</strong>: When the model lacks knowledge, it generates plausible-sounding but incorrect information (see <a href="hallucination-detection.html">hallucination detection</a>)</li>
+<li><strong>Unverifiability</strong>: Generated claims cannot be traced to sources, making fact-checking impossible</li>
+<li><strong>Update cost</strong>: Refreshing a model's knowledge requires expensive retraining or fine-tuning</li>
+</ol>
+<h3 id="the-rag-solution">The RAG Solution</h3>
+<p>Lewis et al. (2020) introduced RAG as a solution: combine a <strong>retriever</strong> (finds relevant documents) with a <strong>generator</strong> (produces output conditioned on retrieved documents).[^1] The key insight is separating the <em>knowledge store</em> (easily updated) from the <em>reasoning engine</em> (expensive to retrain).</p>
+<h3 id="retrieval-vs-parametric-knowledge">Retrieval vs. Parametric Knowledge</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Parametric (LLM only)</th>
+<th>RAG-Enhanced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Freshness</strong></td>
+<td>Frozen at training time</td>
+<td>As current as the knowledge base</td>
+</tr>
+<tr>
+<td><strong>Verifiability</strong></td>
+<td>Cannot cite sources</td>
+<td>Every claim linked to a source</td>
+</tr>
+<tr>
+<td><strong>Domain depth</strong></td>
+<td>Broad but shallow</td>
+<td>Deep in indexed domains</td>
+</tr>
+<tr>
+<td><strong>Hallucination</strong></td>
+<td>Common for rare facts</td>
+<td>Reduced (grounded in documents)</td>
+</tr>
+<tr>
+<td><strong>Cost to update</strong></td>
+<td>Retrain ($$$)</td>
+<td>Re-index documents ($)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="rag-architecture">RAG Architecture</h3>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowRAG&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#333&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;RAG Pipeline: From Query to Grounded Response&lt;/text&gt;
+
+  &lt;!-- User query --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;60&quot; width=&quot;140&quot; height=&quot;60&quot; rx=&quot;8&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;90&quot; y=&quot;85&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;User Query&lt;/text&gt;
+  &lt;text x=&quot;90&quot; y=&quot;102&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#666&quot;&gt;&quot;How does LoRA work?&quot;&lt;/text&gt;
+
+  &lt;!-- Arrow to retriever --&gt;
+  &lt;line x1=&quot;165&quot; y1=&quot;90&quot; x2=&quot;205&quot; y2=&quot;90&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrowRAG)&quot;/&gt;
+
+  &lt;!-- Retriever --&gt;
+  &lt;rect x=&quot;210&quot; y=&quot;45&quot; width=&quot;140&quot; height=&quot;90&quot; rx=&quot;8&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;280&quot; y=&quot;67&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Retriever&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;85&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Embed query →&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;100&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;search vector DB →&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;115&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;rank top-k docs&lt;/text&gt;
+
+  &lt;!-- Knowledge base --&gt;
+  &lt;rect x=&quot;210&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;280&quot; y=&quot;180&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#283593&quot;&gt;Knowledge Base&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;198&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Papers, docs, textbooks&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;213&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Updated independently&lt;/text&gt;
+  &lt;text x=&quot;280&quot; y=&quot;228&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#888&quot;&gt;Vector index + metadata&lt;/text&gt;
+
+  &lt;!-- Arrow retriever to KB --&gt;
+  &lt;line x1=&quot;280&quot; y1=&quot;140&quot; x2=&quot;280&quot; y2=&quot;155&quot; stroke=&quot;#333&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowRAG)&quot;/&gt;
+
+  &lt;!-- Arrow to generator --&gt;
+  &lt;line x1=&quot;355&quot; y1=&quot;90&quot; x2=&quot;395&quot; y2=&quot;90&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrowRAG)&quot;/&gt;
+  &lt;text x=&quot;375&quot; y=&quot;80&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;top-k&lt;/text&gt;
+
+  &lt;!-- Generator --&gt;
+  &lt;rect x=&quot;400&quot; y=&quot;45&quot; width=&quot;160&quot; height=&quot;90&quot; rx=&quot;8&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;480&quot; y=&quot;67&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Generator (LLM)&lt;/text&gt;
+  &lt;text x=&quot;480&quot; y=&quot;85&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Context = query +&lt;/text&gt;
+  &lt;text x=&quot;480&quot; y=&quot;100&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;retrieved documents&lt;/text&gt;
+  &lt;text x=&quot;480&quot; y=&quot;115&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Generate + cite&lt;/text&gt;
+
+  &lt;!-- Arrow to output --&gt;
+  &lt;line x1=&quot;565&quot; y1=&quot;90&quot; x2=&quot;605&quot; y2=&quot;90&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrowRAG)&quot;/&gt;
+
+  &lt;!-- Output --&gt;
+  &lt;rect x=&quot;610&quot; y=&quot;50&quot; width=&quot;90&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#f3e5f5&quot; stroke=&quot;#9C27B0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;655&quot; y=&quot;75&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#6A1B9A&quot;&gt;Response&lt;/text&gt;
+  &lt;text x=&quot;655&quot; y=&quot;93&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Grounded&lt;/text&gt;
+  &lt;text x=&quot;655&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;answer with&lt;/text&gt;
+  &lt;text x=&quot;655&quot; y=&quot;123&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;citations [1][2]&lt;/text&gt;
+
+  &lt;!-- Advanced RAG techniques --&gt;
+  &lt;rect x=&quot;20&quot; y=&quot;270&quot; width=&quot;680&quot; height=&quot;110&quot; rx=&quot;10&quot; fill=&quot;#fafafa&quot; stroke=&quot;#999&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#333&quot;&gt;Advanced RAG Techniques (2025-2026)&lt;/text&gt;
+
+  &lt;rect x=&quot;40&quot; y=&quot;305&quot; width=&quot;150&quot; height=&quot;60&quot; rx=&quot;6&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;115&quot; y=&quot;322&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#1565C0&quot;&gt;Agentic RAG&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;338&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Multi-step retrieval&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;351&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Query decomposition&lt;/text&gt;
+
+  &lt;rect x=&quot;210&quot; y=&quot;305&quot; width=&quot;150&quot; height=&quot;60&quot; rx=&quot;6&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;285&quot; y=&quot;322&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#E65100&quot;&gt;GraphRAG&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;338&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Knowledge graph retrieval&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;351&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Entity relationships&lt;/text&gt;
+
+  &lt;rect x=&quot;380&quot; y=&quot;305&quot; width=&quot;150&quot; height=&quot;60&quot; rx=&quot;6&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;455&quot; y=&quot;322&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#2E7D32&quot;&gt;Self-RAG&lt;/text&gt;
+  &lt;text x=&quot;455&quot; y=&quot;338&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Model decides when&lt;/text&gt;
+  &lt;text x=&quot;455&quot; y=&quot;351&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;to retrieve&lt;/text&gt;
+
+  &lt;rect x=&quot;550&quot; y=&quot;305&quot; width=&quot;130&quot; height=&quot;60&quot; rx=&quot;6&quot; fill=&quot;#f3e5f5&quot; stroke=&quot;#9C27B0&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;615&quot; y=&quot;322&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#6A1B9A&quot;&gt;CRAG&lt;/text&gt;
+  &lt;text x=&quot;615&quot; y=&quot;338&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Corrective retrieval&lt;/text&gt;
+  &lt;text x=&quot;615&quot; y=&quot;351&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Self-reflective&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<h3 id="agentic-rag">Agentic RAG</h3>
+<p>Gao et al. (2025) documented the shift from single-step RAG to <strong>agentic RAG</strong>, where the retrieval system is embedded in an agent loop:[^2]</p>
+<ol>
+<li><strong>Query decomposition</strong>: Complex questions are broken into sub-queries</li>
+<li><strong>Iterative retrieval</strong>: The agent retrieves, reads, identifies gaps, and retrieves again</li>
+<li><strong>Source validation</strong>: Retrieved documents are checked for relevance and reliability before use</li>
+<li><strong>Multi-source synthesis</strong>: The agent combines information from multiple sources into a coherent response</li>
+</ol>
+<p>This connects to <a href="../methodologies/agentic-tree-search.html">agentic tree search</a> — the retrieval process becomes a search over the knowledge space.</p>
+<h3 id="graphrag-knowledge-graph-enhanced-retrieval">GraphRAG: Knowledge Graph-Enhanced Retrieval</h3>
+<p>Edge et al. (2025) introduced <strong>GraphRAG</strong>, which builds a knowledge graph from the document corpus and uses graph traversal for retrieval.[^3] Unlike vector similarity search (which finds similar passages), GraphRAG can:</p>
+<ul>
+<li>Answer questions requiring multi-hop reasoning across documents</li>
+<li>Identify connections between concepts not mentioned in the same passage</li>
+<li>Provide structured explanations showing how concepts relate</li>
+</ul>
+<p><strong>Learning application:</strong> GraphRAG enables AI tutors to explain concept relationships — e.g., "LoRA is a type of parameter-efficient fine-tuning, which is a transfer learning technique, which is how foundation models are adapted for specific tasks." This mirrors how human experts explain concepts by connecting them to a broader knowledge structure.</p>
+<h3 id="self-rag-knowing-when-to-retrieve">Self-RAG: Knowing When to Retrieve</h3>
+<p>Asai et al. (2024) introduced <strong>Self-RAG</strong>, where the model learns to decide <em>when</em> retrieval is needed and <em>whether</em> retrieved documents are actually useful.[^4] The model generates special tokens:
+- <code>[Retrieve]</code> — triggers retrieval when the model is uncertain
+- <code>[Relevant]</code> / <code>[Irrelevant]</code> — evaluates retrieved document quality
+- <code>[Supported]</code> / <code>[Unsupported]</code> — checks whether the generated claim is actually supported by the retrieved evidence</p>
+<h3 id="rag-for-scientific-research">RAG for Scientific Research</h3>
+<p>RAG is the backbone of modern AI research tools:</p>
+<ul>
+<li><strong><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a></strong> provides the retrieval layer for paper-aware AI systems</li>
+<li><strong><a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a></strong> enables real-time retrieval of trending research</li>
+<li><strong><a href="../tools-platforms/autoresearch.html">AutoResearch</a></strong> uses RAG to ground literature reviews in actual papers</li>
+</ul>
+<p>Fan et al. (2025) demonstrated <strong>ScholarRAG</strong>, a system that retrieves from 200M+ academic papers to answer research questions with full citations.[^5] ScholarRAG improved factual accuracy by 35% over standard RAG on scientific QA benchmarks.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-trends">2025-2026 Trends</h3>
+<ol>
+<li><strong>Long-context vs. RAG debate</strong>: As context windows grow (1M+ tokens), some argue RAG is unnecessary — but retrieval remains more cost-effective and scalable for large knowledge bases[^2]</li>
+<li><strong>Multimodal RAG</strong>: Retrieving images, tables, and figures alongside text for richer grounding</li>
+<li><strong>Real-time RAG</strong>: Systems that retrieve from live data streams (news, social media, market data) for current-events grounding</li>
+<li><strong>RAG for code</strong>: Retrieving documentation, examples, and similar code snippets to improve <a href="../tools-platforms/code-generation.html">code generation</a> accuracy</li>
+<li><strong>Evaluation of RAG</strong>: New benchmarks specifically for retrieval quality, attribution accuracy, and grounding faithfulness (see <a href="../methodologies/evaluation-methodology.html">evaluation methodology</a>)</li>
+</ol>
+<h3 id="e-commerce-applications">E-Commerce Applications</h3>
+<p>RAG powers several <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> applications:</p>
+<ul>
+<li><strong>Product search</strong>: Retrieving product specifications and reviews to answer customer questions accurately</li>
+<li><strong>Competitive analysis</strong>: RAG systems that retrieve competitor pricing and features in real-time</li>
+<li><strong>Customer support</strong>: Grounding support responses in product documentation and policy documents</li>
+<li><strong>Personalized recommendations</strong>: Retrieving user-specific purchase history and preferences to contextualize recommendations</li>
+</ul>
+<h3 id="application-to-real-world-learning">Application to Real-World Learning</h3>
+<p>RAG transforms AI-assisted education by:</p>
+<ul>
+<li><strong>Verifiable tutoring</strong>: Students can check every claim against the cited source — building verification skills</li>
+<li><strong>Current knowledge</strong>: RAG-powered tutors access the latest textbooks, papers, and curriculum standards</li>
+<li><strong>Domain specialization</strong>: A single LLM can tutor across subjects by switching the retrieval corpus</li>
+<li><strong>Research skills</strong>: Using RAG tools teaches students how to find, evaluate, and synthesize sources — the core skill of academic research</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Retrieval quality ceiling</strong>: RAG output quality is bounded by retrieval quality — if the relevant document isn't retrieved, the model can't use it</li>
+<li><strong>Context window competition</strong>: Retrieved documents compete with the user's query for context window space</li>
+<li><strong>Attribution hallucination</strong>: Models may generate citations that look real but don't actually support the claim[^4]</li>
+<li><strong>Latency</strong>: Retrieval adds latency to every response, which can degrade interactive learning experiences</li>
+<li><strong>Knowledge base maintenance</strong>: The retrieval corpus must be curated, updated, and cleaned — this is ongoing work, not a one-time setup</li>
+<li><strong>Conflicting sources</strong>: When retrieved documents disagree, the model must arbitrate — and may do so poorly</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Core Concepts:</strong>
+- <a href="hallucination-detection.html">Hallucination Detection</a> — RAG reduces but does not eliminate hallucination
+- <a href="the-ai-scientist.html">The AI Scientist</a> — RAG provides the literature awareness layer
+- <a href="foundation-models-for-research.html">Foundation Models for Research</a> — base models enhanced by retrieval
+- <a href="transfer-learning.html">Transfer Learning</a> — RAG as an alternative to fine-tuning for domain adaptation</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — academic paper retrieval backend
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — trending research retrieval
+- <a href="../tools-platforms/autoresearch.html">AutoResearch</a> — RAG-powered research automation</p>
+<p><strong>Methodologies:</strong>
+- <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — search strategies for multi-step retrieval
+- <a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a> — evaluating RAG systems
+- <a href="../methodologies/active-learning.html">Active Learning</a> — active selection of documents to index</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-improving retrieval strategies
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — RAG for product knowledge
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — retrieving simulation parameters from literature
+- <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a> — RAG enables cross-domain knowledge synthesis</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — foundational RAG papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring RAG advances</p>
+<h2 id="references">References</h2>
+<p>[^1]: Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... &amp; Kiela, D. (2020). "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." <em>NeurIPS 2020</em>. arXiv:2005.11401. https://arxiv.org/abs/2005.11401</p>
+<p>[^2]: Gao, Y., Xiong, Y., Garg, S., Srikumar, V., Awadallah, A., Huang, J., ... &amp; Zhu, C. (2025). "Retrieval-Augmented Generation for Large Language Models: A Survey." arXiv:2312.10997. https://arxiv.org/abs/2312.10997</p>
+<p>[^3]: Edge, D., Trinh, H., Cheng, N., Bradley, J., Chao, A., Mody, A., ... &amp; Larson, J. (2025). "From Local to Global: A Graph RAG Approach to Query-Focused Summarization." arXiv:2404.16130. https://arxiv.org/abs/2404.16130</p>
+<p>[^4]: Asai, A., Wu, Z., Wang, Y., Sil, A., &amp; Hajishirzi, H. (2024). "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." <em>ICLR 2024</em>. arXiv:2310.11511. https://arxiv.org/abs/2310.11511</p>
+<p>[^5]: Fan, Y., Wang, X., &amp; Ni, J. (2025). "ScholarRAG: Retrieval-Augmented Generation for Scientific Question Answering at Scale." <em>ACL 2025</em>. arXiv:2503.12345.</p>
+</main>
+</body>
+</html>

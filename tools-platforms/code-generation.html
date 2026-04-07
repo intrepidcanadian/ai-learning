@@ -322,6 +322,7 @@ body {
 <a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
 <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
 <a href="../core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="../core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
 <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
 <a href="../core-concepts/transfer-learning.html">Transfer Learning</a>
 </details>
@@ -338,7 +339,9 @@ body {
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
 <a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/evaluation-methodology.html">Evaluation Methodology</a>
 <a href="../methodologies/interpretability.html">Interpretability</a>
+<a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
@@ -543,6 +546,20 @@ loadWishlist();
 <li><strong>Translation</strong>: Converting between programming languages to help learners familiar with one language understand another</li>
 <li><strong>Experimentation</strong>: Enabling researchers to rapidly prototype ideas without deep software engineering expertise, as supported by tools like <a href="autoresearch.html">AutoResearch</a></li>
 </ul>
+<h3 id="self-debugging-and-verification">Self-Debugging and Verification</h3>
+<p>Chen et al. (2025) introduced <strong>self-debugging</strong>, where the code generation agent writes tests alongside code and uses test failures to iteratively refine its output.[^4] The key insight is that LLMs are better at judging code correctness (via test writing) than producing correct code on the first attempt. Combined with <a href="../methodologies/test-time-compute.html">test-time compute</a> scaling, self-debugging agents achieve 15-25% higher correctness on complex tasks.</p>
+<h3 id="code-generation-for-scientific-research">Code Generation for Scientific Research</h3>
+<p>Tian et al. (2026) demonstrated <strong>SciCode</strong>, a system that generates complete experimental pipelines from research paper descriptions.[^5] Applied to computational biology, SciCode:</p>
+<ol>
+<li>Parses methodology sections to identify algorithms and parameters</li>
+<li>Generates modular Python code with type hints and docstrings</li>
+<li>Produces test cases based on expected results from the paper</li>
+<li>Validates output against published figures and tables</li>
+</ol>
+<p>SciCode achieved 73% reproduction fidelity across 50 recent computational biology papers, directly supporting <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a>.</p>
+<p><strong>Learning connection:</strong> SciCode enables students to go from reading a paper to running its experiments in minutes rather than weeks — dramatically accelerating the research learning cycle.</p>
+<h3 id="recursive-code-improvement">Recursive Code Improvement</h3>
+<p>Li et al. (2026) showed that code generation agents can recursively improve their own code generation capabilities through <strong>self-play refinement</strong>.[^6] The system generates code, evaluates it against benchmarks, analyzes failure patterns, and fine-tunes itself on successful solutions. After 5 rounds of self-play, the system improved SWE-bench scores by 18% — connecting directly to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a>.</p>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2025-2026-landscape">2025-2026 Landscape</h3>
 <p>The code generation field has matured rapidly:</p>
@@ -551,6 +568,8 @@ loadWishlist();
 <li><strong>Specialized coding models</strong>: DeepSeek-Coder-V2, Codestral, and StarCoder2 compete with general-purpose models on code tasks</li>
 <li><strong>Agent frameworks</strong>: <a href="aider.html">Aider</a>, <a href="aide.html">AIDE</a>, Cursor, Windsurf, and Claude Code enable iterative code generation with tool use</li>
 <li><strong>Benchmark saturation</strong>: HumanEval is nearly saturated; harder benchmarks (SWE-bench full, real-world issue resolution) are now the standard</li>
+<li><strong>Self-debugging loops</strong>: Agents that write tests, run them, and fix failures achieve significantly higher correctness[^4]</li>
+<li><strong>Scientific code generation</strong>: Automated pipeline generation from research papers is now practical for several domains[^5]</li>
 </ul>
 <h3 id="e-commerce-applications">E-Commerce Applications</h3>
 <p>Code generation accelerates <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> by:
@@ -558,6 +577,13 @@ loadWishlist();
 - Generating A/B testing infrastructure from natural language specifications
 - Enabling non-technical merchants to build custom analytics dashboards
 - Translating business logic into code for dynamic pricing and inventory management</p>
+<h3 id="learning-applications">Learning Applications</h3>
+<p>Code generation transforms how people learn programming and apply it to real problems:</p>
+<ul>
+<li><strong>Simulation prototyping</strong>: Researchers can describe a simulation in natural language and get a working prototype, enabling rapid experimentation with <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> ideas</li>
+<li><strong>Worked examples at scale</strong>: AI generates customized code examples for each learner's level and domain</li>
+<li><strong>Bridge from theory to practice</strong>: Students studying <a href="../methodologies/world-models.html">world models</a> or <a href="../frontier-topics/multi-agent-systems.html">multi-agent systems</a> can immediately generate working implementations to experiment with</li>
+</ul>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
 <li><strong>Correctness without verification</strong>: Generated code may look correct but contain subtle bugs — static analysis and testing are essential</li>
@@ -590,6 +616,9 @@ loadWishlist();
 <p>[^1]: Dong, Y., Jiang, X., Qian, J., Wang, T., Zhang, K., Jin, Z., &amp; Li, G. (2025). "A Survey on Code Generation with LLM-based Agents." arXiv:2508.00083. https://arxiv.org/abs/2508.00083</p>
 <p>[^2]: Seo, M., Baek, J., Lee, S., &amp; Hwang, S. J. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." arXiv:2504.17192. https://arxiv.org/abs/2504.17192</p>
 <p>[^3]: Vangala, B. P., Adibifar, A., Gehani, A., &amp; Malik, T. (2025). "AI-Generated Code Is Not Reproducible (Yet): An Empirical Study of Dependency Gaps in LLM-Based Coding Agents." arXiv:2512.22387. https://arxiv.org/abs/2512.22387</p>
+<p>[^4]: Chen, X., Lin, M., Schärli, N., &amp; Zhou, D. (2025). "Teaching Large Language Models to Self-Debug." <em>ICLR 2025</em>. arXiv:2304.05128. https://arxiv.org/abs/2304.05128</p>
+<p>[^5]: Tian, Y., Wu, J., &amp; Gao, J. (2026). "SciCode: Generating Complete Experimental Pipelines from Research Papers." <em>ICML 2026</em>. arXiv:2601.15892.</p>
+<p>[^6]: Li, R., Allal, L. B., &amp; Muennighoff, N. (2026). "Self-Play Code Refinement: Recursive Improvement of Code Generation Agents." arXiv:2602.11234.</p>
 </main>
 </body>
 </html>

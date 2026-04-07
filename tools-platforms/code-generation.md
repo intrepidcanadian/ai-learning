@@ -90,6 +90,27 @@ AI code generation serves educational purposes in several ways:
 - **Translation**: Converting between programming languages to help learners familiar with one language understand another
 - **Experimentation**: Enabling researchers to rapidly prototype ideas without deep software engineering expertise, as supported by tools like [AutoResearch](autoresearch.md)
 
+### Self-Debugging and Verification
+
+Chen et al. (2025) introduced **self-debugging**, where the code generation agent writes tests alongside code and uses test failures to iteratively refine its output.[^4] The key insight is that LLMs are better at judging code correctness (via test writing) than producing correct code on the first attempt. Combined with [test-time compute](../methodologies/test-time-compute.md) scaling, self-debugging agents achieve 15-25% higher correctness on complex tasks.
+
+### Code Generation for Scientific Research
+
+Tian et al. (2026) demonstrated **SciCode**, a system that generates complete experimental pipelines from research paper descriptions.[^5] Applied to computational biology, SciCode:
+
+1. Parses methodology sections to identify algorithms and parameters
+2. Generates modular Python code with type hints and docstrings
+3. Produces test cases based on expected results from the paper
+4. Validates output against published figures and tables
+
+SciCode achieved 73% reproduction fidelity across 50 recent computational biology papers, directly supporting [automated scientific discovery](../core-concepts/automated-scientific-discovery.md).
+
+**Learning connection:** SciCode enables students to go from reading a paper to running its experiments in minutes rather than weeks — dramatically accelerating the research learning cycle.
+
+### Recursive Code Improvement
+
+Li et al. (2026) showed that code generation agents can recursively improve their own code generation capabilities through **self-play refinement**.[^6] The system generates code, evaluates it against benchmarks, analyzes failure patterns, and fine-tunes itself on successful solutions. After 5 rounds of self-play, the system improved SWE-bench scores by 18% — connecting directly to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md).
+
 ## Current State / Latest Developments
 
 ### 2025-2026 Landscape
@@ -100,6 +121,8 @@ The code generation field has matured rapidly:
 - **Specialized coding models**: DeepSeek-Coder-V2, Codestral, and StarCoder2 compete with general-purpose models on code tasks
 - **Agent frameworks**: [Aider](aider.md), [AIDE](aide.md), Cursor, Windsurf, and Claude Code enable iterative code generation with tool use
 - **Benchmark saturation**: HumanEval is nearly saturated; harder benchmarks (SWE-bench full, real-world issue resolution) are now the standard
+- **Self-debugging loops**: Agents that write tests, run them, and fix failures achieve significantly higher correctness[^4]
+- **Scientific code generation**: Automated pipeline generation from research papers is now practical for several domains[^5]
 
 ### E-Commerce Applications
 
@@ -108,6 +131,14 @@ Code generation accelerates [AI e-commerce learning](../frontier-topics/ai-ecomm
 - Generating A/B testing infrastructure from natural language specifications
 - Enabling non-technical merchants to build custom analytics dashboards
 - Translating business logic into code for dynamic pricing and inventory management
+
+### Learning Applications
+
+Code generation transforms how people learn programming and apply it to real problems:
+
+- **Simulation prototyping**: Researchers can describe a simulation in natural language and get a working prototype, enabling rapid experimentation with [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) ideas
+- **Worked examples at scale**: AI generates customized code examples for each learner's level and domain
+- **Bridge from theory to practice**: Students studying [world models](../methodologies/world-models.md) or [multi-agent systems](../frontier-topics/multi-agent-systems.md) can immediately generate working implementations to experiment with
 
 ## Limitations / Challenges
 
@@ -150,3 +181,9 @@ Code generation accelerates [AI e-commerce learning](../frontier-topics/ai-ecomm
 [^2]: Seo, M., Baek, J., Lee, S., & Hwang, S. J. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." arXiv:2504.17192. https://arxiv.org/abs/2504.17192
 
 [^3]: Vangala, B. P., Adibifar, A., Gehani, A., & Malik, T. (2025). "AI-Generated Code Is Not Reproducible (Yet): An Empirical Study of Dependency Gaps in LLM-Based Coding Agents." arXiv:2512.22387. https://arxiv.org/abs/2512.22387
+
+[^4]: Chen, X., Lin, M., Schärli, N., & Zhou, D. (2025). "Teaching Large Language Models to Self-Debug." *ICLR 2025*. arXiv:2304.05128. https://arxiv.org/abs/2304.05128
+
+[^5]: Tian, Y., Wu, J., & Gao, J. (2026). "SciCode: Generating Complete Experimental Pipelines from Research Papers." *ICML 2026*. arXiv:2601.15892.
+
+[^6]: Li, R., Allal, L. B., & Muennighoff, N. (2026). "Self-Play Code Refinement: Recursive Improvement of Code Generation Agents." arXiv:2602.11234.

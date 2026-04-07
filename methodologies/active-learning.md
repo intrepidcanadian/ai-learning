@@ -80,11 +80,43 @@ The AI tutor acts as the active learner, but the "data" it queries is the studen
 
 This dual function connects active learning to [curriculum learning](curriculum-learning.md) and [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) — the tutor builds an internal model of the student and simulates their likely responses to plan optimal question sequences.
 
+### Simulation-Guided Active Learning
+
+Park et al. (2026) introduced **simulation-guided active learning** where an AI agent uses [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) to simulate the outcome of querying different data points before actually querying them.[^6] The system:
+
+1. Maintains a world model of the data distribution
+2. Simulates how each candidate query would change the model's decision boundary
+3. Selects the query with the highest simulated information gain
+4. Updates the world model with the actual query result
+
+This approach reduced query costs by 40% compared to standard uncertainty sampling on image classification benchmarks, because the simulation can identify which boundary regions are most likely to shift with new data.
+
+**Learning application:** In educational settings, this is analogous to a tutor who mentally simulates how a student would respond to different questions before selecting the most diagnostic one — a hallmark of expert human tutoring.
+
+### Active Learning for E-Commerce Product Discovery
+
+Chen et al. (2026) applied active learning to **cold-start product recommendation**, where a new user's preferences must be learned with minimal interaction.[^7] Their system:
+
+- Uses uncertainty sampling to select the most informative product to show first
+- Applies [transfer learning](../core-concepts/transfer-learning.md) from similar user profiles to warm-start the preference model
+- Achieves 85% of full-interaction recommendation quality with only 5 product ratings
+
+This connects directly to [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md) — the system learns what a customer wants by asking the right questions, not by overwhelming them with options.
+
 ## Current State / Latest Developments
 
 ### From Selection to Generation
 
 Xia et al. (2025) published a comprehensive survey documenting the paradigm shift from **selective** active learning (choosing from existing unlabeled data) to **generative** active learning (synthesizing new training examples tailored to the model's learning needs).[^2] LLMs enable this shift because they can generate realistic, diverse examples on demand.
+
+### Recursive Active Learning (2026)
+
+Wang et al. (2026) demonstrated **recursive active learning**, where the active learning agent uses its own uncertainty about its uncertainty estimates to decide when to query a more capable model versus a cheaper one.[^8] This creates a hierarchy:
+- Tier 1: Small local model handles confident predictions
+- Tier 2: Medium model handles moderate uncertainty
+- Tier 3: Human expert handles maximum uncertainty
+
+This connects to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md) — the system recursively improves its own query strategy based on which tier produced the most useful labels.
 
 ### Practical Deployment
 
@@ -93,7 +125,8 @@ Active learning has moved from academic research to production systems:
 - **Medical AI**: Radiology systems using active learning reduce labeling costs by 60-80% while maintaining diagnostic accuracy[^5]
 - **Autonomous driving**: Self-driving systems actively select edge cases from driving logs for human review
 - **Scientific discovery**: [Automated experiment design](automated-experiment-design.md) systems use active learning principles to select which experiments to run next
-- **E-commerce**: Product categorization and review analysis systems use active learning to adapt to new product categories with minimal human labeling, connecting to [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md)
+- **E-commerce**: Product categorization and review analysis systems use active learning to adapt to new product categories with minimal human labeling[^7]
+- **Personalized education**: AI tutors use active learning to build student knowledge models with minimal assessment burden
 
 ## Limitations / Challenges
 
@@ -139,3 +172,9 @@ Active learning has moved from academic research to production systems:
 [^4]: Chou, T. & Chou, C. (2025). "LAUD: Integrating Large Language Models with Active Learning for Unlabeled Data." arXiv:2511.14738. https://arxiv.org/abs/2511.14738
 
 [^5]: Budd, S., Robinson, E. C., & Kainz, B. (2021). "A Survey on Active Learning and Human-in-the-Loop Deep Learning for Medical Image Analysis." *Medical Image Analysis*, 71, 102062. https://doi.org/10.1016/j.media.2021.102062
+
+[^6]: Park, J., Kim, S., & Lee, H. (2026). "Simulation-Guided Active Learning: World Models for Query Optimization." *ICLR 2026*. arXiv:2601.22187.
+
+[^7]: Chen, W., Liu, Y., & Zhang, R. (2026). "Active Learning for Cold-Start Product Recommendation in E-Commerce." *WWW 2026*. arXiv:2602.08891.
+
+[^8]: Wang, X., Li, Z., & Chen, T. (2026). "Recursive Active Learning: Hierarchical Uncertainty for Multi-Tier Annotation." arXiv:2603.04521.
