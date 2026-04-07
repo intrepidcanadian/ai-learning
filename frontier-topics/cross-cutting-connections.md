@@ -1227,6 +1227,36 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 
 [Applications for real-world learning](../methodologies/applications-for-real-world-learning.md) represents the ultimate validation of the simulation-recursion-commerce triad: AI systems that measurably improve human capability in practical contexts. GuideAI's biosensor-augmented adaptation (2026) adds the missing feedback dimension — physiological signals that reveal cognitive load before the learner disengages. Open TutorAI's open-source platform democratizes the educational architecture that commerce has already perfected (preference capture → personalized delivery → outcome measurement). The three-scale adaptation model (micro/meso/macro) directly parallels the three-level recursion in self-improving systems (next action/current strategy/overall architecture).
 
+## Connection 81: E-Commerce as the Fastest AI Learning Laboratory
+
+[E-commerce applications](e-commerce-applications.md) provide the highest-frequency feedback loops of any AI application domain — billions of daily interactions with clear reward signals (purchase, return, satisfaction). Chauhan & Venkateswarlu (2026) show that LLM recommendation agents achieve consistent quality with only 5-item user histories, enabling 88% cost reduction.[^105] This finding has cross-domain implications:
+
+- **Simulation:** The finding that minimal history suffices challenges the data-hungry assumption in simulation training — world models may not need extensive experience to make useful predictions
+- **Recursion:** Self-improving recommendation systems (like the recursive recommender framework[^52]) demonstrate that commerce provides the fastest iteration cycles for recursive improvement
+- **Education:** If 5 interactions are enough to model preferences for product recommendations, perhaps 5 diagnostic questions are enough to model a student's knowledge state — connecting [active learning](../methodologies/active-learning.md) query efficiency to commerce insights
+
+The multi-agent dynamic pricing results (MADDPG achieving competitive fairness) reveal that AI agents in competitive environments naturally develop cooperative-competitive strategies, paralleling how students in collaborative learning environments balance individual achievement with peer support.
+
+## Connection 82: Test-Time Compute Scaling Democratizes AI-Assisted Learning
+
+[Test-time compute scaling](../methodologies/test-time-compute-scaling.md) introduces the principle that smaller, cheaper models can match larger model performance by "thinking harder" on difficult problems. The T2 scaling laws (Roberts et al., 2026) show that 30-50% smaller models, when allowed more inference compute, outperform larger models at the same total compute budget.[^19] For the triad:
+
+- **Simulation:** World models can be smaller if they allocate more compute to complex scenario predictions — a physics simulation doesn't need to think hard about gravity but should think carefully about turbulence
+- **Recursion:** Self-improving systems can use test-time scaling as a cheaper alternative to retraining — improve per-problem performance without updating weights, connecting TRT's perfect math accuracy to the recursive improvement loop
+- **Commerce:** Recommendation systems can allocate more compute to high-value decisions (expensive purchases) and less to routine ones (repeat orders), optimizing the cost-quality tradeoff
+
+**For education:** This is perhaps the most democratizing insight in the entire triad. If a small, inexpensive model can provide expert-level tutoring by thinking longer about hard questions, then high-quality AI education doesn't require expensive infrastructure. The Reasoning Memory approach (reusing prior problem-solving experience rather than generating from scratch) suggests that AI tutors should build experience libraries — every solved problem becomes a resource for future students, creating a positive feedback loop between scale and quality.
+
+## Connection 83: Conversational AI Tutors Bridge the Theory-Practice Gap Through All Three Domains
+
+Vanacore et al. (2026) synthesize legacy ITS research, human tutoring methods, and generative AI to propose a framework for conversational tutors that retain knowledge tracing while leveraging dynamic content delivery.[^105b] This framework connects all three pillars:
+
+- **Simulation → Tutoring:** The conversational tutor simulates expert Socratic dialogue, using predictive models of student responses to select optimal questions — the same predict-act-observe loop used in world models
+- **Recursion → Tutoring:** DPO-trained tutors (Scarlatos et al., 2025) improve through preference optimization on tutoring dialogues[^23], while EduAlign (Song et al., 2025) demonstrates that joint optimization across helpfulness, personalization, and creativity produces better outcomes than single-dimension tuning
+- **Commerce → Tutoring:** The deployed Taiwan high school study (Chung et al., 2026) shows +0.15 SD improvement on unassisted exams — the kind of measurable outcome that commerce systems achieve through A/B testing and the kind of evidence that education has historically lacked
+
+The convergence point: effective AI tutoring requires the same predict-improve-apply cycle documented in Connection 55, but operationalized through natural language dialogue rather than explicit simulation or recommendation interfaces.
+
 ## See Also
 
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) -- End-to-end research automation
@@ -1261,6 +1291,8 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 - [Applications for Real-World Learning](../methodologies/applications-for-real-world-learning.md) -- Practical learning systems
 - [Computational Cost](../methodologies/computational-cost.md) -- Efficiency as equity enabler
 - [Domain Specificity](../methodologies/domain-specificity.md) -- Domain adaptation for learning
+- [E-Commerce Applications](e-commerce-applications.md) -- Practical commerce AI systems
+- [Test-Time Compute Scaling](../methodologies/test-time-compute-scaling.md) -- Adaptive inference scaling laws
 
 ## References
 
@@ -1368,3 +1400,5 @@ An AI tutor that cannot detect its own hallucinations is dangerous: it teaches f
 [^102]: Sun, Q. et al. (2026). "Efficient Hallucination Detection: Adaptive Bayesian Estimation of Semantic Entropy." [arXiv:2603.22812](https://arxiv.org/abs/2603.22812)
 [^103]: Lin, P. et al. (2025). "Efficient Model Development through Fine-tuning Transfer." [arXiv:2503.20110](https://arxiv.org/abs/2503.20110)
 [^104]: Seo, M. et al. (2025). "Paper2Code: Automating Code Generation from Scientific Papers in Machine Learning." [arXiv:2504.17192](https://arxiv.org/abs/2504.17192)
+[^105]: Chauhan, K. & Venkateswarlu, M. (2026). "Less is More: Benchmarking LLM Based Recommendation Agents." [arXiv:2601.20316](https://arxiv.org/abs/2601.20316)
+[^105b]: Vanacore, K., Baker, R.S., Closser, A.H. & Roschelle, J. (2026). "The Path to Conversational AI Tutors." [arXiv:2602.19303](https://arxiv.org/abs/2602.19303)

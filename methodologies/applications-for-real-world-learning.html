@@ -349,6 +349,7 @@ body {
 <a href="../methodologies/prompt-engineering.html">Prompt Engineering</a>
 <a href="../methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute-scaling.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
 <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
@@ -359,6 +360,7 @@ body {
 <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
 <a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
 <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/e-commerce-applications.html">E-Commerce Applications of AI Learning</a>
 <a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
 <a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
 <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
@@ -627,6 +629,77 @@ loadWishlist();
 <li><strong>Customer behavior modeling</strong>: Simulation environments where learners practice segmentation and targeting using <a href="synthetic-data-generation.html">synthetic data generation</a></li>
 <li><strong>Conversational commerce skills</strong>: Training with AI customers that simulate different shopping intents, powered by <a href="../frontier-topics/multi-agent-systems.html">multi-agent systems</a></li>
 </ul>
+<h3 id="conversational-ai-tutors-a-framework-for-the-next-generation-2026">Conversational AI Tutors: A Framework for the Next Generation (2026)</h3>
+<p>Vanacore et al. (2026) synthesize decades of human tutoring research, legacy intelligent tutoring system (ITS) lessons, and generative AI capabilities to propose a comprehensive framework for conversational AI tutors.[^6] The framework identifies three critical capabilities that current systems lack:</p>
+<ol>
+<li><strong>Knowledge tracing with dialogue</strong>: Maintaining a dynamic model of what the student knows based on conversational cues, not just quiz answers</li>
+<li><strong>Socratic scaffolding</strong>: Using questioning strategies that guide students to discover answers rather than providing them directly</li>
+<li><strong>Dynamic content generation</strong>: Creating explanations, examples, and analogies tailored to the individual learner's background and current understanding</li>
+</ol>
+<p>The key insight: legacy ITS systems excelled at knowledge tracing but lacked natural language; LLMs excel at natural language but lack persistent student models. The next generation must combine both.</p>
+<h3 id="llm-based-tutor-training-via-preference-optimization-2025-2026">LLM-Based Tutor Training via Preference Optimization (2025-2026)</h3>
+<p>Scarlatos et al. (2025) demonstrate that open-source LLMs can be trained as effective tutors using direct preference optimization (DPO) on tutoring dialogues.[^7] Their system:</p>
+<ul>
+<li>Trains Llama 3.1 8B on preference pairs where "good" responses use Socratic questioning and "bad" responses give away answers</li>
+<li>Produces tutor responses that <strong>significantly increase correct student answers</strong> compared to untrained models</li>
+<li>Matches GPT-4o teaching quality at a fraction of the inference cost, enabling deployment in resource-constrained educational settings</li>
+</ul>
+<p>This connects to <a href="domain-specificity.html">domain specificity</a> — the same DPO approach can be applied to train subject-specific tutors.</p>
+<h3 id="edualign-multi-dimensional-pedagogical-fine-tuning-2025">EduAlign: Multi-Dimensional Pedagogical Fine-Tuning (2025)</h3>
+<p>Song et al. (2025) introduce EduAlign, a framework that optimizes LLM tutors along three orthogonal pedagogical dimensions simultaneously:[^8]</p>
+<ul>
+<li><strong>Helpfulness</strong>: Does the response move the student toward understanding?</li>
+<li><strong>Personalization</strong>: Does the response adapt to this specific student's level and learning style?</li>
+<li><strong>Creativity</strong>: Does the response use novel analogies, examples, or explanations to engage the student?</li>
+</ul>
+<p>Using 8,000 annotated educational interactions and reinforcement learning from human feedback, EduAlign demonstrates that optimizing all three dimensions jointly produces better learning outcomes than optimizing any single dimension alone.</p>
+<h3 id="deployed-ai-tutors-real-classroom-evidence-2026">Deployed AI Tutors: Real Classroom Evidence (2026)</h3>
+<p>Chung et al. (2026) provide some of the strongest real-world evidence for AI tutoring effectiveness by deploying an LLM-based adaptive tutoring platform across ten Taiwan high schools.[^9] Key findings:</p>
+<ul>
+<li><strong>Adaptive sequencing</strong>: The system uses reinforcement learning to determine which problem to present next, optimizing for long-term retention rather than immediate performance</li>
+<li><strong>Measurable impact</strong>: Students using the AI tutor showed a <strong>0.15 standard deviation improvement</strong> on unassisted final exams — a meaningful effect size for an educational intervention</li>
+<li><strong>Equity effect</strong>: The largest gains were among students who started with the lowest scores, suggesting AI tutoring can narrow achievement gaps</li>
+</ul>
+<p>This represents a shift from lab-based evaluations to production deployments with rigorous experimental controls.</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 720 320&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;12&quot;&gt;
+  &lt;text x=&quot;360&quot; y=&quot;25&quot; text-anchor=&quot;middle&quot; font-size=&quot;15&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;AI Tutoring Evidence Hierarchy (2024-2026)&lt;/text&gt;
+
+  &lt;!-- Evidence pyramid --&gt;
+  &lt;polygon points=&quot;360,50 560,280 160,280&quot; fill=&quot;none&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot;/&gt;
+
+  &lt;!-- Level 1: Lab studies --&gt;
+  &lt;rect x=&quot;240&quot; y=&quot;220&quot; width=&quot;240&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#FFF3E0&quot; stroke=&quot;#FF9800&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;242&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot;&gt;Lab Studies (2024-2025)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;258&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Controlled settings, volunteer participants&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#888&quot;&gt;GuideAI, Open TutorAI, curriculum-constrained tutor&lt;/text&gt;
+
+  &lt;!-- Level 2: Classroom pilots --&gt;
+  &lt;rect x=&quot;260&quot; y=&quot;155&quot; width=&quot;200&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#E8F5E9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;175&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot;&gt;Classroom Pilots (2025-2026)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;191&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Real schools, randomized control&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;203&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot; fill=&quot;#2E7D32&quot;&gt;+0.15 SD on unassisted exams [9]&lt;/text&gt;
+
+  &lt;!-- Level 3: Frameworks --&gt;
+  &lt;rect x=&quot;290&quot; y=&quot;90&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#E3F2FD&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;360&quot; y=&quot;110&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot;&gt;Synthesis (2026)&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;126&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Frameworks unifying&lt;/text&gt;
+  &lt;text x=&quot;360&quot; y=&quot;138&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;ITS + LLM capabilities [6]&lt;/text&gt;
+
+  &lt;!-- Key insight --&gt;
+  &lt;rect x=&quot;575&quot; y=&quot;100&quot; width=&quot;135&quot; height=&quot;80&quot; rx=&quot;8&quot; fill=&quot;#F3E5F5&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;642&quot; y=&quot;120&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; font-weight=&quot;bold&quot; fill=&quot;#7B1FA2&quot;&gt;Key Trend&lt;/text&gt;
+  &lt;text x=&quot;642&quot; y=&quot;138&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;Moving from&lt;/text&gt;
+  &lt;text x=&quot;642&quot; y=&quot;152&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;&quot;can AI teach?&quot;&lt;/text&gt;
+  &lt;text x=&quot;642&quot; y=&quot;166&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;to &quot;how well?&quot;&lt;/text&gt;
+
+  &lt;!-- Arrow --&gt;
+  &lt;line x1=&quot;560&quot; y1=&quot;140&quot; x2=&quot;578&quot; y2=&quot;140&quot; stroke=&quot;#7B1FA2&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;polygon points=&quot;576,135 586,140 576,145&quot; fill=&quot;#7B1FA2&quot;/&gt;
+
+  &lt;!-- Bottom context --&gt;
+  &lt;text x=&quot;360&quot; y=&quot;305&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#666&quot;&gt;Evidence quality increasing: lab demos (2024) -&gt; classroom RCTs (2025-2026) -&gt; longitudinal studies (emerging)&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2026-landscape">2026 Landscape</h3>
 <p>The field is converging around several key trends:</p>
@@ -636,6 +709,9 @@ loadWishlist();
 <li><strong>Simulation-first pedagogy</strong>: Digital twin environments (January 2026) enable four-stage learning: modeling → mirroring → intervening → autonomous management[^5]</li>
 <li><strong>Hallucination safeguards</strong>: All serious educational AI systems now integrate <a href="../core-concepts/hallucination-detection.html">hallucination detection</a> to prevent teaching incorrect information</li>
 <li><strong>Transfer measurement</strong>: New evaluation frameworks specifically measure whether AI-assisted learning transfers to real-world performance, not just test scores</li>
+<li><strong>Preference-optimized tutors</strong>: DPO training on tutoring dialogues produces open-source models that match GPT-4o teaching quality, enabling scalable deployment[^7]</li>
+<li><strong>Real classroom evidence</strong>: Deployed AI tutors show measurable learning gains (+0.15 SD) in randomized controlled trials across multiple schools[^9]</li>
+<li><strong>Multi-dimensional optimization</strong>: Frameworks like EduAlign show that tutoring quality requires joint optimization of helpfulness, personalization, and creativity — not just factual accuracy[^8]</li>
 </ol>
 <h3 id="key-metrics">Key Metrics</h3>
 <table>
@@ -666,6 +742,21 @@ loadWishlist();
 <td>Digital Twin Learning</td>
 <td>2026</td>
 <td>Four-stage framework from modeling to autonomous management</td>
+</tr>
+<tr>
+<td>LLM Tutor (DPO)</td>
+<td>2025</td>
+<td>Open-source Llama 8B matches GPT-4o tutoring quality[^7]</td>
+</tr>
+<tr>
+<td>Taiwan Classroom RCT</td>
+<td>2026</td>
+<td>+0.15 SD on unassisted exams across 10 high schools[^9]</td>
+</tr>
+<tr>
+<td>EduAlign</td>
+<td>2025</td>
+<td>3-dimension pedagogical optimization outperforms single-dimension[^8]</td>
 </tr>
 </tbody>
 </table>
@@ -709,6 +800,10 @@ loadWishlist();
 <p>[^3]: Anonymous. (2026). "Open TutorAI: An Open-source Platform for Personalized and Immersive Learning with Generative AI." arXiv:2602.07176. https://arxiv.org/abs/2602.07176</p>
 <p>[^4]: Anonymous. (2025). "Pedagogically Controlled, Curriculum-Constrained AI Tutor for SE Education." arXiv:2512.11882. https://arxiv.org/abs/2512.11882</p>
 <p>[^5]: Anonymous. (2026). "Digital Twin AI: Opportunities and Challenges from Large Language Models to World Models." arXiv:2601.01321. https://arxiv.org/abs/2601.01321</p>
+<p>[^6]: Vanacore, K., Baker, R. S., Closser, A. H., &amp; Roschelle, J. (2026). "The Path to Conversational AI Tutors." arXiv:2602.19303. https://arxiv.org/abs/2602.19303</p>
+<p>[^7]: Scarlatos, A., Liu, N., Lee, J., Baraniuk, R., &amp; Lan, A. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." arXiv:2503.06424. https://arxiv.org/abs/2503.06424</p>
+<p>[^8]: Song, S., Liu, W., Lu, Y., Zhang, R., Liu, T., et al. (2025). "Cultivating Helpful, Personalized, and Creative AI Tutors: EduAlign." arXiv:2507.20335. https://arxiv.org/abs/2507.20335</p>
+<p>[^9]: Chung, A. T.-H., Zhang, B., Kung, L.-C., Bastani, H., &amp; Bastani, O. (2026). "Effective Personalized AI Tutors via LLM-Guided Reinforcement Learning." SSRN 6423358. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6423358</p>
 </main>
 </body>
 </html>

@@ -35,3 +35,5 @@ application-to-real-world-learning
 distribution-shift
 2025-2026-trends
 learning-connection
+2026-landscape
+verification-bottleneck

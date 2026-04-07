@@ -1,0 +1,38 @@
+{
+  "session": 16,
+  "date": "2026-04-08",
+  "mode": "mixed (coverage + quality)",
+  "hypothesis": {
+    "strategy": "Write 2 new wishlist articles (e-commerce-applications, test-time-compute-scaling) and improve 2 lowest-scoring articles (domain-specificity, applications-for-real-world-learning) with 2026 papers, SVG diagrams, and new references. Add 3 cross-cutting connections (81-83).",
+    "predicted_delta": "+0.0 composite (new articles dilute, improved articles compensate). Coverage should cross 80% threshold.",
+    "dimensions_targeted": ["currency", "sourcing", "depth", "linking"],
+    "reasoning": "Based on sessions 13-15, mixed mode maintains composite while expanding coverage. The 2 lowest-scoring articles both have sourcing as their weakest dimension — adding 5-6 new 2026 papers each should yield +6-8 points. New articles with SVGs and rich cross-linking should score 78-82. Coverage at 79% — 2 new articles should push past 80%."
+  },
+  "result": {
+    "before": {
+      "composite": 85.9,
+      "articles": 43,
+      "wishlist_pct": 58.1,
+      "combined_coverage_pct": 79
+    },
+    "after": {
+      "composite": 85.8,
+      "articles": 45,
+      "wishlist_pct": 60.6,
+      "combined_coverage_pct": 80
+    },
+    "actual_delta": -0.1,
+    "articles_improved": {
+      "domain-specificity": {"before": 79.0, "after": 86.7, "delta": 7.7},
+      "applications-for-real-world-learning": {"before": 79.5, "after": 86.0, "delta": 6.5}
+    },
+    "new_articles": {
+      "e-commerce-applications": {"score": 78.8},
+      "test-time-compute-scaling": {"score": 79.2}
+    },
+    "papers_added": 16,
+    "diagrams_added": 2,
+    "connections_added": 3
+  },
+  "lesson": "Coverage crossed the 80% threshold — mode switched to quality! Improving existing articles with 2026 papers yielded consistent +6.5-7.7 points. New articles scored 78.8-79.2 with SVGs and cross-linking. The composite dipped slightly (-0.1) from new article dilution. Both new articles have low sourcing scores (52-56) — need more references to push higher. Now in quality mode, should focus on improving e-commerce-applications (78.8) and test-time-compute-scaling (79.2)."
+}

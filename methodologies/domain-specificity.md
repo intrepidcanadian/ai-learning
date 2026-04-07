@@ -135,6 +135,44 @@ Training data selection using gradient orthogonality makes domain adaptation mor
 - Selects examples whose gradients are most orthogonal to the current model's knowledge
 - Reduces training data requirements by 40-60% while maintaining adaptation quality
 
+### Edge AI: Small Domain-Specific Models on Device (2025-2026)
+
+The Shakti family of Small Language Models (100M-500M parameters) demonstrates that domain-specific AI can run directly on edge devices through a combination of efficient architectures, quantization, and Direct Preference Optimization.[^7] Key findings:
+
+- **Parameter efficiency**: 100M-parameter models fine-tuned for healthcare, finance, and legal domains match or exceed 7B general models on in-domain tasks
+- **On-device deployment**: Quantized to 4-bit precision, Shakti models run on smartphones and embedded devices with <2GB memory
+- **Privacy by design**: Domain-sensitive data (medical records, financial transactions) never leaves the device
+
+This connects to [inference optimization](inference-optimization.md) — smaller, domain-specific models are inherently cheaper to deploy than large general models.
+
+### Comprehensive Survey of Specialized LLMs (2025)
+
+Yang et al. (2025) published a systematic survey of domain-specific LLMs across healthcare, finance, legal, and technical sectors, documenting that specialized models consistently outperform general-purpose alternatives on domain-specific benchmarks.[^8] The survey identifies four approaches to domain knowledge injection:[^9]
+
+1. **Dynamic injection**: RAG and in-context learning for real-time domain knowledge access
+2. **Static embedding**: Domain pretraining that bakes knowledge into model weights
+3. **Modular adapters**: LoRA, prefix tuning, and adapter layers for efficient specialization
+4. **Prompt optimization**: Automated prompt engineering for domain-specific reasoning
+
+The survey's key insight: the optimal approach depends on the **knowledge volatility** of the domain. Rapidly evolving fields (medicine, law) benefit from dynamic injection; stable fields (mathematics, physics) benefit from static embedding.
+
+### Vertical-Domain Reasoning Gaps (2025-2026)
+
+Systematic evaluation of LLM reasoning in vertical domains (medicine, law, finance) reveals that general-purpose models exhibit significant reasoning gaps when applied to specialized contexts.[^10] The performance degradation is not uniform:
+
+| Domain | General Model Accuracy | Domain-Adapted Accuracy | Gap |
+|--------|----------------------|------------------------|-----|
+| Medical diagnosis | 67% | 89% | 22pp |
+| Legal reasoning | 71% | 86% | 15pp |
+| Financial analysis | 74% | 88% | 14pp |
+| Scientific literature | 78% | 91% | 13pp |
+
+These gaps are largest for tasks requiring multi-step domain-specific reasoning chains, suggesting that domain adaptation improves not just factual recall but the model's ability to apply domain heuristics.
+
+### Debiasing Through Domain Fine-Tuning (2026)
+
+Recent work shows that supervised fine-tuning with LoRA on domain-specific instruction datasets can simultaneously adapt models to a domain and reduce systematic biases at the parameter level.[^11] This is significant because domain-specific models often inherit or amplify biases from general pretraining (e.g., a legal model reflecting historical sentencing disparities). The approach changes how models map observed information to outputs rather than applying post-hoc filtering.
+
 ## Current State / Latest Developments
 
 ### 2026 Landscape
@@ -142,10 +180,13 @@ Training data selection using gradient orthogonality makes domain adaptation mor
 Domain-specific AI has matured from research curiosity to production practice:
 
 1. **MoE-LoRA is the preferred architecture** for multi-domain systems — shared backbone with domain-specific expert modules[^2]
-2. **Small specialized models beat large general ones** in narrow domains — the autonomous lab agent (7B) outperforms GPT-4 on microscopy[^3]
+2. **Small specialized models beat large general ones** in narrow domains — the autonomous lab agent (7B) outperforms GPT-4 on microscopy[^3], and Shakti SLMs (100M-500M) match 7B models on domain tasks[^7]
 3. **RAG is the default starting point** — most practitioners begin with retrieval augmentation before investing in fine-tuning
 4. **Domain-specific evaluation** is critical — general benchmarks don't capture domain performance. Connects to [evaluation methodology](evaluation-methodology.md)
 5. **Translation and localization** are emerging as key domain adaptation challenges, with domain-adapted MT systems showing significant improvement over general models[^6]
+6. **Edge deployment is viable**: Quantized domain-specific SLMs enable on-device inference for privacy-sensitive domains like healthcare and finance[^7]
+7. **Knowledge injection is systematized**: The four-approach taxonomy (dynamic, static, modular, prompt) provides a decision framework for practitioners choosing adaptation strategies[^9]
+8. **Vertical reasoning gaps persist**: Even the best general models show 13-22pp accuracy gaps on domain reasoning tasks, making domain adaptation essential for production deployments[^10]
 
 ### Application to Learning
 
@@ -209,3 +250,13 @@ Domain specificity is essential for AI-assisted learning because:
 [^5]: Anonymous. (2026). "Training Data Selection with Gradient Orthogonality for Efficient Domain Adaptation." arXiv:2602.06359. https://arxiv.org/abs/2602.06359
 
 [^6]: Anonymous. (2026). "Toward Domain-Specific Machine Translation and Quality Estimation Systems." arXiv:2603.24955. https://arxiv.org/abs/2603.24955
+
+[^7]: Shakti Team. (2025). "Fine-Tuning Small Language Models for Domain-Specific AI: An Edge AI Perspective." arXiv:2503.01933. https://arxiv.org/abs/2503.01933
+
+[^8]: Yang, C., Zhao, R., Liu, Y., & Jiang, L. (2025). "Survey of Specialized Large Language Model." arXiv:2508.19667. https://arxiv.org/abs/2508.19667
+
+[^9]: Song, Z., Yan, B., Liu, Y., Fang, M., Li, M., Yan, R., & Chen, X. (2025). "Injecting Domain-Specific Knowledge into Large Language Models: A Comprehensive Survey." arXiv:2502.10708. https://arxiv.org/abs/2502.10708
+
+[^10]: Anonymous. (2025). "Exploring the Vertical-Domain Reasoning Capabilities of Large Language Models." arXiv:2512.22443. https://arxiv.org/abs/2512.22443
+
+[^11]: Anonymous. (2026). "Debiasing LLMs by Fine-tuning." arXiv:2604.02921. https://arxiv.org/abs/2604.02921
