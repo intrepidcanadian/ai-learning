@@ -387,6 +387,46 @@ body {
 - <strong>Refactoring completeness</strong> — whether all necessary changes are made across files
 - <strong>SWE-bench integration</strong> — real-world GitHub issue resolution</p>
 <p>These benchmarks reveal scaling patterns consistent with broader <a href="../frontier-topics/scaling-laws-research.html">scaling laws</a>: each model generation improves coding accuracy by 15-25%, with reasoning models (o3, DeepSeek-R1) showing the largest gains on complex multi-file tasks[^3][^5].</p>
+<h3 id="agentic-coding-maturity-model">Agentic Coding Maturity Model</h3>
+<p>The evolution of AI coding tools follows a maturity curve that Aider has navigated from early adoption to mainstream use[^11]:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Capability</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 — Completion</td>
+<td>Inline code suggestions</td>
+<td>GitHub Copilot</td>
+</tr>
+<tr>
+<td>L2 — Editing</td>
+<td>Multi-file diff generation</td>
+<td>Aider (search/replace mode)</td>
+</tr>
+<tr>
+<td>L3 — Agentic</td>
+<td>Autonomous task execution with tool use</td>
+<td>Aider (architect mode), Claude Code</td>
+</tr>
+<tr>
+<td>L4 — Self-evolving</td>
+<td>Agent modifies its own capabilities</td>
+<td>Live-SWE-agent, Darwin Gödel Machine</td>
+</tr>
+</tbody>
+</table>
+<p>Aider operates primarily at L2-L3, with its architect mode bridging toward L3 by combining planning (reasoning model) with execution (code model). The gap between L3 and L4 — where agents improve their own coding strategies — connects to broader research on <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a>[^8].</p>
+<h3 id="scale-and-adoption-2026">Scale and Adoption (2026)</h3>
+<p>As of early 2026, Aider has reached significant scale[^1][^4]:
+- <strong>39K+ GitHub stars</strong> — among the most popular open-source AI coding tools
+- <strong>4.1M+ installs</strong> — via PyPI, with 15B+ tokens processed weekly
+- <strong>100+ language support</strong> — via tree-sitter parsing for the repository map
+- <strong>Active model ecosystem</strong> — benchmarked against 50+ LLMs on the Aider leaderboard, with Claude Opus 4.6 and GPT-5.4 leading as of April 2026[^3]</p>
 <h3 id="connection-to-predictive-learning">Connection to Predictive Learning</h3>
 <p>Aider's architecture embodies a key principle from <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a>: every edit is a prediction about what code change will achieve the user's goal, followed by immediate feedback (compilation, test results, linter output). This predict-then-verify loop is the same pattern that makes simulation-based learning effective — rapid iteration with concrete feedback signals[^10].</p>
 <h3 id="e-commerce-development-applications">E-Commerce Development Applications</h3>
@@ -397,6 +437,8 @@ body {
 <li><strong>Non-determinism</strong> -- Same prompt can yield different edits across runs, complicating reproducibility</li>
 <li><strong>Language bias</strong> -- Strongest performance on Python; less reliable for other languages</li>
 <li><strong>No native experiment tracking</strong> -- Unlike <a href="../tools-platforms/autoresearch.html">Autoresearch</a>, Aider doesn't manage experimental workflows or results databases</li>
+<li><strong>Long-horizon task limitations</strong> -- SWE-EVO benchmarks show that even top coding agents achieve only 21% accuracy on tasks spanning 21+ files, revealing fundamental challenges in multi-file reasoning[^7]</li>
+<li><strong>Model dependency</strong> -- Aider's effectiveness is tightly coupled to the underlying LLM's coding ability; model regressions (e.g., a model update degrading edit format compliance) can break established workflows</li>
 </ol>
 <h2 id="see-also">See Also</h2>
 <ul>
@@ -428,7 +470,8 @@ body {
 [^7]: Fan, Z. et al. (2025). "SWE-EVO: Benchmarking Coding Agents in Long-Horizon Software Evolution Scenarios." <a href="https://arxiv.org/abs/2512.18470">arXiv:2512.18470</a>
 [^8]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" <a href="https://arxiv.org/abs/2511.13646">arXiv:2511.13646</a>
 [^9]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." <a href="https://arxiv.org/abs/2602.20478">arXiv:2602.20478</a>
-[^10]: Macina, J. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." <a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a></p>
+[^10]: Macina, J. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." <a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a>
+[^11]: AI Coding Benchmarks 2026. "Every Major Eval Explained and Ranked." <a href="https://www.morphllm.com/ai-coding-benchmarks-2026">morphllm.com/ai-coding-benchmarks-2026</a></p>
 </main>
 </body>
 </html>

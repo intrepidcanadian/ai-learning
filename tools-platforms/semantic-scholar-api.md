@@ -52,6 +52,32 @@ GET /author/search?query=<name>
 ```
 Find authors and their publication lists.
 
+## Academic Graph Analytics and AI Features
+
+Beyond basic search, Semantic Scholar provides AI-powered features that make it uniquely valuable for research automation and learning:
+
+### TLDR Summaries
+Semantic Scholar generates one-sentence TLDR summaries for papers using a fine-tuned language model. These summaries are available via the API (`tldr` field) and enable rapid screening of large paper sets — critical for [Autoresearch](../tools-platforms/autoresearch.md)-style pipelines that need to evaluate hundreds of candidate papers per experiment cycle[^10].
+
+### Citation Intent Classification
+The platform classifies citation relationships into categories (background, methodology, result comparison), going beyond simple citation counts to reveal *how* papers relate to each other[^11]. This is particularly valuable for [automated experiment design](../methodologies/automated-experiment-design.md), where understanding whether a paper uses a method vs. merely mentions it determines whether it's a relevant baseline.
+
+### Influence Score and Citation Velocity
+Semantic Scholar computes influence scores that weight citations by their context and intent, providing a more nuanced measure of paper impact than raw citation counts[^1]. Citation velocity (citations per year since publication) helps identify rapidly-rising papers that may signal emerging research directions — a key input for [tracking AI research](../research-sources/tracking-ai-research.md) pipelines.
+
+### Bulk Data Access
+For large-scale bibliometric analysis, Semantic Scholar provides dataset releases containing the full academic graph (225M+ papers, 2.8B+ citation edges). These bulk datasets power research on science-of-science questions — such as how ideas propagate across fields, which is directly relevant to [cross-cutting connections](../frontier-topics/cross-cutting-connections.md) analysis[^12].
+
+### Application for AI-Assisted Subject Learning
+
+For learners aiming to master a specific subject for real-world application, Semantic Scholar's graph analytics enable a structured learning strategy:
+1. **Identify foundational papers** using influence scores to find the most-cited works in a domain
+2. **Map the methodology landscape** using citation intent classification to find papers that *use* (not just cite) a technique
+3. **Track the frontier** using citation velocity to identify the fastest-growing research areas
+4. **Build reading lists** ordered by dependency — read papers before the works that build on them
+
+This approach transforms passive literature browsing into an active, structured curriculum. Combined with AI tutoring systems (Jurenka et al., 2026), it provides the backend for personalized research education[^9].
+
 ## Comparison with HuggingFace Papers API
 
 | Feature | Semantic Scholar | [HF Papers API](../tools-platforms/huggingface-papers-api.md) |
@@ -91,6 +117,10 @@ As of 2026, Semantic Scholar has expanded significantly:
 
 ### Application for AI-Powered Learning
 
+The diagram below illustrates how Semantic Scholar's graph analytics features feed into structured learning strategies:
+
+![Semantic Scholar Graph Analytics Pipeline](semantic-scholar-graph-analytics.svg)
+
 Semantic Scholar's citation graph provides a powerful tool for structured learning. Students entering a new field can:
 1. Start with a known seminal paper
 2. Use the citations endpoint to find papers that built on it (forward citations)
@@ -106,6 +136,8 @@ This systematic approach, automatable via the API, reconstructs a field's evolut
 - **Citation completeness**: Not all citation relationships are captured, especially for papers outside major venues or preprint servers.
 - **Semantic search quality**: While better than keyword matching, semantic search can still miss relevant papers with unusual terminology or framing.
 - **Corpus bias**: The corpus over-represents English-language papers from CS and biomedical domains; coverage of social sciences and humanities is less comprehensive[^1].
+- **TLDR quality**: AI-generated summaries can miss nuance or misrepresent paper contributions, especially for interdisciplinary work — users should verify TLDRs against abstracts for critical decisions.
+- **Graph staleness**: Citation intent classifications and influence scores are computed periodically, not in real-time, so recently-published papers may lack these enrichments.
 
 ## See Also
 
@@ -115,6 +147,11 @@ This systematic approach, automatable via the API, reconstructs a field's evolut
 - [Automated Peer Review](../core-concepts/automated-peer-review.md) — AI evaluation of research quality
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) — frontier topic where citation analysis reveals emerging trends
 - [Agentic Tree Search](../methodologies/agentic-tree-search.md) — experiment methodology that benefits from literature-informed branching
+- [Automated Experiment Design](../methodologies/automated-experiment-design.md) — citation intent informs baseline selection
+- [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md) — bulk graph data reveals interdisciplinary links
+- [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — self-improving agents use citation graphs to discover prior approaches
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — recommendation system research tracked via citation analytics
+- [Wiki Quality Benchmarking](../methodologies/wiki-quality-benchmarking.md) — benchmarking methodology for evaluating knowledge systems
 - [Key Papers](../research-sources/key-papers.md) — curated list of influential papers discoverable via this API
 
 ## References
@@ -136,3 +173,9 @@ This systematic approach, automatable via the API, reconstructs a field's evolut
 [^8]: Semantic Scholar Python Client (2026). PyPI package `semanticscholar` v0.12.0. [pypi.org/project/semanticscholar](https://pypi.org/project/semanticscholar/)
 
 [^9]: Jurenka, R. et al. (2026). "The Path to Conversational AI Tutors." [arXiv:2602.19303](https://arxiv.org/abs/2602.19303)
+
+[^10]: Cachola, I. et al. (2020). "TLDR: Extreme Summarization of Scientific Documents." [arXiv:2004.15011](https://arxiv.org/abs/2004.15011)
+
+[^11]: Cohan, A. et al. (2019). "Structural Scaffolds for Citation Intent Classification in Scientific Publications." *NAACL 2019*. [arXiv:1904.01608](https://arxiv.org/abs/1904.01608)
+
+[^12]: Semantic Scholar Academic Graph Datasets. [semanticscholar.org/product/api#datasets](https://www.semanticscholar.org/product/api#datasets)

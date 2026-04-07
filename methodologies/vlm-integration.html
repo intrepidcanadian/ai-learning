@@ -357,7 +357,18 @@ body {
 <li><strong>Anomaly detection in labs:</strong> VLMs are now being deployed for visual anomaly detection in robotic scientific laboratories, with detection accuracy improving when more contextual information is provided to the model[^10]</li>
 <li><strong>Open-source VLM progress:</strong> Open models (InternVL2.5, Qwen2-VL, LLaVA-OneVision) have closed the gap with proprietary VLMs on scientific understanding benchmarks, making VLM integration accessible to <a href="../tools-platforms/autoresearch.html">Autoresearch</a>-style pipelines that prefer open-weight models[^11]</li>
 <li><strong>E-commerce visual understanding:</strong> VLMs are deployed for product image analysis, visual search, and catalog enrichment — extracting structured attributes from product photos to power recommendation systems (see <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a>)[^12]</li>
+<li><strong>Fine-grained knowledge gaps (2026):</strong> Recent analysis reveals that while VLMs excel at high-level visual question answering, they significantly underperform on fine-grained knowledge tasks — identifying specific species, materials, or technical components in scientific images[^13]. This limits their reliability for specialized research domains where precise visual identification is critical.</li>
+<li><strong>Spatial reasoning limitations:</strong> VLMs typically flatten images into 1D patch sequences, discarding the 2D spatial structure needed for tasks like interpreting circuit diagrams, architectural plans, or molecular structures[^14]. This is a key bottleneck for applications in embodied AI and <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> where spatial relationships are fundamental.</li>
+<li><strong>Multimodal graph learning:</strong> GraphVLM (2026) benchmarks VLMs on multimodal graph tasks, evaluating three paradigms — VLM-as-Encoder, VLM-as-Aligner, and VLM-as-Predictor — revealing that current VLMs struggle with structured relational reasoning beyond pairwise comparisons[^15]</li>
 </ul>
+<h3 id="vlm-integration-for-subject-specific-learning">VLM Integration for Subject-Specific Learning</h3>
+<p>VLMs enable a new paradigm for learning technical subjects through visual comprehension:</p>
+<ol>
+<li><strong>Diagram understanding</strong> — Students can query VLMs about circuit diagrams, biological pathways, or chemical structures, receiving explanations that connect visual elements to underlying concepts</li>
+<li><strong>Lab notebook digitization</strong> — VLMs can extract structured data from handwritten lab notebooks, photographs of experimental setups, and whiteboard diagrams, making tacit knowledge searchable and sharable</li>
+<li><strong>Visual assessment</strong> — Instructors can use VLM-as-judge to automatically evaluate student-generated diagrams, plots, and visual explanations against rubrics, providing rapid feedback at scale[^4]</li>
+<li><strong>Cross-modal synthesis</strong> — By analyzing both the text and figures of research papers, VLMs help learners identify discrepancies between claims and evidence — a critical skill for research literacy</li>
+</ol>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ul>
 <li>VLMs can miss subtle data issues that a domain expert would catch</li>
@@ -390,8 +401,12 @@ body {
 <li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
 <li><a href="../tools-platforms/autoresearch.html">Autoresearch</a> — open-source VLMs enable figure critique in autonomous experiment loops</li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a> — VLM critique as quality gate in experiment pipelines</li>
+<li><a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a> — VLMs as scientific reasoning components</li>
+<li><a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> — VLM evaluation parallels quality benchmarking methods</li>
 <li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — VLM capability scaling trends</li>
 <li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — VLM feedback loops in self-improving systems</li>
+<li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — labs driving VLM research</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Vision Language Models survey authors (2025). "Vision Language Models: A Survey of 26K Papers." arXiv:2510.09586. https://arxiv.org/abs/2510.09586
@@ -405,7 +420,10 @@ body {
 [^9]: Blecher, L. et al. (2025). "Nougat: Neural Optical Understanding for Academic Documents." <a href="https://arxiv.org/abs/2308.13418">arXiv:2308.13418</a>
 [^10]: "A VLM-based Method for Visual Anomaly Detection in Robotic Scientific Laboratories." (2025). <a href="https://arxiv.org/abs/2506.05405">arXiv:2506.05405</a>
 [^11]: "A Survey of State of the Art Large Vision Language Models." (2025). <a href="https://arxiv.org/abs/2501.02189">arXiv:2501.02189</a> — Covers alignment techniques and benchmark advances in open-source VLMs.
-[^12]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a></p>
+[^12]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a>
+[^13]: Zhai, B. et al. (2026). "Understanding the Fine-Grained Knowledge Capabilities of Vision-Language Models." <a href="https://arxiv.org/abs/2602.17871">arXiv:2602.17871</a>
+[^14]: Rahmanzadehgervi, P. et al. (2026). "The Spatial Blindspot of Vision-Language Models." <a href="https://arxiv.org/abs/2601.09954">arXiv:2601.09954</a>
+[^15]: Chen, Z. et al. (2026). "GraphVLM: Benchmarking Vision Language Models for Multimodal Graph Learning." <a href="https://arxiv.org/abs/2603.13370">arXiv:2603.13370</a></p>
 </main>
 </body>
 </html>

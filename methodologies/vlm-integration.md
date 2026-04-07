@@ -115,6 +115,18 @@ However, alternatives are emerging: Gemini 2.0 offers native multimodal reasonin
 - **Anomaly detection in labs:** VLMs are now being deployed for visual anomaly detection in robotic scientific laboratories, with detection accuracy improving when more contextual information is provided to the model[^10]
 - **Open-source VLM progress:** Open models (InternVL2.5, Qwen2-VL, LLaVA-OneVision) have closed the gap with proprietary VLMs on scientific understanding benchmarks, making VLM integration accessible to [Autoresearch](../tools-platforms/autoresearch.md)-style pipelines that prefer open-weight models[^11]
 - **E-commerce visual understanding:** VLMs are deployed for product image analysis, visual search, and catalog enrichment — extracting structured attributes from product photos to power recommendation systems (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md))[^12]
+- **Fine-grained knowledge gaps (2026):** Recent analysis reveals that while VLMs excel at high-level visual question answering, they significantly underperform on fine-grained knowledge tasks — identifying specific species, materials, or technical components in scientific images[^13]. This limits their reliability for specialized research domains where precise visual identification is critical.
+- **Spatial reasoning limitations:** VLMs typically flatten images into 1D patch sequences, discarding the 2D spatial structure needed for tasks like interpreting circuit diagrams, architectural plans, or molecular structures[^14]. This is a key bottleneck for applications in embodied AI and [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) where spatial relationships are fundamental.
+- **Multimodal graph learning:** GraphVLM (2026) benchmarks VLMs on multimodal graph tasks, evaluating three paradigms — VLM-as-Encoder, VLM-as-Aligner, and VLM-as-Predictor — revealing that current VLMs struggle with structured relational reasoning beyond pairwise comparisons[^15]
+
+### VLM Integration for Subject-Specific Learning
+
+VLMs enable a new paradigm for learning technical subjects through visual comprehension:
+
+1. **Diagram understanding** — Students can query VLMs about circuit diagrams, biological pathways, or chemical structures, receiving explanations that connect visual elements to underlying concepts
+2. **Lab notebook digitization** — VLMs can extract structured data from handwritten lab notebooks, photographs of experimental setups, and whiteboard diagrams, making tacit knowledge searchable and sharable
+3. **Visual assessment** — Instructors can use VLM-as-judge to automatically evaluate student-generated diagrams, plots, and visual explanations against rubrics, providing rapid feedback at scale[^4]
+4. **Cross-modal synthesis** — By analyzing both the text and figures of research papers, VLMs help learners identify discrepancies between claims and evidence — a critical skill for research literacy
 
 ## Limitations / Challenges
 
@@ -150,8 +162,12 @@ VLM integration has broader applications in research automation:
 - [Key Papers and References](../research-sources/key-papers.md)
 - [Tracking AI Research](../research-sources/tracking-ai-research.md)
 - [Autoresearch](../tools-platforms/autoresearch.md) — open-source VLMs enable figure critique in autonomous experiment loops
+- [Automated Experiment Design](../methodologies/automated-experiment-design.md) — VLM critique as quality gate in experiment pipelines
+- [Automated Scientific Discovery](../core-concepts/automated-scientific-discovery.md) — VLMs as scientific reasoning components
+- [Wiki Quality Benchmarking](../methodologies/wiki-quality-benchmarking.md) — VLM evaluation parallels quality benchmarking methods
 - [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — VLM capability scaling trends
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — VLM feedback loops in self-improving systems
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — labs driving VLM research
 
 ## References
 
@@ -167,3 +183,6 @@ VLM integration has broader applications in research automation:
 [^10]: "A VLM-based Method for Visual Anomaly Detection in Robotic Scientific Laboratories." (2025). [arXiv:2506.05405](https://arxiv.org/abs/2506.05405)
 [^11]: "A Survey of State of the Art Large Vision Language Models." (2025). [arXiv:2501.02189](https://arxiv.org/abs/2501.02189) — Covers alignment techniques and benchmark advances in open-source VLMs.
 [^12]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." [arXiv:2510.09347](https://arxiv.org/abs/2510.09347)
+[^13]: Zhai, B. et al. (2026). "Understanding the Fine-Grained Knowledge Capabilities of Vision-Language Models." [arXiv:2602.17871](https://arxiv.org/abs/2602.17871)
+[^14]: Rahmanzadehgervi, P. et al. (2026). "The Spatial Blindspot of Vision-Language Models." [arXiv:2601.09954](https://arxiv.org/abs/2601.09954)
+[^15]: Chen, Z. et al. (2026). "GraphVLM: Benchmarking Vision Language Models for Multimodal Graph Learning." [arXiv:2603.13370](https://arxiv.org/abs/2603.13370)

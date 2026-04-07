@@ -108,6 +108,27 @@ Aider's leaderboard system provides empirical data on how different [foundation 
 
 These benchmarks reveal scaling patterns consistent with broader [scaling laws](../frontier-topics/scaling-laws-research.md): each model generation improves coding accuracy by 15-25%, with reasoning models (o3, DeepSeek-R1) showing the largest gains on complex multi-file tasks[^3][^5].
 
+### Agentic Coding Maturity Model
+
+The evolution of AI coding tools follows a maturity curve that Aider has navigated from early adoption to mainstream use[^11]:
+
+| Level | Capability | Example |
+|-------|-----------|---------|
+| L1 — Completion | Inline code suggestions | GitHub Copilot |
+| L2 — Editing | Multi-file diff generation | Aider (search/replace mode) |
+| L3 — Agentic | Autonomous task execution with tool use | Aider (architect mode), Claude Code |
+| L4 — Self-evolving | Agent modifies its own capabilities | Live-SWE-agent, Darwin Gödel Machine |
+
+Aider operates primarily at L2-L3, with its architect mode bridging toward L3 by combining planning (reasoning model) with execution (code model). The gap between L3 and L4 — where agents improve their own coding strategies — connects to broader research on [recursive self-improvement](../frontier-topics/recursive-self-improvement.md)[^8].
+
+### Scale and Adoption (2026)
+
+As of early 2026, Aider has reached significant scale[^1][^4]:
+- **39K+ GitHub stars** — among the most popular open-source AI coding tools
+- **4.1M+ installs** — via PyPI, with 15B+ tokens processed weekly
+- **100+ language support** — via tree-sitter parsing for the repository map
+- **Active model ecosystem** — benchmarked against 50+ LLMs on the Aider leaderboard, with Claude Opus 4.6 and GPT-5.4 leading as of April 2026[^3]
+
 ### Connection to Predictive Learning
 Aider's architecture embodies a key principle from [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md): every edit is a prediction about what code change will achieve the user's goal, followed by immediate feedback (compilation, test results, linter output). This predict-then-verify loop is the same pattern that makes simulation-based learning effective — rapid iteration with concrete feedback signals[^10].
 
@@ -120,6 +141,8 @@ Aider's git-native workflow makes it particularly suited for [e-commerce](../fro
 2. **Non-determinism** -- Same prompt can yield different edits across runs, complicating reproducibility
 3. **Language bias** -- Strongest performance on Python; less reliable for other languages
 4. **No native experiment tracking** -- Unlike [Autoresearch](../tools-platforms/autoresearch.md), Aider doesn't manage experimental workflows or results databases
+5. **Long-horizon task limitations** -- SWE-EVO benchmarks show that even top coding agents achieve only 21% accuracy on tasks spanning 21+ files, revealing fundamental challenges in multi-file reasoning[^7]
+6. **Model dependency** -- Aider's effectiveness is tightly coupled to the underlying LLM's coding ability; model regressions (e.g., a model update degrading edit format compliance) can break established workflows
 
 ## See Also
 
@@ -153,3 +176,4 @@ Aider's git-native workflow makes it particularly suited for [e-commerce](../fro
 [^8]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" [arXiv:2511.13646](https://arxiv.org/abs/2511.13646)
 [^9]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." [arXiv:2602.20478](https://arxiv.org/abs/2602.20478)
 [^10]: Macina, J. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." [arXiv:2503.06424](https://arxiv.org/abs/2503.06424)
+[^11]: AI Coding Benchmarks 2026. "Every Major Eval Explained and Ranked." [morphllm.com/ai-coding-benchmarks-2026](https://www.morphllm.com/ai-coding-benchmarks-2026)

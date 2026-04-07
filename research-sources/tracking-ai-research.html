@@ -513,7 +513,68 @@ for paper in get_daily_papers():
 <li><strong>Multimodal tracking</strong> -- Vision-language models (see <a href="../methodologies/vlm-integration.html">VLM Integration</a>) enable agents to parse figures and tables from papers, not just text.</li>
 <li><strong>Real-time feeds</strong> -- HuggingFace Daily Papers has become the de facto community-curated feed for AI/ML, with same-day coverage of trending preprints.</li>
 <li><strong>AI-assisted learning applications</strong> -- Research tracking is increasingly integrated into educational AI tutors. A landmark 2025 Harvard RCT showed AI tutoring outperforms traditional active learning[^6], and systems like GuideAI use real-time biosensory feedback to personalize content delivery[^7]. These systems rely on up-to-date research tracking to keep curricula current.</li>
+<li><strong>MCP-powered research workflows (2025-2026)</strong> -- Model Context Protocol servers now bridge AI assistants directly to academic APIs (Semantic Scholar, arXiv, OpenAlex), enabling conversational literature review where an AI agent searches, filters, and synthesizes papers within a single dialogue[^8]. This eliminates the context-switching between search tools and writing environments.</li>
+<li><strong>Self-evolving research agents</strong> -- A comprehensive survey of self-evolving AI agents (2025) formalized how research tracking agents can improve their own search strategies over time — for example, learning which query formulations yield the most relevant results for a given research domain[^9].</li>
+<li><strong>Recommendation-driven discovery</strong> -- AI recommendation systems, originally developed for <a href="../frontier-topics/ai-ecommerce-learning.html">e-commerce</a>, are being adapted for paper recommendation. Graph attention networks that model user-item interactions in shopping contexts now model researcher-paper interactions, with citation graphs replacing purchase histories[^10].</li>
 </ul>
+<h3 id="emerging-tools-and-platforms-2026">Emerging Tools and Platforms (2026)</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Type</th>
+<th>Key Feature</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elicit</td>
+<td>Web app</td>
+<td>Multi-paper synthesis with evidence tables</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Consensus</td>
+<td>Web app</td>
+<td>Claims extraction with confidence scores</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>OpenAlex</td>
+<td>API</td>
+<td>Free bibliometric data, 250M+ works</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Semantic Scholar MCP</td>
+<td>MCP server</td>
+<td>AI-assistant integration for literature search</td>
+<td>Open-source</td>
+</tr>
+<tr>
+<td>Papers With Code</td>
+<td>Web + API</td>
+<td>Paper-to-code linking</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Connected Papers</td>
+<td>Web app</td>
+<td>Visual citation graph exploration</td>
+<td>Production</td>
+</tr>
+</tbody>
+</table>
+<h3 id="application-for-real-world-learning">Application for Real-World Learning</h3>
+<p>Research tracking tools enable a structured approach to mastering any technical subject:</p>
+<ol>
+<li><strong>Landscape mapping</strong> — Use citation graph tools to identify the 10-20 foundational papers in a domain, ordered by influence</li>
+<li><strong>Frontier monitoring</strong> — Subscribe to daily feeds (HuggingFace Papers, arXiv RSS) filtered to your specific subfield</li>
+<li><strong>Gap identification</strong> — Cross-reference citation graphs with your reading list to identify important papers you've missed</li>
+<li><strong>Synthesis practice</strong> — Use AI summarization tools to generate paper summaries, then compare with your own understanding to identify gaps in comprehension</li>
+<li><strong>Practical connection</strong> — Track which research papers have associated code implementations (via Papers With Code) to bridge theory and practice</li>
+</ol>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ol>
 <li><strong>Information overload</strong> -- Even automated systems struggle with the sheer volume; filtering for relevance remains an open problem</li>
@@ -534,21 +595,24 @@ for paper in get_daily_papers():
 <li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a></li>
 <li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a></li>
 <li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a></li>
+<li><a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections</a></li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a></li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a></li>
+<li><a href="../tools-platforms/aide.html">AIDE</a></li>
+<li><a href="../tools-platforms/aider.html">Aider</a></li>
 </ul>
 <h2 id="references">References</h2>
-<ol>
-<li>HuggingFace Daily Papers. <a href="https://huggingface.co/papers">huggingface.co/papers</a></li>
-<li>Semantic Scholar. <a href="https://www.semanticscholar.org/">semanticscholar.org</a></li>
-<li>arXiv API. <a href="https://arxiv.org/help/api/">arxiv.org/help/api</a></li>
-<li>Papers With Code. <a href="https://paperswithcode.com/">paperswithcode.com</a></li>
-</ol>
 <p>[^1]: Approximately 500+ AI-related papers are posted daily across cs.AI, cs.LG, cs.CL, and cs.CV categories on arXiv as of 2025.
 [^2]: Sevilla, J. et al. (2022). "Compute Trends Across Three Eras of Machine Learning." <a href="https://arxiv.org/abs/2202.05924">arXiv:2202.05924</a>. Updated estimates suggest the trend has accelerated through 2025.
 [^3]: Peng, Q. et al. (2025). "A Survey on LLM-powered Agents for Recommender Systems." EMNLP 2025 Findings. <a href="https://arxiv.org/abs/2502.10050">arXiv:2502.10050</a>
 [^4]: Lo, K. et al. (2023). "Semantic Scholar Open Data Platform." <a href="https://arxiv.org/abs/2301.10140">arXiv:2301.10140</a>
 [^5]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).
 [^6]: Kestin, G. et al. (2025). "AI Tutoring Outperforms Active Learning." <em>Scientific Reports</em>. <a href="https://www.nature.com/articles/s41598-025-97652-6">doi:10.1038/s41598-025-97652-6</a>
-[^7]: Shukla, A. et al. (2026). "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions." <a href="https://arxiv.org/abs/2601.20402">arXiv:2601.20402</a></p>
+[^7]: Shukla, A. et al. (2026). "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions." <a href="https://arxiv.org/abs/2601.20402">arXiv:2601.20402</a>
+[^8]: Kuo, J. (2025). "Semantic Scholar MCP Server." <a href="https://github.com/JackKuo666/semanticscholar-MCP-Server">github.com/JackKuo666/semanticscholar-MCP-Server</a>
+[^9]: Tao, Z. et al. (2025). "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve." <a href="https://arxiv.org/abs/2507.21046">arXiv:2507.21046</a>
+[^10]: Peng, Q. et al. (2025). "Personalized Recommendation System of E-Commerce: Enhancing Social Connections with Graph Attention Networks." <em>Applied Intelligence</em>. <a href="https://doi.org/10.1080/08839514.2025.2487417">doi:10.1080/08839514.2025.2487417</a></p>
 </main>
 </body>
 </html>

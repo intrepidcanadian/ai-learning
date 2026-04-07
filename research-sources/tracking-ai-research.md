@@ -133,6 +133,30 @@ The research tracking landscape has matured significantly in 2025-2026:
 - **Multimodal tracking** -- Vision-language models (see [VLM Integration](../methodologies/vlm-integration.md)) enable agents to parse figures and tables from papers, not just text.
 - **Real-time feeds** -- HuggingFace Daily Papers has become the de facto community-curated feed for AI/ML, with same-day coverage of trending preprints.
 - **AI-assisted learning applications** -- Research tracking is increasingly integrated into educational AI tutors. A landmark 2025 Harvard RCT showed AI tutoring outperforms traditional active learning[^6], and systems like GuideAI use real-time biosensory feedback to personalize content delivery[^7]. These systems rely on up-to-date research tracking to keep curricula current.
+- **MCP-powered research workflows (2025-2026)** -- Model Context Protocol servers now bridge AI assistants directly to academic APIs (Semantic Scholar, arXiv, OpenAlex), enabling conversational literature review where an AI agent searches, filters, and synthesizes papers within a single dialogue[^8]. This eliminates the context-switching between search tools and writing environments.
+- **Self-evolving research agents** -- A comprehensive survey of self-evolving AI agents (2025) formalized how research tracking agents can improve their own search strategies over time — for example, learning which query formulations yield the most relevant results for a given research domain[^9].
+- **Recommendation-driven discovery** -- AI recommendation systems, originally developed for [e-commerce](../frontier-topics/ai-ecommerce-learning.md), are being adapted for paper recommendation. Graph attention networks that model user-item interactions in shopping contexts now model researcher-paper interactions, with citation graphs replacing purchase histories[^10].
+
+### Emerging Tools and Platforms (2026)
+
+| Tool | Type | Key Feature | Status |
+|------|------|------------|--------|
+| Elicit | Web app | Multi-paper synthesis with evidence tables | Production |
+| Consensus | Web app | Claims extraction with confidence scores | Production |
+| OpenAlex | API | Free bibliometric data, 250M+ works | Production |
+| Semantic Scholar MCP | MCP server | AI-assistant integration for literature search | Open-source |
+| Papers With Code | Web + API | Paper-to-code linking | Production |
+| Connected Papers | Web app | Visual citation graph exploration | Production |
+
+### Application for Real-World Learning
+
+Research tracking tools enable a structured approach to mastering any technical subject:
+
+1. **Landscape mapping** — Use citation graph tools to identify the 10-20 foundational papers in a domain, ordered by influence
+2. **Frontier monitoring** — Subscribe to daily feeds (HuggingFace Papers, arXiv RSS) filtered to your specific subfield
+3. **Gap identification** — Cross-reference citation graphs with your reading list to identify important papers you've missed
+4. **Synthesis practice** — Use AI summarization tools to generate paper summaries, then compare with your own understanding to identify gaps in comprehension
+5. **Practical connection** — Track which research papers have associated code implementations (via Papers With Code) to bridge theory and practice
 
 ## Limitations / Challenges
 
@@ -154,13 +178,15 @@ The research tracking landscape has matured significantly in 2025-2026:
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md)
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md)
 - [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md)
+- [Cross-Cutting Connections](../frontier-topics/cross-cutting-connections.md)
+- [Automated Experiment Design](../methodologies/automated-experiment-design.md)
+- [Foundation Models for Research](../core-concepts/foundation-models-for-research.md)
+- [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md)
+- [AIDE](../tools-platforms/aide.md)
+- [Aider](../tools-platforms/aider.md)
 
 ## References
 
-1. HuggingFace Daily Papers. [huggingface.co/papers](https://huggingface.co/papers)
-2. Semantic Scholar. [semanticscholar.org](https://www.semanticscholar.org/)
-3. arXiv API. [arxiv.org/help/api](https://arxiv.org/help/api/)
-4. Papers With Code. [paperswithcode.com](https://paperswithcode.com/)
 
 [^1]: Approximately 500+ AI-related papers are posted daily across cs.AI, cs.LG, cs.CL, and cs.CV categories on arXiv as of 2025.
 [^2]: Sevilla, J. et al. (2022). "Compute Trends Across Three Eras of Machine Learning." [arXiv:2202.05924](https://arxiv.org/abs/2202.05924). Updated estimates suggest the trend has accelerated through 2025.
@@ -169,3 +195,6 @@ The research tracking landscape has matured significantly in 2025-2026:
 [^5]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." *Nature*, 651(8107).
 [^6]: Kestin, G. et al. (2025). "AI Tutoring Outperforms Active Learning." *Scientific Reports*. [doi:10.1038/s41598-025-97652-6](https://www.nature.com/articles/s41598-025-97652-6)
 [^7]: Shukla, A. et al. (2026). "GuideAI: A Real-time Personalized Learning Solution with Adaptive Interventions." [arXiv:2601.20402](https://arxiv.org/abs/2601.20402)
+[^8]: Kuo, J. (2025). "Semantic Scholar MCP Server." [github.com/JackKuo666/semanticscholar-MCP-Server](https://github.com/JackKuo666/semanticscholar-MCP-Server)
+[^9]: Tao, Z. et al. (2025). "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve." [arXiv:2507.21046](https://arxiv.org/abs/2507.21046)
+[^10]: Peng, Q. et al. (2025). "Personalized Recommendation System of E-Commerce: Enhancing Social Connections with Graph Attention Networks." *Applied Intelligence*. [doi:10.1080/08839514.2025.2487417](https://doi.org/10.1080/08839514.2025.2487417)
