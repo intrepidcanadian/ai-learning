@@ -92,6 +92,98 @@ body {
     border-left-color: #5b9df5;
     font-weight: 600;
 }
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
 .content {
     margin-left: 280px;
     flex: 1;
@@ -262,7 +354,85 @@ body {
 <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
 </details>
 
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
 </nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
 <main class="content">
 <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Agentic Tree Search</div>
 <h1 id="agentic-tree-search">Agentic Tree Search</h1>

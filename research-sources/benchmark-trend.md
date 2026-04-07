@@ -16,7 +16,7 @@ Freshness: 100.0% updated this week | median age: 0.2 days
 
 **Topic Coverage: 100.0/100** (25/25 references resolved, 0 gaps)
 
-*Last benchmarked: 2026-04-08T02:29*
+*Last benchmarked: 2026-04-08T02:38*
 
 ### Core Concepts
 
@@ -70,7 +70,7 @@ Freshness: 100.0% updated this week | median age: 0.2 days
 
 ## Score Trend
 
-**Overall composite:** 88.3 -> 89.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆`
+**Overall composite:** 88.3 -> 89.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆`
 
 ### Score Over Time
 
@@ -95,52 +95,53 @@ Freshness: 100.0% updated this week | median age: 0.2 days
 <text x="47" y="77.5" text-anchor="end" font-size="11" fill="#666">92</text>
 <line x1="55" y1="46.3" x2="700" y2="46.3" stroke="#e0e0e0" stroke-width="1"/>
 <text x="47" y="50.3" text-anchor="end" font-size="11" fill="#666">97</text>
-<polygon points="55.0,93.6 66.5,93.6 78.0,93.6 89.6,81.1 101.1,68.1 112.6,68.1 124.1,68.1 135.6,67.5 147.1,68.1 158.7,68.1 170.2,68.1 181.7,67.5 193.2,60.4 204.7,55.0 216.2,49.6 227.8,43.0 239.3,43.0 250.8,230.6 262.3,232.8 273.8,232.8 285.4,202.9 296.9,202.9 308.4,180.1 319.9,180.1 331.4,167.0 342.9,167.0 354.5,156.7 366.0,156.7 377.5,154.5 389.0,154.5 400.5,142.6 412.1,139.8 423.6,135.5 435.1,135.5 446.6,125.2 458.1,125.7 469.6,125.7 481.2,114.8 492.7,114.8 504.2,103.9 515.7,103.9 527.2,103.9 538.8,103.9 550.3,103.9 561.8,103.9 573.3,103.9 584.8,103.9 596.3,98.0 607.9,98.0 619.4,93.6 630.9,93.6 642.4,87.6 653.9,87.6 665.4,87.6 677.0,87.6 688.5,87.6 700.0,87.6 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
-<polyline points="55.0,93.6 66.5,93.6 78.0,93.6 89.6,81.1 101.1,68.1 112.6,68.1 124.1,68.1 135.6,67.5 147.1,68.1 158.7,68.1 170.2,68.1 181.7,67.5 193.2,60.4 204.7,55.0 216.2,49.6 227.8,43.0 239.3,43.0 250.8,230.6 262.3,232.8 273.8,232.8 285.4,202.9 296.9,202.9 308.4,180.1 319.9,180.1 331.4,167.0 342.9,167.0 354.5,156.7 366.0,156.7 377.5,154.5 389.0,154.5 400.5,142.6 412.1,139.8 423.6,135.5 435.1,135.5 446.6,125.2 458.1,125.7 469.6,125.7 481.2,114.8 492.7,114.8 504.2,103.9 515.7,103.9 527.2,103.9 538.8,103.9 550.3,103.9 561.8,103.9 573.3,103.9 584.8,103.9 596.3,98.0 607.9,98.0 619.4,93.6 630.9,93.6 642.4,87.6 653.9,87.6 665.4,87.6 677.0,87.6 688.5,87.6 700.0,87.6" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="55.0,93.6 66.3,93.6 77.6,93.6 88.9,81.1 100.3,68.1 111.6,68.1 122.9,68.1 134.2,67.5 145.5,68.1 156.8,68.1 168.2,68.1 179.5,67.5 190.8,60.4 202.1,55.0 213.4,49.6 224.7,43.0 236.1,43.0 247.4,230.6 258.7,232.8 270.0,232.8 281.3,202.9 292.6,202.9 303.9,180.1 315.3,180.1 326.6,167.0 337.9,167.0 349.2,156.7 360.5,156.7 371.8,154.5 383.2,154.5 394.5,142.6 405.8,139.8 417.1,135.5 428.4,135.5 439.7,125.2 451.1,125.7 462.4,125.7 473.7,114.8 485.0,114.8 496.3,103.9 507.6,103.9 518.9,103.9 530.3,103.9 541.6,103.9 552.9,103.9 564.2,103.9 575.5,103.9 586.8,98.0 598.2,98.0 609.5,93.6 620.8,93.6 632.1,87.6 643.4,87.6 654.7,87.6 666.1,87.6 677.4,87.6 688.7,87.6 700.0,87.6 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
+<polyline points="55.0,93.6 66.3,93.6 77.6,93.6 88.9,81.1 100.3,68.1 111.6,68.1 122.9,68.1 134.2,67.5 145.5,68.1 156.8,68.1 168.2,68.1 179.5,67.5 190.8,60.4 202.1,55.0 213.4,49.6 224.7,43.0 236.1,43.0 247.4,230.6 258.7,232.8 270.0,232.8 281.3,202.9 292.6,202.9 303.9,180.1 315.3,180.1 326.6,167.0 337.9,167.0 349.2,156.7 360.5,156.7 371.8,154.5 383.2,154.5 394.5,142.6 405.8,139.8 417.1,135.5 428.4,135.5 439.7,125.2 451.1,125.7 462.4,125.7 473.7,114.8 485.0,114.8 496.3,103.9 507.6,103.9 518.9,103.9 530.3,103.9 541.6,103.9 552.9,103.9 564.2,103.9 575.5,103.9 586.8,98.0 598.2,98.0 609.5,93.6 620.8,93.6 632.1,87.6 643.4,87.6 654.7,87.6 666.1,87.6 677.4,87.6 688.7,87.6 700.0,87.6" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
 <circle class="chart-dot" cx="55.0" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:27  —  Score: 88.3" data-note=""/>
-<circle class="chart-dot" cx="78.0" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:43  —  Score: 88.3" data-note=""/>
-<circle class="chart-dot" cx="101.1" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:51  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="124.1" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:57  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="147.1" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="170.2" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:03  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="193.2" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
-<circle class="chart-dot" cx="216.2" cy="49.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:14  —  Score: 96.4" data-note=""/>
-<circle class="chart-dot" cx="239.3" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:19  —  Score: 97.6" data-note=""/>
-<circle class="chart-dot" cx="262.3" cy="232.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:51  —  Score: 62.7" data-note=""/>
-<circle class="chart-dot" cx="285.4" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
-<circle class="chart-dot" cx="308.4" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
-<circle class="chart-dot" cx="331.4" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
-<circle class="chart-dot" cx="354.5" cy="156.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:30  —  Score: 76.7" data-note=""/>
-<circle class="chart-dot" cx="377.5" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
-<circle class="chart-dot" cx="400.5" cy="142.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:42  —  Score: 79.3" data-note=""/>
-<circle class="chart-dot" cx="423.6" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
-<circle class="chart-dot" cx="446.6" cy="125.2" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:59  —  Score: 82.5" data-note=""/>
-<circle class="chart-dot" cx="458.1" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
-<circle class="chart-dot" cx="469.6" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
-<circle class="chart-dot" cx="481.2" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
-<circle class="chart-dot" cx="492.7" cy="114.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:03  —  Score: 84.4" data-note=""/>
-<circle class="chart-dot" cx="504.2" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
-<circle class="chart-dot" cx="515.7" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:23  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="538.8" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:27  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="561.8" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:28  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="584.8" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:38  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="607.9" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
-<circle class="chart-dot" cx="630.9" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 23:09  —  Score: 88.3" data-note=""/>
-<circle class="chart-dot" cx="653.9" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:29  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="677.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:30  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="700.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:29  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="77.6" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:43  —  Score: 88.3" data-note=""/>
+<circle class="chart-dot" cx="100.3" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:51  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="122.9" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:57  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="145.5" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="168.2" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:03  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="190.8" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
+<circle class="chart-dot" cx="213.4" cy="49.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:14  —  Score: 96.4" data-note=""/>
+<circle class="chart-dot" cx="236.1" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:19  —  Score: 97.6" data-note=""/>
+<circle class="chart-dot" cx="258.7" cy="232.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:51  —  Score: 62.7" data-note=""/>
+<circle class="chart-dot" cx="281.3" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
+<circle class="chart-dot" cx="303.9" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
+<circle class="chart-dot" cx="326.6" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
+<circle class="chart-dot" cx="349.2" cy="156.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:30  —  Score: 76.7" data-note=""/>
+<circle class="chart-dot" cx="371.8" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
+<circle class="chart-dot" cx="394.5" cy="142.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:42  —  Score: 79.3" data-note=""/>
+<circle class="chart-dot" cx="417.1" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
+<circle class="chart-dot" cx="439.7" cy="125.2" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:59  —  Score: 82.5" data-note=""/>
+<circle class="chart-dot" cx="451.1" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
+<circle class="chart-dot" cx="462.4" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
+<circle class="chart-dot" cx="473.7" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
+<circle class="chart-dot" cx="485.0" cy="114.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:03  —  Score: 84.4" data-note=""/>
+<circle class="chart-dot" cx="496.3" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
+<circle class="chart-dot" cx="507.6" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:23  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="530.3" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:27  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="552.9" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:28  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="575.5" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:38  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="598.2" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
+<circle class="chart-dot" cx="620.8" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 23:09  —  Score: 88.3" data-note=""/>
+<circle class="chart-dot" cx="643.4" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:29  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="666.1" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:30  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="688.7" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:29  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="700.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:38  —  Score: 89.4" data-note=""/>
 <text x="55.0" y="85.6" text-anchor="start" font-size="11" font-weight="bold" fill="#2c3e50">88.3</text>
-<text x="250.8" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
+<text x="247.4" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
 <text x="700.0" y="79.6" text-anchor="end" font-size="11" font-weight="bold" fill="#2c3e50">89.4</text>
 <text x="55.0" y="278" text-anchor="middle" font-size="10" fill="#888">18:27</text>
-<text x="181.7" y="278" text-anchor="middle" font-size="10" fill="#888">19:09</text>
-<text x="308.4" y="278" text-anchor="middle" font-size="10" fill="#888">20:20</text>
-<text x="435.1" y="278" text-anchor="middle" font-size="10" fill="#888">20:52</text>
-<text x="561.8" y="278" text-anchor="middle" font-size="10" fill="#888">22:28</text>
-<text x="688.5" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
+<text x="179.5" y="278" text-anchor="middle" font-size="10" fill="#888">19:09</text>
+<text x="303.9" y="278" text-anchor="middle" font-size="10" fill="#888">20:20</text>
+<text x="428.4" y="278" text-anchor="middle" font-size="10" fill="#888">20:52</text>
+<text x="552.9" y="278" text-anchor="middle" font-size="10" fill="#888">22:28</text>
+<text x="677.4" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
 <text x="700.0" y="278" text-anchor="end" font-size="10" fill="#888">2026-04-08</text>
-<line x1="250.8" y1="30" x2="250.8" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
-<text x="254.8" y="44" font-size="10" fill="#e67e22">v2</text>
+<line x1="247.4" y1="30" x2="247.4" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="251.4" y="44" font-size="10" fill="#e67e22">v2</text>
 </svg>
 <script>
 (function() {
@@ -234,6 +235,7 @@ Freshness: 100.0% updated this week | median age: 0.2 days
 | 2026-04-08 00:30 | v2 | **89.4** | 100.0 | 25 |  |
 | 2026-04-08 01:13 | v2 | **89.4** | 100.0 | 25 |  |
 | 2026-04-08 02:29 | v2 | **89.4** | 100.0 | 25 |  |
+| 2026-04-08 02:38 | v2 | **89.4** | 100.0 | 25 |  |
 
 ## Open Issues
 

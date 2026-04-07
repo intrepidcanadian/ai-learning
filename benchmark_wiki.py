@@ -478,6 +478,67 @@ def compute_topic_coverage(articles_dict):
 
 COVERAGE_THRESHOLD = 80  # Below this, switch to coverage mode
 
+WISHLIST_PATH = ROOT / "data" / "topic-wishlist.txt"
+
+
+def load_wishlist():
+    """Load topics from the wishlist file.
+    Returns a list of topic stems (no extension, no path)."""
+    if not WISHLIST_PATH.exists():
+        return []
+    topics = []
+    for line in WISHLIST_PATH.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        # Normalize: strip .md if present, take stem
+        stem = Path(line).stem if line.endswith(".md") else line
+        topics.append(stem)
+    return topics
+
+
+def compute_wishlist_coverage(articles_dict):
+    """Check which wishlist topics have articles written.
+    Returns:
+        {
+            "total": int,
+            "written": int,
+            "remaining": int,
+            "coverage_score": float,
+            "items": [{"topic": str, "written": bool}, ...]
+        }
+    """
+    wishlist = load_wishlist()
+    if not wishlist:
+        return {"total": 0, "written": 0, "remaining": 0,
+                "coverage_score": 100.0, "items": []}
+
+    all_stems = set(articles_dict.keys())
+    # Also check if file exists in any category dir
+    items = []
+    written_count = 0
+    for topic in wishlist:
+        exists = topic in all_stems
+        if not exists:
+            for cat in CATEGORIES:
+                if (ROOT / cat / f"{topic}.md").exists():
+                    exists = True
+                    break
+        items.append({"topic": topic, "written": exists})
+        if exists:
+            written_count += 1
+
+    total = len(wishlist)
+    score = (written_count / total * 100) if total > 0 else 100.0
+
+    return {
+        "total": total,
+        "written": written_count,
+        "remaining": total - written_count,
+        "coverage_score": round(score, 1),
+        "items": items,
+    }
+
 
 # ── Coverage & Freshness Summary ────────────────────────────────────────────
 
@@ -633,6 +694,7 @@ def run_benchmark():
     coverage = compute_coverage(results)
     freshness = compute_freshness_summary(results)
     topic_coverage = compute_topic_coverage(discovered)
+    wishlist_coverage = compute_wishlist_coverage(discovered)
 
     # Per-tier composites
     tier_scores = defaultdict(list)
@@ -664,6 +726,7 @@ def run_benchmark():
         "summary": summary,
         "coverage": coverage,
         "topic_coverage": topic_coverage,
+        "wishlist_coverage": wishlist_coverage,
         "freshness": freshness,
         "articles": results,
     }
@@ -800,20 +863,55 @@ def print_scorecard(results):
                 print(f"    ... and {len(gaps) - 10} more")
             print()
 
+    # Wishlist Coverage
+    wishlist_cov = results.get("wishlist_coverage", {})
+    if wishlist_cov and wishlist_cov.get("total", 0) > 0:
+        print(f"  ── TOPIC WISHLIST ──")
+        print()
+        wl_score = wishlist_cov["coverage_score"]
+        wl_written = wishlist_cov["written"]
+        wl_total = wishlist_cov["total"]
+        wl_remaining = wishlist_cov["remaining"]
+        print(f"  WISHLIST: {wl_score}% complete  ({wl_written}/{wl_total} written, "
+              f"{wl_remaining} remaining)")
+        remaining_items = [i["topic"] for i in wishlist_cov["items"] if not i["written"]]
+        if remaining_items:
+            print(f"  Remaining: {', '.join(remaining_items[:10])}")
+            if len(remaining_items) > 10:
+                print(f"    ... and {len(remaining_items) - 10} more")
+        print()
+
     # Mode recommendation
     print("  ── ACTION ──")
     print()
     quality_score = summary["overall_composite"]
     cov_score = topic_cov.get("coverage_score", 100.0) if topic_cov else 100.0
-    if cov_score < COVERAGE_THRESHOLD:
-        print(f"  MODE: ** COVERAGE ** — {unresolved} topic gaps detected "
-              f"(coverage {cov_score}% < {COVERAGE_THRESHOLD}% threshold)")
-        print(f"  Priority: Write new articles for the most-referenced red-link gaps")
+    wl_score = wishlist_cov.get("coverage_score", 100.0) if wishlist_cov else 100.0
+    # Combined coverage: average of link coverage and wishlist coverage (if wishlist exists)
+    if wishlist_cov and wishlist_cov.get("total", 0) > 0:
+        combined_cov = (cov_score + wl_score) / 2
+    else:
+        combined_cov = cov_score
+
+    if combined_cov < COVERAGE_THRESHOLD:
+        reason_parts = []
+        if cov_score < COVERAGE_THRESHOLD:
+            reason_parts.append(f"red-link coverage {cov_score}%")
+        if wl_score < COVERAGE_THRESHOLD:
+            remaining = [i["topic"] for i in wishlist_cov.get("items", []) if not i["written"]]
+            reason_parts.append(f"wishlist {wl_score}%")
+        reason = ", ".join(reason_parts)
+        print(f"  MODE: ** COVERAGE ** — combined coverage {combined_cov:.0f}% "
+              f"< {COVERAGE_THRESHOLD}% ({reason})")
+        print(f"  Priority: Write new articles for wishlist topics or red-link gaps")
+        remaining = [i["topic"] for i in wishlist_cov.get("items", []) if not i["written"]]
+        if remaining:
+            print(f"  Wishlist priorities: {', '.join(remaining[:5])}")
         if gaps:
             top_gaps = [g["topic"] for g in gaps[:5]]
-            print(f"  Top gaps: {', '.join(top_gaps)}")
+            print(f"  Red-link gaps: {', '.join(top_gaps)}")
     else:
-        print(f"  MODE: ** QUALITY ** — coverage is healthy ({cov_score}% >= {COVERAGE_THRESHOLD}%)")
+        print(f"  MODE: ** QUALITY ** — coverage is healthy ({combined_cov:.0f}% >= {COVERAGE_THRESHOLD}%)")
         print(f"  Priority: Improve lowest-scoring existing articles")
         print(f"  Lowest scoring: {summary['lowest_scoring']}")
     print(f"  Highest scoring: {summary['highest_scoring']}")

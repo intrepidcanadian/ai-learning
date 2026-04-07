@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Build static HTML wiki from markdown files."""
+"""Build static HTML wiki from markdown files, and optionally serve with live wishlist API."""
 
 import os
 import re
+import json
 import markdown
 import sys
+from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -110,6 +114,98 @@ body {{
     background: rgba(74,111,165,0.18);
     border-left-color: #5b9df5;
     font-weight: 600;
+}}
+.wishlist-panel {{
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}}
+.wishlist-panel h3 {{
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}}
+.wishlist-panel .wl-stats {{
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}}
+.wishlist-panel .wl-bar {{
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}}
+.wishlist-panel .wl-bar-fill {{
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}}
+.wishlist-panel .wl-item {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}}
+.wishlist-panel .wl-item.written {{
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}}
+.wishlist-panel .wl-item button {{
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}}
+.wishlist-panel .wl-item button:hover {{
+    opacity: 1;
+}}
+.wishlist-panel .wl-add {{
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}}
+.wishlist-panel .wl-add input {{
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}}
+.wishlist-panel .wl-add input:focus {{
+    border-color: #5b9df5;
+}}
+.wishlist-panel .wl-add button {{
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}}
+.wishlist-panel .wl-add button:hover {{
+    background: #5b9df5;
+}}
+.wishlist-panel .wl-offline {{
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
 }}
 .content {{
     margin-left: 280px;
@@ -244,7 +340,85 @@ body {{
     <p>AI Research Automation</p>
 </div>
 {sidebar}
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
 </nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {{
+    try {{
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    }} catch(e) {{
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }}
+}}
+
+function renderWishlist(items) {{
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${{written}}/${{total}} written (${{pct}}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${{i.written ? 'written' : ''}}">
+            <span>${{i.written ? '\\u2713' : '\\u25CB'}} ${{i.topic}}</span>
+            <button onclick="removeWishlistTopic('${{i.topic}}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}}
+
+async function addWishlistTopic() {{
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {{
+        method: 'POST',
+        headers: {{'Content-Type': 'application/json'}},
+        body: JSON.stringify({{topic}})
+    }});
+    const items = await res.json();
+    renderWishlist(items);
+}}
+
+async function removeWishlistTopic(topic) {{
+    if (!wlLive) return;
+    const res = await fetch(API, {{
+        method: 'DELETE',
+        headers: {{'Content-Type': 'application/json'}},
+        body: JSON.stringify({{topic}})
+    }});
+    const items = await res.json();
+    renderWishlist(items);
+}}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {{
+    if (e.key === 'Enter') addWishlistTopic();
+}});
+
+loadWishlist();
+</script>
 <main class="content">
 <div class="breadcrumb">{breadcrumb}</div>
 {body}
@@ -383,11 +557,148 @@ def clean():
         print("  Removed: index.html")
 
 
+WISHLIST_PATH = os.path.join(ROOT, "data", "topic-wishlist.txt")
+
+# All known article stems for checking "written" status
+CATEGORY_DIRS = list(CATEGORIES.keys())
+
+
+def load_wishlist():
+    """Read wishlist, return list of topic strings."""
+    if not os.path.exists(WISHLIST_PATH):
+        return []
+    topics = []
+    with open(WISHLIST_PATH) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            topics.append(line)
+    return topics
+
+
+def save_wishlist(topics):
+    """Write topics list back to file, preserving header comments."""
+    header = (
+        "# Topic Wishlist\n"
+        "# One topic per line. Lines starting with # are comments.\n"
+        "# The benchmark checks which of these have articles written.\n"
+        "# Add topics via the wiki UI or by editing this file directly.\n\n"
+    )
+    os.makedirs(os.path.dirname(WISHLIST_PATH), exist_ok=True)
+    with open(WISHLIST_PATH, "w") as f:
+        f.write(header)
+        for t in topics:
+            f.write(t + "\n")
+
+
+def topic_exists(stem):
+    """Check if an article file exists for this topic stem."""
+    for cat in CATEGORY_DIRS:
+        if os.path.exists(os.path.join(ROOT, cat, f"{stem}.md")):
+            return True
+    return False
+
+
+def wishlist_with_status():
+    """Return wishlist items with written/remaining status."""
+    topics = load_wishlist()
+    return [{"topic": t, "written": topic_exists(t)} for t in topics]
+
+
+class WikiHandler(SimpleHTTPRequestHandler):
+    """Serve static files + /api/wishlist endpoint."""
+
+    def do_GET(self):
+        parsed = urlparse(self.path)
+        if parsed.path == "/api/wishlist":
+            items = wishlist_with_status()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(items).encode())
+        else:
+            super().do_GET()
+
+    def do_POST(self):
+        if self.path == "/api/wishlist":
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            topic = body.get("topic", "").strip().lower().replace(" ", "-")
+            if topic:
+                topics = load_wishlist()
+                if topic not in topics:
+                    topics.append(topic)
+                    save_wishlist(topics)
+            items = wishlist_with_status()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(items).encode())
+        else:
+            self.send_error(404)
+
+    def do_DELETE(self):
+        if self.path == "/api/wishlist":
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            topic = body.get("topic", "").strip()
+            if topic:
+                topics = load_wishlist()
+                topics = [t for t in topics if t != topic]
+                save_wishlist(topics)
+            items = wishlist_with_status()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(items).encode())
+        else:
+            self.send_error(404)
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
+    def log_message(self, format, *args):
+        # Suppress request logs for cleaner output (keep errors)
+        if args and "404" not in str(args):
+            return
+
+
+def serve(port=8000):
+    """Build wiki then serve with live wishlist API."""
+    print("Building wiki...")
+    build()
+    print()
+    os.chdir(ROOT)
+    server = HTTPServer(("", port), WikiHandler)
+    print(f"Serving wiki at http://localhost:{port}")
+    print(f"Wishlist API at http://localhost:{port}/api/wishlist")
+    print("Press Ctrl+C to stop.\n")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nStopped.")
+
+
 if __name__ == "__main__":
     if "--clean" in sys.argv:
         print("Cleaning...")
         clean()
+    elif "--serve" in sys.argv:
+        port = 8000
+        for i, arg in enumerate(sys.argv):
+            if arg == "--port" and i + 1 < len(sys.argv):
+                port = int(sys.argv[i + 1])
+        serve(port)
     else:
         print("Building wiki...")
         build()
         print(f"\nDone! Open: file://{os.path.join(ROOT, 'index.html')}")
+        print(f"Tip: Run 'python3 build.py --serve' for live editing with wishlist API")

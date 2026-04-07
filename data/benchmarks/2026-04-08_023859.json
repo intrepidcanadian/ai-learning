@@ -1,0 +1,1544 @@
+{
+  "timestamp": "2026-04-08T02:38:59.268884",
+  "version": 2,
+  "summary": {
+    "overall_composite": 89.4,
+    "article_count": 25,
+    "total_lines": 7597,
+    "total_words": 104552,
+    "lowest_scoring": "aide",
+    "highest_scoring": "recursive-self-improvement",
+    "tier_composites": {
+      "standard": 87.9,
+      "flagship": 97.0
+    }
+  },
+  "coverage": {
+    "total_articles": 25,
+    "by_category": {
+      "core-concepts": 4,
+      "frontier-topics": 8,
+      "methodologies": 5,
+      "research-sources": 3,
+      "tools-platforms": 5
+    },
+    "stubs": [],
+    "stub_count": 0,
+    "stub_pct": 0.0,
+    "substantial_count": 10,
+    "substantial_pct": 40.0,
+    "total_words": 104552,
+    "total_lines": 7597
+  },
+  "topic_coverage": {
+    "total_topic_refs": 25,
+    "resolved": 25,
+    "unresolved": 0,
+    "coverage_score": 100.0,
+    "gaps": []
+  },
+  "wishlist_coverage": {
+    "total": 10,
+    "written": 0,
+    "remaining": 10,
+    "coverage_score": 0.0,
+    "items": [
+      {
+        "topic": "prompt-engineering",
+        "written": false
+      },
+      {
+        "topic": "multi-agent-systems",
+        "written": false
+      },
+      {
+        "topic": "knowledge-distillation",
+        "written": false
+      },
+      {
+        "topic": "retrieval-augmented-generation",
+        "written": false
+      },
+      {
+        "topic": "synthetic-data-generation",
+        "written": false
+      },
+      {
+        "topic": "reward-modeling",
+        "written": false
+      },
+      {
+        "topic": "constitutional-ai",
+        "written": false
+      },
+      {
+        "topic": "chain-of-thought-reasoning",
+        "written": false
+      },
+      {
+        "topic": "model-merging",
+        "written": false
+      },
+      {
+        "topic": "tool-use-and-function-calling",
+        "written": false
+      }
+    ]
+  },
+  "freshness": {
+    "updated_today": 25,
+    "updated_this_week": 25,
+    "stale_articles": [],
+    "freshness_pct": 100.0,
+    "median_age_days": 0.2
+  },
+  "articles": {
+    "automated-peer-review": {
+      "key": "automated-peer-review",
+      "file": "core-concepts/automated-peer-review.md",
+      "category": "core-concepts",
+      "tier": "standard",
+      "lines": 181,
+      "words": 1972,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 53,
+        "currency": 55,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 86.1
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "ai-safety-in-research",
+        "automated-scientific-discovery",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 11,
+      "h3_count": 14,
+      "footnote_count": 13,
+      "internal_link_count": 26
+    },
+    "automated-scientific-discovery": {
+      "key": "automated-scientific-discovery",
+      "file": "core-concepts/automated-scientific-discovery.md",
+      "category": "core-concepts",
+      "tier": "standard",
+      "lines": 148,
+      "words": 1396,
+      "age_days": 0.3,
+      "scores": {
+        "structural": 100,
+        "depth": 75,
+        "currency": 58,
+        "sourcing": 94,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 88.9
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "automated-peer-review",
+        "autoresearch",
+        "foundation-models-for-research",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "the-ai-scientist",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 7,
+      "footnote_count": 13,
+      "internal_link_count": 27
+    },
+    "foundation-models-for-research": {
+      "key": "foundation-models-for-research",
+      "file": "core-concepts/foundation-models-for-research.md",
+      "category": "core-concepts",
+      "tier": "standard",
+      "lines": 178,
+      "words": 1931,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 53,
+        "currency": 63,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 87.3
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "aider",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "cross-cutting-connections",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 12,
+      "h3_count": 8,
+      "footnote_count": 18,
+      "internal_link_count": 31
+    },
+    "the-ai-scientist": {
+      "key": "the-ai-scientist",
+      "file": "core-concepts/the-ai-scientist.md",
+      "category": "core-concepts",
+      "tier": "standard",
+      "lines": 151,
+      "words": 1580,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 56,
+        "currency": 85,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 91.1
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aider",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "template-free-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 10,
+      "footnote_count": 12,
+      "internal_link_count": 27
+    },
+    "aide": {
+      "key": "aide",
+      "file": "tools-platforms/aide.md",
+      "category": "tools-platforms",
+      "tier": "standard",
+      "lines": 201,
+      "words": 2155,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 61,
+        "currency": 74,
+        "sourcing": 95,
+        "linking": 80,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 85.4
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "autoresearch",
+        "cross-cutting-connections",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "aider",
+          "semantic-scholar-api"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 14,
+      "h3_count": 9,
+      "footnote_count": 15,
+      "internal_link_count": 21
+    },
+    "aider": {
+      "key": "aider",
+      "file": "tools-platforms/aider.md",
+      "category": "tools-platforms",
+      "tier": "standard",
+      "lines": 179,
+      "words": 2053,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 60,
+        "currency": 88,
+        "sourcing": 86,
+        "linking": 90,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 88.0
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "autoresearch",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "semantic-scholar-api"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 10,
+      "footnote_count": 11,
+      "internal_link_count": 30
+    },
+    "autoresearch": {
+      "key": "autoresearch",
+      "file": "tools-platforms/autoresearch.md",
+      "category": "tools-platforms",
+      "tier": "standard",
+      "lines": 159,
+      "words": 1599,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 56,
+        "currency": 61,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 87.5
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "aider",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 13,
+      "h3_count": 3,
+      "footnote_count": 10,
+      "internal_link_count": 21
+    },
+    "huggingface-papers-api": {
+      "key": "huggingface-papers-api",
+      "file": "tools-platforms/huggingface-papers-api.md",
+      "category": "tools-platforms",
+      "tier": "standard",
+      "lines": 200,
+      "words": 1621,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 69,
+        "currency": 76,
+        "sourcing": 100,
+        "linking": 80,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 87.7
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "aide",
+          "aider"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 11,
+      "h3_count": 7,
+      "footnote_count": 12,
+      "internal_link_count": 23
+    },
+    "semantic-scholar-api": {
+      "key": "semantic-scholar-api",
+      "file": "tools-platforms/semantic-scholar-api.md",
+      "category": "tools-platforms",
+      "tier": "standard",
+      "lines": 181,
+      "words": 1839,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 69,
+        "currency": 71,
+        "sourcing": 100,
+        "linking": 80,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 86.9
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "autoresearch",
+        "cross-cutting-connections",
+        "huggingface-papers-api",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "aide",
+          "aider"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 11,
+      "h3_count": 10,
+      "footnote_count": 12,
+      "internal_link_count": 22
+    },
+    "agentic-tree-search": {
+      "key": "agentic-tree-search",
+      "file": "methodologies/agentic-tree-search.md",
+      "category": "methodologies",
+      "tier": "standard",
+      "lines": 169,
+      "words": 1512,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 67,
+        "currency": 70,
+        "sourcing": 100,
+        "linking": 90,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 88.4
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "aide",
+        "automated-experiment-design",
+        "autoresearch",
+        "predictive-simulation-learning",
+        "scaling-laws-research",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "wiki-quality-benchmarking"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 5,
+      "footnote_count": 13,
+      "internal_link_count": 11
+    },
+    "automated-experiment-design": {
+      "key": "automated-experiment-design",
+      "file": "methodologies/automated-experiment-design.md",
+      "category": "methodologies",
+      "tier": "standard",
+      "lines": 189,
+      "words": 1744,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 62,
+        "currency": 61,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 88.3
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 12,
+      "footnote_count": 16,
+      "internal_link_count": 26
+    },
+    "template-free-research": {
+      "key": "template-free-research",
+      "file": "methodologies/template-free-research.md",
+      "category": "methodologies",
+      "tier": "standard",
+      "lines": 194,
+      "words": 1831,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 65,
+        "currency": 68,
+        "sourcing": 94,
+        "linking": 90,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 87.0
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "ai-safety-in-research",
+        "aider",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "automated-experiment-design"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 14,
+      "h3_count": 3,
+      "footnote_count": 14,
+      "internal_link_count": 25
+    },
+    "vlm-integration": {
+      "key": "vlm-integration",
+      "file": "methodologies/vlm-integration.md",
+      "category": "methodologies",
+      "tier": "standard",
+      "lines": 188,
+      "words": 1856,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 74,
+        "currency": 79,
+        "sourcing": 100,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 92.9
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "wiki-quality-benchmarking"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 6,
+      "footnote_count": 15,
+      "internal_link_count": 26
+    },
+    "wiki-quality-benchmarking": {
+      "key": "wiki-quality-benchmarking",
+      "file": "methodologies/wiki-quality-benchmarking.md",
+      "category": "methodologies",
+      "tier": "standard",
+      "lines": 210,
+      "words": 2055,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 69,
+        "currency": 57,
+        "sourcing": 79,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 85.6
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "README",
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "benchmark-trend",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 3,
+      "footnote_count": 11,
+      "internal_link_count": 32
+    },
+    "ai-ecommerce-learning": {
+      "key": "ai-ecommerce-learning",
+      "file": "frontier-topics/ai-ecommerce-learning.md",
+      "category": "frontier-topics",
+      "tier": "flagship",
+      "lines": 873,
+      "words": 14782,
+      "age_days": 0.0,
+      "scores": {
+        "structural": 100,
+        "depth": 100,
+        "currency": 100,
+        "sourcing": 92,
+        "linking": 88,
+        "consistency": 100,
+        "freshness": 99,
+        "composite": 97.2
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "autoresearch",
+        "blockchain-ai-optimization",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "ai-safety-in-research",
+          "scaling-laws-research"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 24,
+      "h3_count": 64,
+      "footnote_count": 68,
+      "internal_link_count": 74
+    },
+    "ai-safety-in-research": {
+      "key": "ai-safety-in-research",
+      "file": "frontier-topics/ai-safety-in-research.md",
+      "category": "frontier-topics",
+      "tier": "standard",
+      "lines": 230,
+      "words": 2128,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 52,
+        "currency": 82,
+        "sourcing": 100,
+        "linking": 77,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 85.4
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "blockchain-ai-optimization",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "ai-ecommerce-learning",
+          "cross-cutting-connections",
+          "predictive-simulation-learning",
+          "scaling-laws-research"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 11,
+      "h3_count": 18,
+      "footnote_count": 19,
+      "internal_link_count": 23
+    },
+    "blockchain-ai-optimization": {
+      "key": "blockchain-ai-optimization",
+      "file": "frontier-topics/blockchain-ai-optimization.md",
+      "category": "frontier-topics",
+      "tier": "standard",
+      "lines": 160,
+      "words": 1369,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 70,
+        "currency": 74,
+        "sourcing": 94,
+        "linking": 90,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 88.6
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "ai-ecommerce-learning",
+        "ai-safety-in-research",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "cross-cutting-connections"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 9,
+      "h3_count": 5,
+      "footnote_count": 12,
+      "internal_link_count": 25
+    },
+    "cross-cutting-connections": {
+      "key": "cross-cutting-connections",
+      "file": "frontier-topics/cross-cutting-connections.md",
+      "category": "frontier-topics",
+      "tier": "flagship",
+      "lines": 1282,
+      "words": 21413,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 97,
+        "currency": 100,
+        "sourcing": 87,
+        "linking": 88,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 95.5
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "ai-safety-in-research",
+          "blockchain-ai-optimization"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 82,
+      "h3_count": 11,
+      "footnote_count": 96,
+      "internal_link_count": 129
+    },
+    "open-ended-discovery": {
+      "key": "open-ended-discovery",
+      "file": "frontier-topics/open-ended-discovery.md",
+      "category": "frontier-topics",
+      "tier": "standard",
+      "lines": 158,
+      "words": 1787,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 48,
+        "currency": 80,
+        "sourcing": 100,
+        "linking": 88,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 86.7
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "ai-safety-in-research",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "blockchain-ai-optimization",
+          "cross-cutting-connections"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 14,
+      "footnote_count": 15,
+      "internal_link_count": 25
+    },
+    "predictive-simulation-learning": {
+      "key": "predictive-simulation-learning",
+      "file": "frontier-topics/predictive-simulation-learning.md",
+      "category": "frontier-topics",
+      "tier": "flagship",
+      "lines": 878,
+      "words": 17285,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 97,
+        "currency": 98,
+        "sourcing": 96,
+        "linking": 88,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 97.0
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "ai-safety-in-research",
+          "blockchain-ai-optimization"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 72,
+      "h3_count": 16,
+      "footnote_count": 84,
+      "internal_link_count": 50
+    },
+    "recursive-self-improvement": {
+      "key": "recursive-self-improvement",
+      "file": "frontier-topics/recursive-self-improvement.md",
+      "category": "frontier-topics",
+      "tier": "flagship",
+      "lines": 747,
+      "words": 13363,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 100,
+        "currency": 99,
+        "sourcing": 96,
+        "linking": 94,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 98.3
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.2,
+        "currency": 0.15,
+        "sourcing": 0.2,
+        "linking": 0.1,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "ai-safety-in-research",
+        "aider",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "scaling-laws-research",
+        "template-free-research",
+        "the-ai-scientist"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "blockchain-ai-optimization"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 10,
+      "h3_count": 65,
+      "footnote_count": 67,
+      "internal_link_count": 42
+    },
+    "scaling-laws-research": {
+      "key": "scaling-laws-research",
+      "file": "frontier-topics/scaling-laws-research.md",
+      "category": "frontier-topics",
+      "tier": "standard",
+      "lines": 207,
+      "words": 2102,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 58,
+        "currency": 73,
+        "sourcing": 98,
+        "linking": 82,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 85.7
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "aider",
+        "automated-peer-review",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "open-ended-discovery",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [
+          "ai-safety-in-research",
+          "blockchain-ai-optimization",
+          "cross-cutting-connections"
+        ],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 9,
+      "h3_count": 13,
+      "footnote_count": 18,
+      "internal_link_count": 23
+    },
+    "institutions-and-labs": {
+      "key": "institutions-and-labs",
+      "file": "research-sources/institutions-and-labs.md",
+      "category": "research-sources",
+      "tier": "standard",
+      "lines": 175,
+      "words": 1809,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 67,
+        "currency": 76,
+        "sourcing": 98,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 91.0
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-safety-in-research",
+        "aider",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "blockchain-ai-optimization",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 13,
+      "h3_count": 11,
+      "footnote_count": 17,
+      "internal_link_count": 23
+    },
+    "key-papers": {
+      "key": "key-papers",
+      "file": "research-sources/key-papers.md",
+      "category": "research-sources",
+      "tier": "standard",
+      "lines": 159,
+      "words": 1744,
+      "age_days": 0.2,
+      "scores": {
+        "structural": 100,
+        "depth": 67,
+        "currency": 84,
+        "sourcing": 64,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 97,
+        "composite": 87.1
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "automated-experiment-design",
+        "automated-peer-review",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "semantic-scholar-api",
+        "template-free-research",
+        "the-ai-scientist",
+        "tracking-ai-research",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 7,
+      "h3_count": 12,
+      "footnote_count": 3,
+      "internal_link_count": 21
+    },
+    "tracking-ai-research": {
+      "key": "tracking-ai-research",
+      "file": "research-sources/tracking-ai-research.md",
+      "category": "research-sources",
+      "tier": "standard",
+      "lines": 200,
+      "words": 1626,
+      "age_days": 0.1,
+      "scores": {
+        "structural": 100,
+        "depth": 78,
+        "currency": 69,
+        "sourcing": 94,
+        "linking": 100,
+        "consistency": 100,
+        "freshness": 98,
+        "composite": 91.1
+      },
+      "weights": {
+        "structural": 0.15,
+        "depth": 0.15,
+        "currency": 0.15,
+        "sourcing": 0.15,
+        "linking": 0.2,
+        "consistency": 0.15,
+        "freshness": 0.05
+      },
+      "outbound_stems": [
+        "agentic-tree-search",
+        "ai-ecommerce-learning",
+        "aide",
+        "aider",
+        "automated-experiment-design",
+        "automated-scientific-discovery",
+        "autoresearch",
+        "cross-cutting-connections",
+        "foundation-models-for-research",
+        "huggingface-papers-api",
+        "institutions-and-labs",
+        "key-papers",
+        "predictive-simulation-learning",
+        "recursive-self-improvement",
+        "scaling-laws-research",
+        "semantic-scholar-api",
+        "the-ai-scientist",
+        "vlm-integration"
+      ],
+      "issues": {
+        "missing_sections": [],
+        "missing_sibling_links": [],
+        "missing_category_links": [],
+        "consistency_issues": []
+      },
+      "h2_count": 11,
+      "h3_count": 6,
+      "footnote_count": 10,
+      "internal_link_count": 27
+    }
+  }
+}

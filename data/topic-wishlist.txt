@@ -1,0 +1,15 @@
+# Topic Wishlist
+# One topic per line. Lines starting with # are comments.
+# The benchmark checks which of these have articles written.
+# Add topics via the wiki UI or by editing this file directly.
+
+prompt-engineering
+multi-agent-systems
+knowledge-distillation
+retrieval-augmented-generation
+synthetic-data-generation
+reward-modeling
+constitutional-ai
+chain-of-thought-reasoning
+model-merging
+tool-use-and-function-calling
