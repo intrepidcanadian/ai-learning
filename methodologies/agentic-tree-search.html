@@ -403,6 +403,16 @@ body {
 <li><strong>VLM-in-the-loop pruning</strong>: Vision-language models evaluate experimental plots at each node, pruning branches with visualization artifacts before they waste compute <a href="OpenAI" title="2024). &quot;GPT-4o System Card.&quot; [openai.com/research](https://openai.com/research/gpt-4o-system-card">^6</a>.</li>
 <li><strong>Multi-objective search</strong>: Recent work explores balancing novelty and performance in the tree objective, rather than optimizing performance alone [^7].</li>
 </ul>
+<h3 id="mcts-llm-convergence-2025-2026">MCTS + LLM Convergence (2025-2026)</h3>
+<p>A wave of 2025-2026 research has deepened the connection between classical MCTS and LLM-based reasoning:</p>
+<ul>
+<li><strong>Unified survey</strong>: Jiang et al. (2025) provide the first comprehensive survey unifying tree search algorithms and reward design for LLM reasoning, showing that MCTS-based methods excel at navigating vast solution spaces to uncover optimal reasoning trajectories[^8].</li>
+<li><strong>Introspective MCTS (I-MCTS)</strong>: Zhang et al. (2025) introduce I-MCTS for AutoML, where tree nodes are iteratively expanded through an introspective process that analyzes solutions from parent and sibling nodes. A hybrid reward combining LLM-estimated evaluations and actual performance scores guides the search, achieving state-of-the-art results on automated ML pipelines[^9].</li>
+<li><strong>RethinkMCTS for code generation</strong>: Ding et al. (2025) apply MCTS to code generation by searching over <em>reasoning paths</em> (not code directly), with a refinement mechanism that corrects erroneous reasoning based on execution feedback. This bridges agentic tree search with <a href="../tools-platforms/aide.html">AIDE</a>'s code-as-search-space approach[^10].</li>
+<li><strong>ToolTree</strong>: Liu et al. (2026) address tool planning for LLM agents using MCTS with dual-feedback mechanisms and bidirectional pruning, improving efficiency of agentic tool use — directly applicable to experiment automation where agents must select among many analysis tools[^11].</li>
+<li><strong>MCTS for prompt optimization</strong>: MCTS-OPS (2025) formulates prompt selection as a sequential decision process guided by MCTS, achieving 98% success on easy problems and 70% on hard optimization tasks[^12]. This suggests agentic tree search could optimize not just experimental designs but also the prompts used to generate them.</li>
+<li><strong>Information-gain MCTS</strong>: TabTracer (2026) replaces one-way data analysis pipelines with information-gain-guided MCTS using versioned states and hash-based deduplication, enabling backtracking when evidence conflicts with the current hypothesis[^13]. The same principle applies to experimental research: negative results should trigger backtracking, not just pruning.</li>
+</ul>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ul>
 <li><strong>Computational cost</strong>: Exploring a 25-node tree requires ~25x the compute of a single linear experiment, making it expensive for large-scale experiments.</li>
@@ -427,6 +437,12 @@ body {
 <p>[^4]: Zhou, A. et al. (2024). "Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models." <a href="https://arxiv.org/abs/2310.04406">arXiv:2310.04406</a></p>
 <p>[^5]: Langley, P. et al. (1987). <em>Scientific Discovery: Computational Explorations of the Creative Processes.</em> MIT Press.</p>
 <p>[^7]: Lehman, J. et al. (2020). "Abandoning Objectives: Evolution Through the Search for Novelty Alone." <a href="https://arxiv.org/abs/2008.08639">arXiv:2008.08639</a></p>
+<p>[^8]: Jiang, Z. et al. (2025). "Unifying Tree Search Algorithm and Reward Design for LLM Reasoning: A Survey." <a href="https://arxiv.org/abs/2510.09988">arXiv:2510.09988</a></p>
+<p>[^9]: Zhang, X. et al. (2025). "I-MCTS: Enhancing Agentic AutoML via Introspective Monte Carlo Tree Search." <a href="https://arxiv.org/abs/2502.14693">arXiv:2502.14693</a></p>
+<p>[^10]: Ding, L. et al. (2025). "RethinkMCTS: Refining Erroneous Thoughts in Monte Carlo Tree Search for Code Generation." <a href="https://arxiv.org/abs/2409.09584">arXiv:2409.09584</a></p>
+<p>[^11]: Liu, Y. et al. (2026). "ToolTree: Efficient LLM Agent Tool Planning via Dual-Feedback MCTS and Bidirectional Pruning." <a href="https://arxiv.org/abs/2603.12740">arXiv:2603.12740</a></p>
+<p>[^12]: Wang, H. et al. (2025). "MCTS-OPS: Optimizing Prompt Sequences using Monte Carlo Tree Search." <a href="https://arxiv.org/abs/2508.05995">arXiv:2508.05995</a></p>
+<p>[^13]: Chen, R. et al. (2026). "TabTracer: Monte Carlo Tree Search for Complex Table Reasoning with LLMs." <a href="https://arxiv.org/abs/2602.14089">arXiv:2602.14089</a></p>
 </main>
 </body>
 </html>

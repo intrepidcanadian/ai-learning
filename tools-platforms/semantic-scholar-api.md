@@ -81,12 +81,23 @@ As of 2026, Semantic Scholar has expanded significantly:
 
 - **Open Academic Graph**: Semantic Scholar contributes to the Open Academic Graph initiative, linking its corpus with Microsoft Academic Graph and other sources to provide the most comprehensive citation network available[^1].
 
-**Application for learning**: Semantic Scholar's citation graph provides a powerful tool for structured learning. Students entering a new field can:
+- **Corpus scale (2025-2026)**: The platform now indexes over 225 million papers, 100 million authors, 650 million paper-authorship edges, and 2.8 billion citation edges[^1]. The API uses AI-powered relevance ranking (not just keyword matching) and offers bulk search endpoints for programmatic access at scale.
+
+- **MCP server integrations (2025-2026)**: Multiple Model Context Protocol (MCP) server implementations now bridge AI assistants (Claude Desktop, Cursor, Claude Code) to Semantic Scholar's API[^7]. These servers enable AI agents to perform structured queries like "papers on LLMs published 2023-2025 with 50+ citations" directly within agentic workflows. The most popular implementations (Kuo, 2025; Tang, 2025) have thousands of downloads, reflecting growing demand for AI-mediated literature search.
+
+- **Python client library**: The `semanticscholar` PyPI package (v0.12.0, March 2026) provides a high-level Python interface with pagination, rate-limit handling, and async support[^8]. This makes it straightforward to build automated literature review pipelines — for example, [Autoresearch](../tools-platforms/autoresearch.md) could use the client to validate paper novelty before running experiments.
+
+- **Rate limit improvements**: Free access now provides 1,000 requests/second shared among unauthenticated users, with higher limits available via free API keys[^2]. This represents a significant increase from earlier limits of 100 requests per 5 minutes, making Semantic Scholar viable for high-throughput research automation.
+
+### Application for AI-Powered Learning
+
+Semantic Scholar's citation graph provides a powerful tool for structured learning. Students entering a new field can:
 1. Start with a known seminal paper
 2. Use the citations endpoint to find papers that built on it (forward citations)
 3. Use the references endpoint to find papers it built on (backward references)
 4. Repeat to map the intellectual landscape
-This systematic approach, automatable via the API, reconstructs a field's evolution in hours rather than weeks.
+
+This systematic approach, automatable via the API, reconstructs a field's evolution in hours rather than weeks. Recent work on conversational AI tutors (Jurenka et al., 2026) shows that providing real-time literature-informed suggestions increases the probability of students mastering knowledge components by 4 percentage points on average[^9] — Semantic Scholar's API is a natural backend for such tutoring systems.
 
 ## Limitations / Challenges
 
@@ -119,3 +130,9 @@ This systematic approach, automatable via the API, reconstructs a field's evolut
 [^5]: Singh, A. et al. (2025). "SPECTER2: Adapting Scientific Document Embeddings for Multiple Tasks." [arXiv:2401.04704](https://arxiv.org/abs/2401.04704)
 
 [^6]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." *Nature*, 651(8107). [doi:10.1038/s41586-025-08865-0](https://doi.org/10.1038/s41586-025-08865-0)
+
+[^7]: Kuo, J. (2025). "Semantic Scholar MCP Server." [github.com/JackKuo666/semanticscholar-MCP-Server](https://github.com/JackKuo666/semanticscholar-MCP-Server)
+
+[^8]: Semantic Scholar Python Client (2026). PyPI package `semanticscholar` v0.12.0. [pypi.org/project/semanticscholar](https://pypi.org/project/semanticscholar/)
+
+[^9]: Jurenka, R. et al. (2026). "The Path to Conversational AI Tutors." [arXiv:2602.19303](https://arxiv.org/abs/2602.19303)

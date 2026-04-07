@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-04-07_211115",
+  "iteration": 6,
+  "articles_modified": [
+    "aide",
+    "aider",
+    "semantic-scholar-api",
+    "agentic-tree-search"
+  ],
+  "hypothesis": {
+    "strategy": "Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic-tree-search) with substantial depth, 2025-2026 papers, and footnoted references. Add SVG diagram to aide.",
+    "predicted_delta": 2.5,
+    "dimensions_targeted": ["depth", "currency", "sourcing"],
+    "reasoning": "Past sessions showed that adding 2025-2026 sourced content reliably boosts currency and sourcing scores. aide and aider need the most work since their standard-tier promotion exposed low depth/sourcing. agentic-tree-search has currency=20 (lowest in wiki). Targeting all 4 lowest articles should yield broad composite improvement."
+  },
+  "result": {
+    "score_before": 82.4,
+    "score_after": 84.4,
+    "actual_delta": 2.0,
+    "improved": true,
+    "lesson": "Adding 2025-2026 papers with footnotes is the most reliable improvement strategy. agentic-tree-search jumped +14.1 (biggest gain) from currency=20 to 70 by adding 6 MCTS papers. aide +12.1, aider +12.4, semantic-scholar-api +11.1. All four targeted articles improved by >10 points. New lowest is huggingface-papers-api (75.0)."
+  },
+  "papers_added": 16,
+  "diagrams_added": 1,
+  "stubs_eliminated": 0
+}

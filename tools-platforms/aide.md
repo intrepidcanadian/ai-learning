@@ -16,6 +16,42 @@ This connects to program synthesis research, where the goal is generating progra
 
 **Learning application**: AIDE demonstrates a powerful study strategy for ML practitioners. Rather than manually tweaking hyperparameters, frame your experiments as a search problem: define a clear metric, generate candidate solutions, evaluate them, and let the results guide your next move. AIDE automates this, but the same structured approach improves manual experimentation.
 
+## Technical Architecture
+
+![AIDE Solution Tree](aide-solution-tree.svg)
+
+AIDE's architecture combines LLM-based code generation with a structured search process over program space[^1].
+
+### Solution Tree
+
+At its core, AIDE maintains a **solution tree** — a tree-structured history of all generated solutions. Each node contains a complete Python script, its execution results, and performance metrics. The tree grows through two operations:
+
+- **Drafting**: Creating a new root-level solution from scratch (exploration)
+- **Improving**: Selecting a promising existing node and generating a modified version as a child (exploitation)
+
+The system uses a selection policy to balance drafting vs. improving, favoring improvement of high-performing nodes while maintaining diversity through occasional new drafts[^1].
+
+### Execution Sandbox
+
+Each generated script runs in an isolated environment with:
+- **Timeout enforcement** — prevents infinite loops or excessive compute
+- **Output capture** — stdout, stderr, and saved files are recorded
+- **Metric extraction** — performance metrics are parsed from output for comparison
+
+### Feedback Loop
+
+After each execution, AIDE constructs a detailed prompt containing:
+1. The task description and evaluation metric
+2. The current best solution's code and score
+3. Execution logs (errors, warnings, metric values)
+4. Instructions to improve upon the current approach
+
+This feedback-driven iteration mirrors how human ML engineers debug and improve their solutions, but at machine speed[^1].
+
+### Self-Improving Coding Agents
+
+The SICA framework (Robeyns et al., 2025) extends AIDE's iterative approach by eliminating the distinction between the meta-agent and target agent — the coding agent edits its own codebase to improve itself, achieving 17–53% performance gains on SWE-Bench Verified subsets[^6]. This demonstrates that AIDE-style iterative code refinement generalizes beyond ML experiments to software engineering tasks.
+
 ## How It Works
 
 1. **Problem specification** -- User provides a task description and evaluation metric
@@ -75,6 +111,12 @@ As of 2026, AIDE has evolved significantly since its initial release:
 
 - **Tree-structured exploration**: AIDE now implements a tree-structured search similar to [Agentic Tree Search](../methodologies/agentic-tree-search.md), maintaining multiple solution branches and selecting the most promising ones for further refinement[^5].
 
+- **Agentic coding evolution**: The broader landscape of AI coding agents has matured rapidly. A comprehensive survey by Qian et al. (2025) categorizes LLM-based coding agents across the full software development lifecycle — planning, context management, tool integration, and execution monitoring — providing a taxonomy that situates AIDE within the larger ecosystem of autonomous code generation[^7]. SWE-EVO (2025) further reveals that current agents struggle with long-horizon software evolution: GPT-5 with OpenHands achieves only 21% on multi-file tasks averaging 21 files, compared to 65% on simpler SWE-Bench Verified tasks[^8].
+
+- **Live self-evolution**: Live-SWE-agent (2025) introduced the first coding agent that autonomously evolves its own capabilities during runtime, achieving 77.4% on SWE-bench Verified without test-time scaling[^9]. This represents a convergence of AIDE's iterative refinement with [recursive self-improvement](../frontier-topics/recursive-self-improvement.md).
+
+- **Context infrastructure**: Codified Context (2026) addresses a key bottleneck for AIDE-style agents: providing structured infrastructure and context engineering for AI agents operating in complex, real-world codebases[^10].
+
 - **Application to learning**: AIDE's approach has implications for AI-powered education. By treating solution-finding as a search problem with execution feedback, it demonstrates how AI tutors could explore multiple explanation strategies for a student, evaluating each approach's effectiveness before settling on the best one. This mirrors how effective human tutors adapt their teaching style based on student responses.
 
 ## Limitations / Challenges
@@ -105,3 +147,13 @@ As of 2026, AIDE has evolved significantly since its initial release:
 [^4]: Gulwani, S. et al. (2017). "Program Synthesis." *Foundations and Trends in Programming Languages*, 4(1-2), 1-119.
 
 [^5]: Chan, J. et al. (2025). "MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering." [arXiv:2410.07095](https://arxiv.org/abs/2410.07095)
+
+[^6]: Robeyns, E. et al. (2025). "A Self-Improving Coding Agent." [arXiv:2504.15228](https://arxiv.org/abs/2504.15228)
+
+[^7]: Qian, C. et al. (2025). "A Survey on Code Generation with LLM-based Agents." [arXiv:2508.00083](https://arxiv.org/abs/2508.00083)
+
+[^8]: Fan, Z. et al. (2025). "SWE-EVO: Benchmarking Coding Agents in Long-Horizon Software Evolution Scenarios." [arXiv:2512.18470](https://arxiv.org/abs/2512.18470)
+
+[^9]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" [arXiv:2511.13646](https://arxiv.org/abs/2511.13646)
+
+[^10]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." [arXiv:2602.20478](https://arxiv.org/abs/2602.20478)

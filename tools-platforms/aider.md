@@ -57,6 +57,14 @@ As of early 2026, Aider has matured significantly[^4]:
 - **Integration with The AI Scientist v2** -- The Nature-published AI Scientist uses Aider for template-based code generation across thousands of experiments[^5]
 - **Leaderboard-driven development** -- Aider maintains public LLM leaderboards (coding accuracy, edit format compliance) that provide empirical data on which [foundation models](../core-concepts/foundation-models-for-research.md) perform best at code editing tasks[^3]. These leaderboards have become a de facto benchmark for assessing model coding capabilities.
 
+### The Agentic Coding Landscape (2025-2026)
+
+Aider sits within a rapidly maturing ecosystem of AI coding agents. A comprehensive survey of agentic programming (2025) categorizes the landscape into planning agents, execution agents, and hybrid systems — Aider exemplifies the hybrid approach by combining conversational planning with direct code execution[^6]. Key developments in the broader ecosystem:
+
+- **Long-horizon challenges**: SWE-EVO (2025) benchmarks coding agents on tasks spanning an average of 21 files, revealing that even GPT-5 with OpenHands achieves only 21% accuracy — far below the 65% on simpler single-file tasks[^7]. This motivates Aider's repo-map approach, which provides structural awareness across large codebases.
+- **Self-evolving agents**: Live-SWE-agent (2025) introduced agents that evolve their own capabilities during runtime, achieving 77.4% on SWE-bench Verified[^8]. Aider's architecture — where every edit is a committed experiment — provides the version-controlled substrate that makes such self-improvement auditable.
+- **Context engineering**: Codified Context (2026) addresses the key challenge of structuring codebase knowledge for AI agents, proposing infrastructure patterns that complement Aider's tree-sitter-based repo map approach[^9].
+
 ### How Aider Supports Learning
 
 Aider's conversational interface makes it a powerful learning tool for developers:
@@ -65,6 +73,7 @@ Aider's conversational interface makes it a powerful learning tool for developer
 2. **Git as audit trail** -- Every edit is a commit, creating a reviewable history of how a codebase evolved — invaluable for learning from AI-assisted development
 3. **Multi-language support** -- As Aider expands beyond Python, it helps practitioners learn new languages by showing idiomatic code patterns in context
 4. **Research to practice bridge** -- Aider connects research automation (via The AI Scientist) to everyday development, demonstrating how techniques from [automated experiment design](../methodologies/automated-experiment-design.md) apply to practical coding
+5. **Pedagogical parallels**: Research on AI tutoring (Macina et al., 2025) shows that the most effective AI teachers provide targeted guidance rather than complete solutions[^10] — exactly the pattern Aider follows by generating minimal diffs rather than full file rewrites
 
 ## Technical Architecture
 
@@ -107,3 +116,8 @@ The repo map is a critical innovation. Aider uses tree-sitter to parse the codeb
 [^3]: Aider LLM Leaderboards. [aider.chat/docs/leaderboards](https://aider.chat/docs/leaderboards/)
 [^4]: Aider Changelog. [aider.chat/HISTORY.html](https://aider.chat/HISTORY.html)
 [^5]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." Sakana AI. [arXiv:2504.08066](https://arxiv.org/abs/2504.08066)
+[^6]: Rasheed, B. et al. (2025). "AI Agentic Programming: A Survey of Techniques, Challenges, and Opportunities." [arXiv:2508.11126](https://arxiv.org/abs/2508.11126)
+[^7]: Fan, Z. et al. (2025). "SWE-EVO: Benchmarking Coding Agents in Long-Horizon Software Evolution Scenarios." [arXiv:2512.18470](https://arxiv.org/abs/2512.18470)
+[^8]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" [arXiv:2511.13646](https://arxiv.org/abs/2511.13646)
+[^9]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." [arXiv:2602.20478](https://arxiv.org/abs/2602.20478)
+[^10]: Macina, J. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." [arXiv:2503.06424](https://arxiv.org/abs/2503.06424)

@@ -347,6 +347,13 @@ body {
 <li><strong>Integration with The AI Scientist v2</strong> -- The Nature-published AI Scientist uses Aider for template-based code generation across thousands of experiments[^5]</li>
 <li><strong>Leaderboard-driven development</strong> -- Aider maintains public LLM leaderboards (coding accuracy, edit format compliance) that provide empirical data on which <a href="../core-concepts/foundation-models-for-research.html">foundation models</a> perform best at code editing tasks[^3]. These leaderboards have become a de facto benchmark for assessing model coding capabilities.</li>
 </ul>
+<h3 id="the-agentic-coding-landscape-2025-2026">The Agentic Coding Landscape (2025-2026)</h3>
+<p>Aider sits within a rapidly maturing ecosystem of AI coding agents. A comprehensive survey of agentic programming (2025) categorizes the landscape into planning agents, execution agents, and hybrid systems — Aider exemplifies the hybrid approach by combining conversational planning with direct code execution[^6]. Key developments in the broader ecosystem:</p>
+<ul>
+<li><strong>Long-horizon challenges</strong>: SWE-EVO (2025) benchmarks coding agents on tasks spanning an average of 21 files, revealing that even GPT-5 with OpenHands achieves only 21% accuracy — far below the 65% on simpler single-file tasks[^7]. This motivates Aider's repo-map approach, which provides structural awareness across large codebases.</li>
+<li><strong>Self-evolving agents</strong>: Live-SWE-agent (2025) introduced agents that evolve their own capabilities during runtime, achieving 77.4% on SWE-bench Verified[^8]. Aider's architecture — where every edit is a committed experiment — provides the version-controlled substrate that makes such self-improvement auditable.</li>
+<li><strong>Context engineering</strong>: Codified Context (2026) addresses the key challenge of structuring codebase knowledge for AI agents, proposing infrastructure patterns that complement Aider's tree-sitter-based repo map approach[^9].</li>
+</ul>
 <h3 id="how-aider-supports-learning">How Aider Supports Learning</h3>
 <p>Aider's conversational interface makes it a powerful learning tool for developers:</p>
 <ol>
@@ -354,6 +361,7 @@ body {
 <li><strong>Git as audit trail</strong> -- Every edit is a commit, creating a reviewable history of how a codebase evolved — invaluable for learning from AI-assisted development</li>
 <li><strong>Multi-language support</strong> -- As Aider expands beyond Python, it helps practitioners learn new languages by showing idiomatic code patterns in context</li>
 <li><strong>Research to practice bridge</strong> -- Aider connects research automation (via The AI Scientist) to everyday development, demonstrating how techniques from <a href="../methodologies/automated-experiment-design.html">automated experiment design</a> apply to practical coding</li>
+<li><strong>Pedagogical parallels</strong>: Research on AI tutoring (Macina et al., 2025) shows that the most effective AI teachers provide targeted guidance rather than complete solutions[^10] — exactly the pattern Aider follows by generating minimal diffs rather than full file rewrites</li>
 </ol>
 <h2 id="technical-architecture">Technical Architecture</h2>
 <p>Aider's architecture involves several key components that work together:</p>
@@ -390,7 +398,12 @@ body {
 [^2]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).
 [^3]: Aider LLM Leaderboards. <a href="https://aider.chat/docs/leaderboards/">aider.chat/docs/leaderboards</a>
 [^4]: Aider Changelog. <a href="https://aider.chat/HISTORY.html">aider.chat/HISTORY.html</a>
-[^5]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." Sakana AI. <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a></p>
+[^5]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." Sakana AI. <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a>
+[^6]: Rasheed, B. et al. (2025). "AI Agentic Programming: A Survey of Techniques, Challenges, and Opportunities." <a href="https://arxiv.org/abs/2508.11126">arXiv:2508.11126</a>
+[^7]: Fan, Z. et al. (2025). "SWE-EVO: Benchmarking Coding Agents in Long-Horizon Software Evolution Scenarios." <a href="https://arxiv.org/abs/2512.18470">arXiv:2512.18470</a>
+[^8]: Yang, J. et al. (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" <a href="https://arxiv.org/abs/2511.13646">arXiv:2511.13646</a>
+[^9]: Tobin, J. et al. (2026). "Codified Context: Infrastructure for AI Agents in a Complex Codebase." <a href="https://arxiv.org/abs/2602.20478">arXiv:2602.20478</a>
+[^10]: Macina, J. et al. (2025). "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues." <a href="https://arxiv.org/abs/2503.06424">arXiv:2503.06424</a></p>
 </main>
 </body>
 </html>

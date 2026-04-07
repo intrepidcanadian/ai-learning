@@ -269,11 +269,11 @@ body {
 <p>Automated quality scores for the wiki's articles across all categories. Articles are scored with tier-aware expectations: <strong>flagship</strong> articles face the highest quality bar, <strong>standard</strong> articles have moderate expectations, and <strong>reference</strong> articles are evaluated primarily on linking and consistency.</p>
 <p>Scores are computed by <a href="../benchmark_wiki.py"><code>benchmark_wiki.py</code></a> across seven dimensions: structural completeness, depth, currency, sourcing, internal linking, consistency, and freshness. See <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> for full methodology.</p>
 <h2 id="current-score">Current Score</h2>
-<p><strong>Overall: 82.4/100</strong> | 25 articles | 91,713 words</p>
-<p>Tier scores: <strong>Standard:</strong> 79.6 | <strong>Flagship:</strong> 97.1</p>
+<p><strong>Overall: 84.4/100</strong> | 25 articles | 93,171 words</p>
+<p>Tier scores: <strong>Standard:</strong> 82.0 | <strong>Flagship:</strong> 97.1</p>
 <p>Coverage: 5 substantial | 0 stubs (0.0%)</p>
 <p>Freshness: 100.0% updated this week | median age: 0.0 days</p>
-<p><em>Last benchmarked: 2026-04-07T21:03</em></p>
+<p><em>Last benchmarked: 2026-04-07T21:11</em></p>
 <h3 id="core-concepts">Core Concepts</h3>
 <table>
 <thead>
@@ -359,6 +359,42 @@ body {
 </thead>
 <tbody>
 <tr>
+<td>semantic-scholar-api</td>
+<td>standard</td>
+<td>100</td>
+<td>60</td>
+<td>71</td>
+<td>90</td>
+<td>80</td>
+<td>100</td>
+<td>99</td>
+<td><strong>84.1</strong></td>
+</tr>
+<tr>
+<td>aider</td>
+<td>standard</td>
+<td>100</td>
+<td>37</td>
+<td>69</td>
+<td>94</td>
+<td>80</td>
+<td>100</td>
+<td>99</td>
+<td><strong>81.0</strong></td>
+</tr>
+<tr>
+<td>aide</td>
+<td>standard</td>
+<td>100</td>
+<td>52</td>
+<td>56</td>
+<td>90</td>
+<td>70</td>
+<td>100</td>
+<td>99</td>
+<td><strong>78.7</strong></td>
+</tr>
+<tr>
 <td>autoresearch</td>
 <td>standard</td>
 <td>100</td>
@@ -382,42 +418,6 @@ body {
 <td>99</td>
 <td><strong>75.0</strong></td>
 </tr>
-<tr>
-<td>semantic-scholar-api</td>
-<td>standard</td>
-<td>100</td>
-<td>54</td>
-<td>32</td>
-<td>74</td>
-<td>70</td>
-<td>100</td>
-<td>99</td>
-<td><strong>73.0</strong></td>
-</tr>
-<tr>
-<td>aider</td>
-<td>standard</td>
-<td>100</td>
-<td>31</td>
-<td>45</td>
-<td>42</td>
-<td>80</td>
-<td>100</td>
-<td>99</td>
-<td><strong>68.6</strong></td>
-</tr>
-<tr>
-<td>aide</td>
-<td>standard</td>
-<td>100</td>
-<td>31</td>
-<td>33</td>
-<td>54</td>
-<td>70</td>
-<td>100</td>
-<td>99</td>
-<td><strong>66.6</strong></td>
-</tr>
 </tbody>
 </table>
 <h3 id="methodologies">Methodologies</h3>
@@ -437,6 +437,18 @@ body {
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>agentic-tree-search</td>
+<td>standard</td>
+<td>100</td>
+<td>67</td>
+<td>70</td>
+<td>100</td>
+<td>90</td>
+<td>100</td>
+<td>99</td>
+<td><strong>88.5</strong></td>
+</tr>
 <tr>
 <td>wiki-quality-benchmarking</td>
 <td>standard</td>
@@ -484,18 +496,6 @@ body {
 <td>100</td>
 <td>99</td>
 <td><strong>75.9</strong></td>
-</tr>
-<tr>
-<td>agentic-tree-search</td>
-<td>standard</td>
-<td>100</td>
-<td>60</td>
-<td>20</td>
-<td>63</td>
-<td>90</td>
-<td>100</td>
-<td>99</td>
-<td><strong>74.4</strong></td>
 </tr>
 </tbody>
 </table>
@@ -670,7 +670,7 @@ body {
 </tbody>
 </table>
 <h2 id="score-trend">Score Trend</h2>
-<p><strong>Overall composite:</strong> 88.3 -&gt; 82.4  <code>▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄</code></p>
+<p><strong>Overall composite:</strong> 88.3 -&gt; 84.4  <code>▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄</code></p>
 <h3 id="run-history">Run History</h3>
 <table>
 <thead>
@@ -902,6 +902,12 @@ body {
 <td>2026-04-07</td>
 <td>v2</td>
 <td><strong>82.4</strong></td>
+<td>25</td>
+</tr>
+<tr>
+<td>2026-04-07</td>
+<td>v2</td>
+<td><strong>84.4</strong></td>
 <td>25</td>
 </tr>
 </tbody>

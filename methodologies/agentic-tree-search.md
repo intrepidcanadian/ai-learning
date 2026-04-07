@@ -112,6 +112,17 @@ As of 2026, agentic tree search has moved from a research prototype to a core co
 - **VLM-in-the-loop pruning**: Vision-language models evaluate experimental plots at each node, pruning branches with visualization artifacts before they waste compute [^6].
 - **Multi-objective search**: Recent work explores balancing novelty and performance in the tree objective, rather than optimizing performance alone [^7].
 
+### MCTS + LLM Convergence (2025-2026)
+
+A wave of 2025-2026 research has deepened the connection between classical MCTS and LLM-based reasoning:
+
+- **Unified survey**: Jiang et al. (2025) provide the first comprehensive survey unifying tree search algorithms and reward design for LLM reasoning, showing that MCTS-based methods excel at navigating vast solution spaces to uncover optimal reasoning trajectories[^8].
+- **Introspective MCTS (I-MCTS)**: Zhang et al. (2025) introduce I-MCTS for AutoML, where tree nodes are iteratively expanded through an introspective process that analyzes solutions from parent and sibling nodes. A hybrid reward combining LLM-estimated evaluations and actual performance scores guides the search, achieving state-of-the-art results on automated ML pipelines[^9].
+- **RethinkMCTS for code generation**: Ding et al. (2025) apply MCTS to code generation by searching over *reasoning paths* (not code directly), with a refinement mechanism that corrects erroneous reasoning based on execution feedback. This bridges agentic tree search with [AIDE](../tools-platforms/aide.md)'s code-as-search-space approach[^10].
+- **ToolTree**: Liu et al. (2026) address tool planning for LLM agents using MCTS with dual-feedback mechanisms and bidirectional pruning, improving efficiency of agentic tool use — directly applicable to experiment automation where agents must select among many analysis tools[^11].
+- **MCTS for prompt optimization**: MCTS-OPS (2025) formulates prompt selection as a sequential decision process guided by MCTS, achieving 98% success on easy problems and 70% on hard optimization tasks[^12]. This suggests agentic tree search could optimize not just experimental designs but also the prompts used to generate them.
+- **Information-gain MCTS**: TabTracer (2026) replaces one-way data analysis pipelines with information-gain-guided MCTS using versioned states and hash-based deduplication, enabling backtracking when evidence conflicts with the current hypothesis[^13]. The same principle applies to experimental research: negative results should trigger backtracking, not just pruning.
+
 ## Limitations / Challenges
 
 - **Computational cost**: Exploring a 25-node tree requires ~25x the compute of a single linear experiment, making it expensive for large-scale experiments.
@@ -144,3 +155,15 @@ As of 2026, agentic tree search has moved from a research prototype to a core co
 [^6]: OpenAI (2024). "GPT-4o System Card." [openai.com/research](https://openai.com/research/gpt-4o-system-card)
 
 [^7]: Lehman, J. et al. (2020). "Abandoning Objectives: Evolution Through the Search for Novelty Alone." [arXiv:2008.08639](https://arxiv.org/abs/2008.08639)
+
+[^8]: Jiang, Z. et al. (2025). "Unifying Tree Search Algorithm and Reward Design for LLM Reasoning: A Survey." [arXiv:2510.09988](https://arxiv.org/abs/2510.09988)
+
+[^9]: Zhang, X. et al. (2025). "I-MCTS: Enhancing Agentic AutoML via Introspective Monte Carlo Tree Search." [arXiv:2502.14693](https://arxiv.org/abs/2502.14693)
+
+[^10]: Ding, L. et al. (2025). "RethinkMCTS: Refining Erroneous Thoughts in Monte Carlo Tree Search for Code Generation." [arXiv:2409.09584](https://arxiv.org/abs/2409.09584)
+
+[^11]: Liu, Y. et al. (2026). "ToolTree: Efficient LLM Agent Tool Planning via Dual-Feedback MCTS and Bidirectional Pruning." [arXiv:2603.12740](https://arxiv.org/abs/2603.12740)
+
+[^12]: Wang, H. et al. (2025). "MCTS-OPS: Optimizing Prompt Sequences using Monte Carlo Tree Search." [arXiv:2508.05995](https://arxiv.org/abs/2508.05995)
+
+[^13]: Chen, R. et al. (2026). "TabTracer: Monte Carlo Tree Search for Complex Table Reasoning with LLMs." [arXiv:2602.14089](https://arxiv.org/abs/2602.14089)

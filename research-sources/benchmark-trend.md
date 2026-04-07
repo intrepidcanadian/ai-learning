@@ -6,15 +6,15 @@ Scores are computed by [`benchmark_wiki.py`](../benchmark_wiki.py) across seven 
 
 ## Current Score
 
-**Overall: 82.4/100** | 25 articles | 91,713 words
+**Overall: 84.4/100** | 25 articles | 93,171 words
 
-Tier scores: **Standard:** 79.6 | **Flagship:** 97.1
+Tier scores: **Standard:** 82.0 | **Flagship:** 97.1
 
 Coverage: 5 substantial | 0 stubs (0.0%)
 
 Freshness: 100.0% updated this week | median age: 0.0 days
 
-*Last benchmarked: 2026-04-07T21:03*
+*Last benchmarked: 2026-04-07T21:11*
 
 ### Core Concepts
 
@@ -29,21 +29,21 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
+| semantic-scholar-api | standard | 100 | 60 | 71 | 90 | 80 | 100 | 99 | **84.1** |
+| aider | standard | 100 | 37 | 69 | 94 | 80 | 100 | 99 | **81.0** |
+| aide | standard | 100 | 52 | 56 | 90 | 70 | 100 | 99 | **78.7** |
 | autoresearch | standard | 100 | 52 | 57 | 86 | 66 | 100 | 99 | **77.4** |
 | huggingface-papers-api | standard | 100 | 64 | 45 | 65 | 70 | 100 | 99 | **75.0** |
-| semantic-scholar-api | standard | 100 | 54 | 32 | 74 | 70 | 100 | 99 | **73.0** |
-| aider | standard | 100 | 31 | 45 | 42 | 80 | 100 | 99 | **68.6** |
-| aide | standard | 100 | 31 | 33 | 54 | 70 | 100 | 99 | **66.6** |
 
 ### Methodologies
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
+| agentic-tree-search | standard | 100 | 67 | 70 | 100 | 90 | 100 | 99 | **88.5** |
 | wiki-quality-benchmarking | standard | 100 | 69 | 57 | 79 | 96 | 100 | 99 | **84.9** |
 | automated-experiment-design | standard | 100 | 58 | 37 | 94 | 100 | 100 | 99 | **83.3** |
 | template-free-research | standard | 100 | 62 | 37 | 66 | 90 | 100 | 99 | **77.7** |
 | vlm-integration | standard | 100 | 64 | 50 | 52 | 80 | 100 | 99 | **75.9** |
-| agentic-tree-search | standard | 100 | 60 | 20 | 63 | 90 | 100 | 99 | **74.4** |
 
 ### Frontier Topics
 
@@ -68,7 +68,7 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 
 ## Score Trend
 
-**Overall composite:** 88.3 -> 82.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄`
+**Overall composite:** 88.3 -> 84.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄`
 
 ### Run History
 
@@ -111,6 +111,7 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 | 2026-04-07 | v2 | **82.5** | 25 |
 | 2026-04-07 | v2 | **82.4** | 25 |
 | 2026-04-07 | v2 | **82.4** | 25 |
+| 2026-04-07 | v2 | **84.4** | 25 |
 
 ## Open Issues
 
