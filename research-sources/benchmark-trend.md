@@ -14,7 +14,7 @@ Coverage: 5 substantial | 0 stubs (0.0%)
 
 Freshness: 100.0% updated this week | median age: 0.0 days
 
-*Last benchmarked: 2026-04-07T21:01*
+*Last benchmarked: 2026-04-07T21:03*
 
 ### Core Concepts
 
@@ -68,7 +68,7 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 
 ## Score Trend
 
-**Overall composite:** 88.3 -> 82.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄`
+**Overall composite:** 88.3 -> 82.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄`
 
 ### Run History
 
@@ -109,6 +109,7 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 | 2026-04-07 | v2 | **80.6** | 25 |
 | 2026-04-07 | v2 | **80.6** | 25 |
 | 2026-04-07 | v2 | **82.5** | 25 |
+| 2026-04-07 | v2 | **82.4** | 25 |
 | 2026-04-07 | v2 | **82.4** | 25 |
 
 ## Open Issues
