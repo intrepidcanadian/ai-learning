@@ -6,15 +6,15 @@ Scores are computed by [`benchmark_wiki.py`](../benchmark_wiki.py) across seven 
 
 ## Current Score
 
-**Overall: 84.4/100** | 25 articles | 93,171 words
+**Overall: 86.4/100** | 25 articles | 95,163 words
 
-Tier scores: **Standard:** 82.0 | **Flagship:** 97.1
+Tier scores: **Standard:** 84.4 | **Flagship:** 97.1
 
-Coverage: 5 substantial | 0 stubs (0.0%)
+Coverage: 6 substantial | 0 stubs (0.0%)
 
-Freshness: 100.0% updated this week | median age: 0.0 days
+Freshness: 100.0% updated this week | median age: 0.1 days
 
-*Last benchmarked: 2026-04-07T21:11*
+*Last benchmarked: 2026-04-07T22:15*
 
 ### Core Concepts
 
@@ -29,21 +29,21 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
+| huggingface-papers-api | standard | 100 | 69 | 76 | 100 | 80 | 100 | 99 | **87.7** |
+| autoresearch | standard | 100 | 56 | 61 | 100 | 100 | 100 | 99 | **87.5** |
 | semantic-scholar-api | standard | 100 | 60 | 71 | 90 | 80 | 100 | 99 | **84.1** |
 | aider | standard | 100 | 37 | 69 | 94 | 80 | 100 | 99 | **81.0** |
 | aide | standard | 100 | 52 | 56 | 90 | 70 | 100 | 99 | **78.7** |
-| autoresearch | standard | 100 | 52 | 57 | 86 | 66 | 100 | 99 | **77.4** |
-| huggingface-papers-api | standard | 100 | 64 | 45 | 65 | 70 | 100 | 99 | **75.0** |
 
 ### Methodologies
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
 | agentic-tree-search | standard | 100 | 67 | 70 | 100 | 90 | 100 | 99 | **88.5** |
+| template-free-research | standard | 100 | 65 | 68 | 94 | 90 | 100 | 99 | **87.0** |
 | wiki-quality-benchmarking | standard | 100 | 69 | 57 | 79 | 96 | 100 | 99 | **84.9** |
+| vlm-integration | standard | 100 | 67 | 59 | 95 | 80 | 100 | 99 | **84.1** |
 | automated-experiment-design | standard | 100 | 58 | 37 | 94 | 100 | 100 | 99 | **83.3** |
-| template-free-research | standard | 100 | 62 | 37 | 66 | 90 | 100 | 99 | **77.7** |
-| vlm-integration | standard | 100 | 64 | 50 | 52 | 80 | 100 | 99 | **75.9** |
 
 ### Frontier Topics
 
@@ -53,10 +53,10 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 | ai-ecommerce-learning | flagship | 100 | 97 | 100 | 95 | 88 | 100 | 99 | **97.2** |
 | predictive-simulation-learning | flagship | 100 | 97 | 98 | 96 | 88 | 100 | 99 | **97.1** |
 | cross-cutting-connections | flagship | 100 | 97 | 100 | 87 | 88 | 100 | 99 | **95.6** |
+| blockchain-ai-optimization | standard | 100 | 70 | 74 | 94 | 90 | 100 | 99 | **88.7** |
 | ai-safety-in-research | standard | 100 | 48 | 76 | 100 | 77 | 100 | 99 | **84.0** |
 | open-ended-discovery | standard | 100 | 46 | 65 | 91 | 88 | 100 | 99 | **82.9** |
 | scaling-laws-research | standard | 100 | 53 | 51 | 91 | 77 | 100 | 99 | **79.6** |
-| blockchain-ai-optimization | standard | 100 | 66 | 51 | 62 | 78 | 100 | 99 | **77.4** |
 
 ### Research Sources
 
@@ -68,7 +68,7 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 
 ## Score Trend
 
-**Overall composite:** 88.3 -> 84.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄`
+**Overall composite:** 88.3 -> 86.4  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅`
 
 ### Run History
 
@@ -112,6 +112,8 @@ Freshness: 100.0% updated this week | median age: 0.0 days
 | 2026-04-07 | v2 | **82.4** | 25 |
 | 2026-04-07 | v2 | **82.4** | 25 |
 | 2026-04-07 | v2 | **84.4** | 25 |
+| 2026-04-07 | v2 | **84.4** | 25 |
+| 2026-04-07 | v2 | **86.4** | 25 |
 
 ## Open Issues
 

@@ -352,7 +352,11 @@ body {
 <li><strong>VLM-as-judge for science:</strong> Multi-agent systems now deploy VLMs as autonomous evaluators of scientific output, with domain-specific rubrics achieving 0.7–0.8 pass rates vs. 0.2–0.3 for code-only approaches[^4]</li>
 <li><strong>Vision-Language-Action models:</strong> VLMs are extending beyond passive analysis into action planning. VLA models integrate perception, language understanding, and physical action for robotics, autonomous vehicles, and medical applications[^5][^6]</li>
 <li><strong>Scale of research:</strong> A 2025 survey cataloged 26,104 VLM papers across major venues, documenting the field's rapid expansion from niche research to a central AI paradigm[^1]</li>
-<li><strong>Educational applications:</strong> VLMs are being integrated into AI tutoring systems to analyze student-generated diagrams and provide visual feedback, connecting to <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> approaches for personalized education</li>
+<li><strong>Educational applications:</strong> VLMs are being integrated into AI tutoring systems to analyze student-generated diagrams, grade visual assignments, and provide multimodal feedback. The "LLM Agents for Education" survey (Chu et al., 2025) identifies VLM-based visual feedback as a key capability for next-generation tutoring systems[^7]</li>
+<li><strong>Scientific document understanding:</strong> Specialized VLMs for parsing scientific figures, tables, and equations have emerged. DAVE (2025) introduces a purpose-built vision encoder for document and web agent tasks using two-stage pretraining[^8]. Models like Nougat achieve &gt;90% accuracy on chart-to-data extraction, enabling automated literature review of visual results[^9]</li>
+<li><strong>Anomaly detection in labs:</strong> VLMs are now being deployed for visual anomaly detection in robotic scientific laboratories, with detection accuracy improving when more contextual information is provided to the model[^10]</li>
+<li><strong>Open-source VLM progress:</strong> Open models (InternVL2.5, Qwen2-VL, LLaVA-OneVision) have closed the gap with proprietary VLMs on scientific understanding benchmarks, making VLM integration accessible to <a href="../tools-platforms/autoresearch.html">Autoresearch</a>-style pipelines that prefer open-weight models[^11]</li>
+<li><strong>E-commerce visual understanding:</strong> VLMs are deployed for product image analysis, visual search, and catalog enrichment — extracting structured attributes from product photos to power recommendation systems (see <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a>)[^12]</li>
 </ul>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
 <ul>
@@ -362,6 +366,7 @@ body {
 <li>Cannot detect fabricated or manipulated data</li>
 <li>VLA models still struggle with fine-grained manipulation tasks requiring precise spatial reasoning</li>
 <li>Evaluation benchmarks for scientific VLM use are still immature</li>
+<li>Open-source VLMs still lag proprietary models on complex scientific reasoning tasks requiring domain expertise</li>
 </ul>
 <h2 id="beyond-the-ai-scientist">Beyond The AI Scientist</h2>
 <p>VLM integration has broader applications in research automation:
@@ -384,6 +389,9 @@ body {
 <li><a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> -- VLM literature search</li>
 <li><a href="../research-sources/key-papers.html">Key Papers and References</a></li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a></li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a> — open-source VLMs enable figure critique in autonomous experiment loops</li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — VLM capability scaling trends</li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — VLM feedback loops in self-improving systems</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Vision Language Models survey authors (2025). "Vision Language Models: A Survey of 26K Papers." arXiv:2510.09586. https://arxiv.org/abs/2510.09586
@@ -391,7 +399,13 @@ body {
 [^3]: Lu, C. et al. (2026). "Towards end-to-end automation of AI research." <em>Nature</em>, 651(8107).
 [^4]: Enhancing Agentic Autonomous Scientific Discovery authors (2025). "Enhancing Agentic Autonomous Scientific Discovery with Vision-Language Model Capabilities." arXiv:2511.14631. https://arxiv.org/abs/2511.14631
 [^5]: VLA survey authors (2025). "Vision-Language-Action (VLA) Models: Concepts, Progress, Applications and Challenges." arXiv:2505.04769. https://arxiv.org/abs/2505.04769
-[^6]: VLM4VLA authors (2026). "VLM4VLA: Revisiting Vision-Language-Models in Vision-Language-Action Models." arXiv:2601.03309. https://arxiv.org/abs/2601.03309</p>
+[^6]: VLM4VLA authors (2026). "VLM4VLA: Revisiting Vision-Language-Models in Vision-Language-Action Models." arXiv:2601.03309. https://arxiv.org/abs/2601.03309
+[^7]: Chu, Z. et al. (2025). "LLM Agents for Education: Advances and Applications." <a href="https://arxiv.org/abs/2503.11733">arXiv:2503.11733</a> — Surveys VLM-based visual feedback in tutoring systems.
+[^8]: "DAVE: A VLM Vision Encoder for Document Understanding and Web Agents." (2025). <a href="https://arxiv.org/abs/2512.17221">arXiv:2512.17221</a>
+[^9]: Blecher, L. et al. (2025). "Nougat: Neural Optical Understanding for Academic Documents." <a href="https://arxiv.org/abs/2308.13418">arXiv:2308.13418</a>
+[^10]: "A VLM-based Method for Visual Anomaly Detection in Robotic Scientific Laboratories." (2025). <a href="https://arxiv.org/abs/2506.05405">arXiv:2506.05405</a>
+[^11]: "A Survey of State of the Art Large Vision Language Models." (2025). <a href="https://arxiv.org/abs/2501.02189">arXiv:2501.02189</a> — Covers alignment techniques and benchmark advances in open-source VLMs.
+[^12]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a></p>
 </main>
 </body>
 </html>

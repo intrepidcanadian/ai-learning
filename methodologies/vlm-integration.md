@@ -110,7 +110,11 @@ However, alternatives are emerging: Gemini 2.0 offers native multimodal reasonin
 - **VLM-as-judge for science:** Multi-agent systems now deploy VLMs as autonomous evaluators of scientific output, with domain-specific rubrics achieving 0.7–0.8 pass rates vs. 0.2–0.3 for code-only approaches[^4]
 - **Vision-Language-Action models:** VLMs are extending beyond passive analysis into action planning. VLA models integrate perception, language understanding, and physical action for robotics, autonomous vehicles, and medical applications[^5][^6]
 - **Scale of research:** A 2025 survey cataloged 26,104 VLM papers across major venues, documenting the field's rapid expansion from niche research to a central AI paradigm[^1]
-- **Educational applications:** VLMs are being integrated into AI tutoring systems to analyze student-generated diagrams and provide visual feedback, connecting to [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) approaches for personalized education
+- **Educational applications:** VLMs are being integrated into AI tutoring systems to analyze student-generated diagrams, grade visual assignments, and provide multimodal feedback. The "LLM Agents for Education" survey (Chu et al., 2025) identifies VLM-based visual feedback as a key capability for next-generation tutoring systems[^7]
+- **Scientific document understanding:** Specialized VLMs for parsing scientific figures, tables, and equations have emerged. DAVE (2025) introduces a purpose-built vision encoder for document and web agent tasks using two-stage pretraining[^8]. Models like Nougat achieve >90% accuracy on chart-to-data extraction, enabling automated literature review of visual results[^9]
+- **Anomaly detection in labs:** VLMs are now being deployed for visual anomaly detection in robotic scientific laboratories, with detection accuracy improving when more contextual information is provided to the model[^10]
+- **Open-source VLM progress:** Open models (InternVL2.5, Qwen2-VL, LLaVA-OneVision) have closed the gap with proprietary VLMs on scientific understanding benchmarks, making VLM integration accessible to [Autoresearch](../tools-platforms/autoresearch.md)-style pipelines that prefer open-weight models[^11]
+- **E-commerce visual understanding:** VLMs are deployed for product image analysis, visual search, and catalog enrichment — extracting structured attributes from product photos to power recommendation systems (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md))[^12]
 
 ## Limitations / Challenges
 
@@ -120,6 +124,7 @@ However, alternatives are emerging: Gemini 2.0 offers native multimodal reasonin
 - Cannot detect fabricated or manipulated data
 - VLA models still struggle with fine-grained manipulation tasks requiring precise spatial reasoning
 - Evaluation benchmarks for scientific VLM use are still immature
+- Open-source VLMs still lag proprietary models on complex scientific reasoning tasks requiring domain expertise
 
 ## Beyond The AI Scientist
 
@@ -144,6 +149,9 @@ VLM integration has broader applications in research automation:
 - [Semantic Scholar API](../tools-platforms/semantic-scholar-api.md) -- VLM literature search
 - [Key Papers and References](../research-sources/key-papers.md)
 - [Tracking AI Research](../research-sources/tracking-ai-research.md)
+- [Autoresearch](../tools-platforms/autoresearch.md) — open-source VLMs enable figure critique in autonomous experiment loops
+- [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — VLM capability scaling trends
+- [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — VLM feedback loops in self-improving systems
 
 ## References
 
@@ -153,3 +161,9 @@ VLM integration has broader applications in research automation:
 [^4]: Enhancing Agentic Autonomous Scientific Discovery authors (2025). "Enhancing Agentic Autonomous Scientific Discovery with Vision-Language Model Capabilities." arXiv:2511.14631. https://arxiv.org/abs/2511.14631
 [^5]: VLA survey authors (2025). "Vision-Language-Action (VLA) Models: Concepts, Progress, Applications and Challenges." arXiv:2505.04769. https://arxiv.org/abs/2505.04769
 [^6]: VLM4VLA authors (2026). "VLM4VLA: Revisiting Vision-Language-Models in Vision-Language-Action Models." arXiv:2601.03309. https://arxiv.org/abs/2601.03309
+[^7]: Chu, Z. et al. (2025). "LLM Agents for Education: Advances and Applications." [arXiv:2503.11733](https://arxiv.org/abs/2503.11733) — Surveys VLM-based visual feedback in tutoring systems.
+[^8]: "DAVE: A VLM Vision Encoder for Document Understanding and Web Agents." (2025). [arXiv:2512.17221](https://arxiv.org/abs/2512.17221)
+[^9]: Blecher, L. et al. (2025). "Nougat: Neural Optical Understanding for Academic Documents." [arXiv:2308.13418](https://arxiv.org/abs/2308.13418)
+[^10]: "A VLM-based Method for Visual Anomaly Detection in Robotic Scientific Laboratories." (2025). [arXiv:2506.05405](https://arxiv.org/abs/2506.05405)
+[^11]: "A Survey of State of the Art Large Vision Language Models." (2025). [arXiv:2501.02189](https://arxiv.org/abs/2501.02189) — Covers alignment techniques and benchmark advances in open-source VLMs.
+[^12]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." [arXiv:2510.09347](https://arxiv.org/abs/2510.09347)

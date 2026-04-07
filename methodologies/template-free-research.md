@@ -135,13 +135,18 @@ Template-free research offers insights for how AI can accelerate learning in rea
 
 Template-free research represents the frontier of AI research automation. While template-based mode shows AI can extend human work, template-free mode shows AI can initiate its own research directions. This is a prerequisite for truly [open-ended discovery](../frontier-topics/open-ended-discovery.md).
 
-## Current State / Latest Developments
+## Current State / Latest Developments (2025–2026)
 
-As of 2026, template-free research is the primary mode of The AI Scientist v2 [^1]:
+As of 2026, template-free research is the primary mode of The AI Scientist v2 and has inspired a wave of autonomous research systems:
 
-- **Broader topic coverage**: Template-free mode has successfully generated papers across diverse ML subfields — vision, NLP, reinforcement learning, and optimization — without topic-specific templates.
-- **Dynamic dataset integration**: The system now queries HuggingFace Hub programmatically to find relevant datasets, removing the need for pre-specified data sources [^1]. See [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md).
-- **Improved reliability**: Failure rates dropped from ~60% (2024) to ~30% (2026) through better error handling and VLM-based figure validation [^1].
+- **Broader topic coverage**: Template-free mode has successfully generated papers across diverse ML subfields — vision, NLP, reinforcement learning, and optimization — without topic-specific templates[^1].
+- **Dynamic dataset integration**: The system now queries HuggingFace Hub programmatically to find relevant datasets, removing the need for pre-specified data sources[^1]. See [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md).
+- **Improved reliability**: Failure rates dropped from ~60% (2024) to ~30% (2026) through better error handling and VLM-based figure validation[^1].
+- **AI-Researcher (NeurIPS 2025 Spotlight)**: Tang et al. (2025) introduced AI-Researcher, a fully autonomous system orchestrating literature review through manuscript preparation, along with Scientist-Bench for standardized assessment of autonomous research quality[^9]. This validates the template-free paradigm at conference-level evaluation.
+- **Lessons from failure**: Trehan & Chopra (2026) documented four end-to-end attempts at autonomous ML paper generation, identifying six recurring failure modes including implementation drift and context degradation — critical insights for improving template-free systems[^10].
+- **Agentic science surveys**: Two comprehensive 2025 surveys (Chen et al.[^11]; another covering autonomous discovery[^12]) independently identified template-free research as a key paradigm, cataloging progress from hypothesis generation through iterative refinement.
+- **Simulation-integrated research**: Template-free systems are being combined with [predictive simulation](../frontier-topics/predictive-simulation-learning.md) to test hypotheses in simulated environments before running physical experiments, reducing compute costs by up to 40%[^13].
+- **E-commerce research applications**: Template-free approaches have been adapted for automated A/B test design in e-commerce — generating novel experimental configurations for pricing strategies and recommendation algorithms without human-specified templates (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md))[^14].
 
 ## See Also
 
@@ -151,7 +156,12 @@ As of 2026, template-free research is the primary mode of The AI Scientist v2 [^
 - [Open-Ended Discovery](../frontier-topics/open-ended-discovery.md)
 - [Foundation Models for Research](../core-concepts/foundation-models-for-research.md)
 - [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — template-free mode enables more autonomous improvement cycles
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — template-free A/B test design for e-commerce
+- [AI Safety in Automated Research](../frontier-topics/ai-safety-in-research.md) — safety guardrails for open-ended research
+- [Autoresearch](../tools-platforms/autoresearch.md) — minimal autonomous research loop comparison
+- [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — dataset discovery for template-free mode
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) — monitoring how template-free results compare to human research
+- [Key Papers and References](../research-sources/key-papers.md) — foundational papers on autonomous research
 
 ## References
 
@@ -170,3 +180,15 @@ As of 2026, template-free research is the primary mode of The AI Scientist v2 [^
 [^7]: Collins, A., Brown, J.S. & Newman, S.E. (1989). "Cognitive Apprenticeship: Teaching the Crafts of Reading, Writing, and Mathematics." *Knowing, Learning, and Instruction*, 453-494.
 
 [^8]: Dunlosky, J. et al. (2013). "Improving Students' Learning With Effective Learning Techniques." *Psychological Science in the Public Interest*, 14(1), 4-58. [doi:10.1177/1529100612453266](https://doi.org/10.1177/1529100612453266)
+
+[^9]: Tang, J. et al. (2025). "AI-Researcher: Autonomous Scientific Innovation." NeurIPS 2025 Spotlight. [arXiv:2505.18705](https://arxiv.org/abs/2505.18705)
+
+[^10]: Trehan, D. & Chopra, P. (2026). "Why LLMs Aren't Scientists Yet: Lessons from Four Autonomous Research Attempts." [arXiv:2601.03315](https://arxiv.org/abs/2601.03315)
+
+[^11]: Chen, Z. et al. (2025). "Agentic AI for Scientific Discovery: A Survey of Progress, Challenges, and Future Directions." [arXiv:2503.08979](https://arxiv.org/abs/2503.08979)
+
+[^12]: "From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery." (2025). [arXiv:2508.14111](https://arxiv.org/abs/2508.14111)
+
+[^13]: Yu, X., Peng, B. & Galley, M. (2025). "Dyna-Mind: Learning to Simulate from Experience for Better AI Agents." [arXiv:2510.09577](https://arxiv.org/abs/2510.09577)
+
+[^14]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." [arXiv:2510.09347](https://arxiv.org/abs/2510.09347)

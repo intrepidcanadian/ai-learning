@@ -108,26 +108,41 @@ A broader movement applying blockchain to all of science:
 - Use **decentralized compute** (Gensyn, Akash) for distributed Autoresearch experiments
 - Use **on-chain timestamps** for research priority claims
 
-## Current State / Latest Developments
+## Current State / Latest Developments (2025–2026)
 
-The blockchain-AI intersection has seen significant activity in 2025-2026:
+The blockchain-AI intersection has seen significant activity in 2025-2026, with convergence accelerating across decentralized compute, verifiable AI, and autonomous agent economies:
 
 - **Verifiable ML training** -- Gensyn launched its mainnet in 2025, enabling decentralized ML training with cryptographic verification proofs[^1]. This addresses the reproducibility challenge that plagues [Automated Experiment Design](../methodologies/automated-experiment-design.md).
 - **AI agent economies** -- Multi-agent reinforcement learning for dynamic pricing (see [AI E-Commerce Learning](ai-ecommerce-learning.md)) is being explored with blockchain-based settlement for autonomous agent transactions[^2].
 - **DeSci momentum** -- ResearchHub surpassed 50,000 papers in its incentivized review system. VitaDAO funded over $5M in longevity research through token governance[^3].
 - **ZK-ML advances** -- Zero-knowledge proofs for ML inference verification (EZKL, Modulus Labs) have made verifiable AI computation practical for small models, though scaling to large foundation models remains an open challenge[^4].
+- **AI-blockchain complementarity**: Li et al. (2026) argue that AI and blockchain are fundamentally complementary — blockchain mitigates AI's centralizing risks through decentralized data/computation/governance, while AI enhances blockchain efficiency. They introduce the "decentralized intelligence" research agenda[^8].
+- **On-chain learning**: Alhaidari et al. (2025) demonstrated the first fully on-chain learning framework with a Proof-of-Improvement (PoIm) protocol that verifies each training update as a self-verifying transaction, enabling inference for models within Ethereum block gas limits[^9].
+- **Autonomous agents on blockchains**: A 2026 survey documents the rapid growth (2023–2025) of autonomous AI agents operating on blockchains, covering standards, execution models, and trust boundary challenges[^10]. This connects to [Recursive Self-Improvement](recursive-self-improvement.md) where agents track their own improvement trajectories on-chain.
+- **Reality check on AI tokens**: Mafrur (2025) found that most AI-token projects depend extensively on off-chain computation, exhibit limited on-chain intelligence, and replicate centralized AI service structures with token layers added — a critical caution for the field[^11].
+- **Blockchain-enabled federated learning**: Privacy-preserving model training using blockchain coordination has shown better accuracy and lower computation overhead versus centralized baselines, relevant for sensitive domains like healthcare AI[^12].
 
 ## See Also
 
-- [The AI Scientist](../core-concepts/the-ai-scientist.md)
-- [Autoresearch](../tools-platforms/autoresearch.md)
-- [Open-Ended Discovery](open-ended-discovery.md)
-- [AI Safety in Automated Research](ai-safety-in-research.md)
-- [Scaling Laws for Research Automation](scaling-laws-research.md)
-- [Automated Experiment Design](../methodologies/automated-experiment-design.md)
-- [Template-Free Automated Research](../methodologies/template-free-research.md)
-- [Key Papers and References](../research-sources/key-papers.md)
-- [Tracking AI Research](../research-sources/tracking-ai-research.md)
+- [The AI Scientist](../core-concepts/the-ai-scientist.md) — AI research system that could benefit from decentralized compute
+- [Autoresearch](../tools-platforms/autoresearch.md) — distributed experiment loops across decentralized GPU networks
+- [Foundation Models for Research](../core-concepts/foundation-models-for-research.md) — models requiring the compute blockchain networks provide
+- [Automated Peer Review](../core-concepts/automated-peer-review.md) — token-incentivized review mechanisms
+- [Automated Scientific Discovery](../core-concepts/automated-scientific-discovery.md) — provenance tracking for automated discoveries
+- [Open-Ended Discovery](open-ended-discovery.md) — decentralized coordination for open-ended research
+- [AI Safety in Automated Research](ai-safety-in-research.md) — safety in decentralized AI systems
+- [Scaling Laws for Research Automation](scaling-laws-research.md) — compute scaling via decentralized networks
+- [Recursive Self-Improvement](recursive-self-improvement.md) — on-chain improvement trajectory tracking
+- [AI E-Commerce Learning](ai-ecommerce-learning.md) — blockchain-verified AI agent transactions
+- [Predictive Simulation Learning](predictive-simulation-learning.md) — verifiable simulation outcomes
+- [Automated Experiment Design](../methodologies/automated-experiment-design.md) — reproducibility through blockchain verification
+- [VLM Integration](../methodologies/vlm-integration.md) — verifiable multimodal AI outputs
+- [Template-Free Automated Research](../methodologies/template-free-research.md) — autonomous research on decentralized infrastructure
+- [HuggingFace Papers API](../tools-platforms/huggingface-papers-api.md) — tracking blockchain-AI research papers
+- [Semantic Scholar API](../tools-platforms/semantic-scholar-api.md) — citation tracking for DeSci publications
+- [Key Papers and References](../research-sources/key-papers.md) — foundational blockchain-AI papers
+- [Tracking AI Research](../research-sources/tracking-ai-research.md) — monitoring the blockchain-AI convergence
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — labs working on blockchain-AI intersection
 
 ## References
 
@@ -138,3 +153,8 @@ The blockchain-AI intersection has seen significant activity in 2025-2026:
 [^5]: DeSci Foundation. "Decentralized Science: An Overview."
 [^6]: ResearchHub. [researchhub.com](https://www.researchhub.com/)
 [^7]: Buterin, V. (2024). "Retroactive Public Goods Funding."
+[^8]: Li, Y. et al. (2026). "Counterweights and Complementarities: The Convergence of AI and Blockchain Powering a Decentralized Future." *ACM SIGMIS Database*. [arXiv:2603.11299](https://arxiv.org/abs/2603.11299)
+[^9]: Alhaidari, A. et al. (2025). "On-Chain Decentralized Learning and Cost-Effective Inference for DeFi Attack Mitigation." [arXiv:2510.16024](https://arxiv.org/abs/2510.16024)
+[^10]: "Autonomous Agents on Blockchains: Standards, Execution Models, and Trust Boundaries." (2026). [arXiv:2601.04583](https://arxiv.org/abs/2601.04583)
+[^11]: Mafrur, R. (2025). "AI-Based Crypto Tokens: The Illusion of Decentralized AI?" *IET Blockchain*. [arXiv:2505.07828](https://arxiv.org/abs/2505.07828)
+[^12]: "Decentralized and Robust Privacy-Preserving Model Using Blockchain-Enabled Federated Deep Learning in Intelligent Enterprises." (2025). [arXiv:2502.17485](https://arxiv.org/abs/2502.17485)

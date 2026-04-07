@@ -390,6 +390,14 @@ body {
 - <strong>macOS</strong> (MPS/MLX backends)
 - <strong>Windows</strong> (RTX GPUs)
 - <strong>AMD GPUs</strong> (ROCm)</p>
+<h2 id="applications-for-real-world-learning">Applications for Real-World Learning</h2>
+<p>Autoresearch's minimal design makes it an excellent pedagogical tool for understanding autonomous research:</p>
+<ul>
+<li><strong>ML coursework</strong>: University courses use Autoresearch as a hands-on lab exercise — students write <code>program.md</code> files with different research hypotheses and compare overnight results. The "AI-Agent School" concept (Jin et al., 2025) uses a similar dual-memory experience-reflection-optimization cycle for educational dynamics[^9].</li>
+<li><strong>Hyperparameter intuition</strong>: By reviewing <code>results.tsv</code> after an overnight run, practitioners develop intuition for which changes matter (learning rate, architecture) vs. which don't (minor activation function swaps). This accelerated feedback loop compresses months of manual experimentation into days.</li>
+<li><strong>E-commerce model optimization</strong>: The single-metric, single-file pattern is directly applicable to e-commerce ML — optimizing click-through rate models, recommendation engines, or pricing models (see <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a>) using the same keep-or-discard loop[^10].</li>
+<li><strong>Simulation-based learning</strong>: Autoresearch's loop mirrors the predict-evaluate-improve cycle in <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a>, where AI agents learn by iterating through simulated scenarios.</li>
+</ul>
 <h2 id="significance">Significance</h2>
 <p>Autoresearch represents a different philosophy from The AI Scientist: rather than automating the full research communication pipeline, it automates the <strong>core empirical loop</strong> that drives ML progress. It shifts the human role from "person who runs experiments" to "person who designs the research program and reviews results."</p>
 <h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
@@ -411,13 +419,24 @@ body {
 </ul>
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
-<li><a href="../tools-platforms/aide.html">AIDE</a></li>
-<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a></li>
-<li><a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a></li>
-<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — how Autoresearch experiments compound according to scaling relationships</li>
-<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — the keep-or-discard loop as a minimal form of recursive improvement</li>
-<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — community forks and developments around Autoresearch</li>
+<li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — full research pipeline compared to Autoresearch's minimal loop</li>
+<li><a href="../tools-platforms/aide.html">AIDE</a> — interactive research assistant with similar agentic capabilities</li>
+<li><a href="aider.html">Aider</a> — AI coding assistant that can serve as the agent backbone</li>
+<li><a href="huggingface-papers-api.html">HuggingFace Papers API</a> — discover baseline models and related work</li>
+<li><a href="semantic-scholar-api.html">Semantic Scholar API</a> — literature search for experiment design</li>
+<li><a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a> — broader framework for automated experimentation</li>
+<li><a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a> — tree-based exploration vs. linear loop</li>
+<li><a href="../methodologies/vlm-integration.html">VLM Integration</a> — adding visual evaluation to experiment loops</li>
+<li><a href="../methodologies/template-free-research.html">Template-Free Research</a> — more complex autonomous counterpart</li>
+<li><a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a> — open-ended research without fixed objectives</li>
+<li><a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a> — how experiments compound</li>
+<li><a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — keep-or-discard as minimal recursive improvement</li>
+<li><a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — applying the loop to e-commerce optimization</li>
+<li><a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulation-based experiment acceleration</li>
+<li><a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a> — evaluation of research outputs</li>
+<li><a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — the LLMs powering Autoresearch agents</li>
+<li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — community forks and developments</li>
+<li><a href="../research-sources/key-papers.html">Key Papers and References</a> — foundational papers on autonomous research</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Karpathy, A. (2025). "Autoresearch." <a href="https://github.com/karpathy/autoresearch">github.com/karpathy/autoresearch</a></p>
@@ -428,6 +447,8 @@ body {
 <p>[^6]: Yu, X., Peng, B. &amp; Galley, M. (2025). "Dyna-Mind: Learning to Simulate from Experience for Better AI Agents." <a href="https://arxiv.org/abs/2510.09577">arXiv:2510.09577</a></p>
 <p>[^7]: Singh, A. et al. (2025). "Self-Improving AI Agents through Self-Play." <a href="https://arxiv.org/abs/2512.02731">arXiv:2512.02731</a></p>
 <p>[^8]: Lam, M. et al. (2026). "The 2025 AI Agent Index: Documenting Technical and Safety Features of Deployed Agentic AI Systems." <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a></p>
+<p>[^9]: Jin, S. et al. (2025). "Evolution in Simulation: AI-Agent School with Dual Memory for High-Fidelity Educational Dynamics." <a href="https://arxiv.org/abs/2510.11290">arXiv:2510.11290</a></p>
+<p>[^10]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a></p>
 </main>
 </body>
 </html>

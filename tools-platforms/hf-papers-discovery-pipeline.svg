@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF9D00;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFD21E;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">HuggingFace Papers API: Research Discovery Pipeline</text>
+
+  <!-- ArXiv Source -->
+  <rect x="30" y="60" width="160" height="70" rx="10" fill="#e8f4fd" stroke="#4A90D9" stroke-width="2"/>
+  <text x="110" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">arXiv</text>
+  <text x="110" y="106" text-anchor="middle" font-size="11" fill="#555">~500 CS papers/day</text>
+  <text x="110" y="120" text-anchor="middle" font-size="11" fill="#555">Unfiltered preprints</text>
+
+  <!-- Arrow: ArXiv → HF Curation -->
+  <line x1="190" y1="95" x2="250" y2="95" stroke="#4A90D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- HF Community Curation -->
+  <rect x="260" y="55" width="200" height="80" rx="10" fill="url(#headerGrad)" stroke="#FF9D00" stroke-width="2"/>
+  <text x="360" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a2e">HF Community Curation</text>
+  <text x="360" y="98" text-anchor="middle" font-size="11" fill="#333">Upvotes + Discussion</text>
+  <text x="360" y="114" text-anchor="middle" font-size="11" fill="#333">30-50 papers/day curated</text>
+  <text x="360" y="128" text-anchor="middle" font-size="10" fill="#555">Editorial quality signal</text>
+
+  <!-- Arrow: Curation → API -->
+  <line x1="460" y1="95" x2="520" y2="95" stroke="#4A90D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- API Layer -->
+  <rect x="530" y="55" width="240" height="80" rx="10" fill="#f0f7ee" stroke="#27ae60" stroke-width="2"/>
+  <text x="650" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#27ae60">Papers API</text>
+  <text x="650" y="96" text-anchor="middle" font-size="10" fill="#555">GET /api/daily_papers</text>
+  <text x="650" y="110" text-anchor="middle" font-size="10" fill="#555">GET /api/papers/search?q=</text>
+  <text x="650" y="124" text-anchor="middle" font-size="10" fill="#555">GET /api/papers/{arxiv_id}</text>
+
+  <!-- Arrow: API → Consumers (fan out) -->
+  <line x1="650" y1="135" x2="650" y2="170" stroke="#4A90D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Consumer Layer Title -->
+  <text x="400" y="195" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Downstream Consumers</text>
+
+  <!-- Consumer 1: AI Scientist -->
+  <rect x="30" y="215" width="170" height="90" rx="8" fill="#fef3e2" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="115" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#d35400">AI Scientist v2</text>
+  <text x="115" y="256" text-anchor="middle" font-size="10" fill="#555">Literature review</text>
+  <text x="115" y="270" text-anchor="middle" font-size="10" fill="#555">Novelty checking</text>
+  <text x="115" y="284" text-anchor="middle" font-size="10" fill="#555">Dataset discovery</text>
+
+  <!-- Consumer 2: Personalized Learning -->
+  <rect x="220" y="215" width="170" height="90" rx="8" fill="#f3e5f5" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="305" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#6a1b9a">Learning Curricula</text>
+  <text x="305" y="256" text-anchor="middle" font-size="10" fill="#555">Personalized feeds</text>
+  <text x="305" y="270" text-anchor="middle" font-size="10" fill="#555">Topic tracking</text>
+  <text x="305" y="284" text-anchor="middle" font-size="10" fill="#555">Reading lists</text>
+
+  <!-- Consumer 3: Research Tracking -->
+  <rect x="410" y="215" width="170" height="90" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="495" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#0d47a1">Research Tracking</text>
+  <text x="495" y="256" text-anchor="middle" font-size="10" fill="#555">Daily monitoring</text>
+  <text x="495" y="270" text-anchor="middle" font-size="10" fill="#555">Trend analysis</text>
+  <text x="495" y="284" text-anchor="middle" font-size="10" fill="#555">Newsletter curation</text>
+
+  <!-- Consumer 4: Autoresearch -->
+  <rect x="600" y="215" width="170" height="90" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="685" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#1b5e20">Autoresearch</text>
+  <text x="685" y="256" text-anchor="middle" font-size="10" fill="#555">Baseline discovery</text>
+  <text x="685" y="270" text-anchor="middle" font-size="10" fill="#555">Prior work search</text>
+  <text x="685" y="284" text-anchor="middle" font-size="10" fill="#555">Experiment seeding</text>
+
+  <!-- Fan-out arrows from API to consumers -->
+  <line x1="560" y1="135" x2="115" y2="215" stroke="#4A90D9" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="610" y1="135" x2="305" y2="215" stroke="#4A90D9" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="680" y1="135" x2="495" y2="215" stroke="#4A90D9" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="720" y1="135" x2="685" y2="215" stroke="#4A90D9" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- Enrichment Layer -->
+  <text x="400" y="340" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Enrichment via Complementary APIs</text>
+
+  <!-- Semantic Scholar -->
+  <rect x="120" y="360" width="220" height="70" rx="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="1.5"/>
+  <text x="230" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">Semantic Scholar API</text>
+  <text x="230" y="403" text-anchor="middle" font-size="10" fill="#555">+ Citation graphs</text>
+  <text x="230" y="417" text-anchor="middle" font-size="10" fill="#555">+ Semantic search + Impact metrics</text>
+
+  <!-- arXiv API -->
+  <rect x="460" y="360" width="220" height="70" rx="8" fill="#e0f2f1" stroke="#00695c" stroke-width="1.5"/>
+  <text x="570" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="#004d40">arXiv API</text>
+  <text x="570" y="403" text-anchor="middle" font-size="10" fill="#555">+ Full metadata</text>
+  <text x="570" y="417" text-anchor="middle" font-size="10" fill="#555">+ Categories + Real-time access</text>
+
+  <!-- Outcome -->
+  <rect x="200" y="455" width="400" height="50" rx="10" fill="#1a1a2e" stroke="none"/>
+  <text x="400" y="478" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFD21E">Complete Research Intelligence Pipeline</text>
+  <text x="400" y="496" text-anchor="middle" font-size="11" fill="#ccc">Curated discovery + Deep metadata + Citation context</text>
+
+  <!-- Arrows to outcome -->
+  <line x1="230" y1="430" x2="350" y2="455" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="570" y1="430" x2="450" y2="455" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+</svg>

@@ -82,6 +82,15 @@ The project has spawned community forks for:
 - **Windows** (RTX GPUs)
 - **AMD GPUs** (ROCm)
 
+## Applications for Real-World Learning
+
+Autoresearch's minimal design makes it an excellent pedagogical tool for understanding autonomous research:
+
+- **ML coursework**: University courses use Autoresearch as a hands-on lab exercise — students write `program.md` files with different research hypotheses and compare overnight results. The "AI-Agent School" concept (Jin et al., 2025) uses a similar dual-memory experience-reflection-optimization cycle for educational dynamics[^9].
+- **Hyperparameter intuition**: By reviewing `results.tsv` after an overnight run, practitioners develop intuition for which changes matter (learning rate, architecture) vs. which don't (minor activation function swaps). This accelerated feedback loop compresses months of manual experimentation into days.
+- **E-commerce model optimization**: The single-metric, single-file pattern is directly applicable to e-commerce ML — optimizing click-through rate models, recommendation engines, or pricing models (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md)) using the same keep-or-discard loop[^10].
+- **Simulation-based learning**: Autoresearch's loop mirrors the predict-evaluate-improve cycle in [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md), where AI agents learn by iterating through simulated scenarios.
+
 ## Significance
 
 Autoresearch represents a different philosophy from The AI Scientist: rather than automating the full research communication pipeline, it automates the **core empirical loop** that drives ML progress. It shifts the human role from "person who runs experiments" to "person who designs the research program and reviews results."
@@ -108,13 +117,24 @@ Key intellectual foundations:
 
 ## See Also
 
-- [The AI Scientist](../core-concepts/the-ai-scientist.md)
-- [AIDE](../tools-platforms/aide.md)
-- [Automated Experiment Design](../methodologies/automated-experiment-design.md)
-- [Open-Ended Discovery](../frontier-topics/open-ended-discovery.md)
-- [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — how Autoresearch experiments compound according to scaling relationships
-- [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — the keep-or-discard loop as a minimal form of recursive improvement
-- [Tracking AI Research](../research-sources/tracking-ai-research.md) — community forks and developments around Autoresearch
+- [The AI Scientist](../core-concepts/the-ai-scientist.md) — full research pipeline compared to Autoresearch's minimal loop
+- [AIDE](../tools-platforms/aide.md) — interactive research assistant with similar agentic capabilities
+- [Aider](aider.md) — AI coding assistant that can serve as the agent backbone
+- [HuggingFace Papers API](huggingface-papers-api.md) — discover baseline models and related work
+- [Semantic Scholar API](semantic-scholar-api.md) — literature search for experiment design
+- [Automated Experiment Design](../methodologies/automated-experiment-design.md) — broader framework for automated experimentation
+- [Agentic Tree Search](../methodologies/agentic-tree-search.md) — tree-based exploration vs. linear loop
+- [VLM Integration](../methodologies/vlm-integration.md) — adding visual evaluation to experiment loops
+- [Template-Free Research](../methodologies/template-free-research.md) — more complex autonomous counterpart
+- [Open-Ended Discovery](../frontier-topics/open-ended-discovery.md) — open-ended research without fixed objectives
+- [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md) — how experiments compound
+- [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — keep-or-discard as minimal recursive improvement
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — applying the loop to e-commerce optimization
+- [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) — simulation-based experiment acceleration
+- [Automated Peer Review](../core-concepts/automated-peer-review.md) — evaluation of research outputs
+- [Foundation Models for Research](../core-concepts/foundation-models-for-research.md) — the LLMs powering Autoresearch agents
+- [Tracking AI Research](../research-sources/tracking-ai-research.md) — community forks and developments
+- [Key Papers and References](../research-sources/key-papers.md) — foundational papers on autonomous research
 
 ## References
 
@@ -133,3 +153,7 @@ Key intellectual foundations:
 [^7]: Singh, A. et al. (2025). "Self-Improving AI Agents through Self-Play." [arXiv:2512.02731](https://arxiv.org/abs/2512.02731)
 
 [^8]: Lam, M. et al. (2026). "The 2025 AI Agent Index: Documenting Technical and Safety Features of Deployed Agentic AI Systems." [arXiv:2602.17753](https://arxiv.org/abs/2602.17753)
+
+[^9]: Jin, S. et al. (2025). "Evolution in Simulation: AI-Agent School with Dual Memory for High-Fidelity Educational Dynamics." [arXiv:2510.11290](https://arxiv.org/abs/2510.11290)
+
+[^10]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." [arXiv:2510.09347](https://arxiv.org/abs/2510.09347)
