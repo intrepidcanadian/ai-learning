@@ -672,6 +672,92 @@ body {
 </table>
 <p>The solution tree structure is particularly valuable for advertising: each node represents a creative-audience-bid combination, with branches representing refinements. The tree itself becomes an ablation study — revealing which elements of the ad (image style? headline framing? audience segment?) contributed most to predicted performance.</p>
 <p><strong>Learning application:</strong> This mapping provides a concrete bridge between AI research methodology and marketing practice. A business student learning both ML and marketing can see that campaign optimization and model training are structurally identical problems — both are search over a solution space guided by a metric. The <a href="../tools-platforms/autoresearch.html">Autoresearch</a> pattern ("set up experiments, go to sleep, wake up to results") applies directly: configure the simulation, let it explore overnight, review the top-performing campaigns in the morning. This transforms ad optimization from an art (relying on creative intuition) into a science (systematic search with measurable outcomes) — the same transformation that <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> brought to ML research.</p>
+<h3 id="verification-and-calibration-closing-the-reality-gap">Verification and Calibration: Closing the Reality Gap</h3>
+<p>The simulation pipeline above has a critical vulnerability: <strong>simulators are only as good as their calibration against reality</strong>. Without a systematic verification loop, the system optimizes for simulated performance that may diverge from actual market outcomes — the same pitfall that <a href="#criterion-validity-of-llm-as-judge-for-conversational-commerce">Chen et al.'s criterion validity research</a> exposed for conversational commerce metrics.</p>
+<p>The verification loop adds three phases that transform the pipeline from a one-shot predictor into a self-improving system:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                  THE CALIBRATION LOOP                           │
+│                                                                 │
+│  SIMULATE          DEPLOY           COMPARE         UPDATE      │
+│  ┌──────┐        ┌──────┐        ┌──────────┐    ┌──────────┐  │
+│  │Predict│──top──▶│Run    │──real─▶│Predicted │───▶│Fine-tune │  │
+│  │ROAS   │  ads   │limited│ data   │vs Actual │    │simulator │  │
+│  │per ad │        │budget │        │gap = Δ   │    │on errors │  │
+│  └──────┘        └──────┘        └──────────┘    └────┬─────┘  │
+│      ▲                                                │        │
+│      └────────────────────────────────────────────────┘        │
+│                   (better predictions next cycle)              │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Phase 1: Limited deployment with instrumentation.</strong> Deploy the top-predicted ads with a small budget (5-10% of total), but instrument everything: actual CTR, conversion rate, ROAS, engagement time, bounce rate, and attribution path. This creates paired data: (simulation prediction, real outcome) for every deployed ad.</p>
+<p><strong>Phase 2: Error analysis — where was the simulator wrong?</strong> The prediction gap Δ (predicted ROAS - actual ROAS) is the core learning signal. Systematic analysis of Δ reveals <em>which types of predictions</em> the simulator gets right and wrong:</p>
+<table>
+<thead>
+<tr>
+<th>Error Pattern</th>
+<th>What It Reveals</th>
+<th>Calibration Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulator overestimates CTR for video ads</td>
+<td>VLM visual scoring doesn't capture video engagement dynamics</td>
+<td>Add video-specific features to VLM assessment</td>
+</tr>
+<tr>
+<td>Simulator underestimates performance for 18-24 demographic</td>
+<td>SocioVerse/MiroFish agents don't accurately model younger user behavior</td>
+<td>Recalibrate demographic agent profiles with real conversion data</td>
+</tr>
+<tr>
+<td>Bids are consistently too high for weekend traffic</td>
+<td>GRAD's auction dynamics model doesn't account for weekend competition changes</td>
+<td>Add temporal features to the bidding model</td>
+</tr>
+<tr>
+<td>Prediction accurate for cold audiences, wrong for retargeting</td>
+<td>Simulator lacks memory of prior user exposure</td>
+<td>Integrate frequency/recency signals into simulation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phase 3: Simulator update.</strong> The prediction errors become training data for the next iteration of the simulator. This is where the system becomes <a href="recursive-self-improvement.html">recursively self-improving</a>:</p>
+<ul>
+<li><strong>World model fine-tuning</strong> — The audience simulation (MiroFish/SocioVerse) is updated with real behavioral data, narrowing the gap between simulated and actual consumer responses. This mirrors how <a href="predictive-simulation-learning.md#dreamer-4-training-agents-inside-scalable-world-models">Dreamer 4</a> updates its world model from real environment observations after acting on imagined trajectories.</li>
+<li><strong>VLM scorer recalibration</strong> — The creative assessment model is fine-tuned on (creative features, actual performance) pairs, so it learns which visual/textual elements <em>actually</em> predict performance rather than which elements <em>look</em> like they should perform well.</li>
+<li><strong>Bid model adjustment</strong> — GRAD's counterfactual value estimator is updated with real auction outcomes, improving its ability to predict "what would have happened if we bid differently."</li>
+<li><strong>Fidelity control</strong> — Following <a href="#rsir-recursive-self-improving-recommendations-without-external-data">RSIR's</a> lesson, each calibration cycle includes quality filtering to prevent degeneration. If a simulator update makes predictions <em>worse</em> on a holdout set, the update is rolled back. This is the keep-or-discard pattern from <a href="../tools-platforms/autoresearch.html">Autoresearch</a> applied to simulator evolution.</li>
+</ul>
+<p><strong>The agent learns from its own mistakes.</strong> Over successive campaigns, the simulator's prediction accuracy improves because each real deployment provides calibration data that was impossible to obtain through simulation alone. The first campaign might have a 40% prediction error; by the tenth campaign, the simulator has seen enough real data to achieve &lt;15% error — at which point the simulation becomes a reliable proxy for reality.</p>
+<p>This is structurally identical to how <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> learns across experiments: each paper's peer review feedback reveals what the system got wrong, which informs better idea generation in the next cycle. The difference is timescale — ad campaigns produce feedback in days rather than months.</p>
+<p><strong>Connection to ACES volatility findings.</strong> The calibration loop is especially important given <a href="#agentic-markets-are-volatile-updated-aces-findings-on-market-instability">ACES's finding</a> that agentic markets are fundamentally volatile — model updates reshuffle demand patterns overnight. A simulator calibrated against last month's market conditions may be wrong for this month. Continuous calibration against live results is the only defense against this volatility.</p>
+<h3 id="learning-through-ad-simulation-the-dual-use-pattern">Learning Through Ad Simulation: The Dual-Use Pattern</h3>
+<p>Once deployed operationally, the ad simulation pipeline doubles as a <strong>learning environment</strong> where marketers develop real expertise. This is the same dual-use pattern validated across other domains:</p>
+<ul>
+<li><a href="predictive-simulation-learning.md#medsim-ai-simulation-based-deliberate-practice-in-medical-education">MedSimAI</a> showed that simulation-trained medical students achieve real skill gains (Cohen's d = 0.75)[^53]</li>
+<li><a href="#shopsimulator-rl-training-ground-for-shopping-agents">ShopSimulator</a> demonstrated that RL agents improve shopping skills through simulated practice[^18]</li>
+<li><a href="../tools-platforms/autoresearch.html">Autoresearch</a> compresses months of ML experimentation into overnight runs, building practitioner intuition from <code>results.tsv</code></li>
+</ul>
+<p>For paid advertising, the learning pipeline works as follows:</p>
+<p><strong>1. Explore — build intuition through rapid experimentation.</strong>
+A junior marketer generates 50 ad variants and runs them through the simulator in an hour. They see instantly which creative strategies, audience segments, and bid levels the simulator predicts will win — and crucially, <em>why</em>. The VLM assessment explains "this creative scores low on clarity because the product is obscured by the lifestyle background." The AIDE solution tree shows "lifestyle images outperform product shots for 25-34 women but underperform for 45-54 men." This builds the same kind of intuition that an experienced marketer develops over years of campaigns — but compressed into hours.</p>
+<p><strong>2. Hypothesize — form testable predictions.</strong>
+After exploring, the marketer forms a hypothesis: "Adding a scarcity CTA ('Only 3 left') will increase predicted CTR by 15% for impulse-buy products but not for considered purchases." This is the same hypothesis-driven approach that <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> uses for research — and it teaches a transferable skill: structured thinking about cause and effect.</p>
+<p><strong>3. Verify — compare predictions to reality.</strong>
+The marketer deploys their hypothesis in a limited live test. The verification loop produces the most valuable learning signal: <strong>where their intuition was wrong</strong>. Maybe scarcity CTAs increased CTR by 20% (better than predicted) for impulse products, but also increased <em>return rates</em> by 8% — something the simulator didn't predict because it doesn't model post-purchase regret. This gap between prediction and reality is where deep learning happens.</p>
+<p><strong>4. Calibrate — update both the simulator and the mental model.</strong>
+The prediction error feeds back into two systems simultaneously:
+- The <strong>AI simulator</strong> updates its models (Phase 3 above)
+- The <strong>human marketer</strong> updates their mental model of how advertising works</p>
+<p>This parallel learning is key. The <a href="#oecd-2026-ai-tutoring-design-principles-apply-to-commerce-training">OECD 2026 findings</a> warn that AI tools must build independent capability, not dependency. A marketer who blindly follows simulation recommendations learns nothing. But a marketer who <em>predicts what the simulation will say</em>, compares their prediction to the simulation's, and then compares both to reality — that marketer is developing genuine expertise through deliberate practice[^53].</p>
+<p><strong>5. Transfer — apply simulation-trained skills to novel situations.</strong>
+The ultimate test: can skills learned in simulation transfer to real-world marketing decisions that the simulator has never seen? MedSimAI's evidence says yes — medical students trained in simulation perform better in real clinical settings. The prediction is that marketers trained through ad simulation will:
+- Develop faster creative judgment (which ad concepts are worth pursuing)
+- Build better audience intuition (which segments will respond to which messages)
+- Make more efficient budget decisions (how to allocate spend across campaigns)
+- Recognize when the market has shifted (when past patterns no longer apply)</p>
+<p><strong>The progressive withdrawal principle.</strong> Following <a href="predictive-simulation-learning.html">Skill0's</a> approach, the learning system should gradually reduce simulation support as the marketer develops competence. Early on, the simulator provides detailed recommendations ("use this creative with this audience at this bid"). Over time, it shifts to validation-only mode ("here's how your plan would perform") and eventually to exception-only alerts ("your plan looks good except the bid for segment C is 30% above optimal"). The goal is a marketer who <em>could</em> run campaigns without the simulator but chooses to use it for efficiency — not a marketer who can't function without it.</p>
 <h3 id="www-2026-workshop-llm-agents-are-reshaping-recommendation-science">WWW 2026 Workshop: LLM Agents Are Reshaping Recommendation Science</h3>
 <p>The WWW 2026 workshop on "LLM &amp; Agents for Recommendation Systems" (Dubai, April 2026) crystallizes an inflection point: recommendation systems are transitioning from passive content filtering to active agentic mediation.[^47] The workshop identifies four transformation vectors:</p>
 <ol>
