@@ -333,15 +333,19 @@ body {
 <details open><summary>Methodologies</summary>
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
 <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
 </details>
 <details open><summary>Frontier Topics</summary>
 <a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
 <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
 <a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
 <a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
 <a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
 <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
 <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
@@ -440,12 +444,12 @@ loadWishlist();
 <p>Automated quality scores for the wiki's articles across all categories. Articles are scored with tier-aware expectations: <strong>flagship</strong> articles face the highest quality bar, <strong>standard</strong> articles have moderate expectations, and <strong>reference</strong> articles are evaluated primarily on linking and consistency.</p>
 <p>Scores are computed by <a href="../benchmark_wiki.py"><code>benchmark_wiki.py</code></a> across seven dimensions: structural completeness, depth, currency, sourcing, internal linking, consistency, and freshness. See <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> for full methodology.</p>
 <h2 id="current-score">Current Score</h2>
-<p><strong>Overall: 89.4/100</strong> | 25 articles | 104,552 words</p>
-<p>Tier scores: <strong>Standard:</strong> 87.9 | <strong>Flagship:</strong> 97.0</p>
-<p>Coverage: 10 substantial | 0 stubs (0.0%)</p>
+<p><strong>Overall: 88.4/100</strong> | 29 articles | 113,466 words</p>
+<p>Tier scores: <strong>Standard:</strong> 87.0 | <strong>Flagship:</strong> 97.0</p>
+<p>Coverage: 13 substantial | 0 stubs (0.0%)</p>
 <p>Freshness: 100.0% updated this week | median age: 0.2 days</p>
-<p><strong>Topic Coverage: 100.0/100</strong> (25/25 references resolved, 0 gaps)</p>
-<p><em>Last benchmarked: 2026-04-08T03:04</em></p>
+<p><strong>Topic Coverage: 100.0/100</strong> (29/29 references resolved, 0 gaps)</p>
+<p><em>Last benchmarked: 2026-04-08T03:16</em></p>
 <h3 id="core-concepts">Core Concepts</h3>
 <table>
 <thead>
@@ -551,8 +555,8 @@ loadWishlist();
 <td>100</td>
 <td>80</td>
 <td>100</td>
-<td>98</td>
-<td><strong>87.7</strong></td>
+<td>97</td>
+<td><strong>87.6</strong></td>
 </tr>
 <tr>
 <td>autoresearch</td>
@@ -563,8 +567,8 @@ loadWishlist();
 <td>100</td>
 <td>100</td>
 <td>100</td>
-<td>98</td>
-<td><strong>87.5</strong></td>
+<td>97</td>
+<td><strong>87.4</strong></td>
 </tr>
 <tr>
 <td>semantic-scholar-api</td>
@@ -616,10 +620,34 @@ loadWishlist();
 <td>74</td>
 <td>79</td>
 <td>100</td>
-<td>100</td>
+<td>82</td>
 <td>100</td>
 <td>98</td>
-<td><strong>92.9</strong></td>
+<td><strong>89.3</strong></td>
+</tr>
+<tr>
+<td>world-models</td>
+<td>standard</td>
+<td>100</td>
+<td>74</td>
+<td>75</td>
+<td>100</td>
+<td>80</td>
+<td>100</td>
+<td>99</td>
+<td><strong>88.3</strong></td>
+</tr>
+<tr>
+<td>test-time-compute</td>
+<td>standard</td>
+<td>100</td>
+<td>80</td>
+<td>73</td>
+<td>86</td>
+<td>76</td>
+<td>100</td>
+<td>99</td>
+<td><strong>86.0</strong></td>
 </tr>
 <tr>
 <td>agentic-tree-search</td>
@@ -628,10 +656,10 @@ loadWishlist();
 <td>67</td>
 <td>70</td>
 <td>100</td>
-<td>90</td>
+<td>77</td>
 <td>100</td>
 <td>97</td>
-<td><strong>88.4</strong></td>
+<td><strong>85.8</strong></td>
 </tr>
 <tr>
 <td>automated-experiment-design</td>
@@ -640,10 +668,10 @@ loadWishlist();
 <td>62</td>
 <td>61</td>
 <td>100</td>
-<td>100</td>
+<td>82</td>
 <td>100</td>
 <td>98</td>
-<td><strong>88.3</strong></td>
+<td><strong>84.8</strong></td>
 </tr>
 <tr>
 <td>template-free-research</td>
@@ -652,10 +680,22 @@ loadWishlist();
 <td>65</td>
 <td>68</td>
 <td>94</td>
-<td>90</td>
+<td>77</td>
 <td>100</td>
-<td>98</td>
-<td><strong>87.0</strong></td>
+<td>97</td>
+<td><strong>84.3</strong></td>
+</tr>
+<tr>
+<td>curriculum-learning</td>
+<td>standard</td>
+<td>100</td>
+<td>81</td>
+<td>61</td>
+<td>74</td>
+<td>82</td>
+<td>100</td>
+<td>99</td>
+<td><strong>83.8</strong></td>
 </tr>
 <tr>
 <td>wiki-quality-benchmarking</td>
@@ -664,10 +704,10 @@ loadWishlist();
 <td>69</td>
 <td>57</td>
 <td>79</td>
-<td>100</td>
+<td>82</td>
 <td>100</td>
 <td>97</td>
-<td><strong>85.6</strong></td>
+<td><strong>82.0</strong></td>
 </tr>
 </tbody>
 </table>
@@ -695,10 +735,10 @@ loadWishlist();
 <td>100</td>
 <td>99</td>
 <td>96</td>
-<td>94</td>
+<td>90</td>
 <td>100</td>
 <td>97</td>
-<td><strong>98.3</strong></td>
+<td><strong>97.9</strong></td>
 </tr>
 <tr>
 <td>ai-ecommerce-learning</td>
@@ -707,10 +747,10 @@ loadWishlist();
 <td>100</td>
 <td>100</td>
 <td>92</td>
-<td>88</td>
+<td>85</td>
 <td>100</td>
 <td>99</td>
-<td><strong>97.2</strong></td>
+<td><strong>96.9</strong></td>
 </tr>
 <tr>
 <td>predictive-simulation-learning</td>
@@ -719,22 +759,34 @@ loadWishlist();
 <td>97</td>
 <td>98</td>
 <td>96</td>
-<td>88</td>
+<td>85</td>
 <td>100</td>
 <td>97</td>
-<td><strong>97.0</strong></td>
+<td><strong>96.7</strong></td>
 </tr>
 <tr>
 <td>cross-cutting-connections</td>
 <td>flagship</td>
 <td>100</td>
-<td>97</td>
+<td>100</td>
 <td>100</td>
 <td>87</td>
-<td>88</td>
+<td>90</td>
 <td>100</td>
-<td>97</td>
-<td><strong>95.5</strong></td>
+<td>99</td>
+<td><strong>96.4</strong></td>
+</tr>
+<tr>
+<td>multi-agent-systems</td>
+<td>standard</td>
+<td>100</td>
+<td>82</td>
+<td>85</td>
+<td>90</td>
+<td>82</td>
+<td>100</td>
+<td>99</td>
+<td><strong>89.9</strong></td>
 </tr>
 <tr>
 <td>blockchain-ai-optimization</td>
@@ -743,10 +795,10 @@ loadWishlist();
 <td>70</td>
 <td>74</td>
 <td>94</td>
-<td>90</td>
+<td>86</td>
 <td>100</td>
-<td>98</td>
-<td><strong>88.6</strong></td>
+<td>97</td>
+<td><strong>87.8</strong></td>
 </tr>
 <tr>
 <td>open-ended-discovery</td>
@@ -755,10 +807,10 @@ loadWishlist();
 <td>48</td>
 <td>80</td>
 <td>100</td>
-<td>88</td>
+<td>85</td>
 <td>100</td>
 <td>98</td>
-<td><strong>86.7</strong></td>
+<td><strong>86.1</strong></td>
 </tr>
 <tr>
 <td>scaling-laws-research</td>
@@ -767,10 +819,10 @@ loadWishlist();
 <td>58</td>
 <td>73</td>
 <td>98</td>
-<td>82</td>
+<td>80</td>
 <td>100</td>
 <td>98</td>
-<td><strong>85.7</strong></td>
+<td><strong>85.2</strong></td>
 </tr>
 <tr>
 <td>ai-safety-in-research</td>
@@ -779,10 +831,10 @@ loadWishlist();
 <td>52</td>
 <td>82</td>
 <td>100</td>
-<td>77</td>
+<td>75</td>
 <td>100</td>
 <td>98</td>
-<td><strong>85.4</strong></td>
+<td><strong>85.0</strong></td>
 </tr>
 </tbody>
 </table>
@@ -842,7 +894,7 @@ loadWishlist();
 </tbody>
 </table>
 <h2 id="score-trend">Score Trend</h2>
-<p><strong>Overall composite:</strong> 88.3 -&gt; 89.4  <code>▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆</code></p>
+<p><strong>Overall composite:</strong> 88.3 -&gt; 88.4  <code>▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▅</code></p>
 <h3 id="score-over-time">Score Over Time</h3>
 <div style="position:relative;display:inline-block;width:100%;max-width:720px">
 <div id="chart-tooltip" style="display:none;position:absolute;background:#1a1a2e;color:#fff;padding:8px 12px;border-radius:6px;font-size:12px;pointer-events:none;z-index:10;max-width:320px;line-height:1.4;white-space:pre-wrap;box-shadow:0 2px 8px rgba(0,0,0,0.2)"></div>
@@ -865,48 +917,49 @@ loadWishlist();
 <text x="47" y="77.5" text-anchor="end" font-size="11" fill="#666">92</text>
 <line x1="55" y1="46.3" x2="700" y2="46.3" stroke="#e0e0e0" stroke-width="1"/>
 <text x="47" y="50.3" text-anchor="end" font-size="11" fill="#666">97</text>
-<polygon points="55.0,93.6 65.4,93.6 75.8,93.6 86.2,81.1 96.6,68.1 107.0,68.1 117.4,68.1 127.8,67.5 138.2,68.1 148.6,68.1 159.0,68.1 169.4,67.5 179.8,60.4 190.2,55.0 200.6,49.6 211.0,43.0 221.5,43.0 231.9,230.6 242.3,232.8 252.7,232.8 263.1,202.9 273.5,202.9 283.9,180.1 294.3,180.1 304.7,167.0 315.1,167.0 325.5,156.7 335.9,156.7 346.3,154.5 356.7,154.5 367.1,142.6 377.5,139.8 387.9,135.5 398.3,135.5 408.7,125.2 419.1,125.7 429.5,125.7 439.9,114.8 450.3,114.8 460.7,103.9 471.1,103.9 481.5,103.9 491.9,103.9 502.3,103.9 512.7,103.9 523.1,103.9 533.5,103.9 544.0,98.0 554.4,98.0 564.8,93.6 575.2,93.6 585.6,87.6 596.0,87.6 606.4,87.6 616.8,87.6 627.2,87.6 637.6,87.6 648.0,87.6 658.4,87.6 668.8,87.6 679.2,87.6 689.6,87.6 700.0,87.6 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
-<polyline points="55.0,93.6 65.4,93.6 75.8,93.6 86.2,81.1 96.6,68.1 107.0,68.1 117.4,68.1 127.8,67.5 138.2,68.1 148.6,68.1 159.0,68.1 169.4,67.5 179.8,60.4 190.2,55.0 200.6,49.6 211.0,43.0 221.5,43.0 231.9,230.6 242.3,232.8 252.7,232.8 263.1,202.9 273.5,202.9 283.9,180.1 294.3,180.1 304.7,167.0 315.1,167.0 325.5,156.7 335.9,156.7 346.3,154.5 356.7,154.5 367.1,142.6 377.5,139.8 387.9,135.5 398.3,135.5 408.7,125.2 419.1,125.7 429.5,125.7 439.9,114.8 450.3,114.8 460.7,103.9 471.1,103.9 481.5,103.9 491.9,103.9 502.3,103.9 512.7,103.9 523.1,103.9 533.5,103.9 544.0,98.0 554.4,98.0 564.8,93.6 575.2,93.6 585.6,87.6 596.0,87.6 606.4,87.6 616.8,87.6 627.2,87.6 637.6,87.6 648.0,87.6 658.4,87.6 668.8,87.6 679.2,87.6 689.6,87.6 700.0,87.6" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="55.0,93.6 65.1,93.6 75.2,93.6 85.2,81.1 95.3,68.1 105.4,68.1 115.5,68.1 125.5,67.5 135.6,68.1 145.7,68.1 155.8,68.1 165.9,67.5 175.9,60.4 186.0,55.0 196.1,49.6 206.2,43.0 216.2,43.0 226.3,230.6 236.4,232.8 246.5,232.8 256.6,202.9 266.6,202.9 276.7,180.1 286.8,180.1 296.9,167.0 307.0,167.0 317.0,156.7 327.1,156.7 337.2,154.5 347.3,154.5 357.3,142.6 367.4,139.8 377.5,135.5 387.6,135.5 397.7,125.2 407.7,125.7 417.8,125.7 427.9,114.8 438.0,114.8 448.0,103.9 458.1,103.9 468.2,103.9 478.3,103.9 488.4,103.9 498.4,103.9 508.5,103.9 518.6,103.9 528.7,98.0 538.8,98.0 548.8,93.6 558.9,93.6 569.0,87.6 579.1,87.6 589.1,87.6 599.2,87.6 609.3,87.6 619.4,87.6 629.5,87.6 639.5,87.6 649.6,87.6 659.7,87.6 669.8,87.6 679.8,87.6 689.9,87.6 700.0,93.1 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
+<polyline points="55.0,93.6 65.1,93.6 75.2,93.6 85.2,81.1 95.3,68.1 105.4,68.1 115.5,68.1 125.5,67.5 135.6,68.1 145.7,68.1 155.8,68.1 165.9,67.5 175.9,60.4 186.0,55.0 196.1,49.6 206.2,43.0 216.2,43.0 226.3,230.6 236.4,232.8 246.5,232.8 256.6,202.9 266.6,202.9 276.7,180.1 286.8,180.1 296.9,167.0 307.0,167.0 317.0,156.7 327.1,156.7 337.2,154.5 347.3,154.5 357.3,142.6 367.4,139.8 377.5,135.5 387.6,135.5 397.7,125.2 407.7,125.7 417.8,125.7 427.9,114.8 438.0,114.8 448.0,103.9 458.1,103.9 468.2,103.9 478.3,103.9 488.4,103.9 498.4,103.9 508.5,103.9 518.6,103.9 528.7,98.0 538.8,98.0 548.8,93.6 558.9,93.6 569.0,87.6 579.1,87.6 589.1,87.6 599.2,87.6 609.3,87.6 619.4,87.6 629.5,87.6 639.5,87.6 649.6,87.6 659.7,87.6 669.8,87.6 679.8,87.6 689.9,87.6 700.0,93.1" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
 <circle class="chart-dot" cx="55.0" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:27  —  Score: 88.3" data-note=""/>
-<circle class="chart-dot" cx="86.2" cy="81.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:49  —  Score: 90.6" data-note=""/>
-<circle class="chart-dot" cx="117.4" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:57  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="148.6" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="179.8" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
-<circle class="chart-dot" cx="211.0" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:16  —  Score: 97.6" data-note=""/>
-<circle class="chart-dot" cx="242.3" cy="232.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:51  —  Score: 62.7" data-note=""/>
-<circle class="chart-dot" cx="263.1" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
-<circle class="chart-dot" cx="273.5" cy="202.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:10  —  Score: 68.2" data-note=""/>
-<circle class="chart-dot" cx="283.9" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
-<circle class="chart-dot" cx="304.7" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
-<circle class="chart-dot" cx="335.9" cy="156.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:30  —  Score: 76.7" data-note=""/>
-<circle class="chart-dot" cx="346.3" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
-<circle class="chart-dot" cx="367.1" cy="142.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:42  —  Score: 79.3" data-note=""/>
-<circle class="chart-dot" cx="387.9" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
-<circle class="chart-dot" cx="398.3" cy="135.5" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:52  —  Score: 80.6" data-note=""/>
-<circle class="chart-dot" cx="419.1" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
-<circle class="chart-dot" cx="429.5" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
-<circle class="chart-dot" cx="439.9" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
-<circle class="chart-dot" cx="460.7" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
-<circle class="chart-dot" cx="491.9" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:27  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="523.1" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:34  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="554.4" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
-<circle class="chart-dot" cx="585.6" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 23:17  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="616.8" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:30  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="648.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:38  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="679.2" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:03  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="700.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:04  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="85.2" cy="81.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:49  —  Score: 90.6" data-note=""/>
+<circle class="chart-dot" cx="115.5" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:57  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="145.7" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="175.9" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
+<circle class="chart-dot" cx="206.2" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:16  —  Score: 97.6" data-note=""/>
+<circle class="chart-dot" cx="236.4" cy="232.8" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:51  —  Score: 62.7" data-note=""/>
+<circle class="chart-dot" cx="256.6" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
+<circle class="chart-dot" cx="266.6" cy="202.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:10  —  Score: 68.2" data-note=""/>
+<circle class="chart-dot" cx="276.7" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
+<circle class="chart-dot" cx="296.9" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
+<circle class="chart-dot" cx="327.1" cy="156.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:30  —  Score: 76.7" data-note=""/>
+<circle class="chart-dot" cx="337.2" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
+<circle class="chart-dot" cx="357.3" cy="142.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:42  —  Score: 79.3" data-note=""/>
+<circle class="chart-dot" cx="377.5" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
+<circle class="chart-dot" cx="387.6" cy="135.5" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:52  —  Score: 80.6" data-note=""/>
+<circle class="chart-dot" cx="407.7" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
+<circle class="chart-dot" cx="417.8" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
+<circle class="chart-dot" cx="427.9" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
+<circle class="chart-dot" cx="448.0" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
+<circle class="chart-dot" cx="478.3" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:27  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="508.5" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:34  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="538.8" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
+<circle class="chart-dot" cx="569.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 23:17  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="599.2" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:30  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="629.5" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:38  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="659.7" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:03  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="689.9" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:08  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="700.0" cy="93.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:16  —  Score: 88.4" data-note=""/>
 <text x="55.0" y="85.6" text-anchor="start" font-size="11" font-weight="bold" fill="#2c3e50">88.3</text>
-<text x="231.9" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
-<text x="700.0" y="79.6" text-anchor="end" font-size="11" font-weight="bold" fill="#2c3e50">89.4</text>
+<text x="226.3" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
+<text x="700.0" y="85.1" text-anchor="end" font-size="11" font-weight="bold" fill="#2c3e50">88.4</text>
 <text x="55.0" y="278" text-anchor="middle" font-size="10" fill="#888">18:27</text>
-<text x="179.8" y="278" text-anchor="middle" font-size="10" fill="#888">19:11</text>
-<text x="304.7" y="278" text-anchor="middle" font-size="10" fill="#888">20:28</text>
-<text x="429.5" y="278" text-anchor="middle" font-size="10" fill="#888">21:03</text>
-<text x="554.4" y="278" text-anchor="middle" font-size="10" fill="#888">22:58</text>
-<text x="679.2" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
+<text x="175.9" y="278" text-anchor="middle" font-size="10" fill="#888">19:11</text>
+<text x="296.9" y="278" text-anchor="middle" font-size="10" fill="#888">20:28</text>
+<text x="417.8" y="278" text-anchor="middle" font-size="10" fill="#888">21:03</text>
+<text x="538.8" y="278" text-anchor="middle" font-size="10" fill="#888">22:58</text>
+<text x="659.7" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
 <text x="700.0" y="278" text-anchor="end" font-size="10" fill="#888">2026-04-08</text>
-<line x1="231.9" y1="30" x2="231.9" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
-<text x="235.9" y="44" font-size="10" fill="#e67e22">v2</text>
+<line x1="226.3" y1="30" x2="226.3" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="230.3" y="44" font-size="10" fill="#e67e22">v2</text>
 </svg>
 <script>
 (function() {
@@ -1454,6 +1507,22 @@ loadWishlist();
 <td><strong>89.4</strong></td>
 <td>100.0</td>
 <td>25</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-04-08 03:08</td>
+<td>v2</td>
+<td><strong>89.4</strong></td>
+<td>100.0</td>
+<td>25</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-04-08 03:16</td>
+<td>v2</td>
+<td><strong>88.4</strong></td>
+<td>100.0</td>
+<td>29</td>
 <td></td>
 </tr>
 </tbody>

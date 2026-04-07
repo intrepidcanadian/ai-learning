@@ -1162,6 +1162,43 @@ This finding has implications across all three domains:
 
 **Learning application:** ABxLab's finding that AI agents are susceptible to the same persuasive techniques that affect humans -- price anchoring, urgency framing, social proof -- has a direct pedagogical application. Students learning critical thinking could use ABxLab-style controlled experiments to *observe* how AI agents make biased decisions, then predict and test interventions. This makes abstract concepts like cognitive bias tangible and testable. Combined with [LLMimic's](#connection-22-ai-literacy-as-a-prerequisite-for-ai-mediated-commerce) finding that AI literacy reduces susceptibility to AI persuasion, this suggests a curriculum where students first study AI agent biases, then apply that understanding to recognize and resist the same biases in their own decision-making -- a concrete instance of the [Predict-Improve-Apply cycle](#connection-55-the-predict-improve-apply-cycle-formalizes-how-ai-helps-humans-learn-for-real-world-application).
 
+## Connection 72: Curriculum Learning as the Orchestration Layer for Simulation, Recursion, and Commerce
+
+[Curriculum learning](../methodologies/curriculum-learning.md) provides the missing orchestration layer that connects all three domains. In simulation, curriculum design determines the order of training scenarios -- easy environments first, complex ones later -- maximizing learning efficiency (AdaRFT achieves the same accuracy in 40-60% less compute via adaptive difficulty scheduling[^97]). In recursion, a self-improving agent that designs its own curriculum learns faster than one that trains on random self-play trajectories, as demonstrated by the ATLAS teacher-student architecture[^98]. In commerce, personalized product recommendation sequences function as curricula: the system introduces users to simple products before recommending complex bundles, mirroring the pedagogical principle of scaffolded complexity.
+
+The key insight is that **curriculum design is domain-agnostic**: the same "easy → hard" pacing principle applies whether you are training a world model, improving a recursive agent, or onboarding a new e-commerce user. This universality makes curriculum learning the natural orchestration layer for the unified [predict → act → observe → update](#the-unified-learning-loop) loop.
+
+### Learning Application: Self-Designing Curricula for Any Subject
+
+A practical application is AI tutoring systems that combine all three domains: a [world model](../methodologies/world-models.md) simulates the learning domain, a recursive improvement loop refines the tutor based on student outcomes, and curriculum learning sequences the content optimally. The result is a tutor that not only teaches but *learns to teach better over time* -- designing its own curriculum based on what works for each individual student.
+
+## Connection 73: Test-Time Compute Transforms the Economics of AI-Assisted Learning
+
+[Test-time compute scaling](../methodologies/test-time-compute.md) fundamentally changes the economics of deploying AI across all three domains. The T² scaling laws (April 2026) prove that smaller, overtrained models with generous inference budgets can match larger models at lower total cost[^99]. This has cascading implications:
+
+- **Simulation:** World model rollouts are a form of test-time compute -- the model "imagines" trajectories instead of executing them. More efficient TTS means more rollouts per second, enabling higher-fidelity simulation for educational applications.
+- **Recursion:** Self-improving agents can use test-time compute to evaluate candidate self-modifications before committing to them, reducing the risk of recursive degradation. This connects to [Connection 1's](#connection-1-simulation-enables-safe-recursion) sandbox principle: TTS provides a lightweight sandbox via extended reasoning.
+- **Commerce:** [AI e-commerce learning](ai-ecommerce-learning.md) recommendation systems can use adaptive TTS to spend more reasoning effort on high-value or ambiguous purchasing decisions while giving quick answers for routine recommendations.
+
+The broader implication is **democratization of AI tutoring**: institutions with limited compute budgets can deploy smaller models that "think harder" per student interaction, achieving personalized education at a fraction of the cost of running frontier-scale models.
+
+## Connection 74: Multi-Agent Architectures as the Implementation Pattern for Cross-Domain Learning Systems
+
+[Multi-agent systems](multi-agent-systems.md) provide the concrete implementation pattern for the theoretical cross-domain connections documented throughout this article. Where single agents struggle with the complexity of combining simulation, recursion, and commerce, multi-agent architectures decompose the problem naturally:
+
+| Agent Role | Domain | Function |
+|-----------|--------|----------|
+| **World Model Agent** | Simulation | Maintains environment dynamics, generates scenarios |
+| **Critic Agent** | Recursion | Evaluates outputs, drives self-improvement via debate |
+| **Recommendation Agent** | Commerce | Personalizes content delivery based on user model |
+| **Curriculum Agent** | Orchestration | Sequences interactions across all three domains |
+
+The 2025-2026 research confirms this pattern: The AI Scientist[^3] uses multi-agent pipelines for end-to-end research, AutoGen[^100] provides the framework for agent coordination, and SocioVerse[^36] demonstrates population-scale multi-agent simulation for social dynamics. The AAAI 2026 Bridge Program specifically targets the challenge of LLM-based multi-agent collaboration, addressing error cascades and coordination failures that limit current systems.
+
+### Learning Application: Multi-Agent Tutoring Systems
+
+The most practical cross-domain application is a multi-agent tutoring system where: a Literature Agent retrieves relevant learning materials ([tracking-ai-research](../research-sources/tracking-ai-research.md)), a Simulation Agent provides practice environments ([world models](../methodologies/world-models.md)), a Critic Agent checks understanding via Socratic questioning ([automated peer review](../core-concepts/automated-peer-review.md)), and a Curriculum Agent sequences the experience optimally ([curriculum learning](../methodologies/curriculum-learning.md)). Each agent is specialized, but together they provide a learning experience richer than any single agent could deliver.
+
 ## See Also
 
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) -- End-to-end research automation
@@ -1181,6 +1218,10 @@ This finding has implications across all three domains:
 - [Key Papers and References](../research-sources/key-papers.md) -- Cross-domain paper collection
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) -- Finding cross-cutting research
 - [Institutions and Labs](../research-sources/institutions-and-labs.md) -- Research organizations
+- [World Models](../methodologies/world-models.md) -- The imagination engine behind simulation
+- [Test-Time Compute](../methodologies/test-time-compute.md) -- Adaptive inference scaling
+- [Curriculum Learning](../methodologies/curriculum-learning.md) -- Progressive difficulty orchestration
+- [Multi-Agent Systems](multi-agent-systems.md) -- Collaborative agent architectures
 
 ## References
 
@@ -1280,3 +1321,7 @@ This finding has implications across all three domains:
 [^94]: Cherep, M., Ma, C., Xu, A., Shaked, M., Maes, P. & Singh, N. (2026). "A Framework for Studying AI Agent Behavior: Evidence from Consumer Choice Experiments." *ICLR 2026*. [arXiv:2509.25609](https://arxiv.org/abs/2509.25609)
 [^95]: Chu, M.-L., Terhorst, L., Reed, K., Ni, T., Chen, W. & Lin, R. (2025). "LLM-Based Multi-Agent System for Simulating and Analyzing Marketing and Consumer Behavior." [arXiv:2510.18155](https://arxiv.org/abs/2510.18155)
 [^96]: Sahoo, S., Chadha, A., Jain, V. & Chaudhary, D. (2026). "Safeguarded Alignment for Recursive Self-Improvement." *ICLR 2026 RSI Workshop*. [arXiv:2603.06333](https://arxiv.org/abs/2603.06333)
+[^97]: Wang, Z. et al. (2026). "Efficient Reinforcement Finetuning via Adaptive Curriculum Learning." [arXiv:2504.05520](https://arxiv.org/abs/2504.05520)
+[^98]: Liu, J. et al. (2025). "Continual Learning, Not Training: Online Adaptation For Agents (ATLAS)." [arXiv:2511.01093](https://arxiv.org/abs/2511.01093)
+[^99]: Sardana, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal (T² Scaling Laws)." [arXiv:2604.01411](https://arxiv.org/abs/2604.01411)
+[^100]: Wu, Q. et al. (2025). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." [arXiv:2308.08155](https://arxiv.org/abs/2308.08155)

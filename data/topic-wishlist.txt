@@ -19,3 +19,8 @@ synthetic-data-generation
 inference-optimization
 knowledge-distillation
 prompt-engineering
+core-concepts
+tools-platforms
+research-sources
+test-time-compute-scaling
+computational-cost

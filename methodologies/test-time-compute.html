@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test-Time Compute Scaling - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html" aria-current="page">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; Test-Time Compute Scaling</div>
+<h1 id="test-time-compute-scaling">Test-Time Compute Scaling</h1>
+<h2 id="overview">Overview</h2>
+<p><strong>Test-time compute scaling</strong> (also called inference-time scaling) is the practice of allocating additional computational resources during inference — not training — to improve an AI model's reasoning, accuracy, and problem-solving ability. Instead of building bigger models, test-time scaling makes existing models <em>think harder</em> on each problem by generating longer chains of thought, sampling multiple solution attempts, or searching over reasoning paths. This paradigm shift has profound implications for AI-assisted learning: a tutor that can spend more time "reasoning" about a student's specific problem can provide more personalized, accurate guidance without requiring a fundamentally larger model.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="the-compute-allocation-tradeoff">The Compute Allocation Tradeoff</h3>
+<p>Traditional AI scaling laws (Kaplan et al., 2020; Chinchilla, Hoffmann et al., 2022) focused on <strong>training compute</strong> — how much computation to spend on model parameters and training data. Test-time compute scaling introduces a second dimension: <strong>how much compute to spend per query at inference time</strong>.[^1]</p>
+<p>Snell et al. (2024) demonstrated that scaling test-time compute optimally can be <strong>more effective than scaling model parameters</strong> for reasoning tasks. A smaller model with sufficient test-time compute can outperform a 14× larger model on difficult problems.[^1] This finding fundamentally changes the economics of AI: instead of always training bigger models, you can deploy smaller models that "think longer" on hard problems.</p>
+<h3 id="why-this-matters-for-learning">Why This Matters for Learning</h3>
+<p>The test-time compute paradigm maps naturally onto human learning:
+- <strong>Easy problems</strong>: A quick answer suffices (low compute)
+- <strong>Hard problems</strong>: Extended deliberation, multiple attempts, and self-correction are needed (high compute)
+- <strong>Personalization</strong>: Different learners need different amounts of "thinking" about the same problem</p>
+<p>AI tutoring systems that dynamically allocate test-time compute can provide adaptive difficulty — spending more reasoning effort on concepts where a student struggles, mirroring how effective human tutors allocate attention.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="core-strategies-for-test-time-scaling">Core Strategies for Test-Time Scaling</h3>
+<p>Test-time compute scaling encompasses four main strategies:[^2]</p>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│              Test-Time Compute Strategies             │
+├──────────────────┬──────────────────────────────────┤
+│  PARALLEL        │  Generate N solutions             │
+│  SAMPLING        │  independently, select best       │
+│                  │  (majority vote, reward model)     │
+├──────────────────┼──────────────────────────────────┤
+│  SEQUENTIAL      │  Generate → critique → revise     │
+│  REVISION        │  iteratively until satisfied      │
+├──────────────────┼──────────────────────────────────┤
+│  TREE SEARCH     │  Expand reasoning tree with       │
+│                  │  branching and backtracking        │
+├──────────────────┼──────────────────────────────────┤
+│  LATENT          │  Extended reasoning in continuous  │
+│  REASONING       │  representation space (not tokens) │
+└──────────────────┴──────────────────────────────────┘
+</code></pre>
+<h3 id="key-papers-and-systems-2024-2026">Key Papers and Systems (2024-2026)</h3>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Year</th>
+<th>Key Finding</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Snell et al.[^1]</td>
+<td>2024</td>
+<td>Optimal TTS can beat 14× larger models</td>
+<td>Smaller models viable for hard tasks</td>
+</tr>
+<tr>
+<td>Art of Scaling TTS[^3]</td>
+<td>2025</td>
+<td>30B+ token study across 8 LLMs</td>
+<td>Practical recipe for TTS strategy selection</td>
+</tr>
+<tr>
+<td>Parallel TTS for Latent Reasoning[^4]</td>
+<td>2025</td>
+<td>Continuous-space sampling more efficient than CoT</td>
+<td>Latent reasoning reduces token cost</td>
+</tr>
+<tr>
+<td>TTS for LLM Agents[^5]</td>
+<td>2025</td>
+<td>Agent tasks benefit from parallel+sequential hybrid</td>
+<td>Agentic systems gain from TTS</td>
+</tr>
+<tr>
+<td>Train-to-Test (T²) Laws[^6]</td>
+<td>2026</td>
+<td>Joint optimization of train + test compute</td>
+<td>Overtraining becomes compute-optimal with TTS</td>
+</tr>
+<tr>
+<td>Training Data Role in TTS[^7]</td>
+<td>2026</td>
+<td>Training data composition affects TTS effectiveness</td>
+<td>Data quality matters for inference scaling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-train-to-test-t2-scaling-laws">The Train-to-Test (T²) Scaling Laws</h3>
+<p>The most significant 2026 result comes from the T² scaling laws, which jointly optimize model size, training tokens, and number of inference samples under a fixed total compute budget.[^6] Key insights:</p>
+<ol>
+<li><strong>Overtraining is optimal</strong>: When test-time compute is available, it becomes compute-optimal to <em>overtrain</em> a smaller model (train it beyond the Chinchilla-optimal point) and compensate with inference-time sampling</li>
+<li><strong>Budget allocation</strong>: For a fixed total budget, the optimal split shifts toward more inference compute as the budget grows</li>
+<li><strong>Pass@k modeling</strong>: Using pass@k (generate k solutions, take the best) as the TTS strategy integrates naturally with existing scaling law frameworks</li>
+</ol>
+<p>This has direct implications for educational AI: schools and institutions with limited training budgets can deploy smaller, overtrained models that deliver high-quality tutoring by spending more compute per student interaction.</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 800 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;system-ui, sans-serif&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arr&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#475569&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;28&quot; text-anchor=&quot;middle&quot; font-size=&quot;17&quot; font-weight=&quot;bold&quot; fill=&quot;#1e293b&quot;&gt;Test-Time Compute: Adaptive Reasoning Depth&lt;/text&gt;
+
+  &lt;!-- Problem difficulty spectrum --&gt;
+  &lt;rect x=&quot;50&quot; y=&quot;50&quot; width=&quot;700&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#f1f5f9&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;75&quot; text-anchor=&quot;middle&quot; font-size=&quot;13&quot; font-weight=&quot;bold&quot; fill=&quot;#334155&quot;&gt;Problem Difficulty Spectrum&lt;/text&gt;
+
+  &lt;!-- Easy --&gt;
+  &lt;rect x=&quot;60&quot; y=&quot;105&quot; width=&quot;200&quot; height=&quot;250&quot; rx=&quot;10&quot; fill=&quot;#dcfce7&quot; stroke=&quot;#86efac&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; font-weight=&quot;bold&quot; fill=&quot;#166534&quot;&gt;Easy&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;150&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#15803d&quot;&gt;Low Compute&lt;/text&gt;
+  &lt;rect x=&quot;80&quot; y=&quot;165&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#86efac&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;185&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#166534&quot;&gt;1 forward pass&lt;/text&gt;
+  &lt;rect x=&quot;80&quot; y=&quot;205&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#86efac&quot;/&gt;
+  &lt;text x=&quot;160&quot; y=&quot;225&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#166534&quot;&gt;Direct answer&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;24&quot; fill=&quot;#166534&quot;&gt;⚡&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#15803d&quot;&gt;~1× base cost&lt;/text&gt;
+  &lt;text x=&quot;160&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#166534&quot; font-style=&quot;italic&quot;&gt;&quot;What is 2+2?&quot;&lt;/text&gt;
+
+  &lt;!-- Medium --&gt;
+  &lt;rect x=&quot;300&quot; y=&quot;105&quot; width=&quot;200&quot; height=&quot;250&quot; rx=&quot;10&quot; fill=&quot;#fef9c3&quot; stroke=&quot;#fde047&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; font-weight=&quot;bold&quot; fill=&quot;#854d0e&quot;&gt;Medium&lt;/text&gt;
+  &lt;text x=&quot;400&quot; y=&quot;150&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#a16207&quot;&gt;Moderate Compute&lt;/text&gt;
+  &lt;rect x=&quot;320&quot; y=&quot;165&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#fde047&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;185&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#854d0e&quot;&gt;Chain-of-thought&lt;/text&gt;
+  &lt;rect x=&quot;320&quot; y=&quot;205&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#fde047&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;225&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#854d0e&quot;&gt;Self-verification&lt;/text&gt;
+  &lt;text x=&quot;400&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;24&quot; fill=&quot;#854d0e&quot;&gt;🔄&lt;/text&gt;
+  &lt;text x=&quot;400&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#a16207&quot;&gt;~5-10× base cost&lt;/text&gt;
+  &lt;text x=&quot;400&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#854d0e&quot; font-style=&quot;italic&quot;&gt;&quot;Explain supply/demand&quot;&lt;/text&gt;
+
+  &lt;!-- Hard --&gt;
+  &lt;rect x=&quot;540&quot; y=&quot;105&quot; width=&quot;200&quot; height=&quot;250&quot; rx=&quot;10&quot; fill=&quot;#fce7f3&quot; stroke=&quot;#f9a8d4&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;640&quot; y=&quot;130&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; font-weight=&quot;bold&quot; fill=&quot;#9d174d&quot;&gt;Hard&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;150&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#be185d&quot;&gt;High Compute&lt;/text&gt;
+  &lt;rect x=&quot;560&quot; y=&quot;165&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#f9a8d4&quot;/&gt;
+  &lt;text x=&quot;640&quot; y=&quot;185&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#9d174d&quot;&gt;N parallel samples&lt;/text&gt;
+  &lt;rect x=&quot;560&quot; y=&quot;205&quot; width=&quot;160&quot; height=&quot;30&quot; rx=&quot;6&quot; fill=&quot;white&quot; stroke=&quot;#f9a8d4&quot;/&gt;
+  &lt;text x=&quot;640&quot; y=&quot;225&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#9d174d&quot;&gt;Tree search + backtrack&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;270&quot; text-anchor=&quot;middle&quot; font-size=&quot;24&quot; fill=&quot;#9d174d&quot;&gt;🌳&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;295&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#be185d&quot;&gt;~50-100× base cost&lt;/text&gt;
+  &lt;text x=&quot;640&quot; y=&quot;340&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#9d174d&quot; font-style=&quot;italic&quot;&gt;&quot;Prove this theorem&quot;&lt;/text&gt;
+
+  &lt;!-- Arrows --&gt;
+  &lt;line x1=&quot;260&quot; y1=&quot;230&quot; x2=&quot;300&quot; y2=&quot;230&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arr)&quot;/&gt;
+  &lt;line x1=&quot;500&quot; y1=&quot;230&quot; x2=&quot;540&quot; y2=&quot;230&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arr)&quot;/&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#64748b&quot; font-style=&quot;italic&quot;&gt;AI tutors allocate reasoning depth based on question difficulty — just like human experts&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p><em>Diagram: Test-time compute scaling allows AI systems to adaptively allocate reasoning effort based on problem difficulty, analogous to how human tutors spend more time on harder concepts.</em></p>
+<h3 id="connection-to-recursive-self-improvement">Connection to Recursive Self-Improvement</h3>
+<p>Test-time compute scaling intersects with <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> in a key way: a self-improving system can learn to <strong>allocate its own test-time compute more efficiently</strong> over time. Early attempts may waste compute on easy problems or under-allocate on hard ones; through recursive optimization of its own inference strategy, the system converges on optimal compute allocation — a form of learned metacognition.[^5]</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="the-2025-2026-tts-landscape">The 2025-2026 TTS Landscape</h3>
+<p>The field has rapidly matured from proof-of-concept to practical deployment:</p>
+<ol>
+<li><strong>OpenAI o1/o3 models</strong> (2024-2025): First commercial systems to implement extended chain-of-thought reasoning at test time, demonstrating significant gains on math, coding, and scientific reasoning</li>
+<li><strong>DeepSeek-R1</strong> (2025): Open-source reasoning model showing that TTS can be replicated outside proprietary labs</li>
+<li><strong>Survey consolidation</strong>: Multiple comprehensive surveys published in late 2025 organize TTS techniques into taxonomies based on subproblem structure (sequential, parallel, tree)[^8] and provide practical guides for strategy selection[^3]</li>
+<li><strong>T² scaling laws</strong> (April 2026): First rigorous framework for jointly optimizing training and test-time compute budgets[^6]</li>
+</ol>
+<h3 id="practical-implications-for-ai-assisted-education">Practical Implications for AI-Assisted Education</h3>
+<p>Test-time compute scaling enables several educational innovations:</p>
+<ul>
+<li><strong>Adaptive tutoring</strong>: Systems that automatically "think harder" about questions from struggling students</li>
+<li><strong>Proof checking</strong>: Mathematical tutors that verify student proofs by generating multiple verification paths</li>
+<li><strong>Personalized explanations</strong>: Spending more inference compute to find the explanation that best matches a student's background knowledge</li>
+<li><strong>Real-time assessment</strong>: Using parallel sampling to evaluate whether a student's approach is correct, even when there are multiple valid solution paths</li>
+</ul>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Latency vs. quality tradeoff</strong>: More test-time compute means slower responses — interactive tutoring systems need sub-second latency, which conflicts with extended reasoning[^3]</li>
+<li><strong>Cost scaling</strong>: Test-time compute costs scale linearly (or worse) with problem difficulty, making it expensive for high-volume educational deployments</li>
+<li><strong>Verification bottleneck</strong>: Many TTS strategies (best-of-N sampling) require a verifier to select the best solution, but building reliable verifiers is itself an open problem[^2]</li>
+<li><strong>Diminishing returns</strong>: Beyond a certain point, additional test-time compute yields marginal improvements — the "thinking longer" strategy has limits on each model's capability ceiling[^1]</li>
+<li><strong>Opacity</strong>: Extended chain-of-thought reasoning can be hard to audit, raising concerns about AI tutors that "show their work" but whose reasoning process is actually opaque or misleading</li>
+<li><strong>Training data dependency</strong>: Recent research shows that the effectiveness of TTS depends heavily on training data composition — models trained on certain data distributions benefit less from inference-time scaling[^7]</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Same category (Methodologies):</strong>
+- <a href="agentic-tree-search.html">Agentic Tree Search</a> — tree search as a specific test-time compute strategy
+- <a href="world-models.html">World Models</a> — imagination-based planning as a form of test-time reasoning
+- <a href="automated-experiment-design.html">Automated Experiment Design</a> — experiment planning benefits from extended inference reasoning
+- <a href="wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a> — quality evaluation as a verification problem</p>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — scientific reasoning requires deep test-time deliberation
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — TTS extends foundation model capabilities without retraining</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — self-improving inference strategies
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — simulation as test-time reasoning in world models
+- <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws Research</a> — T² scaling laws bridge training and inference compute
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — real-time recommendation benefits from adaptive compute</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/aider.html">Aider</a> — coding assistants that leverage extended reasoning for complex programming tasks
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking TTS research publications</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — landmark inference scaling papers
+- <a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> — monitoring the rapidly evolving TTS landscape</p>
+<h2 id="references">References</h2>
+<p>[^1]: Snell, C. et al. (2024). Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters. <em>arXiv:2408.03314</em>. https://arxiv.org/abs/2408.03314
+[^2]: Welleck, S. et al. (2025). Scaling Test-time Compute for LLM Agents. <em>arXiv:2506.12928</em>. https://arxiv.org/abs/2506.12928
+[^3]: Xiao, S. et al. (2025). The Art of Scaling Test-Time Compute for Large Language Models. <em>arXiv:2512.02008</em>. https://arxiv.org/abs/2512.02008
+[^4]: Chen, Z. et al. (2025). Parallel Test-Time Scaling for Latent Reasoning Models. <em>arXiv:2510.07745</em>. https://arxiv.org/abs/2510.07745
+[^5]: Welleck, S. et al. (2025). Scaling Test-time Compute for LLM Agents. <em>arXiv:2506.12928</em>. https://arxiv.org/abs/2506.12928
+[^6]: Sardana, N. et al. (2026). Test-Time Scaling Makes Overtraining Compute-Optimal. <em>arXiv:2604.01411</em>. https://arxiv.org/abs/2604.01411
+[^7]: Ye, J. et al. (2026). Understanding the Role of Training Data in Test-Time Scaling. <em>arXiv:2510.03605</em>. https://arxiv.org/abs/2510.03605
+[^8]: Li, Y. et al. (2025). Test-time Scaling of LLMs: A Survey from A Subproblem Structure Perspective. <em>arXiv:2511.14772</em>. https://arxiv.org/abs/2511.14772</p>
+</main>
+</body>
+</html>

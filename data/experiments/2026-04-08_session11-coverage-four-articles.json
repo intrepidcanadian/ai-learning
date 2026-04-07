@@ -1,0 +1,41 @@
+{
+  "session": 11,
+  "date": "2026-04-08",
+  "strategy": "Coverage mode: write 4 new wishlist articles (world-models, test-time-compute, curriculum-learning, multi-agent-systems) with SVG diagrams, cross-links, and 2025-2026 papers. Add 3 new connections to cross-cutting-connections.md.",
+  "predicted_delta": -1.0,
+  "dimensions_targeted": ["coverage", "linking"],
+  "reasoning": "Coverage mode triggered by 0/15 wishlist topics written. New articles will temporarily lower composite (they start below the 89.4 average) but raise wishlist coverage from 0% to ~27%. Topics chosen for alignment with user interests: world-models (simulation), test-time-compute (recursion/scaling), curriculum-learning (real-life learning), multi-agent-systems (collaborative AI). Each article has 7 template sections, 8-15 footnotes with arxiv links, 1 SVG diagram, and conservative cross-links to existing articles only.",
+  "articles_targeted": [
+    "world-models (new)",
+    "test-time-compute (new)",
+    "curriculum-learning (new)",
+    "multi-agent-systems (new)",
+    "cross-cutting-connections (3 new connections)"
+  ],
+  "papers_added": [
+    "Ha & Schmidhuber (2018) World Models (arXiv:1803.10122)",
+    "Hafner et al. (2023) DreamerV3 (arXiv:2301.04104)",
+    "Alonso et al. (2024) DIAMOND (arXiv:2405.12399)",
+    "Bardes et al. (2025) V-JEPA 2 (arXiv:2506.09985)",
+    "Ding et al. (2025) World Models Survey (arXiv:2411.14499)",
+    "Wang et al. (2025) Embodied AI World Models (arXiv:2510.16732)",
+    "Li et al. (2026) World Models Position Paper (arXiv:2602.01630)",
+    "Melnychuk et al. (2025) Clinical World Models (arXiv:2511.16333)",
+    "Snell et al. (2024) Optimal TTS (arXiv:2408.03314)",
+    "Xiao et al. (2025) Art of Scaling TTS (arXiv:2512.02008)",
+    "Chen et al. (2025) Parallel TTS Latent Reasoning (arXiv:2510.07745)",
+    "Sardana et al. (2026) T² Scaling Laws (arXiv:2604.01411)",
+    "Li et al. (2025) TTS Survey Subproblem Structure (arXiv:2511.14772)",
+    "Bengio et al. (2009) Curriculum Learning (ICML)",
+    "Wang et al. (2026) AdaRFT (arXiv:2504.05520)",
+    "Chen et al. (2025) Curriculum-RLAIF (arXiv:2505.20075)",
+    "Liu et al. (2025) ATLAS (arXiv:2511.01093)",
+    "Du et al. (2025) Multi-Agent Collaboration Survey (arXiv:2501.06322)",
+    "Irving et al. (2018) AI Safety via Debate (arXiv:1805.00899)",
+    "Lu et al. (2024) The AI Scientist (arXiv:2408.06292)",
+    "Wu et al. (2025) AutoGen (arXiv:2308.08155)",
+    "Menzli et al. (2026) AI Agents Taxonomy (Information Fusion)"
+  ],
+  "actual_delta": -1.0,
+  "lesson": "Coverage mode: 4 new articles raised article count from 25 to 29 and wishlist coverage from 0% to 20%. Composite dropped as expected (89.4→88.4) since new articles average ~87. Multi-agent-systems scored highest (89.9) due to strong cross-linking. Curriculum-learning scored lowest (83.8) due to fewer 2026 papers. Next session should continue coverage mode or switch to quality to boost the new articles."
+}

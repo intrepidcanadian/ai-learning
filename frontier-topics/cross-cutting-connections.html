@@ -333,15 +333,19 @@ body {
 <details open><summary>Methodologies</summary>
 <a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
 <a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
 <a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
 <a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
 <a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html">World Models</a>
 </details>
 <details open><summary>Frontier Topics</summary>
 <a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
 <a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
 <a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
 <a href="../frontier-topics/cross-cutting-connections.html" aria-current="page">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
 <a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
 <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
 <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
@@ -2053,6 +2057,55 @@ loadWishlist();
 </ul>
 <h3 id="learning-application-teaching-critical-thinking-through-ai-agent-bias">Learning Application: Teaching Critical Thinking Through AI Agent Bias</h3>
 <p><strong>Learning application:</strong> ABxLab's finding that AI agents are susceptible to the same persuasive techniques that affect humans -- price anchoring, urgency framing, social proof -- has a direct pedagogical application. Students learning critical thinking could use ABxLab-style controlled experiments to <em>observe</em> how AI agents make biased decisions, then predict and test interventions. This makes abstract concepts like cognitive bias tangible and testable. Combined with <a href="#connection-22-ai-literacy-as-a-prerequisite-for-ai-mediated-commerce">LLMimic's</a> finding that AI literacy reduces susceptibility to AI persuasion, this suggests a curriculum where students first study AI agent biases, then apply that understanding to recognize and resist the same biases in their own decision-making -- a concrete instance of the <a href="#connection-55-the-predict-improve-apply-cycle-formalizes-how-ai-helps-humans-learn-for-real-world-application">Predict-Improve-Apply cycle</a>.</p>
+<h2 id="connection-72-curriculum-learning-as-the-orchestration-layer-for-simulation-recursion-and-commerce">Connection 72: Curriculum Learning as the Orchestration Layer for Simulation, Recursion, and Commerce</h2>
+<p><a href="../methodologies/curriculum-learning.html">Curriculum learning</a> provides the missing orchestration layer that connects all three domains. In simulation, curriculum design determines the order of training scenarios -- easy environments first, complex ones later -- maximizing learning efficiency (AdaRFT achieves the same accuracy in 40-60% less compute via adaptive difficulty scheduling[^97]). In recursion, a self-improving agent that designs its own curriculum learns faster than one that trains on random self-play trajectories, as demonstrated by the ATLAS teacher-student architecture[^98]. In commerce, personalized product recommendation sequences function as curricula: the system introduces users to simple products before recommending complex bundles, mirroring the pedagogical principle of scaffolded complexity.</p>
+<p>The key insight is that <strong>curriculum design is domain-agnostic</strong>: the same "easy → hard" pacing principle applies whether you are training a world model, improving a recursive agent, or onboarding a new e-commerce user. This universality makes curriculum learning the natural orchestration layer for the unified <a href="#the-unified-learning-loop">predict → act → observe → update</a> loop.</p>
+<h3 id="learning-application-self-designing-curricula-for-any-subject">Learning Application: Self-Designing Curricula for Any Subject</h3>
+<p>A practical application is AI tutoring systems that combine all three domains: a <a href="../methodologies/world-models.html">world model</a> simulates the learning domain, a recursive improvement loop refines the tutor based on student outcomes, and curriculum learning sequences the content optimally. The result is a tutor that not only teaches but <em>learns to teach better over time</em> -- designing its own curriculum based on what works for each individual student.</p>
+<h2 id="connection-73-test-time-compute-transforms-the-economics-of-ai-assisted-learning">Connection 73: Test-Time Compute Transforms the Economics of AI-Assisted Learning</h2>
+<p><a href="../methodologies/test-time-compute.html">Test-time compute scaling</a> fundamentally changes the economics of deploying AI across all three domains. The T² scaling laws (April 2026) prove that smaller, overtrained models with generous inference budgets can match larger models at lower total cost[^99]. This has cascading implications:</p>
+<ul>
+<li><strong>Simulation:</strong> World model rollouts are a form of test-time compute -- the model "imagines" trajectories instead of executing them. More efficient TTS means more rollouts per second, enabling higher-fidelity simulation for educational applications.</li>
+<li><strong>Recursion:</strong> Self-improving agents can use test-time compute to evaluate candidate self-modifications before committing to them, reducing the risk of recursive degradation. This connects to <a href="#connection-1-simulation-enables-safe-recursion">Connection 1's</a> sandbox principle: TTS provides a lightweight sandbox via extended reasoning.</li>
+<li><strong>Commerce:</strong> <a href="ai-ecommerce-learning.html">AI e-commerce learning</a> recommendation systems can use adaptive TTS to spend more reasoning effort on high-value or ambiguous purchasing decisions while giving quick answers for routine recommendations.</li>
+</ul>
+<p>The broader implication is <strong>democratization of AI tutoring</strong>: institutions with limited compute budgets can deploy smaller models that "think harder" per student interaction, achieving personalized education at a fraction of the cost of running frontier-scale models.</p>
+<h2 id="connection-74-multi-agent-architectures-as-the-implementation-pattern-for-cross-domain-learning-systems">Connection 74: Multi-Agent Architectures as the Implementation Pattern for Cross-Domain Learning Systems</h2>
+<p><a href="multi-agent-systems.html">Multi-agent systems</a> provide the concrete implementation pattern for the theoretical cross-domain connections documented throughout this article. Where single agents struggle with the complexity of combining simulation, recursion, and commerce, multi-agent architectures decompose the problem naturally:</p>
+<table>
+<thead>
+<tr>
+<th>Agent Role</th>
+<th>Domain</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>World Model Agent</strong></td>
+<td>Simulation</td>
+<td>Maintains environment dynamics, generates scenarios</td>
+</tr>
+<tr>
+<td><strong>Critic Agent</strong></td>
+<td>Recursion</td>
+<td>Evaluates outputs, drives self-improvement via debate</td>
+</tr>
+<tr>
+<td><strong>Recommendation Agent</strong></td>
+<td>Commerce</td>
+<td>Personalizes content delivery based on user model</td>
+</tr>
+<tr>
+<td><strong>Curriculum Agent</strong></td>
+<td>Orchestration</td>
+<td>Sequences interactions across all three domains</td>
+</tr>
+</tbody>
+</table>
+<p>The 2025-2026 research confirms this pattern: The AI Scientist[^3] uses multi-agent pipelines for end-to-end research, AutoGen[^100] provides the framework for agent coordination, and SocioVerse[^36] demonstrates population-scale multi-agent simulation for social dynamics. The AAAI 2026 Bridge Program specifically targets the challenge of LLM-based multi-agent collaboration, addressing error cascades and coordination failures that limit current systems.</p>
+<h3 id="learning-application-multi-agent-tutoring-systems">Learning Application: Multi-Agent Tutoring Systems</h3>
+<p>The most practical cross-domain application is a multi-agent tutoring system where: a Literature Agent retrieves relevant learning materials (<a href="../research-sources/tracking-ai-research.html">tracking-ai-research</a>), a Simulation Agent provides practice environments (<a href="../methodologies/world-models.html">world models</a>), a Critic Agent checks understanding via Socratic questioning (<a href="../core-concepts/automated-peer-review.html">automated peer review</a>), and a Curriculum Agent sequences the experience optimally (<a href="../methodologies/curriculum-learning.html">curriculum learning</a>). Each agent is specialized, but together they provide a learning experience richer than any single agent could deliver.</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> -- End-to-end research automation</li>
@@ -2072,6 +2125,10 @@ loadWishlist();
 <li><a href="../research-sources/key-papers.html">Key Papers and References</a> -- Cross-domain paper collection</li>
 <li><a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a> -- Finding cross-cutting research</li>
 <li><a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> -- Research organizations</li>
+<li><a href="../methodologies/world-models.html">World Models</a> -- The imagination engine behind simulation</li>
+<li><a href="../methodologies/test-time-compute.html">Test-Time Compute</a> -- Adaptive inference scaling</li>
+<li><a href="../methodologies/curriculum-learning.html">Curriculum Learning</a> -- Progressive difficulty orchestration</li>
+<li><a href="multi-agent-systems.html">Multi-Agent Systems</a> -- Collaborative agent architectures</li>
 </ul>
 <h2 id="references">References</h2>
 <p>[^1]: Zhang, J. et al. (2025). "Darwin Godel Machine." <a href="https://arxiv.org/abs/2505.22954">arXiv:2505.22954</a>
@@ -2168,7 +2225,11 @@ loadWishlist();
 [^93]: Chen, W., Zhao, Y., Huang, J., Ye, Z., Ju, C.M., Zhao, T., Shah, N., Chen, L. &amp; Zhang, Y. (2026). "MemRec: Collaborative Memory-Augmented Agentic Recommender System." <a href="https://arxiv.org/abs/2601.08816">arXiv:2601.08816</a>
 [^94]: Cherep, M., Ma, C., Xu, A., Shaked, M., Maes, P. &amp; Singh, N. (2026). "A Framework for Studying AI Agent Behavior: Evidence from Consumer Choice Experiments." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2509.25609">arXiv:2509.25609</a>
 [^95]: Chu, M.-L., Terhorst, L., Reed, K., Ni, T., Chen, W. &amp; Lin, R. (2025). "LLM-Based Multi-Agent System for Simulating and Analyzing Marketing and Consumer Behavior." <a href="https://arxiv.org/abs/2510.18155">arXiv:2510.18155</a>
-[^96]: Sahoo, S., Chadha, A., Jain, V. &amp; Chaudhary, D. (2026). "Safeguarded Alignment for Recursive Self-Improvement." <em>ICLR 2026 RSI Workshop</em>. <a href="https://arxiv.org/abs/2603.06333">arXiv:2603.06333</a></p>
+[^96]: Sahoo, S., Chadha, A., Jain, V. &amp; Chaudhary, D. (2026). "Safeguarded Alignment for Recursive Self-Improvement." <em>ICLR 2026 RSI Workshop</em>. <a href="https://arxiv.org/abs/2603.06333">arXiv:2603.06333</a>
+[^97]: Wang, Z. et al. (2026). "Efficient Reinforcement Finetuning via Adaptive Curriculum Learning." <a href="https://arxiv.org/abs/2504.05520">arXiv:2504.05520</a>
+[^98]: Liu, J. et al. (2025). "Continual Learning, Not Training: Online Adaptation For Agents (ATLAS)." <a href="https://arxiv.org/abs/2511.01093">arXiv:2511.01093</a>
+[^99]: Sardana, N. et al. (2026). "Test-Time Scaling Makes Overtraining Compute-Optimal (T² Scaling Laws)." <a href="https://arxiv.org/abs/2604.01411">arXiv:2604.01411</a>
+[^100]: Wu, Q. et al. (2025). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." <a href="https://arxiv.org/abs/2308.08155">arXiv:2308.08155</a></p>
 </main>
 </body>
 </html>

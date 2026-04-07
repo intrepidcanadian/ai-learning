@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Models - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="../index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="../glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="../core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="../core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="../tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="../tools-platforms/aider.html">Aider</a>
+<a href="../tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="../tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="../methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="../methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="../methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="../methodologies/template-free-research.html">Template-Free Research</a>
+<a href="../methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="../methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="../methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="../methodologies/world-models.html" aria-current="page">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="../frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="../frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="../frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="../frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="../frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="../frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="../frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="../frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="../research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="../research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="../research-sources/key-papers.html">Key Papers and References</a>
+<a href="../research-sources/latest-papers.html">Latest Papers</a>
+<a href="../research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Methodologies &rsaquo; World Models</div>
+<h1 id="world-models">World Models</h1>
+<h2 id="overview">Overview</h2>
+<p>A <strong>world model</strong> is a learned internal representation that allows an AI agent to predict how the environment will evolve in response to actions — essentially an "imagination engine" that enables planning, counterfactual reasoning, and transfer learning without requiring real-world interaction at every step. World models are foundational to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> and increasingly central to how AI systems help humans learn complex subjects by providing safe, explorable simulations of real domains.</p>
+<h2 id="background-theoretical-foundations">Background / Theoretical Foundations</h2>
+<h3 id="from-model-free-to-model-based-intelligence">From Model-Free to Model-Based Intelligence</h3>
+<p>Early reinforcement learning systems were <strong>model-free</strong>: they learned policies directly from reward signals without building any internal representation of environment dynamics. While effective in narrow domains, model-free approaches require enormous amounts of real-world interaction and fail to generalize across tasks. World models emerged as the model-based alternative — agents that first learn <em>how the world works</em> and then plan within that learned model.[^1]</p>
+<p>The theoretical case for world models was formalized by Richens et al. (ICML 2025), who proved that any agent capable of generalizing to multi-step, goal-directed tasks in novel environments <strong>must</strong> have learned a world model.[^2] This result establishes world models not as an optional optimization but as a mathematical requirement for general-purpose intelligence.</p>
+<h3 id="the-dreamer-lineage">The Dreamer Lineage</h3>
+<p>The modern world model paradigm traces through the Dreamer family of agents:</p>
+<ul>
+<li><strong>World Models (Ha &amp; Schmidhuber, 2018)</strong>: Introduced the VAE + RNN architecture for learning environment dynamics in latent space[^1]</li>
+<li><strong>DreamerV1 (Hafner et al., 2020)</strong>: Added latent imagination for policy optimization via backpropagation through learned dynamics[^3]</li>
+<li><strong>DreamerV2 (2021)</strong>: Scaled to Atari with discrete latent representations</li>
+<li><strong>DreamerV3 (2023)</strong>: Achieved the first diamond collection in Minecraft from scratch using a single algorithm and hyperparameter set across 150+ diverse tasks[^4]</li>
+</ul>
+<p>Each generation improved the fidelity of the learned world model and the efficiency of "dreaming" — training policies by imagining trajectories rather than executing them.</p>
+<h3 id="connection-to-predictive-coding-in-neuroscience">Connection to Predictive Coding in Neuroscience</h3>
+<p>World models echo the <strong>predictive coding</strong> hypothesis from neuroscience: the brain continuously generates predictions about sensory input and learns from prediction errors. Kuo et al. (NeurIPS 2025) demonstrated that adding predictive coding modules to meta-RL agents produces interpretable, Bayes-optimal belief representations under partial observability.[^5] This convergence between neuroscience and AI suggests that prediction-driven learning is a fundamental principle, not just an engineering choice.</p>
+<h2 id="technical-details-key-systems">Technical Details / Key Systems</h2>
+<h3 id="architecture-patterns">Architecture Patterns</h3>
+<p>Modern world models share a common architecture:</p>
+<pre><code>Observation → Encoder → Latent State → Dynamics Model → Predicted Next State
+                                          ↓
+                                    Reward Predictor → Policy Optimization
+</code></pre>
+<p>The key components are:</p>
+<ol>
+<li><strong>Encoder</strong>: Maps high-dimensional observations (images, text, sensor data) to compact latent representations</li>
+<li><strong>Dynamics model</strong>: Predicts how latent states evolve given actions — the core "world model"</li>
+<li><strong>Reward predictor</strong>: Estimates expected rewards from latent states</li>
+<li><strong>Decoder</strong> (optional): Reconstructs observations from latent states for interpretability</li>
+</ol>
+<h3 id="comparative-overview-of-world-model-systems-2024-2026">Comparative Overview of World Model Systems (2024-2026)</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Year</th>
+<th>Scale</th>
+<th>Key Innovation</th>
+<th>Application Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DreamerV3[^4]</td>
+<td>2023</td>
+<td>150+ tasks</td>
+<td>Single config across all domains</td>
+<td>General RL</td>
+</tr>
+<tr>
+<td>DIAMOND[^6]</td>
+<td>2024</td>
+<td>Atari 100k</td>
+<td>Diffusion-based world simulator</td>
+<td>Game environments</td>
+</tr>
+<tr>
+<td>Genie 2[^7]</td>
+<td>2024</td>
+<td>Interactive 3D</td>
+<td>Foundation world model from video</td>
+<td>3D environment generation</td>
+</tr>
+<tr>
+<td>V-JEPA 2[^8]</td>
+<td>2025</td>
+<td>1M+ hrs video</td>
+<td>Joint-embedding predictive architecture</td>
+<td>Robotics transfer</td>
+</tr>
+<tr>
+<td>Cosmos-Predict2.5[^9]</td>
+<td>2025</td>
+<td>1080p video</td>
+<td>Physical world simulation</td>
+<td>Physical AI</td>
+</tr>
+<tr>
+<td>WebWorld[^10]</td>
+<td>2025</td>
+<td>Open web</td>
+<td>Web interaction simulator</td>
+<td>Digital skills training</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diffusion-world-models">Diffusion World Models</h3>
+<p>DIAMOND (Alonso et al., 2024) represents a paradigm shift: instead of predicting latent states, it uses a <strong>diffusion model</strong> to generate full visual observations of future states.[^6] This produces higher visual fidelity than latent-space models and achieved 1.46× human normalized score on Atari 100k. The implication for learning applications is significant — higher-fidelity simulation means more realistic practice environments for human learners.</p>
+<h3 id="video-foundation-world-models">Video Foundation World Models</h3>
+<p>A major 2025-2026 trend is training world models on internet-scale video data:</p>
+<ul>
+<li><strong>Genie 2</strong> (DeepMind, 2024) generates playable 3D environments from a single image, enabling interactive exploration at 24fps[^7]</li>
+<li><strong>V-JEPA 2</strong> (Meta, 2025) trains on 1M+ hours of video using joint-embedding prediction to learn physical dynamics, then transfers zero-shot to robotic manipulation[^8]</li>
+<li><strong>Cosmos-Predict2.5</strong> (NVIDIA, 2025) generates 1080p world simulations for physical AI training[^9]</li>
+</ul>
+<p>These systems demonstrate that world models trained on passive video can capture enough physical understanding to enable downstream action — a key enabler for educational simulations.</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 800 450&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;system-ui, sans-serif&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowhead&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#475569&quot;/&gt;
+    &lt;/marker&gt;
+    &lt;linearGradient id=&quot;g1&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;1&quot; y2=&quot;1&quot;&gt;
+      &lt;stop offset=&quot;0%&quot; stop-color=&quot;#dbeafe&quot;/&gt;
+      &lt;stop offset=&quot;100%&quot; stop-color=&quot;#bfdbfe&quot;/&gt;
+    &lt;/linearGradient&gt;
+    &lt;linearGradient id=&quot;g2&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;1&quot; y2=&quot;1&quot;&gt;
+      &lt;stop offset=&quot;0%&quot; stop-color=&quot;#fef3c7&quot;/&gt;
+      &lt;stop offset=&quot;100%&quot; stop-color=&quot;#fde68a&quot;/&gt;
+    &lt;/linearGradient&gt;
+    &lt;linearGradient id=&quot;g3&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;1&quot; y2=&quot;1&quot;&gt;
+      &lt;stop offset=&quot;0%&quot; stop-color=&quot;#d1fae5&quot;/&gt;
+      &lt;stop offset=&quot;100%&quot; stop-color=&quot;#a7f3d0&quot;/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;30&quot; text-anchor=&quot;middle&quot; font-size=&quot;18&quot; font-weight=&quot;bold&quot; fill=&quot;#1e293b&quot;&gt;World Model Learning Pipeline&lt;/text&gt;
+
+  &lt;!-- Layer 1: Foundation --&gt;
+  &lt;rect x=&quot;50&quot; y=&quot;55&quot; width=&quot;700&quot; height=&quot;100&quot; rx=&quot;12&quot; fill=&quot;url(#g1)&quot; stroke=&quot;#3b82f6&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;75&quot; text-anchor=&quot;middle&quot; font-size=&quot;13&quot; font-weight=&quot;bold&quot; fill=&quot;#1e40af&quot;&gt;Foundation: Learn Environment Dynamics&lt;/text&gt;
+  &lt;rect x=&quot;80&quot; y=&quot;85&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#93c5fd&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;150&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;Video / Sensor&lt;/text&gt;
+  &lt;text x=&quot;150&quot; y=&quot;124&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;Observations&lt;/text&gt;
+  &lt;line x1=&quot;220&quot; y1=&quot;112&quot; x2=&quot;280&quot; y2=&quot;112&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;rect x=&quot;280&quot; y=&quot;85&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#93c5fd&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;350&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;Latent Dynamics&lt;/text&gt;
+  &lt;text x=&quot;350&quot; y=&quot;124&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;Model Training&lt;/text&gt;
+  &lt;line x1=&quot;420&quot; y1=&quot;112&quot; x2=&quot;480&quot; y2=&quot;112&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;rect x=&quot;480&quot; y=&quot;85&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#93c5fd&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;550&quot; y=&quot;108&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;World Model&lt;/text&gt;
+  &lt;text x=&quot;550&quot; y=&quot;124&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#1e3a5f&quot;&gt;(Learned Simulator)&lt;/text&gt;
+
+  &lt;!-- Layer 2: Imagination --&gt;
+  &lt;rect x=&quot;50&quot; y=&quot;175&quot; width=&quot;700&quot; height=&quot;100&quot; rx=&quot;12&quot; fill=&quot;url(#g2)&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;195&quot; text-anchor=&quot;middle&quot; font-size=&quot;13&quot; font-weight=&quot;bold&quot; fill=&quot;#92400e&quot;&gt;Imagination: Plan via Mental Simulation&lt;/text&gt;
+  &lt;rect x=&quot;80&quot; y=&quot;205&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#fcd34d&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;150&quot; y=&quot;228&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;Action Candidates&lt;/text&gt;
+  &lt;text x=&quot;150&quot; y=&quot;244&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;(Policy Proposals)&lt;/text&gt;
+  &lt;line x1=&quot;220&quot; y1=&quot;232&quot; x2=&quot;280&quot; y2=&quot;232&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;rect x=&quot;280&quot; y=&quot;205&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#fcd34d&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;350&quot; y=&quot;228&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;Imagined Rollouts&lt;/text&gt;
+  &lt;text x=&quot;350&quot; y=&quot;244&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;(Dream Trajectories)&lt;/text&gt;
+  &lt;line x1=&quot;420&quot; y1=&quot;232&quot; x2=&quot;480&quot; y2=&quot;232&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;rect x=&quot;480&quot; y=&quot;205&quot; width=&quot;140&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#fcd34d&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;550&quot; y=&quot;228&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;Evaluated Plans&lt;/text&gt;
+  &lt;text x=&quot;550&quot; y=&quot;244&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#78350f&quot;&gt;(Ranked by Reward)&lt;/text&gt;
+
+  &lt;!-- Layer 3: Application --&gt;
+  &lt;rect x=&quot;50&quot; y=&quot;295&quot; width=&quot;700&quot; height=&quot;100&quot; rx=&quot;12&quot; fill=&quot;url(#g3)&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;315&quot; text-anchor=&quot;middle&quot; font-size=&quot;13&quot; font-weight=&quot;bold&quot; fill=&quot;#065f46&quot;&gt;Application: Transfer to Real-World Learning&lt;/text&gt;
+  &lt;rect x=&quot;70&quot; y=&quot;325&quot; width=&quot;120&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;130&quot; y=&quot;348&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Educational&lt;/text&gt;
+  &lt;text x=&quot;130&quot; y=&quot;362&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Simulations&lt;/text&gt;
+  &lt;rect x=&quot;210&quot; y=&quot;325&quot; width=&quot;120&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;270&quot; y=&quot;348&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Robotic&lt;/text&gt;
+  &lt;text x=&quot;270&quot; y=&quot;362&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Transfer&lt;/text&gt;
+  &lt;rect x=&quot;350&quot; y=&quot;325&quot; width=&quot;120&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;410&quot; y=&quot;348&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;E-Commerce&lt;/text&gt;
+  &lt;text x=&quot;410&quot; y=&quot;362&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Demand Modeling&lt;/text&gt;
+  &lt;rect x=&quot;490&quot; y=&quot;325&quot; width=&quot;120&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;550&quot; y=&quot;348&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Clinical&lt;/text&gt;
+  &lt;text x=&quot;550&quot; y=&quot;362&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Decision Support&lt;/text&gt;
+  &lt;rect x=&quot;630&quot; y=&quot;325&quot; width=&quot;110&quot; height=&quot;55&quot; rx=&quot;8&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;685&quot; y=&quot;348&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Scientific&lt;/text&gt;
+  &lt;text x=&quot;685&quot; y=&quot;362&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#064e3b&quot;&gt;Discovery&lt;/text&gt;
+
+  &lt;!-- Vertical arrows --&gt;
+  &lt;line x1=&quot;400&quot; y1=&quot;155&quot; x2=&quot;400&quot; y2=&quot;175&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;line x1=&quot;400&quot; y1=&quot;275&quot; x2=&quot;400&quot; y2=&quot;295&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+
+  &lt;!-- Feedback loop --&gt;
+  &lt;path d=&quot;M 750 350 Q 780 350 780 230 Q 780 112 750 112&quot; fill=&quot;none&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;5,3&quot; marker-end=&quot;url(#arrowhead)&quot;/&gt;
+  &lt;text x=&quot;790&quot; y=&quot;230&quot; font-size=&quot;10&quot; fill=&quot;#64748b&quot; transform=&quot;rotate(90, 790, 230)&quot;&gt;Feedback Loop&lt;/text&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;430&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#64748b&quot; font-style=&quot;italic&quot;&gt;World models learn dynamics → imagine outcomes → transfer to real applications&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p><em>Diagram: The three-layer world model pipeline — from learning environment dynamics to imagination-based planning to real-world application transfer.</em></p>
+<h3 id="the-foresight-gap">The Foresight Gap</h3>
+<p>A critical 2026 finding reveals that simply <em>having</em> a world model and <em>using</em> it effectively are different challenges. Qian et al. (2026) tested whether vision-language model agents could leverage generative world models as external simulators for planning and found:[^11]</p>
+<ul>
+<li>Agents invoke simulation in fewer than 1% of beneficial situations</li>
+<li>~15% misuse of predicted outcomes when simulations are generated</li>
+<li>Performance can degrade up to 5% when simulation tools are available</li>
+</ul>
+<p>The bottleneck is not model quality but <strong>metacognitive capacity</strong> — knowing <em>when</em> to simulate and <em>how</em> to interpret results. This has direct implications for educational AI: giving learners a simulation tool is insufficient; they must also develop the metacognitive skills to use it effectively.</p>
+<h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
+<h3 id="2025-2026-research-frontiers">2025-2026 Research Frontiers</h3>
+<p><strong>Comprehensive surveys</strong> have consolidated the field:
+- Ding et al. (2025) published the first systematic survey covering 300+ world model papers across video generation, autonomous driving, robotics, and scientific discovery[^12]
+- A companion survey on world models for embodied AI (2025) introduces a unified framework spanning perception, prediction, and action[^13]
+- A February 2026 position paper argues that world model research should focus on genuine environment understanding rather than injecting world knowledge into narrow tasks[^14]</p>
+<p><strong>Healthcare world models</strong> are gaining traction. Melnychuk et al. (2025) review world models for clinical prediction, counterfactual evaluation, and treatment planning — systems that learn multimodal, temporally coherent representations to enable multi-step rollouts in medical decision-making.[^15]</p>
+<p><strong>Scaling trends</strong>: The field is converging on a foundation model paradigm for world models — train on massive, diverse data (video, interaction logs, simulation traces) and fine-tune for specific domains. This mirrors the trajectory of language models and suggests that a small number of general-purpose world models may eventually serve as the backbone for many downstream applications, including educational simulations.</p>
+<h3 id="applications-for-real-world-learning">Applications for Real-World Learning</h3>
+<p>World models enable a new category of AI-assisted learning tools:</p>
+<ol>
+<li><strong>Medical training</strong>: Simulated patient encounters where trainees practice diagnosis and treatment in a world model that captures disease progression dynamics</li>
+<li><strong>E-commerce skills</strong>: <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> systems use world models of consumer behavior to train recommendation and pricing strategies</li>
+<li><strong>Scientific education</strong>: <a href="automated-experiment-design.html">Automated experiment design</a> leverages world models to let students explore experimental spaces virtually before committing to costly real experiments</li>
+<li><strong>Physical skills</strong>: Robotics world models (V-JEPA 2) demonstrate that motor skills learned in simulation transfer to real hardware — applicable to surgical training, manufacturing, and sports</li>
+</ol>
+<h2 id="limitations-challenges">Limitations / Challenges</h2>
+<ol>
+<li><strong>Compounding errors</strong>: World models accumulate prediction errors over long rollout horizons, making multi-step planning unreliable for complex domains[^12]</li>
+<li><strong>Distribution shift</strong>: Models trained on historical data may fail when the environment changes in novel ways — a critical concern for safety-sensitive applications</li>
+<li><strong>Metacognitive gap</strong>: As the foresight gap research shows, agents struggle to decide <em>when</em> and <em>how</em> to use world models effectively[^11]</li>
+<li><strong>Computational cost</strong>: High-fidelity world models (especially diffusion-based ones like DIAMOND) are expensive to train and sample from, limiting real-time applications</li>
+<li><strong>Evaluation challenges</strong>: There is no standard benchmark for world model quality across domains — each field uses its own metrics, making cross-domain comparison difficult</li>
+<li><strong>Hallucination risk</strong>: World models can generate plausible but physically impossible scenarios, which is particularly dangerous in educational contexts where learners may internalize incorrect physics or dynamics</li>
+</ol>
+<h2 id="see-also-connections">See Also / Connections</h2>
+<p><strong>Same category (Methodologies):</strong>
+- <a href="automated-experiment-design.html">Automated Experiment Design</a> — uses world models to simulate experimental outcomes before execution
+- <a href="agentic-tree-search.html">Agentic Tree Search</a> — tree search over world model predictions for planning
+- <a href="vlm-integration.html">VLM Integration</a> — vision-language models that interface with world models for multimodal reasoning
+- <a href="template-free-research.html">Template-Free Research</a> — world models enable unconstrained research approaches</p>
+<p><strong>Core Concepts:</strong>
+- <a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a> — world models as the "imagination" component of AI scientific reasoning
+- <a href="../core-concepts/foundation-models-for-research.html">Foundation Models for Research</a> — foundation world models follow the same scaling paradigm</p>
+<p><strong>Frontier Topics:</strong>
+- <a href="../frontier-topics/predictive-simulation-learning.html">Predictive Simulation Learning</a> — the flagship article on simulation-based learning, which world models enable
+- <a href="../frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a> — world models provide safe sandboxes for testing self-modifications
+- <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a> — demand forecasting as a specialized world model
+- <a href="../frontier-topics/scaling-laws-research.html">Scaling Laws Research</a> — scaling laws for world model training compute</p>
+<p><strong>Tools &amp; Platforms:</strong>
+- <a href="../tools-platforms/huggingface-papers-api.html">HuggingFace Papers API</a> — tracking world model research publications
+- <a href="../tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a> — citation analysis for the world model literature</p>
+<p><strong>Research Sources:</strong>
+- <a href="../research-sources/key-papers.html">Key Papers</a> — landmark world model papers
+- <a href="../research-sources/institutions-and-labs.html">Institutions and Labs</a> — DeepMind, Meta FAIR, NVIDIA as key world model labs</p>
+<h2 id="references">References</h2>
+<p>[^1]: Ha, D. &amp; Schmidhuber, J. (2018). World Models. <em>arXiv:1803.10122</em>. https://arxiv.org/abs/1803.10122
+[^2]: Richens, J. et al. (2025). World models are necessary for general-purpose agents. <em>ICML 2025</em>.
+[^3]: Hafner, D. et al. (2020). Dream to Control: Learning Behaviors by Latent Imagination. <em>ICLR 2020</em>. https://arxiv.org/abs/1912.01603
+[^4]: Hafner, D. et al. (2023). Mastering Diverse Domains through World Models. <em>arXiv:2301.04104</em>. https://arxiv.org/abs/2301.04104
+[^5]: Kuo, Y.-L. et al. (2025). Predictive coding for meta-RL agents. <em>NeurIPS 2025</em>.
+[^6]: Alonso, E. et al. (2024). Diffusion for World Modeling: Visual Details Matter in Atari. <em>NeurIPS 2024</em>. https://arxiv.org/abs/2405.12399
+[^7]: DeepMind (2024). Genie 2: A large-scale foundation world model. https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model/
+[^8]: Bardes, A. et al. (2025). V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning. <em>arXiv:2506.09985</em>. https://arxiv.org/abs/2506.09985
+[^9]: NVIDIA (2025). Cosmos-Predict2.5: World Generation with 1080p Video. https://arxiv.org/abs/2503.13081
+[^10]: Gur, I. et al. (2025). WebWorld: An Open Environment for Web Agent Simulation. <em>arXiv</em>.
+[^11]: Qian, J. et al. (2026). The Foresight Gap: Can VLM Agents Leverage Generative World Models for Planning? <em>arXiv:2601.08955</em>. https://arxiv.org/abs/2601.08955
+[^12]: Ding, Z. et al. (2025). Understanding World or Predicting Future? A Comprehensive Survey of World Models. <em>ACM Computing Surveys</em>. https://arxiv.org/abs/2411.14499
+[^13]: Wang, X. et al. (2025). A Comprehensive Survey on World Models for Embodied AI. <em>arXiv:2510.16732</em>. https://arxiv.org/abs/2510.16732
+[^14]: Li, Q. et al. (2026). Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks. <em>arXiv:2602.01630</em>. https://arxiv.org/abs/2602.01630
+[^15]: Melnychuk, V. et al. (2025). Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning. <em>arXiv:2511.16333</em>. https://arxiv.org/abs/2511.16333</p>
+</main>
+</body>
+</html>
