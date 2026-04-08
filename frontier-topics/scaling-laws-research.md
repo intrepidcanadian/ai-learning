@@ -56,6 +56,50 @@ But also introduces:
 - More failure modes
 - Greater cost per research unit
 
+## Relative Scaling Laws and Distributional Fairness
+
+Classical scaling laws predict average performance improvements, but Held et al. (2025) revealed that **scaling benefits are unevenly distributed** across tasks and populations[^19]. Their "relative scaling laws" framework tracks how performance gaps between different test distributions evolve as models grow:
+
+- **Convergent gaps**: Some performance differences (e.g., between formal and informal English) shrink with scale
+- **Divergent gaps**: Other differences (e.g., between safe and unsafe behaviors) can widen with scale
+- **Safety-relevant divergence**: AI risk behaviors show divergent trajectories during pretraining — larger models may become disproportionately better at harmful tasks relative to helpful ones
+
+This has direct implications for [AI safety in research](ai-safety-in-research.md): scaling a research agent may improve paper quality while simultaneously increasing the risk of evaluation gaming or deceptive outputs.
+
+## Emergent Capabilities and Phase Transitions
+
+A central question in scaling research is whether capabilities appear gradually or discontinuously:
+
+### The Case for Genuine Emergence
+
+Havlik (2025) argues that LLM emergent abilities are genuine emergent properties arising from **cooperative nonlinear dynamics** among model components[^20]. Drawing analogies to complex systems in physics (phase transitions, critical phenomena), this view holds that:
+- Below a critical scale, components lack sufficient interaction to produce the capability
+- Above the threshold, cooperative dynamics enable qualitatively new behaviors
+- The transition is sharp because it depends on collective, not individual, component behavior
+
+### The Survey Evidence
+
+Berti et al. (2025) compiled evidence across dozens of emergent capabilities, finding that emergence depends on multiple interacting factors[^21]:
+| Factor | Role in Emergence |
+|--------|------------------|
+| Model scale | Necessary but not sufficient |
+| Pre-training loss | Strong predictor — capabilities appear at specific loss thresholds |
+| Task complexity | More complex tasks require larger scale for emergence |
+| Prompting strategy | Chain-of-thought can unlock capabilities at smaller scales |
+| Quantization | Can destroy emergent capabilities by disrupting critical precision |
+
+For research automation, this means certain research capabilities (e.g., genuine hypothesis generation vs. literature recombination) may require crossing specific scale thresholds — and the transition may be abrupt rather than gradual.
+
+## The "Logical Compute" Framework
+
+Lu (2026) offered a unifying theoretical explanation for why scaling laws work so well across diverse architectures and tasks[^22]. The key concept is **logical compute** — an implementation-agnostic measure of the computational work a model performs:
+
+- Traditional scaling laws are empirically observed power laws relating FLOPs to performance
+- Logical compute abstracts away hardware details, explaining why the same scaling relationships hold across GPUs, TPUs, and different architectures
+- Practical progress continues via **efficiency gains** (better architectures, distillation, quantization) even when raw parameter scaling hits diminishing returns
+
+This framework reconciles the apparent tension between "scaling is all you need" and "we're hitting scaling walls": raw compute scaling may plateau, but efficiency improvements provide a parallel scaling axis that extends the trajectory.
+
 ## Hypothesized Scaling Laws
 
 ### The Research Chinchilla Law
@@ -205,3 +249,11 @@ For [e-commerce applications](ai-ecommerce-learning.md), scaling laws suggest th
 [^17]: Various (2025). "Scaling Test-time Compute for LLM Agents." [arXiv:2506.12928](https://arxiv.org/abs/2506.12928)
 
 [^18]: Various (2025). "Generalizing Scaling Laws for Dense and Sparse Large Language Models." [arXiv:2508.06617](https://arxiv.org/abs/2508.06617)
+
+[^19]: Held, W., Hall, D., Liang, P. & Yang, D. (2025). "Relative Scaling Laws for LLMs." [arXiv:2510.24626](https://arxiv.org/abs/2510.24626)
+
+[^20]: Havlik, V. (2025). "Why are LLMs' abilities emergent?" [arXiv:2508.04401](https://arxiv.org/abs/2508.04401)
+
+[^21]: Berti, L., Giorgi, F. & Kasneci, G. (2025). "Emergent Abilities in Large Language Models: A Survey." [arXiv:2503.05788](https://arxiv.org/abs/2503.05788)
+
+[^22]: Lu, C.-P. (2026). "The Unreasonable Effectiveness of Scaling Laws in AI." [arXiv:2603.28507](https://arxiv.org/abs/2603.28507)

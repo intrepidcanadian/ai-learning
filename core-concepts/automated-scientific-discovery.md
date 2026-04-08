@@ -109,13 +109,55 @@ Key shifts:
 - **Reproducibility by design** — Automated systems produce deterministic, version-controlled experiments
 - **Learning applications** — Automated discovery tools are being adapted for educational purposes, helping students understand the scientific method through guided simulation (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) for applied examples)
 
+## Taxonomy of AI Roles in Science
+
+Zheng et al. (2025) propose a three-level taxonomy for how LLMs participate in scientific discovery, reflecting increasing autonomy[^14]:
+
+| Level | Role | Capabilities | Example Systems |
+|-------|------|-------------|----------------|
+| **Tool** | Executes specific subtasks | Data processing, literature search, code generation | AlphaFold, GNoME |
+| **Analyst** | Interprets and synthesizes | Hypothesis evaluation, experiment analysis, paper writing | [Autoresearch](../tools-platforms/autoresearch.md), [AIDE](../tools-platforms/aide.md) |
+| **Scientist** | Drives the full research loop | Ideation, design, execution, communication | [The AI Scientist](the-ai-scientist.md), AI Co-Scientist |
+
+Most current systems operate at the Analyst level. The transition to Scientist-level autonomy requires advances in robotic automation (for wet-lab sciences), self-improvement mechanisms, and ethical governance frameworks[^14].
+
+## Multi-Agent Approaches to Discovery
+
+A major 2025–2026 trend is the shift from single-model pipelines to **multi-agent architectures** where specialized agents collaborate on different stages of the research cycle:
+
+### Google's AI Co-Scientist
+Google DeepMind introduced the AI Co-Scientist (2025), a multi-agent system built on Gemini 2.0 that uses a **generate-debate-evolve** paradigm[^15]:
+1. **Generation agents** propose hypotheses from literature synthesis
+2. **Debate agents** critique and rank proposals through adversarial evaluation
+3. **Evolution agents** refine surviving hypotheses through iterative improvement
+
+Validated on 203 biomedical research goals, the system produced hypotheses that domain experts rated as novel and testable — including drug repurposing candidates later confirmed experimentally[^15].
+
+### AI-Researcher Framework
+Tang et al. (2025) proposed AI-Researcher, a fully autonomous pipeline orchestrating literature review → hypothesis generation → experiment design → execution → manuscript preparation[^16]. They introduced **Scientist-Bench**, a benchmark for evaluating autonomous research quality across novelty, rigor, and reproducibility dimensions.
+
+### Failure Mode Analysis
+Not all autonomous research attempts succeed. Trehan & Chopra (2026) documented six systematic failure modes from four end-to-end autonomous research attempts[^17]:
+1. **Implementation drift** — agents gradually deviate from the original hypothesis during coding
+2. **Memory degradation** — loss of context over long research sessions
+3. **Weak scientific taste** — inability to distinguish promising from trivial ideas
+4. **Evaluation gaming** — optimizing for metrics rather than insight
+5. **Scope creep** — expanding research questions beyond tractable bounds
+6. **Citation confabulation** — fabricating references that appear plausible
+
+These failure modes inform the design of next-generation systems and highlight the gap between current capabilities and truly autonomous science.
+
 ## Current State / Latest Developments (2025–2026)
 
+- **AI Scientist v2 (2025):** Sakana AI's upgraded system used progressive [agentic tree search](../methodologies/agentic-tree-search.md) with a dedicated experiment manager agent to produce the first entirely AI-generated peer-review-accepted workshop paper[^18]
 - **Self-improving agents:** The Darwin Gödel Machine and Hyperagents frameworks demonstrate that research agents can autonomously improve their own capabilities[^8][^10]
+- **Autonomous Generalist Scientist (AGS):** Zhang et al. (2025) proposed integrating AI agents with robotic systems to automate the full research lifecycle including physical experimentation, hypothesizing that scientific discovery may follow its own [scaling laws](../frontier-topics/scaling-laws-research.md)[^19]
 - **Test-time recursive thinking:** TRT achieves 100% accuracy on AIME-25/24 math benchmarks using self-generated verification without external feedback[^11]
+- **Comprehensive surveys (2025–2026):** Multiple survey papers established taxonomies for the field — from the Tool-Analyst-Scientist hierarchy[^14] to the four-stage workflow model covering life sciences, chemistry, materials science, and physics[^20]
 - **World models for discovery:** Simulation-based approaches are emerging where AI agents learn through interaction with learned world models rather than direct experimentation (see [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md))[^12]
 - **VLM-enhanced research:** Multi-agent systems using [VLM-as-judge](../methodologies/vlm-integration.md) achieve 0.7–0.8 pass rates for scientific figure evaluation vs. 0.2–0.3 for code-only baselines
 - **Education connections:** AI tutoring systems show measurable learning gains — an RCT found AI tutoring produces 2 additional months of academic progress[^13]
+- **[AI safety concerns](../frontier-topics/ai-safety-in-research.md):** As systems become more autonomous, safety frameworks for research agents are becoming critical — a 2026 survey of AI researchers found 20 of 25 identified automating AI R&D as "one of the most severe and urgent AI risks"[^21]
 
 ## See Also
 
@@ -146,3 +188,11 @@ Key shifts:
 [^11]: Zhuang, Y. et al. (2026). "Test-time Recursive Thinking: Self-Improvement without External Feedback." arXiv:2602.03094. https://arxiv.org/abs/2602.03094
 [^12]: Yang, S. (2026). "World Models as an Intermediary between Agents and the Real World." arXiv:2602.00785. https://arxiv.org/abs/2602.00785
 [^13]: Jurenka, I., Mohamed, S. et al. (2025). "AI tutoring can safely and effectively support students: An exploratory RCT in UK classrooms." arXiv:2512.23633. https://arxiv.org/abs/2512.23633
+[^14]: Zheng, T. et al. (2025). "From Automation to Autonomy: A Survey on Large Language Models in Scientific Discovery." EMNLP 2025. [arXiv:2505.13259](https://arxiv.org/abs/2505.13259)
+[^15]: Gottweis, J. et al. (2025). "Towards an AI Co-Scientist." Google DeepMind. [arXiv:2502.18864](https://arxiv.org/abs/2502.18864)
+[^16]: Tang, J. et al. (2025). "AI-Researcher: Autonomous Scientific Innovation." [arXiv:2505.18705](https://arxiv.org/abs/2505.18705)
+[^17]: Trehan, D. & Chopra, P. (2026). "Why LLMs Aren't Scientists Yet: Lessons from Four Autonomous Research Attempts." [arXiv:2601.03315](https://arxiv.org/abs/2601.03315)
+[^18]: Lu, C. et al. (2025). "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search." [arXiv:2504.08066](https://arxiv.org/abs/2504.08066)
+[^19]: Zhang, P. et al. (2025). "Scaling Laws in Scientific Discovery with AI and Robot Scientists." [arXiv:2503.22444](https://arxiv.org/abs/2503.22444)
+[^20]: Wei, J. et al. (2025). "From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery." [arXiv:2508.14111](https://arxiv.org/abs/2508.14111)
+[^21]: Field, S. et al. (2026). "AI Researchers' Views on Automating AI R&D and Intelligence Explosions." [arXiv:2603.03338](https://arxiv.org/abs/2603.03338)

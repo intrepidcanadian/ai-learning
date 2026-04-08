@@ -1,0 +1,40 @@
+{
+  "session": 22,
+  "date": "2026-04-08",
+  "mode": "quality",
+  "hypothesis": {
+    "strategy": "Improve 3 lowest-scoring articles (automated-scientific-discovery, ai-safety-in-research, scaling-laws-research) with new 2025-2026 papers and depth expansion",
+    "predicted_delta": "+1.0 composite (from 87.8 to ~88.8)",
+    "dimensions_targeted": ["currency", "depth", "sourcing"],
+    "reasoning": "automated-scientific-discovery has currency=58 (very low), ai-safety-in-research has depth=52 (very low), scaling-laws-research has depth=58. Adding 2026 papers with new technical sections should move currency and depth substantially. Past sessions show +6-8 points per article when targeting weak dimensions with 5+ papers."
+  },
+  "targets": [
+    {"article": "automated-scientific-discovery", "before": 83.9, "after": 91.3, "delta": 7.4, "weak_dims": {"currency": "58→88", "depth": "75→85"}},
+    {"article": "ai-safety-in-research", "before": 84.2, "after": 88.9, "delta": 4.7, "weak_dims": {"depth": "52→76", "currency": "82→86"}},
+    {"article": "scaling-laws-research", "before": 84.2, "after": 88.4, "delta": 4.2, "weak_dims": {"depth": "58→71", "currency": "73→82"}}
+  ],
+  "papers_added": [
+    "arXiv:2505.13259 (LLM Scientific Discovery taxonomy)",
+    "arXiv:2502.18864 (AI Co-Scientist, Google DeepMind)",
+    "arXiv:2505.18705 (AI-Researcher framework)",
+    "arXiv:2601.03315 (Why LLMs Aren't Scientists Yet)",
+    "arXiv:2504.08066 (AI Scientist v2)",
+    "arXiv:2503.22444 (Scaling Laws in Scientific Discovery)",
+    "arXiv:2508.14111 (Agentic Science survey)",
+    "arXiv:2603.03338 (AI Researchers Views on R&D)",
+    "arXiv:2512.20798 (Constraint Violations Benchmark)",
+    "arXiv:2512.16856 (Distributional AGI Safety)",
+    "arXiv:2509.23994 (Policy-as-Prompt Guardrails)",
+    "arXiv:2510.24626 (Relative Scaling Laws)",
+    "arXiv:2508.04401 (Why LLM abilities are emergent)",
+    "arXiv:2503.05788 (Emergent Abilities Survey)",
+    "arXiv:2603.28507 (Unreasonable Effectiveness of Scaling Laws)"
+  ],
+  "diagrams_added": 1,
+  "result": {
+    "composite_before": 87.8,
+    "composite_after": 88.2,
+    "composite_delta": 0.4,
+    "lesson": "Adding new technical sections with 2025-2026 papers continues to be highly effective. automated-scientific-discovery had the largest gain (+7.4) because currency was extremely low (58) and responded strongly to 8 new papers. ai-safety-in-research depth jumped 52→76 with 3 new substantive sections. Coverage mode triggered because new cross-links created wishlist entries."
+  }
+}
