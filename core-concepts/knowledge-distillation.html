@@ -622,8 +622,30 @@ loadWishlist();
 <li>Monitor difficulty calibration to avoid overwhelming the student</li>
 </ul>
 <p>This plug-in framework adds minimal computational overhead and works with any base distillation method.</p>
+<h3 id="self-distilled-reasoner-opsd">Self-Distilled Reasoner (OPSD)</h3>
+<p>On-Policy Self-Distillation (OPSD) (Zhao et al., 2026) eliminates the need for a separate teacher by having a <strong>single model act as both teacher and student</strong> with different contexts.[^8] The teacher policy conditions on privileged information (e.g., verified reasoning traces) while the student policy sees only the question. Training minimizes per-token divergence between these distributions over the student's own rollouts.</p>
+<p>Key results:
+- Matches GRPO performance with <strong>4-8x better token efficiency</strong>
+- Outperforms supervised fine-tuning and off-policy distillation
+- Eliminates the cost of running a separate teacher model during training</p>
+<p>This is particularly relevant for real-world learning applications: OPSD mirrors how a student who checks their work against an answer key learns more efficiently than one who passively reads solutions.</p>
+<h3 id="on-policy-context-distillation-opcd">On-Policy Context Distillation (OPCD)</h3>
+<p>OPCD (Ye et al., 2026) bridges on-policy distillation with context distillation by training a student model on its own generated trajectories while minimizing reverse KL divergence against a context-conditioned teacher.[^9] Two key applications:</p>
+<ol>
+<li><strong>Experiential knowledge distillation</strong>: Models extract and consolidate transferable knowledge from their historical solution traces</li>
+<li><strong>System prompt distillation</strong>: Models internalize beneficial behaviors encoded in optimized prompts</li>
+</ol>
+<p>OPCD enables effective <strong>cross-size distillation</strong>, where smaller student models internalize experiential knowledge from larger teachers — critical for deploying capable AI tutors on resource-constrained devices.</p>
 <h3 id="moe-enhanced-distillation">MoE-Enhanced Distillation</h3>
 <p>Leveraging Mixture of Experts architectures (2026) for code model distillation shows that specialized expert routing can improve the teacher's ability to provide diverse, domain-specific training signals for the student.[^7] Different experts specialize in different code patterns, producing richer distillation data than a monolithic teacher.</p>
+<h3 id="e-commerce-search-distillation">E-Commerce Search Distillation</h3>
+<p>Walmart's production deployment (2025) demonstrates a practical distillation pipeline for e-commerce search relevance:[^10]</p>
+<ol>
+<li>A high-performing LLM (GPT-4 class) generates relevance judgments for query-product pairs</li>
+<li>These judgments train a compact student model with &lt;100ms latency</li>
+<li>The student model deploys in production, serving millions of search queries daily</li>
+</ol>
+<p>A complementary approach — Multi-Perspective Chain-of-Thought distillation (MPCoT, 2026) — generates diverse reasoning rationales from distinct perspectives to capture the multifaceted nature of e-commerce relevance, then distills these into a lightweight BERT-class model for real-time deployment.[^11]</p>
 <h2 id="current-state-latest-developments">Current State / Latest Developments</h2>
 <h3 id="2025-2026-trends">2025-2026 Trends</h3>
 <ol>
@@ -633,6 +655,8 @@ loadWishlist();
 <li><strong>Distillation scaling laws</strong>: Predictable relationships between teacher size, student size, data quantity, and student quality</li>
 <li><strong>Cross-modal distillation</strong>: Transferring knowledge from multimodal teachers (vision+language) to text-only students</li>
 <li><strong>Self-distillation</strong>: Models distilling knowledge from their own chain-of-thought reasoning into direct answers, connecting to <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a></li>
+<li><strong>Single-model distillation</strong>: OPSD eliminates the need for a separate teacher, reducing infrastructure complexity[^8]</li>
+<li><strong>Context distillation</strong>: OPCD enables models to internalize prompt-encoded behaviors, removing inference-time prompt overhead[^9]</li>
 </ol>
 <h3 id="e-commerce-applications">E-Commerce Applications</h3>
 <p>Distillation is essential for <a href="../frontier-topics/ai-ecommerce-learning.html">AI e-commerce learning</a> deployment:</p>
@@ -689,6 +713,10 @@ loadWishlist();
 <p>[^5]: IOA Framework Authors. (2026). "Pedagogically-Inspired Data Synthesis for Language Model Knowledge Distillation." arXiv:2602.12172. https://arxiv.org/abs/2602.12172</p>
 <p>[^6]: POCL Authors. (2025). "Being Strong Progressively! Enhancing Knowledge Distillation via Curriculum Learning." arXiv:2506.05695. https://arxiv.org/abs/2506.05695</p>
 <p>[^7]: MoE KD Authors. (2026). "Leveraging Mixture of Experts to Improve Knowledge Distillation for Language Models of Code." arXiv:2603.13213. https://arxiv.org/abs/2603.13213</p>
+<p>[^8]: Zhao, S. et al. (2026). "Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models." arXiv:2601.18734. https://arxiv.org/abs/2601.18734</p>
+<p>[^9]: Ye, T. et al. (2026). "On-Policy Context Distillation for Language Models." arXiv:2602.12275. https://arxiv.org/abs/2602.12275</p>
+<p>[^10]: Walmart Search Team. (2025). "Knowledge Distillation for Enhancing Walmart E-commerce Search Relevance Using Large Language Models." arXiv:2505.07105. https://arxiv.org/abs/2505.07105</p>
+<p>[^11]: MPCoT Authors. (2026). "Thinking Broad, Acting Fast: Latent Reasoning Distillation from Multi-Perspective Chain-of-Thought for E-Commerce Relevance." arXiv:2601.21611. https://arxiv.org/abs/2601.21611</p>
 </main>
 </body>
 </html>

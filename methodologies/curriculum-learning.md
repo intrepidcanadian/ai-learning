@@ -167,9 +167,19 @@ Curriculum-RLAIF addresses a critical problem in training AI systems to be helpf
 
 **Curriculum learning for LLM reasoning**: The explosive growth of reasoning-focused LLMs (OpenAI o1/o3, DeepSeek-R1) has revived interest in curriculum-based training. AdaRFT[^3] demonstrates that reinforcement finetuning — the technique behind these reasoning models — benefits substantially from curriculum scheduling. Models trained with adaptive curricula solve harder math problems and generalize better to out-of-distribution tasks.
 
+**E2H Reasoner — Easy-to-Hard task scheduling (2026)**: The E2H Reasoner method schedules RL training tasks from easy to hard, allowing small LLMs (1.5B-3B parameters) to build reasoning skills that they cannot acquire through vanilla RL alone.[^9] This demonstrates that curriculum design is not just an optimization — for small models, it is a *prerequisite* for learning complex reasoning at all.
+
+**Actor-Curator — Co-adaptive curriculum (2026)**: Rather than using heuristic difficulty estimates, Actor-Curator trains an LLM-based curator that directly operates over language problems using a policy-improvement-based target.[^10] The curator and actor co-evolve: as the actor improves, the curator selects harder problems, creating a natural [recursive self-improvement](../frontier-topics/recursive-self-improvement.md) dynamic. This approach generalizes across different RL update rules and scales to large, heterogeneous datasets.
+
+**Self-Evolving Curriculum (SEC)**: SEC formulates curriculum selection as a non-stationary Multi-Armed Bandit problem, adaptively learning the curriculum policy concurrently with RL fine-tuning.[^11] Unlike fixed curricula, SEC responds to the model's changing capabilities in real-time.
+
+**Curriculum learning for LLM pretraining (2026)**: Analysis of learning dynamics during LLM pretraining reveals that curriculum ordering affects not just convergence speed but the *quality of internal representations* — models pretrained with curricula develop more structured knowledge hierarchies than randomly-trained baselines.[^12]
+
 **Generative AI for adaptive education**: A comprehensive 2025 study integrates LLMs with retrieval-augmented generation (RAG) into adaptive learning systems that assess student code, generate personalized feedback, and recommend exercises at appropriate difficulty levels.[^7] The system dynamically adjusts its curriculum based on learner performance, implementing the self-paced learning principle at scale.
 
 **Knowledge graph-guided curricula**: Recent work (2025) combines knowledge graphs with curriculum design: the graph encodes prerequisite relationships between concepts, and the AI generates learning sequences that respect these dependencies while adapting to individual learner pace.[^8] This bridges structured curriculum design with personalized adaptive learning.
+
+**Adaptive Difficulty Curriculum Learning (ADCL)**: ADCL tackles the "Difficulty Shift" phenomenon — where a curriculum's difficulty ranking becomes misaligned with the model's evolving capabilities during training — by periodically re-estimating difficulty within upcoming data batches.[^13] This connects to [knowledge distillation](../core-concepts/knowledge-distillation.md), where progressive distillation (POCL) applies the same principle to teacher-student training.
 
 ### Applications for Real-World Learning
 
@@ -199,6 +209,8 @@ Curriculum-RLAIF addresses a critical problem in training AI systems to be helpf
 **Core Concepts:**
 - [Foundation Models for Research](../core-concepts/foundation-models-for-research.md) — curriculum pretraining for foundation models
 - [The AI Scientist](../core-concepts/the-ai-scientist.md) — progressive skill acquisition in AI research agents
+- [Knowledge Distillation](../core-concepts/knowledge-distillation.md) — progressive distillation follows curriculum design principles
+- [Transfer Learning](../core-concepts/transfer-learning.md) — curriculum learning facilitates knowledge transfer across difficulty levels
 
 **Frontier Topics:**
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) — simulated practice environments enable curriculum-based skill building
@@ -224,3 +236,8 @@ Curriculum-RLAIF addresses a critical problem in training AI systems to be helpf
 [^6]: Lee, S. et al. (2025). Competence-Based Curricula for Adaptive Educational AI. *NeurIPS 2025 Workshop on AI for Education*.
 [^7]: Kim, J. et al. (2025). Bringing Generative AI to Adaptive Learning in Education. *arXiv:2402.14601*. https://arxiv.org/abs/2402.14601
 [^8]: Park, S. et al. (2025). Evaluating adaptive and generative AI-based feedback and recommendations in a knowledge-graph-integrated programming learning system. *Computers & Education: AI*.
+[^9]: E2H Reasoner Authors. (2026). Curriculum Reinforcement Learning from Easy to Hard Tasks Improves LLM Reasoning. *arXiv:2506.06632*. https://arxiv.org/abs/2506.06632
+[^10]: Actor-Curator Authors. (2026). Actor-Curator: Co-adaptive Curriculum Learning via Policy-Improvement Bandits for Scalable RL Post-Training. *arXiv:2602.20532*. https://arxiv.org/abs/2602.20532
+[^11]: SEC Authors. (2025). Self-Evolving Curriculum for LLM Reasoning. *arXiv:2505.14970*. https://arxiv.org/abs/2505.14970
+[^12]: Curriculum Pretraining Authors. (2026). Curriculum Learning for LLM Pretraining: An Analysis of Learning Dynamics. *arXiv:2601.21698*. https://arxiv.org/abs/2601.21698
+[^13]: ADCL Authors. (2025). Learning Like Humans: Advancing LLM Reasoning Capabilities via Adaptive Difficulty Curriculum Learning and Expert-Guided Self-Reformulation. *arXiv:2505.08364*. https://arxiv.org/abs/2505.08364

@@ -121,6 +121,101 @@ Other automated review systems and approaches:
 
 - **Scaling peer review with AI**: Goldberg et al. (2025) proposed scaling frameworks for using AI to handle the exponential growth of ML conference submissions, arguing that hybrid human-AI systems can maintain quality while reducing per-reviewer burden by 30-40%[^13].
 
+- **AAAI-26 pilot program**: AAAI became the first top-tier AI conference to institutionalize LLM-generated reviews in its formal review pipeline.[^14] The pilot integrates AI at two points: (1) supplementary first-stage reviews alongside human expert evaluations (without ratings or accept/reject decisions), and (2) discussion summary assistance to highlight consensus and disagreement among human reviewers. Critically, only human-written reviews inform acceptance decisions — the AI review serves as an additional perspective, not a replacement.
+
+- **Prompt injection vulnerabilities**: As automated review systems deploy at scale, researchers demonstrated that adversarial text injected into papers can manipulate LLM-generated reviews — raising concerns about the security of AI-assisted peer review pipelines[^15]. This creates a new attack surface that traditional human review does not face.
+
+## Automated Review as a Learning Tool
+
+A key real-world application of automated peer review is as a **formative assessment tool for learners**. Rather than waiting weeks for human feedback, students and early-career researchers can use AI reviewers to get instant, structured critiques of their writing:
+
+### The Feedback Loop for Learning
+
+```svg
+<svg viewBox="0 0 780 360" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arwPR" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="390" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Automated Review as Formative Assessment</text>
+  <text x="390" y="48" text-anchor="middle" font-size="11" fill="#64748b">How AI review accelerates the learning-to-write-science cycle</text>
+
+  <!-- Step 1: Draft -->
+  <rect x="30" y="80" width="150" height="90" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="105" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#0369a1">1. Draft</text>
+  <text x="105" y="128" text-anchor="middle" font-size="10" fill="#0369a1">Student writes</text>
+  <text x="105" y="143" text-anchor="middle" font-size="10" fill="#0369a1">paper or section</text>
+  <text x="105" y="158" text-anchor="middle" font-size="18">&#x270D;</text>
+
+  <line x1="180" y1="125" x2="220" y2="125" stroke="#475569" stroke-width="1.5" marker-end="url(#arwPR)"/>
+
+  <!-- Step 2: AI Review -->
+  <rect x="225" y="80" width="150" height="90" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="300" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">2. AI Review</text>
+  <text x="300" y="128" text-anchor="middle" font-size="10" fill="#92400e">Instant structured</text>
+  <text x="300" y="143" text-anchor="middle" font-size="10" fill="#92400e">feedback (minutes)</text>
+  <text x="300" y="158" text-anchor="middle" font-size="18">&#x1F916;</text>
+
+  <line x1="375" y1="125" x2="415" y2="125" stroke="#475569" stroke-width="1.5" marker-end="url(#arwPR)"/>
+
+  <!-- Step 3: Revise -->
+  <rect x="420" y="80" width="150" height="90" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="495" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">3. Revise</text>
+  <text x="495" y="128" text-anchor="middle" font-size="10" fill="#065f46">Address weaknesses,</text>
+  <text x="495" y="143" text-anchor="middle" font-size="10" fill="#065f46">strengthen claims</text>
+  <text x="495" y="158" text-anchor="middle" font-size="18">&#x1F4DD;</text>
+
+  <line x1="570" y1="125" x2="610" y2="125" stroke="#475569" stroke-width="1.5" marker-end="url(#arwPR)"/>
+
+  <!-- Step 4: Human Review -->
+  <rect x="615" y="80" width="150" height="90" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="690" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#5b21b6">4. Submit</text>
+  <text x="690" y="128" text-anchor="middle" font-size="10" fill="#5b21b6">Human peer review</text>
+  <text x="690" y="143" text-anchor="middle" font-size="10" fill="#5b21b6">(higher quality draft)</text>
+  <text x="690" y="158" text-anchor="middle" font-size="18">&#x1F393;</text>
+
+  <!-- Feedback loop arrow -->
+  <path d="M 495 170 L 495 210 L 105 210 L 105 170" fill="none" stroke="#475569" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arwPR)"/>
+  <text x="300" y="205" text-anchor="middle" font-size="10" fill="#64748b">Iterate until AI review scores stabilize</text>
+
+  <!-- Benefits row -->
+  <rect x="30" y="240" width="720" height="100" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="390" y="265" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">Learning Outcomes</text>
+
+  <rect x="50" y="278" width="155" height="48" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="127" y="298" text-anchor="middle" font-size="10" fill="#0369a1" font-weight="bold">Faster iteration</text>
+  <text x="127" y="314" text-anchor="middle" font-size="9" fill="#0369a1">Minutes vs weeks</text>
+
+  <rect x="225" y="278" width="155" height="48" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="302" y="298" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Structured feedback</text>
+  <text x="302" y="314" text-anchor="middle" font-size="9" fill="#92400e">Consistent rubric</text>
+
+  <rect x="400" y="278" width="155" height="48" rx="6" fill="#d1fae5" stroke="#059669"/>
+  <text x="477" y="298" text-anchor="middle" font-size="10" fill="#065f46" font-weight="bold">Self-assessment skills</text>
+  <text x="477" y="314" text-anchor="middle" font-size="9" fill="#065f46">Learn review criteria</text>
+
+  <rect x="575" y="278" width="155" height="48" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="652" y="298" text-anchor="middle" font-size="10" fill="#5b21b6" font-weight="bold">Reduced anxiety</text>
+  <text x="652" y="314" text-anchor="middle" font-size="9" fill="#5b21b6">Low-stakes practice</text>
+</svg>
+```
+
+*Diagram: The formative assessment loop — students iterate with AI review before formal human submission, building scientific writing skills through rapid feedback cycles.*
+
+### Pedagogical Benefits
+
+1. **Immediate feedback**: Students receive detailed reviews within minutes, enabling rapid revision cycles that would take weeks with human reviewers
+2. **Consistent rubric application**: AI reviewers apply the same evaluation criteria every time, helping students internalize what "good" scientific writing looks like
+3. **Low-stakes practice**: Students can submit drafts without the anxiety of formal review, encouraging experimentation and risk-taking in their writing
+4. **Self-assessment development**: By comparing their self-evaluation against AI reviews, students develop the meta-cognitive skill of evaluating their own work — a critical competency for independent researchers
+5. **Scalable mentorship**: In large courses where faculty cannot review every draft, AI review provides personalized feedback to each student[^14]
+
+### Connection to E-Commerce Learning
+
+The same review pipeline applies to [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md): product descriptions, marketing copy, and A/B test analyses can be automatically reviewed for quality, consistency, and persuasive rigor — helping e-commerce teams iterate on content faster than traditional editorial review cycles.
+
 ## Implications for Science
 
 ### Positive
@@ -179,3 +274,5 @@ The ultimate test of automated review quality: can an AI-generated paper pass hu
 [^11]: Ye, S. et al. (2025). "Is Your Paper Being Reviewed by an LLM? Benchmarking AI Text Detection in Peer Review." [arXiv:2502.19614](https://arxiv.org/abs/2502.19614)
 [^12]: Wei, Z. et al. (2025). "What Happens When Reviewers Receive AI Feedback in Their Reviews?" [arXiv:2602.13817](https://arxiv.org/abs/2602.13817)
 [^13]: Goldberg, A. et al. (2025). "The AI Imperative: Scaling High-Quality Peer Review in Machine Learning." [arXiv:2506.08134](https://arxiv.org/abs/2506.08134)
+[^14]: Biswas, J. et al. (2026). "The AAAI-2026 AI-Assisted Peer Review Pilot Program." AAAI. https://aaai.org/aaai-launches-ai-powered-peer-review-assessment-system/
+[^15]: Prompt Injection in Reviews Authors. (2025). "Prompt Injection Attacks on LLM Generated Reviews of Scientific Publications." arXiv:2509.10248. https://arxiv.org/abs/2509.10248
