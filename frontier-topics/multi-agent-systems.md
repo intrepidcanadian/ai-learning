@@ -206,6 +206,121 @@ Empirical studies show that multi-agent debate reduces factual errors by 30-45% 
 
 **GenAI-enhanced collaborative problem-solving**: A 2025 study demonstrates that multi-agent architectures with generative AI can enhance collaborative problem-solving across learning domains, with student groups achieving 23% higher performance when supported by a multi-agent tutoring system versus single-agent tutoring.[^10]
 
+### Swarm-Scale Social Simulation: MiroFish and OASIS
+
+A breakthrough application of multi-agent systems is **swarm-scale social simulation**, where thousands to millions of LLM-based agents interact on simulated social platforms to predict collective human behavior.
+
+**OASIS** (Open Agent Social Interaction Simulations) is the foundational engine, developed by CAMEL-AI and published as arXiv:2411.11581.[^11] OASIS simulates social media environments (Twitter-like and Reddit-like) where up to **one million agents** can perform 23 distinct social actions: posting, replying, commenting, reposting, following, unfollowing, liking, and forming threaded debates. The system handles agent concurrency via **async action queues and eventual consistency** — the same architecture used by real social platforms. Critically, OASIS includes a **recommendation algorithm** that determines what each agent sees in their feed, modeling how algorithmic curation shapes opinion formation and information spread.
+
+OASIS validated that emergent phenomena — information cascades, group polarization, and herd effects — match real-world patterns observed on X (Twitter) and Reddit, providing the first large-scale evidence that LLM agent populations can replicate social dynamics.[^11]
+
+**MiroFish** (2026) builds on OASIS to create a full **predictive simulation pipeline**:[^12]
+
+```svg
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="mfArr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">MiroFish Swarm Prediction Pipeline</text>
+  <text x="400" y="48" text-anchor="middle" font-size="11" fill="#64748b">From input document to emergent social prediction</text>
+
+  <!-- Step 1 -->
+  <rect x="30" y="70" width="160" height="130" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="110" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#5b21b6">1. Extract</text>
+  <rect x="45" y="105" width="130" height="30" rx="5" fill="white" stroke="#a78bfa"/>
+  <text x="110" y="125" text-anchor="middle" font-size="10" fill="#5b21b6">Input document</text>
+  <rect x="45" y="142" width="130" height="30" rx="5" fill="white" stroke="#a78bfa"/>
+  <text x="110" y="162" text-anchor="middle" font-size="10" fill="#5b21b6">Knowledge graph</text>
+  <text x="110" y="190" text-anchor="middle" font-size="9" fill="#7c3aed">Neo4j entities +</text>
+  <text x="110" y="200" text-anchor="middle" font-size="9" fill="#7c3aed">relationships</text>
+
+  <line x1="190" y1="135" x2="220" y2="135" stroke="#475569" stroke-width="1.5" marker-end="url(#mfArr)"/>
+
+  <!-- Step 2 -->
+  <rect x="220" y="70" width="160" height="130" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="300" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">2. Bootstrap</text>
+  <rect x="235" y="105" width="130" height="30" rx="5" fill="white" stroke="#93c5fd"/>
+  <text x="300" y="125" text-anchor="middle" font-size="10" fill="#1e40af">Agent personas</text>
+  <rect x="235" y="142" width="130" height="30" rx="5" fill="white" stroke="#93c5fd"/>
+  <text x="300" y="162" text-anchor="middle" font-size="10" fill="#1e40af">Long-term memory</text>
+  <text x="300" y="190" text-anchor="middle" font-size="9" fill="#2563eb">Personality + history</text>
+  <text x="300" y="200" text-anchor="middle" font-size="9" fill="#2563eb">+ opinion state</text>
+
+  <line x1="380" y1="135" x2="410" y2="135" stroke="#475569" stroke-width="1.5" marker-end="url(#mfArr)"/>
+
+  <!-- Step 3 -->
+  <rect x="410" y="70" width="160" height="130" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="490" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">3. Simulate</text>
+  <rect x="425" y="105" width="130" height="30" rx="5" fill="white" stroke="#fcd34d"/>
+  <text x="490" y="125" text-anchor="middle" font-size="10" fill="#92400e">OASIS engine</text>
+  <rect x="425" y="142" width="130" height="30" rx="5" fill="white" stroke="#fcd34d"/>
+  <text x="490" y="162" text-anchor="middle" font-size="10" fill="#92400e">23 social actions</text>
+  <text x="490" y="190" text-anchor="middle" font-size="9" fill="#b45309">Post, reply, debate,</text>
+  <text x="490" y="200" text-anchor="middle" font-size="9" fill="#b45309">follow, repost...</text>
+
+  <line x1="570" y1="135" x2="600" y2="135" stroke="#475569" stroke-width="1.5" marker-end="url(#mfArr)"/>
+
+  <!-- Step 4 -->
+  <rect x="600" y="70" width="170" height="130" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="685" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">4. Analyze</text>
+  <rect x="615" y="105" width="140" height="30" rx="5" fill="white" stroke="#6ee7b7"/>
+  <text x="685" y="125" text-anchor="middle" font-size="10" fill="#065f46">Emergent dynamics</text>
+  <rect x="615" y="142" width="140" height="30" rx="5" fill="white" stroke="#6ee7b7"/>
+  <text x="685" y="162" text-anchor="middle" font-size="10" fill="#065f46">Prediction report</text>
+  <text x="685" y="190" text-anchor="middle" font-size="9" fill="#047857">Opinion formation,</text>
+  <text x="685" y="200" text-anchor="middle" font-size="9" fill="#047857">polarization, cascades</text>
+
+  <!-- Bottom: What emerges -->
+  <rect x="30" y="230" width="740" height="150" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="400" y="255" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">Emergent Phenomena Captured</text>
+
+  <rect x="50" y="270" width="130" height="50" rx="6" fill="#ede9fe" stroke="#8b5cf6"/>
+  <text x="115" y="292" text-anchor="middle" font-size="10" fill="#5b21b6" font-weight="bold">Info Cascades</text>
+  <text x="115" y="308" text-anchor="middle" font-size="9" fill="#5b21b6">How news spreads</text>
+
+  <rect x="200" y="270" width="130" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="265" y="292" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">Polarization</text>
+  <text x="265" y="308" text-anchor="middle" font-size="9" fill="#1e40af">Opinion clustering</text>
+
+  <rect x="350" y="270" width="130" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="415" y="292" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Herd Effects</text>
+  <text x="415" y="308" text-anchor="middle" font-size="9" fill="#92400e">Tipping points</text>
+
+  <rect x="500" y="270" width="130" height="50" rx="6" fill="#d1fae5" stroke="#10b981"/>
+  <text x="565" y="292" text-anchor="middle" font-size="10" fill="#065f46" font-weight="bold">Influence Maps</text>
+  <text x="565" y="308" text-anchor="middle" font-size="9" fill="#065f46">Who drives opinion</text>
+
+  <rect x="650" y="270" width="110" height="50" rx="6" fill="#fce7f3" stroke="#ec4899"/>
+  <text x="705" y="292" text-anchor="middle" font-size="10" fill="#9d174d" font-weight="bold">Narrative Drift</text>
+  <text x="705" y="308" text-anchor="middle" font-size="9" fill="#9d174d">Story mutation</text>
+
+  <text x="400" y="360" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Agents aren't told what to conclude — collective behavior emerges from individual interactions</text>
+</svg>
+```
+
+*Diagram: MiroFish's four-stage pipeline — extract a knowledge graph from input, bootstrap agent personas with persistent memory, run social simulation via OASIS, and analyze emergent collective dynamics for prediction.*
+
+The pipeline works in four stages:
+
+1. **Knowledge graph extraction**: An input document (news article, product launch, policy proposal) is parsed into entities and relationships, stored in **Neo4j**
+2. **Agent bootstrap**: From the knowledge graph, hundreds of agent personas are generated — each with a unique personality, long-term memory (via Zep Cloud or Mem0), social history, and behavioral logic. Agents are not generic — they're derived from the *topic's entity graph*, ensuring relevant diversity
+3. **Social simulation**: Agents are released into OASIS environments where they interact freely. The recommendation algorithm determines what each agent sees, modeling algorithmic curation's effect on opinion formation
+4. **Emergent analysis**: The system tracks sentiment evolution, topic propagation, influence dynamics, and narrative drift. The collective dynamics — not any single agent's opinion — produce the prediction
+
+**Key architectural decisions:**
+
+- **No hardcoded interactions**: Agent behavior emerges from persona + environment + memory, not scripted rules
+- **Dual-platform simulation**: Agents interact on both Twitter-like (short-form, viral) and Reddit-like (long-form, threaded) environments simultaneously, capturing different interaction dynamics
+- **Memory persistence**: Agents remember past interactions, so repeated exposure to a topic shifts their opinion differently than first exposure — critical for modeling ad frequency effects and brand familiarity accumulation
+- **Hybrid search**: Agent memory retrieval uses 0.7 × vector similarity + 0.3 × BM25 keyword search, balancing semantic and exact-match recall
+
+**Limitations and the calibration gap:**
+
+While MiroFish demonstrates that emergent social phenomena (polarization, herd effects, information cascades) can be replicated qualitatively, **quantitative calibration against real-world outcomes** remains limited. LLM-based agents are more articulate and rational than real humans — the [competence paradox](predictive-simulation-learning.md) identified by Yuan et al. (2026) applies directly. Agents don't exhibit the bounded attention, cognitive biases, and impulse behavior that drive real consumer decisions. Closing this calibration gap — connecting simulation outputs to measured real-world metrics — is the key open problem for production deployment in [e-commerce](ai-ecommerce-learning.md) and advertising applications.
+
 ### Applications for Real-World Learning
 
 1. **Research acceleration**: Multi-agent systems conduct literature reviews, generate hypotheses, and run experiments in parallel — enabling [automated scientific discovery](../core-concepts/automated-scientific-discovery.md) that would take human teams months
@@ -264,3 +379,5 @@ Empirical studies show that multi-agent debate reduces factual errors by 30-45% 
 [^8]: Zhang, Y. et al. (2025). Silo-Bench: Evaluating Distributed Coordination in Multi-Agent LLM Systems. *arXiv*.
 [^9]: Menzli, L. et al. (2026). AI Agents vs. Agentic AI: A Conceptual Taxonomy, Applications and Challenges. *Information Fusion*. https://doi.org/10.1016/j.inffus.2025.103175
 [^10]: Wang, S. et al. (2025). A Generative AI-Enhanced Multiagent Approach to Empowering Collaborative Problem Solving Across Learning Domains. *Computers & Education*.
+[^11]: Yang, Z. et al. (2024). OASIS: Open Agent Social Interaction Simulations with One Million Agents. *arXiv:2411.11581*. https://arxiv.org/abs/2411.11581
+[^12]: MiroFish Contributors. (2026). MiroFish: A Simple and Universal Swarm Intelligence Engine. https://github.com/666ghj/MiroFish

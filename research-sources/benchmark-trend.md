@@ -8,11 +8,11 @@ Scores are computed by [`benchmark_wiki.py`](../benchmark_wiki.py) across seven 
 
 **Overall: 87.0/100** | 45 articles | 155,057 words
 
-Tier scores: **Standard:** 86.1 | **Flagship:** 96.7
+Tier scores: **Standard:** 86.0 | **Flagship:** 96.7
 
 Coverage: 29 substantial | 0 stubs (0.0%)
 
-Freshness: 100.0% updated this week | median age: 0.3 days
+Freshness: 100.0% updated this week | median age: 0.4 days
 
 ### Coverage Metrics
 
@@ -38,53 +38,53 @@ Freshness: 100.0% updated this week | median age: 0.3 days
 - 2026-landscape
 - verification-bottleneck
 
-*Last benchmarked: 2026-04-08T12:22*
+*Last benchmarked: 2026-04-08T13:54*
 
 ### Core Concepts
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
 | hallucination-detection | standard | 100 | 80 | 80 | 97 | 82 | 100 | 96 | **89.8** |
-| transfer-learning | standard | 100 | 72 | 87 | 85 | 77 | 100 | 98 | **86.9** |
+| transfer-learning | standard | 100 | 72 | 87 | 85 | 77 | 100 | 97 | **86.8** |
 | the-ai-scientist | standard | 100 | 56 | 85 | 100 | 77 | 100 | 94 | **86.2** |
 | knowledge-distillation | standard | 100 | 66 | 81 | 84 | 77 | 100 | 99 | **85.0** |
 | automated-peer-review | standard | 100 | 67 | 63 | 100 | 77 | 100 | 99 | **84.9** |
-| automated-scientific-discovery | standard | 100 | 75 | 58 | 94 | 77 | 100 | 93 | **84.1** |
+| automated-scientific-discovery | standard | 100 | 75 | 58 | 94 | 77 | 100 | 92 | **84.0** |
 | retrieval-augmented-generation | standard | 100 | 72 | 61 | 71 | 88 | 100 | 96 | **83.0** |
-| foundation-models-for-research | standard | 100 | 53 | 63 | 100 | 77 | 100 | 94 | **82.5** |
+| foundation-models-for-research | standard | 100 | 53 | 63 | 100 | 77 | 100 | 93 | **82.5** |
 
 ### Tools & Platforms
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
-| huggingface-papers-api | standard | 100 | 69 | 76 | 100 | 76 | 100 | 94 | **86.7** |
 | aider | standard | 100 | 60 | 88 | 86 | 84 | 100 | 94 | **86.6** |
+| huggingface-papers-api | standard | 100 | 69 | 76 | 100 | 76 | 100 | 93 | **86.6** |
 | semantic-scholar-api | standard | 100 | 69 | 71 | 100 | 76 | 100 | 94 | **85.9** |
-| autoresearch | standard | 100 | 56 | 61 | 100 | 92 | 100 | 94 | **85.7** |
-| aide | standard | 100 | 61 | 74 | 95 | 76 | 100 | 94 | **84.4** |
-| code-generation | standard | 100 | 73 | 77 | 51 | 84 | 100 | 96 | **81.8** |
+| autoresearch | standard | 100 | 56 | 61 | 100 | 92 | 100 | 93 | **85.6** |
+| aide | standard | 100 | 61 | 74 | 95 | 76 | 100 | 93 | **84.4** |
+| code-generation | standard | 100 | 73 | 77 | 51 | 84 | 100 | 95 | **81.7** |
 
 ### Methodologies
 
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
-| active-learning | standard | 100 | 90 | 88 | 85 | 74 | 100 | 98 | **89.2** |
+| active-learning | standard | 100 | 90 | 88 | 85 | 74 | 100 | 97 | **89.1** |
 | curriculum-learning | standard | 100 | 81 | 83 | 100 | 71 | 100 | 99 | **88.8** |
-| wiki-quality-benchmarking | standard | 100 | 72 | 87 | 100 | 74 | 100 | 97 | **88.5** |
-| computational-cost | standard | 100 | 76 | 81 | 97 | 74 | 100 | 98 | **87.8** |
+| wiki-quality-benchmarking | standard | 100 | 72 | 87 | 100 | 74 | 100 | 96 | **88.4** |
+| computational-cost | standard | 100 | 76 | 81 | 97 | 74 | 100 | 97 | **87.7** |
 | interpretability | standard | 100 | 77 | 88 | 100 | 63 | 100 | 96 | **87.1** |
-| applications-for-real-world-learning | standard | 100 | 76 | 92 | 79 | 74 | 100 | 97 | **86.7** |
-| domain-specificity | standard | 100 | 73 | 88 | 88 | 72 | 100 | 97 | **86.6** |
+| applications-for-real-world-learning | standard | 100 | 76 | 92 | 79 | 74 | 100 | 96 | **86.6** |
+| domain-specificity | standard | 100 | 73 | 88 | 88 | 72 | 100 | 96 | **86.5** |
 | vlm-integration | standard | 100 | 74 | 79 | 100 | 69 | 100 | 94 | **86.5** |
 | evaluation-methodology | standard | 100 | 73 | 60 | 100 | 81 | 100 | 96 | **86.0** |
 | prompt-engineering | standard | 100 | 78 | 80 | 89 | 71 | 100 | 96 | **86.0** |
-| world-models | standard | 100 | 74 | 75 | 100 | 69 | 100 | 96 | **86.0** |
 | synthetic-data-generation | standard | 100 | 75 | 74 | 93 | 74 | 100 | 96 | **85.9** |
-| test-time-compute-scaling | standard | 100 | 75 | 90 | 79 | 70 | 100 | 97 | **85.4** |
+| world-models | standard | 100 | 74 | 75 | 100 | 69 | 100 | 95 | **85.9** |
+| test-time-compute-scaling | standard | 100 | 75 | 90 | 79 | 70 | 100 | 96 | **85.4** |
 | inference-optimization | standard | 100 | 68 | 78 | 95 | 69 | 100 | 96 | **84.8** |
-| test-time-compute | standard | 100 | 80 | 73 | 86 | 69 | 100 | 96 | **84.5** |
+| test-time-compute | standard | 100 | 80 | 73 | 86 | 69 | 100 | 95 | **84.4** |
 | agentic-tree-search | standard | 100 | 67 | 70 | 100 | 67 | 100 | 93 | **83.6** |
-| template-free-research | standard | 100 | 65 | 68 | 94 | 67 | 100 | 94 | **82.2** |
+| template-free-research | standard | 100 | 65 | 68 | 94 | 67 | 100 | 93 | **82.1** |
 | automated-experiment-design | standard | 100 | 62 | 61 | 100 | 69 | 100 | 94 | **82.0** |
 
 ### Frontier Topics
@@ -92,12 +92,12 @@ Freshness: 100.0% updated this week | median age: 0.3 days
 | Article | Tier | Struct | Depth | Currency | Sourcing | Linking | Consist | Fresh | **Score** |
 |---------|------|--------|-------|----------|----------|---------|---------|-------|-----------|
 | recursive-self-improvement | flagship | 100 | 100 | 99 | 96 | 86 | 100 | 96 | **97.5** |
-| cross-cutting-connections | flagship | 100 | 100 | 100 | 88 | 91 | 100 | 97 | **96.5** |
+| cross-cutting-connections | flagship | 100 | 100 | 100 | 88 | 91 | 100 | 96 | **96.5** |
 | ai-ecommerce-learning | flagship | 100 | 100 | 100 | 92 | 82 | 100 | 96 | **96.4** |
 | predictive-simulation-learning | flagship | 100 | 97 | 98 | 96 | 82 | 100 | 96 | **96.3** |
-| multi-agent-systems | standard | 100 | 82 | 85 | 90 | 86 | 100 | 96 | **90.5** |
-| e-commerce-applications | standard | 100 | 76 | 88 | 79 | 82 | 100 | 97 | **87.7** |
-| blockchain-ai-optimization | standard | 100 | 70 | 74 | 94 | 82 | 100 | 94 | **86.8** |
+| multi-agent-systems | standard | 100 | 82 | 85 | 90 | 86 | 100 | 95 | **90.5** |
+| e-commerce-applications | standard | 100 | 76 | 88 | 79 | 82 | 100 | 96 | **87.6** |
+| blockchain-ai-optimization | standard | 100 | 70 | 74 | 94 | 82 | 100 | 93 | **86.8** |
 | open-ended-discovery | standard | 100 | 48 | 80 | 100 | 82 | 100 | 94 | **85.3** |
 | scaling-laws-research | standard | 100 | 58 | 73 | 98 | 77 | 100 | 94 | **84.5** |
 | ai-safety-in-research | standard | 100 | 52 | 82 | 100 | 73 | 100 | 94 | **84.4** |
@@ -112,7 +112,7 @@ Freshness: 100.0% updated this week | median age: 0.3 days
 
 ## Score Trend
 
-**Overall composite:** 88.3 -> 87.0  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅`
+**Overall composite:** 88.3 -> 87.0  `▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇██   ▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅`
 
 ### Score Over Time
 
@@ -137,49 +137,49 @@ Freshness: 100.0% updated this week | median age: 0.3 days
 <text x="47" y="77.5" text-anchor="end" font-size="11" fill="#666">92</text>
 <line x1="55" y1="46.3" x2="700" y2="46.3" stroke="#e0e0e0" stroke-width="1"/>
 <text x="47" y="50.3" text-anchor="end" font-size="11" fill="#666">97</text>
-<polygon points="55.0,93.6 62.8,93.6 70.5,93.6 78.3,81.1 86.1,68.1 93.9,68.1 101.6,68.1 109.4,67.5 117.2,68.1 124.9,68.1 132.7,68.1 140.5,67.5 148.3,60.4 156.0,55.0 163.8,49.6 171.6,43.0 179.3,43.0 187.1,230.6 194.9,232.8 202.7,232.8 210.4,202.9 218.2,202.9 226.0,180.1 233.7,180.1 241.5,167.0 249.3,167.0 257.0,156.7 264.8,156.7 272.6,154.5 280.4,154.5 288.1,142.6 295.9,139.8 303.7,135.5 311.4,135.5 319.2,125.2 327.0,125.7 334.8,125.7 342.5,114.8 350.3,114.8 358.1,103.9 365.8,103.9 373.6,103.9 381.4,103.9 389.2,103.9 396.9,103.9 404.7,103.9 412.5,103.9 420.2,98.0 428.0,98.0 435.8,93.6 443.6,93.6 451.3,87.6 459.1,87.6 466.9,87.6 474.6,87.6 482.4,87.6 490.2,87.6 498.0,87.6 505.7,87.6 513.5,87.6 521.3,87.6 529.0,87.6 536.8,87.6 544.6,87.6 552.3,93.1 560.1,93.1 567.9,108.3 575.7,108.3 583.4,108.3 591.2,108.8 599.0,108.8 606.7,107.8 614.5,107.2 622.3,107.2 630.1,106.7 637.8,106.7 645.6,106.7 653.4,107.2 661.1,107.2 668.9,104.5 676.7,104.5 684.5,101.8 692.2,102.3 700.0,100.7 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
-<polyline points="55.0,93.6 62.8,93.6 70.5,93.6 78.3,81.1 86.1,68.1 93.9,68.1 101.6,68.1 109.4,67.5 117.2,68.1 124.9,68.1 132.7,68.1 140.5,67.5 148.3,60.4 156.0,55.0 163.8,49.6 171.6,43.0 179.3,43.0 187.1,230.6 194.9,232.8 202.7,232.8 210.4,202.9 218.2,202.9 226.0,180.1 233.7,180.1 241.5,167.0 249.3,167.0 257.0,156.7 264.8,156.7 272.6,154.5 280.4,154.5 288.1,142.6 295.9,139.8 303.7,135.5 311.4,135.5 319.2,125.2 327.0,125.7 334.8,125.7 342.5,114.8 350.3,114.8 358.1,103.9 365.8,103.9 373.6,103.9 381.4,103.9 389.2,103.9 396.9,103.9 404.7,103.9 412.5,103.9 420.2,98.0 428.0,98.0 435.8,93.6 443.6,93.6 451.3,87.6 459.1,87.6 466.9,87.6 474.6,87.6 482.4,87.6 490.2,87.6 498.0,87.6 505.7,87.6 513.5,87.6 521.3,87.6 529.0,87.6 536.8,87.6 544.6,87.6 552.3,93.1 560.1,93.1 567.9,108.3 575.7,108.3 583.4,108.3 591.2,108.8 599.0,108.8 606.7,107.8 614.5,107.2 622.3,107.2 630.1,106.7 637.8,106.7 645.6,106.7 653.4,107.2 661.1,107.2 668.9,104.5 676.7,104.5 684.5,101.8 692.2,102.3 700.0,100.7" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="55.0,93.6 62.7,93.6 70.4,93.6 78.0,81.1 85.7,68.1 93.4,68.1 101.1,68.1 108.8,67.5 116.4,68.1 124.1,68.1 131.8,68.1 139.5,67.5 147.1,60.4 154.8,55.0 162.5,49.6 170.2,43.0 177.9,43.0 185.5,230.6 193.2,232.8 200.9,232.8 208.6,202.9 216.2,202.9 223.9,180.1 231.6,180.1 239.3,167.0 247.0,167.0 254.6,156.7 262.3,156.7 270.0,154.5 277.7,154.5 285.4,142.6 293.0,139.8 300.7,135.5 308.4,135.5 316.1,125.2 323.8,125.7 331.4,125.7 339.1,114.8 346.8,114.8 354.5,103.9 362.1,103.9 369.8,103.9 377.5,103.9 385.2,103.9 392.9,103.9 400.5,103.9 408.2,103.9 415.9,98.0 423.6,98.0 431.2,93.6 438.9,93.6 446.6,87.6 454.3,87.6 462.0,87.6 469.6,87.6 477.3,87.6 485.0,87.6 492.7,87.6 500.4,87.6 508.0,87.6 515.7,87.6 523.4,87.6 531.1,87.6 538.8,87.6 546.4,93.1 554.1,93.1 561.8,108.3 569.5,108.3 577.1,108.3 584.8,108.8 592.5,108.8 600.2,107.8 607.9,107.2 615.5,107.2 623.2,106.7 630.9,106.7 638.6,106.7 646.2,107.2 653.9,107.2 661.6,104.5 669.3,104.5 677.0,101.8 684.6,102.3 692.3,100.7 700.0,100.7 700.0,260.0 55.0,260.0" fill="#4A90D9" opacity="0.1"/>
+<polyline points="55.0,93.6 62.7,93.6 70.4,93.6 78.0,81.1 85.7,68.1 93.4,68.1 101.1,68.1 108.8,67.5 116.4,68.1 124.1,68.1 131.8,68.1 139.5,67.5 147.1,60.4 154.8,55.0 162.5,49.6 170.2,43.0 177.9,43.0 185.5,230.6 193.2,232.8 200.9,232.8 208.6,202.9 216.2,202.9 223.9,180.1 231.6,180.1 239.3,167.0 247.0,167.0 254.6,156.7 262.3,156.7 270.0,154.5 277.7,154.5 285.4,142.6 293.0,139.8 300.7,135.5 308.4,135.5 316.1,125.2 323.8,125.7 331.4,125.7 339.1,114.8 346.8,114.8 354.5,103.9 362.1,103.9 369.8,103.9 377.5,103.9 385.2,103.9 392.9,103.9 400.5,103.9 408.2,103.9 415.9,98.0 423.6,98.0 431.2,93.6 438.9,93.6 446.6,87.6 454.3,87.6 462.0,87.6 469.6,87.6 477.3,87.6 485.0,87.6 492.7,87.6 500.4,87.6 508.0,87.6 515.7,87.6 523.4,87.6 531.1,87.6 538.8,87.6 546.4,93.1 554.1,93.1 561.8,108.3 569.5,108.3 577.1,108.3 584.8,108.8 592.5,108.8 600.2,107.8 607.9,107.2 615.5,107.2 623.2,106.7 630.9,106.7 638.6,106.7 646.2,107.2 653.9,107.2 661.6,104.5 669.3,104.5 677.0,101.8 684.6,102.3 692.3,100.7 700.0,100.7" fill="none" stroke="#4A90D9" stroke-width="2.5" stroke-linejoin="round"/>
 <circle class="chart-dot" cx="55.0" cy="93.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:27  —  Score: 88.3" data-note=""/>
-<circle class="chart-dot" cx="86.1" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:51  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="117.2" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
-<circle class="chart-dot" cx="148.3" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
-<circle class="chart-dot" cx="179.3" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:19  —  Score: 97.6" data-note=""/>
-<circle class="chart-dot" cx="210.4" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
-<circle class="chart-dot" cx="226.0" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
-<circle class="chart-dot" cx="241.5" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
-<circle class="chart-dot" cx="272.6" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
-<circle class="chart-dot" cx="303.7" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
-<circle class="chart-dot" cx="327.0" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
-<circle class="chart-dot" cx="334.8" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
-<circle class="chart-dot" cx="342.5" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
-<circle class="chart-dot" cx="358.1" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
-<circle class="chart-dot" cx="365.8" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:23  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="396.9" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:28  —  Score: 86.4" data-note=""/>
-<circle class="chart-dot" cx="428.0" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
-<circle class="chart-dot" cx="459.1" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:29  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="490.2" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:29  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="521.3" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:03  —  Score: 89.4" data-note=""/>
-<circle class="chart-dot" cx="552.3" cy="93.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:16  —  Score: 88.4" data-note=""/>
-<circle class="chart-dot" cx="567.9" cy="108.3" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:54  —  Score: 85.6" data-note="Write 5 new wishlist articles (hallucination-detection, interpretability, active..."/>
-<circle class="chart-dot" cx="583.4" cy="108.3" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:02  —  Score: 85.6" data-note=""/>
-<circle class="chart-dot" cx="614.5" cy="107.2" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:25  —  Score: 85.8" data-note="Write 2 new wishlist articles (e-commerce-applications, test-time-compute-scalin..."/>
-<circle class="chart-dot" cx="630.1" cy="106.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:54  —  Score: 85.9" data-note="Write 3 new wishlist articles (applications-for-real-world-learning, computation..."/>
-<circle class="chart-dot" cx="645.6" cy="106.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 05:38  —  Score: 85.9" data-note=""/>
-<circle class="chart-dot" cx="653.4" cy="107.2" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 05:50  —  Score: 85.8" data-note="Write 2 new wishlist articles (e-commerce-applications, test-time-compute-scalin..."/>
-<circle class="chart-dot" cx="676.7" cy="104.5" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 07:42  —  Score: 86.3" data-note=""/>
-<circle class="chart-dot" cx="700.0" cy="100.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 12:22  —  Score: 87.0" data-note=""/>
+<circle class="chart-dot" cx="85.7" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 18:51  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="116.4" cy="68.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:02  —  Score: 93.0" data-note=""/>
+<circle class="chart-dot" cx="147.1" cy="60.4" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:11  —  Score: 94.4" data-note=""/>
+<circle class="chart-dot" cx="177.9" cy="43.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 19:19  —  Score: 97.6" data-note=""/>
+<circle class="chart-dot" cx="208.6" cy="202.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:09  —  Score: 68.2" data-note="Expand 5 lowest-scoring stubs (institutions-and-labs, vlm-integration, automated..."/>
+<circle class="chart-dot" cx="223.9" cy="180.1" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:20  —  Score: 72.4" data-note="Expand the 4 lowest-scoring articles (tracking-ai-research, foundation-models-fo..."/>
+<circle class="chart-dot" cx="239.3" cy="167.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:28  —  Score: 74.8" data-note=""/>
+<circle class="chart-dot" cx="270.0" cy="154.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:34  —  Score: 77.1" data-note="Add background sections to lowest-scoring articles, add footnoted references to ..."/>
+<circle class="chart-dot" cx="300.7" cy="135.5" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 20:45  —  Score: 80.6" data-note="Fix lowest-scoring article (ai-safety-in-research 58.6), add missing sections an..."/>
+<circle class="chart-dot" cx="323.8" cy="125.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:01  —  Score: 82.4" data-note="Fix lowest-scoring articles (wiki-quality-benchmarking, template-free-research, ..."/>
+<circle class="chart-dot" cx="331.4" cy="125.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:03  —  Score: 82.4" data-note=""/>
+<circle class="chart-dot" cx="339.1" cy="114.8" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 21:11  —  Score: 84.4" data-note="Expand the 4 lowest-scoring articles (aide, aider, semantic-scholar-api, agentic..."/>
+<circle class="chart-dot" cx="354.5" cy="103.9" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:15  —  Score: 86.4" data-note="Expand the 5 lowest-scoring articles with 2025-2026 papers (sourced from web sea..."/>
+<circle class="chart-dot" cx="362.1" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:23  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="392.9" cy="103.9" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:28  —  Score: 86.4" data-note=""/>
+<circle class="chart-dot" cx="423.6" cy="98.0" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-07 22:58  —  Score: 87.5" data-note=""/>
+<circle class="chart-dot" cx="454.3" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 00:29  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="485.0" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 02:29  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="515.7" cy="87.6" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:03  —  Score: 89.4" data-note=""/>
+<circle class="chart-dot" cx="546.4" cy="93.1" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:16  —  Score: 88.4" data-note=""/>
+<circle class="chart-dot" cx="561.8" cy="108.3" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 03:54  —  Score: 85.6" data-note="Write 5 new wishlist articles (hallucination-detection, interpretability, active..."/>
+<circle class="chart-dot" cx="577.1" cy="108.3" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:02  —  Score: 85.6" data-note=""/>
+<circle class="chart-dot" cx="607.9" cy="107.2" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:25  —  Score: 85.8" data-note="Write 2 new wishlist articles (e-commerce-applications, test-time-compute-scalin..."/>
+<circle class="chart-dot" cx="623.2" cy="106.7" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 04:54  —  Score: 85.9" data-note="Write 3 new wishlist articles (applications-for-real-world-learning, computation..."/>
+<circle class="chart-dot" cx="638.6" cy="106.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 05:38  —  Score: 85.9" data-note=""/>
+<circle class="chart-dot" cx="646.2" cy="107.2" r="5" fill="#e67e22" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 05:50  —  Score: 85.8" data-note="Write 2 new wishlist articles (e-commerce-applications, test-time-compute-scalin..."/>
+<circle class="chart-dot" cx="669.3" cy="104.5" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 07:42  —  Score: 86.3" data-note=""/>
+<circle class="chart-dot" cx="700.0" cy="100.7" r="3.5" fill="#4A90D9" stroke="#fff" stroke-width="1.5" style="cursor:pointer" data-tip="2026-04-08 13:54  —  Score: 87.0" data-note=""/>
 <text x="55.0" y="85.6" text-anchor="start" font-size="11" font-weight="bold" fill="#2c3e50">88.3</text>
-<text x="187.1" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
+<text x="185.5" y="222.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">63.1</text>
 <text x="700.0" y="92.7" text-anchor="end" font-size="11" font-weight="bold" fill="#2c3e50">87.0</text>
 <text x="55.0" y="278" text-anchor="middle" font-size="10" fill="#888">18:27</text>
-<text x="179.3" y="278" text-anchor="middle" font-size="10" fill="#888">19:19</text>
-<text x="303.7" y="278" text-anchor="middle" font-size="10" fill="#888">20:45</text>
-<text x="428.0" y="278" text-anchor="middle" font-size="10" fill="#888">22:58</text>
-<text x="552.3" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
-<text x="676.7" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
+<text x="177.9" y="278" text-anchor="middle" font-size="10" fill="#888">19:19</text>
+<text x="300.7" y="278" text-anchor="middle" font-size="10" fill="#888">20:45</text>
+<text x="423.6" y="278" text-anchor="middle" font-size="10" fill="#888">22:58</text>
+<text x="546.4" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
+<text x="669.3" y="278" text-anchor="middle" font-size="10" fill="#888">2026-04-08</text>
 <text x="700.0" y="278" text-anchor="end" font-size="10" fill="#888">2026-04-08</text>
-<line x1="187.1" y1="30" x2="187.1" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
-<text x="191.1" y="44" font-size="10" fill="#e67e22">v2</text>
+<line x1="185.5" y1="30" x2="185.5" y2="260" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="189.5" y="44" font-size="10" fill="#e67e22">v2</text>
 </svg>
 <script>
 (function() {
@@ -300,6 +300,7 @@ Freshness: 100.0% updated this week | median age: 0.3 days
 | 2026-04-08 07:48 | v2 | **86.8** | 100.0 | 60.6% | 80% | 45 |  |
 | 2026-04-08 12:17 | v2 | **86.7** | 100.0 | 60.6% | 80% | 45 |  |
 | 2026-04-08 12:22 | v2 | **87.0** | 100.0 | 60.6% | 80% | 45 |  |
+| 2026-04-08 13:54 | v2 | **87.0** | 100.0 | 60.6% | 80% | 45 |  |
 
 ## Open Issues
 

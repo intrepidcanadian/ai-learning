@@ -663,6 +663,111 @@ loadWishlist();
 <p><strong>Scalable coordination</strong>: Silo-Bench (2025) provides the first standardized benchmark for evaluating distributed coordination in multi-agent LLM systems, measuring how well agents maintain coherence as the number of agents scales.[^8]</p>
 <p><strong>Agentic AI taxonomy</strong>: A February 2026 survey provides the first conceptual taxonomy distinguishing between "AI agents" (single autonomous entities) and "agentic AI" (multi-agent systems with emergent collective behavior), clarifying terminology for the field.[^9]</p>
 <p><strong>GenAI-enhanced collaborative problem-solving</strong>: A 2025 study demonstrates that multi-agent architectures with generative AI can enhance collaborative problem-solving across learning domains, with student groups achieving 23% higher performance when supported by a multi-agent tutoring system versus single-agent tutoring.[^10]</p>
+<h3 id="swarm-scale-social-simulation-mirofish-and-oasis">Swarm-Scale Social Simulation: MiroFish and OASIS</h3>
+<p>A breakthrough application of multi-agent systems is <strong>swarm-scale social simulation</strong>, where thousands to millions of LLM-based agents interact on simulated social platforms to predict collective human behavior.</p>
+<p><strong>OASIS</strong> (Open Agent Social Interaction Simulations) is the foundational engine, developed by CAMEL-AI and published as arXiv:2411.11581.[^11] OASIS simulates social media environments (Twitter-like and Reddit-like) where up to <strong>one million agents</strong> can perform 23 distinct social actions: posting, replying, commenting, reposting, following, unfollowing, liking, and forming threaded debates. The system handles agent concurrency via <strong>async action queues and eventual consistency</strong> — the same architecture used by real social platforms. Critically, OASIS includes a <strong>recommendation algorithm</strong> that determines what each agent sees in their feed, modeling how algorithmic curation shapes opinion formation and information spread.</p>
+<p>OASIS validated that emergent phenomena — information cascades, group polarization, and herd effects — match real-world patterns observed on X (Twitter) and Reddit, providing the first large-scale evidence that LLM agent populations can replicate social dynamics.[^11]</p>
+<p><strong>MiroFish</strong> (2026) builds on OASIS to create a full <strong>predictive simulation pipeline</strong>:[^12]</p>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 800 400&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;system-ui, sans-serif&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;mfArr&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#475569&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;28&quot; text-anchor=&quot;middle&quot; font-size=&quot;16&quot; font-weight=&quot;bold&quot; fill=&quot;#1e293b&quot;&gt;MiroFish Swarm Prediction Pipeline&lt;/text&gt;
+  &lt;text x=&quot;400&quot; y=&quot;48&quot; text-anchor=&quot;middle&quot; font-size=&quot;11&quot; fill=&quot;#64748b&quot;&gt;From input document to emergent social prediction&lt;/text&gt;
+
+  &lt;!-- Step 1 --&gt;
+  &lt;rect x=&quot;30&quot; y=&quot;70&quot; width=&quot;160&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#ede9fe&quot; stroke=&quot;#8b5cf6&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;110&quot; y=&quot;95&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#5b21b6&quot;&gt;1. Extract&lt;/text&gt;
+  &lt;rect x=&quot;45&quot; y=&quot;105&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#a78bfa&quot;/&gt;
+  &lt;text x=&quot;110&quot; y=&quot;125&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#5b21b6&quot;&gt;Input document&lt;/text&gt;
+  &lt;rect x=&quot;45&quot; y=&quot;142&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#a78bfa&quot;/&gt;
+  &lt;text x=&quot;110&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#5b21b6&quot;&gt;Knowledge graph&lt;/text&gt;
+  &lt;text x=&quot;110&quot; y=&quot;190&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#7c3aed&quot;&gt;Neo4j entities +&lt;/text&gt;
+  &lt;text x=&quot;110&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#7c3aed&quot;&gt;relationships&lt;/text&gt;
+
+  &lt;line x1=&quot;190&quot; y1=&quot;135&quot; x2=&quot;220&quot; y2=&quot;135&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#mfArr)&quot;/&gt;
+
+  &lt;!-- Step 2 --&gt;
+  &lt;rect x=&quot;220&quot; y=&quot;70&quot; width=&quot;160&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#dbeafe&quot; stroke=&quot;#3b82f6&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;300&quot; y=&quot;95&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#1e40af&quot;&gt;2. Bootstrap&lt;/text&gt;
+  &lt;rect x=&quot;235&quot; y=&quot;105&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#93c5fd&quot;/&gt;
+  &lt;text x=&quot;300&quot; y=&quot;125&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1e40af&quot;&gt;Agent personas&lt;/text&gt;
+  &lt;rect x=&quot;235&quot; y=&quot;142&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#93c5fd&quot;/&gt;
+  &lt;text x=&quot;300&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1e40af&quot;&gt;Long-term memory&lt;/text&gt;
+  &lt;text x=&quot;300&quot; y=&quot;190&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2563eb&quot;&gt;Personality + history&lt;/text&gt;
+  &lt;text x=&quot;300&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#2563eb&quot;&gt;+ opinion state&lt;/text&gt;
+
+  &lt;line x1=&quot;380&quot; y1=&quot;135&quot; x2=&quot;410&quot; y2=&quot;135&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#mfArr)&quot;/&gt;
+
+  &lt;!-- Step 3 --&gt;
+  &lt;rect x=&quot;410&quot; y=&quot;70&quot; width=&quot;160&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;490&quot; y=&quot;95&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#92400e&quot;&gt;3. Simulate&lt;/text&gt;
+  &lt;rect x=&quot;425&quot; y=&quot;105&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#fcd34d&quot;/&gt;
+  &lt;text x=&quot;490&quot; y=&quot;125&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#92400e&quot;&gt;OASIS engine&lt;/text&gt;
+  &lt;rect x=&quot;425&quot; y=&quot;142&quot; width=&quot;130&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#fcd34d&quot;/&gt;
+  &lt;text x=&quot;490&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#92400e&quot;&gt;23 social actions&lt;/text&gt;
+  &lt;text x=&quot;490&quot; y=&quot;190&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#b45309&quot;&gt;Post, reply, debate,&lt;/text&gt;
+  &lt;text x=&quot;490&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#b45309&quot;&gt;follow, repost...&lt;/text&gt;
+
+  &lt;line x1=&quot;570&quot; y1=&quot;135&quot; x2=&quot;600&quot; y2=&quot;135&quot; stroke=&quot;#475569&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#mfArr)&quot;/&gt;
+
+  &lt;!-- Step 4 --&gt;
+  &lt;rect x=&quot;600&quot; y=&quot;70&quot; width=&quot;170&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#d1fae5&quot; stroke=&quot;#10b981&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;685&quot; y=&quot;95&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#065f46&quot;&gt;4. Analyze&lt;/text&gt;
+  &lt;rect x=&quot;615&quot; y=&quot;105&quot; width=&quot;140&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot;/&gt;
+  &lt;text x=&quot;685&quot; y=&quot;125&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#065f46&quot;&gt;Emergent dynamics&lt;/text&gt;
+  &lt;rect x=&quot;615&quot; y=&quot;142&quot; width=&quot;140&quot; height=&quot;30&quot; rx=&quot;5&quot; fill=&quot;white&quot; stroke=&quot;#6ee7b7&quot;/&gt;
+  &lt;text x=&quot;685&quot; y=&quot;162&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#065f46&quot;&gt;Prediction report&lt;/text&gt;
+  &lt;text x=&quot;685&quot; y=&quot;190&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#047857&quot;&gt;Opinion formation,&lt;/text&gt;
+  &lt;text x=&quot;685&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#047857&quot;&gt;polarization, cascades&lt;/text&gt;
+
+  &lt;!-- Bottom: What emerges --&gt;
+  &lt;rect x=&quot;30&quot; y=&quot;230&quot; width=&quot;740&quot; height=&quot;150&quot; rx=&quot;10&quot; fill=&quot;#f8fafc&quot; stroke=&quot;#cbd5e1&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;400&quot; y=&quot;255&quot; text-anchor=&quot;middle&quot; font-size=&quot;13&quot; font-weight=&quot;bold&quot; fill=&quot;#334155&quot;&gt;Emergent Phenomena Captured&lt;/text&gt;
+
+  &lt;rect x=&quot;50&quot; y=&quot;270&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#ede9fe&quot; stroke=&quot;#8b5cf6&quot;/&gt;
+  &lt;text x=&quot;115&quot; y=&quot;292&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#5b21b6&quot; font-weight=&quot;bold&quot;&gt;Info Cascades&lt;/text&gt;
+  &lt;text x=&quot;115&quot; y=&quot;308&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#5b21b6&quot;&gt;How news spreads&lt;/text&gt;
+
+  &lt;rect x=&quot;200&quot; y=&quot;270&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#dbeafe&quot; stroke=&quot;#3b82f6&quot;/&gt;
+  &lt;text x=&quot;265&quot; y=&quot;292&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#1e40af&quot; font-weight=&quot;bold&quot;&gt;Polarization&lt;/text&gt;
+  &lt;text x=&quot;265&quot; y=&quot;308&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#1e40af&quot;&gt;Opinion clustering&lt;/text&gt;
+
+  &lt;rect x=&quot;350&quot; y=&quot;270&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#fef3c7&quot; stroke=&quot;#f59e0b&quot;/&gt;
+  &lt;text x=&quot;415&quot; y=&quot;292&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#92400e&quot; font-weight=&quot;bold&quot;&gt;Herd Effects&lt;/text&gt;
+  &lt;text x=&quot;415&quot; y=&quot;308&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#92400e&quot;&gt;Tipping points&lt;/text&gt;
+
+  &lt;rect x=&quot;500&quot; y=&quot;270&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#d1fae5&quot; stroke=&quot;#10b981&quot;/&gt;
+  &lt;text x=&quot;565&quot; y=&quot;292&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#065f46&quot; font-weight=&quot;bold&quot;&gt;Influence Maps&lt;/text&gt;
+  &lt;text x=&quot;565&quot; y=&quot;308&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#065f46&quot;&gt;Who drives opinion&lt;/text&gt;
+
+  &lt;rect x=&quot;650&quot; y=&quot;270&quot; width=&quot;110&quot; height=&quot;50&quot; rx=&quot;6&quot; fill=&quot;#fce7f3&quot; stroke=&quot;#ec4899&quot;/&gt;
+  &lt;text x=&quot;705&quot; y=&quot;292&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#9d174d&quot; font-weight=&quot;bold&quot;&gt;Narrative Drift&lt;/text&gt;
+  &lt;text x=&quot;705&quot; y=&quot;308&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#9d174d&quot;&gt;Story mutation&lt;/text&gt;
+
+  &lt;text x=&quot;400&quot; y=&quot;360&quot; text-anchor=&quot;middle&quot; font-size=&quot;10&quot; fill=&quot;#64748b&quot; font-style=&quot;italic&quot;&gt;Agents aren't told what to conclude — collective behavior emerges from individual interactions&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p><em>Diagram: MiroFish's four-stage pipeline — extract a knowledge graph from input, bootstrap agent personas with persistent memory, run social simulation via OASIS, and analyze emergent collective dynamics for prediction.</em></p>
+<p>The pipeline works in four stages:</p>
+<ol>
+<li><strong>Knowledge graph extraction</strong>: An input document (news article, product launch, policy proposal) is parsed into entities and relationships, stored in <strong>Neo4j</strong></li>
+<li><strong>Agent bootstrap</strong>: From the knowledge graph, hundreds of agent personas are generated — each with a unique personality, long-term memory (via Zep Cloud or Mem0), social history, and behavioral logic. Agents are not generic — they're derived from the <em>topic's entity graph</em>, ensuring relevant diversity</li>
+<li><strong>Social simulation</strong>: Agents are released into OASIS environments where they interact freely. The recommendation algorithm determines what each agent sees, modeling algorithmic curation's effect on opinion formation</li>
+<li><strong>Emergent analysis</strong>: The system tracks sentiment evolution, topic propagation, influence dynamics, and narrative drift. The collective dynamics — not any single agent's opinion — produce the prediction</li>
+</ol>
+<p><strong>Key architectural decisions:</strong></p>
+<ul>
+<li><strong>No hardcoded interactions</strong>: Agent behavior emerges from persona + environment + memory, not scripted rules</li>
+<li><strong>Dual-platform simulation</strong>: Agents interact on both Twitter-like (short-form, viral) and Reddit-like (long-form, threaded) environments simultaneously, capturing different interaction dynamics</li>
+<li><strong>Memory persistence</strong>: Agents remember past interactions, so repeated exposure to a topic shifts their opinion differently than first exposure — critical for modeling ad frequency effects and brand familiarity accumulation</li>
+<li><strong>Hybrid search</strong>: Agent memory retrieval uses 0.7 × vector similarity + 0.3 × BM25 keyword search, balancing semantic and exact-match recall</li>
+</ul>
+<p><strong>Limitations and the calibration gap:</strong></p>
+<p>While MiroFish demonstrates that emergent social phenomena (polarization, herd effects, information cascades) can be replicated qualitatively, <strong>quantitative calibration against real-world outcomes</strong> remains limited. LLM-based agents are more articulate and rational than real humans — the <a href="predictive-simulation-learning.html">competence paradox</a> identified by Yuan et al. (2026) applies directly. Agents don't exhibit the bounded attention, cognitive biases, and impulse behavior that drive real consumer decisions. Closing this calibration gap — connecting simulation outputs to measured real-world metrics — is the key open problem for production deployment in <a href="ai-ecommerce-learning.html">e-commerce</a> and advertising applications.</p>
 <h3 id="applications-for-real-world-learning">Applications for Real-World Learning</h3>
 <ol>
 <li><strong>Research acceleration</strong>: Multi-agent systems conduct literature reviews, generate hypotheses, and run experiments in parallel — enabling <a href="../core-concepts/automated-scientific-discovery.html">automated scientific discovery</a> that would take human teams months</li>
@@ -713,7 +818,9 @@ loadWishlist();
 [^7]: Liang, T. et al. (2025). Multi-Agent Debate Reduces Errors in LLM-Generated Educational Content. <em>NeurIPS 2025 Workshop on AI for Education</em>.
 [^8]: Zhang, Y. et al. (2025). Silo-Bench: Evaluating Distributed Coordination in Multi-Agent LLM Systems. <em>arXiv</em>.
 [^9]: Menzli, L. et al. (2026). AI Agents vs. Agentic AI: A Conceptual Taxonomy, Applications and Challenges. <em>Information Fusion</em>. https://doi.org/10.1016/j.inffus.2025.103175
-[^10]: Wang, S. et al. (2025). A Generative AI-Enhanced Multiagent Approach to Empowering Collaborative Problem Solving Across Learning Domains. <em>Computers &amp; Education</em>.</p>
+[^10]: Wang, S. et al. (2025). A Generative AI-Enhanced Multiagent Approach to Empowering Collaborative Problem Solving Across Learning Domains. <em>Computers &amp; Education</em>.
+[^11]: Yang, Z. et al. (2024). OASIS: Open Agent Social Interaction Simulations with One Million Agents. <em>arXiv:2411.11581</em>. https://arxiv.org/abs/2411.11581
+[^12]: MiroFish Contributors. (2026). MiroFish: A Simple and Universal Swarm Intelligence Engine. https://github.com/666ghj/MiroFish</p>
 </main>
 </body>
 </html>
