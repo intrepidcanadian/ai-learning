@@ -1,0 +1,42 @@
+{
+  "session": 21,
+  "date": "2026-04-08",
+  "mode": "quality",
+  "hypothesis": {
+    "strategy": "Improve 3 lowest-scoring articles (foundation-models-for-research, retrieval-augmented-generation, agentic-tree-search) with new technical sections, 2025-2026 papers, and 1 SVG diagram",
+    "predicted_delta": 1.0,
+    "dimensions_targeted": ["depth", "currency", "sourcing", "linking"],
+    "reasoning": "Foundation-models has depth=53 (massive room for improvement). RAG has currency=61 (needs recent papers). Agentic-tree-search has depth=67 (needs new sections). Past experiments show adding 4+ new sections yields large depth gains, and 2026 papers reliably move currency."
+  },
+  "result": {
+    "composite_before": 87.4,
+    "composite_after": 87.8,
+    "actual_delta": 0.4,
+    "articles_improved": [
+      {
+        "article": "foundation-models-for-research",
+        "before": 82.3,
+        "after": 89.2,
+        "delta": 6.9,
+        "changes": "Added FM taxonomy SVG diagram, hypothesis generation/lab validation section, multi-modal scientific FMs section, materials discovery section, FOUNDER world models. Added 7 new footnoted references."
+      },
+      {
+        "article": "retrieval-augmented-generation",
+        "before": 82.8,
+        "after": 91.1,
+        "delta": 8.3,
+        "changes": "Added MCTS-RAG section, Self-Routing RAG section, System 1/System 2 framework, 4 new trend items. Added 7 new footnoted references."
+      },
+      {
+        "article": "agentic-tree-search",
+        "before": 83.4,
+        "after": 89.4,
+        "delta": 6.0,
+        "changes": "Added RL+tree search section (Tree-GRPO, DeepSearch, AT2PO, ToTRL), OR-Agent algorithm discovery section, learning application table, CogMCTS. Added 6 new footnoted references. Expanded See Also links."
+      }
+    ],
+    "papers_added": 20,
+    "diagrams_added": 1,
+    "lesson": "RAG article had the biggest gain (+8.3) because currency jumped from 61 to 89 — adding recent MCTS-RAG and agentic RAG papers was highly effective. Foundation-models depth jumped from 53 to 76 with hypothesis generation and multi-modal FM sections."
+  }
+}

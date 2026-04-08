@@ -123,6 +123,45 @@ A wave of 2025-2026 research has deepened the connection between classical MCTS 
 - **MCTS for prompt optimization**: MCTS-OPS (2025) formulates prompt selection as a sequential decision process guided by MCTS, achieving 98% success on easy problems and 70% on hard optimization tasks[^12]. This suggests agentic tree search could optimize not just experimental designs but also the prompts used to generate them.
 - **Information-gain MCTS**: TabTracer (2026) replaces one-way data analysis pipelines with information-gain-guided MCTS using versioned states and hash-based deduplication, enabling backtracking when evidence conflicts with the current hypothesis[^13]. The same principle applies to experimental research: negative results should trigger backtracking, not just pruning.
 
+### Reinforcement Learning + Tree Search (2025-2026)
+
+A powerful new direction integrates tree search directly into RL training of language model agents:
+
+- **Tree-GRPO** (ICLR 2026): Proposes tree-based Group Relative Policy Optimization where each tree node represents a complete agent interaction step. By sharing common prefixes in a tree structure, it increases the number of rollouts achievable within a fixed token budget and constructs step-wise process supervision signals from outcome rewards alone[^14]. This means tree search not only improves inference-time performance but also makes training more sample-efficient.
+
+- **DeepSearch** (Wu et al., 2025): Integrates MCTS directly into RLVR (Reinforcement Learning with Verifiable Rewards) training to overcome training plateaus. Uses a global frontier selection strategy and entropy-based guidance for confident path identification, achieving 62.95% accuracy on math benchmarks — SOTA for 1.5B reasoning models — while using 5.7x fewer GPU hours than extended training[^15].
+
+- **AT2PO** (2026): Agentic Turn-based Policy Optimization uses tree search for training LLM agents on multi-turn reasoning and tool-use tasks. Achieves gains of up to 1.84 percentage points over baselines across seven benchmarks, validating turn-based tree exploration for agentic decision-making[^16].
+
+- **ToTRL** (2025): Tree-of-Thoughts Reinforcement Learning guides LLMs to develop parallel tree-of-thought strategies from sequential chain-of-thought, enabling both performance and reasoning efficiency gains[^17].
+
+The convergence of RL and tree search suggests a future where agents continuously improve their tree search policies through experience — connecting to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md).
+
+### Tree Search for Automated Algorithm Discovery
+
+**OR-Agent** (Liu et al., 2026) organizes automated algorithm discovery as a structured tree-based workflow with branching hypothesis generation and systematic backtracking[^18]. It bridges evolutionary search with structured research by:
+
+1. **Evolutionary selection** of starting points from a population of algorithms
+2. **Research plan generation** using LLMs to propose modifications
+3. **Coordinated exploration** within a research tree where each branch tests a hypothesis
+4. **Backtracking** when experimental evidence conflicts with the current approach
+
+This directly parallels the [AI Scientist](../core-concepts/the-ai-scientist.md)'s agentic tree search but applied to algorithm design rather than ML experiments. The key insight: tree search is domain-agnostic — any problem that can be decomposed into hypothesize-test-refine cycles benefits from structured exploration.
+
+### Application to Learning and Education
+
+Agentic tree search offers a powerful mental model for structured learning:
+
+| Learning Challenge | Tree Search Analogy | Strategy |
+|---|---|---|
+| Choosing what to study | Node expansion (branching) | Generate multiple topic directions, evaluate which is most promising |
+| Going deep vs. broad | Explore-exploit tradeoff | Balance breadth (new topics) with depth (mastering one area) |
+| Hitting a dead end | Branch pruning | Recognize when an approach isn't working, backtrack to a different strategy |
+| Building on prior knowledge | Path through tree | Each new concept builds on the best path of previously mastered concepts |
+| Reviewing for exams | Backpropagation | Propagate exam outcomes back to identify which study strategies were effective |
+
+**CogMCTS** (2025) makes this connection explicit by integrating cognitive guidance mechanisms with MCTS — using multi-round cognitive feedback to incorporate historical experience and dynamically improve heuristic quality[^19]. The same principle applies to learning: reflecting on past study sessions (cognitive feedback) improves future study strategies (heuristic generation).
+
 ## Limitations / Challenges
 
 - **Computational cost**: Exploring a 25-node tree requires ~25x the compute of a single linear experiment, making it expensive for large-scale experiments.
@@ -138,7 +177,14 @@ A wave of 2025-2026 research has deepened the connection between classical MCTS 
 - [Vision-Language Model Integration](../methodologies/vlm-integration.md)
 - [Scaling Laws for Research Automation](../frontier-topics/scaling-laws-research.md)
 - [Predictive Simulation Learning](../frontier-topics/predictive-simulation-learning.md) — uses simulation to predict experimental outcomes before running them
+- [Recursive Self-Improvement](../frontier-topics/recursive-self-improvement.md) — RL+tree search enables self-improving agents
+- [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md) — tree search for product recommendation optimization
+- [Test-Time Compute](test-time-compute.md) — theoretical basis for spending more compute at inference
+- [Active Learning](active-learning.md) — tree search as an active exploration strategy
+- [Foundation Models for Research](../core-concepts/foundation-models-for-research.md) — FMs as the branching heuristic in tree search
+- [Retrieval-Augmented Generation](../core-concepts/retrieval-augmented-generation.md) — MCTS-RAG combines tree search with retrieval
 - [Tracking AI Research](../research-sources/tracking-ai-research.md) — discovering new experiment directions from the literature
+- [Institutions and Labs](../research-sources/institutions-and-labs.md) — labs advancing tree search methods
 
 ## References
 
@@ -167,3 +213,15 @@ A wave of 2025-2026 research has deepened the connection between classical MCTS 
 [^12]: Wang, H. et al. (2025). "MCTS-OPS: Optimizing Prompt Sequences using Monte Carlo Tree Search." [arXiv:2508.05995](https://arxiv.org/abs/2508.05995)
 
 [^13]: Chen, R. et al. (2026). "TabTracer: Monte Carlo Tree Search for Complex Table Reasoning with LLMs." [arXiv:2602.14089](https://arxiv.org/abs/2602.14089)
+
+[^14]: AMAP-ML. (2025). "Tree Search for LLM Agent Reinforcement Learning (Tree-GRPO)." *ICLR 2026*. [arXiv:2509.21240](https://arxiv.org/abs/2509.21240)
+
+[^15]: Wu, F. et al. (2025). "DeepSearch: Overcome the Bottleneck of Reinforcement Learning with Verifiable Rewards via Monte Carlo Tree Search." [arXiv:2509.25454](https://arxiv.org/abs/2509.25454)
+
+[^16]: AT2PO Authors. (2026). "AT2PO: Agentic Turn-based Policy Optimization via Tree Search." [arXiv:2601.04767](https://arxiv.org/abs/2601.04767)
+
+[^17]: ToTRL Authors. (2025). "ToTRL: Unlock LLM Tree-of-Thoughts Reasoning Potential through Puzzles Solving." [arXiv:2505.12717](https://arxiv.org/abs/2505.12717)
+
+[^18]: Liu, Q. et al. (2026). "OR-Agent: Bridging Evolutionary Search and Structured Research for Automated Algorithm Discovery." [arXiv:2602.13769](https://arxiv.org/abs/2602.13769)
+
+[^19]: CogMCTS Authors. (2025). "CogMCTS: A Cognitive-Guided Monte Carlo Tree Search Framework for Iterative Heuristic Evolution with LLMs." [arXiv:2512.08609](https://arxiv.org/abs/2512.08609)

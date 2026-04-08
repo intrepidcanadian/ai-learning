@@ -548,6 +548,176 @@ loadWishlist();
 <p>The model autonomously conducts major research stages: hypothesis generation, experimental design, execution, and manuscript preparation. <a href="the-ai-scientist.html">The AI Scientist</a> and its successors represent this frontier. Liang et al. (2025) survey the transition from automation to autonomy, finding that current systems still require human oversight for novelty assessment and ethical review[^13].</p>
 <h3 id="embodied-fm-research-agents">Embodied FM Research Agents</h3>
 <p>The newest development extends FMs into physical laboratories. Liu et al. (2026) demonstrated FMs generating Python control scripts for scientific instruments — translating user-specified objectives into directly executable lab protocols[^14]. This connects foundation models to real-world <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a>, where the model's predictions are tested against physical outcomes.</p>
+<h2 id="fm-taxonomy-for-scientific-discovery">FM Taxonomy for Scientific Discovery</h2>
+<pre><code class="language-svg">&lt;svg viewBox=&quot;0 0 750 480&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; font-family=&quot;monospace&quot; font-size=&quot;11&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrowFM&quot; markerWidth=&quot;8&quot; markerHeight=&quot;6&quot; refX=&quot;8&quot; refY=&quot;3&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 8 3, 0 6&quot; fill=&quot;#555&quot;/&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;text x=&quot;375&quot; y=&quot;22&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; font-weight=&quot;bold&quot; fill=&quot;#1a1a2e&quot;&gt;Foundation Model Roles in Scientific Discovery&lt;/text&gt;
+
+  &lt;!-- Level 1: FM as Tool --&gt;
+  &lt;rect x=&quot;30&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#e3f2fd&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;135&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#1565C0&quot; font-size=&quot;12&quot;&gt;Level 1: FM as Tool&lt;/text&gt;
+  &lt;text x=&quot;135&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#333&quot;&gt;Human-directed, task-specific&lt;/text&gt;
+  &lt;line x1=&quot;50&quot; y1=&quot;100&quot; x2=&quot;220&quot; y2=&quot;100&quot; stroke=&quot;#1565C0&quot; stroke-width=&quot;0.5&quot;/&gt;
+  &lt;text x=&quot;45&quot; y=&quot;118&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Literature summarization&lt;/text&gt;
+  &lt;text x=&quot;45&quot; y=&quot;133&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Code generation&lt;/text&gt;
+  &lt;text x=&quot;45&quot; y=&quot;148&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Statistical analysis&lt;/text&gt;
+  &lt;text x=&quot;45&quot; y=&quot;163&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Data visualization&lt;/text&gt;
+
+  &lt;!-- Level 2: FM as Analyst --&gt;
+  &lt;rect x=&quot;270&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#fff3e0&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;375&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#E65100&quot; font-size=&quot;12&quot;&gt;Level 2: FM as Analyst&lt;/text&gt;
+  &lt;text x=&quot;375&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#333&quot;&gt;Semi-autonomous reasoning&lt;/text&gt;
+  &lt;line x1=&quot;290&quot; y1=&quot;100&quot; x2=&quot;460&quot; y2=&quot;100&quot; stroke=&quot;#E65100&quot; stroke-width=&quot;0.5&quot;/&gt;
+  &lt;text x=&quot;285&quot; y=&quot;118&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Multi-paper synthesis&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;133&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Research gap identification&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;148&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Experimental modification&lt;/text&gt;
+  &lt;text x=&quot;285&quot; y=&quot;163&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• AIDE-style ML exploration&lt;/text&gt;
+
+  &lt;!-- Level 3: FM as Scientist --&gt;
+  &lt;rect x=&quot;510&quot; y=&quot;50&quot; width=&quot;210&quot; height=&quot;130&quot; rx=&quot;10&quot; fill=&quot;#e8f5e9&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;2&quot;/&gt;
+  &lt;text x=&quot;615&quot; y=&quot;72&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; fill=&quot;#2E7D32&quot; font-size=&quot;12&quot;&gt;Level 3: FM as Scientist&lt;/text&gt;
+  &lt;text x=&quot;615&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#333&quot;&gt;Fully autonomous research&lt;/text&gt;
+  &lt;line x1=&quot;530&quot; y1=&quot;100&quot; x2=&quot;700&quot; y2=&quot;100&quot; stroke=&quot;#2E7D32&quot; stroke-width=&quot;0.5&quot;/&gt;
+  &lt;text x=&quot;525&quot; y=&quot;118&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Hypothesis generation&lt;/text&gt;
+  &lt;text x=&quot;525&quot; y=&quot;133&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Experiment design + execution&lt;/text&gt;
+  &lt;text x=&quot;525&quot; y=&quot;148&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• Manuscript preparation&lt;/text&gt;
+  &lt;text x=&quot;525&quot; y=&quot;163&quot; font-size=&quot;9&quot; fill=&quot;#555&quot;&gt;• AI Scientist v2 / Nature&lt;/text&gt;
+
+  &lt;!-- Arrows between levels --&gt;
+  &lt;line x1=&quot;245&quot; y1=&quot;115&quot; x2=&quot;265&quot; y2=&quot;115&quot; stroke=&quot;#555&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowFM)&quot;/&gt;
+  &lt;line x1=&quot;485&quot; y1=&quot;115&quot; x2=&quot;505&quot; y2=&quot;115&quot; stroke=&quot;#555&quot; stroke-width=&quot;1.5&quot; marker-end=&quot;url(#arrowFM)&quot;/&gt;
+
+  &lt;!-- Modalities row --&gt;
+  &lt;text x=&quot;375&quot; y=&quot;210&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#333&quot;&gt;Cross-Cutting Capabilities&lt;/text&gt;
+
+  &lt;rect x=&quot;30&quot; y=&quot;225&quot; width=&quot;155&quot; height=&quot;75&quot; rx=&quot;8&quot; fill=&quot;#f3e5f5&quot; stroke=&quot;#9C27B0&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;107&quot; y=&quot;245&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#6A1B9A&quot;&gt;Multi-Modal&lt;/text&gt;
+  &lt;text x=&quot;107&quot; y=&quot;260&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Text + vision + code&lt;/text&gt;
+  &lt;text x=&quot;107&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Gemini 2.5, Intern-S1&lt;/text&gt;
+  &lt;text x=&quot;107&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;V-JEPA 2 (video)&lt;/text&gt;
+
+  &lt;rect x=&quot;205&quot; y=&quot;225&quot; width=&quot;155&quot; height=&quot;75&quot; rx=&quot;8&quot; fill=&quot;#e0f2f1&quot; stroke=&quot;#00695C&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;282&quot; y=&quot;245&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#00695C&quot;&gt;Reasoning&lt;/text&gt;
+  &lt;text x=&quot;282&quot; y=&quot;260&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Chain-of-thought, search&lt;/text&gt;
+  &lt;text x=&quot;282&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;o3, DeepSeek-R1&lt;/text&gt;
+  &lt;text x=&quot;282&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Tree-of-thought scaling&lt;/text&gt;
+
+  &lt;rect x=&quot;380&quot; y=&quot;225&quot; width=&quot;155&quot; height=&quot;75&quot; rx=&quot;8&quot; fill=&quot;#fce4ec&quot; stroke=&quot;#C62828&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;457&quot; y=&quot;245&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#C62828&quot;&gt;Embodied&lt;/text&gt;
+  &lt;text x=&quot;457&quot; y=&quot;260&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Lab instrument control&lt;/text&gt;
+  &lt;text x=&quot;457&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Robot planning&lt;/text&gt;
+  &lt;text x=&quot;457&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;FOUNDER world models&lt;/text&gt;
+
+  &lt;rect x=&quot;555&quot; y=&quot;225&quot; width=&quot;165&quot; height=&quot;75&quot; rx=&quot;8&quot; fill=&quot;#fff8e1&quot; stroke=&quot;#F57F17&quot; stroke-width=&quot;1.5&quot;/&gt;
+  &lt;text x=&quot;637&quot; y=&quot;245&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;10&quot; fill=&quot;#F57F17&quot;&gt;Domain-Specific&lt;/text&gt;
+  &lt;text x=&quot;637&quot; y=&quot;260&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Biology: BioArc, AlphaFold3&lt;/text&gt;
+  &lt;text x=&quot;637&quot; y=&quot;275&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Materials: GNOME&lt;/text&gt;
+  &lt;text x=&quot;637&quot; y=&quot;290&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Science: Intern-S1 (241B)&lt;/text&gt;
+
+  &lt;!-- Application domains --&gt;
+  &lt;text x=&quot;375&quot; y=&quot;330&quot; text-anchor=&quot;middle&quot; font-size=&quot;12&quot; font-weight=&quot;bold&quot; fill=&quot;#333&quot;&gt;Application Domains&lt;/text&gt;
+
+  &lt;rect x=&quot;30&quot; y=&quot;345&quot; width=&quot;130&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;95&quot; y=&quot;363&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;9&quot; fill=&quot;#283593&quot;&gt;Drug Discovery&lt;/text&gt;
+  &lt;text x=&quot;95&quot; y=&quot;378&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;LLM hypothesis →&lt;/text&gt;
+  &lt;text x=&quot;95&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;lab validation&lt;/text&gt;
+
+  &lt;rect x=&quot;175&quot; y=&quot;345&quot; width=&quot;130&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;240&quot; y=&quot;363&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;9&quot; fill=&quot;#283593&quot;&gt;Materials Science&lt;/text&gt;
+  &lt;text x=&quot;240&quot; y=&quot;378&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Property prediction&lt;/text&gt;
+  &lt;text x=&quot;240&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;+ synthesis planning&lt;/text&gt;
+
+  &lt;rect x=&quot;320&quot; y=&quot;345&quot; width=&quot;130&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;385&quot; y=&quot;363&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;9&quot; fill=&quot;#283593&quot;&gt;E-Commerce&lt;/text&gt;
+  &lt;text x=&quot;385&quot; y=&quot;378&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Product understanding&lt;/text&gt;
+  &lt;text x=&quot;385&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;+ recommendation&lt;/text&gt;
+
+  &lt;rect x=&quot;465&quot; y=&quot;345&quot; width=&quot;130&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;530&quot; y=&quot;363&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;9&quot; fill=&quot;#283593&quot;&gt;Education&lt;/text&gt;
+  &lt;text x=&quot;530&quot; y=&quot;378&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Personalized tutoring&lt;/text&gt;
+  &lt;text x=&quot;530&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;+ concept mapping&lt;/text&gt;
+
+  &lt;rect x=&quot;610&quot; y=&quot;345&quot; width=&quot;115&quot; height=&quot;55&quot; rx=&quot;6&quot; fill=&quot;#e8eaf6&quot; stroke=&quot;#3F51B5&quot; stroke-width=&quot;1&quot;/&gt;
+  &lt;text x=&quot;667&quot; y=&quot;363&quot; text-anchor=&quot;middle&quot; font-weight=&quot;bold&quot; font-size=&quot;9&quot; fill=&quot;#283593&quot;&gt;Simulation&lt;/text&gt;
+  &lt;text x=&quot;667&quot; y=&quot;378&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;Predictive world&lt;/text&gt;
+  &lt;text x=&quot;667&quot; y=&quot;390&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;models + planning&lt;/text&gt;
+
+  &lt;!-- Footer --&gt;
+  &lt;text x=&quot;375&quot; y=&quot;435&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot; fill=&quot;#888&quot;&gt;Increasing autonomy →&lt;/text&gt;
+  &lt;line x1=&quot;100&quot; y1=&quot;440&quot; x2=&quot;650&quot; y2=&quot;440&quot; stroke=&quot;#ccc&quot; stroke-width=&quot;1&quot; stroke-dasharray=&quot;4&quot;/&gt;
+  &lt;text x=&quot;100&quot; y=&quot;460&quot; font-size=&quot;8&quot; fill=&quot;#aaa&quot;&gt;Human-in-the-loop&lt;/text&gt;
+  &lt;text x=&quot;555&quot; y=&quot;460&quot; font-size=&quot;8&quot; fill=&quot;#aaa&quot;&gt;Autonomous discovery&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<h2 id="hypothesis-generation-and-lab-validation">Hypothesis Generation and Lab Validation</h2>
+<p>A critical frontier for foundation models is generating scientifically valid, testable hypotheses — and having those hypotheses survive laboratory validation. This represents the strongest evidence that FMs can contribute to genuine discovery rather than just text generation.</p>
+<h3 id="llm-generated-hypotheses-in-biomedicine">LLM-Generated Hypotheses in Biomedicine</h3>
+<p>Abdel-Rehim et al. (2025) conducted a landmark study where GPT-4 generated hypotheses about synergistic drug combinations for breast cancer treatment using FDA-approved non-cancer drugs. Of 12 LLM-proposed drug pairs, 3 showed synergy scores exceeding positive controls in laboratory assays — a 25% hit rate that compares favorably to traditional high-throughput screening[^19]. This study provides the first published evidence of LLM-generated hypotheses being validated in wet-lab experiments, establishing a new paradigm for AI-accelerated drug discovery.</p>
+<h3 id="hypothesis-generation-taxonomy">Hypothesis Generation Taxonomy</h3>
+<p>Alkan et al. (2025) provide a comprehensive taxonomy of LLM-based hypothesis generation methods, ranging from simple zero-shot prompting to complex multi-agent frameworks[^20]:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Approach</th>
+<th>Strengths</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero-shot prompting</td>
+<td>Direct hypothesis request</td>
+<td>Simple, fast</td>
+<td>Low novelty, generic</td>
+</tr>
+<tr>
+<td>Chain-of-thought</td>
+<td>Step-by-step reasoning</td>
+<td>Better logical structure</td>
+<td>May hallucinate reasoning steps</td>
+</tr>
+<tr>
+<td>Retrieval-augmented</td>
+<td><a href="retrieval-augmented-generation.html">RAG</a>-grounded generation</td>
+<td>Factual grounding</td>
+<td>Bounded by retrieval quality</td>
+</tr>
+<tr>
+<td>Multi-agent debate</td>
+<td>Multiple LLMs critique each other</td>
+<td>Higher novelty, self-correction</td>
+<td>Expensive, slow</td>
+</tr>
+<tr>
+<td>Evolutionary search</td>
+<td>Iterative hypothesis refinement</td>
+<td>Explores hypothesis space</td>
+<td>Requires fitness function</td>
+</tr>
+</tbody>
+</table>
+<p>The key insight for learning applications: these same methods can teach students how to formulate research questions — the AI's hypothesis generation process mirrors the structured thinking that researchers develop over years of practice.</p>
+<h3 id="llms-across-the-full-scientific-method">LLMs Across the Full Scientific Method</h3>
+<p>Zhang et al. (2025) published in <em>Nature npj AI</em> a comprehensive review of how LLMs are transforming every stage of the scientific method — from hypothesis generation through experimental design, data analysis, and discovery[^21]. They identify a critical gap: while LLMs excel at generating plausible hypotheses and writing papers, the experimental validation loop remains the weakest link. This motivates the integration of FMs with <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a> to pre-validate hypotheses computationally before expensive lab work.</p>
+<h2 id="multi-modal-and-domain-specific-scientific-fms">Multi-Modal and Domain-Specific Scientific FMs</h2>
+<h3 id="scientific-multi-modal-models">Scientific Multi-Modal Models</h3>
+<p>A new class of foundation models is purpose-built for scientific reasoning across modalities. <strong>Intern-S1</strong> (Bai et al., 2025) is a Mixture-of-Experts model with 28B activated parameters (241B total), continually pre-trained on 5 trillion tokens including 2.5T+ scientific tokens[^22]. It achieves state-of-the-art on scientific reasoning benchmarks in both text-only and multi-modal settings, demonstrating that domain-specific pretraining data dramatically improves scientific capabilities.</p>
+<p>Key architectural innovations in scientific FMs:
+- <strong>MoE routing</strong> — Expert specialization allows different parameter subsets to handle chemistry vs. physics vs. biology
+- <strong>Scientific tokenization</strong> — Custom tokenizers for mathematical notation, chemical formulae, and protein sequences
+- <strong>Multi-modal fusion</strong> — Joint processing of text, figures, tables, and molecular structures</p>
+<h3 id="domain-specific-architecture-search">Domain-Specific Architecture Search</h3>
+<p>Rather than adapting general-purpose architectures, <strong>BioArc</strong> (ICLR 2026) demonstrates that domain-specific neural architecture search produces biological foundation models that significantly outperform adapted Transformers[^23]. This challenges the "one architecture fits all" assumption and suggests that the next wave of scientific FMs will be architecturally specialized.</p>
+<h3 id="grounding-fms-in-world-models">Grounding FMs in World Models</h3>
+<p><strong>FOUNDER</strong> (Wang et al., 2025) integrates foundation model knowledge with world model dynamics for embodied decision-making[^24]. The system learns a mapping that grounds FM representations in the world model's state space, enabling goal-conditioned policy learning through imagination — without reward signals. For research applications, this means FMs can "simulate" experimental outcomes by grounding their predictions in learned physical dynamics, connecting to <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation learning</a> and <a href="../methodologies/world-models.html">world models</a>.</p>
+<h3 id="materials-discovery">Materials Discovery</h3>
+<p>Foundation models for materials science represent one of the most commercially impactful applications. Pyzer-Knapp et al. (2025) review how FMs are applied to property prediction, synthesis planning, and molecular generation[^25]. The integration of language models with physics-based simulation creates a feedback loop: FMs propose candidate materials → simulations predict properties → results refine FM predictions. This cycle exemplifies how foundation models learn from simulation outcomes for real-world application.</p>
 <h2 id="scaling-properties">Scaling Properties</h2>
 <p>Research quality correlates with model capability. Key observations from The AI Scientist:</p>
 <ul>
@@ -592,6 +762,15 @@ loadWishlist();
 </li>
 <li>
 <p><strong>Foundation models for temporal processes</strong>: Bae et al. (2025) introduced foundation models specifically for temporal point processes — a key tool for modeling event sequences in scientific experiments, user behavior analysis, and clinical trial monitoring[^18].</p>
+</li>
+<li>
+<p><strong>5th paradigm of science</strong>: Liu et al. (2025) argue that FMs are not merely enhancing existing scientific methodologies but catalyzing a transition toward a new "5th paradigm" of science — beyond empirical, theoretical, computational, and data-driven paradigms — where AI autonomously generates and tests hypotheses[^11].</p>
+</li>
+<li>
+<p><strong>Lab-validated LLM hypotheses</strong>: The first published evidence of LLM-generated hypotheses validated in wet-lab experiments emerged in 2025, with GPT-4-proposed drug combinations showing synergy in breast cancer assays[^19]. This moves foundation models from "generating plausible text" to "generating actionable science."</p>
+</li>
+<li>
+<p><strong>Scientific MoE models</strong>: Intern-S1, a 241B-parameter scientific MoE model trained on 2.5T+ scientific tokens, achieves SOTA on scientific reasoning benchmarks, demonstrating that domain-focused pretraining dramatically outperforms general-purpose models on scientific tasks[^22].</p>
 </li>
 </ul>
 <h2 id="current-limitations">Current Limitations</h2>
@@ -641,6 +820,13 @@ loadWishlist();
 <p>[^16]: Chen, X. et al. (2025). "The Rapid Growth of AI Foundation Model Usage in Science." <a href="https://arxiv.org/abs/2511.21739">arXiv:2511.21739</a></p>
 <p>[^17]: He, Z. et al. (2024). "A Comprehensive Review of Recommender Systems: Transitioning from Theory to Practice." <a href="https://arxiv.org/abs/2407.13699">arXiv:2407.13699</a></p>
 <p>[^18]: Bae, J. et al. (2025). "On Foundation Models for Temporal Point Processes to Accelerate Scientific Discovery." <a href="https://arxiv.org/abs/2510.12640">arXiv:2510.12640</a></p>
+<p>[^19]: Abdel-Rehim, A. et al. (2025). "Scientific Hypothesis Generation by Large Language Models: Laboratory Validation in Breast Cancer Treatment." <em>Journal of The Royal Society Interface</em>, 22(227). <a href="https://doi.org/10.1098/rsif.2024.0674">doi:10.1098/rsif.2024.0674</a></p>
+<p>[^20]: Alkan, A. K. et al. (2025). "A Survey on Hypothesis Generation for Scientific Discovery in the Era of Large Language Models." <a href="https://arxiv.org/abs/2504.05496">arXiv:2504.05496</a></p>
+<p>[^21]: Zhang, Y. et al. (2025). "Exploring the Role of Large Language Models in the Scientific Method: From Hypothesis to Discovery." <em>npj Artificial Intelligence</em>, 1(1). <a href="https://doi.org/10.1038/s44387-025-00019-5">doi:10.1038/s44387-025-00019-5</a></p>
+<p>[^22]: Bai, L. et al. (2025). "Intern-S1: A Scientific Multimodal Foundation Model." <a href="https://arxiv.org/abs/2508.15763">arXiv:2508.15763</a></p>
+<p>[^23]: BioArc Authors. (2026). "BioArc: Discovering Optimal Neural Architectures for Biological Foundation Models." <em>ICLR 2026</em>. <a href="https://arxiv.org/abs/2512.00283">arXiv:2512.00283</a></p>
+<p>[^24]: Wang, Y. et al. (2025). "FOUNDER: Grounding Foundation Models in World Models for Open-Ended Embodied Decision Making." <a href="https://arxiv.org/abs/2507.12496">arXiv:2507.12496</a></p>
+<p>[^25]: Pyzer-Knapp, E. O. et al. (2025). "Foundation Models for Materials Discovery — Current State and Future Directions." <em>npj Computational Materials</em>. <a href="https://doi.org/10.1038/s41524-025-01538-0">doi:10.1038/s41524-025-01538-0</a></p>
 </main>
 </body>
 </html>

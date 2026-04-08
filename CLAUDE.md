@@ -34,7 +34,7 @@ This wiki covers AI learning research across 5 categories and ~24 articles:
 
    **Quality mode** (coverage >= 80%):
    - Priority: improve lowest-scoring existing articles
-   - If all flagship articles are above 95, prioritize standard articles
+   - If all flaøgship articles are above 95, prioritize standard articles
    - For stubs (<100 lines), expand to standard size rather than micro-optimizing
    - Fix priorities: missing sections (structural) > missing footnotes (sourcing) > missing cross-links (linking) > stale content (currency)
    - Adding richer cross-links may introduce new red-link gaps — this is fine, as it creates natural pressure to write new articles in future coverage-mode sessions

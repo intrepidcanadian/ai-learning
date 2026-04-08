@@ -145,6 +145,36 @@ Asai et al. (2024) introduced **Self-RAG**, where the model learns to decide *wh
 - `[Relevant]` / `[Irrelevant]` — evaluates retrieved document quality
 - `[Supported]` / `[Unsupported]` — checks whether the generated claim is actually supported by the retrieved evidence
 
+### MCTS-RAG: Tree Search Meets Retrieval
+
+A major 2025 advance integrates Monte Carlo Tree Search with RAG to overcome the limitations of single-pass retrieval. **MCTS-RAG** (Hu et al., 2025) dynamically refines both retrieval and reasoning through iterative decision-making[^8]. Unlike standard RAG (retrieve → generate sequentially), MCTS-RAG explores multiple reasoning paths and strategically decides when to retrieve at each node:
+
+1. **Expansion**: Generate multiple candidate reasoning steps
+2. **Retrieval decision**: At each node, decide whether to retrieve new evidence or reason from existing context
+3. **Simulation**: Roll out each path to estimate answer quality
+4. **Backpropagation**: Update path scores to guide future exploration
+
+This bridges RAG with [agentic tree search](../methodologies/agentic-tree-search.md) — the retrieval process becomes a search over both knowledge space and reasoning space simultaneously. MCTS-RAG reduces hallucinations and improves factual accuracy, particularly for small language models that benefit most from structured search.
+
+**AirRAG** (Feng et al., 2025) extends this further by integrating autonomous strategic planning with five fundamental reasoning actions (retrieve, decompose, verify, synthesize, conclude), using self-consistency verification across explored paths[^9]. Accepted at EMNLP 2025, AirRAG shows significant gains on complex multi-hop QA datasets.
+
+### Adaptive and Self-Routing Retrieval
+
+**Self-Routing RAG** (Wu et al., 2025) enables an LLM to dynamically decide between external retrieval and verbalizing its own parametric knowledge[^10]. A multi-task objective jointly optimizes:
+- **Knowledge source selection** — when to retrieve vs. use internal knowledge
+- **Verbalization** — explicitly articulating internal knowledge for transparency
+- **Response generation** — producing the final answer
+
+Self-Routing RAG outperforms selective retrieval baselines by 2-8.5% while performing 21-40% fewer retrievals — demonstrating that knowing *when not to retrieve* is as important as retrieval quality itself.
+
+### System 1 / System 2 RAG Framework
+
+A 2025 survey frames RAG reasoning through Kahneman's dual-process theory[^11]:
+- **System 1 RAG**: Fast, single-pass retrieve-and-generate for simple factual questions
+- **System 2 RAG**: Slow, deliberate multi-step reasoning with iterative retrieval for complex questions
+
+This framework helps practitioners choose the right RAG architecture: System 1 for latency-sensitive applications (e-commerce product search), System 2 for accuracy-critical applications (scientific research, medical QA). The key insight for learning: matching cognitive effort to question complexity mirrors how expert learners allocate study time.
+
 ### RAG for Scientific Research
 
 RAG is the backbone of modern AI research tools:
@@ -167,6 +197,10 @@ Fan et al. (2025) demonstrated **ScholarRAG**, a system that retrieves from 200M
 6. **Deep research agents**: ProductResearch (2026) trains e-commerce deep research agents through multi-agent synthetic trajectory distillation with tailored tool-use and citation-grounded report generation — representing RAG evolved into autonomous research[^6]
 7. **Memory-augmented RAG**: Shopping Companion (2026) introduces memory-augmented LLM agents that manage long-term user preferences across extended conversations, combining retrieval with persistent user modeling[^7]
 8. **RAG + knowledge distillation**: Distilled retrieval-aware models (see [knowledge distillation](knowledge-distillation.md)) can internalize common retrieval patterns, reducing latency while preserving grounding quality through [inference optimization](../methodologies/inference-optimization.md)
+9. **MCTS-RAG convergence**: Multiple 2025-2026 papers demonstrate that tree search dramatically improves RAG — MCTS-RAG and AirRAG show that exploring multiple retrieval-reasoning paths outperforms single-pass retrieval by 15-30% on complex QA[^8][^9]
+10. **Hierarchical agentic RAG**: A-RAG (2026) exposes hierarchical retrieval interfaces (keyword search, semantic search, chunk read) directly to the model, enabling adaptive search across multiple granularities[^12]
+11. **Agentic RAG systematization**: SoK (2026) provides the first comprehensive taxonomy of agentic RAG architectures, identifying autonomous coordination of multi-step reasoning, dynamic memory management, and iterative retrieval as the three defining capabilities[^13]
+12. **E-commerce product QA**: Tangarajan et al. (2025) demonstrate a scalable RAG framework for e-commerce that integrates conversational history, user profiles, and product attributes to handle objective, subjective, and multi-intent queries across heterogeneous sources[^14]
 
 ### E-Commerce Applications
 
@@ -241,3 +275,17 @@ RAG transforms AI-assisted education by:
 [^6]: ProductResearch Authors. (2026). "ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation." arXiv:2602.23716. https://arxiv.org/abs/2602.23716
 
 [^7]: Shopping Companion Authors. (2026). "Shopping Companion: A Memory-Augmented LLM Agent for Real-World E-Commerce Tasks." arXiv:2603.14864. https://arxiv.org/abs/2603.14864
+
+[^8]: Hu, Y., Zhao, Z. et al. (2025). "MCTS-RAG: Enhancing Retrieval-Augmented Generation with Monte Carlo Tree Search." *EMNLP 2025 Findings*. [arXiv:2503.20757](https://arxiv.org/abs/2503.20757)
+
+[^9]: Feng, H. et al. (2025). "AirRAG: Autonomous Strategic Planning and Reasoning Steer Retrieval Augmented Generation." *EMNLP 2025 Findings*. [arXiv:2501.10053](https://arxiv.org/abs/2501.10053)
+
+[^10]: Wu, D., Gu, J.-C., Chang, K.-W., & Peng, N. (2025). "Self-Routing RAG: Binding Selective Retrieval with Knowledge Verbalization." [arXiv:2504.01018](https://arxiv.org/abs/2504.01018)
+
+[^11]: Reasoning RAG Authors. (2025). "Reasoning RAG via System 1 or System 2: A Survey on Reasoning Agentic RAG for Industry Challenges." [arXiv:2506.10408](https://arxiv.org/abs/2506.10408)
+
+[^12]: A-RAG Authors. (2026). "A-RAG: Scaling Agentic Retrieval-Augmented Generation via Hierarchical Retrieval Interfaces." [arXiv:2602.03442](https://arxiv.org/abs/2602.03442)
+
+[^13]: SoK Authors. (2026). "SoK: Agentic Retrieval-Augmented Generation — Taxonomy, Architectures, Evaluation, and Research Directions." [arXiv:2603.07379](https://arxiv.org/abs/2603.07379)
+
+[^14]: Tangarajan, P. et al. (2025). "Contextually Aware E-Commerce Product Question Answering using RAG." [arXiv:2508.01990](https://arxiv.org/abs/2508.01990)
