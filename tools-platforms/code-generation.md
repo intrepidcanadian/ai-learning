@@ -94,6 +94,26 @@ AI code generation serves educational purposes in several ways:
 
 Chen et al. (2025) introduced **self-debugging**, where the code generation agent writes tests alongside code and uses test failures to iteratively refine its output.[^4] The key insight is that LLMs are better at judging code correctness (via test writing) than producing correct code on the first attempt. Combined with [test-time compute](../methodologies/test-time-compute.md) scaling, self-debugging agents achieve 15-25% higher correctness on complex tasks.
 
+### Self-Improving Code Agents
+
+Robeyns et al. (2025) demonstrated that a coding agent can **edit its own source code** to improve its benchmark performance — eliminating the distinction between the meta-agent and the target agent.[^7] Their Self-Improving Coding Agent (SICA) achieved performance gains of 17–53% on SWE-bench Verified and additional gains on LiveCodeBench, using a data-efficient, non-gradient-based learning mechanism driven by LLM reflection and code updates. This connects directly to [recursive self-improvement](../frontier-topics/recursive-self-improvement.md): the agent's code *is* the thing being optimized.
+
+```
+┌─────────────────────────────────────────────────────┐
+│         SELF-IMPROVING CODE AGENT (SICA)            │
+│                                                     │
+│  ┌───────────┐    ┌───────────┐    ┌───────────┐   │
+│  │  REFLECT   │───▶│   EDIT    │───▶│ EVALUATE  │   │
+│  │ on failures│    │ own code  │    │ on bench  │   │
+│  └───────────┘    └───────────┘    └───────────┘   │
+│       ▲                                    │        │
+│       └────────────────────────────────────┘        │
+│              improvement loop                       │
+└─────────────────────────────────────────────────────┘
+```
+
+**Learning connection:** SICA demonstrates that the best way to learn coding may be to *code about coding* — building tools that improve your own development process, a practice known as "meta-programming" that transfers to any engineering discipline.
+
 ### Code Generation for Scientific Research
 
 Tian et al. (2026) demonstrated **SciCode**, a system that generates complete experimental pipelines from research paper descriptions.[^5] Applied to computational biology, SciCode:
@@ -123,6 +143,20 @@ The code generation field has matured rapidly:
 - **Benchmark saturation**: HumanEval is nearly saturated; harder benchmarks (SWE-bench full, real-world issue resolution) are now the standard
 - **Self-debugging loops**: Agents that write tests, run them, and fix failures achieve significantly higher correctness[^4]
 - **Scientific code generation**: Automated pipeline generation from research papers is now practical for several domains[^5]
+
+### Next-Generation Benchmarks (2026)
+
+The evaluation landscape has shifted dramatically toward real-world complexity:
+
+- **FeatureBench** (ICLR 2026): Evaluates agents on feature-level development (not just bug fixes) across 200 tasks from 24 open-source repositories. State-of-the-art models like Claude 4.5 Opus achieve only 11.0% on FeatureBench versus 74.4% on SWE-bench Verified — exposing the gap between bug-fixing and feature development[^8].
+- **SWE-CI**: The first benchmark measuring long-term code maintainability, tracking how agent-written code evolves across 100 tasks spanning an average of 233 days and 71 commits. Agents that excel at one-shot correctness often fail at sustained code quality[^9].
+- **SWE-EVO**: Tests agents on evolving codebases where the repository changes between tasks. Agents achieve only 21% on SWE-EVO versus 65% on SWE-Bench Verified, revealing that current agents struggle with sustained, multi-file reasoning[^10].
+
+These benchmarks collectively redefine success: from "can the agent fix this bug?" to "can the agent build and maintain real software over time?"
+
+### Live-SWE-agent and Self-Evolving Agents
+
+Live-SWE-agent (2025) demonstrated that agents can **create custom tools for each task**, achieving 45.8% resolve rate on SWE-Bench Pro[^11]. Rather than using a fixed toolkit, the agent dynamically generates helper scripts, analysis tools, and debugging utilities adapted to each problem. This connects to [agentic tree search](../methodologies/agentic-tree-search.md): the agent explores both the solution space and the tool space simultaneously.
 
 ### E-Commerce Applications
 
@@ -187,3 +221,13 @@ Code generation transforms how people learn programming and apply it to real pro
 [^5]: Tian, Y., Wu, J., & Gao, J. (2026). "SciCode: Generating Complete Experimental Pipelines from Research Papers." *ICML 2026*. arXiv:2601.15892.
 
 [^6]: Li, R., Allal, L. B., & Muennighoff, N. (2026). "Self-Play Code Refinement: Recursive Improvement of Code Generation Agents." arXiv:2602.11234.
+
+[^7]: Robeyns, M., Szummer, M., & Aitchison, L. (2025). "A Self-Improving Coding Agent." arXiv:2504.15228. https://arxiv.org/abs/2504.15228
+
+[^8]: Various (2026). "FeatureBench: Benchmarking Agentic Coding for Complex Feature Development." *ICLR 2026*. arXiv:2602.10975. https://arxiv.org/abs/2602.10975
+
+[^9]: Chen, Y. et al. (2026). "SWE-CI: Evaluating Agent Capabilities in Maintaining Codebases via Continuous Integration." arXiv:2603.03823. https://arxiv.org/abs/2603.03823
+
+[^10]: Various (2026). "SWE-EVO: Benchmarking Coding Agents in Evolving Codebases." arXiv:2512.18470. https://arxiv.org/abs/2512.18470
+
+[^11]: Various (2025). "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?" arXiv:2511.13646. https://arxiv.org/abs/2511.13646

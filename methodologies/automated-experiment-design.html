@@ -575,6 +575,42 @@ loadWishlist();
 </ul>
 <h3 id="bayesian-optimization-for-experiment-planning">Bayesian Optimization for Experiment Planning</h3>
 <p>Bayesian optimization remains the mathematical backbone of sequential experiment design. Recent advances include optimization over <strong>problem formulation space</strong> itself — rather than just optimizing within a fixed experimental setup, the AI identifies optimal design formulations, choosing what to measure and how<a href="Various" title="2025). &quot;Towards Autonomous Experimentation: Bayesian Optimization over Problem Formulation Space.&quot; [arXiv:2502.05735](https://arxiv.org/abs/2502.05735">^16</a>. This meta-level optimization connects to <a href="../frontier-topics/open-ended-discovery.html">open-ended discovery</a> principles: the system explores the space of possible experiments, not just the space within an experiment.</p>
+<h3 id="autolabs-multi-agent-chemical-experimentation-2025">AutoLabs: Multi-Agent Chemical Experimentation (2025)</h3>
+<p>AutoLabs (Patel et al., 2025) introduced a <strong>self-correcting, multi-agent architecture</strong> that translates natural-language experiment descriptions into executable protocols for high-throughput liquid handlers[^17]. The system:</p>
+<ol>
+<li>Engages users in dialogue to clarify experimental goals</li>
+<li>Decomposes goals into discrete tasks for specialized agents</li>
+<li>Performs tool-assisted stoichiometric calculations</li>
+<li>Self-validates the generated protocol before execution</li>
+</ol>
+<p>Through an ablation study of 20 agent configurations, AutoLabs found that <strong>agent reasoning capacity</strong> is the most critical factor for success, reducing quantitative errors (nRMSE) by over 85% in complex tasks. Combined with multi-agent architecture and iterative self-correction, AutoLabs achieves near-expert procedural accuracy (F1 &gt; 0.89) on challenging multi-step syntheses.</p>
+<p><strong>Learning connection:</strong> AutoLabs demonstrates the principle that breaking complex experimental design into specialized sub-tasks — each handled by a domain-expert agent — outperforms monolithic approaches. This mirrors effective team-based research: a statistician designs the analysis, a chemist designs the synthesis, and a coordinator ensures coherence.</p>
+<h3 id="autoresearch-rl-perpetual-self-evaluating-agents-2026">AutoResearch-RL: Perpetual Self-Evaluating Agents (2026)</h3>
+<p>AutoResearch-RL (2026) formalized automated experiment design as a <strong>Markov Decision Process</strong> where a reinforcement learning agent conducts open-ended neural architecture and hyperparameter research without human supervision<a href="Various" title="2026). &quot;AutoResearch-RL: Perpetual Self-Evaluating Reinforcement Learning Agents for Autonomous Neural Architecture Discovery.&quot; [arXiv:2603.07300](https://arxiv.org/abs/2603.07300">^18</a>. At each step, the agent:</p>
+<ol>
+<li>Proposes a code modification to a target training script</li>
+<li>Executes it under a fixed wall-clock time budget</li>
+<li>Observes a scalar reward (validation bits-per-byte)</li>
+<li>Updates its policy via Proximal Policy Optimization (PPO)</li>
+</ol>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│           AutoResearch-RL: EXPERIMENT AS MDP                │
+│                                                             │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌────────┐  │
+│  │  STATE   │──▶│  ACTION  │──▶│ EXECUTE  │──▶│ REWARD │  │
+│  │ past exp │   │ code edit│   │ train.py │   │val-bpb │  │
+│  │ outcomes │   │ proposal │   │ w/ budget│   │ score  │  │
+│  └──────────┘   └──────────┘   └──────────┘   └────────┘  │
+│       ▲                                            │       │
+│       └────────────── PPO policy update ───────────┘       │
+│                                                             │
+│  Key separation:                                            │
+│  • Frozen: data pipeline, eval protocol (fair comparison)   │
+│  • Mutable: train.py (agent's editable state)              │
+│  • Meta: RL agent (accumulates trajectory knowledge)        │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>The key design separates three concerns: (i) a <strong>frozen environment</strong> (data pipeline, evaluation protocol) guaranteeing fair comparison, (ii) a <strong>mutable target file</strong> representing the agent's editable state, and (iii) a <strong>meta-learner</strong> that accumulates experiment outcomes. On a single-GPU nanochat benchmark, AutoResearch-RL discovered configurations matching or exceeding hand-tuned baselines after ~300 overnight iterations with no human intervention. This directly extends <a href="../frontier-topics/recursive-self-improvement.html">recursive self-improvement</a> principles to experiment design.</p>
 <h3 id="learning-application-from-sdl-to-everyday-experimentation">Learning Application: From SDL to Everyday Experimentation</h3>
 <p>Self-driving lab principles transfer to any domain with structured experimentation. For <a href="../frontier-topics/ai-ecommerce-learning.html">e-commerce</a>, the SDL pattern maps to automated A/B testing platforms: an AI decision engine proposes test variants, the platform executes them with real users, and orchestration software manages traffic allocation and statistical analysis. The key lesson: <strong>let the AI decide what to test next</strong>, not just how to run the test.</p>
 <h2 id="limitations-challenges">Limitations / Challenges</h2>
@@ -615,6 +651,7 @@ loadWishlist();
 <p>[^9]: Yamada, Y. et al. (2025). "AI Scientist v2: Workshop-Level Automated Scientific Discovery." <a href="https://arxiv.org/abs/2504.08066">arXiv:2504.08066</a></p>
 <p>[^10]: Chan, J. et al. (2025). "MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering." <a href="https://arxiv.org/abs/2410.07095">arXiv:2410.07095</a></p>
 <p>[^11]: VanLehn, K. (2025). "The Relative Effectiveness of Human Tutoring, Intelligent Tutoring Systems, and Other Tutoring Systems." <em>Educational Psychologist</em>, 46(4), 197-221. <a href="https://doi.org/10.1080/00461520.2011.611369">doi:10.1080/00461520.2011.611369</a></p>
+<p>[^17]: Patel, V. et al. (2025). "AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation." <a href="https://arxiv.org/abs/2509.25651">arXiv:2509.25651</a></p>
 </main>
 </body>
 </html>

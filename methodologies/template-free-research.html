@@ -643,6 +643,35 @@ Review ───────────── OpenAI o4-mini (cost-efficient re
 <li><strong>Simulation-integrated research</strong>: Template-free systems are being combined with <a href="../frontier-topics/predictive-simulation-learning.html">predictive simulation</a> to test hypotheses in simulated environments before running physical experiments, reducing compute costs by up to 40%[^13].</li>
 <li><strong>E-commerce research applications</strong>: Template-free approaches have been adapted for automated A/B test design in e-commerce — generating novel experimental configurations for pricing strategies and recommendation algorithms without human-specified templates (see <a href="../frontier-topics/ai-ecommerce-learning.html">AI E-Commerce Learning</a>)[^14].</li>
 </ul>
+<h3 id="coral-multi-agent-evolution-for-open-ended-discovery-2026">CORAL: Multi-Agent Evolution for Open-Ended Discovery (2026)</h3>
+<p>CORAL (Qu et al., 2026) represents a paradigm shift in template-free research: rather than a single agent exploring a research space, <strong>multiple long-running agents evolve collaboratively</strong> through shared persistent memory, asynchronous execution, and heartbeat-based interventions[^15].</p>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│                CORAL: MULTI-AGENT EVOLUTION                  │
+│                                                              │
+│  Agent A ──explore──▶ ┌─────────────┐ ◀──reflect── Agent B  │
+│                       │   SHARED     │                       │
+│  Agent C ──discover─▶ │  PERSISTENT  │ ◀──evolve── Agent D   │
+│                       │   MEMORY     │                       │
+│  Agent E ──validate─▶ └─────────────┘ ◀──prune──── Agent F   │
+│                                                              │
+│  Safeguards: isolated workspaces | evaluator separation     │
+│              resource mgmt | session health monitoring       │
+│                                                              │
+│  Results: 3-10× higher improvement rates vs fixed baselines  │
+│           State-of-the-art on 10 open-ended tasks            │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>CORAL's key insight is that rigid control structures (fixed heuristics, hard-coded exploration rules) limit the autonomy of LLM agents. By allowing agents to explore, reflect, and collaborate autonomously — with practical safeguards including isolated workspaces, evaluator separation, and resource management — CORAL achieved state-of-the-art results on 10 tasks with 3–10x higher improvement rates and far fewer evaluations than fixed evolutionary search baselines.</p>
+<p><strong>Learning connection:</strong> CORAL's approach mirrors how research groups function: individual researchers pursue independent lines of inquiry, share findings through lab meetings (persistent memory), and collectively build on each other's discoveries. The framework demonstrates that the same collaborative learning principles that accelerate human research also accelerate AI research.</p>
+<h3 id="ai-supervisor-persistent-research-world-models-2026">AI-Supervisor: Persistent Research World Models (2026)</h3>
+<p>AI-Supervisor (Long, 2026) addresses a key limitation of existing template-free systems: <strong>statelessness</strong>[^16]. Previous systems process papers sequentially and propose ideas without maintaining structured understanding of the research landscape. AI-Supervisor introduces a <strong>Persistent Research World Model</strong> — a continuously evolving Knowledge Graph that captures methods, benchmarks, known limitations, and unexplored gaps.</p>
+<p>The system operates through specialized agents that provide end-to-end research supervision:
+1. <strong>Literature agent</strong>: Reviews papers and updates the knowledge graph
+2. <strong>Gap discovery agent</strong>: Identifies unexplored research directions from graph structure
+3. <strong>Method development agent</strong>: Proposes and implements new approaches
+4. <strong>Evaluation agent</strong>: Tests methods and updates the world model with results
+5. <strong>Writing agent</strong>: Generates manuscripts grounded in the accumulated knowledge</p>
+<p>This connects to <a href="world-models.html">world models</a>: just as world models enable agents to plan by simulating outcomes, the Research World Model enables the AI-Supervisor to plan research by simulating which gaps are most promising to explore.</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="../core-concepts/the-ai-scientist.html">The AI Scientist</a></li>
@@ -673,6 +702,8 @@ Review ───────────── OpenAI o4-mini (cost-efficient re
 <p>[^12]: "From AI for Science to Agentic Science: A Survey on Autonomous Scientific Discovery." (2025). <a href="https://arxiv.org/abs/2508.14111">arXiv:2508.14111</a></p>
 <p>[^13]: Yu, X., Peng, B. &amp; Galley, M. (2025). "Dyna-Mind: Learning to Simulate from Experience for Better AI Agents." <a href="https://arxiv.org/abs/2510.09577">arXiv:2510.09577</a></p>
 <p>[^14]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." <a href="https://arxiv.org/abs/2510.09347">arXiv:2510.09347</a></p>
+<p>[^15]: Qu, A., Zheng, H., Zhou, Z., &amp; Yan, Y. (2026). "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery." MIT &amp; NUS. <a href="https://arxiv.org/abs/2604.01658">arXiv:2604.01658</a></p>
+<p>[^16]: Long, Y. (2026). "AI-Supervisor: Autonomous AI Research Supervision via a Persistent Research World Model." <a href="https://arxiv.org/abs/2603.24402">arXiv:2603.24402</a></p>
 </main>
 </body>
 </html>

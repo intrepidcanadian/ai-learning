@@ -148,6 +148,45 @@ As of 2026, template-free research is the primary mode of The AI Scientist v2 an
 - **Simulation-integrated research**: Template-free systems are being combined with [predictive simulation](../frontier-topics/predictive-simulation-learning.md) to test hypotheses in simulated environments before running physical experiments, reducing compute costs by up to 40%[^13].
 - **E-commerce research applications**: Template-free approaches have been adapted for automated A/B test design in e-commerce — generating novel experimental configurations for pricing strategies and recommendation algorithms without human-specified templates (see [AI E-Commerce Learning](../frontier-topics/ai-ecommerce-learning.md))[^14].
 
+### CORAL: Multi-Agent Evolution for Open-Ended Discovery (2026)
+
+CORAL (Qu et al., 2026) represents a paradigm shift in template-free research: rather than a single agent exploring a research space, **multiple long-running agents evolve collaboratively** through shared persistent memory, asynchronous execution, and heartbeat-based interventions[^15].
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                CORAL: MULTI-AGENT EVOLUTION                  │
+│                                                              │
+│  Agent A ──explore──▶ ┌─────────────┐ ◀──reflect── Agent B  │
+│                       │   SHARED     │                       │
+│  Agent C ──discover─▶ │  PERSISTENT  │ ◀──evolve── Agent D   │
+│                       │   MEMORY     │                       │
+│  Agent E ──validate─▶ └─────────────┘ ◀──prune──── Agent F   │
+│                                                              │
+│  Safeguards: isolated workspaces | evaluator separation     │
+│              resource mgmt | session health monitoring       │
+│                                                              │
+│  Results: 3-10× higher improvement rates vs fixed baselines  │
+│           State-of-the-art on 10 open-ended tasks            │
+└──────────────────────────────────────────────────────────────┘
+```
+
+CORAL's key insight is that rigid control structures (fixed heuristics, hard-coded exploration rules) limit the autonomy of LLM agents. By allowing agents to explore, reflect, and collaborate autonomously — with practical safeguards including isolated workspaces, evaluator separation, and resource management — CORAL achieved state-of-the-art results on 10 tasks with 3–10x higher improvement rates and far fewer evaluations than fixed evolutionary search baselines.
+
+**Learning connection:** CORAL's approach mirrors how research groups function: individual researchers pursue independent lines of inquiry, share findings through lab meetings (persistent memory), and collectively build on each other's discoveries. The framework demonstrates that the same collaborative learning principles that accelerate human research also accelerate AI research.
+
+### AI-Supervisor: Persistent Research World Models (2026)
+
+AI-Supervisor (Long, 2026) addresses a key limitation of existing template-free systems: **statelessness**[^16]. Previous systems process papers sequentially and propose ideas without maintaining structured understanding of the research landscape. AI-Supervisor introduces a **Persistent Research World Model** — a continuously evolving Knowledge Graph that captures methods, benchmarks, known limitations, and unexplored gaps.
+
+The system operates through specialized agents that provide end-to-end research supervision:
+1. **Literature agent**: Reviews papers and updates the knowledge graph
+2. **Gap discovery agent**: Identifies unexplored research directions from graph structure
+3. **Method development agent**: Proposes and implements new approaches
+4. **Evaluation agent**: Tests methods and updates the world model with results
+5. **Writing agent**: Generates manuscripts grounded in the accumulated knowledge
+
+This connects to [world models](world-models.md): just as world models enable agents to plan by simulating outcomes, the Research World Model enables the AI-Supervisor to plan research by simulating which gaps are most promising to explore.
+
 ## See Also
 
 - [The AI Scientist](../core-concepts/the-ai-scientist.md)
@@ -192,3 +231,7 @@ As of 2026, template-free research is the primary mode of The AI Scientist v2 an
 [^13]: Yu, X., Peng, B. & Galley, M. (2025). "Dyna-Mind: Learning to Simulate from Experience for Better AI Agents." [arXiv:2510.09577](https://arxiv.org/abs/2510.09577)
 
 [^14]: Wang, H. et al. (2025). "LLP: LLM-based Product Pricing in E-commerce." [arXiv:2510.09347](https://arxiv.org/abs/2510.09347)
+
+[^15]: Qu, A., Zheng, H., Zhou, Z., & Yan, Y. (2026). "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery." MIT & NUS. [arXiv:2604.01658](https://arxiv.org/abs/2604.01658)
+
+[^16]: Long, Y. (2026). "AI-Supervisor: Autonomous AI Research Supervision via a Persistent Research World Model." [arXiv:2603.24402](https://arxiv.org/abs/2603.24402)

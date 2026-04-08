@@ -1,0 +1,64 @@
+{
+  "session": 20,
+  "date": "2026-04-08",
+  "mode": "quality",
+  "hypothesis": {
+    "strategy": "Improve 3 lowest-scoring articles (code-generation, automated-experiment-design, template-free-research) with 2026 papers, new technical sections, and diagrams",
+    "predicted_delta": "+0.5 composite",
+    "dimensions_targeted": ["sourcing", "depth", "currency"],
+    "reasoning": "code-generation has sourcing=51 (biggest gap in wiki), automated-experiment-design has depth=62 and currency=61, template-free-research has depth=65 and currency=68. Adding 2026 papers with footnotes should move sourcing; new technical sections with diagrams should move depth; 2026 papers should move currency."
+  },
+  "changes": {
+    "articles_improved": [
+      {
+        "article": "code-generation",
+        "category": "tools-platforms",
+        "before": 81.5,
+        "after": 91.7,
+        "delta": 10.2,
+        "additions": [
+          "Self-Improving Code Agents section (SICA, Robeyns et al. 2025)",
+          "Next-Generation Benchmarks 2026 section (FeatureBench, SWE-CI, SWE-EVO)",
+          "Live-SWE-agent self-evolving agents section",
+          "SICA improvement loop diagram",
+          "5 new references with footnotes"
+        ]
+      },
+      {
+        "article": "automated-experiment-design",
+        "category": "methodologies",
+        "before": 81.8,
+        "after": 88.4,
+        "delta": 6.6,
+        "additions": [
+          "AutoLabs multi-agent chemical experimentation section (2025)",
+          "AutoResearch-RL perpetual self-evaluating agents section (2026)",
+          "AutoResearch-RL MDP diagram",
+          "2 new references with footnotes"
+        ]
+      },
+      {
+        "article": "template-free-research",
+        "category": "methodologies",
+        "before": 82.0,
+        "after": 88.2,
+        "delta": 6.2,
+        "additions": [
+          "CORAL multi-agent evolution section (2026)",
+          "AI-Supervisor persistent research world model section (2026)",
+          "CORAL multi-agent architecture diagram",
+          "2 new references with footnotes"
+        ]
+      }
+    ],
+    "new_papers": 9,
+    "new_diagrams": 2,
+    "new_articles": 0
+  },
+  "results": {
+    "composite_before": 86.8,
+    "composite_after": 87.4,
+    "actual_delta": 0.6,
+    "lesson": "code-generation had the largest gain (+10.2) because sourcing was extremely low (51) and adding 5 footnoted refs moved it to 86. Depth is the most responsive dimension when adding entirely new technical sections with diagrams (62→88, 65→89). Currency responds well to 2026 papers (61→76, 68→83)."
+  }
+}
