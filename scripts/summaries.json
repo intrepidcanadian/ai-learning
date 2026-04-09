@@ -1,0 +1,331 @@
+[
+  {
+    "path": "wiki/core-concepts/automated-peer-review.md",
+    "category": "core-concepts",
+    "title": "Automated Peer Review",
+    "summary": "Automated Peer Review refers to AI systems that evaluate the scientific quality of research papers, producing structured reviews with scores, strengths, weaknesses, and accept/reject decisions.",
+    "slug": "automated-peer-review"
+  },
+  {
+    "path": "wiki/core-concepts/automated-scientific-discovery.md",
+    "category": "core-concepts",
+    "title": "Automated Scientific Discovery",
+    "summary": "Automated Scientific Discovery is the use of AI systems to perform one or more stages of the scientific method \u2014 hypothesis generation, experimental design, data collection, analysis, and communication of results \u2014 wi...",
+    "slug": "automated-scientific-discovery"
+  },
+  {
+    "path": "wiki/core-concepts/foundation-models-for-research.md",
+    "category": "core-concepts",
+    "title": "Foundation Models for Research",
+    "summary": "Foundation models -- large-scale pretrained models that can be adapted to a wide range of downstream tasks -- are the backbone of modern AI research automation.",
+    "slug": "foundation-models-for-research"
+  },
+  {
+    "path": "wiki/core-concepts/hallucination-detection.md",
+    "category": "core-concepts",
+    "title": "Hallucination Detection",
+    "summary": "Hallucination detection refers to the set of methods and systems designed to identify when AI models \u2014 particularly large language models (LLMs) \u2014 generate outputs that are factually incorrect, unsupported by their in...",
+    "slug": "hallucination-detection"
+  },
+  {
+    "path": "wiki/core-concepts/knowledge-distillation.md",
+    "category": "core-concepts",
+    "title": "Knowledge Distillation",
+    "summary": "Knowledge distillation is the process of transferring learned capabilities from a large, expensive \"teacher\" model to a smaller, efficient \"student\" model.",
+    "slug": "knowledge-distillation"
+  },
+  {
+    "path": "wiki/core-concepts/retrieval-augmented-generation.md",
+    "category": "core-concepts",
+    "title": "Retrieval-Augmented Generation",
+    "summary": "Retrieval-augmented generation (RAG) is a technique that enhances AI model outputs by retrieving relevant information from external knowledge sources before generating a response.",
+    "slug": "retrieval-augmented-generation"
+  },
+  {
+    "path": "wiki/core-concepts/the-ai-scientist.md",
+    "category": "core-concepts",
+    "title": "The AI Scientist",
+    "summary": "The AI Scientist is the first comprehensive system designed to autonomously conduct the entire machine learning research lifecycle \u2014 from idea generation to peer-reviewed publication.",
+    "slug": "the-ai-scientist"
+  },
+  {
+    "path": "wiki/core-concepts/transfer-learning.md",
+    "category": "core-concepts",
+    "title": "Transfer Learning",
+    "summary": "Transfer learning is the practice of applying knowledge gained from one task, domain, or dataset to improve performance on a different but related task.",
+    "slug": "transfer-learning"
+  },
+  {
+    "path": "wiki/frontier-topics/ai-ecommerce-learning.md",
+    "category": "frontier-topics",
+    "title": "AI for E-Commerce Learning",
+    "summary": "AI for E-Commerce Learning covers how artificial intelligence -- particularly LLM-powered agents -- is transforming online commerce through personalization, autonomous shopping assistance, demand prediction, and suppl...",
+    "slug": "ai-ecommerce-learning"
+  },
+  {
+    "path": "wiki/frontier-topics/ai-safety-in-research.md",
+    "category": "frontier-topics",
+    "title": "AI Safety in Automated Research",
+    "summary": "AI Safety in Automated Research addresses the risks, ethical concerns, and guardrails needed as AI systems increasingly conduct scientific research autonomously.",
+    "slug": "ai-safety-in-research"
+  },
+  {
+    "path": "wiki/frontier-topics/blockchain-ai-optimization.md",
+    "category": "frontier-topics",
+    "title": "Blockchain for AI Optimization",
+    "summary": "Blockchain for AI Optimization explores the intersection of decentralized ledger technology and artificial intelligence -- using blockchain to coordinate, incentivize, verify, and scale AI research and computation.",
+    "slug": "blockchain-ai-optimization"
+  },
+  {
+    "path": "wiki/frontier-topics/cross-cutting-connections.md",
+    "category": "frontier-topics",
+    "title": "Cross-Cutting Connections: Simulation, Recursion, and Commerce",
+    "summary": "This article maps the deep structural connections between three emerging research areas -- predictive simulation learning, recursive self-improvement, and AI for e-commerce learning -- and explains how they collective...",
+    "slug": "cross-cutting-connections"
+  },
+  {
+    "path": "wiki/frontier-topics/e-commerce-applications.md",
+    "category": "frontier-topics",
+    "title": "E-Commerce Applications of AI Learning",
+    "summary": "E-commerce applications of AI learning encompass the rapidly evolving ecosystem of AI systems that learn to optimize online commerce \u2014 from product search and recommendation to dynamic pricing and conversational shopp...",
+    "slug": "e-commerce-applications"
+  },
+  {
+    "path": "wiki/frontier-topics/multi-agent-systems.md",
+    "category": "frontier-topics",
+    "title": "Multi-Agent Systems for AI Learning",
+    "summary": "Multi-agent systems (MAS) in AI learning refer to architectures where multiple specialized AI agents collaborate, debate, or compete to solve problems, conduct research, and teach humans.",
+    "slug": "multi-agent-systems"
+  },
+  {
+    "path": "wiki/frontier-topics/open-ended-discovery.md",
+    "category": "frontier-topics",
+    "title": "Open-Ended Discovery",
+    "summary": "Open-Ended Discovery refers to AI systems that explore without predefined boundaries -- continuously generating novel, increasingly complex artifacts (ideas, code, environments, research) without converging to a fixed...",
+    "slug": "open-ended-discovery"
+  },
+  {
+    "path": "wiki/frontier-topics/predictive-simulation-learning.md",
+    "category": "frontier-topics",
+    "title": "Predictive Learning Through Simulation",
+    "summary": "Predictive Simulation Learning refers to AI systems that build internal models of their environment and learn by simulating outcomes before acting.",
+    "slug": "predictive-simulation-learning"
+  },
+  {
+    "path": "wiki/frontier-topics/recursive-self-improvement.md",
+    "category": "frontier-topics",
+    "title": "Recursive Self-Improvement",
+    "summary": "Recursive Self-Improvement refers to AI systems that iteratively enhance their own capabilities -- improving not just at tasks, but at the process of improvement itself.",
+    "slug": "recursive-self-improvement"
+  },
+  {
+    "path": "wiki/frontier-topics/scaling-laws-research.md",
+    "category": "frontier-topics",
+    "title": "Scaling Laws for Research Automation",
+    "summary": "Scaling Laws for Research Automation examines how the quality and quantity of AI-generated research output changes as we scale compute, model capability, data, and system complexity.",
+    "slug": "scaling-laws-research"
+  },
+  {
+    "path": "wiki/methodologies/active-learning.md",
+    "category": "methodologies",
+    "title": "Active Learning",
+    "summary": "Active learning is a machine learning paradigm where the model strategically selects which data points to learn from, rather than passively consuming a pre-labeled dataset.",
+    "slug": "active-learning"
+  },
+  {
+    "path": "wiki/methodologies/agentic-tree-search.md",
+    "category": "methodologies",
+    "title": "Agentic Tree Search",
+    "summary": "Agentic Tree Search is an experiment exploration strategy used by The AI Scientist (template-free mode) to systematically explore a tree of experimental directions, using extra test-time compute to find better researc...",
+    "slug": "agentic-tree-search"
+  },
+  {
+    "path": "wiki/methodologies/applications-for-real-world-learning.md",
+    "category": "methodologies",
+    "title": "Applications for Real-World Learning",
+    "summary": "Applications for real-world learning encompasses the design and deployment of AI systems that help humans learn skills, concepts, and competencies applicable to real-life contexts \u2014 from professional training and scie...",
+    "slug": "applications-for-real-world-learning"
+  },
+  {
+    "path": "wiki/methodologies/automated-experiment-design.md",
+    "category": "methodologies",
+    "title": "Automated Experiment Design",
+    "summary": "Automated Experiment Design refers to AI systems that plan, implement, execute, and evaluate scientific experiments without human intervention.",
+    "slug": "automated-experiment-design"
+  },
+  {
+    "path": "wiki/methodologies/computational-cost.md",
+    "category": "methodologies",
+    "title": "Computational Cost",
+    "summary": "Computational cost refers to the resources \u2014 compute, energy, memory, and time \u2014 required to train, deploy, and run AI systems.",
+    "slug": "computational-cost"
+  },
+  {
+    "path": "wiki/methodologies/curriculum-learning.md",
+    "category": "methodologies",
+    "title": "Curriculum Learning",
+    "summary": "Curriculum learning is a training strategy where an AI system learns from examples arranged in a meaningful order \u2014 typically from easy to hard \u2014 rather than randomly shuffled data.",
+    "slug": "curriculum-learning"
+  },
+  {
+    "path": "wiki/methodologies/domain-specificity.md",
+    "category": "methodologies",
+    "title": "Domain Specificity",
+    "summary": "Domain specificity refers to the challenge and practice of adapting general-purpose AI models to perform effectively within specialized knowledge domains \u2014 from medicine and law to scientific research and e-commerce.",
+    "slug": "domain-specificity"
+  },
+  {
+    "path": "wiki/methodologies/evaluation-methodology.md",
+    "category": "methodologies",
+    "title": "Evaluation Methodology",
+    "summary": "Evaluation methodology encompasses the frameworks, benchmarks, metrics, and practices used to assess AI system performance, reliability, and safety.",
+    "slug": "evaluation-methodology"
+  },
+  {
+    "path": "wiki/methodologies/inference-optimization.md",
+    "category": "methodologies",
+    "title": "Inference Optimization",
+    "summary": "Inference optimization is the set of techniques that make AI model inference faster, cheaper, and more memory-efficient without significantly degrading output quality.",
+    "slug": "inference-optimization"
+  },
+  {
+    "path": "wiki/methodologies/interpretability.md",
+    "category": "methodologies",
+    "title": "Interpretability",
+    "summary": "Interpretability (also called mechanistic interpretability) is the field of research dedicated to understanding how and why neural networks produce their outputs.",
+    "slug": "interpretability"
+  },
+  {
+    "path": "wiki/methodologies/prompt-engineering.md",
+    "category": "methodologies",
+    "title": "Prompt Engineering",
+    "summary": "Prompt engineering is the practice of designing, optimizing, and automating the natural language instructions given to AI models to elicit desired behaviors.",
+    "slug": "prompt-engineering"
+  },
+  {
+    "path": "wiki/methodologies/synthetic-data-generation.md",
+    "category": "methodologies",
+    "title": "Synthetic Data Generation",
+    "summary": "Synthetic data generation is the practice of using AI models to create artificial training data that mimics the statistical properties of real data.",
+    "slug": "synthetic-data-generation"
+  },
+  {
+    "path": "wiki/methodologies/template-free-research.md",
+    "category": "methodologies",
+    "title": "Template-Free Research",
+    "summary": "Template-Free Research is an operating mode of The AI Scientist that conducts open-ended scientific exploration without requiring human-provided code templates .",
+    "slug": "template-free-research"
+  },
+  {
+    "path": "wiki/methodologies/test-time-compute-scaling.md",
+    "category": "methodologies",
+    "title": "Test-Time Compute Scaling",
+    "summary": "Test-time compute scaling is the practice of allocating additional computation during inference (rather than training) to improve AI model performance on individual problems.",
+    "slug": "test-time-compute-scaling"
+  },
+  {
+    "path": "wiki/methodologies/test-time-compute.md",
+    "category": "methodologies",
+    "title": "Test-Time Compute Scaling",
+    "summary": "Test-time compute scaling (also called inference-time scaling) is the practice of allocating additional computational resources during inference \u2014 not training \u2014 to improve an AI model's reasoning, accuracy, and probl...",
+    "slug": "test-time-compute"
+  },
+  {
+    "path": "wiki/methodologies/vlm-integration.md",
+    "category": "methodologies",
+    "title": "Vision-Language Model Integration",
+    "summary": "Vision-Language Model (VLM) Integration refers to the use of multi-modal AI models that process both images and text within automated research pipelines.",
+    "slug": "vlm-integration"
+  },
+  {
+    "path": "wiki/methodologies/wiki-quality-benchmarking.md",
+    "category": "methodologies",
+    "title": "Wiki Quality Benchmarking",
+    "summary": "This wiki uses an automated benchmarking system to measure and improve article quality over time.",
+    "slug": "wiki-quality-benchmarking"
+  },
+  {
+    "path": "wiki/methodologies/world-models.md",
+    "category": "methodologies",
+    "title": "World Models",
+    "summary": "A world model is a learned internal representation that allows an AI agent to predict how the environment will evolve in response to actions \u2014 essentially an \"imagination engine\" that enables planning, counterfactual...",
+    "slug": "world-models"
+  },
+  {
+    "path": "wiki/research-sources/benchmark-trend.md",
+    "category": "research-sources",
+    "title": "Quality Benchmark",
+    "summary": "Automated quality scores for the wiki's articles across all categories.",
+    "slug": "benchmark-trend"
+  },
+  {
+    "path": "wiki/research-sources/institutions-and-labs.md",
+    "category": "research-sources",
+    "title": "Research Institutions and Labs",
+    "summary": "The landscape of AI research automation spans academic labs, industry research divisions, infrastructure providers, independent researchers, and safety organizations.",
+    "slug": "institutions-and-labs"
+  },
+  {
+    "path": "wiki/research-sources/key-papers.md",
+    "category": "research-sources",
+    "title": "Key Papers and References",
+    "summary": "This article is a curated, annotated reading list of the most important papers for understanding AI research automation \u2014 from foundational theoretical work to cutting-edge systems.",
+    "slug": "key-papers"
+  },
+  {
+    "path": "wiki/research-sources/latest-papers.md",
+    "category": "research-sources",
+    "title": "Latest Papers",
+    "summary": "Auto-updated feed of recent AI research relevant to research automation, foundation models, agentic systems, and related topics.",
+    "slug": "latest-papers"
+  },
+  {
+    "path": "wiki/research-sources/tracking-ai-research.md",
+    "category": "research-sources",
+    "title": "Tracking AI Research",
+    "summary": "Tracking AI research is the practice of systematically monitoring, filtering, and synthesizing the flood of new publications, preprints, and code releases across artificial intelligence.",
+    "slug": "tracking-ai-research"
+  },
+  {
+    "path": "wiki/tools-platforms/aide.md",
+    "category": "tools-platforms",
+    "title": "AIDE: AI-Driven Exploration",
+    "summary": "AIDE (AI-Driven Exploration) is a system for automated machine learning experimentation that explores the space of possible solutions through code generation.",
+    "slug": "aide"
+  },
+  {
+    "path": "wiki/tools-platforms/aider.md",
+    "category": "tools-platforms",
+    "title": "Aider",
+    "summary": "Aider is an open-source AI coding assistant designed to implement features, fix bugs, and refactor code within existing repositories.",
+    "slug": "aider"
+  },
+  {
+    "path": "wiki/tools-platforms/autoresearch.md",
+    "category": "tools-platforms",
+    "title": "Autoresearch (Karpathy)",
+    "summary": "Autoresearch is a minimal framework by Andrej Karpathy that enables AI coding agents (Claude, Codex, etc.) to conduct fully autonomous machine learning research on a single GPU, without human supervision.",
+    "slug": "autoresearch"
+  },
+  {
+    "path": "wiki/tools-platforms/code-generation.md",
+    "category": "tools-platforms",
+    "title": "Code Generation",
+    "summary": "Code generation refers to AI systems that automatically produce executable source code from natural language descriptions, specifications, or other high-level inputs.",
+    "slug": "code-generation"
+  },
+  {
+    "path": "wiki/tools-platforms/huggingface-papers-api.md",
+    "category": "tools-platforms",
+    "title": "Hugging Face Papers API",
+    "summary": "The Hugging Face Papers API provides free, public, no-authentication-required access to AI/ML research papers curated daily on huggingface.co.",
+    "slug": "huggingface-papers-api"
+  },
+  {
+    "path": "wiki/tools-platforms/semantic-scholar-api.md",
+    "category": "tools-platforms",
+    "title": "Semantic Scholar API",
+    "summary": "Semantic Scholar is a free, AI-powered academic search engine developed by the Allen Institute for AI (AI2).",
+    "slug": "semantic-scholar-api"
+  }
+]

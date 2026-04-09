@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary & Index - AI Learning Wiki</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f8f9fb;
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #16213e;
+    color: #c4c9d4;
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #1a1a4e;
+    margin-bottom: 12px;
+}
+.sidebar-header h1 {
+    font-size: 16px;
+    color: #e8eaf0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar-header a {
+    color: #e8eaf0;
+    text-decoration: none;
+}
+.sidebar-header p {
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 4px;
+}
+.sidebar details {
+    margin-bottom: 4px;
+}
+.sidebar summary {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.sidebar summary::-webkit-details-marker { display: none; }
+.sidebar summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+.sidebar details[open] summary::before {
+    transform: rotate(90deg);
+}
+.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 36px;
+    color: #a8b2c1;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+.sidebar a:hover {
+    color: #e8eaf0;
+    background: rgba(255,255,255,0.04);
+    border-left-color: #4a6fa5;
+}
+.sidebar a[aria-current="page"] {
+    color: #fff;
+    background: rgba(74,111,165,0.18);
+    border-left-color: #5b9df5;
+    font-weight: 600;
+}
+.wishlist-panel {
+    border-top: 1px solid #1a1a4e;
+    margin-top: 12px;
+    padding: 12px 20px;
+}
+.wishlist-panel h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #7b8794;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-stats {
+    font-size: 11px;
+    color: #a8b2c1;
+    margin-bottom: 8px;
+}
+.wishlist-panel .wl-bar {
+    height: 4px;
+    background: #2a2a4e;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.wishlist-panel .wl-bar-fill {
+    height: 100%;
+    background: #5b9df5;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.wishlist-panel .wl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #a8b2c1;
+}
+.wishlist-panel .wl-item.written {
+    color: #4ade80;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.wishlist-panel .wl-item button {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    opacity: 0.5;
+}
+.wishlist-panel .wl-item button:hover {
+    opacity: 1;
+}
+.wishlist-panel .wl-add {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.wishlist-panel .wl-add input {
+    flex: 1;
+    background: #1a1a3e;
+    border: 1px solid #2a2a5e;
+    border-radius: 4px;
+    color: #e8eaf0;
+    padding: 4px 8px;
+    font-size: 12px;
+    outline: none;
+}
+.wishlist-panel .wl-add input:focus {
+    border-color: #5b9df5;
+}
+.wishlist-panel .wl-add button {
+    background: #4a6fa5;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wishlist-panel .wl-add button:hover {
+    background: #5b9df5;
+}
+.wishlist-panel .wl-offline {
+    font-size: 11px;
+    color: #f59e0b;
+    margin-top: 6px;
+    display: none;
+}
+.content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 1060px;
+}
+.breadcrumb {
+    font-size: 12px;
+    color: #7b8794;
+    margin-bottom: 24px;
+}
+.breadcrumb a { color: #4a6fa5; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.content h1 {
+    font-size: 32px;
+    color: #16213e;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e6ed;
+}
+.content h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e6ed;
+}
+.content h3 {
+    font-size: 17px;
+    color: #2d3748;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+.content p { margin-bottom: 14px; }
+.content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+}
+.content a:hover {
+    color: #1a4971;
+    border-bottom-color: #2b6cb0;
+}
+.content ul, .content ol {
+    margin: 0 0 16px 24px;
+}
+.content li { margin-bottom: 4px; }
+.content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+.content th {
+    background: #edf2f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid #d2d8e2;
+}
+.content td {
+    padding: 8px 14px;
+    border: 1px solid #e2e6ed;
+    vertical-align: top;
+}
+.content tr:nth-child(even) { background: #f7fafc; }
+.content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2d3748;
+}
+.content pre {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    line-height: 1.5;
+}
+.content pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.content blockquote {
+    border-left: 4px solid #4a6fa5;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: #edf2f7;
+    color: #4a5568;
+}
+.content strong { color: #1a1a2e; }
+.content hr {
+    border: none;
+    border-top: 1px solid #e2e6ed;
+    margin: 32px 0;
+}
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    background: #16213e;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 860px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+    .sidebar.open { transform: translateX(0); }
+    .content { margin-left: 0; padding: 60px 20px 60px; }
+    .hamburger { display: block; }
+}
+
+.gl-header { margin-bottom: 24px; }
+.gl-subtitle { color: #7b8794; font-size: 14px; margin-top: 4px; }
+.gl-search {
+    width: 100%; padding: 10px 16px; font-size: 15px;
+    border: 2px solid #e2e6ed; border-radius: 8px;
+    margin-top: 16px; outline: none;
+    font-family: inherit;
+}
+.gl-search:focus { border-color: #4a6fa5; }
+.gl-letters {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 16px 0 24px; padding: 12px 0;
+    border-bottom: 1px solid #e2e6ed;
+}
+.gl-letter-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 6px;
+    background: #edf2f7; color: #2d3748; font-weight: 600;
+    font-size: 13px; text-decoration: none; border: none;
+}
+.gl-letter-link:hover { background: #4a6fa5; color: #fff; }
+.gl-letter {
+    font-size: 18px; color: #4a6fa5; margin: 24px 0 8px;
+    padding-bottom: 4px; border-bottom: 2px solid #4a6fa5;
+    display: inline-block;
+}
+.gl-entry {
+    padding: 6px 0; font-size: 14px;
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.gl-term {
+    font-weight: 600; color: #2b6cb0; text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+.gl-term:hover { border-bottom-color: #2b6cb0; }
+.gl-defn { color: #4a5568; flex: 1; min-width: 200px; }
+.gl-source {
+    font-size: 11px; color: #7b8794; background: #f1f5f9;
+    padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<nav class="sidebar">
+<div class="sidebar-header">
+    <h1><a href="index.html">AI Learning Wiki</a></h1>
+    <p>AI Research Automation</p>
+    <p style="margin-top:8px"><a href="glossary.html" style="color:#5b9df5;font-size:12px;text-decoration:none;border-bottom:none">Glossary &amp; Index</a></p>
+</div>
+<details open><summary>Core Concepts</summary>
+<a href="core-concepts/automated-peer-review.html">Automated Peer Review</a>
+<a href="core-concepts/automated-scientific-discovery.html">Automated Scientific Discovery</a>
+<a href="core-concepts/foundation-models-for-research.html">Foundation Models for Research</a>
+<a href="core-concepts/hallucination-detection.html">Hallucination Detection</a>
+<a href="core-concepts/knowledge-distillation.html">Knowledge Distillation</a>
+<a href="core-concepts/retrieval-augmented-generation.html">Retrieval-Augmented Generation</a>
+<a href="core-concepts/the-ai-scientist.html">The AI Scientist</a>
+<a href="core-concepts/transfer-learning.html">Transfer Learning</a>
+</details>
+<details open><summary>Tools & Platforms</summary>
+<a href="tools-platforms/aide.html">AIDE: AI-Driven Exploration</a>
+<a href="tools-platforms/aider.html">Aider</a>
+<a href="tools-platforms/autoresearch.html">Autoresearch (Karpathy)</a>
+<a href="tools-platforms/code-generation.html">Code Generation</a>
+<a href="tools-platforms/huggingface-papers-api.html">Hugging Face Papers API</a>
+<a href="tools-platforms/semantic-scholar-api.html">Semantic Scholar API</a>
+</details>
+<details open><summary>Methodologies</summary>
+<a href="methodologies/active-learning.html">Active Learning</a>
+<a href="methodologies/agentic-tree-search.html">Agentic Tree Search</a>
+<a href="methodologies/applications-for-real-world-learning.html">Applications for Real-World Learning</a>
+<a href="methodologies/automated-experiment-design.html">Automated Experiment Design</a>
+<a href="methodologies/computational-cost.html">Computational Cost</a>
+<a href="methodologies/curriculum-learning.html">Curriculum Learning</a>
+<a href="methodologies/domain-specificity.html">Domain Specificity</a>
+<a href="methodologies/evaluation-methodology.html">Evaluation Methodology</a>
+<a href="methodologies/inference-optimization.html">Inference Optimization</a>
+<a href="methodologies/interpretability.html">Interpretability</a>
+<a href="methodologies/prompt-engineering.html">Prompt Engineering</a>
+<a href="methodologies/synthetic-data-generation.html">Synthetic Data Generation</a>
+<a href="methodologies/template-free-research.html">Template-Free Research</a>
+<a href="methodologies/test-time-compute-scaling.html">Test-Time Compute Scaling</a>
+<a href="methodologies/test-time-compute.html">Test-Time Compute Scaling</a>
+<a href="methodologies/vlm-integration.html">Vision-Language Model Integration</a>
+<a href="methodologies/wiki-quality-benchmarking.html">Wiki Quality Benchmarking</a>
+<a href="methodologies/world-models.html">World Models</a>
+</details>
+<details open><summary>Frontier Topics</summary>
+<a href="frontier-topics/ai-ecommerce-learning.html">AI for E-Commerce Learning</a>
+<a href="frontier-topics/ai-safety-in-research.html">AI Safety in Automated Research</a>
+<a href="frontier-topics/blockchain-ai-optimization.html">Blockchain for AI Optimization</a>
+<a href="frontier-topics/cross-cutting-connections.html">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a>
+<a href="frontier-topics/e-commerce-applications.html">E-Commerce Applications of AI Learning</a>
+<a href="frontier-topics/multi-agent-systems.html">Multi-Agent Systems for AI Learning</a>
+<a href="frontier-topics/open-ended-discovery.html">Open-Ended Discovery</a>
+<a href="frontier-topics/predictive-simulation-learning.html">Predictive Learning Through Simulation</a>
+<a href="frontier-topics/recursive-self-improvement.html">Recursive Self-Improvement</a>
+<a href="frontier-topics/scaling-laws-research.html">Scaling Laws for Research Automation</a>
+</details>
+<details open><summary>Research Sources</summary>
+<a href="research-sources/benchmark-trend.html">Quality Benchmark</a>
+<a href="research-sources/institutions-and-labs.html">Research Institutions and Labs</a>
+<a href="research-sources/key-papers.html">Key Papers and References</a>
+<a href="research-sources/latest-papers.html">Latest Papers</a>
+<a href="research-sources/tracking-ai-research.html">Tracking AI Research</a>
+</details>
+
+<div class="wishlist-panel" id="wishlistPanel">
+    <h3>Topic Wishlist</h3>
+    <div class="wl-stats" id="wlStats">Loading...</div>
+    <div class="wl-bar"><div class="wl-bar-fill" id="wlBarFill" style="width:0%"></div></div>
+    <div id="wlItems"></div>
+    <div class="wl-add">
+        <input type="text" id="wlInput" placeholder="new-topic-name" />
+        <button onclick="addWishlistTopic()">Add</button>
+    </div>
+    <div class="wl-offline" id="wlOffline">Run python3 build.py --serve for live editing</div>
+</div>
+</nav>
+<script>
+const API = '/api/wishlist';
+let wlLive = false;
+
+async function loadWishlist() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('not served');
+        const items = await res.json();
+        wlLive = true;
+        renderWishlist(items);
+    } catch(e) {
+        wlLive = false;
+        document.getElementById('wlOffline').style.display = 'block';
+        document.getElementById('wlStats').textContent = 'Offline mode';
+    }
+}
+
+function renderWishlist(items) {
+    const total = items.length;
+    const written = items.filter(i => i.written).length;
+    const pct = total > 0 ? Math.round(written / total * 100) : 100;
+
+    document.getElementById('wlStats').textContent =
+        total > 0 ? `${written}/${total} written (${pct}%)` : 'No topics yet';
+    document.getElementById('wlBarFill').style.width = pct + '%';
+
+    const container = document.getElementById('wlItems');
+    container.innerHTML = items.map(i => `
+        <div class="wl-item ${i.written ? 'written' : ''}">
+            <span>${i.written ? '\u2713' : '\u25CB'} ${i.topic}</span>
+            <button onclick="removeWishlistTopic('${i.topic}')" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+async function addWishlistTopic() {
+    const input = document.getElementById('wlInput');
+    const topic = input.value.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!topic || !wlLive) return;
+    input.value = '';
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+async function removeWishlistTopic(topic) {
+    if (!wlLive) return;
+    const res = await fetch(API, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({topic})
+    });
+    const items = await res.json();
+    renderWishlist(items);
+}
+
+document.getElementById('wlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addWishlistTopic();
+});
+
+loadWishlist();
+</script>
+<main class="content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Glossary</div>
+
+<div class="gl-header">
+<h1>Glossary & Index</h1>
+<p class="gl-subtitle">445 terms across 47 articles</p>
+<input type="text" id="glSearch" class="gl-search" placeholder="Search terms..." autofocus />
+</div>
+
+<div class="gl-letters"><a href="#letter-A" class="gl-letter-link">A</a> <a href="#letter-B" class="gl-letter-link">B</a> <a href="#letter-C" class="gl-letter-link">C</a> <a href="#letter-D" class="gl-letter-link">D</a> <a href="#letter-E" class="gl-letter-link">E</a> <a href="#letter-F" class="gl-letter-link">F</a> <a href="#letter-G" class="gl-letter-link">G</a> <a href="#letter-H" class="gl-letter-link">H</a> <a href="#letter-I" class="gl-letter-link">I</a> <a href="#letter-K" class="gl-letter-link">K</a> <a href="#letter-L" class="gl-letter-link">L</a> <a href="#letter-M" class="gl-letter-link">M</a> <a href="#letter-N" class="gl-letter-link">N</a> <a href="#letter-O" class="gl-letter-link">O</a> <a href="#letter-P" class="gl-letter-link">P</a> <a href="#letter-Q" class="gl-letter-link">Q</a> <a href="#letter-R" class="gl-letter-link">R</a> <a href="#letter-S" class="gl-letter-link">S</a> <a href="#letter-T" class="gl-letter-link">T</a> <a href="#letter-U" class="gl-letter-link">U</a> <a href="#letter-V" class="gl-letter-link">V</a> <a href="#letter-W" class="gl-letter-link">W</a> <a href="#letter-Y" class="gl-letter-link">Y</a></div>
+
+<div id="glEntries">
+<div class="gl-group" id="letter-A">
+<h2 class="gl-letter">A</h2>
+<div class="gl-entry" data-term="academic graph analytics and ai features"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Academic Graph Analytics and AI Features</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="active learning"><a href="methodologies/active-learning.html" class="gl-term">Active Learning</a><span class="gl-defn"> — Active learning is a machine learning paradigm where the model strategically selects which data points to learn from, rather than passively consuming a pre-labeled dataset.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="ad performance simulation: predicting roi before spending"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Ad Performance Simulation: Predicting ROI Before Spending</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="adversarial simulation: dark patterns and agent vulnerability"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Adversarial Simulation: Dark Patterns and Agent Vulnerability</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="agent world model (awm): infinite synthetic environments for agent training"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Agent World Model (AWM): Infinite Synthetic Environments for Agent Training</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="agentic ai and self-improvement"><a href="research-sources/key-papers.html" class="gl-term">Agentic AI and self-improvement</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="agentic ai workflows in education: from observation to orchestration"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Agentic AI Workflows in Education: From Observation to Orchestration</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="agentic code generation"><a href="tools-platforms/code-generation.html" class="gl-term">Agentic code generation</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="agentic markets are volatile: updated aces findings on market instability"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Agentic Markets Are Volatile: Updated ACES Findings on Market Instability</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="agentic patterns"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Agentic Patterns</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="agentic tree search"><a href="methodologies/agentic-tree-search.html" class="gl-term">Agentic Tree Search</a><span class="gl-defn"> — Agentic Tree Search is an experiment exploration strategy used by The AI Scientist (template-free mode) to systematically explore a tree of experimental directions, using extra test-time compute to...</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="agenttutor: multi-turn interactive teaching"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">AgentTutor: Multi-Turn Interactive Teaching</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="ai for e-commerce learning"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">AI for E-Commerce Learning</a><span class="gl-defn"> — AI for E-Commerce Learning covers how artificial intelligence -- particularly LLM-powered agents -- is transforming online commerce through personalization, autonomous shopping assistance, demand p...</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="ai for recommendation and personalization"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">AI for Recommendation and Personalization</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="ai research automation leaders"><a href="research-sources/institutions-and-labs.html" class="gl-term">AI Research Automation Leaders</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="ai safety in automated research"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">AI Safety in Automated Research</a><span class="gl-defn"> — AI Safety in Automated Research addresses the risks, ethical concerns, and guardrails needed as AI systems increasingly conduct scientific research autonomously.</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="ai safety organizations"><a href="research-sources/institutions-and-labs.html" class="gl-term">AI Safety Organizations</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="ai-agent school: dual memory for educational simulation"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">AI-Agent School: Dual Memory for Educational Simulation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="ai-powered dynamic pricing: the lm-tree agent"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">AI-Powered Dynamic Pricing: The LM-Tree Agent</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="aide"><a href="tools-platforms/aide.html" class="gl-term">AIDE</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="aide: ai-driven exploration"><a href="tools-platforms/aide.html" class="gl-term">AIDE: AI-Driven Exploration</a><span class="gl-defn"> — AIDE (AI-Driven Exploration) is a system for automated machine learning experimentation that explores the space of possible solutions through code generation.</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="aider"><a href="tools-platforms/aider.html" class="gl-term">Aider</a><span class="gl-defn"> — Aider is an open-source AI coding assistant designed to implement features, fix bugs, and refactor code within existing repositories.</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="akash"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Akash</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="api base url:"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">API Base URL:</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="api docs:"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">API Docs:</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="apis for programmatic access"><a href="research-sources/tracking-ai-research.html" class="gl-term">APIs for Programmatic Access</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="applications for real-world learning"><a href="tools-platforms/autoresearch.html" class="gl-term">Applications for Real-World Learning</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="approaches"><a href="methodologies/automated-experiment-design.html" class="gl-term">Approaches</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="architecture"><a href="tools-platforms/autoresearch.html" class="gl-term">Architecture</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="architecture: blockchain-enhanced ai research pipeline"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Architecture: Blockchain-Enhanced AI Research Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="automated experiment design"><a href="methodologies/automated-experiment-design.html" class="gl-term">Automated Experiment Design</a><span class="gl-defn"> — Automated Experiment Design refers to AI systems that plan, implement, execute, and evaluate scientific experiments without human intervention.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="automated peer review"><a href="core-concepts/automated-peer-review.html" class="gl-term">Automated Peer Review</a><span class="gl-defn"> — Automated Peer Review refers to AI systems that evaluate the scientific quality of research papers, producing structured reviews with scores, strengths, weaknesses, and accept/reject decisions.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="automated review as a learning tool"><a href="core-concepts/automated-peer-review.html" class="gl-term">Automated Review as a Learning Tool</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="automated scientific discovery"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Automated Scientific Discovery</a><span class="gl-defn"> — Automated Scientific Discovery is the use of AI systems to perform one or more stages of the scientific method — hypothesis generation, experimental design, data collection, analysis, and communica...</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="automated scientific review."><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">Automated scientific review.</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="autoresearch"><a href="tools-platforms/autoresearch.html" class="gl-term">Autoresearch</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="autoresearch (karpathy)"><a href="tools-platforms/autoresearch.html" class="gl-term">Autoresearch (Karpathy)</a><span class="gl-defn"> — Autoresearch is a minimal framework by Andrej Karpathy that enables AI coding agents (Claude, Codex, etc.) to conduct fully autonomous machine learning research on a single GPU, without human super...</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="autoworld: self-supervised world models at scale"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">AutoWorld: Self-Supervised World Models at Scale</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-B">
+<h2 class="gl-letter">B</h2>
+<div class="gl-entry" data-term="background / historical context"><a href="research-sources/institutions-and-labs.html" class="gl-term">Background / Historical Context</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="base url:"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Base URL:</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="bayesian optimization"><a href="methodologies/automated-experiment-design.html" class="gl-term">Bayesian optimization</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="benchmark saturation"><a href="methodologies/evaluation-methodology.html" class="gl-term">Benchmark saturation</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="benchmarks and evaluation"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Benchmarks and Evaluation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="beyond the ai scientist"><a href="core-concepts/automated-peer-review.html" class="gl-term">Beyond The AI Scientist</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="blockchain for ai optimization"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Blockchain for AI Optimization</a><span class="gl-defn"> — Blockchain for AI Optimization explores the intersection of decentralized ledger technology and artificial intelligence -- using blockchain to coordinate, incentivize, verify, and scale AI research...</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="bug fixing"><a href="tools-platforms/aider.html" class="gl-term">Bug fixing</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="building your own research tracker"><a href="research-sources/tracking-ai-research.html" class="gl-term">Building Your Own Research Tracker</a><span class="gl-source">Research Sources</span></div>
+</div>
+<div class="gl-group" id="letter-C">
+<h2 class="gl-letter">C</h2>
+<div class="gl-entry" data-term="capability vs. accessibility"><a href="methodologies/computational-cost.html" class="gl-term">Capability vs. accessibility</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="challenges"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Challenges</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="chinchilla scaling laws"><a href="methodologies/computational-cost.html" class="gl-term">Chinchilla scaling laws</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="citation laundering"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Citation laundering</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="clawarena: belief revision in evolving information environments"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">ClawArena: Belief Revision in Evolving Information Environments</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="code generation"><a href="tools-platforms/code-generation.html" class="gl-term">Code Generation</a><span class="gl-defn"> — Code generation refers to AI systems that automatically produce executable source code from natural language descriptions, specifications, or other high-level inputs.</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="code refactoring"><a href="tools-platforms/aider.html" class="gl-term">Code refactoring</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="code world models: predicting execution before running"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Code World Models: Predicting Execution Before Running</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="code-gen: agentic educational content generation with human-in-the-loop"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">CODE-GEN: Agentic Educational Content Generation with Human-in-the-Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="combined coverage"><a href="research-sources/benchmark-trend.html" class="gl-term">Combined Coverage</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="common design patterns"><a href="methodologies/automated-experiment-design.html" class="gl-term">Common Design Patterns</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="community"><a href="tools-platforms/autoresearch.html" class="gl-term">Community</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="companion tools"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Companion Tools</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="comparison with huggingface papers api"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Comparison with HuggingFace Papers API</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="comparison with linear experimentation"><a href="methodologies/agentic-tree-search.html" class="gl-term">Comparison with Linear Experimentation</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="comparison with other coding tools"><a href="tools-platforms/aider.html" class="gl-term">Comparison with Other Coding Tools</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="comparison with other research apis"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Comparison with Other Research APIs</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="comparison with the ai scientist"><a href="tools-platforms/autoresearch.html" class="gl-term">Comparison with The AI Scientist</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="comprehensive its review: what 15 years of intelligent tutoring reveals"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Comprehensive ITS Review: What 15 Years of Intelligent Tutoring Reveals</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="computational cost"><a href="methodologies/computational-cost.html" class="gl-term">Computational Cost</a><span class="gl-defn"> — Computational cost refers to the resources — compute, energy, memory, and time — required to train, deploy, and run AI systems.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="compute"><a href="methodologies/inference-optimization.html" class="gl-term">Compute</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="conference proceedings as sources"><a href="research-sources/tracking-ai-research.html" class="gl-term">Conference Proceedings as Sources</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="connection 10: compact memory bridges recursion and commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 10: Compact Memory Bridges Recursion and Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 11: self-distillation bridges all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 11: Self-Distillation Bridges All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 12: overtraining + test-time compute redefines the learning budget"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 12: Overtraining + Test-Time Compute Redefines the Learning Budget</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 13: code world models extend simulation to software domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 13: Code World Models Extend Simulation to Software Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 14: from skill chunking to compositional learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 14: From Skill Chunking to Compositional Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 15: closing the loop -- llm tutors that optimize for learning outcomes"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 15: Closing the Loop -- LLM Tutors That Optimize for Learning Outcomes</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 16: imagination as a universal self-improvement mechanism"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 16: Imagination as a Universal Self-Improvement Mechanism</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 17: memory architecture as the bridge between session and lifetime learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 17: Memory Architecture as the Bridge Between Session and Lifetime Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 18: synthetic environments as universal training grounds"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 18: Synthetic Environments as Universal Training Grounds</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 19: scaffolded withdrawal as a universal learning principle"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 19: Scaffolded Withdrawal as a Universal Learning Principle</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 1: simulation enables safe recursion"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 1: Simulation Enables Safe Recursion</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 20: the complete scaffolding stack -- from hints to simulation"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 20: The Complete Scaffolding Stack -- From Hints to Simulation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 21: population-based improvement outperforms individual recursion"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 21: Population-Based Improvement Outperforms Individual Recursion</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 22: ai literacy as a prerequisite for ai-mediated commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 22: AI Literacy as a Prerequisite for AI-Mediated Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 23: the variance inequality unifies all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 23: The Variance Inequality Unifies All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 24: social world models bridge simulation and commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 24: Social World Models Bridge Simulation and Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 25: empirical validation -- the rct evidence"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 25: Empirical Validation -- The RCT Evidence</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 26: metric validity bridges evaluation across all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 26: Metric Validity Bridges Evaluation Across All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 27: full-stack ai self-improvement reaches all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 27: Full-Stack AI Self-Improvement Reaches All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 28: embodied world models complete the observation-to-action pipeline"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 28: Embodied World Models Complete the Observation-to-Action Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 29: the dreamer-jepa convergence creates a unified simulation-recursion stack"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 29: The Dreamer-JEPA Convergence Creates a Unified Simulation-Recursion Stack</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 2: e-commerce as a natural lab for ai learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 2: E-Commerce as a Natural Lab for AI Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 30: predict-then-verify as a universal learning paradigm"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 30: Predict-Then-Verify as a Universal Learning Paradigm</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 31: guided exploration bridges policy learning and simulation"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 31: Guided Exploration Bridges Policy Learning and Simulation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 32: adversarial robustness as the missing dimension of simulation fidelity"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 32: Adversarial Robustness as the Missing Dimension of Simulation Fidelity</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 33: uncertainty-aware recursion completes the self-improvement stack"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 33: Uncertainty-Aware Recursion Completes the Self-Improvement Stack</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 34: learning architecture as a cross-domain bridge"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 34: Learning Architecture as a Cross-Domain Bridge</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 35: the oecd scaffolding-dependency principle unifies design across all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 35: The OECD Scaffolding-Dependency Principle Unifies Design Across All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 36: game worlds as the next educational simulation frontier"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 36: Game Worlds as the Next Educational Simulation Frontier</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 37: zero-data self-evolution closes the bootstrap gap"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 37: Zero-Data Self-Evolution Closes the Bootstrap Gap</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 38: open-source platforms bridge theory and practice"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 38: Open-Source Platforms Bridge Theory and Practice</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 39: the illusion of understanding bridges all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 39: The Illusion of Understanding Bridges All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 3: scaffolded learning across domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 3: Scaffolded Learning Across Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 40: bidirectional memory as the universal knowledge architecture"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 40: Bidirectional Memory as the Universal Knowledge Architecture</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 41: the knowledge creation paradox threatens all three feedback loops"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 41: The Knowledge Creation Paradox Threatens All Three Feedback Loops</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 42: the sim-distill-adapt pipeline (simulation → recursion → commerce)"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 42: The Sim-Distill-Adapt Pipeline (Simulation → Recursion → Commerce)</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 43: recursive language models unify context management across domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 43: Recursive Language Models Unify Context Management Across Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 44: continual meta-learning bridges session-to-lifetime improvement"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 44: Continual Meta-Learning Bridges Session-to-Lifetime Improvement</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 45: efficiency as the enabler of educational equity"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 45: Efficiency as the Enabler of Educational Equity</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 46: standardized world model definitions enable cross-domain composability"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 46: Standardized World Model Definitions Enable Cross-Domain Composability</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 47: hierarchical skill transfer bridges agent learning and human learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 47: Hierarchical Skill Transfer Bridges Agent Learning and Human Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 48: evolving information environments demand dynamic belief revision across all domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 48: Evolving Information Environments Demand Dynamic Belief Revision Across All Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 49: observation-based recursion unifies all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 49: Observation-Based Recursion Unifies All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 4: metacognition as the unifying principle"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 4: Metacognition as the Unifying Principle</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 50: professional simulation training validates the entire stack"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 50: Professional Simulation Training Validates the Entire Stack</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 51: the its review reveals what 15 years of tutoring gets wrong"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 51: The ITS Review Reveals What 15 Years of Tutoring Gets Wrong</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 52: classroom simulation completes the educational simulation stack"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 52: Classroom Simulation Completes the Educational Simulation Stack</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 53: evolving research agents bridge self-improvement and scientific discovery"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 53: Evolving Research Agents Bridge Self-Improvement and Scientific Discovery</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 54: situated learning theory provides the pedagogical foundation"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 54: Situated Learning Theory Provides the Pedagogical Foundation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 55: the predict-improve-apply cycle formalizes how ai helps humans learn for real-world application"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 55: The Predict-Improve-Apply Cycle Formalizes How AI Helps Humans Learn for Real-World Application</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 56: agentic education workflows complete the multi-agent learning architecture"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 56: Agentic Education Workflows Complete the Multi-Agent Learning Architecture</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 57: llm-simulated environments eliminate the environment engineering bottleneck"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 57: LLM-Simulated Environments Eliminate the Environment Engineering Bottleneck</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 58: biosensory feedback adds the missing dimension to the predict-verify loop"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 58: Biosensory Feedback Adds the Missing Dimension to the Predict-Verify Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 59: ai-generated scientific discovery closes the knowledge creation loop"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 59: AI-Generated Scientific Discovery Closes the Knowledge Creation Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 5: efficient world models accelerate recursive commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 5: Efficient World Models Accelerate Recursive Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 60: test-time learning as the convergence point"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 60: Test-Time Learning as the Convergence Point</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 61: unified world model definitions enable cross-domain transfer"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 61: Unified World Model Definitions Enable Cross-Domain Transfer</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 62: ai-agent school bridges physical and educational simulation"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 62: AI-Agent School Bridges Physical and Educational Simulation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 63: conversational rl unifies commerce dialogue and tutoring dialogue"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 63: Conversational RL Unifies Commerce Dialogue and Tutoring Dialogue</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 64: llm-guided curricula bridge all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 64: LLM-Guided Curricula Bridge All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 65: perfusion shows simulation-to-commerce is a direct pipeline"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 65: PerFusion Shows Simulation-to-Commerce is a Direct Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 66: skill extraction parallels across scientific, educational, and commercial domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 66: Skill Extraction Parallels Across Scientific, Educational, and Commercial Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 67: the simulation stack expands from physical to digital to social"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 67: The Simulation Stack Expands from Physical to Digital to Social</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 68: the foresight gap reveals the meta-skill all three domains need"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 68: The Foresight Gap Reveals the Meta-Skill All Three Domains Need</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 69: world models as recommendation evaluation engines"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 69: World Models as Recommendation Evaluation Engines</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 6: multi-agent architectures unify all three"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 6: Multi-Agent Architectures Unify All Three</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 70: self-improving recommenders close the recursion-commerce loop"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 70: Self-Improving Recommenders Close the Recursion-Commerce Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 71: ai agent consumer behavior reveals systematic biases across all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 71: AI Agent Consumer Behavior Reveals Systematic Biases Across All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 72: curriculum learning as the orchestration layer for simulation, recursion, and commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 72: Curriculum Learning as the Orchestration Layer for Simulation, Recursion, and Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 73: test-time compute transforms the economics of ai-assisted learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 73: Test-Time Compute Transforms the Economics of AI-Assisted Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 74: multi-agent architectures as the implementation pattern for cross-domain learning systems"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 74: Multi-Agent Architectures as the Implementation Pattern for Cross-Domain Learning Systems</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 75: hallucination detection as the trust layer for ai-assisted learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 75: Hallucination Detection as the Trust Layer for AI-Assisted Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 76: transfer learning as the efficiency engine across domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 76: Transfer Learning as the Efficiency Engine Across Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 77: code generation accelerates the research-to-application pipeline"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 77: Code Generation Accelerates the Research-to-Application Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 78: computational cost as the equity bottleneck"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 78: Computational Cost as the Equity Bottleneck</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 79: domain specificity as the transfer mechanism"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 79: Domain Specificity as the Transfer Mechanism</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 7: from agentic commerce to agentic education"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 7: From Agentic Commerce to Agentic Education</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 80: real-world learning applications complete the theory-practice pipeline"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 80: Real-World Learning Applications Complete the Theory-Practice Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 81: e-commerce as the fastest ai learning laboratory"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 81: E-Commerce as the Fastest AI Learning Laboratory</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 82: test-time compute scaling democratizes ai-assisted learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 82: Test-Time Compute Scaling Democratizes AI-Assisted Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 83: conversational ai tutors bridge the theory-practice gap through all three domains"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 83: Conversational AI Tutors Bridge the Theory-Practice Gap Through All Three Domains</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 8: information gain as the universal learning currency"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 8: Information Gain as the Universal Learning Currency</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection 9: dreaming about commerce -- simulation as training ground for agents"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Connection 9: Dreaming About Commerce -- Simulation as Training Ground for Agents</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connection to mcts"><a href="methodologies/agentic-tree-search.html" class="gl-term">Connection to MCTS</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="connection to mlagentbench"><a href="tools-platforms/aide.html" class="gl-term">Connection to MLAgentBench</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="connections to emerging topics"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">Connections to Emerging Topics</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="connections to other topics"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Connections to Other Topics</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="context dependence"><a href="methodologies/applications-for-real-world-learning.html" class="gl-term">Context dependence</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="cosmos-predict2.5: unified world simulation at foundation scale"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Cosmos-Predict2.5: Unified World Simulation at Foundation Scale</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="cosmos-predict2.5: unified world simulation for physical ai"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Cosmos-Predict2.5: Unified World Simulation for Physical AI</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="coverage"><a href="research-sources/benchmark-trend.html" class="gl-term">Coverage</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="credential inflation"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Credential inflation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="cross-cutting connections: simulation, recursion, and commerce"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Cross-Cutting Connections: Simulation, Recursion, and Commerce</a><span class="gl-defn"> — This article maps the deep structural connections between three emerging research areas -- predictive simulation learning, recursive self-improvement, and AI for e-commerce learning -- and explains...</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="cross-cutting themes"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Cross-Cutting Themes</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="cross-domain"><a href="core-concepts/transfer-learning.html" class="gl-term">Cross-domain</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="cross-modal"><a href="core-concepts/transfer-learning.html" class="gl-term">Cross-modal</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="curated feeds and newsletters"><a href="research-sources/tracking-ai-research.html" class="gl-term">Curated Feeds and Newsletters</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="curiosity-driven predictive learning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Curiosity-Driven Predictive Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="current limitations"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Current Limitations</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="current score"><a href="research-sources/benchmark-trend.html" class="gl-term">Current Score</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="current state / latest developments (2025–2026)"><a href="core-concepts/automated-peer-review.html" class="gl-term">Current State / Latest Developments (2025–2026)</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="curriculum learning"><a href="methodologies/curriculum-learning.html" class="gl-term">Curriculum Learning</a><span class="gl-defn"> — Curriculum learning is a training strategy where an AI system learns from examples arranged in a meaningful order — typically from easy to hard — rather than randomly shuffled data.</span><span class="gl-source">Methodologies</span></div>
+</div>
+<div class="gl-group" id="letter-D">
+<h2 class="gl-letter">D</h2>
+<div class="gl-entry" data-term="daily papers"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Daily Papers</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="dark patterns and llm shopping agent vulnerability"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Dark Patterns and LLM Shopping Agent Vulnerability</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="data contamination"><a href="methodologies/evaluation-methodology.html" class="gl-term">Data contamination</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="decentralized compute"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Decentralized compute</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="decentralized science (desci)"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Decentralized Science (DeSci)</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="design of experiments (doe)"><a href="methodologies/automated-experiment-design.html" class="gl-term">Design of experiments (DoE)</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="diff-based editing"><a href="tools-platforms/aider.html" class="gl-term">Diff-based editing</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="distillation loss"><a href="core-concepts/knowledge-distillation.html" class="gl-term">Distillation loss</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="distributional safety: multi-agent risk governance"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Distributional Safety: Multi-Agent Risk Governance</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="domain adaptation"><a href="core-concepts/transfer-learning.html" class="gl-term">Domain adaptation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="domain specificity"><a href="methodologies/domain-specificity.html" class="gl-term">Domain Specificity</a><span class="gl-defn"> — Domain specificity refers to the challenge and practice of adapting general-purpose AI models to perform effectively within specialized knowledge domains — from medicine and law to scientific resea...</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="dreamer 4: scaling world models to offline data"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Dreamer 4: Scaling World Models to Offline Data</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="dreamer 4: training agents inside scalable world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Dreamer 4: Training Agents Inside Scalable World Models</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="dreamerad: latent world models for autonomous driving"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">DreamerAD: Latent World Models for Autonomous Driving</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="drivedreamer-policy: unified geometry-grounded world-action model"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">DriveDreamer-Policy: Unified Geometry-Grounded World-Action Model</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-E">
+<h2 class="gl-letter">E</h2>
+<div class="gl-entry" data-term="e-commerce applications"><a href="tools-platforms/aide.html" class="gl-term">E-Commerce Applications</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="e-commerce applications of ai learning"><a href="frontier-topics/e-commerce-applications.html" class="gl-term">E-Commerce Applications of AI Learning</a><span class="gl-defn"> — E-commerce applications of AI learning encompass the rapidly evolving ecosystem of AI systems that learn to optimize online commerce — from product search and recommendation to dynamic pricing and ...</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="eduverse: multi-agent classroom simulation with human-in-the-loop"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">EduVerse: Multi-Agent Classroom Simulation with Human-in-the-Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="egosim: first-person world simulation for embodied interaction"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">EgoSim: First-Person World Simulation for Embodied Interaction</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="emergent capabilities and phase transitions"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Emergent Capabilities and Phase Transitions</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="emergent misalignment in research agents"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Emergent Misalignment in Research Agents</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="emerging trends (2025–2026)"><a href="research-sources/institutions-and-labs.html" class="gl-term">Emerging Trends (2025–2026)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="empirical validation: ai tutoring outperforms active learning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Empirical Validation: AI Tutoring Outperforms Active Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="endpoints"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Endpoints</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="ethical considerations"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Ethical Considerations</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="evaluation gaming"><a href="methodologies/evaluation-methodology.html" class="gl-term">Evaluation gaming</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="evaluation methodology"><a href="methodologies/evaluation-methodology.html" class="gl-term">Evaluation Methodology</a><span class="gl-defn"> — Evaluation methodology encompasses the frameworks, benchmarks, metrics, and practices used to assess AI system performance, reliability, and safety.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="existing safeguards"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Existing Safeguards</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="expected model change"><a href="methodologies/active-learning.html" class="gl-term">Expected model change</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="experiment implementation"><a href="tools-platforms/aider.html" class="gl-term">Experiment implementation</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="experimental journal"><a href="methodologies/template-free-research.html" class="gl-term">Experimental Journal</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="experimentation"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Experimentation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="extrinsic hallucination"><a href="core-concepts/hallucination-detection.html" class="gl-term">Extrinsic hallucination</a><span class="gl-source">Core Concepts</span></div>
+</div>
+<div class="gl-group" id="letter-F">
+<h2 class="gl-letter">F</h2>
+<div class="gl-entry" data-term="failure handling"><a href="methodologies/automated-experiment-design.html" class="gl-term">Failure Handling</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="flagship:"><a href="research-sources/benchmark-trend.html" class="gl-term">Flagship:</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="fm taxonomy for scientific discovery"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">FM Taxonomy for Scientific Discovery</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="foreagent: predict-then-verify for ml agents"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">ForeAgent: Predict-Then-Verify for ML Agents</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="foundation model providers"><a href="research-sources/institutions-and-labs.html" class="gl-term">Foundation Model Providers</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="foundation models"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Foundation models</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="foundation models for research"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Foundation Models for Research</a><span class="gl-defn"> — Foundation models -- large-scale pretrained models that can be adapted to a wide range of downstream tasks -- are the backbone of modern AI research automation.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="foundational papers"><a href="research-sources/key-papers.html" class="gl-term">Foundational Papers</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="from commerce agents to education agents: the agentic workflow bridge"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">From Commerce Agents to Education Agents: The Agentic Workflow Bridge</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="from multi-agent to single-agent: when is skill distillation beneficial?"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">From Multi-Agent to Single-Agent: When Is Skill Distillation Beneficial?</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-G">
+<h2 class="gl-letter">G</h2>
+<div class="gl-entry" data-term="generalized dataset access"><a href="methodologies/template-free-research.html" class="gl-term">Generalized Dataset Access</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="generative ai impact on e-commerce productivity"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Generative AI Impact on E-Commerce Productivity</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="generative world renderer: aaa game data for world model training"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Generative World Renderer: AAA Game Data for World Model Training</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="genetic algorithms + deep learning for repurchase prediction"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Genetic Algorithms + Deep Learning for Repurchase Prediction</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="genie 3: interactive world generation at scale"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Genie 3: Interactive World Generation at Scale</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="gensyn"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Gensyn</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="gigaworld-policy: efficient action-centered world-action models for robotics"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">GigaWorld-Policy: Efficient Action-Centered World-Action Models for Robotics</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="git-native"><a href="tools-platforms/aider.html" class="gl-term">Git-native</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="grounding world models in real cities"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Grounding World Models in Real Cities</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="guideai: biosensory feedback closes the learner state gap"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">GuideAI: Biosensory Feedback Closes the Learner State Gap</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-H">
+<h2 class="gl-letter">H</h2>
+<div class="gl-entry" data-term="hallucination"><a href="core-concepts/retrieval-augmented-generation.html" class="gl-term">Hallucination</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="hallucination detection"><a href="core-concepts/hallucination-detection.html" class="gl-term">Hallucination Detection</a><span class="gl-defn"> — Hallucination detection refers to the set of methods and systems designed to identify when AI models — particularly large language models (LLMs) — generate outputs that are factually incorrect, uns...</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="hardware requirements"><a href="tools-platforms/autoresearch.html" class="gl-term">Hardware Requirements</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="historical timeline"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Historical Timeline</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="how foundation models enable research"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">How Foundation Models Enable Research</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="how it differs from template-based mode"><a href="methodologies/template-free-research.html" class="gl-term">How It Differs from Template-Based Mode</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="how scoring works"><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">How Scoring Works</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="how to read this list"><a href="research-sources/key-papers.html" class="gl-term">How to Read This List</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="hugging face papers api"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Hugging Face Papers API</a><span class="gl-defn"> — The Hugging Face Papers API provides free, public, no-authentication-required access to AI/ML research papers curated daily on huggingface.co.</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="hypothesis generation and lab validation"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Hypothesis Generation and Lab Validation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="hypothesized scaling laws"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Hypothesized Scaling Laws</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-I">
+<h2 class="gl-letter">I</h2>
+<div class="gl-entry" data-term="iclr 2026 workshop on recursive self-improvement: the field crystallizes"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">ICLR 2026 Workshop on Recursive Self-Improvement: The Field Crystallizes</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="idea appropriation"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Idea appropriation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="idea generation"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Idea Generation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="impact on research practice"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Impact on Research Practice</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="implications"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Implications</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="implications for ai-assisted human learning"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">Implications for AI-Assisted Human Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="implications for science"><a href="core-concepts/automated-peer-review.html" class="gl-term">Implications for Science</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="incentive alignment"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Incentive alignment</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="independent researchers"><a href="research-sources/institutions-and-labs.html" class="gl-term">Independent Researchers</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="industry trends and scale (2026)"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Industry Trends and Scale (2026)</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="inert knowledge"><a href="methodologies/applications-for-real-world-learning.html" class="gl-term">Inert knowledge</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="inference optimization"><a href="methodologies/inference-optimization.html" class="gl-term">Inference Optimization</a><span class="gl-defn"> — Inference optimization is the set of techniques that make AI model inference faster, cheaper, and more memory-efficient without significantly degrading output quality.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="information retrieval"><a href="research-sources/tracking-ai-research.html" class="gl-term">Information retrieval</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="instruction-tuned multimodal models (2023–2024):"><a href="methodologies/vlm-integration.html" class="gl-term">Instruction-tuned multimodal models (2023–2024):</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="integration example"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Integration Example</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="interpretability"><a href="methodologies/interpretability.html" class="gl-term">Interpretability</a><span class="gl-defn"> — Interpretability (also called mechanistic interpretability) is the field of research dedicated to understanding how and why neural networks produce their outputs.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="intrinsic hallucination"><a href="core-concepts/hallucination-detection.html" class="gl-term">Intrinsic hallucination</a><span class="gl-source">Core Concepts</span></div>
+</div>
+<div class="gl-group" id="letter-K">
+<h2 class="gl-letter">K</h2>
+<div class="gl-entry" data-term="key api endpoints"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Key API Endpoints</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="key application areas"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Key Application Areas</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="key capabilities"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Key Capabilities</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="key challenges"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Key Challenges</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="key design decisions"><a href="tools-platforms/autoresearch.html" class="gl-term">Key Design Decisions</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="key features"><a href="tools-platforms/aider.html" class="gl-term">Key Features</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="key papers and references"><a href="research-sources/key-papers.html" class="gl-term">Key Papers and References</a><span class="gl-defn"> — This article is a curated, annotated reading list of the most important papers for understanding AI research automation — from foundational theoretical work to cutting-edge systems.</span><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="key results"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Key Results</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="key surveys and meta-research (2025–2026)"><a href="research-sources/institutions-and-labs.html" class="gl-term">Key Surveys and Meta-Research (2025–2026)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="key systems"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">Key Systems</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="key systems and results"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Key Systems and Results</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="knowledge cutoff"><a href="core-concepts/retrieval-augmented-generation.html" class="gl-term">Knowledge cutoff</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="knowledge distillation"><a href="core-concepts/knowledge-distillation.html" class="gl-term">Knowledge Distillation</a><span class="gl-defn"> — Knowledge distillation is the process of transferring learned capabilities from a large, expensive "teacher" model to a smaller, efficient "student" model.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="kv cache memory"><a href="methodologies/inference-optimization.html" class="gl-term">KV cache memory</a><span class="gl-source">Methodologies</span></div>
+</div>
+<div class="gl-group" id="letter-L">
+<h2 class="gl-letter">L</h2>
+<div class="gl-entry" data-term="latest papers"><a href="research-sources/latest-papers.html" class="gl-term">Latest Papers</a><span class="gl-defn"> — Auto-updated feed of recent AI research relevant to research automation, foundation models, agentic systems, and related topics.</span><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="latex generation"><a href="tools-platforms/aider.html" class="gl-term">LaTeX generation</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="leworldmodel: stable jepa from pixels"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">LeWorldModel: Stable JEPA from Pixels</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="license:"><a href="tools-platforms/autoresearch.html" class="gl-term">License:</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="llm-guided curriculum learning for simulated agents"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">LLM-Guided Curriculum Learning for Simulated Agents</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="llm-guided search"><a href="methodologies/agentic-tree-search.html" class="gl-term">LLM-guided search</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="llm-powered shopping agents"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">LLM-Powered Shopping Agents</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="lome: egocentric world models for human-object manipulation"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">LOME: Egocentric World Models for Human-Object Manipulation</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-M">
+<h2 class="gl-letter">M</h2>
+<div class="gl-entry" data-term="manuscript generation"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Manuscript Generation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="medical imaging"><a href="methodologies/synthetic-data-generation.html" class="gl-term">Medical imaging</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="medsimai: simulation-based deliberate practice in medical education"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">MedSimAI: Simulation-Based Deliberate Practice in Medical Education</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="memory bandwidth"><a href="methodologies/inference-optimization.html" class="gl-term">Memory bandwidth</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="meta-ttl: learning how to learn at test time"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Meta-TTL: Learning How to Learn at Test Time</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="metric mismatch"><a href="methodologies/evaluation-methodology.html" class="gl-term">Metric mismatch</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="models used in research automation"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Models Used in Research Automation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="multi-agent approaches to discovery"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Multi-Agent Approaches to Discovery</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="multi-agent systems"><a href="frontier-topics/multi-agent-systems.html" class="gl-term">Multi-agent systems</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="multi-agent systems for ai learning"><a href="frontier-topics/multi-agent-systems.html" class="gl-term">Multi-Agent Systems for AI Learning</a><span class="gl-defn"> — Multi-agent systems (MAS) in AI learning refer to architectures where multiple specialized AI agents collaborate, debate, or compete to solve problems, conduct research, and teach humans.</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="multi-modal and domain-specific scientific fms"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Multi-Modal and Domain-Specific Scientific FMs</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="multi-model architecture"><a href="methodologies/template-free-research.html" class="gl-term">Multi-Model Architecture</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="multi-model architectures"><a href="methodologies/template-free-research.html" class="gl-term">Multi-model architectures</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="multi-model support"><a href="tools-platforms/aider.html" class="gl-term">Multi-model support</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="multi-turn rl for customer service agent training"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Multi-Turn RL for Customer Service Agent Training</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-N">
+<h2 class="gl-letter">N</h2>
+<div class="gl-entry" data-term="neural code generation"><a href="tools-platforms/code-generation.html" class="gl-term">Neural code generation</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="novelty filtering"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Novelty Filtering</a><span class="gl-source">Core Concepts</span></div>
+</div>
+<div class="gl-group" id="letter-O">
+<h2 class="gl-letter">O</h2>
+<div class="gl-entry" data-term="observed scaling relationships"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Observed Scaling Relationships</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="oecd evidence: pedagogical design determines whether ai simulation helps or harms"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">OECD Evidence: Pedagogical Design Determines Whether AI Simulation Helps or Harms</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="open issues"><a href="research-sources/benchmark-trend.html" class="gl-term">Open Issues</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="open questions"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Open Questions</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="open tutorai: from commerce personalization to learning platforms"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Open TutorAI: From Commerce Personalization to Learning Platforms</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="open-ended ai research systems"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">Open-Ended AI Research Systems</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="open-ended discovery"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">Open-Ended Discovery</a><span class="gl-defn"> — Open-Ended Discovery refers to AI systems that explore without predefined boundaries -- continuously generating novel, increasingly complex artifacts (ideas, code, environments, research) without c...</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="open-ended search"><a href="methodologies/template-free-research.html" class="gl-term">Open-ended search</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="openworldlib: a unified definition and codebase for world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">OpenWorldLib: A Unified Definition and Codebase for World Models</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="openworldlib: a unified definition and framework for world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">OpenWorldLib: A Unified Definition and Framework for World Models</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="overall: 88.2/100"><a href="research-sources/benchmark-trend.html" class="gl-term">Overall: 88.2/100</a><span class="gl-source">Research Sources</span></div>
+</div>
+<div class="gl-group" id="letter-P">
+<h2 class="gl-letter">P</h2>
+<div class="gl-entry" data-term="performance benchmarks"><a href="methodologies/template-free-research.html" class="gl-term">Performance Benchmarks</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="performance scaling"><a href="methodologies/agentic-tree-search.html" class="gl-term">Performance Scaling</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="performance vs. efficiency"><a href="methodologies/computational-cost.html" class="gl-term">Performance vs. efficiency</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="perfusion: "sell it before you make it" -- ai-generated commerce"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">PerFusion: "Sell It Before You Make It" -- AI-Generated Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="philosophy of computational discovery"><a href="research-sources/key-papers.html" class="gl-term">Philosophy of computational discovery</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="pijepa: policy-guided world model planning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">PiJEPA: Policy-Guided World Model Planning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="policy-as-code: translating governance to guardrails"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Policy-as-Code: Translating Governance to Guardrails</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="practical implications for learning"><a href="methodologies/template-free-research.html" class="gl-term">Practical Implications for Learning</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="practical opportunities today"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Practical Opportunities Today</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="practical world model rl for embodied agents: vla-mbpo"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Practical World Model RL for Embodied Agents: VLA-MBPO</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="predictive learning through simulation"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Predictive Learning Through Simulation</a><span class="gl-defn"> — Predictive Simulation Learning refers to AI systems that build internal models of their environment and learn by simulating outcomes before acting.</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="predictive models for commerce"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Predictive Models for Commerce</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="predictive models for supply chain resilience"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">Predictive Models for Supply Chain Resilience</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="predictive simulation learning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Predictive Simulation Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="privacy constraints"><a href="methodologies/synthetic-data-generation.html" class="gl-term">Privacy constraints</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="product understanding"><a href="frontier-topics/e-commerce-applications.html" class="gl-term">Product understanding</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="program synthesis"><a href="tools-platforms/code-generation.html" class="gl-term">Program synthesis</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="prompt engineering"><a href="methodologies/prompt-engineering.html" class="gl-term">Prompt Engineering</a><span class="gl-defn"> — Prompt engineering is the practice of designing, optimizing, and automating the natural language instructions given to AI models to elicit desired behaviors.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="proposed frameworks"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Proposed Frameworks</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="provenance"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Provenance</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-Q">
+<h2 class="gl-letter">Q</h2>
+<div class="gl-entry" data-term="quality benchmark"><a href="research-sources/benchmark-trend.html" class="gl-term">Quality Benchmark</a><span class="gl-defn"> — Automated quality scores for the wiki's articles across all categories.</span><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="quality of simulation: what actually matters"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Quality of Simulation: What Actually Matters</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="quality-diversity optimization"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">Quality-Diversity Optimization</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="quantifying agent safety: empirical benchmarks"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Quantifying Agent Safety: Empirical Benchmarks</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="query-by-committee"><a href="methodologies/active-learning.html" class="gl-term">Query-by-committee</a><span class="gl-source">Methodologies</span></div>
+</div>
+<div class="gl-group" id="letter-R">
+<h2 class="gl-letter">R</h2>
+<div class="gl-entry" data-term="rare events"><a href="methodologies/synthetic-data-generation.html" class="gl-term">Rare events</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="recommendation"><a href="frontier-topics/e-commerce-applications.html" class="gl-term">Recommendation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="recommender systems"><a href="research-sources/tracking-ai-research.html" class="gl-term">Recommender systems</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="recursive self-improvement"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">Recursive Self-Improvement</a><span class="gl-defn"> — Recursive Self-Improvement refers to AI systems that iteratively enhance their own capabilities -- improving not just at tasks, but at the process of improvement itself.</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="reinforcement world model learning (rwml): self-supervised environment understanding"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Reinforcement World Model Learning (RWML): Self-Supervised Environment Understanding</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="relative scaling laws and distributional fairness"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Relative Scaling Laws and Distributional Fairness</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="relevance to ai research:"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Relevance to AI research:</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="remaining wishlist topics:"><a href="research-sources/benchmark-trend.html" class="gl-term">Remaining wishlist topics:</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="render network"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Render Network</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="research infrastructure providers"><a href="research-sources/institutions-and-labs.html" class="gl-term">Research Infrastructure Providers</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="research institutions and labs"><a href="research-sources/institutions-and-labs.html" class="gl-term">Research Institutions and Labs</a><span class="gl-defn"> — The landscape of AI research automation spans academic labs, industry research divisions, infrastructure providers, independent researchers, and safety organizations.</span><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="retrieval-augmented generation"><a href="core-concepts/retrieval-augmented-generation.html" class="gl-term">Retrieval-Augmented Generation</a><span class="gl-defn"> — Retrieval-augmented generation (RAG) is a technique that enhances AI model outputs by retrieving relevant information from external knowledge sources before generating a response.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="retrieval-augmented generation (rag)"><a href="core-concepts/retrieval-augmented-generation.html" class="gl-term">Retrieval-augmented generation (RAG)</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="rise: imagination-driven robot self-improvement"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">RISE: Imagination-Driven Robot Self-Improvement</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="risk categories"><a href="frontier-topics/ai-safety-in-research.html" class="gl-term">Risk Categories</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="rlvr-world: training world models with verifiable rewards"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">RLVR-World: Training World Models with Verifiable Rewards</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="role in ai research automation"><a href="tools-platforms/aider.html" class="gl-term">Role in AI Research Automation</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="roles in research automation"><a href="methodologies/vlm-integration.html" class="gl-term">Roles in Research Automation</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="running the benchmark"><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">Running the Benchmark</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="rwml: reinforcement learning for world model training"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">RWML: Reinforcement Learning for World Model Training</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-S">
+<h2 class="gl-letter">S</h2>
+<div class="gl-entry" data-term="scaling and capability research"><a href="research-sources/key-papers.html" class="gl-term">Scaling and capability research</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="scaling behavior and compute trade-offs"><a href="tools-platforms/aide.html" class="gl-term">Scaling Behavior and Compute Trade-offs</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="scaling laws for research automation"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">Scaling Laws for Research Automation</a><span class="gl-defn"> — Scaling Laws for Research Automation examines how the quality and quantity of AI-generated research output changes as we scale compute, model capability, data, and system complexity.</span><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="scaling properties"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Scaling Properties</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="scope of automation"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Scope of Automation</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="score trend"><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">Score Trend</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="self-bootstrapping world model curricula: agent0 meets simulation"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Self-Bootstrapping World Model Curricula: Agent0 Meets Simulation</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="self-driving laboratories (2025–2026)"><a href="methodologies/automated-experiment-design.html" class="gl-term">Self-Driving Laboratories (2025–2026)</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="self-execution simulation for code learning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Self-Execution Simulation for Code Learning</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="self-improving world models: the wav framework"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Self-Improving World Models: The WAV Framework</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="semantic scholar"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Semantic Scholar</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="semantic scholar api"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Semantic Scholar API</a><span class="gl-defn"> — Semantic Scholar is a free, AI-powered academic search engine developed by the Allen Institute for AI (AI2).</span><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="sharma, sun, lu, zhang, liu & yang"><a href="research-sources/latest-papers.html" class="gl-term">Sharma, Sun, Lu, Zhang, Liu & Yang</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="simia: llm-simulated environments replace real testbeds"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Simia: LLM-Simulated Environments Replace Real Testbeds</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="simulation distillation: bridging sim-to-real for world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Simulation Distillation: Bridging Sim-to-Real for World Models</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="situated learning through simulation: bridging virtual and real-world contexts"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Situated Learning Through Simulation: Bridging Virtual and Real-World Contexts</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="skill-knowledge gap"><a href="methodologies/applications-for-real-world-learning.html" class="gl-term">Skill-knowledge gap</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="skill0: progressive skill internalization via curriculum"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Skill0: Progressive Skill Internalization via Curriculum</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="social and community sources"><a href="research-sources/tracking-ai-research.html" class="gl-term">Social and Community Sources</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="socioverse: world model for social simulation at scale"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">SocioVerse: World Model for Social Simulation at Scale</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="specialization advantage"><a href="frontier-topics/multi-agent-systems.html" class="gl-term">Specialization advantage</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="standard:"><a href="research-sources/benchmark-trend.html" class="gl-term">Standard:</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="swirl: self-improving world models without action labels"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">SWIRL: Self-Improving World Models Without Action Labels</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="synthetic data generation"><a href="methodologies/synthetic-data-generation.html" class="gl-term">Synthetic Data Generation</a><span class="gl-defn"> — Synthetic data generation is the practice of using AI models to create artificial training data that mimics the statistical properties of real data.</span><span class="gl-source">Methodologies</span></div>
+</div>
+<div class="gl-group" id="letter-T">
+<h2 class="gl-letter">T</h2>
+<div class="gl-entry" data-term="task transfer"><a href="core-concepts/transfer-learning.html" class="gl-term">Task transfer</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="taxonomy of ai roles in science"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">Taxonomy of AI Roles in Science</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="taxonomy of fm roles in scientific discovery"><a href="core-concepts/foundation-models-for-research.html" class="gl-term">Taxonomy of FM Roles in Scientific Discovery</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="technical architecture: search and evaluation"><a href="methodologies/template-free-research.html" class="gl-term">Technical Architecture: Search and Evaluation</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="technical deep dive: review generation pipeline"><a href="core-concepts/automated-peer-review.html" class="gl-term">Technical Deep Dive: Review Generation Pipeline</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="technical implementation"><a href="methodologies/vlm-integration.html" class="gl-term">Technical Implementation</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="technology stack"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Technology Stack</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="template-based"><a href="tools-platforms/code-generation.html" class="gl-term">Template-based</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="template-free research"><a href="methodologies/template-free-research.html" class="gl-term">Template-Free Research</a><span class="gl-defn"> — Template-Free Research is an operating mode of The AI Scientist that conducts open-ended scientific exploration without requiring human-provided code templates [^1].</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="test-time compute scaling"><a href="methodologies/agentic-tree-search.html" class="gl-term">Test-time compute scaling</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="the "logical compute" framework"><a href="frontier-topics/scaling-laws-research.html" class="gl-term">The "Logical Compute" Framework</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the ai scientist"><a href="core-concepts/the-ai-scientist.html" class="gl-term">The AI Scientist</a><span class="gl-defn"> — The AI Scientist is the first comprehensive system designed to autonomously conduct the entire machine learning research lifecycle — from idea generation to peer-reviewed publication.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="the ai scientist turing test"><a href="core-concepts/automated-peer-review.html" class="gl-term">The AI Scientist Turing Test</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="the archive mechanism"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">The Archive Mechanism</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the automated reviewer"><a href="core-concepts/automated-peer-review.html" class="gl-term">The Automated Reviewer</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="the automation spectrum"><a href="core-concepts/automated-scientific-discovery.html" class="gl-term">The Automation Spectrum</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="the autonomous loop"><a href="tools-platforms/autoresearch.html" class="gl-term">The Autonomous Loop</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="the dreamer-jepa convergence (march 2026)"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">The Dreamer-JEPA Convergence (March 2026)</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the iclr 2026 workshop"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">The ICLR 2026 Workshop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the improvement loop"><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">The Improvement Loop</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="the jepa family expands: from pixels to plans (march 2026)"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">The JEPA Family Expands: From Pixels to Plans (March 2026)</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the knowledge creation paradox: when ai helps individuals but hurts communities"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">The Knowledge Creation Paradox: When AI Helps Individuals but Hurts Communities</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the learning-commerce loop: how subject mastery transfers to real-world application"><a href="frontier-topics/ai-ecommerce-learning.html" class="gl-term">The Learning-Commerce Loop: How Subject Mastery Transfers to Real-World Application</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the metacognition framework"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">The Metacognition Framework</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the observation-based recursive learning pipeline"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">The Observation-Based Recursive Learning Pipeline</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the scaling hypothesis"><a href="frontier-topics/open-ended-discovery.html" class="gl-term">The Scaling Hypothesis</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="the unified learning loop"><a href="frontier-topics/cross-cutting-connections.html" class="gl-term">The Unified Learning Loop</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="theoretical foundations"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Theoretical Foundations</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="together ai"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Together AI</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="topic coverage"><a href="research-sources/benchmark-trend.html" class="gl-term">Topic Coverage</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="tracking ai research"><a href="research-sources/tracking-ai-research.html" class="gl-term">Tracking AI Research</a><span class="gl-defn"> — Tracking AI research is the practice of systematically monitoring, filtering, and synthesizing the flood of new publications, preprints, and code releases across artificial intelligence.</span><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="training vs. inference"><a href="methodologies/computational-cost.html" class="gl-term">Training vs. inference</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="transfer learning"><a href="core-concepts/transfer-learning.html" class="gl-term">Transfer Learning</a><span class="gl-defn"> — Transfer learning is the practice of applying knowledge gained from one task, domain, or dataset to improve performance on a different but related task.</span><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="two operating modes"><a href="core-concepts/the-ai-scientist.html" class="gl-term">Two Operating Modes</a><span class="gl-source">Core Concepts</span></div>
+</div>
+<div class="gl-group" id="letter-U">
+<h2 class="gl-letter">U</h2>
+<div class="gl-entry" data-term="uncertainty sampling"><a href="methodologies/active-learning.html" class="gl-term">Uncertainty sampling</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="unverifiability"><a href="core-concepts/retrieval-augmented-generation.html" class="gl-term">Unverifiability</a><span class="gl-source">Core Concepts</span></div>
+<div class="gl-entry" data-term="update: 2026-04-07 (scheduled — batch 6)"><a href="research-sources/latest-papers.html" class="gl-term">Update: 2026-04-07 (Scheduled — Batch 6)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="update: 2026-04-07 (scheduled — batch 7)"><a href="research-sources/latest-papers.html" class="gl-term">Update: 2026-04-07 (Scheduled — Batch 7)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="update: 2026-04-07 (scheduled — batch 9)"><a href="research-sources/latest-papers.html" class="gl-term">Update: 2026-04-07 (Scheduled — Batch 9)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="update: 2026-04-07 (scheduled)"><a href="research-sources/latest-papers.html" class="gl-term">Update: 2026-04-07 (Scheduled)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="updating this list"><a href="research-sources/key-papers.html" class="gl-term">Updating This List</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="use cases for ai learning research"><a href="tools-platforms/huggingface-papers-api.html" class="gl-term">Use Cases for AI Learning Research</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="use in building research knowledge bases"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Use in Building Research Knowledge Bases</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="user modeling"><a href="frontier-topics/e-commerce-applications.html" class="gl-term">User modeling</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-V">
+<h2 class="gl-letter">V</h2>
+<div class="gl-entry" data-term="v-jepa 2.1: dense features unlock robotic transfer"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">V-JEPA 2.1: Dense Features Unlock Robotic Transfer</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="valid student simulation: the competence paradox"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Valid Student Simulation: The Competence Paradox</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="value-guided action planning with jepa world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Value-Guided Action Planning with JEPA World Models</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="verification"><a href="frontier-topics/blockchain-ai-optimization.html" class="gl-term">Verification</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="verification: the critical constraint"><a href="frontier-topics/recursive-self-improvement.html" class="gl-term">Verification: The Critical Constraint</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="video generation as world simulation: an efficiency survey"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Video Generation as World Simulation: An Efficiency Survey</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="video models reason early: plan commitment in diffusion"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">Video Models Reason Early: Plan Commitment in Diffusion</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="vision-language model (vlm) integration"><a href="methodologies/vlm-integration.html" class="gl-term">Vision-Language Model (VLM) Integration</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="vision-language model integration"><a href="methodologies/vlm-integration.html" class="gl-term">Vision-Language Model Integration</a><span class="gl-defn"> — Vision-Language Model (VLM) Integration refers to the use of multi-modal AI models that process both images and text within automated research pipelines.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="vision-language pre-training (2019–2022):"><a href="methodologies/vlm-integration.html" class="gl-term">Vision-language pre-training (2019–2022):</a><span class="gl-source">Methodologies</span></div>
+</div>
+<div class="gl-group" id="letter-W">
+<h2 class="gl-letter">W</h2>
+<div class="gl-entry" data-term="website:"><a href="tools-platforms/semantic-scholar-api.html" class="gl-term">Website:</a><span class="gl-source">Tools & Platforms</span></div>
+<div class="gl-entry" data-term="webworld: large-scale open-web world model"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">WebWorld: Large-Scale Open-Web World Model</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 late night update)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 late night update)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update — batch 2)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update — batch 2)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update — batch 3)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update — batch 3)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update — batch 4)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update — batch 4)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update — batch 5)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update — batch 5)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update — batch 7)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update — batch 7)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of april 06, 2026 (april 7 scheduled update)"><a href="research-sources/latest-papers.html" class="gl-term">Week of April 06, 2026 (April 7 scheduled update)</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="week of march 30, 2026"><a href="research-sources/latest-papers.html" class="gl-term">Week of March 30, 2026</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="why gpt-4o?"><a href="methodologies/vlm-integration.html" class="gl-term">Why GPT-4o?</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="wiki quality benchmarking"><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">Wiki Quality Benchmarking</a><span class="gl-defn"> — This wiki uses an automated benchmarking system to measure and improve article quality over time.</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="wikipedia quality assessment."><a href="methodologies/wiki-quality-benchmarking.html" class="gl-term">Wikipedia quality assessment.</a><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="wildworld: large-scale action-conditioned world modeling from games"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">WildWorld: Large-Scale Action-Conditioned World Modeling from Games</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="wishlist coverage"><a href="research-sources/benchmark-trend.html" class="gl-term">Wishlist Coverage</a><span class="gl-source">Research Sources</span></div>
+<div class="gl-entry" data-term="world action models vs. vision-language-action policies: what generalizes?"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">World Action Models vs. Vision-Language-Action Policies: What Generalizes?</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="world models"><a href="methodologies/world-models.html" class="gl-term">World Models</a><span class="gl-defn"> — A world model is a learned internal representation that allows an AI agent to predict how the environment will evolve in response to actions — essentially an "imagination engine" that enables plann...</span><span class="gl-source">Methodologies</span></div>
+<div class="gl-entry" data-term="world models survey: understanding vs. predicting"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">World Models Survey: Understanding vs. Predicting</a><span class="gl-source">Frontier Topics</span></div>
+<div class="gl-entry" data-term="world-gymnast: rl training inside learned world models"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">World-Gymnast: RL Training Inside Learned World Models</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+<div class="gl-group" id="letter-Y">
+<h2 class="gl-letter">Y</h2>
+<div class="gl-entry" data-term="yc-bench: long-horizon business simulation for agent planning"><a href="frontier-topics/predictive-simulation-learning.html" class="gl-term">YC-Bench: Long-Horizon Business Simulation for Agent Planning</a><span class="gl-source">Frontier Topics</span></div>
+</div>
+
+</div>
+
+<script>
+document.getElementById('glSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.gl-entry').forEach(el => {
+        el.style.display = el.dataset.term.includes(q) ? '' : 'none';
+    });
+    document.querySelectorAll('.gl-group').forEach(g => {
+        const visible = g.querySelectorAll('.gl-entry[style=""], .gl-entry:not([style])');
+        g.style.display = visible.length > 0 ? '' : 'none';
+    });
+});
+</script>
+
+</main>
+</body>
+</html>

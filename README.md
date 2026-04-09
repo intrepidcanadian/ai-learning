@@ -1,71 +1,52 @@
-# Wikipedia for AI Learning Research
+# Wikipedia for AI Learning
 
-The open knowledge base for AI-driven scientific discovery, automated research, and the future of machine learning.
+A personal, LLM-maintained wiki on AI learning research. The human curates sources and asks questions; an LLM (Claude Code, in this repo's case) reads, summarizes, integrates, and maintains everything.
 
-## What This Is
-
-A structured, interlinked collection of articles covering the rapidly evolving field of **AI-automated research** -- from foundational concepts to cutting-edge tools, methodologies, and frontier topics. This wiki serves as the canonical reference for anyone learning about, building, or contributing to AI research automation.
-
-## Directory Structure
-
-```
-core-concepts/          Foundational ideas and systems
-tools-platforms/        Software, APIs, and frameworks
-methodologies/          Technical approaches and architectures
-frontier-topics/        Emerging and speculative research directions
-research-sources/       Where to find and track new research
-```
-
-## Quick Navigation
-
-### Core Concepts
-- [The AI Scientist](core-concepts/the-ai-scientist.md) -- End-to-end automated AI research system
-- [Automated Scientific Discovery](core-concepts/automated-scientific-discovery.md) -- History and landscape of AI in science
-- [Foundation Models for Research](core-concepts/foundation-models-for-research.md) -- How LLMs power research automation
-- [Automated Peer Review](core-concepts/automated-peer-review.md) -- AI systems that evaluate scientific papers
-
-### Tools & Platforms
-- [Autoresearch (Karpathy)](tools-platforms/autoresearch.md) -- Autonomous ML research on a single GPU
-- [Hugging Face Papers API](tools-platforms/huggingface-papers-api.md) -- Programmatic access to daily AI research
-- [AIDE](tools-platforms/aide.md) -- AI-driven exploration in code space
-- [Aider](tools-platforms/aider.md) -- AI coding assistant for research implementation
-- [Semantic Scholar API](tools-platforms/semantic-scholar-api.md) -- Literature search and citation graph access
-
-### Methodologies
-- [Agentic Tree Search](methodologies/agentic-tree-search.md) -- Tree-structured experiment exploration
-- [Template-Free Research](methodologies/template-free-research.md) -- Open-ended AI research without scaffolds
-- [Automated Experiment Design](methodologies/automated-experiment-design.md) -- How AI plans and runs experiments
-- [Vision-Language Model Integration](methodologies/vlm-integration.md) -- Using VLMs for figure critique and data analysis
-- [Wiki Quality Benchmarking](methodologies/wiki-quality-benchmarking.md) -- How this wiki measures and improves its own quality
-
-### Frontier Topics
-- [Blockchain for AI Optimization](frontier-topics/blockchain-ai-optimization.md) -- Decentralized compute, verification, and incentive alignment
-- [Open-Ended Discovery](frontier-topics/open-ended-discovery.md) -- AI systems that explore without boundaries
-- [AI Safety in Automated Research](frontier-topics/ai-safety-in-research.md) -- Risks, ethics, and guardrails
-- [Scaling Laws for Research Automation](frontier-topics/scaling-laws-research.md) -- How research quality scales with compute and model capability
-- [Predictive Simulation Learning](frontier-topics/predictive-simulation-learning.md) -- World models, mental rehearsal, and learning by imagining outcomes
-- [Recursive Self-Improvement](frontier-topics/recursive-self-improvement.md) -- AI systems that improve their own improvement process
-- [AI for E-Commerce Learning](frontier-topics/ai-ecommerce-learning.md) -- Agentic commerce, recommendation, and applied AI learning
-- [Cross-Cutting Connections](frontier-topics/cross-cutting-connections.md) -- How simulation, recursion, and commerce research reinforce each other
-
-### Research Sources
-- [Latest Papers](research-sources/latest-papers.md) -- Auto-updated feed of new research (updated daily via cron)
-- [Tracking AI Research](research-sources/tracking-ai-research.md) -- APIs, feeds, and tools for staying current
-- [Key Papers and References](research-sources/key-papers.md) -- Essential reading list with annotations
-- [Research Institutions and Labs](research-sources/institutions-and-labs.md) -- Who is building what
-- [Quality Benchmark](research-sources/benchmark-trend.md) -- Score trend tracking wiki quality over time
-
-## Contributing
-
-Each article follows a consistent structure:
-1. **Overview** -- What it is, in plain language
-2. **Background** -- Context and history
-3. **Technical Details** -- How it works
-4. **Current State** -- Latest developments and results
-5. **Limitations** -- Known issues and open problems
-6. **See Also** -- Links to related articles
-7. **References** -- Primary sources with links
+This is **not** an encyclopedia. It's a compounding artifact that grows with every source the human drops into `raw/` and every question they ask. The LLM does the bookkeeping — cross-references, summaries, contradiction-flagging — that humans abandon wikis over.
 
 ---
 
-*Last updated: 2026-04-07 (scheduled update — batch 9: added LLM-Guided Curriculum Learning (74% training acceleration), CODE-GEN agentic educational content generation, Generative World Renderer (AAA game data), SkillFoundry self-evolving skill libraries (71% novel skills), Multi-Turn RL with Iterative Reward Calibration (4B beats GPT-4.1), PerFusion "sell before you make" (KDD 2026, +13% CTR at Alibaba); 3 new cross-cutting connections (59-61); new Curriculum-Skill Pipeline diagram; 6 new papers tracked)*
+## Layout
+
+```
+raw/        sources you drop in (PDFs, clipped articles, transcripts) — immutable
+wiki/       LLM-maintained markdown organized into 5 categories — the knowledge base
+CLAUDE.md   the schema (conventions + ingest/query/lint workflows)
+index.md    catalog of every wiki page with one-line summaries
+log.md      append-only record of every operation
+archive/    old static-site tooling (build.py, benchmark loop, generated HTML)
+```
+
+Open the repo in Obsidian and browse `wiki/` like a normal vault. Use the graph view to see the shape of the wiki; use Dataview queries against the YAML frontmatter for dynamic views.
+
+---
+
+## Operations
+
+Ask the LLM (in Claude Code, Cursor, or any agent that respects `CLAUDE.md`) to do any of:
+
+- **Ingest** a new source: drop a file into `raw/`, then "ingest raw/foo.pdf". The LLM reads it, writes a source-summary page, updates affected concept and entity pages, and logs the operation.
+- **Query** the wiki: "what does the wiki say about world models?" The LLM reads `index.md`, picks relevant pages, synthesizes an answer with citations, and offers to file the answer back as a new wiki page.
+- **Lint** the wiki: "lint the wiki." The LLM checks for contradictions, stale claims, orphan pages, red-link gaps, missing cross-refs, and frontmatter drift, then produces a report.
+
+Full step-by-step workflows are in [CLAUDE.md](CLAUDE.md).
+
+---
+
+## What the wiki currently covers
+
+47 pages across 5 categories, originally hand-curated as a static-site encyclopedia and now living as the seed corpus for the new LLM-maintained system:
+
+- **Core Concepts** — foundation models, automated discovery, RAG, transfer learning, hallucination detection
+- **Tools & Platforms** — aider, AIDE, autoresearch, Semantic Scholar API, HuggingFace papers API
+- **Methodologies** — active learning, agentic tree search, evaluation, prompt engineering, world models, VLM integration
+- **Frontier Topics** — predictive simulation learning, recursive self-improvement, AI safety in research, multi-agent systems, cross-cutting connections
+- **Research Sources** — institutions and labs, key papers, paper-tracking pages, per-source summaries
+
+Browse [index.md](index.md) for the full catalog.
+
+---
+
+## History
+
+This repo started life as a static-site encyclopedia with an HTML build (`build.py`), a quality benchmark (`benchmark_wiki.py`), and a "Quality vs Coverage" improvement loop. That tooling lives in `archive/` for reference. The new model is described in [CLAUDE.md](CLAUDE.md) — the restructure is logged in [log.md](log.md).
