@@ -5,7 +5,7 @@ category: methodologies
 tags: []
 created: 2026-04-09
 updated: 2026-04-09
-sources: []
+sources: [raw/2603.19710v1.pdf]
 ---
 
 # Prompt Engineering
@@ -269,6 +269,18 @@ Prompt engineering is critical for [AI e-commerce learning](../frontier-topics/a
 - **Review summarization**: Prompts that extract specific attribute sentiments from customer reviews
 - **Conversational commerce**: Multi-turn prompts that maintain shopping context across conversation turns
 
+#### Schema-slot prompt compression with special tokens
+
+When the prompt template is fixed and serving cost is dominated by per-token compute, natural-language scaffolding becomes pure overhead. AIGQ at Taobao (Xu et al., 2026)[^12] addresses this by **replacing each fixed schema slot with a single special token** added to the tokenizer vocabulary. Demographic categories, time-of-day buckets, last-clicked category IDs, and behaviour-sequence summaries become one token each instead of a sentence.
+
+This is a different optimization from few-shot pruning or instruction shortening — those compress *content*; special-token compression compresses *structure*. It works when:
+
+1. The prompt has a small number of fixed schema slots that recur on every request
+2. The slot values come from a known finite vocabulary
+3. You control the model and can extend the tokenizer + embedding table
+
+Token reduction in production was large enough to make a 30B-parameter MoE model viable in the request path of [AI e-commerce learning](../frontier-topics/ai-ecommerce-learning.md) at Taobao QPS — paired with the [hybrid offline–online deployment](inference-optimization.md) pattern that pushes reasoning out of the latency path. Schema-slot tokens generalize beyond e-commerce to any high-throughput LLM service with stable input structure (intent classifiers, log triagers, tool-calling routers).
+
 ### Application to Real-World Learning
 
 Prompt engineering has direct applications in education:
@@ -341,3 +353,5 @@ Prompt engineering has direct applications in education:
 [^10]: Anonymous. (2026). "REprompt: Prompt Generation for Intelligent Software Development Guided by Requirements Engineering." arXiv:2601.16507. https://arxiv.org/abs/2601.16507
 
 [^11]: Anonymous. (2026). "LLM Prompt Duel Optimizer." arXiv:2510.13907. https://arxiv.org/abs/2510.13907
+
+[^12]: Xu, J., Zou, J., Yang, R., Geng, Z., Liu, Q., & Tang, H. (2026). "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation." arXiv:2603.19710. https://arxiv.org/abs/2603.19710

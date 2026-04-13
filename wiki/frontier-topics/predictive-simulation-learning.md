@@ -4,7 +4,7 @@ type: concept
 category: frontier-topics
 tags: []
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-13
 sources: []
 ---
 
@@ -270,6 +270,71 @@ Lou et al. (NUS, April 2026) introduce Meta-TTL, a framework that formulates the
 Jin et al. (EMNLP 2025) construct Agent-based Learning Simulation (AAS) to simulate teaching and learning processes, featuring a "Zero-Exp strategy" and a continuous "experience-reflection-optimization" cycle supported by dual memory (experience and knowledge bases with short/long-term components).[^75] Multi-agents autonomously evolve via interactions within simulated school scenarios, producing high-fidelity behavioral and interaction data.
 
 **Learning application:** AI-Agent School directly addresses the gap between world models for physical environments and world models for educational environments. While [DreamerV3](#dreamerv3-general-world-model-agent) simulates physics and [SocioVerse](#socioverse-world-model-for-social-simulation-at-scale) simulates populations, AI-Agent School simulates the classroom itself -- teacher-student interactions, learning dynamics, and pedagogical strategies. The dual memory architecture (separate experience and knowledge stores) mirrors how effective teachers maintain both episodic recall (specific student interactions) and pedagogical knowledge (teaching strategies). For educational AI design, this provides a testing ground: new tutoring strategies can be evaluated against simulated classrooms before deploying with real students, just as [RISE](#rise-imagination-driven-robot-self-improvement) tests robot policies in imagined scenarios before physical execution.
+
+## FOREAGENT: Predicting Before Executing ML Experiments
+
+Zheng et al. (ACL 2026) address a fundamental bottleneck in scientific discovery agents: the **execution bottleneck**, where every hypothesis must be physically run to evaluate it.[^86] Drawing from world model theory, FOREAGENT internalizes execution priors to substitute costly experiment runs with instantaneous predictive reasoning through a Predict-then-Verify loop.
+
+**Key results:**
+- 61.5% prediction accuracy with robust confidence calibration on 18,438 pairwise comparisons
+- 6× acceleration in convergence compared to traditional generate-execute-feedback loops
+- +6% performance over execution-based baselines
+
+**Learning application:** FOREAGENT demonstrates that the predict-before-acting principle central to world models extends beyond physical environments into the domain of scientific experimentation. A student learning to design ML experiments could use a FOREAGENT-style system to preview likely outcomes of different hyperparameter choices or architectural decisions before committing compute. This builds the kind of experimental intuition that expert researchers develop over years -- the ability to predict roughly what will happen before running the experiment. The framework connects to [ZeroSearch's](#zerosearch-simulated-environments-for-information-retrieval) simulation of search environments and [InCoder-32B-Thinking's](#code-world-models-predicting-execution-before-running) prediction of code execution, forming a spectrum of "predict before executing" approaches: web search (ZeroSearch) → code compilation (InCoder) → ML experiments (FOREAGENT).
+
+## Agent World Model: Synthetic Environments at Scale
+
+Wang et al. (February 2026) introduce Agent World Model (AWM), a fully synthetic environment generation pipeline that creates code-driven, database-backed environments for training agentic RL agents.[^87] Unlike LLM-simulated environments (which suffer from hallucination and inconsistency), AWM generates executable environments with reliable state transitions.
+
+**Scale:**
+- 1,000 diverse synthetic environments covering everyday scenarios
+- 35,062 tools (35 per environment average)
+- 10,000 tasks with verification code
+- Largest open-source environment synthesis effort to date
+
+**Key finding:** Training exclusively in synthetic environments yields strong out-of-distribution generalization across three independent benchmarks -- agents don't need benchmark-specific environments to learn transferable skills.
+
+**Learning application:** AWM addresses a scaling bottleneck for simulation-based education: creating realistic practice environments is expensive and slow. By synthesizing thousands of diverse environments automatically, AWM enables an approach where learners can practice in an effectively unlimited variety of simulated contexts -- each with different tools, databases, and tasks. The out-of-distribution generalization result is particularly significant for education: it suggests that practicing across *many diverse simulations* transfers better than practicing in a single high-fidelity simulation. This connects to [curriculum learning](../methodologies/curriculum-learning.md) -- diversity of practice contexts may matter more than depth in any single context.
+
+## Dreamer 4: Offline Learning from Video Alone
+
+Hafner, Yan & Lillicrap (2025) introduce Dreamer 4, a scalable world model that achieves a landmark result: the first agent to obtain diamonds in Minecraft purely from offline data, without any environment interaction.[^88] The agent selects 20,000+ sequential actions from raw pixels using only a world model trained on pre-recorded video.
+
+**Key achievements:**
+- Real-time interactive inference on a single GPU
+- Accurately predicts object interactions and game mechanics in Minecraft
+- Learns general action conditioning from a small amount of data
+- Enables knowledge extraction from diverse unlabeled video
+
+**Learning application:** Dreamer 4 shows that AI agents can learn complex, long-horizon skills purely by watching -- without ever practicing in the real environment. This has profound implications for education: a learner could build substantial competence by observing expert demonstrations before any hands-on practice, analogous to surgical residents watching procedures before scrubbing in. The offline-only result challenges the assumption that interactive practice is always necessary for skill acquisition. Combined with [V-JEPA 2's](#v-jepa-2-learning-world-models-from-video) video-based world model and [DreamerV3's](#dreamerv3-general-world-model-agent) generality, Dreamer 4 establishes that *observation alone* can produce robust action policies when mediated by a sufficiently capable world model.
+
+```mermaid
+graph LR
+    subgraph predict["Predict-Before-Acting Spectrum"]
+        direction TB
+        ZS["ZeroSearch<br>Simulated web search"]
+        IC["InCoder-32B<br>Code execution prediction"]
+        FA["FOREAGENT<br>ML experiment prediction"]
+        D4["Dreamer 4<br>Action from video observation"]
+        AWM["Agent World Model<br>Synthetic environment training"]
+    end
+
+    subgraph transfer["Transfer Pathway"]
+        direction TB
+        OBS["Observe<br>(video/logs)"] --> PRED["Predict<br>(world model)"]
+        PRED --> ACT["Act<br>(real environment)"]
+        ACT -->|feedback| OBS
+    end
+
+    ZS -.->|"search → retrieval"| PRED
+    IC -.->|"code → hardware"| PRED
+    FA -.->|"hypothesis → result"| PRED
+    D4 -.->|"video → actions"| OBS
+    AWM -.->|"synthetic → real"| ACT
+
+    style predict fill:#f0f7ff,stroke:#1565C0
+    style transfer fill:#f0fff0,stroke:#2E7D32
+```
 
 ## Connections to Other Topics
 
@@ -892,3 +957,6 @@ The field is converging on a shared understanding that effective world models re
 [^83]: Li, X. et al. (2025). "A Comprehensive Survey on World Models for Embodied AI." [arXiv:2510.16732](https://arxiv.org/abs/2510.16732)
 [^84]: Feng, T. et al. (2025). "Embodied AI: From LLMs to World Models." [arXiv:2509.20021](https://arxiv.org/abs/2509.20021)
 [^85]: Yang, Z. et al. (2024). "OASIS: Open Agent Social Interaction Simulations with One Million Agents." [arXiv:2411.11581](https://arxiv.org/abs/2411.11581); MiroFish Contributors. (2026). "MiroFish: A Simple and Universal Swarm Intelligence Engine." https://github.com/666ghj/MiroFish
+[^86]: Zheng, J., Zhang, J., Luo, Y., Mao, Y., Gao, Y., Du, L., Chen, H. & Zhang, N. (2026). "Can We Predict Before Executing Machine Learning Agents?" *ACL 2026*. [arXiv:2601.05930](https://arxiv.org/abs/2601.05930)
+[^87]: Wang, Z., Xu, C., Liu, B., Wang, Y., Han, S., Yao, Z., Yao, H. & He, Y. (2026). "Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning." [arXiv:2602.10090](https://arxiv.org/abs/2602.10090)
+[^88]: Hafner, D., Yan, W. & Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." [danijar.com/dreamer4](https://danijar.com/dreamer4/); [arXiv:2509.24527](https://arxiv.org/abs/2509.24527)

@@ -2,7 +2,7 @@
 
 Catalog of every page in the wiki. Updated by ingest and lint operations — see [CLAUDE.md](CLAUDE.md) for the schema.
 
-**47 pages** across 5 categories.
+**48 pages** across 5 categories. Last updated: 2026-04-13.
 
 ## Core Concepts
 
@@ -60,6 +60,7 @@ Catalog of every page in the wiki. Updated by ingest and lint operations — see
 
 ## Research Sources
 
+- [AIGQ: End-to-End Hybrid Generative Query Recommendation (Xu et al. 2026)](wiki/research-sources/aigq-ecommerce-query-recommendation.md) — source summary of arXiv:2603.19710 — production query recommender at Taobao with IL-GRPO, hybrid offline–online deployment, +10.31% orders / +10.68% GMV.
 - [Key Papers and References](wiki/research-sources/key-papers.md) — This article is a curated, annotated reading list of the most important papers for understanding AI research automation — from foundational theoretical work to cutting-edge systems.
 - [Latest Papers](wiki/research-sources/latest-papers.md) — Auto-updated feed of recent AI research relevant to research automation, foundation models, agentic systems, and related topics.
 - [Quality Benchmark](wiki/research-sources/benchmark-trend.md) — Automated quality scores for the wiki's articles across all categories.

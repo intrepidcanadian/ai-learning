@@ -5,7 +5,7 @@ category: methodologies
 tags: []
 created: 2026-04-09
 updated: 2026-04-09
-sources: []
+sources: [raw/2603.19710v1.pdf]
 ---
 
 # Inference Optimization
@@ -191,6 +191,19 @@ Inference optimization is critical for [AI e-commerce learning](../frontier-topi
 - **Cost efficiency**: Serving millions of product queries per day demands aggressive optimization to control compute costs
 - **Edge deployment**: Running recommendation models on users' devices for privacy-preserving personalization
 
+#### Hybrid offline–online deployment
+
+A reusable production pattern for serving large LLMs under tight latency budgets, exemplified by AIGQ at Taobao (Xu et al., 2026).[^11] Rather than choosing between an expensive reasoning model and a fast personalization model, the system splits the work along the latency boundary:
+
+| Stage | Model | When it runs | What it does |
+|-------|-------|-------------|--------------|
+| **Offline** | Reasoning LLM (CoT) | Batch jobs, keyed by trigger | Generates rich candidate sets, cached in a lookup table |
+| **Online** | Personalization LLM | Per-request, in the latency path | Selects/conditions on user state, returns ranked output |
+
+At Taobao this is implemented as **AIGQ-Think** (offline, generates queries with chain-of-thought from a trigger query) and **AIGQ-Direct** (online, generates personalized queries from user state). The reasoning cost is amortized across many requests; the request path only sees the cheaper Direct model. The team also uses **special tokens to compress fixed schema slots** in the online prompt — see [prompt engineering](prompt-engineering.md) for the technique. Production A/B results: +10.31% orders, +10.68% GMV.
+
+This pattern generalizes beyond e-commerce: any system where (a) an expensive model produces reusable artifacts keyed by a low-cardinality input, and (b) a cheap model conditions on per-request state, can use the same offline–online split. It is complementary to quantization and speculative decoding rather than a substitute — the offline model can itself be quantized, and the online model can use speculative decoding.
+
 ### Application to Real-World Learning
 
 Inference optimization directly enables accessible AI education:
@@ -259,3 +272,5 @@ Inference optimization directly enables accessible AI education:
 [^9]: RocketKV Authors. (2025). "RocketKV: Accelerating Long-Context LLM Inference via Two-Stage KV Cache Compression." arXiv:2502.14051. https://arxiv.org/abs/2502.14051
 
 [^10]: ZipServ Authors. (2026). "ZipServ: Fast and Memory-Efficient LLM Inference with Hardware-Aware Lossless Compression." arXiv:2603.17435. https://arxiv.org/abs/2603.17435
+
+[^11]: Xu, J., Zou, J., Yang, R., Geng, Z., Liu, Q., & Tang, H. (2026). "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation." arXiv:2603.19710. https://arxiv.org/abs/2603.19710

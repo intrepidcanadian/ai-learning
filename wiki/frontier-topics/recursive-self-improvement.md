@@ -4,7 +4,7 @@ type: concept
 category: frontier-topics
 tags: []
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-13
 sources: []
 ---
 
@@ -130,9 +130,12 @@ Zhuang et al. (2026) introduced TRT, an iterative self-improvement framework tha
 
 Venkatraman et al. (2025) proposed RSA, a test-time scaling method inspired by evolutionary algorithms that iteratively refines a population of candidate reasoning chains through recursive aggregation.[^6]
 
-**Results:** A 4B-parameter model (Qwen3-4B) achieved competitive performance with much larger models like DeepSeek-R1 and o3-mini across AIME-25, HMMT-25, and LiveCodeBench.
+**Results:**
+- Qwen3-4B-Instruct with RSA achieved competitive performance with much larger models (DeepSeek-R1, o3-mini) across AIME-25, HMMT-25, and LiveCodeBench
+- Gemini 3 Flash with RSA reached near-top of the ARC-AGI-2 public leaderboard
+- Consistently outperformed purely parallel and sequential scaling strategies across all tested benchmarks
 
-**Learning connection:** Mirrors collaborative learning and iterative refinement -- generating multiple candidate solutions, combining the best elements, and repeating. For education, this suggests "ensemble thinking" strategies.
+**Learning connection:** RSA mirrors collaborative learning and iterative refinement -- generating multiple candidate solutions, combining the best elements, and repeating. The ARC-AGI-2 result is particularly striking: a relatively small model with RSA matches models orders of magnitude larger, demonstrating that *how* you combine reasoning attempts matters more than raw model scale. For education, this suggests "ensemble thinking" strategies where students generate multiple solution approaches, then synthesize the best elements into a refined answer.
 
 ### Self-Developing: Discovering Improvement Algorithms
 
@@ -313,7 +316,16 @@ Recommendation systems in [AI for e-commerce](ai-ecommerce-learning.md) benefit 
 
 The establishment of a dedicated ICLR 2026 Workshop on AI with Recursive Self-Improvement (April 26-27, 2026, Rio de Janeiro) signals that this is now a mainstream research area. The workshop notes that "LLM agents now rewrite their own codebases or prompts, scientific discovery pipelines schedule continual fine-tuning, and robotics stacks patch controllers from streaming telemetry."[^10]
 
-The workshop organizes contributions around five lenses: change targets, temporal regime, mechanisms/drivers, operating contexts, and evidence of improvement. Confirmed speakers include Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Graham Neubig (CMU/OpenHands), and Yoshua Bengio-affiliated researchers from Mila.[^10]
+The workshop organizes contributions around six lenses[^62]:
+
+1. **What changes** — parameters, world models, memory, tools and skills, architectures
+2. **When** — within episodes, at test-time, post-deployment
+3. **How** — reward learning, imitation, evolutionary search
+4. **Where** — web/UI, games, robotics, science, enterprise
+5. **Safety** — long-horizon stability, regression risk, alignment drift
+6. **Evaluation** — benchmarking methodologies for measuring genuine improvement
+
+Confirmed speakers include Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Graham Neubig (CMU/OpenHands), Yu Su (Ohio State), Arman Cohan (Yale), Matej Balog (Google DeepMind), Bang Liu (Mila), and Yuandong Tian.[^62]
 
 ### Notable Accepted Papers
 
