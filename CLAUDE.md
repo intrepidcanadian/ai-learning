@@ -185,7 +185,18 @@ Lint produces a **report** (markdown, in chat or filed to `wiki/research-sources
 ## Tooling
 
 ### Today: just markdown + this schema
-Plain `.md` files, plain frontmatter, relative links, the `index.md` and `log.md` indices. No build step. No database. No embeddings. The LLM operates on the raw filesystem.
+Plain `.md` files, plain frontmatter, relative links, the `index.md` and `log.md` indices. No database. No embeddings. The LLM operates on the raw filesystem — the site builder below is optional and only exists for human browsing.
+
+### Website: `scripts/build_site.py`
+For browsing the wiki in a browser (not just Obsidian), there's a static site builder at `scripts/build_site.py`. It reads `wiki/<category>/*.md` (plus `index.md` at the repo root as the landing page), strips YAML frontmatter, converts markdown to HTML, and writes everything into `site/` at the repo root. `site/` is gitignored — it's build output, not source.
+
+```bash
+python3 scripts/build_site.py            # build once → site/index.html
+python3 scripts/build_site.py --serve    # build + serve on http://localhost:4321
+python3 scripts/build_site.py --clean    # delete site/
+```
+
+Light wrapper around the Python `markdown` package (extensions: tables, fenced_code, toc, nl2br, footnotes). Handles same-category relative links (`foo.md` → `foo.html`) and `index.md`-style `wiki/<cat>/<page>.md` links. No live reload, no search — regenerate after ingests. This replaces the old `archive/build.py`, which targeted the pre-2026-04-09 directory layout. `archive/` remains frozen for history.
 
 ### When the wiki grows: `qmd`
 Once `wiki/` exceeds a few hundred pages, reading `index.md` linearly stops scaling. At that point, install [qmd](https://github.com/qmd) — a local hybrid BM25/vector search engine for markdown directories. It has both a CLI (shell out to it) and an MCP server (use as a native tool). Both work on relative-path markdown without modification.
@@ -224,7 +235,7 @@ For presentation-style answers, Marp markdown works in Obsidian via the Marp plu
 - **Never use `[[wikilinks]]`.** Relative `[text](path.md)` only.
 - **Never silently resolve contradictions.** Flag them in the page text and mention in the log.
 - **Never answer a query from memory** when the wiki has the information. Read the pages.
-- **Never run the old `archive/build.py` or `archive/benchmark_wiki.py`** as part of the new workflow. They're kept for history, not for use.
+- **Never run `archive/benchmark_wiki.py`** — it's kept for history, not for use. (The old `archive/build.py` is also frozen; its replacement is `scripts/build_site.py`, which points at `wiki/` and outputs to `site/`.)
 - **Never re-introduce the old "Quality vs Coverage" improvement loop.** That mental model is replaced by ingest/query/lint. Don't run benchmark scoring against the new wiki — the score weights were tuned for the old publication-mode framing and would mislead.
 
 ---

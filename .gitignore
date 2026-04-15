@@ -1,0 +1,18 @@
+# Obsidian — vault config is personal, not part of the wiki
+.obsidian/
+.trash/
+
+# macOS
+.DS_Store
+
+# Python (for scripts/)
+__pycache__/
+*.pyc
+.venv/
+
+# Editor
+*.swp
+.idea/
+
+# Generated site (build output from scripts/build_site.py)
+site/

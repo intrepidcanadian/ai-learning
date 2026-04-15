@@ -9,15 +9,39 @@ This is **not** an encyclopedia. It's a compounding artifact that grows with eve
 ## Layout
 
 ```
-raw/        sources you drop in (PDFs, clipped articles, transcripts) — immutable
-wiki/       LLM-maintained markdown organized into 5 categories — the knowledge base
-CLAUDE.md   the schema (conventions + ingest/query/lint workflows)
-index.md    catalog of every wiki page with one-line summaries
-log.md      append-only record of every operation
-archive/    old static-site tooling (build.py, benchmark loop, generated HTML)
+raw/                  sources you drop in (PDFs, clipped articles, transcripts) — immutable
+wiki/                 LLM-maintained markdown organized into 5 categories — the knowledge base
+CLAUDE.md             the schema (conventions + ingest/query/lint workflows)
+index.md              catalog of every wiki page with one-line summaries
+log.md                append-only record of every operation
+scripts/              maintenance scripts, including the static site builder
+site/                  build output from scripts/build_site.py (gitignored)
+archive/              old static-site tooling (build.py, benchmark loop, generated HTML)
 ```
 
 Open the repo in Obsidian and browse `wiki/` like a normal vault. Use the graph view to see the shape of the wiki; use Dataview queries against the YAML frontmatter for dynamic views.
+
+---
+
+## Browsing as a website
+
+If you'd rather read the wiki in a browser than in Obsidian, there's a static site builder at `scripts/build_site.py`. It reads `wiki/<category>/*.md` plus the root `index.md` (as the landing page), strips YAML frontmatter, and writes HTML into `site/`.
+
+```bash
+# one-shot build → open site/index.html manually
+python3 scripts/build_site.py
+
+# build + serve locally at http://localhost:4321
+python3 scripts/build_site.py --serve
+
+# build + serve on a different port
+python3 scripts/build_site.py --serve --port 8080
+
+# delete site/
+python3 scripts/build_site.py --clean
+```
+
+Requires the Python `markdown` package (`pip install markdown`). `site/` is gitignored — it's build output, regenerate it after every ingest.
 
 ---
 
