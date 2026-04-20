@@ -255,8 +255,7 @@ Computational cost directly affects who can access AI-powered learning:
 
 **Methodologies:**
 - [Inference Optimization](inference-optimization.md) — reducing deployment costs
-- [Test-Time Compute](test-time-compute.md) — compute allocation at inference
-- [Test-Time Compute Scaling](test-time-compute-scaling.md) — adaptive compute budget strategies
+- [Test-Time Compute Scaling](test-time-compute.md) — compute allocation and adaptive budget strategies at inference
 - [Evaluation Methodology](evaluation-methodology.md) — measuring cost-performance trade-offs
 - [Synthetic Data Generation](synthetic-data-generation.md) — reducing data collection costs
 - [Active Learning](active-learning.md) — reducing labeling costs through intelligent query selection

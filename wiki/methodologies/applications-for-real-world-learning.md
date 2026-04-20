@@ -4,7 +4,7 @@ type: concept
 category: methodologies
 tags: []
 created: 2026-04-09
-updated: 2026-04-13
+updated: 2026-04-20
 sources: []
 ---
 
@@ -268,6 +268,103 @@ This represents a shift from lab-based evaluations to production deployments wit
 </svg>
 ```
 
+### AI Adaptive Learning Platforms: The 2026 Meta-Landscape
+
+Multiple systematic reviews published in early 2026 converge on the state of AI-enabled adaptive learning platforms (ALPs):[^11]
+
+**What works:**
+- ALPs that dynamically adjust instructional content and pathways produce measurably better learning outcomes than static delivery
+- Real-time analysis of learning behaviors enables precise resource recommendation and pathway optimization
+- Platforms emphasizing real-world application (connecting abstract ideas with practical scenarios) show the strongest engagement and transfer
+- Corporate training deployments report faster completion with superior mastery and better on-the-job application
+
+**What doesn't (yet):**
+- Clinical judgment and complex decision-making skills resist improvement from AI tutoring alone — foundational knowledge responds best
+- 22% skill retention drop at follow-up in the Chen (2025) RCT suggests durability remains a challenge
+- 15% of AI-generated path adjustments in the Coze platform were unexplainable, raising transparency concerns
+
+**The OECD signal:** The 2026 Digital Education Outlook recommends moving beyond general-purpose AI tools toward **purpose-built educational AI** designed specifically to produce durable learning gains — not just repurposed chatbots with educational prompts.[^12]
+
+```svg
+<svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <text x="360" y="25" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">From Simulation to Real-World Skill: The AI Learning Pipeline</text>
+
+  <!-- Stage 1: Simulation -->
+  <rect x="20" y="50" width="160" height="120" rx="10" fill="#e3f2fd" stroke="#1565C0" stroke-width="2"/>
+  <text x="100" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565C0">1. Simulate</text>
+  <text x="100" y="95" text-anchor="middle" font-size="9" fill="#333">World models predict</text>
+  <text x="100" y="109" text-anchor="middle" font-size="9" fill="#333">outcomes before acting</text>
+  <line x1="40" y1="125" x2="160" y2="125" stroke="#1565C0" stroke-width="0.5"/>
+  <text x="100" y="142" text-anchor="middle" font-size="8" fill="#1565C0">Simia, AWM, Genie 3</text>
+  <text x="100" y="158" text-anchor="middle" font-size="8" fill="#1565C0">SpatialEvo, DreamerV3</text>
+
+  <!-- Arrow 1-2 -->
+  <line x1="185" y1="110" x2="210" y2="110" stroke="#475569" stroke-width="2"/>
+  <polygon points="208,105 218,110 208,115" fill="#475569"/>
+
+  <!-- Stage 2: Recurse -->
+  <rect x="220" y="50" width="160" height="120" rx="10" fill="#fff3e0" stroke="#FF9800" stroke-width="2"/>
+  <text x="300" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">2. Self-Improve</text>
+  <text x="300" y="95" text-anchor="middle" font-size="9" fill="#333">Recursive refinement</text>
+  <text x="300" y="109" text-anchor="middle" font-size="9" fill="#333">of skills &amp; strategies</text>
+  <line x1="240" y1="125" x2="360" y2="125" stroke="#FF9800" stroke-width="0.5"/>
+  <text x="300" y="142" text-anchor="middle" font-size="8" fill="#E65100">TRT, LADDER, SkillClaw</text>
+  <text x="300" y="158" text-anchor="middle" font-size="8" fill="#E65100">HiLL, Skill0, GASP</text>
+
+  <!-- Arrow 2-3 -->
+  <line x1="385" y1="110" x2="410" y2="110" stroke="#475569" stroke-width="2"/>
+  <polygon points="408,105 418,110 408,115" fill="#475569"/>
+
+  <!-- Stage 3: Personalize -->
+  <rect x="420" y="50" width="160" height="120" rx="10" fill="#e8f5e9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="500" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E7D32">3. Personalize</text>
+  <text x="500" y="95" text-anchor="middle" font-size="9" fill="#333">Adapt to individual</text>
+  <text x="500" y="109" text-anchor="middle" font-size="9" fill="#333">learner needs</text>
+  <line x1="440" y1="125" x2="560" y2="125" stroke="#2E7D32" stroke-width="0.5"/>
+  <text x="500" y="142" text-anchor="middle" font-size="8" fill="#2E7D32">GuideAI, EduAlign</text>
+  <text x="500" y="158" text-anchor="middle" font-size="8" fill="#2E7D32">Coze platform, SLOW</text>
+
+  <!-- Arrow 3-4 -->
+  <line x1="585" y1="110" x2="610" y2="110" stroke="#475569" stroke-width="2"/>
+  <polygon points="608,105 618,110 608,115" fill="#475569"/>
+
+  <!-- Stage 4: Apply -->
+  <rect x="620" y="50" width="85" height="120" rx="10" fill="#fce4ec" stroke="#C62828" stroke-width="2"/>
+  <text x="662" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#C62828">4. Apply</text>
+  <text x="662" y="95" text-anchor="middle" font-size="9" fill="#333">Real-world</text>
+  <text x="662" y="109" text-anchor="middle" font-size="9" fill="#333">skill transfer</text>
+  <line x1="632" y1="125" x2="692" y2="125" stroke="#C62828" stroke-width="0.5"/>
+  <text x="662" y="142" text-anchor="middle" font-size="8" fill="#C62828">Medicine</text>
+  <text x="662" y="158" text-anchor="middle" font-size="8" fill="#C62828">Commerce</text>
+
+  <!-- Feedback loop -->
+  <path d="M 662 175 L 662 200 Q 662 210 652 210 L 110 210 Q 100 210 100 200 L 100 175" stroke="#7B1FA2" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <polygon points="95,177 100,167 105,177" fill="#7B1FA2"/>
+  <text x="380" y="228" text-anchor="middle" font-size="9" fill="#7B1FA2">Performance data feeds back to improve simulation fidelity and self-improvement strategies</text>
+
+  <!-- Evidence boxes -->
+  <rect x="20" y="250" width="220" height="75" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="130" y="270" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Evidence: RCTs</text>
+  <text x="130" y="288" text-anchor="middle" font-size="9">Medical AI: d=0.72 (Chen 2025)</text>
+  <text x="130" y="302" text-anchor="middle" font-size="9">Taiwan schools: +0.15 SD</text>
+  <text x="130" y="316" text-anchor="middle" font-size="9">Equity: largest gains for weakest</text>
+
+  <rect x="260" y="250" width="200" height="75" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="360" y="270" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Challenge: Durability</text>
+  <text x="360" y="288" text-anchor="middle" font-size="9">22% retention drop at follow-up</text>
+  <text x="360" y="302" text-anchor="middle" font-size="9">OECD: 17% worse after removal</text>
+  <text x="360" y="316" text-anchor="middle" font-size="9">Scaffolding withdrawal is key</text>
+
+  <rect x="480" y="250" width="220" height="75" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+  <text x="590" y="270" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Frontier: Collective</text>
+  <text x="590" y="288" text-anchor="middle" font-size="9">SkillClaw: cross-user evolution</text>
+  <text x="590" y="302" text-anchor="middle" font-size="9">Simia: LLM-as-environment</text>
+  <text x="590" y="316" text-anchor="middle" font-size="9">Ecosystem-level improvement</text>
+</svg>
+```
+
+*Diagram: The AI learning pipeline proceeds from simulation (building predictive models) through recursive self-improvement (refining strategies) to personalization (adapting to individual learners) and finally real-world application — with performance data feeding back to improve every stage.*
+
 ## Current State / Latest Developments
 
 ### 2026 Landscape
@@ -282,6 +379,8 @@ The field is converging around several key trends:
 6. **Preference-optimized tutors**: DPO training on tutoring dialogues produces open-source models that match GPT-4o teaching quality, enabling scalable deployment[^7]
 7. **Real classroom evidence**: Deployed AI tutors show measurable learning gains (+0.15 SD) in randomized controlled trials across multiple schools[^9]
 8. **Multi-dimensional optimization**: Frameworks like EduAlign show that tutoring quality requires joint optimization of helpfulness, personalization, and creativity — not just factual accuracy[^8]
+9. **LLM-as-environment**: Simia shows LLMs can replace bespoke training environments entirely, drastically lowering the cost of creating diverse practice simulations[^11]
+10. **Collective skill evolution**: SkillClaw demonstrates that user-discovered improvements can propagate across an entire platform instantly, enabling ecosystem-level learning[^13]
 
 ### Key Metrics
 
@@ -356,3 +455,9 @@ The field is converging around several key trends:
 [^9]: Chung, A. T.-H., Zhang, B., Kung, L.-C., Bastani, H., & Bastani, O. (2026). "Effective Personalized AI Tutors via LLM-Guided Reinforcement Learning." SSRN 6423358. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6423358
 
 [^10]: Chen, Y. (2025). "Evaluation of the impact of AI-driven personalized learning platform on medical students' learning performance." *Frontiers in Medicine*. [PMC12465117](https://pmc.ncbi.nlm.nih.gov/articles/PMC12465117/)
+
+[^11]: Multiple systematic reviews (2026): Rasool, A. et al. "AI in personalized learning: A global systematic review." *ScienceDirect*; Shaik, T. et al. "AI-based personalised learning in education: A systematic literature review." *Discover AI*, Springer Nature; Zafari, M. et al. "AI-enabled adaptive learning platforms: A review." *ScienceDirect*.
+
+[^12]: OECD (2026). *Digital Education Outlook 2026*. Organisation for Economic Co-operation and Development.
+
+[^13]: Ma, Z. et al. (2026). "SkillClaw: Let Skills Evolve Collectively with Agentic Evolver." [arXiv:2604.08377](https://arxiv.org/abs/2604.08377)

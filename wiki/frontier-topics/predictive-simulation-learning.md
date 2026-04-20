@@ -2,9 +2,9 @@
 title: Predictive Learning Through Simulation
 type: concept
 category: frontier-topics
-tags: []
+tags: [world-models, simulation, self-evolving]
 created: 2026-04-09
-updated: 2026-04-13
+updated: 2026-04-20
 sources: []
 ---
 
@@ -296,6 +296,20 @@ Wang et al. (February 2026) introduce Agent World Model (AWM), a fully synthetic
 
 **Learning application:** AWM addresses a scaling bottleneck for simulation-based education: creating realistic practice environments is expensive and slow. By synthesizing thousands of diverse environments automatically, AWM enables an approach where learners can practice in an effectively unlimited variety of simulated contexts -- each with different tools, databases, and tasks. The out-of-distribution generalization result is particularly significant for education: it suggests that practicing across *many diverse simulations* transfers better than practicing in a single high-fidelity simulation. This connects to [curriculum learning](../methodologies/curriculum-learning.md) -- diversity of practice contexts may matter more than depth in any single context.
 
+## Simia: LLM-Simulated Environments Replace Bespoke Testbeds
+
+Li et al. (November 2025) address the brittleness of agent training by demonstrating that LLMs themselves can serve as environment simulators, eliminating the need for handcrafted testbed infrastructure.[^89] Simia introduces two complementary training pipelines:
+
+- **Simia-SFT:** Amplifies small seed sets of expert trajectories into diverse training data through LLM-simulated environment feedback, in an environment-agnostic manner
+- **Simia-RL:** Enables RL-based agent training entirely through LLM-simulated feedback, with no actual environment implementation required
+
+**Key results:**
+- Fine-tuned open models consistently improve across multiple benchmarks
+- Performance exceeds GPT-4o and approaches o1-mini on τ²-Bench
+- Eliminates dependency on bespoke testbed engineering
+
+**Learning application:** Simia represents a paradigm shift for simulation-based education: instead of building expensive, domain-specific training environments, the LLM *becomes* the environment. A medical education system wouldn't need a custom patient simulator -- the LLM simulates patient responses. A business school wouldn't need purpose-built market simulations -- the LLM simulates market dynamics. This dramatically lowers the cost of creating diverse practice environments, connecting to [AWM's](#agent-world-model-synthetic-environments-at-scale) finding that training across many diverse simulated contexts produces better transfer than a single high-fidelity simulation. The key tradeoff is fidelity: LLM-simulated environments may hallucinate implausible states, requiring the same verification mechanisms that [WAV](#self-improving-world-models-the-wav-framework) applies to world model predictions.
+
 ## Dreamer 4: Offline Learning from Video Alone
 
 Hafner, Yan & Lillicrap (2025) introduce Dreamer 4, a scalable world model that achieves a landmark result: the first agent to obtain diamonds in Minecraft purely from offline data, without any environment interaction.[^88] The agent selects 20,000+ sequential actions from raw pixels using only a world model trained on pre-recorded video.
@@ -335,6 +349,19 @@ graph LR
     style predict fill:#f0f7ff,stroke:#1565C0
     style transfer fill:#f0fff0,stroke:#2E7D32
 ```
+
+## SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Environments
+
+Li et al. (April 2026) address a critical bottleneck in spatial reasoning: expensive geometric annotation.[^90] SpatialEvo leverages a unique property of 3D reasoning -- ground truth is a deterministic consequence of geometry, computable exactly from point clouds and camera poses -- to create zero-noise interactive oracles from unannotated 3D scenes.
+
+**Key innovations:**
+- **Deterministic Geometric Environment (DGE):** Formalizes 16 spatial reasoning task categories with explicit validation rules, converting raw 3D scenes into objective feedback oracles
+- **Co-evolving dual roles:** A shared-parameter policy simultaneously generates spatially valid questions (questioner) and derives answers against verified ground truth (solver)
+- **Task-Adaptive Scheduler:** Dynamically concentrates training on the model's weakest areas without manual intervention
+
+**Results:** Highest average scores at both 3B and 7B parameter scales across nine spatial reasoning benchmarks, while maintaining general visual understanding.
+
+**Learning application:** SpatialEvo demonstrates a powerful paradigm for self-supervised simulation-based learning: when the domain has deterministic ground truth, the environment itself becomes an inexhaustible teacher. The co-evolving questioner-solver architecture generates an organic curriculum -- the system asks itself progressively harder questions in areas where it struggles. For spatial learning in education (architecture, engineering, surgery), SpatialEvo suggests that AI systems could generate unlimited practice problems with guaranteed-correct answers from raw 3D scans of real environments. The task-adaptive scheduler implements what educational psychologists call "desirable difficulty" -- focusing practice on weak areas rather than reinforcing strengths. This connects to [LADDER's](recursive-self-improvement.md#ladder-recursive-problem-decomposition) recursive problem decomposition and [Agent0's](recursive-self-improvement.md#agent0-self-evolving-agents-from-zero-data) co-evolutionary curriculum -- all three generate training curricula without human annotation, but SpatialEvo uniquely leverages geometric determinism to guarantee correctness.
 
 ## Connections to Other Topics
 
@@ -960,3 +987,5 @@ The field is converging on a shared understanding that effective world models re
 [^86]: Zheng, J., Zhang, J., Luo, Y., Mao, Y., Gao, Y., Du, L., Chen, H. & Zhang, N. (2026). "Can We Predict Before Executing Machine Learning Agents?" *ACL 2026*. [arXiv:2601.05930](https://arxiv.org/abs/2601.05930)
 [^87]: Wang, Z., Xu, C., Liu, B., Wang, Y., Han, S., Yao, Z., Yao, H. & He, Y. (2026). "Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning." [arXiv:2602.10090](https://arxiv.org/abs/2602.10090)
 [^88]: Hafner, D., Yan, W. & Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." [danijar.com/dreamer4](https://danijar.com/dreamer4/); [arXiv:2509.24527](https://arxiv.org/abs/2509.24527)
+[^89]: Li, Y., Inan, H. A., Yue, X., Chen, W.-N., Wutschitz, L., Kulkarni, J., Poovendran, R., Sim, R. & Rajmohan, S. (2025). "Simulating Environments with Reasoning Models for Agent Training." [arXiv:2511.01824](https://arxiv.org/abs/2511.01824)
+[^90]: Li, D. et al. (2026). "SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Geometric Environments." [arXiv:2604.14144](https://arxiv.org/abs/2604.14144)

@@ -2,7 +2,7 @@
 
 Catalog of every page in the wiki. Updated by ingest and lint operations — see [CLAUDE.md](CLAUDE.md) for the schema.
 
-**48 pages** across 5 categories. Last updated: 2026-04-13.
+**47 pages** across 5 categories. Last updated: 2026-04-20.
 
 ## Core Concepts
 
@@ -39,8 +39,7 @@ Catalog of every page in the wiki. Updated by ingest and lint operations — see
 - [Prompt Engineering](wiki/methodologies/prompt-engineering.md) — Prompt engineering is the practice of designing, optimizing, and automating the natural language instructions given to AI models to elicit desired behaviors.
 - [Synthetic Data Generation](wiki/methodologies/synthetic-data-generation.md) — Synthetic data generation is the practice of using AI models to create artificial training data that mimics the statistical properties of real data.
 - [Template-Free Research](wiki/methodologies/template-free-research.md) — Template-Free Research is an operating mode of The AI Scientist that conducts open-ended scientific exploration without requiring human-provided code templates .
-- [Test-Time Compute Scaling](wiki/methodologies/test-time-compute-scaling.md) — Test-time compute scaling is the practice of allocating additional computation during inference (rather than training) to improve AI model performance on individual problems.
-- [Test-Time Compute Scaling](wiki/methodologies/test-time-compute.md) — Test-time compute scaling (also called inference-time scaling) is the practice of allocating additional computational resources during inference — not training — to improve an AI model's reasoning, accuracy, and probl...
+- [Test-Time Compute Scaling](wiki/methodologies/test-time-compute.md) — Test-time compute scaling (also called inference-time scaling) is the practice of allocating additional computational resources during inference — not training — to improve an AI model's reasoning, accuracy, and problem-solving ability.
 - [Vision-Language Model Integration](wiki/methodologies/vlm-integration.md) — Vision-Language Model (VLM) Integration refers to the use of multi-modal AI models that process both images and text within automated research pipelines.
 - [Wiki Quality Benchmarking](wiki/methodologies/wiki-quality-benchmarking.md) — This wiki uses an automated benchmarking system to measure and improve article quality over time.
 - [World Models](wiki/methodologies/world-models.md) — A world model is a learned internal representation that allows an AI agent to predict how the environment will evolve in response to actions — essentially an "imagination engine" that enables planning, counterfactual...

@@ -2,9 +2,9 @@
 title: "Cross-Cutting Connections: Simulation, Recursion, and Commerce"
 type: concept
 category: frontier-topics
-tags: []
+tags: [cross-cutting, self-evolving, ecosystem]
 created: 2026-04-09
-updated: 2026-04-13
+updated: 2026-04-20
 sources: []
 ---
 
@@ -1249,7 +1249,7 @@ The multi-agent dynamic pricing results (MADDPG achieving competitive fairness) 
 
 ## Connection 82: Test-Time Compute Scaling Democratizes AI-Assisted Learning
 
-[Test-time compute scaling](../methodologies/test-time-compute-scaling.md) introduces the principle that smaller, cheaper models can match larger model performance by "thinking harder" on difficult problems. The T2 scaling laws (Roberts et al., 2026) show that 30-50% smaller models, when allowed more inference compute, outperform larger models at the same total compute budget.[^19] For the triad:
+[Test-time compute scaling](../methodologies/test-time-compute.md) introduces the principle that smaller, cheaper models can match larger model performance by "thinking harder" on difficult problems. The T2 scaling laws (Roberts et al., 2026) show that 30-50% smaller models, when allowed more inference compute, outperform larger models at the same total compute budget.[^19] For the triad:
 
 - **Simulation:** World models can be smaller if they allocate more compute to complex scenario predictions — a physics simulation doesn't need to think hard about gravity but should think carefully about turbulence
 - **Recursion:** Self-improving systems can use test-time scaling as a cheaper alternative to retraining — improve per-problem performance without updating weights, connecting TRT's perfect math accuracy to the recursive improvement loop
@@ -1302,7 +1302,7 @@ The convergence point: effective AI tutoring requires the same predict-improve-a
 - [Computational Cost](../methodologies/computational-cost.md) -- Efficiency as equity enabler
 - [Domain Specificity](../methodologies/domain-specificity.md) -- Domain adaptation for learning
 - [E-Commerce Applications](e-commerce-applications.md) -- Practical commerce AI systems
-- [Test-Time Compute Scaling](../methodologies/test-time-compute-scaling.md) -- Adaptive inference scaling laws
+- [Test-Time Compute Scaling](../methodologies/test-time-compute.md) -- Adaptive inference scaling laws
 
 ## Connection 84: The Predict-Before-Executing Spectrum Connects All Three Domains (April 2026)
 
@@ -1360,6 +1360,62 @@ The connections:
 5. **Hybrid CF-MF-RL** (commerce → education): The integration of collaborative filtering, matrix factorization, and reinforcement learning in a single e-commerce framework provides an architectural template for educational platforms. CF captures peer learning patterns, MF discovers latent learning factors, and RL optimizes long-term learning trajectories -- each learning paradigm contributing a different dimension.[^106]
 
 6. **Medical AI RCT** (education → recursion): The Chen (2025) randomized controlled trial showing Cohen's d=0.72 improvement and a strong equity effect (largest gains for weakest students) provides the strongest evidence yet that AI-driven personalization produces genuine learning improvements -- not just test score optimization. The behavioral changes (41.5% more study time, 48.3% more reading) indicate recursive improvement in the *learning process itself*, not just outcomes.[^107]
+
+## Connection 85: Self-Evolving Ecosystems — From Individual to Collective Learning (April 2026)
+
+A new wave of April 2026 papers reveals a shift from individual agent improvement to **ecosystem-level self-evolution** — where skills, environments, and learning strategies evolve collectively across users, domains, and modalities. This pattern connects all three pillars of the wiki and has profound implications for how AI helps humans learn real-world skills.
+
+```mermaid
+graph TD
+    subgraph environments["SELF-EVOLVING ENVIRONMENTS"]
+        SIM["Simia<br>LLM = Environment<br>No testbed needed"]
+        SPAT["SpatialEvo<br>Deterministic oracles<br>Self-generated curriculum"]
+    end
+
+    subgraph skills["SELF-EVOLVING SKILLS"]
+        CLAW["SkillClaw<br>Cross-user skill evolution<br>Shared skill repository"]
+        TRT_C["TRT<br>100% AIME via<br>recursive self-verification"]
+    end
+
+    subgraph commerce["SELF-EVOLVING COMMERCE"]
+        MEIT["Meituan Xiaomei<br>Delegation-first<br>Zero-screen transactions"]
+        DELE["New literacy:<br>Delegate vs. Search"]
+    end
+
+    subgraph learn["LEARNING APPLICATIONS"]
+        L1["Any LLM becomes<br>a practice environment"]
+        L2["Community knowledge<br>improves all learners"]
+        L3["Preference articulation<br>as core competency"]
+    end
+
+    SIM -->|"environment as service"| L1
+    SPAT -->|"unlimited self-graded<br>practice"| L1
+    CLAW -->|"collective discovery<br>propagation"| L2
+    TRT_C -->|"self-verification<br>as study skill"| L2
+    MEIT -->|"delegation requires<br>preference clarity"| L3
+    DELE -->|"new professional<br>literacy"| L3
+
+    L1 -.->|"simulated storefronts<br>for agent training"| MEIT
+    L2 -.->|"evolved skills improve<br>simulation fidelity"| SIM
+    L3 -.->|"articulated preferences<br>feed recursive improvement"| CLAW
+
+    style environments fill:#e3f2fd,stroke:#1565c0
+    style skills fill:#fff3e0,stroke:#ff9800
+    style commerce fill:#e8f5e9,stroke:#2e7d32
+    style learn fill:#fce4ec,stroke:#c62828
+```
+
+The connections:
+
+1. **Simia** (simulation → all): By showing that LLMs can replace bespoke environment implementations entirely, Simia removes the last major barrier to scaling simulation-based learning. Any domain — medical, legal, business, engineering — can now have unlimited practice environments without custom development. This connects the "environment creation" bottleneck to the "curriculum diversity" solution that [AWM](#connection-84-the-predict-before-executing-spectrum-connects-all-three-domains-april-2026) demonstrated with synthetic environments.
+
+2. **SpatialEvo** (simulation → recursion): When the domain has deterministic ground truth (geometry, math, code), the environment itself becomes an inexhaustible teacher through self-generated curricula. The co-evolving questioner-solver architecture generates harder questions exactly where the model struggles — connecting simulation fidelity with [LADDER's](recursive-self-improvement.md#ladder-recursive-problem-decomposition) recursive difficulty generation and [Agent0's](recursive-self-improvement.md#agent0-self-evolving-agents-from-zero-data) co-evolutionary curriculum.
+
+3. **SkillClaw** (recursion → education): When one user's discovery propagates to all users immediately, the system exhibits collective recursive improvement. For educational platforms, this means a tutoring system serving thousands of students could aggregate pedagogical discoveries across all sessions — if one interaction finds a better explanation for a tricky concept, every future student benefits immediately.
+
+4. **Meituan Xiaomei** (commerce → education): Delegation-first commerce (where users transfer decision authority to agents) creates a new learning challenge: consumers must learn to articulate preferences clearly rather than browse effectively. This shifts the educational imperative from "information literacy" to "preference literacy" — a new competency that e-commerce professionals and consumers alike must develop.
+
+5. **The ecosystem pattern**: Across all three domains, the April 2026 results show a consistent shift from *individual* optimization to *ecosystem* evolution. Simia makes environments shareable; SkillClaw makes skills collective; Meituan makes preferences portable. For AI-assisted learning of real-world skills, this suggests the next generation of platforms won't just personalize to individual learners but will learn from the collective — discovering effective teaching strategies that no single interaction could reveal, much like how [CORAL](recursive-self-improvement.md#coral-autonomous-multi-agent-evolution-for-open-ended-discovery) achieves 3-10× improvement rates through population-based evolution.
 
 ## References
 

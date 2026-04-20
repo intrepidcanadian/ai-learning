@@ -4,7 +4,7 @@ type: concept
 category: research-sources
 tags: []
 created: 2026-04-09
-updated: 2026-04-13
+updated: 2026-04-20
 sources: []
 ---
 
@@ -108,6 +108,7 @@ Understanding these traditions helps readers navigate the reading list strategic
 | **ShopSimulator** | 2026 | Large-scale RL benchmark for LLM shopping agents; best models achieve <40% success. [arXiv:2601.18225](https://arxiv.org/abs/2601.18225) |
 | **Xu et al. "AIGQ"** | 2026 | First end-to-end generative pre-search query recommender; deployed at Taobao with hybrid offline–online split, IL-GRPO with dual-level rewards, +10.31% orders / +10.68% GMV in production A/B. Full summary: [aigq-ecommerce-query-recommendation.md](aigq-ecommerce-query-recommendation.md). [arXiv:2603.19710](https://arxiv.org/abs/2603.19710) |
 | **Hybrid CF-MF-RL Framework** | 2026 | Scalable hybrid combining collaborative filtering, matrix factorisation, and RL for unified recommendation + pricing + supply chain. [DOI: 10.1038/s41598-026-37437-7](https://www.nature.com/articles/s41598-026-37437-7) |
+| **Greeven et al. "China AI Agents"** | 2026 | HBR analysis of delegation-first commerce via Meituan Xiaomei; AI as autonomous executor, not assistant. *Harvard Business Review*, April 2026. |
 
 ### World Models and Simulation
 | Paper | Year | Core Contribution |
@@ -115,12 +116,16 @@ Understanding these traditions helps readers navigate the reading list strategic
 | **Zheng et al. "FOREAGENT"** | 2026 | Predict-then-verify loop for ML agents; 6× convergence acceleration, +6% over execution baselines. *ACL 2026*. [arXiv:2601.05930](https://arxiv.org/abs/2601.05930) |
 | **Wang et al. "Agent World Model"** | 2026 | 1,000 synthetic environments with 35K tools for agentic RL; OOD generalization from purely synthetic training. [arXiv:2602.10090](https://arxiv.org/abs/2602.10090) |
 | **Hafner et al. "Dreamer 4"** | 2025 | First agent to obtain Minecraft diamonds from offline video alone; real-time inference on single GPU. [arXiv:2509.24527](https://arxiv.org/abs/2509.24527) |
+| **Li et al. "Simia"** | 2025 | LLMs simulate environments for agent training; fine-tuned open models exceed GPT-4o and approach o1-mini on τ²-Bench. [arXiv:2511.01824](https://arxiv.org/abs/2511.01824) |
+| **Li et al. "SpatialEvo"** | 2026 | Self-evolving spatial reasoning via deterministic geometric environments; highest scores at 3B/7B scales across 9 benchmarks. [arXiv:2604.14144](https://arxiv.org/abs/2604.14144) |
 
 ### AI for Personalized Learning
 | Paper | Year | Core Contribution |
 |-------|------|-------------------|
 | **Chen "AI-Driven Medical Learning"** | 2025 | RCT showing Cohen's d=0.72 improvement with AI personalization for medical students; strong equity effect for weak-baseline learners. [PMC12465117](https://pmc.ncbi.nlm.nih.gov/articles/PMC12465117/) |
 | **Venkatraman et al. "RSA"** | 2025 | Recursive Self-Aggregation: 4B model matches DeepSeek-R1/o3-mini via iterative population refinement; near top of ARC-AGI-2 leaderboard. [arXiv:2509.26626](https://arxiv.org/abs/2509.26626) |
+| **Ma et al. "SkillClaw"** | 2026 | Collective skill evolution across users via agentic evolver; cross-user discoveries propagate system-wide. [arXiv:2604.08377](https://arxiv.org/abs/2604.08377) |
+| **Zhuang et al. "TRT"** | 2026 | Test-time Recursive Thinking: 100% AIME accuracy via self-improvement without external feedback. [arXiv:2602.03094](https://arxiv.org/abs/2602.03094) |
 
 ### AI Safety in Research
 | Paper | Year | Core Contribution |

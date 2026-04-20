@@ -74,3 +74,39 @@ Automated scheduled update. Searched HuggingFace, arXiv, Scientific Reports, PMC
 3. **Duplicate page titles.** `wiki/methodologies/test-time-compute.md` and `wiki/methodologies/test-time-compute-scaling.md` both display as "Test-Time Compute Scaling" in `index.md` — almost certainly two articles for one concept. Lint candidate: merge or rename.
 4. **Footnote-number drift.** Legacy footnotes use a slightly different style than the schema example (`Author. (Year). "Title." arXiv:NNNN.NNNNN` vs the schema's `Author et al. (Year). "Title." [arXiv:NNNN.NNNNN](url)`). Worth normalising during the next lint pass, not now.
 5. **No automated catalog regeneration.** `index.md` was edited by hand for this ingest (one entry, one count bump). Manageable now; needs a script if ingest cadence picks up. Could be added to a `scripts/regenerate_index.py` similar to the one-shot frontmatter script.
+
+## [2026-04-20] ingest + lint | April 2026 research update + duplicate TTC page merge
+
+Automated scheduled update. Resolved one outstanding issue and integrated 6 new papers/reports.
+
+**Issue resolved:**
+- **Merged duplicate test-time-compute pages.** `wiki/methodologies/test-time-compute-scaling.md` deleted; unique content (Reasoning Memory, Deep-Thinking Tokens, RD-VLA, BAM) folded into `wiki/methodologies/test-time-compute.md`. All cross-references in `computational-cost.md`, `cross-cutting-connections.md`, and `index.md` updated to point to the canonical page. Page count 48 → 47.
+
+**New research integrated (6 papers/reports):**
+1. **Simia** (Li et al., Nov 2025) — LLMs simulate environments for agent training, eliminating bespoke testbed infrastructure; fine-tuned open models exceed GPT-4o
+2. **SpatialEvo** (Li et al., Apr 2026) — Self-evolving spatial intelligence via deterministic geometric environments; highest scores at 3B/7B on 9 benchmarks
+3. **SkillClaw** (Ma et al., Apr 2026) — Collective skill evolution across multi-user agent ecosystems; cross-user discoveries propagate system-wide
+4. **HBR China AI Agents** (Greeven et al., HBR Apr 2026) — Meituan Xiaomei delegation-first commerce; AI as autonomous executor not assistant
+5. **ICLR RSI Workshop update** — Confirmed spotlight papers (Contextual Drag, Meta-learning Agentic Memory), panel details (Schrittwieser/Anthropic, Schmidhuber moderating), speakers (Levine, Kirsch, Bing Liu added)
+6. **AI Adaptive Learning Platforms meta-landscape** — Synthesis of 3 systematic reviews on ALPs; OECD 2026 recommendation for purpose-built educational AI
+
+**Pages updated:**
+- `wiki/methodologies/test-time-compute.md` — merged unique 2026 content, added 4 references
+- `wiki/frontier-topics/predictive-simulation-learning.md` — added Simia, SpatialEvo sections
+- `wiki/frontier-topics/recursive-self-improvement.md` — added SkillClaw, SpatialEvo cross-reference, updated ICLR workshop with panels/speakers/spotlights
+- `wiki/frontier-topics/ai-ecommerce-learning.md` — added HBR China AI agents section
+- `wiki/frontier-topics/cross-cutting-connections.md` — added Connection 85: Self-Evolving Ecosystems with mermaid diagram
+- `wiki/methodologies/applications-for-real-world-learning.md` — added ALP meta-landscape section, SVG pipeline diagram, new landscape entries
+- `wiki/methodologies/computational-cost.md` — fixed broken test-time-compute-scaling reference
+- `wiki/research-sources/key-papers.md` — added 6 new paper entries
+- `index.md` — removed duplicate TTC entry, updated count and timestamp
+
+**New diagrams added (2):**
+1. Self-Evolving Ecosystems connection diagram (mermaid) in cross-cutting-connections.md — shows how Simia, SpatialEvo, SkillClaw, and Meituan connect simulation, recursion, and commerce
+2. Simulation-to-Real-World Learning Pipeline (SVG) in applications-for-real-world-learning.md — four-stage pipeline from simulation through self-improvement and personalization to real-world application
+
+**Issues/improvements for next session:**
+1. Cross-cutting connections page now at 85 connections — consider splitting by theme
+2. ICLR 2026 RSI Workshop happens April 26-27 — fetch proceedings and integrate after event
+3. Footnote numbering gap in ai-ecommerce-learning.md ([^66] to [^69]) still present
+4. No raw/ sources added this session — consider downloading key PDFs for schema-compliant ingest

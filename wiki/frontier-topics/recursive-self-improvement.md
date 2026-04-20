@@ -2,9 +2,9 @@
 title: Recursive Self-Improvement
 type: concept
 category: frontier-topics
-tags: []
+tags: [self-improvement, recursive, skill-evolution]
 created: 2026-04-09
-updated: 2026-04-13
+updated: 2026-04-20
 sources: []
 ---
 
@@ -653,9 +653,17 @@ The workshop frames RSI across six research dimensions that map directly to the 
 | **Safety** | Long-horizon stability, regression risk, alignment | SAHOO (alignment guardrails), A-Evolve (Git-native audit trail) |
 | **Evaluation** | Benchmarks, optimization, curricula | PostTrainBench (post-training), GrandCode (competitive programming) |
 
-**Key invited speakers** include Chelsea Finn (Stanford), whose work on meta-learning underpins much of the "learning to learn" paradigm explored here; Graham Neubig (CMU/OpenHands), whose open-source agent infrastructure enables practical RSI deployment; and Jeff Clune (UBC/DeepMind), whose Darwin Godel Machine[^1] and Hyperagents[^2] are foundational RSI systems.
+**Invited speakers** span the full breadth of RSI: Chelsea Finn (Stanford), Jeff Clune (UBC/DeepMind), Sergey Levine (UC Berkeley / Physical Intelligence), Louis Kirsch (DeepMind), Bang Liu (Mila), Bing Liu (Scale), Yu Su (Ohio State), and Yuandong Tian.
 
-**Learning connection:** The workshop's emergence signals that recursive self-improvement has matured from a speculative concept into a recognized research field with its own evaluation standards, safety frameworks, and application domains. For educational AI, this means the tools and techniques described in this article are transitioning from proof-of-concept to deployable systems. The workshop's emphasis on safety and evaluation -- not just capability -- reflects the [OECD's evidence](predictive-simulation-learning.md#oecd-evidence-pedagogical-design-determines-whether-ai-simulation-helps-or-harms) that how AI is deployed matters as much as what it can do.
+**Panel sessions** bring together leaders across industry and academia:
+- **Super Stars Panel** (moderated by Jürgen Schmidhuber, KAUST/IDSIA): Julian Schrittwieser (Anthropic), Sergey Levine, Yuandong Tian, Matej Balog (DeepMind), Ming-Hsuan Yang (UC Merced/DeepMind)
+- **Open-Talk Panel** (moderated by Rong Zou, Apple): Louis Kirsch, Ran Xu (Salesforce), Yi Lu (Meta)
+
+**Oral spotlights** (4 of 110 accepted papers): [Agent0](#agent0-self-evolving-agents-from-zero-data), Contextual Drag (how context errors affect LLM reasoning), Learning to Continually Learn via Meta-learning Agentic Memory Designs, and [PostTrainBench](#posttrainbench-can-agents-train-other-agents).
+
+**Sponsors:** Tencent, Meta.
+
+**Learning connection:** The workshop's emergence signals that recursive self-improvement has matured from a speculative concept into a recognized research field with its own evaluation standards, safety frameworks, and application domains. The panel composition -- spanning Anthropic, DeepMind, Physical Intelligence, Salesforce, Meta, and Apple -- reflects industry-wide investment in RSI. For educational AI, this means the tools and techniques described in this article are transitioning from proof-of-concept to deployable systems. The workshop's emphasis on safety and evaluation -- not just capability -- reflects the [OECD's evidence](predictive-simulation-learning.md#oecd-evidence-pedagogical-design-determines-whether-ai-simulation-helps-or-harms) that how AI is deployed matters as much as what it can do.
 
 ### SkillFoundry: Self-Evolving Agent Skill Libraries from Scientific Resources
 
@@ -679,6 +687,27 @@ Modecrua et al. (April 2026) address a core challenge in training tool-calling a
 - Critical finding: poorly designed dense rewards *reduce* performance -- reward design is as important as model capability
 
 **Learning connection:** This paper addresses a fundamental obstacle to recursive self-improvement in multi-step tasks: how does a self-improving system know which step in a long sequence was responsible for success or failure? The finding that a 4B model can outperform GPT-4.1 at customer service through better reward calibration (not more parameters) is a direct validation of the [Variance Inequality's](#the-variance-inequality-a-unified-theory-of-self-improvement) principle: strengthening the verifier matters more than strengthening the generator. For educational AI, this translates directly: a tutoring system that can accurately attribute learning outcomes to specific instructional decisions (which explanation helped? which question confused?) will improve faster than one with a more powerful language model but blunter feedback. The customer service domain connects naturally to [e-commerce learning](ai-ecommerce-learning.md) -- training agents to handle complex multi-turn customer interactions is both a commercial application and a testbed for the recursive improvement of conversational skills.
+
+### SkillClaw: Collective Skill Evolution Across Users
+
+Ma et al. (April 2026) address a fundamental limitation of deployed AI agents: skills remain static after deployment despite repeated discovery of similar workflows and failure patterns across users.[^68] SkillClaw enables **collective skill evolution** in multi-user agent ecosystems by treating cross-user and over-time interactions as the primary signal for improvement.
+
+**Architecture:**
+- An autonomous **Agentic Evolver** continuously aggregates user-generated trajectories across a multi-user environment
+- The evolver identifies recurring behavioral patterns and translates them into skill updates through two mechanisms: refining existing skills and extending capabilities with new ones
+- Updated skills are maintained in a shared repository and synchronized across users
+
+**Results:** Significantly improves Qwen3-Max performance on WildClawBench in real-world agent scenarios through limited interaction and feedback integration.
+
+**Learning connection:** SkillClaw operationalizes a powerful educational principle: **collective knowledge improves faster than individual knowledge**. When one user discovers an effective workflow, that discovery propagates to all users -- mirroring how a class wiki or shared study repository accumulates collective understanding. This extends [CORAL's](#coral-autonomous-multi-agent-evolution-for-open-ended-discovery) population-based evolution from research agents to production user-facing systems, and connects to [SkillFoundry's](#skillfoundry-self-evolving-agent-skill-libraries-from-scientific-resources) skill mining with a critical difference: SkillFoundry mines skills from static resources, while SkillClaw evolves skills from live user behavior. For educational platforms, this suggests that a tutoring system serving thousands of students could aggregate pedagogical discoveries across all sessions -- if one tutoring interaction discovers an effective explanation for a tricky concept, that explanation becomes available to all future students immediately. Combined with [MetaClaw's](#metaclaw-continual-meta-learning-with-skill-evolution) continual learning and [SkillRL's](#skillrl-recursive-skill-discovery-and-evolution) evolutionary discovery, SkillClaw adds the social dimension: skills evolve not just within a single agent but across an entire community of agents and users.
+
+### SpatialEvo: Self-Evolving Intelligence via Deterministic Simulation
+
+Li et al. (April 2026) demonstrate that spatial reasoning can be improved through pure self-play when the domain has deterministic ground truth.[^69] SpatialEvo uses a Deterministic Geometric Environment (DGE) that converts unannotated 3D scenes into zero-noise oracles, enabling a co-evolving questioner-solver architecture to generate its own training curriculum (see full details in [Predictive Simulation Learning](predictive-simulation-learning.md#spatialevo-self-evolving-spatial-intelligence-via-deterministic-environments)).
+
+**Results:** Highest average scores at 3B and 7B scales across nine spatial reasoning benchmarks.
+
+**Learning connection:** SpatialEvo bridges [predictive simulation](predictive-simulation-learning.md) and recursive self-improvement by showing that when simulations provide deterministic feedback, self-improvement requires no human annotation at all. The task-adaptive scheduler -- concentrating training on the model's weakest areas -- implements the same "desirable difficulty" principle that [GASP](#gasp-guided-asymmetric-self-play-for-code) applies to coding and [HiLL](#hill-learning-to-hint-for-reinforcement-learning) applies to hint generation. For any learning domain with objective ground truth (mathematics, spatial reasoning, programming), this paradigm enables unlimited self-improvement from raw environmental interaction.
 
 ## See Also
 
@@ -770,3 +799,5 @@ Modecrua et al. (April 2026) address a core challenge in training tool-calling a
 [^65]: Maimon, G., Yoran, O., Kreuk, F., Hassid, M., Cohen, G., Chambon, P. & Adi, Y. (2026). "Self-Execution Simulation Improves Coding Models." [arXiv:2604.03253](https://arxiv.org/abs/2604.03253)
 [^66]: Shen, S., Cheng, W., Ma, M., Turcan, A., Zhang, M.J. & Ma, J. (2026). "SkillFoundry: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources." [arXiv:2604.03964](https://arxiv.org/abs/2604.03964)
 [^67]: Modecrua, W., Kaewtawee, K., Pachtrachai, K. & Kraisingkorn, T. (2026). "Multi-Turn Reinforcement Learning for Tool-Calling Agents with Iterative Reward Calibration." [arXiv:2604.02869](https://arxiv.org/abs/2604.02869)
+[^68]: Ma, Z., Yang, S., Ji, Y., Wang, X., Wang, Y., Hu, Y., Huang, T. & Chu, X. (2026). "SkillClaw: Let Skills Evolve Collectively with Agentic Evolver." [arXiv:2604.08377](https://arxiv.org/abs/2604.08377)
+[^69]: Li, D. et al. (2026). "SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Geometric Environments." [arXiv:2604.14144](https://arxiv.org/abs/2604.14144)

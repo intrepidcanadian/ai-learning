@@ -4,7 +4,7 @@ type: concept
 category: methodologies
 tags: []
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-20
 sources: []
 ---
 
@@ -66,6 +66,10 @@ Test-time compute scaling encompasses four main strategies:[^2]
 | TTS for LLM Agents[^5] | 2025 | Agent tasks benefit from parallel+sequential hybrid | Agentic systems gain from TTS |
 | Train-to-Test (T²) Laws[^6] | 2026 | Joint optimization of train + test compute | Overtraining becomes compute-optimal with TTS |
 | Training Data Role in TTS[^7] | 2026 | Training data composition affects TTS effectiveness | Data quality matters for inference scaling |
+| Reasoning Memory[^9] | 2026 | Retrieval of prior reasoning beats generation | Procedure reuse reduces TTS cost |
+| Deep-Thinking Tokens[^10] | 2026 | Concentrated compute at key positions | Matches uniform scaling at lower cost |
+| RD-VLA[^11] | 2026 | Iterative latent refinement for robotics | TTS generalizes beyond text to embodied AI |
+| BAM[^12] | 2025 | Budget-aware decomposition saves 40-60% tokens | Makes TTS practical for education |
 
 ### The Train-to-Test (T²) Scaling Laws
 
@@ -137,6 +141,18 @@ This has direct implications for educational AI: schools and institutions with l
 
 *Diagram: Test-time compute scaling allows AI systems to adaptively allocate reasoning effort based on problem difficulty, analogous to how human tutors spend more time on harder concepts.*
 
+### Efficient Allocation: Spend Compute Where It Matters (2026)
+
+Multiple 2026 papers converge on a key insight: uniform compute allocation is wasteful. Efficient TTS requires *adaptive* allocation.
+
+**Reasoning Memory** (2026) indexes solved problems and their reasoning traces, then retrieves similar solutions at inference time.[^9] The model adapts retrieved reasoning strategies rather than generating from scratch, consistently outperforming RAG and compute-matched baselines across six math, science, and coding benchmarks. This connects to [retrieval-augmented generation](../core-concepts/retrieval-augmented-generation.md) — Reasoning Memory is specialized RAG where what's retrieved is reasoning procedures, not factual knowledge.
+
+**Deep-Thinking Tokens** (Lu et al., 2026) identify positions where internal predictions undergo significant revision in deeper layers — moments of genuine cognitive effort.[^10] The Think@n strategy allocates additional compute at these positions, matching self-consistency performance while significantly reducing total cost. The insight: not all tokens require equal compute.
+
+**RD-VLA** (Chen et al., 2026) extends test-time scaling to embodied AI through latent iterative refinement.[^11] Tasks that failed with single-iteration inference exceeded 90% success rate with four iterations, demonstrating that TTS generalizes beyond text to robotics and physical simulation. This bridges [predictive simulation learning](../frontier-topics/predictive-simulation-learning.md) and test-time scaling.
+
+**Budget-Aware Inference (BAM)** (Zhang et al., 2025) decomposes queries into sub-problems and allocates token budgets proportionally to complexity.[^12] This achieves comparable accuracy while using 40-60% fewer tokens — making high-quality AI tutoring economically viable at scale.
+
 ### Connection to Recursive Self-Improvement
 
 Test-time compute scaling intersects with [recursive self-improvement](../frontier-topics/recursive-self-improvement.md) in a key way: a self-improving system can learn to **allocate its own test-time compute more efficiently** over time. Early attempts may waste compute on easy problems or under-allocate on hard ones; through recursive optimization of its own inference strategy, the system converges on optimal compute allocation — a form of learned metacognition.[^5]
@@ -206,3 +222,7 @@ Test-time compute scaling enables several educational innovations:
 [^6]: Sardana, N. et al. (2026). Test-Time Scaling Makes Overtraining Compute-Optimal. *arXiv:2604.01411*. https://arxiv.org/abs/2604.01411
 [^7]: Ye, J. et al. (2026). Understanding the Role of Training Data in Test-Time Scaling. *arXiv:2510.03605*. https://arxiv.org/abs/2510.03605
 [^8]: Li, Y. et al. (2025). Test-time Scaling of LLMs: A Survey from A Subproblem Structure Perspective. *arXiv:2511.14772*. https://arxiv.org/abs/2511.14772
+[^9]: Anonymous. (2026). "Procedural Knowledge at Scale Improves Reasoning." *arXiv:2604.01348*. https://arxiv.org/abs/2604.01348
+[^10]: Lu, H. A. et al. (2026). "Think Deep, Not Just Long: Measuring LLM Reasoning Effort via Deep-Thinking Tokens." arXiv preprint.
+[^11]: Chen, H. et al. (2026). "Recurrent-Depth VLA: Implicit Test-Time Compute Scaling via Latent Iterative Reasoning." *arXiv:2602.07845*. https://arxiv.org/abs/2602.07845
+[^12]: Zhang, Y. et al. (2025). "Plan and Budget: Effective and Efficient Test-Time Scaling on Reasoning Large Language Models." *arXiv:2505.16122*. https://arxiv.org/abs/2505.16122
