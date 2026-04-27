@@ -4,7 +4,7 @@ type: concept
 category: frontier-topics
 tags: []
 created: 2026-04-09
-updated: 2026-04-20
+updated: 2026-04-27
 sources: [raw/2603.19710v1.pdf]
 ---
 
@@ -354,6 +354,17 @@ Industry analysis in early 2026 identifies a paradigm shift toward **zero-click 
 The **Universal Commerce Protocol (UCP)** is emerging as an open standard enabling AI agents to interact with commerce backends consistently across the shopping journey. This addresses a critical infrastructure gap: if product data is unstructured or inconsistent, even capable shopping agents cannot reliably include products in their candidate sets.
 
 **Learning application:** Zero-click commerce fundamentally changes what commerce education must teach. When AI agents mediate purchases, the skills that matter shift from "finding good deals" to "configuring agent intent correctly" and "auditing agent decisions." Business students need to understand how to make their products machine-readable and agent-accessible -- a competency that didn't exist two years ago. The UCP standardization effort mirrors how web standards (HTML, HTTP) transformed commerce in the 1990s -- understanding these protocols becomes a core business literacy.
+
+### TessPay: Verify-then-Pay Infrastructure for Trusted Agent Commerce
+
+Goenka, Pathak & Asthana (January 2026) formalize a foundational trust gap in agentic commerce: current payment systems were designed for human-to-human transactions, not autonomous agent-to-agent operations.[^73] TessPay introduces a four-stage verify-then-pay framework that operationalizes trust across the full transaction lifecycle:
+
+1. **Before Execution:** Agents are registered in a canonical registry and user intent is captured as verifiable mandates
+2. **During Execution:** Funds are locked in escrow while agents generate cryptographic Proof of Task Execution (PoTE) via TLS Notary or TEE
+3. **At Settlement:** Funds are released only when PoTE satisfies verification predicates; modular rail adapters ensure chain-agnostic escrow
+4. **After Settlement:** A tamper-evident audit trail enables dispute resolution and accountability
+
+**Learning application:** TessPay addresses the fundamental question of how agent-mediated commerce earns consumer trust -- a prerequisite for the [zero-click commerce](#zero-click-commerce-and-the-universal-commerce-protocol) paradigm to scale. The verify-then-pay model inverts the traditional trust assumption: instead of trusting an agent and paying upfront, the system requires cryptographic proof of task completion before releasing funds. For e-commerce education, TessPay illustrates how infrastructure-level trust mechanisms differ from human trust (reputation, brand loyalty) -- students studying digital commerce need to understand that agent trust is built through verifiable computation, not social signals. The escrow-plus-verification pattern also has pedagogical applications: an AI tutoring system could use similar "proof of learning" mechanisms to verify that a student has genuinely mastered material before unlocking advanced content, moving beyond simple quiz scores to verifiable competency demonstration.
 
 ### SocioVerse: Simulating Consumer Populations at Scale
 
@@ -935,3 +946,4 @@ This loop is visible across the systems described here: [ShopSimulator](#shopsim
 [^70]: Pattern Research (2026). "Many e-commerce brands now deploying AI powered shopping agents." [retailtechinnovationhub.com](https://retailtechinnovationhub.com/home/2026/1/21/many-e-commerce-brands-now-deploying-ai-powered-shopping-agents-pattern-research); commercetools (2026). "7 AI Trends Shaping Agentic Commerce in 2026." [commercetools.com](https://commercetools.com/blog/ai-trends-shaping-agentic-commerce)
 [^71]: IDC (2026). "IDC Highlights New AI Research at Directions 2026 on Economic Impact, Agentic Buyers and the Rise of AI Agents." [financialcontent.com](https://www.financialcontent.com/article/accwirecq-2026-4-9-idc-highlights-new-ai-research-at-directions-2026-on-economic-impact-agentic-buyers-and-the-rise-of-ai-agents)
 [^72]: Greeven, M. J., Beaulieu, F. & Wei, W. (2026). "Research: What China's AI Agents Reveal About the Future of Commerce." *Harvard Business Review*, April 17, 2026.
+[^73]: Goenka, M., Pathak, T. & Asthana, S. (2026). "TessPay: Verify-then-Pay Infrastructure for Trusted Agentic Commerce." [arXiv:2602.00213](https://arxiv.org/abs/2602.00213)

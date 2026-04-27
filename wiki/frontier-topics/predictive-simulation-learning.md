@@ -4,7 +4,7 @@ type: concept
 category: frontier-topics
 tags: [world-models, simulation, self-evolving]
 created: 2026-04-09
-updated: 2026-04-20
+updated: 2026-04-27
 sources: []
 ---
 
@@ -73,6 +73,7 @@ graph TD
 | LeWM[^13] | 15M params | Stable JEPA from pixels | Single-GPU training | 48× faster than foundation models |
 | WebWorld[^79] | 134M pages | Open web world model | +9.2% cross-domain transfer | Digital skill simulation |
 | SimDist[^49] | Sim→real | Structure transfer across domains | Short-horizon calibration suffices | Reduces real-world data needs |
+| WorldMark[^91] | 6 models, 500 cases | Unified world model benchmark | Standardized cross-model comparison | World Model Arena leaderboard |
 | MedSimAI[^62] | Multi-institution | Medical deliberate practice | Cohen's d = 0.75 on real OSCEs | 59.5% voluntary repetition rate |
 | SocioVerse[^31] | 10M profiles | Population behavioral prediction | Market response simulation | LLM agents + demographics |
 
@@ -846,6 +847,42 @@ Shanda AI Research (April 2026) released a large-scale dynamic dataset extracted
 
 **Learning application:** This dataset addresses a practical bottleneck for simulation-based education: where do world models get high-fidelity training data? AAA game engines already solve many of the rendering challenges that educational simulations face -- realistic physics, diverse environments, dynamic lighting. By extracting structured data from game engines, this approach provides a bridge between entertainment-grade visual fidelity and educational world models. Combined with [Cosmos-Predict2.5's](#cosmos-predict25-unified-world-simulation-at-foundation-scale) open foundation models and [OpenWorldLib's](#openworldlib-a-unified-definition-and-codebase-for-world-models) standardized architecture, game-derived datasets could power a new generation of visually compelling educational simulations built on entertainment infrastructure.
 
+## WorldMark: A Unified Benchmark for Interactive Video World Models
+
+Xu et al. (April 2026) introduce WorldMark, the first standardized benchmark suite for evaluating interactive video generation world models.[^91] Models like Genie, YUME, HY-World, and Matrix-Game have each used proprietary evaluation frameworks, preventing meaningful cross-model comparisons. WorldMark resolves this through three innovations:
+
+1. **Unified Action-Mapping Layer:** Translates a shared WASD-style control vocabulary into each model's native format, enabling consistent evaluation across six major systems
+2. **Hierarchical Test Suite:** 500 evaluation cases featuring first- and third-person perspectives, photorealistic and stylized scenes, and three difficulty tiers spanning 20-60 seconds
+3. **Modular Evaluation Toolkit:** Assesses Visual Quality, Control Alignment, and World Consistency using standardized inputs
+
+The authors also launched **World Model Arena**, an online platform for side-by-side battles and live leaderboard comparison -- transforming benchmark evaluation into a community experience.
+
+```mermaid
+graph LR
+    subgraph Inputs["Standardized Inputs"]
+        WASD[WASD Control<br>Vocabulary]
+        SCENE[500 Evaluation<br>Cases]
+    end
+    subgraph Models["World Models Under Test"]
+        G[Genie]
+        Y[YUME]
+        HW[HY-World]
+        MG[Matrix-Game]
+        O1[...]
+    end
+    subgraph Metrics["Evaluation Axes"]
+        VQ[Visual Quality]
+        CA[Control Alignment]
+        WC[World Consistency]
+    end
+    WASD --> G & Y & HW & MG & O1
+    SCENE --> G & Y & HW & MG & O1
+    G & Y & HW & MG & O1 --> VQ & CA & WC
+    VQ & CA & WC --> ARENA[World Model Arena<br>Live Leaderboard]
+```
+
+**Learning application:** WorldMark's emergence signals the maturation of interactive world models from isolated demos into a rigorously compared field. For educational simulation, standardized benchmarking means that practitioners can select world model backends based on empirical evidence rather than marketing claims. The three evaluation axes map directly to educational simulation requirements: Visual Quality affects learner immersion, Control Alignment determines whether learner actions produce expected outcomes, and World Consistency ensures that simulation-based learning isn't undermined by physics or logic violations. As educational institutions adopt simulation-based training (see [MedSimAI](#medsim-ai-deliberate-practice-through-simulation) and [EduVerse](#eduverse-multi-agent-classroom-simulation-with-human-in-the-loop)), WorldMark provides the evaluation framework to compare and select simulation backends objectively.
+
 ## Current State / Latest Developments
 
 As of April 2026, predictive simulation learning has reached an inflection point where foundational research is becoming practically deployable. Key developments include:
@@ -989,3 +1026,4 @@ The field is converging on a shared understanding that effective world models re
 [^88]: Hafner, D., Yan, W. & Lillicrap, T. (2025). "Training Agents Inside of Scalable World Models (Dreamer 4)." [danijar.com/dreamer4](https://danijar.com/dreamer4/); [arXiv:2509.24527](https://arxiv.org/abs/2509.24527)
 [^89]: Li, Y., Inan, H. A., Yue, X., Chen, W.-N., Wutschitz, L., Kulkarni, J., Poovendran, R., Sim, R. & Rajmohan, S. (2025). "Simulating Environments with Reasoning Models for Agent Training." [arXiv:2511.01824](https://arxiv.org/abs/2511.01824)
 [^90]: Li, D. et al. (2026). "SpatialEvo: Self-Evolving Spatial Intelligence via Deterministic Geometric Environments." [arXiv:2604.14144](https://arxiv.org/abs/2604.14144)
+[^91]: Xu, X., Lin, Z., He, K., Feng, Y., Mao, X., Yin, Y., Zhang, K. & Ge, Y. (2026). "WorldMark: A Unified Benchmark Suite for Interactive Video World Models." [arXiv:2604.21686](https://arxiv.org/abs/2604.21686)

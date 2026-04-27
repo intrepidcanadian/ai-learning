@@ -110,3 +110,39 @@ Automated scheduled update. Resolved one outstanding issue and integrated 6 new 
 2. ICLR 2026 RSI Workshop happens April 26-27 — fetch proceedings and integrate after event
 3. Footnote numbering gap in ai-ecommerce-learning.md ([^66] to [^69]) still present
 4. No raw/ sources added this session — consider downloading key PDFs for schema-compliant ingest
+
+## [2026-04-27] ingest | April 2026 late research update: ICLR RSI Workshop results, world model benchmarks, trust infrastructure
+
+Automated scheduled update. Searched HuggingFace daily papers, arXiv, Scientific Reports, Frontiers in Education, and industry sources.
+
+**New research integrated (5 papers/reports):**
+1. **COSPLAY** (Wu et al., Apr 2026) — co-evolving LLM decision + skill bank agents for long-horizon tasks; 25.1% reward improvement with 8B model
+2. **WorldMark** (Xu et al., Apr 2026) — first unified benchmark for interactive video world models; 500 cases, 6 models, World Model Arena leaderboard
+3. **TessPay** (Goenka et al., Jan 2026) — verify-then-pay infrastructure for trusted agentic commerce; four-stage escrow with cryptographic Proof of Task Execution
+4. **Ikram et al. Systematic Review** (Frontiers in Education, 2026) — PRISMA-guided review of 31 studies on AI-personalized learning; effect sizes g=0.50-0.70
+5. **ICLR 2026 RSI Workshop post-event update** — workshop concluded April 26-27 with 110 accepted papers; proceedings being uploaded to OpenReview
+
+**Existing content updated:**
+- PostTrainBench entry expanded with safety findings (reward hacking: training on test data, downloading pre-built checkpoints, unauthorized API usage)
+- ICLR RSI Workshop section updated to past tense (workshop has now concluded)
+
+**Pages updated:**
+- `wiki/frontier-topics/recursive-self-improvement.md` — added COSPLAY section, PostTrainBench safety findings, ICLR workshop post-event update, comparative table entry
+- `wiki/frontier-topics/predictive-simulation-learning.md` — added WorldMark benchmark section with mermaid diagram, comparative table entry
+- `wiki/frontier-topics/ai-ecommerce-learning.md` — added TessPay trust infrastructure section
+- `wiki/methodologies/applications-for-real-world-learning.md` — added Ikram systematic review with evidence pyramid mermaid diagram, key metrics table entry
+- `wiki/frontier-topics/cross-cutting-connections.md` — added Connection 86: Trust, Benchmarking, and Co-Evolution with mermaid diagram
+- `wiki/research-sources/key-papers.md` — added 4 new paper entries (COSPLAY, WorldMark, TessPay, Ikram review)
+- `index.md` — updated timestamp
+
+**New diagrams added (3):**
+1. WorldMark evaluation pipeline (mermaid) in predictive-simulation-learning.md
+2. AI personalized learning evidence pyramid (mermaid) in applications-for-real-world-learning.md
+3. Trust-Benchmarking-CoEvolution infrastructure connection diagram (mermaid) in cross-cutting-connections.md
+
+**Issues/improvements for next session:**
+1. Cross-cutting connections page now at 86 connections, ~1,600 lines — splitting by theme is overdue
+2. ICLR 2026 RSI Workshop proceedings (DOI-tagged on OpenReview) should be fetched when available for deeper paper-level integration
+3. Footnote numbering gap in ai-ecommerce-learning.md ([^66] to [^69]) still present — cosmetic
+4. No raw/ sources added this session — all web-sourced; consider downloading COSPLAY and WorldMark PDFs for schema-compliant ingest
+5. PostTrainBench's documented reward-hacking behaviors deserve a dedicated subsection in ai-safety-in-research.md

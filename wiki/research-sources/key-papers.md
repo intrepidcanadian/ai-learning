@@ -4,7 +4,7 @@ type: concept
 category: research-sources
 tags: []
 created: 2026-04-09
-updated: 2026-04-20
+updated: 2026-04-27
 sources: []
 ---
 
@@ -85,6 +85,7 @@ Understanding these traditions helps readers navigate the reading list strategic
 | **Simonds & Yoshiyama. "LADDER"** | 2025 | Recursive problem decomposition for self-improving LLMs. [arXiv:2503.00735](https://arxiv.org/abs/2503.00735) |
 | **Zhuang et al. "Test-time Recursive Thinking"** | 2026 | Self-improvement at inference time, 100% on AIME. [arXiv:2602.03094](https://arxiv.org/abs/2602.03094) |
 | **Liu & van der Schaar. "Intrinsic Metacognitive Learning"** | 2025 | Position paper: true self-improvement needs metacognition. [arXiv:2506.05109](https://arxiv.org/abs/2506.05109) |
+| **Wu et al. "COSPLAY"** | 2026 | Co-evolving decision + skill bank agents; 25.1% reward improvement with 8B model on long-horizon tasks. [arXiv:2604.20987](https://arxiv.org/abs/2604.20987) |
 | **Ishibashi et al. "Self-Developing"** | 2025 | LLMs discovering their own improvement algorithms. [arXiv:2410.15639](https://arxiv.org/abs/2410.15639) |
 | **Godel Agent** | 2025 | Self-referential framework enabling agents to recursively modify their own logic via LLMs. [arXiv:2410.04444](https://arxiv.org/abs/2410.04444) |
 | **Singh et al. "Self-Improving AI through Self-Play"** | 2025 | Formalizes recursive self-improvement as Generator-Verifier-Updater operator. [arXiv:2512.02731](https://arxiv.org/abs/2512.02731) |
@@ -93,6 +94,7 @@ Understanding these traditions helps readers navigate the reading list strategic
 ### AI-Augmented Learning
 | Paper | Year | Core Contribution |
 |-------|------|-------------------|
+| **Ikram et al. "AI in Education Systematic Review"** | 2026 | PRISMA-guided review of 31 studies; effect sizes g=0.50-0.70 for AI-personalized learning. [DOI: 10.3389/feduc.2026.1782626](https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2026.1782626/full) |
 | **Goel et al. "A4L: An Architecture for AI-Augmented Learning"** | 2025 | Data architecture for bidirectional feedback between learners, teachers, and AI agents. [arXiv:2505.06314](https://arxiv.org/abs/2505.06314) |
 | **Wei et al. "Agentic-MME"** | 2026 | Process-verified benchmark for multimodal agentic capabilities with 2,000+ stepwise checkpoints. [arXiv:2604.03016](https://arxiv.org/abs/2604.03016) |
 
@@ -109,10 +111,12 @@ Understanding these traditions helps readers navigate the reading list strategic
 | **Xu et al. "AIGQ"** | 2026 | First end-to-end generative pre-search query recommender; deployed at Taobao with hybrid offline–online split, IL-GRPO with dual-level rewards, +10.31% orders / +10.68% GMV in production A/B. Full summary: [aigq-ecommerce-query-recommendation.md](aigq-ecommerce-query-recommendation.md). [arXiv:2603.19710](https://arxiv.org/abs/2603.19710) |
 | **Hybrid CF-MF-RL Framework** | 2026 | Scalable hybrid combining collaborative filtering, matrix factorisation, and RL for unified recommendation + pricing + supply chain. [DOI: 10.1038/s41598-026-37437-7](https://www.nature.com/articles/s41598-026-37437-7) |
 | **Greeven et al. "China AI Agents"** | 2026 | HBR analysis of delegation-first commerce via Meituan Xiaomei; AI as autonomous executor, not assistant. *Harvard Business Review*, April 2026. |
+| **Goenka et al. "TessPay"** | 2026 | Verify-then-pay infrastructure for trusted agentic commerce; four-stage escrow with cryptographic Proof of Task Execution. [arXiv:2602.00213](https://arxiv.org/abs/2602.00213) |
 
 ### World Models and Simulation
 | Paper | Year | Core Contribution |
 |-------|------|-------------------|
+| **Xu et al. "WorldMark"** | 2026 | First unified benchmark for interactive video world models; 500 evaluation cases, World Model Arena leaderboard. [arXiv:2604.21686](https://arxiv.org/abs/2604.21686) |
 | **Zheng et al. "FOREAGENT"** | 2026 | Predict-then-verify loop for ML agents; 6× convergence acceleration, +6% over execution baselines. *ACL 2026*. [arXiv:2601.05930](https://arxiv.org/abs/2601.05930) |
 | **Wang et al. "Agent World Model"** | 2026 | 1,000 synthetic environments with 35K tools for agentic RL; OOD generalization from purely synthetic training. [arXiv:2602.10090](https://arxiv.org/abs/2602.10090) |
 | **Hafner et al. "Dreamer 4"** | 2025 | First agent to obtain Minecraft diamonds from offline video alone; real-time inference on single GPU. [arXiv:2509.24527](https://arxiv.org/abs/2509.24527) |

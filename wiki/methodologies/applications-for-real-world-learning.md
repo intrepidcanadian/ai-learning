@@ -4,7 +4,7 @@ type: concept
 category: methodologies
 tags: []
 created: 2026-04-09
-updated: 2026-04-20
+updated: 2026-04-27
 sources: []
 ---
 
@@ -393,6 +393,42 @@ The field is converging around several key trends:
 | LLM Tutor (DPO) | 2025 | Open-source Llama 8B matches GPT-4o tutoring quality[^7] |
 | Taiwan Classroom RCT | 2026 | +0.15 SD on unassisted exams across 10 high schools[^9] |
 | EduAlign | 2025 | 3-dimension pedagogical optimization outperforms single-dimension[^8] |
+| Ikram et al. Systematic Review | 2026 | g=0.50-0.70 effect sizes across 31 studies (PRISMA)[^14] |
+
+### Systematic Review: AI for Personalized Learning (Ikram et al., Frontiers in Education, 2026)
+
+Ikram et al. (2026) conducted a PRISMA-guided systematic review of 31 studies (2013-2025) on AI in personalized education, providing the most comprehensive meta-analysis of the field to date.[^14]
+
+**Key findings:**
+- **Medium to large positive effects** on learner cognitive outcomes (effect sizes g = 0.50 to 0.70)
+- Improved vocabulary retention, syntax accuracy, and conceptual understanding across diverse subjects
+- Enhanced student motivation and engagement compared to traditional instruction
+- AI techniques covered include ML-based adaptive content sequencing, NLP-driven feedback generation, collaborative filtering recommenders, and generative AI for personalized content creation
+
+**Critical gaps identified:**
+- **Teacher readiness** is a major bottleneck: effectiveness depends heavily on pedagogical alignment and teacher digital competence
+- **Ethical governance** remains underdeveloped: data privacy, algorithmic bias, and equitable access are persistent concerns
+- **Methodological heterogeneity**: 45% qualitative, 42% quantitative, 13% mixed-methods -- making cross-study comparison difficult
+- **Geographic concentration**: China (6 papers), India (4), USA (2) -- limited cross-cultural validation
+
+```mermaid
+graph TD
+    subgraph Evidence["Evidence Pyramid: AI Personalized Learning (2025-2026)"]
+        RCT["🔬 RCTs<br>Kestin et al. (d=0.73-1.3)<br>Chen (d=0.72)<br>Taiwan classroom (+0.15 SD)"]
+        SR["📊 Systematic Reviews<br>Ikram et al. (g=0.50-0.70)<br>OECD Outlook 2026"]
+        PILOT["🧪 Pilot Studies<br>GuideAI (n=25)<br>EduAlign (3-dim optimization)"]
+        CASE["📋 Case Studies<br>Canvas AI Teaching Agent<br>Open TutorAI"]
+    end
+    RCT --> SR
+    SR --> PILOT
+    PILOT --> CASE
+    style RCT fill:#C8E6C9,stroke:#2E7D32
+    style SR fill:#BBDEFB,stroke:#1565C0
+    style PILOT fill:#FFF9C4,stroke:#F9A825
+    style CASE fill:#FFCCBC,stroke:#E64A19
+```
+
+**Learning application:** This systematic review provides the strongest aggregate evidence yet that AI-personalized learning produces real outcomes -- not just engagement metrics. The g = 0.50-0.70 effect sizes are educationally meaningful (comparable to moving from the 50th to the 69th-73rd percentile). However, the teacher readiness finding is critical: AI tools deployed without teacher buy-in and competence may fail to deliver these gains. Combined with the individual RCTs already tracked in this wiki (Kestin et al., Chen), the evidence base now spans multiple countries, subjects, and age groups -- strengthening the case for pedagogically designed AI learning systems while highlighting that implementation quality matters as much as technology capability.
 
 ## Limitations / Challenges
 
@@ -461,3 +497,4 @@ The field is converging around several key trends:
 [^12]: OECD (2026). *Digital Education Outlook 2026*. Organisation for Economic Co-operation and Development.
 
 [^13]: Ma, Z. et al. (2026). "SkillClaw: Let Skills Evolve Collectively with Agentic Evolver." [arXiv:2604.08377](https://arxiv.org/abs/2604.08377)
+[^14]: Ikram, M., Hanefar, S.B.M., Saleem, S.M.U. & Zulfiqar, F. (2026). "Artificial intelligence in education: a systematic review of personalized learning trends and future directions." *Frontiers in Education*, 11, 1782626. [DOI: 10.3389/feduc.2026.1782626](https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2026.1782626/full)

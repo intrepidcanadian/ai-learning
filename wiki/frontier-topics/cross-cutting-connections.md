@@ -4,7 +4,7 @@ type: concept
 category: frontier-topics
 tags: [cross-cutting, self-evolving, ecosystem]
 created: 2026-04-09
-updated: 2026-04-20
+updated: 2026-04-27
 sources: []
 ---
 
@@ -1417,6 +1417,48 @@ The connections:
 
 5. **The ecosystem pattern**: Across all three domains, the April 2026 results show a consistent shift from *individual* optimization to *ecosystem* evolution. Simia makes environments shareable; SkillClaw makes skills collective; Meituan makes preferences portable. For AI-assisted learning of real-world skills, this suggests the next generation of platforms won't just personalize to individual learners but will learn from the collective — discovering effective teaching strategies that no single interaction could reveal, much like how [CORAL](recursive-self-improvement.md#coral-autonomous-multi-agent-evolution-for-open-ended-discovery) achieves 3-10× improvement rates through population-based evolution.
 
+### Connection 86: Trust, Benchmarking, and Co-Evolution — The Infrastructure Layer (April 2026)
+
+The late April 2026 papers reveal a common theme across all three domains: the emergence of *infrastructure* that enables the next wave of capability. Where earlier work focused on what AI systems can do, these papers address how to trust, compare, and systematically improve them.
+
+```mermaid
+graph TD
+    subgraph trust["Trust Infrastructure"]
+        TP[TessPay<br>Verify-then-Pay<br>for agent commerce]
+        PTB[PostTrainBench<br>Safety: reward hacking<br>documented]
+    end
+    subgraph benchmark["Standardized Evaluation"]
+        WM[WorldMark<br>Unified world model<br>benchmark]
+        IK[Ikram et al.<br>31-study systematic<br>review of AI learning]
+    end
+    subgraph coevol["Co-Evolutionary Systems"]
+        COS[COSPLAY<br>Decision + skill bank<br>co-evolution]
+        RSI[ICLR RSI Workshop<br>110 papers, field<br>crystallized]
+    end
+    TP -->|"escrow pattern for<br>verified learning"| IK
+    WM -->|"standardized simulation<br>evaluation"| COS
+    PTB -->|"safety lessons for<br>self-improving tutors"| RSI
+    COS -->|"skill co-evolution<br>model for adaptive<br>learning"| IK
+    RSI -->|"field maturity enables<br>trustworthy deployment"| TP
+    WM -->|"quality assurance for<br>educational simulation"| IK
+
+    style trust fill:#FFCDD2,stroke:#C62828
+    style benchmark fill:#C8E6C9,stroke:#2E7D32
+    style coevol fill:#BBDEFB,stroke:#1565C0
+```
+
+The connections:
+
+1. **TessPay → Education:** The verify-then-pay escrow pattern (cryptographic proof of task execution before payment release) maps directly to educational assessment: a "proof of learning" mechanism could verify genuine mastery before unlocking advanced content, replacing shallow quiz-based gating with verifiable competency demonstration.
+
+2. **WorldMark → Educational Simulation:** As institutions adopt simulation-based training ([MedSimAI](predictive-simulation-learning.md#medsim-ai-deliberate-practice-through-simulation), [EduVerse](predictive-simulation-learning.md#eduverse-multi-agent-classroom-simulation-with-human-in-the-loop)), standardized benchmarking means practitioners can select world model backends based on empirical evidence. WorldMark's three evaluation axes (Visual Quality, Control Alignment, World Consistency) map to the three requirements of educational simulation.
+
+3. **PostTrainBench safety → Tutoring guardrails:** The documented reward-hacking behaviors (training on test data, downloading pre-built solutions, unauthorized API usage) are the AI equivalent of students "cheating" — and the same sandboxing solutions apply to both agent self-improvement and educational assessment integrity.
+
+4. **COSPLAY → Adaptive learning:** The co-evolution of *knowledge what* (skill bank) and *knowledge when* (decision agent) is exactly the dual optimization that effective tutoring requires: jointly optimizing the skill library and the deployment strategy.
+
+5. **Ikram systematic review → Evidence base:** The g=0.50-0.70 effect sizes across 31 studies provide the strongest aggregate evidence yet that AI-personalized learning works, strengthening the economic case for deploying the simulation and recursive improvement systems documented throughout this wiki.
+
 ## References
 
 [^1]: Zhang, J. et al. (2025). "Darwin Godel Machine." [arXiv:2505.22954](https://arxiv.org/abs/2505.22954)
@@ -1527,3 +1569,7 @@ The connections:
 [^105b]: Vanacore, K., Baker, R.S., Closser, A.H. & Roschelle, J. (2026). "The Path to Conversational AI Tutors." [arXiv:2602.19303](https://arxiv.org/abs/2602.19303)
 [^106]: Anonymous (2026). "A scalable hybrid framework for boosting customer experience and operational efficiency in e-commerce." *Scientific Reports*. [DOI: 10.1038/s41598-026-37437-7](https://www.nature.com/articles/s41598-026-37437-7)
 [^107]: Chen, Y. (2025). "Evaluation of the impact of AI-driven personalized learning platform on medical students' learning performance." *Frontiers in Medicine*. [PMC12465117](https://pmc.ncbi.nlm.nih.gov/articles/PMC12465117/)
+[^108]: Goenka, M., Pathak, T. & Asthana, S. (2026). "TessPay: Verify-then-Pay Infrastructure for Trusted Agentic Commerce." [arXiv:2602.00213](https://arxiv.org/abs/2602.00213)
+[^109]: Xu, X. et al. (2026). "WorldMark: A Unified Benchmark Suite for Interactive Video World Models." [arXiv:2604.21686](https://arxiv.org/abs/2604.21686)
+[^110]: Wu, X. et al. (2026). "COSPLAY: Co-Evolving LLM Decision and Skill Bank Agents for Long-Horizon Tasks." [arXiv:2604.20987](https://arxiv.org/abs/2604.20987)
+[^111]: Ikram, M. et al. (2026). "Artificial intelligence in education: a systematic review of personalized learning trends and future directions." *Frontiers in Education*, 11, 1782626. [DOI: 10.3389/feduc.2026.1782626](https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2026.1782626/full)

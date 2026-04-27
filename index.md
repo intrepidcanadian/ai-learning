@@ -2,7 +2,7 @@
 
 Catalog of every page in the wiki. Updated by ingest and lint operations — see [CLAUDE.md](CLAUDE.md) for the schema.
 
-**47 pages** across 5 categories. Last updated: 2026-04-20.
+**47 pages** across 5 categories. Last updated: 2026-04-27.
 
 ## Core Concepts
 
